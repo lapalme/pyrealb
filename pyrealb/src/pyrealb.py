@@ -90,7 +90,6 @@ if __name__ == '__main__':
     def francais():
         loadFr()
         print(S(NP(D("le"),N("chat")).n("p"),VP(V("asseoir"))).typ({"refl":True}).realize())
-        sys.exit(1)
         addToLexicon({"John":{"N":{"g":"m","tab":"n35"}}})
         addToLexicon({"Mary":{"N":{"g":"f","tab":"n36"}}})
 
@@ -156,5 +155,6 @@ if __name__ == '__main__':
                 VP(V("manger").t('pc')))),
           VP(V("être").t('p'),
              AP(A("gris")))))
-
+    
+    english()
     francais()
