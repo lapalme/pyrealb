@@ -1,4 +1,4 @@
 import os, sys
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..','..','pyrealb','src')))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..','..','src','pyrealb')))
 
-import pyrealb
+import pyrealb 

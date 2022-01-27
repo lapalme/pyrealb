@@ -1,6 +1,6 @@
 from context import pyrealb
 from pyrealb import *
-from tests.test import test
+from test import test
 
 
 def numbers_fr():

@@ -4,7 +4,7 @@
 import datetime
 from context import pyrealb
 from pyrealb import *
-from tests.test import test
+from test import test
 
 apple = NP(D("a"),N("apple"))
 appleC = lambda:NP(D("a"),N("apple"))

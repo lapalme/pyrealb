@@ -1,6 +1,6 @@
 import json,sys, os
 
-datadir=os.path.abspath(os.path.join(os.path.dirname(__file__),'../data')) 
+datadir=os.path.abspath(os.path.join(os.path.dirname(__file__),'data')) 
 
 class Lexicon(object):
     '''

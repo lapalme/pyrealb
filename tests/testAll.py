@@ -7,7 +7,7 @@ import pronouns_en, pronouns_fr
 import sentences_en, sentences_fr
 import examples_en, exemples_fr
 
-from tests.test import test
+from test import test
 
 
 totalOK=0

@@ -4,7 +4,7 @@
 import datetime
 from context import pyrealb
 from pyrealb import *
-from tests.test import test
+from test import test
 
 def exemples_fr():
     loadFr()
