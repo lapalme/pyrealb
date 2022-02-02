@@ -4,10 +4,10 @@
 ##   similar
 ## Guy Lapalme, December 2021
 
-from Constituent import Constituent
-from Terminal import  Terminal,N,A,Pro,D,Adv,V,P,C,DT,NO,Q
-from Phrase import Phrase, NP,AP,VP,AdvP,PP,CP,S,SP
-from Lexicon import loadEn,loadFr,currentLanguage,addToLexicon,updateLexicon,getLemma,getLexicon,getRules
+from .Constituent import Constituent
+from .Terminal import  Terminal,N,A,Pro,D,Adv,V,P,C,DT,NO,Q
+from .Phrase import Phrase, NP,AP,VP,AdvP,PP,CP,S,SP
+from .Lexicon import loadEn,loadFr,currentLanguage,addToLexicon,updateLexicon,getLemma,getLexicon,getRules
 
 import random,sys,datetime
 

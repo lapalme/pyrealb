@@ -1,6 +1,6 @@
 import re,datetime,sys
 
-from Lexicon import getLexicon, getLemma, getRules, currentLanguage
+from .Lexicon import getLexicon, getLemma, getRules, currentLanguage
 
 defaultProps = {"en":{"g":"n","n":"s","pe":3,"t":"p"},             # language dependent default properties
                 "fr":{"g":"m","n":"s","pe":3,"t":"p","aux":"av"}}; 
@@ -100,7 +100,7 @@ class Constituent():
     # if case_ is not given, return the tonic form else return the corresponding case
     # HACK:: parameter case_ is followed by _ so that it is not displayed as a keyword in the editor
     def getTonicPro(self,case_):
-        from Terminal import Pro
+        from .Terminal import Pro
         if self.isA("Pro") and ("tn" in self.props or "c" in self.props):
             if case_ is None:
                 self.props["c"]=case_
@@ -537,7 +537,7 @@ class Constituent():
         return self                    
     
     def warn(self,*args):
-        from Warning import warning
+        from .Warning import warning
         # print("WARNING:",self.me(),args,file=sys.stderr)
         print(warning(self,args),file=sys.stderr)
         return self
