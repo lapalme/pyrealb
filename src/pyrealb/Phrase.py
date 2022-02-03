@@ -1001,7 +1001,7 @@ class Phrase(Constituent):
 
     @classmethod
     def fromJSON(self, constType, json, lang):
-        from .pyrealb import fromJSON
+        from .utils import fromJSON
         if "elements" in json:
             if isinstance(json["elements"], list):
                 args = [fromJSON(e, lang) for e in json["elements"]]
