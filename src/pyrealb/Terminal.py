@@ -1,7 +1,8 @@
-from Constituent import Constituent,quoteOOV
-from Number import enToutesLettres, ordinal
+from .Constituent import Constituent,quoteOOV
+from .Number import enToutesLettres, ordinal
+from .Lexicon import getLexicon,currentLanguage,getLemma,getRules
+
 import datetime, sys,re,copy
-from Lexicon import getLexicon,currentLanguage,getLemma,getRules
 
 class Terminal(Constituent):
     def __init__(self, terminalType,lemma,lang=None):

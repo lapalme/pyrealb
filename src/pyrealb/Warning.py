@@ -1,6 +1,6 @@
-from Terminal import  N,A,Pro,D,Adv,V,P,C,DT,NO,Q
-from Phrase import NP,AP,VP,AdvP,PP,CP,S,SP
-from Lexicon import loadEn, loadFr
+from .Terminal import  N,A,Pro,D,Adv,V,P,C,DT,NO,Q
+from .Phrase import NP,AP,VP,AdvP,PP,CP,S,SP
+from .Lexicon import loadEn, loadFr
 
 # create a list of elements [a,b,c] => "a, b $conj c" 
 def makeDisj(conj,elems):     

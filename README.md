@@ -1,6 +1,6 @@
 # *pyRealB* - A Python Bilingual Text Realizer
 
-*Version 1.0 - December 2021*
+*Version 1.1 - February 2022*
 
 *pyRealB* is a Python adaptation of the JavaScript [**jsRealB**](http://rali.iro.umontreal.ca/jsRealB) with the same dependency syntax notation. It facilitates its integration within Python applications by simply adding
 
@@ -8,8 +8,15 @@
 
 CAUTION: some directories include `markup.py` which should be loaded using `pip`. Unfortunately I never managed to make this "piped" version work,it does not import the name `oneliner`although it should. It works once the file is in the local directory.
 
+## Building and installing distribution package
+
+1. `cd` into this directory (with `pyproject.toml` file) 
+2. Build the distribution package `python3 -m build`
+3. Install with `python3 -m pip install .`
+4. In your code, `import pyrealb` as usual.
+
 ## Directories
-* [`src/`](src/)
+* [`src`](src/)
     * `pyRealB.py` : main program that exports all relevant symbols and defines a few utility functions.   
                   Running this file will exercise a few typical functions, but usually it is `import`ed.
     * `Constituent.py`: *Constituent* is the top class for methods shared between *Phrase*s and *Terminal*s 

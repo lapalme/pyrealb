@@ -1,6 +1,6 @@
-from Constituent import Constituent
-from Terminal import Terminal, N, A, Pro, D, Adv, V, P, C, DT, NO, Q
-from Lexicon import getLexicon, getRules, currentLanguage
+from .Constituent import Constituent
+from .Terminal import Terminal, N, A, Pro, D, Adv, V, P, C, DT, NO, Q
+from .Lexicon import getLexicon, getRules, currentLanguage
 import sys
 
 # all prepositions from getLexicon-en|fr.js (used for implementing int:"woi|wai|whn|whe"
@@ -1001,7 +1001,7 @@ class Phrase(Constituent):
 
     @classmethod
     def fromJSON(self, constType, json, lang):
-        from pyrealb import fromJSON
+        from .utils import fromJSON
         if "elements" in json:
             if isinstance(json["elements"], list):
                 args = [fromJSON(e, lang) for e in json["elements"]]
