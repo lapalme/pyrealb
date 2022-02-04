@@ -1,7 +1,4 @@
-# from pyrealb import *
-from pyrealb import Constituent, Terminal,N,A,Pro,D,Adv,V,P,C,DT,NO,Q, Phrase,NP,AP,VP,AdvP,PP,CP,S,SP,\
-    loadEn,loadFr,addToLexicon, getLemma,\
-    oneOf, fromJSON, pyRealB_version, true, false, null
+from pyrealb.all import *
 
 from Realization.common import realize, jsrDayPeriod
 

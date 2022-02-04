@@ -1,5 +1,5 @@
 from context import pyrealb
-from pyrealb import *
+from pyrealb.all import *
 from test import test
 
 def sentences_fr():

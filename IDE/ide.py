@@ -1,8 +1,9 @@
 from context import pyrealb
-# from pyrealb import *
-from pyrealb import Constituent, Terminal,N,A,Pro,D,Adv,V,P,C,DT,NO,Q, Phrase,NP,AP,VP,AdvP,PP,CP,S,SP,\
-    loadEn,loadFr,addToLexicon, getLemma, getLexicon, getRules, currentLanguage,\
-    oneOf, fromJSON, pyRealB_version, true, false, null
+
+from pyrealb.Lexicon import *
+from pyrealb.Phrase import *
+from pyrealb.Terminal import *
+from pyrealb.utils import *
 
 import unicodedata,re, sys
 from ppJson import ppJson

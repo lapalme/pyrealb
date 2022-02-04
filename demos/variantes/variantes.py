@@ -1,8 +1,5 @@
 from context import pyrealb
-# from pyrealb import *
-from pyrealb import Constituent, Terminal,N,A,Pro,D,Adv,V,P,C,DT,NO,Q, Phrase,NP,AP,VP,AdvP,PP,CP,S,SP,\
-    loadEn,loadFr,addToLexicon, getLemma,\
-    oneOf, fromJSON, pyRealB_version, true, false, null
+from pyrealb.all import *
 
 ### generate sentence variations on sentences in examples.py
 ###   the list of options is defined by setting values in "checkboxes"

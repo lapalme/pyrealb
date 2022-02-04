@@ -12,18 +12,18 @@
 <p>One way of testing and developing <code>pyrealb</code> expressions is to use a command line environment
 built on top of the standard Python 3 <em>Read-Eval-Print loop</em>.</p>
 
-<p>The system is started by typing launching a Python 3 interpreter and, at the Python prompt, typing </p>
+<p>The system is started by typing launching a Python 3 interpreter in the <code>IDE</code> directory and, at the Python prompt, typing </p>
 <pre><code>from ide import *
 </code></pre>
 
 <p>which imports all public <code>pyrealb</code> constructors and functions and loads the English lexicon and rule sets. 
 It then displays the version and Python prompt
-<pre><code>** pyrealb 1.0 Interactive Development Environment [_help() for info]
+<pre><code>** pyrealb 1.1 Interactive Development Environment [_help() for info]
 English rules and lexicon loaded
 >>>
 </code></pre>
 <p>A <em>pyrealb</em> expression can be evaluated and realized with the <code>str</code> function. For example:</p>
-<pre><code>>>> s=S(NP(D("the"),N("cat")).n("p"),VP(V("sit")))
+<pre><code>>>> +s
 >>> s
 &lt;Phrase.S object at 0x104246ef0>
 >>> str(s)
@@ -116,7 +116,7 @@ Des chats sont populaires sur [[Facebook]].
 
 <p><i>Facebook</i> is in the French lexicon, so we will add it. First find a similar word that has
 the same inflection. We look for words ending in <i>ok</i></p>
-<pre><code>>>> >>> _lx(".*ok")
+<pre><code>>>> _lx(".*ok")
 amok:{"N":{"g":"m",
            "tab":"n3"}}
 chinook:{"N":{"g":"m",
@@ -140,6 +140,8 @@ new-look:{"N":{"g":"m",
 >>> +S(NP(D("un"),N("chat")).n("p"),VP(V("être"),A("populaire"),PP(P("sur"),N("Facebook"))))
 Des chats sont populaires sur Facebook.
 </code></pre>
+
+<p>Happy realization</p>
 <a href="mailto:lapalme@iro.umontreal.ca">Guy Lapalme</a>
 </body>
 </html>

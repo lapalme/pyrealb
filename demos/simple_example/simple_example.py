@@ -1,10 +1,7 @@
 from context import pyrealb
 
-from pyrealb.Lexicon import *
-from pyrealb.Terminal import *
-from pyrealb.Phrase import *
-from pyrealb.utils import *
-
+from pyrealb.all import *
+import datetime, sys
 
 def english():
     # a few examples generates warnings shown here as comments
