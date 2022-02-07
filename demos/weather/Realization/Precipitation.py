@@ -1,4 +1,4 @@
-from pyrealb.all import *
+from pyrealb import *
 
 from Realization.common import realize, jsrDayPeriod, jsrHour, get_max_term, get_min_term, get_term_at
 

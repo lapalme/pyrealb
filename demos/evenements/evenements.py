@@ -1,5 +1,5 @@
 from context import pyrealb
-from pyrealb.all import *
+from pyrealb import *
 
 # Adaptation en python de l'adaptation en JavaScript
 #     http://rali.iro.umontreal.ca/JSrealB/current/demos/Evenements/index.html

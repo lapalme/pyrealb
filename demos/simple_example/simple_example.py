@@ -1,6 +1,6 @@
 from context import pyrealb
 
-from pyrealb.all import *
+from pyrealb import *
 import datetime, sys
 
 def english():

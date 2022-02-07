@@ -3,7 +3,7 @@
 
 import datetime
 from context import pyrealb
-from pyrealb.all import *
+from pyrealb import *
 from test import test
 
 apple = NP(D("a"),N("apple"))

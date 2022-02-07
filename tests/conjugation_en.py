@@ -1,5 +1,5 @@
 from context import pyrealb
-from pyrealb.all import *
+from pyrealb import *
 from test import test
 
 def conjugation_en():

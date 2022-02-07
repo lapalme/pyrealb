@@ -1,4 +1,4 @@
-from pyrealb.all import *
+from pyrealb import *
 
 ## the jsRealB server should be launched from the jsRealB directory with
 ##    node dist/jsRealB-server.js demos/Weather/weatherLexicon.js

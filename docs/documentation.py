@@ -2,7 +2,7 @@ import markup, unicodedata, re, datetime
 from markup import oneliner as e
 
 from context import pyrealb
-from pyrealb.all import *
+from pyrealb import *
 from userinfos import *
 import os
 
@@ -202,7 +202,7 @@ page.p("""<span class="jsr">pyRealB</span> est un réalisateur de texte pour l'a
 pour l'utiliser, il suffit d'ajouter la ligne suivante à son programme.""",lang="fr")
 page.p("""<span class="jsr">pyRealB</span> is a text realizer for French and English written in Python. Once installed according to <a href="https://github.com/lapalme/pyrealb" title="GitHub - lapalme/pyrealb: French and English text realisator">the instructions on the GitHub</a>, using it
 is only a matter of adding the following line to the program.""",lang="en")
-page.code("from pyRealB.all import *")
+page.code("from pyrealb import *")
 page.p("""
 <span class="jsr">pyRealB</span> peut aussi être utilisé pour créer une page web comme celle-ci dans laquelle 
 les exemples ont été réalisés par <span class="jsr">pyRealB</span>  lors de la création de la page.""",

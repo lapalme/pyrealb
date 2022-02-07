@@ -1,5 +1,5 @@
 from context import pyrealb
-from pyrealb.all import *
+from pyrealb import *
 
 import json,textwrap,re,os
 from datetime import datetime, timedelta

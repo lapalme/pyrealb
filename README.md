@@ -4,7 +4,7 @@
 
 *pyRealB* is a Python adaptation of the JavaScript [**jsRealB**](http://rali.iro.umontreal.ca/jsRealB) with the same constituent syntax notation. It facilitates its integration within Python applications by simply adding
 
-	from pyrealb.all import *
+	from pyrealb import *
 
 
 ## Building and installing distribution package
@@ -12,19 +12,17 @@
 1. `cd` into this directory (with `pyproject.toml` file) 
 2. Build the distribution package `python3 -m build`
 3. Install with `python3 -m pip install .`
-4. In your python3 code: `from pyrealb.all import *` 
 
 ## First realization test at the Python 3 prompt
 
-1. `from pyrealb.all import *` 
+1. `from pyrealb import *` 
 2. `print(S(NP(D("a"),N("cat").n("p")),VP(V("sit").t("p"))))`
 3. this should print `Cats sit.`
 
 ## Directories
 
 * [`src`](src/)
-    * `all.py` : empty program that imports subpackages and exports relevant symbols. **This is the
-                     the file to import** 
+    * `__init__.py` : empty program that imports subpackages and exports relevant symbols. 
     * `Constituent.py`: *Constituent* is the top class for methods shared between *Phrase*s and *Terminal*s 
     * `Lexicon.py`: class to access lexicon entries and syntactic rules
     * `Number.py` : utility functions for dealing with number formatting
@@ -41,7 +39,7 @@
 In most of the following directories, a `context.py` file is used to set the appropriate search path for  *pyRealB* functions. Thus many example programs start with the following lines:
 
     from context import pyrealb
-    from pyrealb.all import *
+    from pyrealb import *
 
 Some directories include `markup.py` which should be loaded using `pip`. Unfortunately I never managed to make this "piped" version work, it does not import the name `oneliner`although it should. It works once the file is in the local directory.
 

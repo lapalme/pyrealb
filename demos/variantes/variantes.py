@@ -1,5 +1,5 @@
 from context import pyrealb
-from pyrealb.all import *
+from pyrealb import *
 
 ### generate sentence variations on sentences in examples.py
 ###   the list of options is defined by setting values in "checkboxes"
