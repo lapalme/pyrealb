@@ -382,14 +382,29 @@ class Terminal(Constituent):
                     n=self.cod.getProp("n")
             aux.taux["t"]=tempsAux
             aux.realization=aux.realize()
-            aux.neg2=self.neg2 if hasattr(self,"neg2") else None
-            if aux.neg2:
-                del self.neg2
             # change this verb to pp
             self.setProp("g",g)
             self.setProp("n",n)
             self.setProp("t","pp")
             self.realization=self.realize()
+            if hasattr(self,"neg2"):
+                aux.neg2=self.neg2 # save this flag to put on the auxiliary, 
+                del self.neg2      # delete it on this verb
+            if "lier" in self.props:
+                aux.lier()         # put this flag on the auxiliary
+                del self.props["lier"] # delete it from the verb
+                # HACK: check if the verb was lié to a nominative pronoun (e.g. subject inversion for a question)
+                myParent=self.parentConst
+                if myParent != None:
+                    myParentElems=myParent.elements
+                    idxMe=myParentElems.index(self)
+                    if idxMe>=0 and idxMe<len(myParentElems)-1:
+                        idxNext=idxMe+1
+                        next=myParentElems[idxNext]
+                        if next.isA("Pro"):
+                            thePro=myParentElems.pop(idxNext) # remove next pro from parent
+                            thePro.realization=thePro.realize() # insert its realization after the auxiliary and before the verb
+                            return [aux,thePro,self]
             return [aux,self]
         else: # simple tense
             conjugationTable=getRules()["conjugation"][self.tab]

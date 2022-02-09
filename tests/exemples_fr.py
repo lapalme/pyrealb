@@ -238,6 +238,16 @@ def exemples_fr():
                NP(D('le'),
                   N('fromage')))).typ({"int":"yon"}),
          "Mange-t-il le fromage? "],
+         [S(Pro("je"),  # 58
+            VP(V('manger').t("pc"),
+               NP(D('le'),
+                  N('fromage')))).typ({"int":"yon"}),
+         "A-t-il mangé le fromage? "],
+         [S(Pro("je"),  # 58
+            VP(V('manger').t("pc"),
+               NP(D('le'),
+                  N('fromage')))).typ({"neg":true,"int":"yon"}),
+         "N'a-t-il pas mangé le fromage? "],
     ]
     tests = [{}]
     for exp, expected in exemples_fr:
