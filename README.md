@@ -7,7 +7,12 @@
 	from pyrealb import *
 
 
-## Building and installing distribution package
+## Installing the distribution package 
+### from PyPI
+
+1. `pip install pyrealb`
+
+### building and installing the package from the sources
 
 1. `cd` into this directory (with `pyproject.toml` file) 
 2. Build the distribution package `python3 -m build`
@@ -16,8 +21,8 @@
 ## First realization test at the Python 3 prompt
 
 1. `from pyrealb import *` 
-2. `print(S(NP(D("a"),N("cat").n("p")),VP(V("sit").t("p"))))`
-3. this should print `Cats sit.`
+2. `print(S(Pro("I").g("f"),VP(V("say"),"hello",PP(P("to"),NP(D("the"),N("world"))))))`
+3. this should print `She says hello to the world.`
 
 ## Directories
 
@@ -73,4 +78,4 @@ Some directories include `markup.py` which should be loaded using `pip`. Unfortu
 [Guy Lapalme](http://rali.iro.umontreal.ca/lapalme)
 
 ### Acknowledgement
-Thanks to Fabrizio Gotti for his help for the organization of the Python package.
+Thanks to Fabrizio Gotti for helping setting up the Python package.

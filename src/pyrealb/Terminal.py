@@ -122,6 +122,8 @@ class Terminal(Constituent):
                                                 i=1
                                                 while i<len(dd) and dd[i]["pe"]==pe:i+=1
                                                 if i==len(dd):self.setProp("pe",pe)
+                                        else:
+                                            pe=3
                             else:
                                 if self.tab in rules["conjugation"]:
                                     ending=rules["conjugation"][self.tab]["ending"]

@@ -536,18 +536,23 @@ class Phrase(Constituent):
         self.processVP(types, "prog", prog)
 
         def mod(vp, idxV, v, mod):
-            vUnit = v.lemma
+            origLemma = v.lemma
             for key in rules["verb_option"]["modalityVerb"]:
                 if key.startswith(mod):
                     v.setLemma(rules["verb_option"]["modalityVerb"][key])
                     break
+            v.isMod=True
             i = idxV - 1
             # move the modality verb before the pronoun(s) inserted by .pro()
             while i >= 0 and vp.elements[i].isA("Pro") and vp.elements[i].peng != vp.peng: i -= 1
             if i != idxV - 1:
                 vp.addElement(vp.removeElement(idxV),
                               i + 1)  # remove the modality verb and move it before the pronouns
-            vp.addElement(V(vUnit).t("b"), idxV + 1)  # add the original verb at infinitive
+            newV=V(origLemma).t("b")
+            if hasattr(v,"isProg"): #copy progressive from original verb...
+                newV.isProg=v.isProg
+                del v.isProg
+            vp.addElement(newV, idxV + 1)  # add the original verb at infinitive
 
         self.processVP(types, "mod", mod)
 
@@ -851,20 +856,34 @@ class Phrase(Constituent):
         "en": 7,
         "*verbe*": 8,
     }
-
+    
+    modalityVerbs=["vouloir","devoir","pouvoir"]
+    
     def doFrenchPronounPlacement(self, cList):
+        iDeb=0
+        i=iDeb
+        while i<len(cList):
+            c=cList[i]
+            if c.isA("V") and hasattr(c,"neg2"):
+                if hasattr(c,"isMod") or hasattr(c,"isProg"):
+                    c.insertReal(cList,Adv(c.neg2,"fr"),i+1)
+                    c.insertReal(cList,Adv("ne","fr"),i)
+                    del c.neg2 # remove negation from the original verb
+                    iDeb=i+3   # skip these in the following loop
+                    if hasattr(c,"isProg"):iDeb+=2 # skip "en train","de"
+            i+=1
         # gather verb position and pronouns coming after the verb possibly adding a reflexive pronoun
         verbPos = None
         prog = None
         neg2 = None
         pros = []
-        i = 0
+        i = iDeb
         while i < len(cList):
             c = cList[i]
             if c.isA("V"):
                 if verbPos == None:
-                    if hasattr(c, "isProg"):
-                        prog = c
+                    if hasattr(c, "isProg") or hasattr(c,"isMod"):
+                        if hasattr(c, "isProg"):prog = c
                         i += 1
                         continue
                     verbPos = i
@@ -965,9 +984,9 @@ class Phrase(Constituent):
         if self.isA("CP"):
             res = self.cpReal()
         else:
+            self.pronominalizeChildren()
             if "typ" in self.props:
                 self.processTyp(self.props["typ"])
-            self.pronominalizeChildren()
             for e in self.elements:
                 if e.isA("CP"):
                     r = e.cpReal()

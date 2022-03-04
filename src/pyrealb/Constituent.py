@@ -96,17 +96,18 @@ class Constituent():
 
     # return a pronoun corresponding to this object 
     # taking into account the current gender, number and person
-    #  do not change the current pronoun, if it is already using the tonic form
+    #  do not change the current pronoun, if it is already using the tonic form or does not have one (e.g. this)
     # if case_ is not given, return the tonic form else return the corresponding case
     # HACK:: parameter case_ is followed by _ so that it is not displayed as a keyword in the editor
     def getTonicPro(self,case_):
         from .Terminal import Pro
-        if self.isA("Pro") and ("tn" in self.props or "c" in self.props):
-            if case_ is None:
-                self.props["c"]=case_
-            else: # ensure tonic form
-                self.props["tn"]=""
-                if "c" in self.props: del self.props["c"]
+        if self.isA("Pro"):
+            if ("tn" in self.props or "c" in self.props):
+                if case_ is not None:
+                    self.props["c"]=case_
+                else: # ensure tonic form
+                    self.props["tn"]=""
+                    if "c" in self.props: del self.props["c"]
             return self
         else: # generate the string corresponding to the tonic form
             pro=Pro("moi" if self.isFr() else "me",self.lang)
@@ -506,11 +507,13 @@ class Constituent():
         return self.detokenize(terminals)
     
     def __str__(self):
-        ## in Javascript, the realization is implicit with __str__ but given that
-        ##     the python debugger also uses str() to display information that
-        ##     makes is hard to follow when tracing... 
-        ##     I found more useful during development to (un)comment these lines
-        ##     but then realization must be launched with ".realize()"
+        ## in Javascript, the realization is implicit with .toString(),
+        ## so in Python, it should be also implicit with str(), but
+        ## the Python debugger in PyCharm also uses str() to display information
+        ## which can in some cases change the structure.
+        ## This makes it hard to follow when tracing...
+        ## I found more useful during development to (un)comment the following two lines
+        ## but then realization must be launched with ".realize()"
         # return self.toSource(-1)
         return self.realize()
     
@@ -530,7 +533,7 @@ class Constituent():
                                 getattr(self,opt)(*o)
                             else:
                                 getattr(self,opt)(o)
-                    else:
+                    elif opt not in ["pat","h"]: # do not copy the pat or h properties of a verb
                         getattr(self,opt)(val)
                 else:
                     print("Constituent.fromJSON: illegal prop:"+opt,file=sys.stderr)
