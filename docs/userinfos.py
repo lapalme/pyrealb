@@ -49,7 +49,23 @@ syntagmesSect = {"fr":"Syntagmes","en":"Phrases",
                             "en":["Sentence",'S(NP(D("the"),N("man")), VP(V("sleep")))']},
          {"pattern":"SP(…)","fr":["Syntagme subordonné",'SP(Pro("que"), Pro("je"), VP(V("rencontrer").t("pc")))'],
                             "en":["Subordinated Phrase",'SP(Adv("that"), Pro("I"), VP(V("meet").t("ps")))']},
-     ]};
+     ]}
+
+dependentsSect ={"fr":"Dépendents","en":"Dependencies",
+     "ex":[
+         {"pattern":"root(…)","fr":["Racine de la phrase",'root(V("aimer"),subj(Pro("lui").c("nom")))'],
+                              "en":["Root of dependencies",'root(V("love"),subj(Pro("me").c("nom")))']},
+         {"pattern":"subj(…)","fr":["Sujet",'subj(N("enfant").n("p"),det(D("le")))'],
+                              "en":["Subject",'subj(N("child").n("p"),det(D("a")))']},
+         {"pattern":"det(…)","fr":["Déterminant",'det(D("le"))'],
+                              "en":["Determiner",'det(D("the"))']},
+         {"pattern":"comp(…)","fr":["Complément du verbe",'comp(N("fromage"),det(D("le")))'],
+                              "en":["Verb complement",'comp(N("cheese"),det(D("the")))']},
+         {"pattern":"mod(…)","fr":["Modificateeur",'mod(A("bon").f("su"))'],
+                            "en":["Modifier",'mod(A("good").f("su"))']},
+         {"pattern":"coord(…)","fr":["Coordination",'root(V("courir"),coord(C("et"),subj(N("chat").n("p")),subj(N("chien").n("p"))))'],
+                               "en":["Coordination",'root(V("run"),coord(C("and"),subj(N("cat").n("p")),subj(N("dog").n("p"))))']},
+     ]}
 
 optionsSect= {"fr":"","en":"",
      "ex":[

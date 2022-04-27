@@ -242,6 +242,28 @@ page.div("""
 <p>Options (next section) can override these automatic agreements.</p>
 """,lang="en")
 
+addTable(dependentsSect)
+page.div("""
+    <p>Le premier paramètre d'une dépendance est un terminal. Les autres paramètres doivent être d'autres dépendances. La dépendance <code>root</code> ne peut apparaître qu'une seule fois à la racine.</p>
+    <p><code>coord</code> regroupe des <strong>dépendances de même type</strong> coordonnées par la conjonction donnée comme terminal. Les dépendents seront séparés par une virgule sauf les deux derniers qui seront séparés par la conjonction. <code>coord</code> sans dépendent sera ignoré à la réalisation. <code>coord</code> avec un seul dépendent apparaitra sans la conjonction. <code>coord</code> doit être inclus dans une autre dépendance pour être réalisé correctement.</p>
+    <p>Les accords <em>simples</em> sont effectués automatiquement entre les dépendents:</p>
+    <ul>
+        <li>Le verbe d'un <code>root</code> s'accorde en personne, en genre et en nombre avec le sujet indiqué par la dépendance <code>subj</code>. Ceci peut être un <code>N</code>, un <code>Pro</code> ou même des dépendents d'un <code>coord</code>. Les attributs et participes passés des verbes copules sont accordés avec leur sujet. Les participes passés des verbes conjugés avec avoir s'accordent avec leur complément d'objet direct s'ils sont placés avant le verbe. Un complément d'objet direct est le terminal d'un <code>comp</code> dont le terminal n'est pas un <code>P</code>.</li>
+        <li>Le déterminant d'un <code>det</code> s'accorde en genre et en nombre avec son sujet, i.e. le terminal englobant.</li>
+        <li>L'adjectif d'un <code>mod</code> s'accorde en genre et en nombre avec son sujet, i.e. le terminal englobant.</li>
+    </ul>
+""",lang="fr")
+
+page.div("""
+    <p>The first parameter of a dependency is a terminal. The other parameters must be dependents. The <code>root</code> dependency can only appear once, at the root of the tree.</p>
+    <p><code>coord</code> combine <strong>dependencies of the same type</strong> coordinated by the conjunction given as terminal. Dependencies will comma separated except for the last two that will be separated by the conjunction. A  <code>coord</code> without dependent will not be realized. A <code>coord</code> with a single dependent will be realized without the conjunction. A <code>coord</code> must not be used as root in order to be properly dealt with.</p>
+    <p>Simple agreements are realized between dependents:</p>
+    <ul>
+        <li>A verb agrees in person and number with a subject indicated by a <code>subj</code> dependency,. The subject can be a <code>N</code>, a <code>Pro</code> or dependents of a <code>coord</code>.</li>
+        <li>The determiner of a <code>det</code> agrees in number with its determinee, i.e. its enclosing terminal.</li>
+    </ul>
+""",lang="en")
+
 ### Déclinaisons et conjugaisons 
 h2_fr("Déclinaisons et conjugaisons","optionsFr");h2_en("Declension and conjugation", "optionsEn")
 addTable(optionsSect)

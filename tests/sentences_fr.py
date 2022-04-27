@@ -23,7 +23,7 @@ def sentences_fr():
          "message":"Phrase avec attribut, de plus le passé composé avec avoir est accordé correctement..."},
         # 2
         {"expression":S(N("cadeau").n("p")).cap(False),
-         "expected":"cadeaux.",
+         "expected":"cadeaux",
          "message":"Phrase sans capitale"},
         # 3
         {"expression":S(NP(A("beau"), N("cadeau").n("p"))),

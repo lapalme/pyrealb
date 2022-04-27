@@ -1,5 +1,5 @@
 ## Python version of jsRealB
-##   the organization parallels the one of JavaScript version (version 3.9)
+##   the organization parallels the one of JavaScript version (version 4.0)
 ##   in fact, the JavaScript version was sometimes revised in order to make it
 ##   similar
 ## Guy Lapalme, December 2021
@@ -15,7 +15,7 @@ import sys
 from .Lexicon import currentLanguage
 from .Terminal import Terminal
 from .Phrase import Phrase
-
+from .Dependent import Dependent
 
 def oneOf(*elems):
     if len(elems) == 1:
@@ -33,7 +33,6 @@ def oneOf(*elems):
 # def setQuoteOOV(qOOV):
 #     global quoteOOV
 #     quoteOOV=qOOV
-
 
 # create expression from a JSON structure
 def fromJSON(json, lang=None):
@@ -54,6 +53,12 @@ def fromJSON(json, lang=None):
                 return Phrase.fromJSON(constType, json, lang1)
             else:
                 print("fromJSON: unknown Phrase type:" + constType, file=sys.stderr)
+        elif "dependent" in json:
+            constType = json["dependent"]
+            if constType in ["root", "det", "subj", "comp", "mod", "compObj", "compObl", "coord"]:
+                return Dependent.fromJSON(constType,json,lang1)
+            else:
+                print("fromJSON: unknown Dependent type:" + constType, file=sys.stderr)
         elif "terminal" in json:
             constType = json["terminal"];
             if constType in ['N', 'A', 'Pro', 'D', 'Adv', 'V', 'P', 'C', 'DT', 'NO', 'Q']:
@@ -70,5 +75,5 @@ true = True
 null = None
 
 # version and date informations
-pyRealB_version = "1.1"
+pyRealB_version = "2.0"
 pyRealB_dateCreated = datetime.datetime.today()

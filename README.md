@@ -1,8 +1,10 @@
 # *pyRealB* - A Python Bilingual Text Realizer
 
-*Version 1.1 - February 2022*
+*Version 2.0 - May 2022*
 
-*pyRealB* is a Python adaptation of the JavaScript [**jsRealB**](http://rali.iro.umontreal.ca/jsRealB) with the same constituent syntax notation. It facilitates its integration within Python applications by simply adding
+*pyRealB* is a Python adaptation of the JavaScript [**jsRealB**](http://rali.iro.umontreal.ca/jsRealB) 
+with the same constituent and dependency syntax notation. 
+It facilitates its integration within Python applications by simply adding
 
 	from pyrealb import *
 
@@ -32,6 +34,7 @@
     * `Lexicon.py`: class to access lexicon entries and syntactic rules
     * `Number.py` : utility functions for dealing with number formatting
     * `Phrase.py` : subclass of *Constituent* for creating complex phrases
+    * `Dependent.py` : subclass of *Constituent* for creating complex phrases using dependencies
     * `Terminal.py` : subclass of *Constituent* for creating a single unit (most often a single word)
     * `util.py`  : some useful functions
     * `Warning.py` : function to generate warnings in case of erroneous specifications using *pyRealB* itself

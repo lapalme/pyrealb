@@ -74,7 +74,7 @@ class Phrase(Constituent):
             else:
                 self.warn("bad position", position, len(self.elements))
         else:
-            self.warn("bad Vonstituent", NO(position + 1).dOpt({"ord": True}), type(elem).__name__)
+            self.warn("bad Constituent", NO(position + 1).dOpt({"ord": True}), type(elem).__name__)
         return self
 
     # remove a child from this Phrase and return it
@@ -98,7 +98,7 @@ class Phrase(Constituent):
             return self.warn("bad Constituent", "last" if self.isEn() else "dernier",
                              type(constituent).__name__ + ":" + str(constituent))
         if prog is None:
-            self.optSource += f'.add({constituent.toSource(0)}({"" if position is None else ("," + str(position))})))'
+            self.optSource += f'.add({constituent.toSource(0)}{"" if position is None else ("," + str(position))})'
         else:  # call from the constructor
             self.elementsSource.append(constituent)
         constituent.parentConst = self
@@ -154,9 +154,9 @@ class Phrase(Constituent):
                                 e.peng = self.peng
             # set agreement between the subject of a subordinate or the object of a subordinate
             pro = self.getFromPath([["S", "SP"], "Pro"])
-            if pro != None:
+            if pro is not None:
                 v = pro.parentConst.getFromPath(["VP", "V"])
-                if v != None:
+                if v is not None:
                     if pro.lemma in ["qui", "who"]:  # agrees with self NP
                         v.peng = self.peng
                     elif self.isFr() and pro.lemma == "que":
@@ -180,7 +180,7 @@ class Phrase(Constituent):
             # the information will be computed at realization time (see Phrase.prototype.cpReal)
         elif self.isOneOf(["S", "SP"]):
             vpv = self.getFromPath([["", "VP"], "V"])
-            if vpv != None:
+            if vpv is not None:
                 self.taux = vpv.taux  # share tense and auxiliary of the verb
                 if vpv.getProp("t") == "ip":  # do not search for subject for an imperative verb
                     return self
@@ -205,7 +205,7 @@ class Phrase(Constituent):
                             return self
                 self.peng = subject.peng
                 vpv = self.linkPengWithSubject("VP", "V", subject)
-                if vpv != None:
+                if vpv is not None:
                     self.taux = vpv.taux
                     if self.isFr() and vpv.lemma in ["être", "paraître", "sembler", "devenir", "rester"]:
                         # check for a French attribute of copula verb
@@ -226,23 +226,23 @@ class Phrase(Constituent):
                 else:
                     # check for a coordination of verbs that share the subject
                     cvs = self.getFromPath(["CP", "VP"])
-                    if cvs != None:
+                    if cvs is not None:
                         for e in self.getConst("CP").elements:
                             if isinstance(e, Phrase):  # skip possible C
                                 e.linkPengWithSubject("VP", "V", subject)
                     if self.isFr():
-                        #  in French, check for a coordinated object of a verb in a SP used as cod 
+                        #  in French, check for a coordinated object of a verb in an SP used as cod
                         #  occurring before the verb
                         cp = self.getConst("CP")
                         sp = self.getConst("SP")
-                        if cp != None and sp != None:
+                        if cp is not None and sp is not None:
                             sppro = sp.getConst("Pro")
-                            if sppro != None and sppro.lemma == "que":
+                            if sppro is not None and sppro.lemma == "que":
                                 v = sp.getFromPath([["VP", ""], "V"])
                                 if v != None:
                                     v.cod = cp
             else:
-                # finally self generates too many spurious messages
+                # finally, self generates too many spurious messages
                 # self.warning("no possible subject found")
                 self.peng = None
         else:
@@ -361,7 +361,7 @@ class Phrase(Constituent):
             # else:
             npParent.removeElement(idxMe)  # insert pronoun where the NP was
             npParent.addElement(pro, idxMe)
-        else:  # special case without parentConst so we leave the NP and change its elements
+        else:  # special case without parentConst, so we leave the NP and change its elements
             pro = self.getTonicPro(None)
             pro.props = self.props
             pro.peng = self.peng
@@ -387,7 +387,7 @@ class Phrase(Constituent):
                 npParent.peng = pro.peng
             npParent.removeElement(idx)  # insert pronoun where the NP was
             npParent.addElement(pro, idx)
-        else:  # special case without parentConst so we leave the NP and change its elements
+        else:  # special case without parentConst, so we leave the NP and change its elements
             pro = self.getNomPro()
             pro.props = self.props
             pro.peng = self.peng
@@ -465,7 +465,7 @@ class Phrase(Constituent):
                 vp.addElement(PP(P("par" if self.isFr() else "by", self.lang), subject), vpIdx + 1)
             if self.isFr():
                 # do this only for French because in English this is done by processTyp_en
-                # change verbe into an "être" auxiliary and make it agree with the newSubject
+                # change verbe to "être" auxiliary and make it agree with the newSubject
                 verbeIdx = vp.getIndex("V")
                 verbe = vp.removeElement(verbeIdx)
                 aux = V("être", "fr")
@@ -566,6 +566,87 @@ class Phrase(Constituent):
 
         self.processVP(types, "neg", process_neg)
 
+    @staticmethod
+    def affixHopping(v,t,compound,types):
+        v_peng = v.peng
+        neg = "neg" in types and types["neg"] == True
+        # English conjugation
+        # it implements the "affix hopping" rules given in
+        #      N. Chomsky, "Syntactic Structures", 2nd ed. Mouton de Gruyter, 2002, p 38 - 48
+        auxils = []  # list of Aux followed by V
+        affixes = []
+        isFuture = False
+        if (t == "f"):
+            isFuture = True
+            t = "p"  # the auxiliary will be generated here so remove it from the V
+        prog = "prog" in types and types["prog"] != False
+        perf = "perf" in types and types["perf"] != False
+        pas = "pas" in types and types["pas"] != False
+        interro = types["int"] if "int" in types and types["int"] != False else None
+        modality = types["mod"] if "mod" in types and types["mod"] != False else None
+        # compound = getRules()["compound"]
+        if modality != None:
+            auxils.append(compound[modality]["aux"])
+            affixes.append("b")
+        elif isFuture:
+            # caution: future in English is done with the modal will, so another modal cannot be used
+            auxils.append(compound["future"]["aux"])
+            affixes.append("b")
+        if perf or prog or pas:
+            if perf:
+                auxils.append(compound["perfect"]["aux"])
+                affixes.append(compound["perfect"]["participle"])
+            if prog:
+                auxils.append(compound["continuous"]["aux"])
+                affixes.append(compound["continuous"]["participle"])
+            if pas:
+                auxils.append(compound["passive"]["aux"])
+                affixes.append(compound["passive"]["participle"])
+        elif (interro != None and
+              len(auxils) == 0 and v.lemma != "be" and v.lemma != "have"):
+            # add auxiliary for interrogative if not already there
+            if interro != "wos" and interro != "was":
+                auxils.append("do")
+                affixes.append("b")
+        auxils.append(v.lemma)
+        # realise the first verb, modal or auxiliary
+        # but make the difference between "have" as an auxiliary and "have" as a verb
+        vAux = auxils.pop(0)
+        words = []
+        # conjugate the first verb
+        if neg:  # negate the first verb
+            if t == "pp" or t == "pr":  # special case for these tenses
+                words.append(Adv("not", "en"))
+                words.append(V(vAux, "en").t(t))
+            elif vAux in negMod:
+                if vAux == "can" and t == "p":
+                    words.append(Q("cannot"))
+                else:
+                    words.append(V(vAux, "en").t(t))
+                    words.append(Adv("not", "en"))
+            elif vAux == "be" or (vAux == "have" and v.lemma != "have"):
+                words.append(V(vAux).t(t))
+                words.append(Adv("not", "en"))
+            else:
+                words.append(V("do", "en").t(t))
+                words.append(Adv("not", "en"))
+                if vAux != "do": words.append(V(vAux).t("b"))
+        else:  # must only set necessary options, so that shared properties will work ok
+            newAux = V(vAux)
+            if not isFuture: newAux.t(t)
+            if v in negMod: newAux.pe(1)
+            words.append(newAux)
+        # recover the original agreement info and set it to the first pyrealb verb...
+        words[0].peng = v_peng
+        # realise the other parts using the corresponding affixes
+        while len(auxils) > 0:
+            vb = auxils.pop(0)
+            words.append(V(vb).t(affixes.pop(0)))
+        if "refl" in types and types["refl"] == True and t != "pp":
+            words.append(Pro("myself", "en").pe(v.getProp("pe"))
+                         .n(v.getProp("n")).g(v.getProp("g")))
+        return words
+
     def processTyp_en(self, types):
         # replace current verb with the list pyrealb words
         #  TODO: take into account the fact that there might be already a verb with modals...
@@ -580,87 +661,10 @@ class Phrase(Constituent):
         idxV = vp.getIndex("V")
         if idxV >= 0:
             v = vp.elements[idxV]
-            v_peng = v.peng
-            t = vp.getProp("t")
-            neg = "neg" in types and types["neg"] == True
-            # English conjugation 
-            # it implements the "affix hopping" rules given in 
-            #      N. Chomsky, "Syntactic Structures", 2nd ed. Mouton de Gruyter, 2002, p 38 - 48
-            auxils = []  # list of Aux followed by V
-            affixes = []
-            isFuture = False
-            if (t == "f"):
-                isFuture = True
-                t = "p"  # the auxiliary will be generated here so remove it from the V
-            prog = "prog" in types and types["prog"] != False
-            perf = "perf" in types and types["perf"] != False
-            pas = "pas" in types and types["pas"] != False
-            interro = types["int"] if "int" in types and types["int"] != False else None
-            modality = types["mod"] if "mod" in types and types["mod"] != False else None
             if "contr" in types and types["contr"] != False:
                 vp.contraction = True  # necessary because we want the negation to be contracted within the VP before the S or SP
                 self.contraction = True
-            compound = getRules()["compound"]
-            if modality != None:
-                auxils.append(compound[modality]["aux"])
-                affixes.append("b")
-            elif isFuture:
-                # caution: future in English is done with the modal will, so another modal cannot be used
-                auxils.append(compound["future"]["aux"])
-                affixes.append("b")
-            if perf or prog or pas:
-                if perf:
-                    auxils.append(compound["perfect"]["aux"])
-                    affixes.append(compound["perfect"]["participle"])
-                if prog:
-                    auxils.append(compound["continuous"]["aux"])
-                    affixes.append(compound["continuous"]["participle"])
-                if pas:
-                    auxils.append(compound["passive"]["aux"])
-                    affixes.append(compound["passive"]["participle"])
-            elif (interro != None and
-                  len(auxils) == 0 and v.lemma != "be" and v.lemma != "have"):
-                # add auxiliary for interrogative if not already there
-                if interro != "wos" and interro != "was":
-                    auxils.append("do")
-                    affixes.append("b")
-            auxils.append(v.lemma)
-            # realise the first verb, modal or auxiliary
-            # but make the difference between "have" as an auxiliary and "have" as a verb
-            vAux = auxils.pop(0)
-            words = []
-            # conjugate the first verb
-            if neg:  # negate the first verb
-                if t == "pp" or t == "pr":  # special case for these tenses
-                    words.append(Adv("not", "en"))
-                    words.append(V(vAux, "en").t(t))
-                elif vAux in negMod:
-                    if vAux == "can" and t == "p":
-                        words.append(Q("cannot"))
-                    else:
-                        words.append(V(vAux, "en").t(t))
-                        words.append(Adv("not", "en"))
-                elif vAux == "be" or (vAux == "have" and v.lemma != "have"):
-                    words.append(V(vAux).t(t))
-                    words.append(Adv("not", "en"))
-                else:
-                    words.append(V("do", "en").t(t))
-                    words.append(Adv("not", "en"))
-                    if vAux != "do": words.append(V(vAux).t("b"))
-            else:  # must only set necessary options, so that shared properties will work ok
-                newAux = V(vAux)
-                if not isFuture: newAux.t(t)
-                if v in negMod: newAux.pe(1)
-                words.append(newAux)
-            # recover the original agreement info and set it to the first pyrealb verb...
-            words[0].peng = v_peng
-            # realise the other parts using the corresponding affixes
-            while len(auxils) > 0:
-                vb = auxils.pop(0)
-                words.append(V(vb).t(affixes.pop(0)))
-            if "refl" in types and types["refl"] == True and t != "pp":
-                words.append(Pro("myself", "en").pe(v.getProp("pe"))
-                             .n(v.getProp("n")).g(v.getProp("g")))
+            words=Phrase.affixHopping(vp.elements[idxV],vp.getProp("t"),getRules()["compound"],types)
             # insert the content of the word array into vp.elements
             vp.removeElement(idxV)
             for i in range(0, len(words)):
@@ -807,128 +811,6 @@ class Phrase(Constituent):
             self.a(getRules()["sentence_type"]["exc"]["punctuation"], True)
         return self
 
-    # tables des positions des clitiques en français, tirées de
-    #    Choi-Jonin (I.) & Lagae (V.), 2016, « Les pronoms personnels clitiques », in Encyclopédie Grammaticale du Français,
-    #    en ligne : http:#encyclogram.fr
-
-    #  section 3.1.1. (http:#encyclogram.fr/notx/006/006_Notice.php#tit31)
-
-    proclitiqueOrdre = {  # page 11 du PDF
-        # premier pronom que nous ignorons pour les besoins de cette application
-        # "je":1, "tu":1, "il":1, "elle":1, "on":1, "on":1, "nous":1, "vous":1, "vous":1, "ils":1, "elle":1,
-        "ne": 2,
-        "me": 3, "te": 3, "se": 3, "nous": 3, "vous": 3,
-        "le": 4, "la": 4, "les": 4,
-        "lui": 5, "leur": 5,
-        "y": 6,
-        "en": 7,
-        "*verbe*": 8,
-        "pas": 9,  # S'applique aussi aux autre négations... plus, guère
-    }
-
-    proclitiqueOrdreImperatifNeg = {  # page 14 du PDF
-        "ne": 1,
-        "me": 2, "te": 2, "nous": 2, "vous": 2,
-        "le": 3, "la": 3, "les": 3,
-        "lui": 4, "leur": 4,
-        "y": 5,
-        "en": 6,
-        "*verbe*": 7,
-        "pas": 8,  # S'applique aussi aux autre négations... plus, guère
-    }
-
-    proclitiqueOrdreImperatifPos = {  # page 15 du PDF
-        "*verbe*": 1,
-        "le": 2, "la": 2, "les": 2,
-        "lui": 3, "leur": 3,
-        "me": 4, "te": 4, "nous": 2, "vous": 2,
-        "y": 5,
-        "en": 6,
-    }
-
-    proclitiqueOrdreInfinitif = {  # page 17 du PDF
-        "ne": 1,
-        "pas": 2,  # S'applique aussi aux autre négations... plus, guère, jamais
-        "me": 3, "te": 3, "se": 3, "nous": 3, "vous": 3,
-        "le": 4, "la": 4, "les": 4,
-        "lui": 5, "leur": 5,
-        "y": 6,
-        "en": 7,
-        "*verbe*": 8,
-    }
-    
-    modalityVerbs=["vouloir","devoir","pouvoir"]
-    
-    def doFrenchPronounPlacement(self, cList):
-        iDeb=0
-        i=iDeb
-        while i<len(cList):
-            c=cList[i]
-            if c.isA("V") and hasattr(c,"neg2"):
-                if hasattr(c,"isMod") or hasattr(c,"isProg"):
-                    c.insertReal(cList,Adv(c.neg2,"fr"),i+1)
-                    c.insertReal(cList,Adv("ne","fr"),i)
-                    del c.neg2 # remove negation from the original verb
-                    iDeb=i+3   # skip these in the following loop
-                    if hasattr(c,"isProg"):iDeb+=2 # skip "en train","de"
-            i+=1
-        # gather verb position and pronouns coming after the verb possibly adding a reflexive pronoun
-        verbPos = None
-        prog = None
-        neg2 = None
-        pros = []
-        i = iDeb
-        while i < len(cList):
-            c = cList[i]
-            if c.isA("V"):
-                if verbPos == None:
-                    if hasattr(c, "isProg") or hasattr(c,"isMod"):
-                        if hasattr(c, "isProg"):prog = c
-                        i += 1
-                        continue
-                    verbPos = i
-                    # find the appropriate clitic table to use
-                    t = c.getProp("t")
-                    if t == "ip":
-                        cliticTable = Phrase.proclitiqueOrdreImperatifNeg if hasattr(c, "neg2") \
-                            else Phrase.proclitiqueOrdreImperatifPos
-                    elif t == "b":
-                        cliticTable = Phrase.proclitiqueOrdreInfinitif
-                    else:
-                        cliticTable = Phrase.proclitiqueOrdre
-                    # check for negation
-                    if hasattr(c, "neg2") and c.neg2 is not None:
-                        c.insertReal(pros, Adv("ne", "fr"))
-                        if t == "b":
-                            c.insertReal(pros, Adv(c.neg2, "fr"))
-                        else:
-                            neg2 = c.neg2
-                if c.isReflexive() and c.getProp("t") != "pp":
-                    if prog != None: c = prog
-                    c.insertReal(pros,
-                                 Pro("moi", "fr").c("refl").pe(c.getProp("pe")).n(c.getProp("n")).g(c.getProp("g")))
-                i += 1
-            elif c.isA("Pro") and verbPos != None:
-                if c.getProp("c") in ["refl", "acc", "dat"] or c.lemma == "y" or c.lemma == "en":
-                    pros.append(cList.pop(i))
-                else:
-                    i += 1
-                    # HACK: stop when seeing a preposition (except "par" introduced by a passivee) or a conjunction
-                    #          or a "strange" pronoun that might start a phrase
-                    #       whose structure has been flattened at this stage
-            elif c.isOneOf(["P", "C", "Adv", "Pro"]) and verbPos != None and c.lemma != "par":
-                break
-            else:
-                i += 1
-        if verbPos == None: return
-        # add ending "pas" after the verb unless it is "lié" in which cas it goes after the next word
-        if neg2 != None:
-            vb = cList[verbPos]
-            vb.insertReal(cList, Adv(neg2, "fr"), verbPos + (1 if "lier" not in vb.props else 2))
-        if len(pros) > 1:
-            pros.sort(key=lambda pro: cliticTable[pro] if pro in cliticTable else 100)
-        # insert pronouns before the verb
-        cList[verbPos:verbPos] = pros
 
     ######### Realization
 
@@ -1026,9 +908,94 @@ class Phrase(Constituent):
                 args = [fromJSON(e, lang) for e in json["elements"]]
                 return Phrase(constType, args, lang).setJSONprops(json)
             else:
-                print("Phrase.fromJSON elements should be a list:" + str(json["elements"]))
+                return self.warn("user-warning","Phrase.fromJSON elements should be a list:" + str(json["elements"]))
         else:
-            print("Phrase.fromJSON: no elements found in " + str(json))
+            return self.warn("user-warning","Phrase.fromJSON: no elements found in " + str(json))
+
+    # create a Dependent version of a Phrase
+    def toDependent(self,depName=None):
+        from .Dependent import Dependent
+
+        def removeAddOption(s):
+            # we must remove the add option because the Phrase structure has already taken it into account,
+            # so it should not be output in the Dependent version
+            iAdd = s.find(".add(")
+            if iAdd < 0: return s
+            l = len(s)
+            p = 1
+            i = iAdd + 5
+            while p > 0 and i < l:
+                if   s[i] == "(": p += 1
+                elif s[i] == ")": p -= 1
+                i += 1
+            return s[0:iAdd] + removeAddOption(s[i:])
+
+        def setPos(i,idx,dep):
+            # check if the position has to be specified
+            if i < idx:
+                if dep.isA("comp"):
+                    dep.pos("pre")
+                elif dep.isA("mod") and (not dep.isEn() or not dep.terminal.isA("A")):
+                    dep.pos("pre")
+            else:
+                if dep.isOneOf(["subj", "det"]):
+                    dep.pos("post")
+            return dep
+
+        def makeDep(me,phName):
+            termName=phName[:-1] # remove P at the end of the phrase name
+            idx=me.getHeadIndex(phName)
+            if (me.elements[idx].isA(termName)):
+                deprel = Dependent([me.elements[idx]],depName)
+                for i,e in enumerate(me.elements):
+                    if i!=idx:
+                        dep=e.toDependent("comp" if phName=="VP" else "mod")
+                        deprel.add(setPos(i,idx,dep),None,True)
+            else :
+                return self.warn("user-warning",f"Phrase.toDependent:: {phName} without {termName} {me.toSource()}")
+            return deprel
+
+        if depName is None:depName="root"
+        deprel=None
+        if self.constType in ["NP","VP","AP","PP","AdvP"]:
+            deprel=makeDep(self,self.constType)
+        elif self.constType == "CP":
+            idxC=self.getIndex("C")
+            if (idxC>=0):
+                deprel=Dependent([self.elements[idxC]],"coord")
+                for i,e in enumerate(self.elements):
+                    if i!=idxC:
+                        deprel.add(e.toDependent(depName),None,True)
+            else:
+                return self.warn("Phrase.toDependent:: CP without C:"+self.toSource())
+        elif self.constType in ["S","SP"]:
+            iVP=self.getIndex("VP")
+            if iVP>=0:
+                deprel=self.elements[iVP].toDependent(depName)
+            else:  ## this message can be ignored...
+                # return self.warn("user-warning","Phrase.toDependent:: S without VP:"+self.toSource())
+                return self
+            iPro=-1
+            if self.isA("SP"):
+                if self.isFr(): # check for possible relative pronoun "que" in French that could be an object
+                    iPro=self.getIndex(["Pro"])
+                    if iPro>=0 and self.elements[iPro].lemma=="que":
+                        deprel.add(self.elements[iPro].toDependent("comp").pos("pre"),0,True)
+                    else:
+                        iPro = -1
+            iSubj=self.getIndex(["NP","N","CP","Pro"])
+            # add rest of args
+            for i,e in enumerate(self.elements):
+                if i!=iVP and i!=iPro:
+                    dep=e.toDependent("subj" if i==iSubj else "mod")
+                    deprel.add(setPos(i,iVP,dep),None,True)
+        else:
+            return self.warn("user-warning",f"Phrase.toDependent:: {self.constType} not yet implemented")
+        deprel.props=self.props
+        deprel.optSource=removeAddOption(self.optSource)
+        if self.parentConst is None and not self.isA("S"):
+            deprel.cap(False)
+        return deprel
 
 
 # # create Phrase subclasses

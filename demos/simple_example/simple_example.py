@@ -1,11 +1,34 @@
 from context import pyrealb
-
 from pyrealb import *
 import datetime, sys
+
+## some examples that were used during development
 
 def english():
     # a few examples generates warnings shown here as comments
     loadEn()
+    exp=S(CP(C("and"),NP(D("the"),N("apple"))),        # 13
+          VP(V("be"),A("good")))
+    print(exp.toDependent().toSource(0))
+    print(exp.toDependent())
+    # sys.exit(0)
+    exp=S(Pro("him").c("nom"),
+       VP(V("eat"),                                 # 11
+          NP(D("a"),N("apple").n("p"))
+          .add(A("red")))).add(Adv("now").a(","),0)
+    print(exp.toDependent().toSource(0))
+    print(exp.toDependent())
+    print(root(V("eat")).add(Adv("now").a(','),0))
+    print(root(V("eat"),
+               comp(N("apple").n('p'),
+                    det(D("a")),
+                    mod(A("red")).pos('pre')).add(A("red")),
+               subj(Pro("him").c('nom')),
+               mod(Adv("now").a(','))).add(Adv("now").a(','),0))
+    print(S(Pro("him").c("nom"),                      # 20
+         VP(V("eat"),
+            NP(D("a"), N("apple").tag("a", {"href":"https:#en.wikipedia.org/wiki/Apple"})))).clone(globals()))
+    print(S(CP(C("and"), NP(D("the"), N("apple"))), VP(V("be"), A("good"))))
     print(V("reserve").t(""))  # V('reserve'):: : this bad value for option t is ignored.
     print(N())  # N(None):: the parameter should be string, not NoneType.
     print(DT())
@@ -95,6 +118,121 @@ def francais():
             VP(V("être").t('p'),
                AP(A("gris")))))
 
+def dependent_fr():
+    loadFr()
+    pommeS = subj(N("pomme"),det(D("le")))
+    gars = subj(N("garçon").n("p"),det(D("le")))
+    addToLexicon({"John":{"N":{"g":"m","tab":"n4"}}})
+    addToLexicon({"Mary":{"N":{"g":"f","tab":"n16"}}})
 
+    print(root(N("test")))
+    print(V("repentir").t('p').pe(1).n('s').realize())
+    print(root(V("manger").t("pc"),
+                  subj(N("souris"),
+                       det(D("le"))),
+                  comp(N("fromage"),
+                       det(D("le")))).typ({"int": "wad", "pas": true}).realize())
+    print(root(V('demander').t("pc"),
+                  comp(N('adresse'),
+                       det(D('mon'))).pro(),
+                  comp(P('à'),
+                       mod(N('parent').n("p"),
+                           det(D('mon')))).pro(),
+                  subj(Pro('je').pe(2))).realize())
+    print(root(V("manger").t("f"),
+               subj(N("chat"),
+                    det(D("le"))).n("p"),
+               comp(N("souris"),
+                    det(D("un")))).typ({"neg":True}).realize())
+    print(root(V('être').t("p"),
+               comp(A('gris')),
+               subj(N('souris'),
+                    det(D('le')),
+                    mod(V('manger').t("pc"),
+                        comp(Pro('que')).pos("pre"),
+                        subj(N('chat').n("p"),
+                             det(D('le')))))))
+    print(root(N('cadeau').n("p"),
+                 mod(A('beau'))))
+    print(root(N('gens').n("p"),
+                 det(D('le')),
+                 mod(A('vulgaire').pos("pre"))).cap(false))
+    print(root(N('père'),
+                 det(D('le')),
+                 mod(P('de'),
+                     mod(N('fille'),
+                         det(D('mon').pe(1))))))
+    print(root(V('manger'),
+                 comp(N('gâteau'),
+                      det(D('le'))),
+                 subj(N('enfant').n("p"),
+                      det(D('le'))).pro()))
+    print(root(V('manger'),
+                 comp(N('gâteau'),
+                      det(D('le'))).pro(),
+                 subj(N('enfant').n("p"),
+                      det(D('le')))))
+    print(root(V('manger'),
+                 comp(N('gâteau'),
+                      det(D('le'))),
+                 subj(N('enfant').n("p"),
+                      det(D('le')))).typ({"pas":True}))
+    print(root(V('venir').t("pc"),
+             comp(Adv('hier')),
+             coord(C('et'),
+                   subj(N('fruit'),
+                        det(D('le')))).add(pommeS).add(gars)))
+
+def dependent_en():
+    loadEn()
+    print(root(V("play").t("f"),
+                           subj(N("cat"),det(D("a"))),
+                           comp(N("piano"))).typ({"neg":true}).realize())
+    print(root(V("sit").t("ps"),
+              subj(N("cat"),det(D("the"))),
+              comp(P("on"),mod(N("couch"),det(D("the"))))))
+    print(root(V("like").t("pr"),
+               subj(N("dog").n("p"),mod(A("nice"))),
+               comp(N("cat"),
+                    det(D("a"))).n("p")))
+    print(root(V('love'),
+                 comp(N('woman'),
+                      det(D('a'))).pro(),
+                 subj(Pro('I').g("m"))))
+    s = lambda: root(V("say").t("ps"),
+                     subj(Pro("I").pe(1)),
+                     comp(N("bye")),
+                     comp(P("to"),
+                          mod(N("world"),
+                              det(D("the"))))).typ({"pas": False, "neg": True})
+    print(s())
+    sJson = s().toJSON()
+    import json
+    json.dump(sJson, sys.stdout, indent=3)
+    print()
+    s1 = fromJSON(s().toJSON())
+    print(s1)
+
+def dependentTransformation():
+    s = lambda: S(Pro("I").pe(1),
+                  VP(V("say").t("ps"),
+                     NP(N("hello"),
+                        PP(P("to"), NP(D("the"), N("world").n("p")))))).typ({"pas": False, "neg": True})
+    print(s().toDependent().toSource(0))
+    print(s().toDependent())
+
+test_warnings()
+
+print("** English **")
 english()
+print("======")
+print("** Français **")
 francais()
+print("======")
+print("** Dépendances françaises **")
+dependent_fr()
+print("======")
+print("** English dependencies **")
+dependent_en()
+print("======")
+dependentTransformation()

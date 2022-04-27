@@ -398,15 +398,28 @@ class Terminal(Constituent):
                 # HACK: check if the verb was lié to a nominative pronoun (e.g. subject inversion for a question)
                 myParent=self.parentConst
                 if myParent != None:
-                    myParentElems=myParent.elements
-                    idxMe=myParentElems.index(self)
-                    if idxMe>=0 and idxMe<len(myParentElems)-1:
-                        idxNext=idxMe+1
-                        next=myParentElems[idxNext]
-                        if next.isA("Pro"):
-                            thePro=myParentElems.pop(idxNext) # remove next pro from parent
-                            thePro.realization=thePro.realize() # insert its realization after the auxiliary and before the verb
-                            return [aux,thePro,self]
+                    if hasattr(myParent,"elements"): # when dealing with a Phrase
+                        myParentElems=myParent.elements
+                        idxMe=myParentElems.index(self)
+                        if idxMe>=0 and idxMe<len(myParentElems)-1:
+                            idxNext=idxMe+1
+                            next=myParentElems[idxNext]
+                            if next.isA("Pro"):
+                                thePro=myParentElems.pop(idxNext) # remove next pro from parent
+                                thePro.realization=thePro.realize() # insert its realization after the auxiliary and before the verb
+                                return [aux,thePro,self]
+                    elif hasattr(myParent,"dependents"): # when dealing with a Dependent
+                        proIndex=myParent.findIndex(lambda d:d.terminal.isA("Pro"))
+                        if proIndex>=0:
+                            thePro=myParent.removeDependent(proIndex).terminal  # remove Pro from Parent
+                            thePro2=Pro(thePro.lemma)             # as the original Pro is already realized in the output list, we must hack
+                            thePro2.props=thePro.props            # and we cannot use clone because of environ
+                            thePro2.peng=thePro.peng
+                            thePro2.realization=thePro2.realize() # insert its realization after the auxiliary and before the verb
+                            thePro.realization=""                 # set original Pro realization to nothing
+                            return [aux,thePro2,self]
+                    else:
+                        self.error("Terminal.conjugate_fr:: Strange parent:" + type(myParent).__name__)
             return [aux,self]
         else: # simple tense
             conjugationTable=getRules()["conjugation"][self.tab]
@@ -637,7 +650,18 @@ class Terminal(Constituent):
             print("Terminal.fromJSON: no lemma found in "+str(json))
         return self
         
-    
+    def toDependent(self,depName=None):
+        from .Dependent import Dependent,det
+        # HACK: self.parentConst in changed during transformation to refer to the parent dependennt...
+        isTopLevel = self.parentConst is None;  # we save it to use it at the end
+        if (self.isOneOf(["D", "NO"])):
+            deprel=det(self)
+        else:
+            deprel= Dependent([self], "root" if depName is None else depName);
+        if isTopLevel: deprel.cap(False);
+        return deprel
+
+
 # # create Terminal subclasses
 #  which could be done using the following exec
 # terminalDefString ='''

@@ -1,4 +1,4 @@
-def test(title,lang,testsFn,kept=None,badOnly=False):
+def test(title,lang,testsFn,kept=None,badOnly=False,showExpr=False):
     print("===",title,"===")
     nbTests=0
     nbOK=0
@@ -8,9 +8,11 @@ def test(title,lang,testsFn,kept=None,badOnly=False):
                 nbTests+=1
                 try:
                     expression=s["expression"]
+                    if showExpr:
+                        print(expression.toSource(0))
                     expected=s["expected"]
                     message=s["message"]
-                    realized=expression.realize()
+                    realized=expression if isinstance(expression,str) else expression.realize()
                     if expected is None or realized==expected:
                         nbOK+=1
                         if not badOnly:
@@ -19,12 +21,12 @@ def test(title,lang,testsFn,kept=None,badOnly=False):
                             print("---")
                     else:
                         print("KO",i,message)
-                        print(expression.toSource())
+                        print("exp" if isinstance(expression,str) else expression.toSource())
                         print(realized)
                         print(expected)
                         print("---")
                 except Exception as e:
-                    print("**** Exception: ",repr(e))
+                    print("KO **** Exception: ",i,repr(e))
                     print(expression.toSource())
                     print(expected)
                     print("---")

@@ -3,10 +3,12 @@ import re,datetime,sys
 from .Lexicon import getLexicon, getLemma, getRules, currentLanguage
 
 defaultProps = {"en":{"g":"n","n":"s","pe":3,"t":"p"},             # language dependent default properties
-                "fr":{"g":"m","n":"s","pe":3,"t":"p","aux":"av"}}; 
+                "fr":{"g":"m","n":"s","pe":3,"t":"p","aux":"av"}}
 
 quoteOOV=False # TODO: make this settable globally
 optionListMethods = ('a', 'b', 'ba', 'en')
+
+deprels = ["root","subj","det","mod","comp","coord"] # list of implemented dependency relations
 
 # regex for matching the first word in a generated string (ouch!!! it is quite subtle...) 
 #  match index:
@@ -64,8 +66,8 @@ class Constituent():
         self.props[propName]=val
 
     # should be in Terminal.prototype... but here for consistency with three previous definitions
-    pengNO=0; # useful for debugging: identifier of peng struct to check proper sharing in the debugger
-    tauxNO=0; # useful for debugging: identifier of taux struct to check proper sharing in the debugger
+    pengNO=0 # useful for debugging: identifier of peng struct to check proper sharing in the debugger
+    tauxNO=0 # useful for debugging: identifier of taux struct to check proper sharing in the debugger
    
     def initProps(self):
         if self.isOneOf(["N","A","D","V","NO","Pro","Q","DT"]):
@@ -99,7 +101,7 @@ class Constituent():
     #  do not change the current pronoun, if it is already using the tonic form or does not have one (e.g. this)
     # if case_ is not given, return the tonic form else return the corresponding case
     # HACK:: parameter case_ is followed by _ so that it is not displayed as a keyword in the editor
-    def getTonicPro(self,case_):
+    def getTonicPro(self,case_=None):
         from .Terminal import Pro
         if self.isA("Pro"):
             if ("tn" in self.props or "c" in self.props):
@@ -138,7 +140,7 @@ class Constituent():
             self.addOptSource("tag",name)
             attrs={}
         else:
-            self.optSource+=f'.tag("{name}",str(attrs))' # specila case of addOptionSource
+            self.optSource+=f'.tag("{name}",{str(attrs)})' # specila case of addOptionSource
         if "tag" not in self.props:self.props["tag"]=[]
         self.props["tag"].append([name,attrs])
         return self
@@ -236,7 +238,7 @@ class Constituent():
         self.addOptSource("typ",types)
         if not isinstance(types, dict):
             self.warn("ignored value for option",".typ",type(types).__name__+":"+str(types))
-        elif not self.isOneOf(["S", "SP", "VP"]):
+        elif not self.isOneOf(["S", "SP", "VP", *deprels]):
             self.warn("bad application", f'.typ("{str(types)}")', ["S", "SP", "VP"], self.constType)
         else: # validate types and keep only the valid ones
             for key,val in types.copy().items():
@@ -384,8 +386,131 @@ class Constituent():
                     cList[i+1].realization=m2[1]+m2[3].strip()
                 i+=1
             i+=1
-        
-    
+
+        # tables des positions des clitiques en français, tirées de
+        #    Choi-Jonin (I.) & Lagae (V.), 2016, « Les pronoms personnels clitiques », in Encyclopédie Grammaticale du Français,
+        #    en ligne : http:#encyclogram.fr
+
+        #  section 3.1.1. (http:#encyclogram.fr/notx/006/006_Notice.php#tit31)
+
+    proclitiqueOrdre = {  # page 11 du PDF
+        # premier pronom que nous ignorons pour les besoins de cette application
+        # "je":1, "tu":1, "il":1, "elle":1, "on":1, "on":1, "nous":1, "vous":1, "vous":1, "ils":1, "elle":1,
+        "ne": 2,
+        "me": 3, "te": 3, "se": 3, "nous": 3, "vous": 3,
+        "le": 4, "la": 4, "les": 4,
+        "lui": 5, "leur": 5,
+        "y": 6,
+        "en": 7,
+        "*verbe*": 8,
+        "pas": 9,  # S'applique aussi aux autre négations... plus, guère
+    }
+
+    proclitiqueOrdreImperatifNeg = {  # page 14 du PDF
+        "ne": 1,
+        "me": 2, "te": 2, "nous": 2, "vous": 2,
+        "le": 3, "la": 3, "les": 3,
+        "lui": 4, "leur": 4,
+        "y": 5,
+        "en": 6,
+        "*verbe*": 7,
+        "pas": 8,  # S'applique aussi aux autre négations... plus, guère
+    }
+
+    proclitiqueOrdreImperatifPos = {  # page 15 du PDF
+        "*verbe*": 1,
+        "le": 2, "la": 2, "les": 2,
+        "lui": 3, "leur": 3,
+        "me": 4, "te": 4, "nous": 2, "vous": 2,
+        "y": 5,
+        "en": 6,
+    }
+
+    proclitiqueOrdreInfinitif = {  # page 17 du PDF
+        "ne": 1,
+        "pas": 2,  # S'applique aussi aux autre négations... plus, guère, jamais
+        "me": 3, "te": 3, "se": 3, "nous": 3, "vous": 3,
+        "le": 4, "la": 4, "les": 4,
+        "lui": 5, "leur": 5,
+        "y": 6,
+        "en": 7,
+        "*verbe*": 8,
+    }
+
+    modalityVerbs = ["vouloir", "devoir", "pouvoir"]
+
+    def doFrenchPronounPlacement(self, cList):
+        from .Terminal import Adv,Pro
+        iDeb = 0
+        i = iDeb
+        while i < len(cList):
+            c = cList[i]
+            if c.isA("V") and hasattr(c, "neg2"):
+                if hasattr(c, "isMod") or hasattr(c, "isProg"):
+                    c.insertReal(cList, Adv(c.neg2, "fr"), i + 1)
+                    c.insertReal(cList, Adv("ne", "fr"), i)
+                    del c.neg2  # remove negation from the original verb
+                    iDeb = i + 3  # skip these in the following loop
+                    if hasattr(c, "isProg"): iDeb += 2  # skip "en train","de"
+            i += 1
+        # gather verb position and pronouns coming after the verb possibly adding a reflexive pronoun
+        verbPos = None
+        prog = None
+        neg2 = None
+        pros = []
+        i = iDeb
+        while i < len(cList):
+            c = cList[i]
+            if c.isA("V"):
+                if verbPos == None:
+                    if hasattr(c, "isProg") or hasattr(c, "isMod"):
+                        if hasattr(c, "isProg"): prog = c
+                        i += 1
+                        continue
+                    verbPos = i
+                    # find the appropriate clitic table to use
+                    t = c.getProp("t")
+                    if t == "ip":
+                        cliticTable = Constituent.proclitiqueOrdreImperatifNeg if hasattr(c, "neg2") \
+                            else Constituent.proclitiqueOrdreImperatifPos
+                    elif t == "b":
+                        cliticTable = Constituent.proclitiqueOrdreInfinitif
+                    else:
+                        cliticTable = Constituent.proclitiqueOrdre
+                    # check for negation
+                    if hasattr(c, "neg2") and c.neg2 is not None:
+                        c.insertReal(pros, Adv("ne", "fr"))
+                        if t == "b":
+                            c.insertReal(pros, Adv(c.neg2, "fr"))
+                        else:
+                            neg2 = c.neg2
+                if c.isReflexive() and c.getProp("t") != "pp":
+                    if prog != None: c = prog
+                    c.insertReal(pros,
+                                 Pro("moi", "fr").c("refl").pe(c.getProp("pe")).n(c.getProp("n")).g(c.getProp("g")))
+                i += 1
+            elif c.isA("Pro") and verbPos != None:
+                if c.getProp("c") in ["refl", "acc", "dat"] or c.lemma == "y" or c.lemma == "en":
+                    pros.append(cList.pop(i))
+                else:
+                    i += 1
+                    # HACK: stop when seeing a preposition (except "par" introduced by a passivee) or a conjunction
+                    #          or a "strange" pronoun that might start a phrase
+                    #       whose structure has been flattened at this stage
+            elif c.isOneOf(["P", "C", "Adv", "Pro"]) and verbPos != None and c.lemma != "par":
+                break
+            else:
+                i += 1
+        if verbPos == None: return
+        # add ending "pas" after the verb unless it is "lié" in which cas it goes after the next word
+        if neg2 != None:
+            vb = cList[verbPos]
+            vb.insertReal(cList, Adv(neg2, "fr"), verbPos + (1 if "lier" not in vb.props else 2))
+        if len(pros) > 1:
+            pros.sort(key=lambda pro: cliticTable[pro] if pro in cliticTable else 100)
+        # insert pronouns before the verb
+        cList[verbPos:verbPos] = pros
+
     # applies to a list of Constituents (can be a single one)
     # adds either to the first or last token (which can be the same)
     def doFormat(self,cList):
@@ -416,7 +541,7 @@ class Constituent():
             cList[0].realization=before+cList[0].realization
             cList[-1].realization+=after
 
-        def startTag(tagName,attrs):
+        def startTag(tagName,attrs={}):
             attString="".join(f' {key}="{val}"' for key,val in attrs.items())
             return "<"+tagName+attString+">"
     
@@ -432,7 +557,7 @@ class Constituent():
         # start of processing
         removeEmpty(cList)
         # reorder French pronouns within a VP
-        if self.isA("VP") and self.isFr():
+        if self.isFr() and (self.isA("VP") or (self.isOneOf(deprels) and self.terminal.isA("V"))):
             self.doFrenchPronounPlacement(cList)
             
         if self.isFr():
@@ -484,21 +609,21 @@ class Constituent():
             elif len(terminal.realization)>0:
                 s+=terminal.realization+" "
         s+=terminals[-1].realization
-        # apply capitalization and final full stop
+        # apply capitalization and final full stop unless .cap(False)
         if self.parentConst is None:
-            if self.isA("S") and len(s)>0: ## this is a top-level S
+            if self.isOneOf(["S","root"]) and len(s)>0: ## this is a top-level S
                 if "cap" not in self.props or self.props["cap"]!=False:
                     sepWordRE=sepWordREen if self.isEn() else sepWordREfr
                     m=sepWordRE.match(s)
                     idx=len(m.group(1)) # get index of first letter
                     if idx<len(s): # check if there was a letter
                         s=s[0:idx]+s[idx].upper()+s[idx+1:]
-                if "tag" not in self.props or self.props["tag"]==False: # do not touch top-level tag
-                    # and a full stop at the end unless there is already one
-                    # taking into account any trailing HTML tag
-                    m=re.search(r"(.)( |(<[^>]+>))*$",s)
-                    if m!=None and m.group(1) not in "?!.:;/":
-                        s+="."
+                    if "tag" not in self.props or self.props["tag"]==False: # do not touch top-level tag
+                        # and a full stop at the end unless there is already one
+                        # taking into account any trailing HTML tag
+                        m=re.search(r"(.)( |(<[^>]+>))*$",s)
+                        if m!=None and m.group(1) not in "?!.:;/":
+                            s+="."
         return s
     
     ## this looks very simple, but it is the start of the realization process
@@ -517,8 +642,8 @@ class Constituent():
         # return self.toSource(-1)
         return self.realize()
     
-    def clone(self):
-        return eval(self.toSource(),globals())
+    def clone(self,env=None):
+        return eval(self.toSource(),globals() if env is None else env)
     
     def toSource(self):
         return self.optSource
@@ -563,7 +688,7 @@ def makeOptionMethod(option,validVals,allowedConsts,optionName=None):
                 if len(allowedConsts)==0 or e.isOneOf(allowedConsts):
                     e[option](val)
             return self
-        if len(allowedConsts)==0 or self.isOneOf(allowedConsts):
+        if len(allowedConsts)==0 or self.isOneOf(allowedConsts) or self.isOneOf(deprels):
             if validVals!=None and val not in validVals:
                 return self.warn("ignored value for option",option,val)
             # start of the real work

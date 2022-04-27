@@ -44,9 +44,10 @@ def examples_en():
      )).typ({"neg":true,"pas":true}),
      "Apples are not eaten by him."],
     # Section 6.1
-    [S(Pro("him").c("nom"), VP(V("eat"),            # 11
-       NP(D("a"),N("apple").n("p")).add(A("red"))) 
-      ).add(Adv("now").a(","),0),
+    [S(Pro("him").c("nom"),
+       VP(V("eat"),                                 # 11
+          NP(D("a"),N("apple").n("p"))
+          .add(A("red")))).add(Adv("now").a(","),0),
      "Now, he eats red apples."],
     # Section 6.2
     [S(CP(C("and"),NP(D("the"),N("apple")),         # 12
@@ -60,7 +61,7 @@ def examples_en():
      # Section 6.3
      [S(Pro("him").c("nom"),                        # 14
         CP(C("and"),
-           VP(V("eat"),apple), VP(V("love"),apple.pro()))),
+           VP(V("eat"),appleF()), VP(V("love"),appleF().pro()))),
       "He eats an apple and loves it."],
       # this example is not exactly what is in the paper, but I have not managed to make it work properly
      [S(NP(D("a"),N("apple")).pro(),VP(V("be"),A("red"))),# 15 
@@ -89,11 +90,11 @@ def examples_en():
        "one plane"],   
       [NP(NO(3).dOpt({"nat":true}),N("plane")),     # 22
        "three planes"],
-      [NP(NP(D("the"),                            # 23 
-        A("large").f("su"),
-        NP(P("of"),
-           D("the"),
-           N("trainer").n("p")).a(",")),
+      [SP(SP(D("the"),                            # 23
+             A("large").f("su"),
+             NP(P("of"),
+                D("the"),
+                N("trainer").n("p")).a(",")),
         D("this").n("s"),    # check propagation of the number (this should not be these)
         N("addition").n("s")),
        "the largest of the trainers, this addition"]
@@ -101,10 +102,18 @@ def examples_en():
     tests = [{}]
     for exp, expected in examples_en:
         tests.append({
-            "expression": exp,
+            "expression": exp.clone(globals()),
             "expected": expected,
             "message": f"Phrase complète:  {expected}"
         })
+    # add also the dependent version
+    for exp, expected in examples_en:
+        tests.append({
+            "expression": exp.clone(globals()).toDependent(),
+            "expected": expected,
+            "message": f"Phrase complète:  {expected}"
+        })
+
     return tests
 
 if __name__ == '__main__':
