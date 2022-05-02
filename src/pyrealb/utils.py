@@ -41,14 +41,14 @@ def fromJSON(json, lang=None):
             if json["lang"] == "en":
                 lang = "en"
             elif json["lang"] == "fr":
-                lang = "fr";
+                lang = "fr"
             else:
                 print("FromJSON: lang should be 'en' or 'fr', not " + json["lang"] + " 'en' will be used",
-                      file=sys.stderr);
-                lang = "en";
-        lang1 = lang if lang != None else currentLanguage()
+                      file=sys.stderr)
+                lang = "en"
+        lang1 = lang if lang is not None else currentLanguage()
         if "phrase" in json:
-            constType = json["phrase"];
+            constType = json["phrase"]
             if constType in ['NP', 'AP', 'AdvP', 'VP', 'PP', 'CP', 'S', 'SP']:
                 return Phrase.fromJSON(constType, json, lang1)
             else:
@@ -56,11 +56,11 @@ def fromJSON(json, lang=None):
         elif "dependent" in json:
             constType = json["dependent"]
             if constType in ["root", "det", "subj", "comp", "mod", "compObj", "compObl", "coord"]:
-                return Dependent.fromJSON(constType,json,lang1)
+                return Dependent.fromJSON(constType, json, lang1)
             else:
                 print("fromJSON: unknown Dependent type:" + constType, file=sys.stderr)
         elif "terminal" in json:
-            constType = json["terminal"];
+            constType = json["terminal"]
             if constType in ['N', 'A', 'Pro', 'D', 'Adv', 'V', 'P', 'C', 'DT', 'NO', 'Q']:
                 return Terminal.fromJSON(constType, json, lang1)
             else:

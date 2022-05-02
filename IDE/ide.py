@@ -2,6 +2,7 @@ from context import pyrealb
 
 from pyrealb.Lexicon import *
 from pyrealb.Phrase import *
+from pyrealb.Dependent import *
 from pyrealb.Terminal import *
 from pyrealb.utils import *
 
@@ -9,11 +10,11 @@ import unicodedata,re, sys
 from ppJson import ppJson
 
 __all__ = [ # from pyRealB
-     'A', 'AP', 'Adv', 'AdvP', 'C', 'CP', 'D', 'DT', 'N', 'NO', 'NP', 
-     'P', 'PP', 'Phrase', 'Pro', 'Q', 'S', 'SP', 'Terminal', 'V', 'VP', 
-     'addToLexicon', 'currentLanguage', 'fromJSON', 
-     'getLemma', 'getLexicon', 'getRules', 'loadEn', 'loadFr', 
-     'oneOf', 'false', 'true', 'null', 'pyRealB_version', 
+     'A','Adv','C', 'D', 'DT', 'N', 'NO','P', 'Pro', 'Q','V',            # from Terminal
+     'AP',  'AdvP',  'CP', 'NP', 'PP',  'VP', 'S', 'SP',                 # from Phrase
+     'root', 'subj', 'det', 'mod', 'comp', 'compObj', 'compObl', 'coord',# from Dependent
+     'currentLanguage', 'addToLexicon', 'getLemma', 'loadEn', 'loadFr',  # from Lexicon
+     'fromJSON', 'oneOf', 'false', 'true', 'null', 'pyRealB_version',    # from utils
      # from this IDE
      "_en", "_fr", "_cn", "_ce", "_dn", "_de", "_lm", "_lx", "_help"]
 

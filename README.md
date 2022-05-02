@@ -9,10 +9,13 @@ It facilitates its integration within Python applications by simply adding
 	from pyrealb import *
 
 
-## Installing the distribution package 
-### from PyPI
+### Installing the distribution package from PyPI
 
 1. `pip install pyrealb`
+
+## Upgrading the version 
+
+1. `pip install pyrealb --upgrade`
 
 ### building and installing the package from the sources
 
@@ -20,11 +23,13 @@ It facilitates its integration within Python applications by simply adding
 2. Build the distribution package `python3 -m build`
 3. Install with `python3 -m pip install .`
 
-## First realization test at the Python 3 prompt
+## First realization tests at the Python 3 prompt
 
 1. `from pyrealb import *` 
 2. `print(S(Pro("I").g("f"),VP(V("say"),"hello",PP(P("to"),NP(D("the"),N("world"))))))`
 3. this should print `She says hello to the world.`
+4. `print(root(V("say").t("ps"),subj(Pro("him").c("nom")),comp(N("goodbye"))).typ({"neg":True}))`
+5. this should print `He did not say goodbye.`
 
 ## Directories
 
@@ -82,3 +87,16 @@ Some directories include `markup.py` which should be loaded using `pip`. Unfortu
 
 ### Acknowledgement
 Thanks to Fabrizio Gotti for helping setting up the Python package.
+
+### Updating package version on PyPI (for the maintainer only)
+
+These steps take for granted that the password for PyPI has already been setup...
+
+1. update version number in `setup.cfg`
+2. `cd` into the directory with the `pyproject.toml` file 
+3. Build the distribution package  
+       `python3 -m build`
+4. Upload to PyPi  
+      `twine upload dist/*`
+5. Install new version from PyPI  
+    `python3 -m pip install pyrealb --upgrade`

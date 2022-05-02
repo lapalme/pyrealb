@@ -40,11 +40,11 @@ def currentLanguage():
 
 def loadEn(trace=False):
     __lexicon.lang="en"
-    if trace: print("English language loaded",file=sys.stderr)
+    if trace: print("English lexicon and rules loaded",file=sys.stderr)
 
 def loadFr(trace=False):
     __lexicon.lang="fr"
-    if trace: print("French language loaded",file=sys.stderr)
+    if trace: print("Règles et lexique français chargés",file=sys.stderr)
 
 # add to lexicon and return the updated object
 #     to remove from lexicon (give None as newInfos)
