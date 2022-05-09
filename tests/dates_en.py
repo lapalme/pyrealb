@@ -9,6 +9,7 @@ def dates_en():
     theDate="2015-01-01T11:25:45"
     date=datetime.strptime(theDate,"%Y-%m-%dT%H:%M:%S")
     exp=DT(theDate)
+    rtimeOption = {"rtime":date,"hour":False,"minute":False,"second":False}
     return [    # natural date
             {},
     {"expression":exp,
@@ -76,25 +77,25 @@ def dates_en():
      "expected":"1", 
      "message":"Only date"},
     #relative time to Thursday January 1st 2015
-    {"expression":DT(date-timedelta(days=1)).dOpt({"rtime":date}),
+    {"expression":DT(date-timedelta(days=1)).dOpt(rtimeOption),
      "expected":"yesterday",
      "message":"one day before"},
-    {"expression":DT(date-timedelta(days=2)).dOpt({"rtime":date}),
+    {"expression":DT(date-timedelta(days=2)).dOpt(rtimeOption),
      "expected":"last Tuesday",
      "message":"two days before"},
-    {"expression":DT(date-timedelta(days=10)).dOpt({"rtime":date}),
+    {"expression":DT(date-timedelta(days=10)).dOpt(rtimeOption),
      "expected":"10 days ago",
      "message":"since 10 days"},
-    {"expression":DT(date).dOpt({"rtime":date}),
+    {"expression":DT(date).dOpt(rtimeOption),
      "expected":"today",
      "message":"same day"},
-    {"expression":DT(date+timedelta(days=1)).dOpt({"rtime":date}),
+    {"expression":DT(date+timedelta(days=1)).dOpt(rtimeOption),
      "expected":"tomorrow",
      "message":"one day after"},
-    {"expression":DT(date+timedelta(days=4)).dOpt({"rtime":date}),
+    {"expression":DT(date+timedelta(days=4)).dOpt(rtimeOption),
      "expected":"Monday",
      "message":"four days after"},
-    {"expression":DT(date+timedelta(days=10)).dOpt({"rtime":date}),
+    {"expression":DT(date+timedelta(days=10)).dOpt(rtimeOption),
      "expected":"in 10 days",
      "message":"10 days after"},
     ]

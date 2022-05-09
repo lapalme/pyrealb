@@ -582,14 +582,16 @@ class Terminal(Constituent):
             # find the number of days of difference between relDay and the current date
             diffDays=(dateObj-dOpts["rtime"]).days  # use datetime arithmetic to create timedelta
             if str(diffDays) in relativeDate: # within a week before or after
-                return relativeDate[str(diffDays)].replace("[l]",
+                dateS = relativeDate[str(diffDays)].replace("[l]",
                             dateRule["text"]["weekday"][(dateObj.weekday()+1)%7])
-            ## more than a week
-            sign="-" if diffDays<0 else "+"
-            return relativeDate[sign].replace("[x]",str(abs(diffDays)))
-        
-        ## process date fields
-        dateS=interpret("-".join(field for field in ["year","month","date","day"] if dOpts[field]))
+            else:
+                ## more than a week
+                sign="-" if diffDays<0 else "+"
+                dateS = relativeDate[sign].replace("[x]",str(abs(diffDays)))
+        else:
+            ## process date fields
+            dateS = interpret("-".join(field for field in ["year", "month", "date", "day"] if dOpts[field]))
+
         timeS=interpret(":".join(field for field in ["hour","minute","second"] if dOpts[field]))
         return " ".join(s for s in [dateS,timeS] if len(s)>0)
      

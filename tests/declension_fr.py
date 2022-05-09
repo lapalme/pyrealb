@@ -2108,7 +2108,7 @@ def declension_fr():
          "morne":{"A":{"fp":"mornes",
                        "fs":"morne",
                        "p":"mornes"}},
-         "mort":{"N":{"mp":"morts"}},
+         "mort":{"A":{"mp":"morts"}},
          "mortel":{"A":{"fp":"mortelles",
                         "fs":"mortelle",
                         "p":"mortels"}},

@@ -4472,13 +4472,13 @@
     "date": {
         "format": {
             "non_natural": {
-                "year-month-date-day": "[l] [M]\/[d]\/[Y]",
-                "year-month-date": "[M]\/[d]\/[Y]",
+                "year-month-date-day": "[l] [d]\/[M]\/[Y]",
+                "year-month-date": "[d]\/[M]\/[Y]",
                 "year-month": "[M]\/[Y]",
-                "month-date": "[M]\/[d]",
-                "month-date-day": "[l] [M]\/[d]",
+                "month-date": "[d]\/[M]",
+                "month-date-day": "[l] [d]\/[M]",
                 "year": "[Y]",
-                "month": "[M]",
+                "month": "[m]",
                 "date": "[d]",
                 "day": "[l]",
                 "hour:minute:second": "[H0]:[m0]:[s0]",
@@ -4500,9 +4500,9 @@
                 "day": "le [l]",
                 "hour:minute:second": "à [H] h [m] min [s] s",
                 "hour:minute": "à [H] h [m]",
-                "minute:second": "à [m] min [s0] s",
+                "minute:second": "à [m] min [s] s",
                 "hour": "à [H] h",
-                "minute": "à [m] min",
+                "minute": "à [i] min",
                 "second": "à [s] s"
             },
             "relative_time": {

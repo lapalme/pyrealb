@@ -1754,7 +1754,19 @@
         }
     },
     "declension": {
-        "n1": {
+         "nI": {
+            "ending": "",
+            "declension": [{
+                "val": "","g": "m","n": "s"
+            },{
+                "val": "","g": "f","n": "s"
+            },{
+                "val": "","g": "m","n": "p"
+            },{
+                "val": "","g": "f","n": "p"
+            }]
+        },
+       "n1": {
             "ending": "",
             "declension": [{
                 "val": "","n": "s"
