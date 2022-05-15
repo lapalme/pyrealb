@@ -23,20 +23,19 @@ class WeatherTerm:
         return "[%s,%s):[%s]"%(hour(self.start),hour(self.end),", ".join(map(str,self.infos)))
                                                                            
 class WeatherInfo:
+    """
+    Keep info about the Meteocode and provide methods to query it
+    on top of the "administrative information",
+    weather info encoded into fields
+    a field is a fieldname associated with a list of terms
+    a term is a list of values
+       the first value is the beginHour
+       the second value is the endHour
+       other values depending on the field kind
+       can be terminated by a possible embedded list which describes an "exception".
+    """
 
     def __init__(self, json):
-        '''
-        Keep info about the Meteocode and provide methods to query it
-        on top of the "administrative information", 
-        weather info encoded into fields
-        a field is a fieldname associated with a list of terms
-        a term is a list of values 
-           the first value is the beginHour
-           the second value is the endHour
-           other values depending of the field kind
-           can be terminated by a possible embedded list which describes an "exception".
-        
-        '''
         self.data=json
         hdr=json["header"]
         isoFormat="%Y-%m-%dT%H:%M:%S"
@@ -80,9 +79,9 @@ class WeatherInfo:
         print("%s (%4s,%4s) :: %s :: %s"%(
                 period,hour(beginHour),hour(endHour), self.data["id"],self.issue_date))
         for field in self.data:
-            if field not in self.ignoredFields and  field in self.data:
+            if field not in self.ignoredFields and field in self.data:
                 terms=self.select_terms(period,self.data[field])
-                if terms!=None:
+                if terms is not None:
                     print("%-25s : %s"%(field,show_terms(terms)))
         print("----")
             

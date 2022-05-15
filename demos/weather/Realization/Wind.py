@@ -49,13 +49,13 @@ def wind(wInfo,period,lang):
         wDir= wind_term.infos[0]
         jsrExpr=S()                                           # current expression
         if wSpeed>=15 and wDir in jsrWindDirection:
-            if lastSpeed!=None and abs(wSpeed-lastSpeed)>=20: # significant speed change
+            if lastSpeed is not None and abs(wSpeed-lastSpeed)>=20: # significant speed change
                 lastSpeed=wSpeed
                 if lang=="en":
                     jsrExpr.add(VP(V("increase").t("pr"),PP(P("to"),NO(wSpeed))))
                 else:
                     jsrExpr.add(VP(V("augmenter").t("pr"),PP(P("à"),NO(wSpeed))))    
-            elif lastDir!=None and dir_diff(wDir, lastDir):  # significant direction change
+            elif lastDir is not None and dir_diff(wDir, lastDir):  # significant direction change
                 if lang=="en":
                     jsrExpr.add(VP(V("become").t("pr"),jsrWindDirection[wDir][lang]()))
                 else:

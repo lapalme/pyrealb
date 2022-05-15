@@ -11,12 +11,12 @@ def clearSavedJsrIO():
 def getSavedJsrIO():
     return savedJsrIO
 
-def realize(jsrExpr,lang,addS=True):
+def realize(jsrExpr,_lang,addS=True):
     if addS and not isinstance(jsrExpr,S):
         jsrExpr=S(jsrExpr)
     # realization=jsRealB(jsrExpr.set_lang(lang).pp())
     realization=str(jsrExpr)
-    if savedJsrIO!=None:
+    if savedJsrIO is not None:
         # savedJsrIO.append((jsrExpr.show(),realization))
         savedJsrIO.append((jsrExpr.toSource(),realization))
     return realization
@@ -39,7 +39,8 @@ def jsrDayPeriod(hour,lang):
             elif s!=18:
                 return exp.add(D("this" if lang=="en" else "ce"),0)
 
-dayOnly={"day":True,"year": False, "month": False, "date": False,"hour":False,"minute":False, "second": False,"det":False}
+dayOnly={"day":True,"year": False, "month": False, "date": False,
+         "hour":False,"minute":False, "second": False, "det":False}
 periodNames = {
     "today":{"en":lambda _:N("today"),
              "fr":lambda _:Adv("aujourd'hui")},

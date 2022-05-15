@@ -5,7 +5,7 @@ from pyrealb import *
 
 ## print a table of values so that the lines are aligned
 ## it takes for granted that all lines are of the same length
-## if transforms all values using str()
+## it transforms all values using str()
 
 def width(val):
     if isinstance(val,str):
@@ -13,7 +13,7 @@ def width(val):
     return len(str(val))
 
 # the first nbHeadLines are centered and followed by a line
-def printTable(table,nbHeadlines=0,_nbColhead=0):
+def printTable(table,nbHeadlines=0):
     if not len(table):return
     widths=[width(table[0][j]) for j in range(0,len(table[0])) ]
     for i in range(0,len(table)):
@@ -92,7 +92,7 @@ def conjuguer(verbe,lang,typs):
             else:
                 return VP(V(verbe).t(t).pe(pe).n(n)).typ(typs).realize()
         else:
-            sp=SP(Pro("moi" if lang=="fr" else "me").pe(pe).n(n),VP(V(verbe).t(t))).typ(typs)
+            sp=SP(Pro("moi" if lang=="fr" else "me").c("nom").pe(pe).n(n),VP(V(verbe).t(t))).typ(typs)
             if t.startswith("s"): # subjonctif
                 sp=SP(Q("que"),sp)
             return sp.realize()
@@ -130,6 +130,7 @@ def conjuguer(verbe,lang,typs):
         
 
 if __name__ == '__main__':
+    conjuguer("aller","fr",{"neg":False,"prog":False,"pas":False,"refl":False})
     conjuguer("aimer","fr",{"neg":False,"prog":True,"pas":True,"refl":True})
     conjuguer("love","en",{"neg":False,"prog":True,"pas":True,"refl":False})
     conjuguer("say","en",{"neg":True,"prog":True,"pas":False,"perf":True,"refl":True})

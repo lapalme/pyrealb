@@ -31,7 +31,7 @@ def sky_condition(mc,period,lang):
         if c not in previous_conditions:
             if len(sky_condition_terminology[c][lang])==1:dn=0
             jsrExpr=sky_condition_terminology[c][lang][dn]()
-            if period!=None:jsrExpr.add(period)
+            if period is not None:jsrExpr.add(period)
             jsrExprs.append(jsrExpr)
             previous_conditions.append(c)
             
