@@ -24,8 +24,6 @@ trace=False
 # and is not needed unless the lexicons or the rules are changed 
 checkAmbiguities=False
 
-lemmataEn={}
-lemmataFr={}
 lemmataLang="en"
 
 def addLemma(lemmata,word,jsrExp):
@@ -46,12 +44,12 @@ def addLemma(lemmata,word,jsrExp):
 #  using information from the declension and lexicon information (declension, lexiconEntry)
 def genExp(declension,pos,entry,lexiconEntry):
     if trace:print(f"genExp(declension,{pos},{entry},{lexiconEntry}")
-    out = pos+'("'+entry+'")';
+    out = pos+'("'+entry+'")'
     if pos=="N":
         g=lexiconEntry["g"] if "g" in lexiconEntry else None
         # gender are ignored in English
         if lemmataLang=="en" or declension["g"]==g:
-            return out+('.n("p")'if declension["n"]=="p" else "");
+            return out+('.n("p")'if declension["n"]=="p" else "")
         elif g=="x":
             return out+f'.g("{declension["g"]}")'+('.n("p")'if declension["n"]=="p" else "")
     elif pos=="Pro" or pos== "D":
@@ -67,7 +65,7 @@ def genExp(declension,pos,entry,lexiconEntry):
         # number
         outN =""
         if "n" in declension:
-            dn = declension["n"];
+            dn = declension["n"]
             if dn=="x": 
                 dn="s"
             outN = f'.n("{dn}")' if dn!="s" else ""
@@ -77,7 +75,7 @@ def genExp(declension,pos,entry,lexiconEntry):
             pe=declension["pe"]
             outPe+=f'.pe({pe})' if pe!=3 or entry=="moi" else ""
         # ow
-        outOw="";
+        outOw=""
         if "own" in declension:
             outOw='.ow("'+declension["own"]+'")'
         # combine all
@@ -87,22 +85,22 @@ def genExp(declension,pos,entry,lexiconEntry):
             out+=outG + outN + outPe + outOw+f'.c("{declension["c"]}")'
         else:
             out+=outG + outN + outPe + outOw
-        return out;
+        return out
     elif pos=="A": 
         if lemmataLang=="fr":
-            g=declension["g"];
+            g=declension["g"]
             if "g" in declension or declension["g"]=="x":
-                n=declension["n"];
+                n=declension["n"]
             if "n" in declension:
                 n=declension["n"]
             else: 
-                n="s";
+                n="s"
             return out + ("" if g=="m" else f'.g("{g}")')+("" if n=="s" else f'.n("{n}")')
         else: # comparatif en anglais
             if "f" in declension:
                 return out+f'.f("{declension["f"]}")'
             else:
-                return out;
+                return out
     elif pos=="Adv":
         if lemmataLang=="fr":
             return out
@@ -120,7 +118,7 @@ def expandConjugation(lexicon,lemmata,rules,entry,tab):
     endRadical=len(entry)-len(ending)
     radical=entry[:endRadical]
     if entry[endRadical:]!=ending:
-        print("strange ending:",entry,":",ending,file=sys.stderr);
+        print("strange ending:",entry,":",ending,file=sys.stderr)
         return
     for t in conjug["t"]:
         persons=conjug["t"][t]
@@ -128,16 +126,16 @@ def expandConjugation(lexicon,lemmata,rules,entry,tab):
         if isinstance(persons,list) and len(persons)==6:
             for pe in range(0,6):
                 if persons[pe] is None: continue
-                word=radical+persons[pe];
-                pe3=pe%3+1;
+                word=radical+persons[pe]
+                pe3=pe%3+1
                 n="p" if pe>=3 else "s"
                 jsrExp= f'V("{entry}")'+\
                           ("" if t=="p" else f'.t("{t}")')+\
                           ("" if pe3==3  else f'.pe("{pe3}")')+\
                           ("" if n=="s" else f'.n("{n}")')
-                addLemma(lemmata,word,jsrExp);
+                addLemma(lemmata,word,jsrExp)
         elif isinstance(persons,str):
-                addLemma(lemmata,radical+persons,f'V("{entry}")'+("" if t=="p" else f'.t("{t}")'))
+            addLemma(lemmata,radical+persons,f'V("{entry}")'+("" if t=="p" else f'.t("{t}")'))
         else:
             print("***Strange persons:",entry,persons,file=sys.stderr)
 
@@ -146,27 +144,27 @@ def expandDeclension(lexicon,lemmata,rules,entry,pos,tab):
     rulesDecl=rules["declension"]
     declension=None
     if tab in rulesDecl:
-        declension=rulesDecl[tab];
+        declension=rulesDecl[tab]
     elif tab in rules["regular"]:
-        addLemma(lemmata,entry,pos+'("'+entry+'")');
-        return;
+        addLemma(lemmata,entry,pos+'("'+entry+'")')
+        return
     if declension is None or "ending" not in declension: return
-    ending=declension["ending"];
-    endRadical=len(entry)-len(ending);
+    ending=declension["ending"]
+    endRadical=len(entry)-len(ending)
     radical=entry[:endRadical]
     if entry[endRadical:]!=ending:
-        print("strange ending:",entry,":",ending,file=sys.stderr);
+        print("strange ending:",entry,":",ending,file=sys.stderr)
         return
-    decl=declension["declension"];
+    decl=declension["declension"]
     for  l  in range(0,len(decl)):
-        jsrExp=genExp(decl[l],pos,entry,lexicon[entry][pos]);
-        if jsrExp!=None:
-            word=radical+decl[l]["val"];
+        jsrExp=genExp(decl[l],pos,entry,lexicon[entry][pos])
+        if jsrExp is not None:
+            word=radical+decl[l]["val"]
             addLemma(lemmata,word,jsrExp)
 
 def buildLemmata(lang,lexicon,rules):
     global lemmataLang
-    lemmataLang=lang;
+    lemmataLang=lang
     if checkAmbiguities:
         print("Checking realization ambiguities for %s lemmata ..."%("English" if lang=="en" else "French"))
     lemmata={} 
@@ -176,9 +174,9 @@ def buildLemmata(lang,lexicon,rules):
             if pos=="Pc": continue; # ignore punctuation
             if pos=="V": # conjugation
                 expandConjugation(lexicon,lemmata,rules,entry,
-                                  entryInfos["V"]["tab"]);
+                                  entryInfos["V"]["tab"])
             else:       # declension
-                expandDeclension(lexicon,lemmata,rules,entry,pos,entryInfos[pos]["tab"]);
+                expandDeclension(lexicon,lemmata,rules,entry,pos,entryInfos[pos]["tab"])
     return lemmata
 
 
@@ -191,7 +189,7 @@ def lemmatize(query,lemmata):
     # try to match with a regular expression
     queryRE=re.compile(query)
     res =[(key,val) for key,val in lemmata.items() 
-                                if queryRE.fullmatch(key)!=None]
+                                if queryRE.fullmatch(key) is not None]
     if len(res)==0:
         return query+" : "+("cannot be lemmatized" if lang=="en" 
                             else "ne peut être lemmatisé")
@@ -216,11 +214,11 @@ lemmataFr=buildLemmata("fr",getLexicon("fr"),getRules("fr"))
 def getNo(no,table):
     if no in table: return [(no,table[no])]
     # try with a regular expression
-    return [(key,val) for key,val in table.items() if re.fullmatch(no, key)!=None]
+    return [(key,val) for key,val in table.items() if re.fullmatch(no, key) is not None]
 
 def getEnding(ending,table):
     return [(key,val) for key,val in table.items() 
-                if re.fullmatch(ending,val["ending"])!=None]
+                if re.fullmatch(ending,val["ending"]) is not None]
 
 def displayResults(query,res,mess):
     if len(res)==0:
@@ -277,7 +275,7 @@ def _lm(word):
 
 def _lx(word,terminal=None):
     res=getNo(word,lexicon)
-    if terminal!=None:
+    if terminal is not None:
         res=[(key,val) for key,val in res if terminal in val]
     displayResults(word,res,
                    "no lexicon entry found" if lang=="en" else "pas d'entrée dans le lexique")
@@ -287,7 +285,7 @@ setattr(Constituent,"__pos__", lambda self: print(self.realize()))
 
 
 def _help():
-    print ('''pyRealB_ide: special commands (starting with _)
+    print('''pyRealB_ide: special commands (starting with _)
 
  _en() : load English lexicon and rules
  _fr() : load French lexicon and rules
@@ -310,7 +308,7 @@ def _help():
 print(f"** pyRealB {pyRealB_version} Interactive Development Environment [_help() for info]")
 _en()
   
-## some unit test
+## some unit tests
 if __name__ == '__main__':
     def show(cmd):
         print("==>"+cmd)

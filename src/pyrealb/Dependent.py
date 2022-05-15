@@ -168,7 +168,7 @@ class Dependent(Constituent):
             else:
                 self.error("Strange dependent:"+d.constType)
 
-    def setLemma(self,lemma,terminalTyp):
+    def setLemma(self,_lemma,_terminalTyp):
         self.error("***: should never happen: setLemma: called on a Dependent")
         return self
 
@@ -404,7 +404,6 @@ class Dependent(Constituent):
         subjIdx = self.findIndex(lambda d: d.isA("subj"))
         if subjIdx >= 0:
             subj = self.dependents[subjIdx].terminal
-            pro = None
             if subj.isA("Pro"):
                 pro = self.removeDependent(subjIdx).terminal  # remove subject
             elif subj.isA("C"):

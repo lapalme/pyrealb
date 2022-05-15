@@ -50,6 +50,7 @@ def english():
 
 def francais():
     loadFr()
+    print(S(Pro("moi").pe(1),VP(V("aimer"))).typ({"pas":True}).realize())
     print(S(NP(D("le"), N("chat")).n("p"), VP(V("asseoir"))).typ({"refl": True}).realize())
     addToLexicon({"John": {"N": {"g": "m", "tab": "n35"}}})
     addToLexicon({"Mary": {"N": {"g": "f", "tab": "n36"}}})

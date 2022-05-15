@@ -26,12 +26,12 @@ page.p(e.em("Adaptation du "+
                                           title="JSreal: un réalisateur de texte pour la programmation web | RALI")))
 page.p("Les événements (en format JSON) sont d'abord triés en ordre chronologique et regroupés par ville avant d'être décrits.")
 
-loadFr();
+loadFr()
 
 ## ajouts au lexique
-addToLexicon({"Alice":{ "N": { "g": "f", "pe": 3, "tab": "nI" } }});
-addToLexicon({"Robert":{ "N": { "g": "m", "pe": 3, "tab": "nI" } }});
-addToLexicon({"Nicolas":{ "N": { "g": "m", "pe": 3, "tab": "nI" } }});
+addToLexicon({"Alice":{ "N": { "g": "f", "pe": 3, "tab": "nI" } }})
+addToLexicon({"Robert":{ "N": { "g": "m", "pe": 3, "tab": "nI" } }})
+addToLexicon({"Nicolas":{ "N": { "g": "m", "pe": 3, "tab": "nI" } }})
 
 ## Définit les informations comme des chaines pour pouvoir les afficher dans la page avant l'évaluation
 # événements à présenter
@@ -55,14 +55,14 @@ evList=eval(evListS)
 catWordString="""{"consult": N("consultation"),
  "atelier": N("atelier"),
  "conf":    N("conférence"),
- "sejour":  N("séjour")}""";
-catWord = eval(catWordString); 
+ "sejour":  N("séjour")}"""
+catWord = eval(catWordString)
 
 # participants
 partInfoString="""{"al":   {"name": N("Alice"),   "tel": 5552543, "email": False },
  "bob":  {"name": N("Robert"),  "tel": False,   "email": "rob@JSreal.js" },
- "nico": {"name": N("Nicolas"), "tel": 5556426, "email": "nic@JSreal.js" }}""";
-partInfo = eval(partInfoString); 
+ "nico": {"name": N("Nicolas"), "tel": 5556426, "email": "nic@JSreal.js" }}"""
+partInfo = eval(partInfoString)
 
 # créer une date pour un événement
 #  d'abord le "datetime"
@@ -103,7 +103,7 @@ def showMotif(ev):
     if "attr" in ev:
         attr=ev["attr"]
         lemma=getLemma(attr)
-        if lemma!=None and "A" in lemma:
+        if lemma is not None and "A" in lemma:
             np.add(A(attr))
         else:
             np.add(Q(attr))          

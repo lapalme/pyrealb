@@ -8,7 +8,7 @@ from examples import *
 import copy
 
 types={"en":["neg","contr","pas","prog","perf","int","mod"],
-       "fr":["neg","pas","prog","int","mod"]};
+       "fr":["neg","pas","prog","int","mod"]}
 
 pos={"int":["yon","wos","was","wod","wad","woi","wai","whe","why","whn","how","muc"],
      "mod":["poss","perm","nece","obli","will"]}

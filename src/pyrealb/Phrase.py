@@ -35,7 +35,7 @@ negMod = {"can": "cannot", "may": "may not", "shall": "shall not", "will": "will
 
 class Phrase(Constituent):
     def __init__(self, constType, elements, lang=None):
-        elements = [e for e in elements if e != None]  # ignore None elements
+        elements = [e for e in elements if e is not None]  # ignore None elements
         super().__init__(constType)
         if lang is None:
             self.lang = currentLanguage()
@@ -67,7 +67,7 @@ class Phrase(Constituent):
         if isinstance(elem, Constituent):
             elem.parentConst = self
             # add it to the list of elements
-            if position == None:
+            if position is None:
                 self.elements.append(elem)
             elif isinstance(position, int) and 0 <= position <= len(self.elements):
                 self.elements.insert(position, elem)
@@ -239,7 +239,7 @@ class Phrase(Constituent):
                             sppro = sp.getConst("Pro")
                             if sppro is not None and sppro.lemma == "que":
                                 v = sp.getFromPath([["VP", ""], "V"])
-                                if v != None:
+                                if v is not None:
                                     v.cod = cp
             else:
                 # finally, self generates too many spurious messages
@@ -253,11 +253,11 @@ class Phrase(Constituent):
         # do not link a subject pronoun at genitive
         if subject.isA("Pro") and "c" in subject.props and subject.props["c"] == "gen": return
         pt = self.getFromPath([phrase, terminal])
-        if pt != None:
+        if pt is not None:
             pt.parentConst.peng = pt.peng = subject.peng
         else:
             pt = self.getFromPath([terminal])
-            if pt != None:
+            if pt is not None:
                 pt.peng = subject.peng
         return pt
 
@@ -299,7 +299,7 @@ class Phrase(Constituent):
                 if propG == "m" or propG == "x" or e.isA("q"): g = "m"  # masculine if gender is unspecified
                 if e.getProp("n") == "p": n = "p"
                 propPe = e.getProp("pe")
-                if propPe != None and propPe < pe: pe = propPe
+                if propPe is not None and propPe < pe: pe = propPe
         if nb == 0:
             g = "m"
         elif nb > 1 and n == "s" and andCombination:
@@ -314,7 +314,7 @@ class Phrase(Constituent):
     def pronominalize_fr(self):
         npParent = self.parentConst
         pro = None
-        if npParent != None:
+        if npParent is not None:
             idxMe = npParent.elements.index(self)
             idxV = idxMe - 1  # search for the first verb before the NP
             while idxV >= 0 and not npParent.elements[idxV].isA("V"): idxV -= 1
@@ -334,7 +334,7 @@ class Phrase(Constituent):
             elif self.isA("PP"):  # is indirect complement
                 np = self.getFromPath([["NP", "Pro"]])  # either a NP or Pro within the PP
                 prep = self.getFromPath(["P"])
-                if prep != None and np != None:
+                if prep is not None and np is not None:
                     if prep.lemma == "à":
                         pro = np.getTonicPro("dat")
                     elif prep.lemma == "de":
@@ -372,7 +372,7 @@ class Phrase(Constituent):
     #  and does not need reorganisation of the sentence 
     def pronominalize_en(self):
         npParent = self.parentConst
-        if npParent != None:
+        if npParent is not None:
             idx = npParent.elements.index(self)
             if hasattr(npParent, "peng") and self.peng == npParent.peng:  # is subject
                 pro = self.getTonicPro("nom")
@@ -420,7 +420,7 @@ class Phrase(Constituent):
             vp = self
         else:
             vp = self.getConst("VP")
-            if vp != None:
+            if vp is not None:
                 if len(self.elements) > 0 and self.elements[0].isOneOf(["N", "NP", "Pro"]):
                     subject = self.removeElement(0)
                     if subject.isA("Pro"):
@@ -434,7 +434,7 @@ class Phrase(Constituent):
                 return self.warn("not found", "VP", "contexte passif" if self.isFr() else "passive context")
         # remove object (first NP or Pro within VP) from elements
         newSubject = None
-        if vp != None:
+        if vp is not None:
             objIdx = vp.getIndex(["NP", "Pro"])
             if objIdx >= 0:
                 obj = vp.elements.pop(objIdx)
@@ -471,14 +471,14 @@ class Phrase(Constituent):
                 aux = V("être", "fr")
                 aux.parentConst = vp
                 aux.taux = verbe.taux
-                if newSubject != None:  # this can happen when a subject is Q
+                if newSubject is not None:  # this can happen when a subject is Q
                     aux.peng = newSubject.peng
                 aux.props = verbe.props
                 aux.pe(3)  # force person to be 3rd (number and tense will come from the pyrealb subject)
                 if vp.getProp("t") == "ip":
                     aux.t("s")  # set subjonctive present tense for an imperative
                 pp = V(verbe.lemma, "fr").t("pp")
-                if newSubject != None:  # self can happen when a subject is Q
+                if newSubject is not None:  # self can happen when a subject is Q
                     # make the past participle agree with the new subject
                     pp.setProp("g",newSubject.getProp("g"))
                     pp.setProp("n",newSubject.getProp("n"))
@@ -490,7 +490,7 @@ class Phrase(Constituent):
     # also deals with coordinated verbs
     def processVP(self, types, key, action):
         v = self.getFromPath(["CP", "VP"])
-        if v != None:  # possibly a coordination of verbs
+        if v is not None:  # possibly a coordination of verbs
             for e in self.getConst("CP").elements:
                 if e.isA("VP"):
                     e.processVP(types, key, action)
@@ -556,7 +556,7 @@ class Phrase(Constituent):
 
         self.processVP(types, "mod", mod)
 
-        def process_neg(vp, idxV, v, neg):
+        def process_neg(vp, _idxV, v, neg):
             if neg == True: neg = "pas"
             v.neg2 = neg  # HACK: to be used when conjugating at the realization time
             # while idxV>0 and vp.elements[idxV-1].isA("Pro"):idxV-=1
@@ -576,7 +576,7 @@ class Phrase(Constituent):
         auxils = []  # list of Aux followed by V
         affixes = []
         isFuture = False
-        if (t == "f"):
+        if t == "f":
             isFuture = True
             t = "p"  # the auxiliary will be generated here so remove it from the V
         prog = "prog" in types and types["prog"] != False
@@ -585,7 +585,7 @@ class Phrase(Constituent):
         interro = types["int"] if "int" in types and types["int"] != False else None
         modality = types["mod"] if "mod" in types and types["mod"] != False else None
         # compound = getRules()["compound"]
-        if modality != None:
+        if modality is not None:
             auxils.append(compound[modality]["aux"])
             affixes.append("b")
         elif isFuture:
@@ -602,7 +602,7 @@ class Phrase(Constituent):
             if pas:
                 auxils.append(compound["passive"]["aux"])
                 affixes.append(compound["passive"]["participle"])
-        elif (interro != None and
+        elif (interro is not None and
               len(auxils) == 0 and v.lemma != "be" and v.lemma != "have"):
             # add auxiliary for interrogative if not already there
             if interro != "wos" and interro != "was":
@@ -662,9 +662,10 @@ class Phrase(Constituent):
         if idxV >= 0:
             v = vp.elements[idxV]
             if "contr" in types and types["contr"] != False:
-                vp.contraction = True  # necessary because we want the negation to be contracted within the VP before the S or SP
+                vp.contraction = True  # necessary because we want the negation to be contracted
+                                       # within the VP before the S or SP
                 self.contraction = True
-            words=Phrase.affixHopping(vp.elements[idxV],vp.getProp("t"),getRules()["compound"],types)
+            words=Phrase.affixHopping(v,vp.getProp("t"),getRules()["compound"],types)
             # insert the content of the word array into vp.elements
             vp.removeElement(idxV)
             for i in range(0, len(words)):
@@ -679,7 +680,7 @@ class Phrase(Constituent):
             if idx >= 0: return (idx, self.elements)
         elif self.isOneOf(["S", "SP"]):
             cst = self.getConst(cst1)
-            if cst != None: return cst.getIdxCtx(cst1, cst2)
+            if cst is not None: return cst.getIdxCtx(cst1, cst2)
         return (None, None)
 
     def moveAuxToFront(self):
@@ -687,7 +688,7 @@ class Phrase(Constituent):
         if self.isEn():
             if self.isOneOf(["S", "SP"]):
                 (idx, vpElems) = self.getIdxCtx("VP", "V")
-                if idx != None:
+                if idx is not None:
                     v = vpElems.pop(0)  # remove first V
                     # check if V is followed by a negation, if so move it also
                     if len(vpElems) > 0 and vpElems[0].isA("Adv") and vpElems[0].lemma == "not":
@@ -713,7 +714,7 @@ class Phrase(Constituent):
             else:
                 pro = Pro("moi", "fr").g(subj.getProp("g")).n(subj.getProp("n")).pe(3).c("nom")  # create a pronoun
             (idx, vpElems) = self.getIdxCtx("VP", "V")
-            if idx != None:
+            if idx is not None:
                 v = vpElems[idx]
                 v.parentConst.addElement(pro, idx + 1)  # add pronoun after verb
                 v.lier()  # add - after verb
@@ -733,9 +734,9 @@ class Phrase(Constituent):
         elif int_ in ["wos", "was"]:  # remove subject (first NP,N, Pro or SP)
             if self.isOneOf(["S", "SP", "VP"]):
                 subjIdx = self.getIndex(["NP", "N", "Pro", "SP"])
-                if subjIdx != None:
+                if subjIdx is not None:
                     vbIdx = self.getIndex(["VP", "V"])
-                    if vbIdx != None and subjIdx < vbIdx:  # subject should be before the verb
+                    if vbIdx is not None and subjIdx < vbIdx:  # subject should be before the verb
                         # make sure that the verb at the third-person singular,
                         # because now the subject has been removed
                         v = self.elements[vbIdx]
@@ -746,13 +747,13 @@ class Phrase(Constituent):
         elif int_ in ["wod", "wad"]:  # remove direct object (first NP,N,Pro or SP in the first VP)
             if self.isOneOf(["S", "SP", "VP"]):
                 idx, obj = self.getIdxCtx("VP", ["NP", "N", "Pro", "SP"])
-                if idx != None:
+                if idx is not None:
                     del obj[idx]
                 elif self.isFr():  # check for passive subject starting with par
                     idx, ppElems = self.getIdxCtx("VP", "PP")
-                    if idx != None:
+                    if idx is not None:
                         pp = ppElems[idx].getConst("P")
-                        if pp != None and pp.lemma == "par":
+                        if pp is not None and pp.lemma == "par":
                             ppElems[0].parentConst.removeElement(idx)  # remove the passive subject
                         else:
                             pp = None
@@ -765,7 +766,7 @@ class Phrase(Constituent):
             if self.isOneOf(["S", "SP", "VP"]):
                 idx, ppElems = self.getIdxCtx("VP", "PP")
                 prefix = intPrefix[int_]  # get default prefix
-                if idx != None:
+                if idx is not None:
                     # try to find a more appropriate prefix by looking at preposition in the structure
                     prep = ppElems[idx].elements[0]
                     if prep.isA("P"):
@@ -790,7 +791,7 @@ class Phrase(Constituent):
             self.warn("not implemented", "int:" + int_)
         if self.isFr() or int_ != "yon":  # add the interrogative prefix
             self.addElement(Q(prefix), 0)
-            if pp != None:  # add "par" in front of some French passive interrogative
+            if pp is not None:  # add "par" in front of some French passive interrogative
                 self.addElement(pp, 0)
                 if int_ == "wad":  # replace "que" by "quoi" for French passive wad
                     self.elements[1].lemma = "quoi"
@@ -811,9 +812,7 @@ class Phrase(Constituent):
             self.a(getRules()["sentence_type"]["exc"]["punctuation"], True)
         return self
 
-
     ######### Realization
-
     #  special case of realization of a cp for which the gender and number must be computed
     #    at realization time...
 
@@ -832,7 +831,7 @@ class Phrase(Constituent):
             res = elems[0].real()
             self.setProp("g", elems[0].getProp("g"))
             self.setProp("n", elems[0].getProp("n"))
-            self.setProp("pe", elems[0].getProp("pe") if elems[0].getProp("pe") != None else 3)
+            self.setProp("pe", elems[0].getProp("pe") if elems[0].getProp("pe") is not None else 3)
             return self.doFormat(res)  # process format for the CP
         for j in range(0, last):  # insert comma after each element
             ej = elems[j]
@@ -908,9 +907,9 @@ class Phrase(Constituent):
                 args = [fromJSON(e, lang) for e in json["elements"]]
                 return Phrase(constType, args, lang).setJSONprops(json)
             else:
-                return self.warn("user-warning","Phrase.fromJSON elements should be a list:" + str(json["elements"]))
+                return self.warn(Q(""),"user-warning","Phrase.fromJSON elements should be a list:" + str(json["elements"]))
         else:
-            return self.warn("user-warning","Phrase.fromJSON: no elements found in " + str(json))
+            return self.warn(Q(""),"user-warning","Phrase.fromJSON: no elements found in " + str(json))
 
     # create a Dependent version of a Phrase
     def toDependent(self,depName=None):
@@ -1046,4 +1045,8 @@ class S(Phrase):
 
 class SP(Phrase):
     def __init__(self, *elems):
+        """
+
+        :rtype: object
+        """
         super().__init__("SP", elems)

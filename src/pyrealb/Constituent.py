@@ -302,14 +302,14 @@ class Constituent():
                     hAnRE.match(w2) or       # silent h
                     acronymRE.match(w2))):   # is an acronym
                         cList[i].realization=m1.group(1)+w1+"n"+m1.group(3)
-                        i+=1;                 # skip next word
+                        i+=1                 # skip next word
             elif hasattr(self,"contraction") and self.contraction == True:
                 if w1=="cannot": # special case...
                     cList[i].realization=m1.group(1)+"can't"+m1.group(3)
                 else:
                     key=w1+"+"+w2
                     if key in contractionEnTable:
-                        contr=contractionEnTable[key];   
+                        contr=contractionEnTable[key]
                         # do contraction of first word and remove second word (keeping start and end)
                         cList[i].realization=m1.group(1)+contr+m1.group(3)
                         cList[i+1].realization=m2.group(1)+m2.group(3).strip()
@@ -541,7 +541,8 @@ class Constituent():
             cList[0].realization=before+cList[0].realization
             cList[-1].realization+=after
 
-        def startTag(tagName,attrs={}):
+        def startTag(tagName, attrs=None):
+            if attrs is None:attrs = {}
             attString="".join(f' {key}="{val}"' for key,val in attrs.items())
             return "<"+tagName+attString+">"
     
@@ -636,7 +637,7 @@ class Constituent():
         ## so in Python, it should be also implicit with str(), but
         ## the Python debugger in PyCharm also uses str() to display information
         ## which can in some cases change the structure.
-        ## This makes it hard to follow when tracing...
+        ## This makes it hard to follow when tracing... a classic case of Heisenbug!
         ## I found more useful during development to (un)comment the following two lines
         ## but then realization must be launched with ".realize()"
         # return self.toSource(-1)
@@ -710,7 +711,7 @@ setattr(Constituent,"n",makeOptionMethod("n",["s","p","x"],["D","Pro","N","NP","
 setattr(Constituent,"g",makeOptionMethod("g",["m","f","n","x"],["D","Pro","N","NP","A","AP","V","VP","S","SP","CP"]))
 #  t, aux : can be applied to VP and sentence
 setattr(Constituent,"t",makeOptionMethod("t",["p", "i", "f", "ps", "c", "s", "si", "ip", "pr", "pp", "b", # simple tenses
-                   "pc", "pq", "cp", "fa", "spa", "spq"],["V","VP","S","SP","CP"]));  # composed tenses
+                   "pc", "pq", "cp", "fa", "spa", "spq"],["V","VP","S","SP","CP"]))  # composed tenses
 setattr(Constituent,"aux",makeOptionMethod("aux",["av","êt","aê"],["V","VP","S","SP","CP"]))
 # ordinary properties
 setattr(Constituent,"f",makeOptionMethod("f",["co","su"],["A","Adv"]))

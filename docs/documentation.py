@@ -11,8 +11,8 @@ def removeAccent(s):
 
 def makeId(s):return removeAccent(s).replace(" ","_")
 
-def h2_fr(text,id_=None):page.h2(text,lang="fr",id=makeId(text) if id_==None else id_)
-def h2_en(text,id_=None):page.h2(text,lang="en",id=makeId(text) if id_==None else id_)
+def h2_fr(text,id_=None):page.h2(text,lang="fr",id=makeId(text) if id_ is None else id_)
+def h2_en(text,id_=None):page.h2(text,lang="en",id=makeId(text) if id_ is None else id_)
 
 titres=[
     {"fr":"Nom","en":"Name"},
@@ -21,10 +21,10 @@ titres=[
     {"fr":"Réalisation","en":"Realisation"}
 ]
 
-# execute an assignement or evaluate an expression
+# execute an assignment or evaluate an expression
 def evaluate(s):
     m=re.match(r"(\w+)\s*=",s)
-    if m!=None:
+    if m is not None:
         exec(s,globals())
     else:
         return str(eval(s))

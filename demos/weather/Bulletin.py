@@ -5,7 +5,7 @@ import json,textwrap,re,os
 from datetime import datetime, timedelta
 from WeatherInfo import WeatherInfo
 
-from Realization.common import realize, periodNames, clearSavedJsrIO, getSavedJsrIO
+from Realization.common import realize, periodNames
 from Realization.Title_Block import title_block
 from Realization.Sky_Condition import sky_condition
 from Realization.Precipitation import precipitation
@@ -25,7 +25,7 @@ def forecast_regions(wInfo,lang):
     return "\n".join(wInfo.get_region_names(lang))+"\n"
 
 def forecast_period(wInfo,period,lang):
-    sents=filter(lambda l:l!=None,[
+    sents=filter(lambda l:l is not None,[
         sky_condition(wInfo, period, lang),
         precipitation(wInfo, period, lang),
         wind(wInfo, period, lang),
@@ -64,7 +64,7 @@ def generate_bulletin(wInfo,lang):
         forecast_text(wInfo,lang),
         end_statement(lang),
     ]    
-    return "\n".join(line for line in text if line!=None)
+    return "\n".join(line for line in text if line is not None)
 
 ##  compare three periods only and display result and  original in parallel 
 def compare_with_orig(wInfo,lang):
@@ -100,10 +100,10 @@ def paperExample():
 
     ##  example function used in the paper
     def pcpn(type,action,tense,moment,quantity=None,unit=None):
-    	return S(type,
-    	         VP(V(action).t(tense),
-    			    CP(PP(P("in"),NP(D("the"),N(moment))),
-    				   None if quantity is None else NP(N("amount"),NP(NO(quantity),unit)))))
+        return S(type,
+                 VP(V(action).t(tense),
+                    CP(PP(P("in"),NP(D("the"),N(moment))),
+                       None if quantity is None else NP(N("amount"),NP(NO(quantity),unit)))))
     
     print(realize(pcpn(N("flurry").n("p"),"begin","p","morning",2,N("foot")),"en"))
     print(realize(pcpn(N("rain"),"begin","p","evening",1,N("inch")),"en"))
@@ -113,11 +113,11 @@ def paperExample():
 # paperExample()
 
 def weatherLexicon():
-    loadFr();
+    loadFr()
     addToLexicon("ennuagement",{"N":{"g":"m","tab":"n3"}})
     addToLexicon("verglaçant",{"A":{"tab":"n28"}})
     
-    loadEn();
+    loadEn()
     addToLexicon({"gust":{"N":{"tab":"n5"},"V":{"tab":"v1"}}})
     addToLexicon({"cloudiness":{"N":{"tab":"n2"}}})
     addToLexicon({"cent":{"N":{"tab":"n1"}}})

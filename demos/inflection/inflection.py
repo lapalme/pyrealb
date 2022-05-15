@@ -13,7 +13,7 @@ def width(val):
     return len(str(val))
 
 # the first nbHeadLines are centered and followed by a line
-def printTable(table,nbHeadlines=0,nbColhead=0):
+def printTable(table,nbHeadlines=0,_nbColhead=0):
     if not len(table):return
     widths=[width(table[0][j]) for j in range(0,len(table[0])) ]
     for i in range(0,len(table)):
@@ -66,10 +66,10 @@ def declinerAdjectif(mot,lang):
     return table
         
 def decliner(mot,lang):
-    if lang=="fr":loadFr(); 
+    if lang=="fr":loadFr()
     else: loadEn()
     entry=getLemma(mot)
-    if entry==None:
+    if entry is None:
         if lang=="fr":
             print("%s : absent du lexique français"%mot)
         else:
@@ -92,7 +92,7 @@ def conjuguer(verbe,lang,typs):
             else:
                 return VP(V(verbe).t(t).pe(pe).n(n)).typ(typs).realize()
         else:
-            sp=SP(Pro("je" if lang=="fr" else "I").pe(pe).n(n),VP(V(verbe).t(t))).typ(typs)
+            sp=SP(Pro("moi" if lang=="fr" else "me").pe(pe).n(n),VP(V(verbe).t(t))).typ(typs)
             if t.startswith("s"): # subjonctif
                 sp=SP(Q("que"),sp)
             return sp.realize()
@@ -131,6 +131,7 @@ def conjuguer(verbe,lang,typs):
 
 if __name__ == '__main__':
     conjuguer("aimer","fr",{"neg":False,"prog":True,"pas":True,"refl":True})
+    conjuguer("love","en",{"neg":False,"prog":True,"pas":True,"refl":False})
     conjuguer("say","en",{"neg":True,"prog":True,"pas":False,"perf":True,"refl":True})
     decliner("chat","fr")
     decliner("beau","fr")

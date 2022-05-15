@@ -14,7 +14,7 @@ def refrain():
     print(S('mais',
                      Pro("ce"),
                      VP(V("être").t("p"),
-					    AdvP(Adv("bien"),A("beau").f("co")),
+                        AdvP(Adv("bien"),A("beau").f("co")),
                         SP(Pro("que"),
                            NP(D("le"),N("peinture"),
                            PP(P("à"),D("le"),N("eau")) ) ) )

@@ -3446,6 +3446,8 @@ def declension_fr():
                 exp0=lambda:A(word)
             else:
                 print("POS incorrect dans Tests.declension_fr",pos,file=sys.stderr)
+                continue
+            exp=None
             for flags,expected in posInfo.items():
                 if flags=="m":
                     exp=exp0().g("m")
@@ -3469,7 +3471,8 @@ def declension_fr():
                     exp=exp0().f("co")
                 else:
                     print("flags inconnu dans Test.declension_fr",flags,file=sys.stderr)
-            tests.append(makeTestExpr(exp, expected))
+            if exp is not None:
+                tests.append(makeTestExpr(exp, expected))
         
     for pro,wordInfo in testsProDeclinaisonFr.items():
         for flags,expected in wordInfo.items():

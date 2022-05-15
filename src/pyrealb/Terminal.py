@@ -2,7 +2,7 @@ from .Constituent import Constituent,quoteOOV
 from .Number import enToutesLettres, ordinal
 from .Lexicon import getLexicon,currentLanguage,getLemma,getRules
 
-import datetime, sys,re,copy
+import datetime, re
 
 class Terminal(Constituent):
     def __init__(self, terminalType,lemma,lang=None):
@@ -89,7 +89,7 @@ class Terminal(Constituent):
                 self.tab=None 
                 self.realization=f"[[{lemma}]]"
                 return self.warn("not in lexicon",self.lang)
-                if quoteOOV:
+                if quoteOOV: # not currently used
                     self.lemma=str(lemma)
                     self.realization=self.lemma
                     self.constType="Q"
@@ -98,7 +98,7 @@ class Terminal(Constituent):
                     self.tab=None 
                     self.realization=f"[[{lemma}]]"
                     return self.warn("not in lexicon",self.lang,lexInfo.keys())
-                    if quoteOOV:
+                    if quoteOOV: # not currently used
                         self.lemma=str(lemma)
                         self.realization=self.lemma
                         self.constType="Q"
@@ -114,7 +114,8 @@ class Terminal(Constituent):
                                     declension=rules["declension"][self.tab]
                                     ending=declension["ending"]
                                     if terminalType=="Pro":
-                                        #  set person for Pro when different than 3 (i.e. all elements of declension are the same)
+                                        #  set person for Pro when different than 3 (i.e. all elements of
+                                        #  declension are the same)
                                         dd=declension["declension"]
                                         if "pe" in dd[0]:
                                             pe=dd[0]["pe"]
@@ -130,7 +131,7 @@ class Terminal(Constituent):
                                 else:
                                     ending=""
                                     self.warn("bad lexicon table",lemma,ending)
-                            if ending!=None and self.lemma.endswith(ending):
+                            if ending is not None and self.lemma.endswith(ending):
                                 self.stem=self.lemma if ending=="" else self.lemma[:-len(ending)]
                             else:
                                 self.tab=None 
@@ -202,7 +203,7 @@ class Terminal(Constituent):
                     return f"[[{self.lemma}]]"
                 res=stem+ending
                 f = self.getProp("f") # comparatif d'adjectif
-                if f!=None and f != False:
+                if f is not None and f != False:
                     specialFRcomp={"bon":"meilleur","mauvais":"pire"}
                     if f=="co":
                         if self.lemma in specialFRcomp:
@@ -219,7 +220,7 @@ class Terminal(Constituent):
                 # English adjective/adverbs are invariable but they can have comparative
                 res=self.lemma
                 f = self.getProp("f")
-                if f!=None and f!=False:
+                if f is not None and f!=False:
                     if self.tab=="a1":
                         res=("more " if f=="co" else "most ")+res
                     else:
@@ -252,7 +253,7 @@ class Terminal(Constituent):
                 keyVals["own"]=self.props["own"]
             if self.isA("Pro"):
                 c  = self.props["c"] if "c" in self.props else None
-                if c!= None:
+                if c is not None:
                     if self.isFr() and c=="gen": # genitive cannot be used in French
                         self.warn("ignored value for option","c",c)
                     elif self.isEn() and c=="refl": # reflechi cannot be used in English
@@ -260,13 +261,13 @@ class Terminal(Constituent):
                     else:
                         keyVals["c"]=c
                 tn = self.props["tn"] if "tn" in self.props else None
-                if tn != None:
-                    if c!= None:
+                if tn  is not None:
+                    if c is not None:
                         self.warn("both tonic and clitic")
                     else:
                         keyVals["tn"]=tn
-                if c != None or tn != None:
-                    if ((self.isFr() and self.lemma=="moi")) or  ((self.isEn() and self.lemma=="me")):
+                if c  is not None or tn  is not None:
+                    if (self.isFr() and self.lemma=="moi") or  (self.isEn() and self.lemma=="me"):
                         # HACK:remove defaults from pronoun such as "moi" in French and "me" in English
                         #      because their definition is special in order to try to keep some upward compatibility
                         #      with the original way of specifying the pronouns
@@ -325,7 +326,7 @@ class Terminal(Constituent):
         if isinstance(newTerminal,Terminal):
             newTerminal.parentConst=self.parentConst
             newTerminal.realize()
-            if position==None:
+            if position is None:
                 terms.append(newTerminal)
             else:
                 terms.insert(position,newTerminal)
@@ -336,9 +337,10 @@ class Terminal(Constituent):
     def isReflexive(self):
         if not self.isA("V"):
             return self.error("isReflexive() should be called only for a verb,  not a "+self.constType)
-        if hasattr(self,"ignoreRefl"):return False; #HACK: this might be set in Phrase.processTyp_fr when dealing with "progressive"
+        if hasattr(self,"ignoreRefl"):return False # HACK: this might be set in Phrase.processTyp_fr when
+                                                   # dealing with "progressive"
         pat=self.getProp("pat")
-        if pat!=None and len(pat)==1 and pat[0]=="réfl": return True # essentiellement réflexif
+        if pat is not None and len(pat)==1 and pat[0]=="réfl": return True # essentiellement réflexif
         # check for "refl" typ (only called for V): Terminal.conjugate_fr
         pc=self.parentConst
         while pc is not None:
@@ -361,7 +363,6 @@ class Terminal(Constituent):
         g = self.getProp("g")
         n = self.getProp("n")
         t = self.getProp("t")
-        neg=None 
         if self.tab is None:
             return [self.morphoError("conjugate_fr:tab",{"pe":pe,"n":n,"t":t})] 
         if t in ["pc","pq","cp","fa","spa","spq"]: # temps composés
@@ -376,7 +377,8 @@ class Terminal(Constituent):
             elif aux.taux["aux"]=="êt":
                 aux.setLemma("être")
             else: # auxiliary "avoir"
-                # check the gender and number of a cod appearing before the verb to do proper agreement of its part participle
+                # check the gender and number of a cod appearing before the verb to do proper agreement
+                # of its part participle
                 g="m"
                 n="s"
                 if hasattr(self,"cod"):
@@ -397,7 +399,7 @@ class Terminal(Constituent):
                 del self.props["lier"] # delete it from the verb
                 # HACK: check if the verb was lié to a nominative pronoun (e.g. subject inversion for a question)
                 myParent=self.parentConst
-                if myParent != None:
+                if myParent is not None:
                     if hasattr(myParent,"elements"): # when dealing with a Phrase
                         myParentElems=myParent.elements
                         idxMe=myParentElems.index(self)
@@ -406,16 +408,19 @@ class Terminal(Constituent):
                             next=myParentElems[idxNext]
                             if next.isA("Pro"):
                                 thePro=myParentElems.pop(idxNext) # remove next pro from parent
-                                thePro.realization=thePro.realize() # insert its realization after the auxiliary and before the verb
+                                thePro.realization=thePro.realize() # insert its realization after the auxiliary
+                                                                    # and before the verb
                                 return [aux,thePro,self]
                     elif hasattr(myParent,"dependents"): # when dealing with a Dependent
                         proIndex=myParent.findIndex(lambda d:d.terminal.isA("Pro"))
                         if proIndex>=0:
                             thePro=myParent.removeDependent(proIndex).terminal  # remove Pro from Parent
-                            thePro2=Pro(thePro.lemma)             # as the original Pro is already realized in the output list, we must hack
+                            thePro2=Pro(thePro.lemma)             # as the original Pro is already realized in the
+                                                                  # output list, we must hack
                             thePro2.props=thePro.props            # and we cannot use clone because of environ
                             thePro2.peng=thePro.peng
-                            thePro2.realization=thePro2.realize() # insert its realization after the auxiliary and before the verb
+                            thePro2.realization=thePro2.realize() # insert its realization after the auxiliary
+                                                                  # and before the verb
                             thePro.realization=""                 # set original Pro realization to nothing
                             return [aux,thePro2,self]
                     else:
@@ -444,14 +449,14 @@ class Terminal(Constituent):
                     else:
                         self.realization=self.stem+term
                     res=[self]
-                    if self.isReflexive() and self.parentConst==None:
+                    if self.isReflexive() and self.parentConst is None:
                         self.lier()
                         self.insertReal(res,Pro("moi","fr").tn("").pe(pe).n(n).g(g))
                     return res
                 elif t in ["b","pr","pp"]:
                     self.realization=self.stem+conjugation[t]
                     res=[self]
-                    if t!="pp" and self.isReflexive() and self.parentConst==None:
+                    if t!="pp" and self.isReflexive() and self.parentConst is None:
                         self.insertReal(res, Pro("moi","fr").c("refl").pe(pe).n(n).g(g), 0)
                     if t=="pp" and self.realization!="été": # HACK: frequent case of être that does not change
                         g=self.getProp("g")
@@ -461,7 +466,7 @@ class Terminal(Constituent):
                         term={"ms":"","mp":"s","fs":"e","fp":"es"}[g+n]
                         self.realization+=term
                     # neg=self.neg2 if hasattr(self,"neg2") else None
-                    # if neg!=None and neg!="":
+                    # if neg is not None and neg!="":
                     #     if t=="b" or t=="pp":
                     #         self.insertReal(res,Adv(neg,"fr"),0)
                     #     else:
@@ -544,7 +549,7 @@ class Terminal(Constituent):
     
     ### Date
     def dateFormat(self,dateObj,dOpts):
-        fmtRE=re.compile(r"(.*?)\[(.+?)\]|(.+$)")
+        fmtRE=re.compile(r"(.*?)\[(.+?)]|(.+$)")
         dateRule = getRules()["date"]
         fmts=dateRule["format"]["natural" if dOpts["nat"] else "non_natural"]
 
@@ -594,15 +599,15 @@ class Terminal(Constituent):
 
         timeS=interpret(":".join(field for field in ["hour","minute","second"] if dOpts[field]))
         return " ".join(s for s in [dateS,timeS] if len(s)>0)
-     
-    
-    
+
+
+
     def real(self):
         if self.isOneOf(["N","A"]):
-            if hasattr(self, "tab") and self.tab !=None:
+            if hasattr(self, "tab") and self.tab  is not None:
                 self.realization=self.decline(False)
         elif self.isA("Adv"):
-            if hasattr(self, "tab") and self.tab !=None:
+            if hasattr(self, "tab") and self.tab  is not None:
                 self.realization=self.decline(False)
             else:
                 self.realization=self.lemma
@@ -610,7 +615,7 @@ class Terminal(Constituent):
             if self.realization is None:
                 self.realization=self.lemma
         elif self.isOneOf(["D","Pro"]):
-            if hasattr(self, "tab") and self.tab !=None:
+            if hasattr(self, "tab") and self.tab is not None:
                 self.realization=self.decline(True)
         elif self.isA("V"):
             return self.doFormat(self.conjugate())
@@ -639,28 +644,28 @@ class Terminal(Constituent):
     def toJSON(self):
         res={"terminal":self.constType,"lemma":self.lemma}
         if self.parentConst is None or self.lang!=self.parentConst.lang: # only indicate when language changes
-            res["lang"]=self.lang;
+            res["lang"]=self.lang
         if len(self.props): # do not output empty props
-            res["props"]=self.props;
-        return res;
+            res["props"]=self.props
+        return res
     
     @classmethod
-    def fromJSON(self,constType,json,lang):
+    def fromJSON(cls,constType,json,lang):
         if "lemma" in json:
             return Terminal(constType,json["lemma"],lang).setJSONprops(json)
         else:
             print("Terminal.fromJSON: no lemma found in "+str(json))
-        return self
+        return cls
         
     def toDependent(self,depName=None):
         from .Dependent import Dependent,det
         # HACK: self.parentConst in changed during transformation to refer to the parent dependennt...
-        isTopLevel = self.parentConst is None;  # we save it to use it at the end
-        if (self.isOneOf(["D", "NO"])):
+        isTopLevel = self.parentConst is None  # we save it to use it at the end
+        if self.isOneOf(["D", "NO"]):
             deprel=det(self)
         else:
-            deprel= Dependent([self], "root" if depName is None else depName);
-        if isTopLevel: deprel.cap(False);
+            deprel= Dependent([self], "root" if depName is None else depName)
+        if isTopLevel: deprel.cap(False)
         return deprel
 
 
@@ -708,7 +713,7 @@ class C(Terminal):
         super().__init__("C",lemma,lang)
 
 class DT(Terminal):
-    def __init__(self, lemma=None,lang=None):
+    def __init__(self, lemma=None,_lang=None):
         super().__init__("DT", lemma) 
             
 class NO(Terminal):

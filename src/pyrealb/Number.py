@@ -1,10 +1,10 @@
 #Fonctions pour la sortie en lettres:
-#Fonction EnToutesLettres par Guy Lapalme , légèrement modifiée par Francis pour accomoder le genre
+#Fonction EnToutesLettres par Guy Lapalme, légèrement modifiée par Francis pour accomoder le genre
 import re,sys
 
 def enToutesLettres(s,lang):
     en=lang=="en"
-    trace=False; # utile pour la mise au point
+    trace=False  # utile pour la mise au point
 
     # expressions des unités pour les "grands" nombres >1000 
     # expressions donnent les formes [{singulier, pluriel}...]
@@ -16,16 +16,16 @@ def enToutesLettres(s,lang):
                ,{"sing":"un trillion"   ,"plur":"trillions"}    # 10^12
                ,{"sing":"un quatrillion","plur":"quatrillions"} # 10^15
                ,{"sing":"un quintillion","plur":"quintillions"} # 10^18
-                ];
+                ]
     unitsM =[   {"sing":"one thousand"      ,"plur":"thousand"}    # 10^3
                ,{"sing":"one million"       ,"plur":"million"}     # 10^6
                ,{"sing":"one billion"       ,"plur":"billion"}     # 10^9
                ,{"sing":"one trillion"      ,"plur":"trillion"}    # 10^12
                ,{"sing":"one quatrillion"   ,"plur":"quatrillion"} # 10^15
                ,{"sing":"one quintillion"   ,"plur":"quintillion"} # 10^18
-                ];
+                ]
 
-    maxLong=21;  # longueur d'une chaîne de chiffres traitable (fixé par la liste unitesM)
+    maxLong=21  # longueur d'une chaîne de chiffres traitable (fixé par la liste unitesM)
 
     # séparer une chaine en groupes de trois et complétant le premier groupe avec des 0 au début
     def splitS(s):
@@ -35,7 +35,7 @@ def enToutesLettres(s,lang):
         elif len(s)==2: s="0"+s
         return [s]
 
-    # est-ce que tous les triplets d'une liste correspondent à  0 ?
+    # est-ce que tous les triplets d'une liste correspondent à 0 ?
     def tousZero(ns):
         if len(ns)==0:return True;
         return ns[0]=="000" and tousZero(ns[1:])
@@ -43,14 +43,14 @@ def enToutesLettres(s,lang):
     # création d'une liste de triplets de chiffres
     def grouper(ns): # ns est une liste de chaines de 3 chiffres
         l=len(ns)
-        if trace: print("grouper:"+l+":"+ns)
+        if trace: print("grouper:"+str(l)+":"+ns)
         head=ns[0]
         if l==1:return centaines(head)
         tail=ns[1:]
         if head=="000": return grouper(tail)
-        uM=unitsM if en else unitesM;
+        uM=unitsM if en else unitesM
         return (uM[l-2]["sing"] if head=="001" else grouper([head])+" "+uM[l-2]["plur"])\
-                +" "+("" if tousZero(tail) else grouper(tail));
+                +" "+("" if tousZero(tail) else grouper(tail))
 
     # traiter un nombre entre 0 et 999
     def centaines(ns): # ns est une chaine d'au plus trois chiffres
@@ -77,7 +77,7 @@ def enToutesLettres(s,lang):
             if en: 
                 return ["ten","eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen"][int(u)]
             else:
-                return["dix","onze","douze","treize","quatorze","quinze","seize","dix-sept","dix-huit","dix-neuf"][int(u)];
+                return["dix","onze","douze","treize","quatorze","quinze","seize","dix-sept","dix-huit","dix-neuf"][int(u)]
         elif d in "23456":
             tens = (["twenty","thirty","forty","fifty","sixty"] if en else 
                     ["vingt","trente","quarante","cinquante","soixante"])[int(d)-2]
@@ -109,7 +109,7 @@ def enToutesLettres(s,lang):
         neg=True
         s=s[1:]
     if len(s)>maxLong:
-        print("nombreChaineEnLettres ne traite que les nombres d'au plus "+maxLong+" chiffres:"+s,sys.stderr)
+        print("nombreChaineEnLettres ne traite que les nombres d'au plus "+str(maxLong)+" chiffres:"+s,sys.stderr)
     res=grouper(splitS(s))
     if neg: res=("minus " if en else "moins ")+res
     return res.strip()
@@ -149,11 +149,11 @@ def ordinal(s,lang,gender):
 if __name__ == '__main__':
     print(enToutesLettres("1234567","en"))
     print(enToutesLettres("1234567","fr"))
-    print(enToutesLettres(-45, "en"))
-    print(enToutesLettres(300, "fr"))
+    print(enToutesLettres("-45", "en"))
+    print(enToutesLettres("300", "fr"))
     print(ordinal(34,"en","f"))
     for n in range(7,100000, 397):
-        print(enToutesLettres(n, "en"))
-        print(enToutesLettres(n, "fr"))
+        print(enToutesLettres(str(n), "en"))
+        print(enToutesLettres(str(n), "fr"))
         
 

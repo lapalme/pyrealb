@@ -3769,17 +3769,17 @@
         "pn4-3pf":{
             "ending":"elles",
             "declension":[{
-                "val":"elles", "g":"f", "tn":"", "g":"f", "n":"p", "pe":3
+                "val":"elles", "tn":"", "g":"f", "n":"p", "pe":3
             },{
-                "val":"elles-mêmes", "g":"f", "tn":"refl", "g":"f", "n":"p", "pe":3
+                "val":"elles-mêmes", "tn":"refl", "g":"f", "n":"p", "pe":3
             },{
-                "val":"elles", "g":"f", "c":"nom", "g":"f", "n":"p", "pe":3
+                "val":"elles", "c":"nom", "g":"f", "n":"p", "pe":3
             },{
-                "val":"les", "g":"f", "c":"acc", "g":"f", "n":"p", "pe":3
+                "val":"les", "c":"acc", "g":"f", "n":"p", "pe":3
             },{
-                "val":"leur", "g":"f", "c":"dat", "g":"f", "n":"p", "pe":3
+                "val":"leur", "c":"dat", "g":"f", "n":"p", "pe":3
             },{
-                "val":"se", "g":"f", "c":"refl", "g":"f", "n":"p", "pe":3
+                "val":"se", "c":"refl", "g":"f", "n":"p", "pe":3
             }]
         },
         "pn5": {

@@ -1,7 +1,7 @@
 from context import pyrealb
 from pyrealb import *
 
-max=99
+max = 99
 
 def nbb(n): # (n  no more) bottle(s) of beer
     b=N("bottle")

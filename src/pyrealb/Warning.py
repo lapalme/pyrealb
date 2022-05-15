@@ -107,8 +107,10 @@ warnings = {
             S(AP(A("absent"),PP(P("de"),NP(D("le"),N("lexique"),A("anglais" if lang=="en" else "français")))),
               Q("") if altPos is None else AdvP(Adv("mais"),V("exister"),Adv("comme"),makeDisj("ou",altPos)))},
     "no appropriate pronoun":
-        {"en":lambda  :S(VP(V("find").t("ps"),NP(D("a"),A("appropriate"),N("pronoun")))).typ({"neg":True,"pas":True,"mod":"poss"}),
-         "fr":lambda  :S(VP(V("trouver").t("pc"),NP(D("un"),A("adéquat"),N("pronom")))).typ({"neg":True,"pas":True,"mod":"poss"})
+        {"en":lambda  :S(VP(V("find").t("ps"),NP(D("a"),A("appropriate"),N("pronoun")))
+                         ).typ({"neg":True,"pas":True,"mod":"poss"}),
+         "fr":lambda  :S(VP(V("trouver").t("pc"),NP(D("un"),A("adéquat"),N("pronom")))
+                         ).typ({"neg":True,"pas":True,"mod":"poss"})
         },
     "both tonic and clitic":
         {"en":lambda  :# tn(..) and c(..) cannot be used together, tn(..) is ignored.
