@@ -290,12 +290,12 @@ def _help():
  _en() : load English lexicon and rules
  _fr() : load French lexicon and rules
 
- _cn(no): show conjugation table no 
- _ce(no): show conjugation ending no
- _dn(no): show declension table no
- _de(no): show declension ending no
- _lm(word): show jsRealB expressions that can realize word
- _lx(word[,terminal]) : show lexical information about word, 
+ _cn("no"): show conjugation table no 
+ _ce("no"): show conjugation ending no
+ _dn("no"): show declension table no
+ _de("no"): show declension ending no
+ _lm("word"): show jsRealB expressions that can realize word
+ _lx("word"[,"terminal"]) : show lexical information about word, 
             if terminal is present, show only entries having terminal in its table
  a parameter for these functions can be a regex that matches fully 
 

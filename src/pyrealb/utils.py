@@ -75,5 +75,5 @@ true = True
 null = None
 
 # version and date informations
-pyRealB_version = "2.0"
+pyRealB_version = "2.1"
 pyRealB_dateCreated = datetime.datetime.today()

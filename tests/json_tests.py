@@ -23,7 +23,7 @@ def json_tests():
 
     tests=[
         {"expression": exp,
-         "expected": "The cats did not sit on the mat.",
+         "expected": "The cats did not sit on the mat. ",
          "message": "original sentence built using Phrase"},
         {"expression": outExp.getvalue(),
          "expected":
@@ -51,11 +51,11 @@ def json_tests():
 """,
          "message": "pretty-print of JSON froom Phrase"},
         {"expression": fromJSON(exp.toJSON()),
-         "expected": "The cats did not sit on the mat.",
+         "expected": "The cats did not sit on the mat. ",
          "message": "original sentence built using Phrase"},
 
         {"expression": dep,
-         "expected": "The cats will not sit on the mat.",
+         "expected": "The cats will not sit on the mat. ",
          "message": "original sentence built using Phrase"},
         {"expression": outDep.getvalue(),
          "expected":
@@ -86,7 +86,7 @@ def json_tests():
 """,
          "message": "pretty-print of JSON froom Phrase"},
         {"expression": fromJSON(dep.toJSON()),
-         "expected": "The cats will not sit on the mat.",
+         "expected": "The cats will not sit on the mat. ",
          "message": "original sentence built using Phrase"},
 
     ]

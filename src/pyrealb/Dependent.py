@@ -160,8 +160,9 @@ class Dependent(Constituent):
                     firstDep=d.dependents[0]
                     if firstDep.isA("subj"):
                         headTerm.peng=d.peng
-                    elif firstDep.isOneOf(["mod","comp"]) and firstDep.terminal.isA("V"):
+                    elif firstDep.isOneOf(["mod","comp"]) and firstDep.terminal.isOneOf(["V","A"]):
                         # consider this as coordination of verb sharing a subject (the current root)
+                        # or coordination of adjectives
                         for d0 in d.dependents:
                             d0.peng=self.peng
                             d0.terminal.peng=self.peng

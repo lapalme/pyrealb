@@ -19,6 +19,59 @@ sepWordREen=re.compile(r"((?:[^<\w'-]*(?:<[^>]+>)?)*)([\w'-]+)?(.*)")
 # same as sepWordREen but the [\w] class is extended with French accented letters and cedilla
 sepWordREfr=re.compile(r"((?:[^<\wàâéèêëîïôöùüç'-]*(?:<[^>]+>)?)*)([\wàâéèêëîïôöùüç'-]+)?(.*)",re.I)
 
+# tables des positions des clitiques en français, tirées de
+#    Choi-Jonin (I.) & Lagae (V.), 2016, « Les pronoms personnels clitiques », in Encyclopédie Grammaticale du Français,
+#    en ligne : http:#encyclogram.fr
+
+#  section 3.1.1. (http:#encyclogram.fr/notx/006/006_Notice.php#tit31)
+
+proclitiqueOrdre = {  # page 11 du PDF
+    # premier pronom que nous ignorons pour les besoins de cette application
+    # "je":1, "tu":1, "il":1, "elle":1, "on":1, "on":1, "nous":1, "vous":1, "vous":1, "ils":1, "elle":1,
+    "ne": 2,
+    "me": 3, "te": 3, "se": 3, "nous": 3, "vous": 3,
+    "le": 4, "la": 4, "les": 4,
+    "lui": 5, "leur": 5,
+    "y": 6,
+    "en": 7,
+    "*verbe*": 8,
+    "pas": 9,  # S'applique aussi aux autre négations... plus, guère
+}
+
+proclitiqueOrdreImperatifNeg = {  # page 14 du PDF
+    "ne": 1,
+    "me": 2, "te": 2, "nous": 2, "vous": 2,
+    "le": 3, "la": 3, "les": 3,
+    "lui": 4, "leur": 4,
+    "y": 5,
+    "en": 6,
+    "*verbe*": 7,
+    "pas": 8,  # S'applique aussi aux autre négations... plus, guère
+}
+
+proclitiqueOrdreImperatifPos = {  # page 15 du PDF
+    "*verbe*": 1,
+    "le": 2, "la": 2, "les": 2,
+    "lui": 3, "leur": 3,
+    "me": 4, "te": 4, "nous": 2, "vous": 2,
+    "y": 5,
+    "en": 6,
+}
+
+proclitiqueOrdreInfinitif = {  # page 17 du PDF
+    "ne": 1,
+    "pas": 2,  # S'applique aussi aux autre négations... plus, guère, jamais
+    "me": 3, "te": 3, "se": 3, "nous": 3, "vous": 3,
+    "le": 4, "la": 4, "les": 4,
+    "lui": 5, "leur": 5,
+    "y": 6,
+    "en": 7,
+    "*verbe*": 8,
+}
+
+modalityVerbs = ["vouloir", "devoir", "pouvoir"]
+
+
 class Constituent():
     def __init__(self,constType):
         self.constType=constType
@@ -59,9 +112,9 @@ class Constituent():
         return None
     
     def setProp(self,propName,val):
-        if propName in ["pe","n","g"] and hasattr(self,"peng"):
+        if propName in ["pe","n","g"] and hasattr(self,"peng") and self.peng is not None:
             self.peng[propName]=val
-        if propName in ["t","aux"] and hasattr(self,"taux"):
+        if propName in ["t","aux"] and hasattr(self,"taux") and self.taux is not None:
             self.taux[propName]=val
         self.props[propName]=val
 
@@ -387,57 +440,6 @@ class Constituent():
                 i+=1
             i+=1
 
-        # tables des positions des clitiques en français, tirées de
-        #    Choi-Jonin (I.) & Lagae (V.), 2016, « Les pronoms personnels clitiques », in Encyclopédie Grammaticale du Français,
-        #    en ligne : http:#encyclogram.fr
-
-        #  section 3.1.1. (http:#encyclogram.fr/notx/006/006_Notice.php#tit31)
-
-    proclitiqueOrdre = {  # page 11 du PDF
-        # premier pronom que nous ignorons pour les besoins de cette application
-        # "je":1, "tu":1, "il":1, "elle":1, "on":1, "on":1, "nous":1, "vous":1, "vous":1, "ils":1, "elle":1,
-        "ne": 2,
-        "me": 3, "te": 3, "se": 3, "nous": 3, "vous": 3,
-        "le": 4, "la": 4, "les": 4,
-        "lui": 5, "leur": 5,
-        "y": 6,
-        "en": 7,
-        "*verbe*": 8,
-        "pas": 9,  # S'applique aussi aux autre négations... plus, guère
-    }
-
-    proclitiqueOrdreImperatifNeg = {  # page 14 du PDF
-        "ne": 1,
-        "me": 2, "te": 2, "nous": 2, "vous": 2,
-        "le": 3, "la": 3, "les": 3,
-        "lui": 4, "leur": 4,
-        "y": 5,
-        "en": 6,
-        "*verbe*": 7,
-        "pas": 8,  # S'applique aussi aux autre négations... plus, guère
-    }
-
-    proclitiqueOrdreImperatifPos = {  # page 15 du PDF
-        "*verbe*": 1,
-        "le": 2, "la": 2, "les": 2,
-        "lui": 3, "leur": 3,
-        "me": 4, "te": 4, "nous": 2, "vous": 2,
-        "y": 5,
-        "en": 6,
-    }
-
-    proclitiqueOrdreInfinitif = {  # page 17 du PDF
-        "ne": 1,
-        "pas": 2,  # S'applique aussi aux autre négations... plus, guère, jamais
-        "me": 3, "te": 3, "se": 3, "nous": 3, "vous": 3,
-        "le": 4, "la": 4, "les": 4,
-        "lui": 5, "leur": 5,
-        "y": 6,
-        "en": 7,
-        "*verbe*": 8,
-    }
-
-    modalityVerbs = ["vouloir", "devoir", "pouvoir"]
 
     def doFrenchPronounPlacement(self, cList):
         from .Terminal import Adv,Pro
@@ -624,7 +626,7 @@ class Constituent():
                         # taking into account any trailing HTML tag
                         m=re.search(r"(.)( |(<[^>]+>))*$",s)
                         if m!=None and m.group(1) not in "?!.:;/":
-                            s+="."
+                            s+=". "   # add a space after "." , like for rule "pc4"
         return s
     
     ## this looks very simple, but it is the start of the realization process
@@ -687,7 +689,7 @@ def makeOptionMethod(option,validVals,allowedConsts,optionName=None):
             if prog is None:self.addOptSource(optionName,val)
             for e in self.elements:
                 if len(allowedConsts)==0 or e.isOneOf(allowedConsts):
-                    e[option](val)
+                    getattr(e,option)(val)
             return self
         if len(allowedConsts)==0 or self.isOneOf(allowedConsts) or self.isOneOf(deprels):
             if validVals!=None and val not in validVals:

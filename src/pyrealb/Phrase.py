@@ -32,11 +32,22 @@ prepositionsList = {
 negMod = {"can": "cannot", "may": "may not", "shall": "shall not", "will": "will not", "must": "must not",
           "could": "could not", "might": "might not", "should": "should not", "would": "would not"}
 
+# insert a list of elements that are not None flattening an embedded list
+def _getElems(es):
+    res = []
+    for e in es:
+        if e != None:
+            if isinstance(e, list):res.extend([e0 for e0 in e if e0 != None])
+            else:res.append(e)
+    return res
 
 class Phrase(Constituent):
     def __init__(self, constType, elements, lang=None):
-        elements = [e for e in elements if e is not None]  # ignore None elements
         super().__init__(constType)
+        if (len(elements) == 0):  # check for an empty list that can be added to
+            elements = []
+        else:  # # transform the tuple received as star args into a list that can be modified
+            elements = _getElems(elements)
         if lang is None:
             self.lang = currentLanguage()
         elif lang in ["en", "fr"]:
@@ -57,7 +68,7 @@ class Phrase(Constituent):
                 self.elements.append(e)
                 self.elementsSource.append(e)
             else:
-                self.warn("bad Constituent", i + 1, type(e).__name__, str(e))
+                self.warn("bad Constituent", i + 1, type(e).__name__)
         if len(elements) > 0:
             # terminate the list with add which does other checks on the final list
             self.add(elements[-1], None, True)
@@ -74,7 +85,7 @@ class Phrase(Constituent):
             else:
                 self.warn("bad position", position, len(self.elements))
         else:
-            self.warn("bad Constituent", NO(position + 1).dOpt({"ord": True}), type(elem).__name__)
+            self.warn("bad Constituent", NO(position + 1).dOpt({"ord": True}), type(elem).__name__+":"+str(e))
         return self
 
     # remove a child from this Phrase and return it
@@ -91,6 +102,14 @@ class Phrase(Constituent):
             if start > end: (end, start) = (start, end)
             return all(el.isOneOf(["A", "N"]) for el in elems[start:end + 1])
 
+        if isinstance(constituent,list):
+            if len(constituent)==0: return self
+            if len(constituent)==1:
+                constituent=constituent[0]
+            else:
+                for c in constituent:
+                    self.add(c,position,prog)
+                return self
         if prog is None and constituent is None: return self
         if isinstance(constituent, str):
             constituent = Q(constituent)
@@ -98,7 +117,7 @@ class Phrase(Constituent):
             return self.warn("bad Constituent", "last" if self.isEn() else "dernier",
                              type(constituent).__name__ + ":" + str(constituent))
         if prog is None:
-            self.optSource += f'.add({constituent.toSource(0)}{"" if position is None else ("," + str(position))})'
+            self.optSource += f'.add({constituent.toSource()}{"" if position is None else ("," + str(position))})'
         else:  # call from the constructor
             self.elementsSource.append(constituent)
         constituent.parentConst = self
@@ -138,30 +157,36 @@ class Phrase(Constituent):
             # the head is the first internal N, number with a possible NO
             # find first NP or N
             headIndex = self.getHeadIndex("NP")
-            self.peng = self.elements[headIndex].peng
-            for i in range(0, len(self.elements)):
-                if i != headIndex:
-                    e = self.elements[i]
-                    if hasattr(self, "peng"):  # do not try to modify if current peng does not exist e.g. Q
-                        if e.isA("NO") and i < headIndex:  # NO must appear before the N for agreement
-                            self.peng["n"] = e.grammaticalNumber()
-                            # gender agreement between a French number and subject
-                            e.peng["g"] = self.peng["g"]
-                        elif e.isOneOf(["D", "A"]):
-                            # link gender and number of the noun to the determiners and adjectives
-                            # in English possessive determiner should not depend on the noun but on the "owner"
-                            if self.isFr() or not e.isA("D") or "own" not in e.props:
-                                e.peng = self.peng
-            # set agreement between the subject of a subordinate or the object of a subordinate
-            pro = self.getFromPath([["S", "SP"], "Pro"])
-            if pro is not None:
-                v = pro.parentConst.getFromPath(["VP", "V"])
-                if v is not None:
-                    if pro.lemma in ["qui", "who"]:  # agrees with self NP
-                        v.peng = self.peng
-                    elif self.isFr() and pro.lemma == "que":
-                        # in French past participle can agree with a cod appearing before... keep that info just in case
-                        v.cod = self
+            if hasattr(self.elements[headIndex],"peng"):
+                # must check because getHeadIndex returns the first element when it does not find anything appropriate
+                self.peng = self.elements[headIndex].peng
+                for i in range(0, len(self.elements)):
+                    if i != headIndex:
+                        e = self.elements[i]
+                        if hasattr(self, "peng"):  # do not try to modify if current peng does not exist e.g. Q
+                            if e.isA("NO") and i < headIndex:  # NO must appear before the N for agreement
+                                self.peng["n"] = e.grammaticalNumber()
+                                # gender agreement between a French number and subject
+                                e.peng["g"] = self.peng["g"]
+                            elif e.isOneOf(["D", "A"]):
+                                # link gender and number of the noun to the determiners and adjectives
+                                # in English possessive determiner should not depend on the noun but on the "owner"
+                                if self.isFr() or not e.isA("D") or "own" not in e.props:
+                                    e.peng = self.peng
+                            elif e.isA("CP"): # check for a coordination of adjectives
+                                for el in e.elements:
+                                    if el.isA("A"):
+                                        el.peng=self.peng
+                # set agreement between the subject of a subordinate or the object of a subordinate
+                pro = self.getFromPath([["S", "SP"], "Pro"])
+                if pro is not None:
+                    v = pro.parentConst.getFromPath(["VP", "V"])
+                    if v is not None:
+                        if pro.lemma in ["qui", "who"]:  # agrees with self NP
+                            v.peng = self.peng
+                        elif self.isFr() and pro.lemma == "que":
+                            # in French past participle can agree with a cod appearing before... keep that info just in case
+                            v.cod = self
         elif self.isA("VP"):
             headIndex = self.getHeadIndex("VP")  # head is the first internal V
             self.peng = self.elements[headIndex].peng
@@ -203,8 +228,11 @@ class Phrase(Constituent):
                             # finally self generates too many spurious messages
                             # self.warning("no possible subject found")
                             return self
-                self.peng = subject.peng
-                vpv = self.linkPengWithSubject("VP", "V", subject)
+                if hasattr(subject,"peng"):
+                    self.peng = subject.peng
+                    vpv = self.linkPengWithSubject("VP", "V", subject)
+                else:
+                    vpv = None
                 if vpv is not None:
                     self.taux = vpv.taux
                     if self.isFr() and vpv.lemma in ["être", "paraître", "sembler", "devenir", "rester"]:
@@ -737,10 +765,9 @@ class Phrase(Constituent):
                 if subjIdx is not None:
                     vbIdx = self.getIndex(["VP", "V"])
                     if vbIdx is not None and subjIdx < vbIdx:  # subject should be before the verb
-                        # make sure that the verb at the third-person singular,
+                        # make sure that the verb at the third-person
                         # because now the subject has been removed
                         v = self.elements[vbIdx]
-                        v.setProp("n", "s")
                         v.setProp("pe", 3)
                         del self.elements[subjIdx]
             prefix = intPrefix[int_]

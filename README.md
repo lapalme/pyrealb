@@ -1,6 +1,6 @@
 # *pyRealB* - A Python Bilingual Text Realizer
 
-*Version 2.0 - May 2022*
+*Version 2.1 - May 2022*
 
 *pyRealB* is a Python adaptation of the JavaScript [**jsRealB**](http://rali.iro.umontreal.ca/jsRealB) 
 with the same constituent and dependency syntax notation. 
@@ -75,10 +75,12 @@ Some directories include `markup.py` which should be loaded using `pip`. Unfortu
 
 * `99bottlesofbeer/99bottlesofbeer.py` : simple generation of a classic repetitive text in English.
 * `evenementsDemo/evenements.py` : Description (in French) of a list of events, it creates HTML.
+* `gophypi/amr2text.py` : generate a literal reading of an AMR (Abstract Meaning Representation);  
+                          [paper describing the approach](gophypi/Doc/GoPhiPy.pdf) 
 * `inflectionDemo/inflection.py` : French or English conjugation and declension of a form.
 * `kilometresapied/kilometresapied.py` : simple generation of a classic repetitive text in French.
 * `randomgen/randomgen.py`: Generation of random English sentences
-*  `report/report.py` : Single sentence parameterized by language, tense and subject
+* `report/report.py` : Single sentence parameterized by language, tense and subject
 * `simple_example/simple_example.py`: a few examples of English and French expressions to be realized
 * `variantes/variantes.py`: French or English sentences realized with all possible sentence modifiers; some challenging examples are in `examples.py`.
 * `weather/Bulletin.py`: French and English weather bulletins generated from information in a *json-line* file. (`weather-data.jsonl`). It uses the packages in the `Realization` directory.
@@ -90,6 +92,8 @@ Some directories include `markup.py` which should be loaded using `pip`. Unfortu
 Thanks to Fabrizio Gotti for helping to organize the Python package.
 
 ### Updating package version on PyPI (for the maintainer only)
+
+see [this tutorial](https://packaging.python.org/en/latest/tutorials/packaging-projects/)
 
 These steps take for granted that the password for PyPI has already been given...
 

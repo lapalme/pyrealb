@@ -227,8 +227,8 @@ class Terminal(Constituent):
                         if self.tab=="b1": # adverb without comparative/superlative, try the adjective table
                             adjAdv=getLemma(self.lemma)
                             if "A" in adjAdv:
-                                declension=rules["declension"][adjAdv["tab"]]["declension"]
-                                ending=rules["declension"][adjAdv["tab"]]["ending"]
+                                declension=rules["declension"][adjAdv["A"]["tab"]]["declension"]
+                                ending=rules["declension"][adjAdv["A"]["tab"]]["ending"]
                                 stem=stem[0:-len(ending)]
                             else:  # adverb without adjective
                                 return res
@@ -478,7 +478,8 @@ class Terminal(Constituent):
                 return [self.morphoError("conjugate_fr",{"pe":pe,"n":n,"t":t})]
     
     def conjugate_en(self):
-        pe=int(self.getProp("pe"))
+        pe=self.getProp("pe")
+        pe = 3 if pe is None else int(pe)
         n = self.getProp("n")
         t = self.getProp("t")
         if self.tab is None:
