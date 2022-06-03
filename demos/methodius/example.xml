@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<exhibit-descriptions>
+  <exhibit id="exhibit41">
+    <content-plan>
+      <rst type="joint">
+        <rst type="elaboration">
+          <fact pred="type" arg1="exhibit41" />
+          <fact pred="creation-time" arg1="exhibit41" arg2="exhibit41-creation-time" />
+        </rst>
+        <rst type="joint">
+          <fact pred="painting-technique-used" arg1="exhibit41" arg2="red-figure-technique" />
+          <fact pred="original-location" arg1="exhibit41" arg2="attica" />
+        </rst>
+      </rst>
+      <rst type="contrast">
+        <fact compare="additive" pred="creation-period" arg1="exhibit24,exhibit1" arg2="archaic-period" />
+        <fact pred="creation-period" arg1="exhibit41" arg2="classical-period" />
+      </rst>
+      <fact pred="exhibit-depicts" arg1="exhibit41" arg2="exhibit41-exhibit-depicts" />
+    </content-plan>
+    <logical-forms>
+      <lf>
+        <node pred=";" id=";5" mood="dcl">
+          <rel name="Arg1">
+            <node pred="and" id="and3">
+              <rel name="Arg1">
+                <node id="type2:situation" pred="be-verb" tense="pres" voice="active">
+                  <rel name="ArgOne">
+                    <node id="exhibit41_proximal-pronoun0:lekythos" pred="this" num="sg" />
+                  </rel>
+                  <rel name="ArgTwo">
+                    <node id="exhibit41_indef1:lekythos" pred="lekythos-np" det="indef" num="sg" />
+                  </rel>
+                </node>
+              </rel>
+              <rel name="Arg2">
+                <node id="creation-time5:situation" pred="create-verb" tense="past" voice="passive">
+                  <rel name="ArgOne">
+                    <node id="exhibit41_default3:lekythos" pred="pro3n" num="sg" />
+                  </rel>
+                  <rel name="ArgTwo">
+                    <node id="exhibit41-creation-time_default4:string" pred="exhibit41-creation-time" prep="in" />
+                  </rel>
+                </node>
+              </rel>
+            </node>
+          </rel>
+          <rel name="Arg2">
+            <node pred="and" id="and8">
+              <rel name="Arg1">
+                <node id="painting-technique-used7:situation" pred="paint-verb" tense="past" voice="passive">
+                  <rel name="ArgOne">
+                    <node id="exhibit41_default5:lekythos" pred="pro3n" num="sg" />
+                  </rel>
+                  <rel name="ArgTwo">
+                    <node id="red-figure-technique_default6:painting-technique" pred="red-figure-technique-np" num="sg" prep="with" />
+                  </rel>
+                </node>
+              </rel>
+              <rel name="Arg2">
+                <node id="original-location10:situation" pred="be-verb" tense="past" voice="active">
+                  <rel name="ArgOne">
+                    <node id="exhibit41_default8:lekythos" pred="pro3n" num="sg" />
+                  </rel>
+                  <rel name="ArgTwo">
+                    <node id="attica_default9:region" pred="attica-np" num="sg" prep="from" />
+                  </rel>
+                  <rel name="HasProp">
+                    <node pred="originally" id="originally11" />
+                  </rel>
+                </node>
+              </rel>
+            </node>
+          </rel>
+        </node>
+      </lf>
+      <lf>
+        <node pred="unlike" id="unlike23" mood="dcl">
+          <rel name="Comparator">
+            <node id="exhibit24exhibit1_def8:vessel" pred="vessel-np" det="def" num="pl">
+              <rel name="CoreInv">
+                <node pred="elab-rel" id="elab-rel14">
+                  <rel name="Trib">
+                    <node id="creation-period10:situation" pred="create-verb" tense="past" voice="passive">
+                      <rel name="ArgOne">
+                        <node idref="exhibit24exhibit1_def8:vessel" />
+                      </rel>
+                      <rel name="ArgTwo">
+                        <node id="archaic-period_default9:historical-period" pred="archaic-period-np" num="sg" prep="during" />
+                      </rel>
+                    </node>
+                  </rel>
+                </node>
+              </rel>
+              <rel name="RedGenRel">
+                <node id="see-verb16:situation" pred="see-verb" tense="past" voice="active">
+                  <rel name="ArgOne">
+                    <node pred="pro2" id="pro217:animate-being" />
+                  </rel>
+                  <rel name="ArgTwo">
+                    <node idref="exhibit24exhibit1_def8:vessel" />
+                  </rel>
+                </node>
+                <rel name="HasProp">
+                  <node pred="recently" id="recently21" />
+                </rel>
+              </rel>
+              <rel name="HasProp">
+                <node pred="other" id="other19" />
+              </rel>
+            </node>
+          </rel>
+          <rel name="Focus">
+            <node id="creation-period13:situation" pred="create-verb" tense="past" voice="passive">
+              <rel name="ArgOne">
+                <node id="exhibit41_default11:lekythos" pred="lekythos-np" det="dem-prox" num="sg" />
+              </rel>
+              <rel name="ArgTwo">
+                <node id="classical-period_default12:historical-period" pred="classical-period-np" num="sg" prep="during" />
+              </rel>
+            </node>
+          </rel>
+        </node>
+      </lf>
+      <lf>
+        <node id="exhibit-depicts13:situation" pred="depict-verb" mood="dcl" tense="pres" voice="active">
+          <rel name="ArgOne">
+            <node id="exhibit41_default11:lekythos" pred="pro3n" num="sg" />
+          </rel>
+          <rel name="ArgTwo">
+            <node id="exhibit41-exhibit-depicts_default12:string" pred="exhibit41-exhibit-depicts" />
+          </rel>
+        </node>
+      </lf>
+    </logical-forms>
+    <text>This is a lekythos and it was created in between 475 and 470 B.C.; it was painted with the red figure technique and it was originally from Attica.  Unlike the other vessels you recently saw, which were created during the archaic period, this lekythos was created during the classical period.  It depicts an athlete preparing to perform a jump.</text>
+  </exhibit>
+</exhibit-descriptions>

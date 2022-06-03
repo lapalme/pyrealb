@@ -97,7 +97,9 @@ class Terminal(Constituent):
                 if terminalType not in lexInfo:
                     self.tab=None 
                     self.realization=f"[[{lemma}]]"
-                    return self.warn("not in lexicon",self.lang,lexInfo.keys())
+                    otherPOS=list(lexInfo.keys())
+                    if "basic" in otherPOS:otherPOS.remove("basic")
+                    return self.warn("not in lexicon",self.lang,otherPOS)
                     if quoteOOV: # not currently used
                         self.lemma=str(lemma)
                         self.realization=self.lemma

@@ -79,6 +79,7 @@ Some directories include `markup.py` which should be loaded using `pip`. Unfortu
                           [paper describing the approach](gophypi/Doc/GoPhiPy.pdf) 
 * `inflectionDemo/inflection.py` : French or English conjugation and declension of a form.
 * `kilometresapied/kilometresapied.py` : simple generation of a classic repetitive text in French.
+* `methodius/methodius.py` : generation of English sentences from a logical form expressed in XML.
 * `randomgen/randomgen.py`: Generation of random English sentences
 * `report/report.py` : Single sentence parameterized by language, tense and subject
 * `simple_example/simple_example.py`: a few examples of English and French expressions to be realized
