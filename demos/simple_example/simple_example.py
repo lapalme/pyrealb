@@ -46,10 +46,26 @@ def english():
     print()
     s1 = fromJSON(s().toJSON())
     print(s1)
-
+    print(S(Pro("him").c("nom"),
+         VP(V("eat"),
+            NP(D("a"),N("apple").n("p")).tag("em")
+       )).typ({"int":"tag"}).realize())
+    print(S(Pro("him").c("nom"),
+         VP(V("eat"),
+            NP(D("a"),N("apple").n("p")).tag("em")
+       )).typ({"int":"tag","neg":True}).realize())
+    print(S(Pro("him").c("nom"),
+         VP(V("eat").t("f"),
+            NP(D("a"),N("apple").n("p")).tag("em")
+       )).typ({"int":"tag"}).realize())
 
 def francais():
     loadFr()
+    exp=S(Pro("je"),
+        VP(V('manger').t("pc"),
+           NP(D('le'),
+              N('fromage')))).typ({"int":"tag"})
+    print(exp.realize())
     print(S(Pro("moi").pe(1),VP(V("aimer"))).typ({"pas":True}).realize())
     print(S(NP(D("le"), N("chat")).n("p"), VP(V("asseoir"))).typ({"refl": True}).realize())
     addToLexicon({"John": {"N": {"g": "m", "tab": "n35"}}})
@@ -133,6 +149,11 @@ def dependent_fr():
                        det(D("le"))),
                   comp(N("fromage"),
                        det(D("le")))).typ({"int": "wad", "pas": true}).realize())
+    print(root(V("manger").t("pc"),
+                  subj(N("souris"),
+                       det(D("le"))),
+                  comp(N("fromage"),
+                       det(D("le")))).typ({"int": "tag"}).realize())
     print(root(V('demander').t("pc"),
                   comp(N('adresse'),
                        det(D('mon'))).pro(),
@@ -186,12 +207,19 @@ def dependent_fr():
 
 def dependent_en():
     loadEn()
+    # print(root(V("run"),subj(N("cat"),det(D("the"))).pro()).realize())
     print(root(V("play").t("f"),
                            subj(N("cat"),det(D("a"))),
                            comp(N("piano"))).typ({"neg":true}).realize())
     print(root(V("sit").t("ps"),
               subj(N("cat"),det(D("the"))),
               comp(P("on"),mod(N("couch"),det(D("the"))))))
+    print(root(V("sit").t("ps"),
+              subj(N("cat"),det(D("the"))),
+              comp(P("on"),mod(N("couch"),det(D("the"))))).typ({"int":"tag"}).realize())
+    print(root(V("sit").t("ps"),
+              subj(N("cat"),det(D("the"))),
+              comp(P("on"),mod(N("couch"),det(D("the"))))).typ({"int":"tag","perf":true}).realize())
     print(root(V("like").t("pr"),
                subj(N("dog").n("p"),mod(A("nice"))),
                comp(N("cat"),
@@ -222,18 +250,34 @@ def dependentTransformation():
     print(s().toDependent().toSource(0))
     print(s().toDependent())
 
-test_warnings()
+## test a single expression (useful for launching the debugger on a given expression
+def test(exp,lang):
+    loadEn() if lang=="en" else loadFr()
+    print(exp.toSource(0))
+    print(exp.realize())
 
-print("** English **")
-english()
-print("======")
-print("** Français **")
-francais()
-print("======")
-print("** Dépendances françaises **")
-dependent_fr()
-print("======")
-print("** English dependencies **")
-dependent_en()
-print("======")
-dependentTransformation()
+# test_warnings()
+
+# print("** English **")
+# english()
+# print("======")
+# print("** Français **")
+# francais()
+# print("======")
+# print("** Dépendances françaises **")
+# dependent_fr()
+# print("======")
+# print("** English dependencies **")
+# dependent_en()
+# print("======")
+# dependentTransformation()
+
+# check list of list of parameters for Phrase
+test(S(NP(D("the"),[N("cat"),A("white")],VP([V("sit"),[PP(P("on"),[NP(D("the"),N("mat"))])]]))),
+     "en")
+
+test(root(V("be").t("p"),
+         subj(Pro("I").n("s").pe(1)),
+            comp(P("on"),mod(N("couch"),det(D("the"))))).typ({"int":"yon","perf":False}),
+     "en")
+test(S(Pro("I").pe(1),VP(V("be"),PP(P("on"),NP(D("the"),N("couch"))))).typ({"int":"yon"}),"en")

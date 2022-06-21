@@ -10,7 +10,7 @@ import copy
 types={"en":["neg","contr","pas","prog","perf","int","mod"],
        "fr":["neg","pas","prog","int","mod"]}
 
-pos={"int":["yon","wos","was","wod","wad","woi","wai","whe","why","whn","how","muc"],
+pos={"int":["yon","wos","was","wod","wad","woi","wai","whe","why","whn","how","muc","tag"],
      "mod":["poss","perm","nece","obli","will"]}
 
 ##  generate a list of objects that can be given as argument to .typ()
@@ -66,4 +66,4 @@ addToLexicon({"Mary":{"N":{"g":"f","tab":"n4"}}})
 
 generate(examplesEn,types["en"],
          ## checkbox simulation: " " (unchecked), "*" (checked), "-":indeterminate
-         {"neg":"*","contr":" ","pas":"*","prog":"*","perf":"*","int":"-","mod":"-"})
+         {"neg":"*","contr":" ","pas":"*","prog":"*","perf":"*","int":"*","mod":"-"})

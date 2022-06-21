@@ -20,6 +20,8 @@ class Dependent(Constituent):
         params=list(params)
         if isinstance(params[0],Terminal):
             self.terminal=params.pop(0)
+        elif isinstance(params[0],str):
+            self.terminal=Q(params.pop(0))
         else:
             self.warn("Dependent needs Terminal",type(params[0]).__name__)
             params.pop(0)
@@ -233,7 +235,7 @@ class Dependent(Constituent):
     #  Does not currently deal with "Give the book to her." that {c|sh}ould be "Give her the book."
     def pronominalize_en(self):
         self.props["pe"] = 3  # ensure that pronominalization of a noun is 3rd person
-        if self.isA("subj"):  # is it a subject
+        if self.parentConst is None or self.isA("subj"):  # is it a subject
             pro = self.getTonicPro("nom")
         else:
             pro = self.getTonicPro("acc")  # is direct complement
@@ -396,6 +398,11 @@ class Dependent(Constituent):
             aux = self.dependents[auxIdx].terminal
             self.removeDependent(auxIdx)
             self.addPre(aux, 0)  # put auxiliary before
+        elif self.terminal.lemma in ["be","have"]:
+            # no auxiliary, but check for have or be "alone" for which the subject should appear after the aux
+            subjIdx=self.findIndex(lambda d:d.isA("subj"))
+            if subjIdx>=0:
+                self.dependents[subjIdx].pos("post")
 
     def invertSubject(self):
         # in French : use inversion rule which is quite "delicate"
@@ -416,7 +423,8 @@ class Dependent(Constituent):
                 self.addPost(pro)
                 self.terminal.lier()
 
-    def processTypInt(self,int_):
+    def processTypInt(self,types):
+        int_=types["int"]
         sentenceTypeInt = getRules()["sentence_type"]["int"]
         intPrefix = sentenceTypeInt["prefix"]
         prefix = None  # to be filled later
@@ -477,6 +485,68 @@ class Dependent(Constituent):
                 self.moveAuxToFront()
             else:
                 self.invertSubject()
+        elif int_=="tag":
+            # according to Antidote: Syntax Guide - Question tag
+            # Question tags are short questions added after affirmations to ask for verification
+            if self.isFr(): # in French really simple, add "n'est-ce pas"
+                self.a(", n'est-ce pas")
+            else: # in English, sources: https://www.anglaisfacile.com/exercices/exercice-anglais-2/exercice-anglais-95625.php
+                  # must find  the pronoun and conjugate the auxiliary
+                # look for the first verb or auxiliary (added by affixHopping)
+                vIdx = self.findIndex(lambda d:d.terminal.isA("V") and d.depPosition()=="pre")
+                currV = self.terminal if vIdx<0 else self.dependents[vIdx].terminal
+                if "mod" in types and types["mod"] != False:
+                    aux=getRules("en")["compound"][types["mod"]]["aux"]
+                else:
+                    if currV.lemma in ["have","be","can","will","shall","may","must"]:
+                        aux=currV.lemma
+                    else:
+                        aux="do"
+                neg = "neg" in types and types["neg"]==True
+                pe=currV.getProp("pe")
+                t = currV.getProp("t")
+                n = currV.getProp("n")
+                g = currV.getProp("g")
+                pro = Pro("I").pe(pe).n(n).g(g)  # default pronoun
+                subjIdx = self.findIndex(lambda d:d.isA("subj"))
+                # check for negative adverb
+                advIdx = self.findIndex(lambda d: d.isA("mod") and d.terminal.isA("Adv"))
+                if advIdx>=0 and self.dependents[advIdx].terminal.lemma in ["hardly","scarcely","never","seldom"]:
+                    neg=True
+                if subjIdx >=0 :
+                    subj=self.dependents[subjIdx].terminal
+                    if subj.isA("Pro"):
+                        if subj.getProp("pe")==1 and aux=="be" and t=="p" and not neg:
+                            pe=2 # I am => aren't I
+                        elif subj.lemma in ["this","that","nothing"]:
+                            pro=Pro("I").g("n") # it
+                        elif subj.lemma in ["somebody","anybody","nobody","everybody",
+                                            "someone","anyone","everyone"] :
+                            pro=Pro("I").n("p") # they
+                            if subj.lemma=="nobody":neg=True
+                        else:
+                            pro=subj.clone()
+                        pro=comp(pro)
+                    else:
+                        # must wrap into comp("",...) to force pronominalization of children
+                        pro=comp("",self.dependents[subjIdx].clone().pro())
+                iDeps=len(self.dependents)-1
+                while iDeps>=0 and self.dependents[iDeps].depPosition()!="post":
+                    iDeps-=1
+                if iDeps<0: # add comma to the verb
+                    currV.a(",")
+                else: #add comma to the last current dependent
+                    self.dependents[iDeps].a(",")
+                # nice use-case of jsRealB using itself for realization
+                if aux=="have" and not neg:
+                    # special case because it should be realized as "have not" instead of "does not have"
+                    self.addDependent(comp(V("have").t(t).pe(pe).n(n),
+                                           mod(Adv("not")),
+                                           pro).typ({"contr":True}))
+                else:
+                    self.addDependent(comp(V(aux).t(t).pe(pe).n(n),
+                                           pro).typ({"neg":not neg,"contr":True}))
+            prefix=intPrefix[int_]
         else:
             self.warn("not implemented", "int:" + int_)
         if self.isFr() or (int_ != "yon"):   # add the interrogative prefix
@@ -498,7 +568,7 @@ class Dependent(Constituent):
         else:
             self.processTyp_en(types)
         if "int" in types and types["int"] is not False:
-            self.processTypInt(types["int"])
+            self.processTypInt(types)
         if "exc" in types and types["exc"] is True:
             self.a(getRules()["sentence_type"]["exc"]["punctuation"], True)
         return self

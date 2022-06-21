@@ -4,7 +4,7 @@
 <meta name="name" content="viewport" />
 <meta name="content" content="width=device-width, initial-scale=1.0" />
 <meta name="charset" content="UTF-8" />
-<meta name="date" content="2022-05-09 08:55:44.480597" />
+<meta name="date" content="2022-06-10 17:20:10.801989" />
 <link href="style.css" rel="stylesheet" type="text/css" media="all" />
 <title>pyRealB - Documentation</title>
 <script src="https://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
@@ -17,7 +17,7 @@
 <span class="dropdown-content"></span>
 </span>
 <span id="langSelect">[<span lang="en">FR</span><span lang="fr">EN</span>]</span>
-<h1><span class="jsr">pyRealB</span> (Version 2.0) Documentation</h1>
+<h1><span class="jsr">pyRealB</span> (Version 2.1) Documentation</h1>
 <p lang="fr"><span class="jsr">pyRealB</span> est un réalisateur de texte pour l'anglais et le français écrit en Python. Une fois le package Python installé selon les <a href="https://github.com/lapalme/pyrealb" title="GitHub - lapalme/pyrealb: French and English text realisator">instructions données dans le répertoire GitHub</a>,
 pour l'utiliser, il suffit d'ajouter la ligne suivante à son programme.</p>
 <p lang="en"><span class="jsr">pyRealB</span> is a text realizer for French and English written in Python. Once installed according to <a href="https://github.com/lapalme/pyrealb" title="GitHub - lapalme/pyrealb: French and English text realisator">the instructions on the GitHub</a>, using it
@@ -42,7 +42,7 @@ les exemples ont été réalisés par <span class="jsr">pyRealB</span>  lors de 
 <tr><td class="description">Adverbe</td><td class="pattern">Adv(…)</td><td class="example-fr">Adv("bien")</td><td class="realisation">bien</td></tr>
 <tr><td class="description">Préposition</td><td class="pattern">P(…)</td><td class="example-fr">P("dans")</td><td class="realisation">dans</td></tr>
 <tr><td class="description">Conjonction</td><td class="pattern">C(…)</td><td class="example-fr">C("et")</td><td class="realisation">et</td></tr>
-<tr><td class="description">Date avec <a href='#dateFr'>options</a> facultatives</td><td class="pattern">DT(…)</td><td class="example-fr">DT()</td><td class="realisation">le lundi 9 mai 2022 à 8 h 55 min 44 s</td></tr>
+<tr><td class="description">Date avec <a href='#dateFr'>options</a> facultatives</td><td class="pattern">DT(…)</td><td class="example-fr">DT()</td><td class="realisation">le vendredi 10 juin 2022 à 17 h 20 min 10 s</td></tr>
 <tr><td class="description">Nombre avec <a href='#nombres'>options</a> facultatives</td><td class="pattern">NO(…)</td><td class="example-fr">NO(2)</td><td class="realisation">2</td></tr>
 <tr><td class="description">Texte brut</td><td class="pattern">"…"</td><td class="example-fr">"Wow"</td><td class="realisation">Wow</td></tr>
 <tr><td class="description">Texte brut auquel on peut ajouter des <a href='#optionsFr'>options</a></td><td class="pattern">Q(…)</td><td class="example-fr">Q("Bang !").tag("i")</td><td class="realisation"><i>Bang !</i></td></tr>
@@ -58,7 +58,7 @@ les exemples ont été réalisés par <span class="jsr">pyRealB</span>  lors de 
 <tr><td class="description">Adverb</td><td class="pattern">Adv(…)</td><td class="example-en">Adv("well")</td><td class="realisation">well</td></tr>
 <tr><td class="description">Preposition</td><td class="pattern">P(…)</td><td class="example-en">P("in")</td><td class="realisation">in</td></tr>
 <tr><td class="description">Conjunction</td><td class="pattern">C(…)</td><td class="example-en">C("and")</td><td class="realisation">and</td></tr>
-<tr><td class="description">Date possibly with <a href='#dateEn'>options</a></td><td class="pattern">DT(…)</td><td class="example-en">DT()</td><td class="realisation">on Monday, May 9, 2022 at 8:55:44 a.m.</td></tr>
+<tr><td class="description">Date possibly with <a href='#dateEn'>options</a></td><td class="pattern">DT(…)</td><td class="example-en">DT()</td><td class="realisation">on Friday, June 10, 2022 at 5:20:10 p.m.</td></tr>
 <tr><td class="description">Number possibly with <a href='#numbers'>options</a></td><td class="pattern">NO(…)</td><td class="example-en">NO(2)</td><td class="realisation">2</td></tr>
 <tr><td class="description">Raw text</td><td class="pattern">"…"</td><td class="example-en">"Wow"</td><td class="realisation">Wow</td></tr>
 <tr><td class="description">Raw text to which <a href='#optionsEn'>options</a> can be added</td><td class="pattern">Q(…)</td><td class="example-en">Q("Bang !").tag("i")</td><td class="realisation"><i>Bang !</i></td></tr>
@@ -73,7 +73,7 @@ les exemples ont été réalisés par <span class="jsr">pyRealB</span>  lors de 
 <tr><td class="description">Syntagme Prépositionnel</td><td class="pattern">PP(…)</td><td class="example-fr">PP(P("à"), NP(N("minuit")))</td><td class="realisation">à minuit</td></tr>
 <tr><td class="description">Syntagme coordonné</td><td class="pattern">CP(…)</td><td class="example-fr">CP(C("et"), AP(A("vaillant")), AP(A("gentil")), AP(A("serviable")))</td><td class="realisation">vaillant, gentil et serviable</td></tr>
 <tr><td class="description">&nbsp;<code>CP</code> sans <code>C</code></td><td class="pattern">CP(…)</td><td class="example-fr">CP(AP(A("vaillant")), AP(A("gentil")), AP(A("serviable")))</td><td class="realisation">vaillant, gentil, serviable</td></tr>
-<tr><td class="description">Phrase</td><td class="pattern">S(…)</td><td class="example-fr">S(NP(D("le"),N("homme")), VP(V("dormir")))</td><td class="realisation">L'homme dort.</td></tr>
+<tr><td class="description">Phrase</td><td class="pattern">S(…)</td><td class="example-fr">S(NP(D("le"),N("homme")), VP(V("dormir")))</td><td class="realisation">L'homme dort. </td></tr>
 <tr><td class="description">Syntagme subordonné</td><td class="pattern">SP(…)</td><td class="example-fr">SP(Pro("que"), Pro("je"), VP(V("rencontrer").t("pc")))</td><td class="realisation">qu'il a rencontré</td></tr>
 </table>
 <h3 lang="en">Phrases</h3>
@@ -86,7 +86,7 @@ les exemples ont été réalisés par <span class="jsr">pyRealB</span>  lors de 
 <tr><td class="description">Prepositional Phrase</td><td class="pattern">PP(…)</td><td class="example-en">PP(P("at"), NP(N("midnight")))</td><td class="realisation">at midnight</td></tr>
 <tr><td class="description">Coordinated Phrase</td><td class="pattern">CP(…)</td><td class="example-en">CP(C("and"), AP(A("kind")), AP(A("strong")), AP(A("beautiful")))</td><td class="realisation">kind, strong and beautiful</td></tr>
 <tr><td class="description">&nbsp;<code>CP</code> with no <code>C</code></td><td class="pattern">CP(…)</td><td class="example-en">CP(AP(A("kind")), AP(A("strong")), AP(A("beautiful")))</td><td class="realisation">kind, strong, beautiful</td></tr>
-<tr><td class="description">Sentence</td><td class="pattern">S(…)</td><td class="example-en">S(NP(D("the"),N("man")), VP(V("sleep")))</td><td class="realisation">The man sleeps.</td></tr>
+<tr><td class="description">Sentence</td><td class="pattern">S(…)</td><td class="example-en">S(NP(D("the"),N("man")), VP(V("sleep")))</td><td class="realisation">The man sleeps. </td></tr>
 <tr><td class="description">Subordinated Phrase</td><td class="pattern">SP(…)</td><td class="example-en">SP(Adv("that"), Pro("I"), VP(V("meet").t("ps")))</td><td class="realisation">that it met</td></tr>
 </table>
 <div lang="fr">
@@ -114,22 +114,22 @@ les exemples ont été réalisés par <span class="jsr">pyRealB</span>  lors de 
 <h3 lang="fr">Dépendents</h3>
 <table lang="fr">
 <tr><th>Nom</th><th>Représentation</th><th>Exemple</th><th>Réalisation</th></tr>
-<tr><td class="description">Racine de la phrase</td><td class="pattern">root(…)</td><td class="example-fr">root(V("aimer"),subj(Pro("lui").c("nom")))</td><td class="realisation">Il aime.</td></tr>
+<tr><td class="description">Racine de la phrase</td><td class="pattern">root(…)</td><td class="example-fr">root(V("aimer"),subj(Pro("lui").c("nom")))</td><td class="realisation">Il aime. </td></tr>
 <tr><td class="description">Sujet</td><td class="pattern">subj(…)</td><td class="example-fr">subj(N("enfant").n("p"),det(D("le")))</td><td class="realisation">les enfants</td></tr>
 <tr><td class="description">Déterminant</td><td class="pattern">det(…)</td><td class="example-fr">det(D("le"))</td><td class="realisation">le</td></tr>
 <tr><td class="description">Complément du verbe</td><td class="pattern">comp(…)</td><td class="example-fr">comp(N("fromage"),det(D("le")))</td><td class="realisation">le fromage</td></tr>
 <tr><td class="description">Modificateeur</td><td class="pattern">mod(…)</td><td class="example-fr">mod(A("bon").f("su"))</td><td class="realisation">le meilleur</td></tr>
-<tr><td class="description">Coordination</td><td class="pattern">coord(…)</td><td class="example-fr">root(V("courir"),coord(C("et"),subj(N("chat").n("p")),subj(N("chien").n("p"))))</td><td class="realisation">Chats et chiens courent.</td></tr>
+<tr><td class="description">Coordination</td><td class="pattern">coord(…)</td><td class="example-fr">root(V("courir"),coord(C("et"),subj(N("chat").n("p")),subj(N("chien").n("p"))))</td><td class="realisation">Chats et chiens courent. </td></tr>
 </table>
 <h3 lang="en">Dependencies</h3>
 <table lang="en">
 <tr><th>Name</th><th>Representation</th><th>Example</th><th>Realisation</th></tr>
-<tr><td class="description">Root of dependencies</td><td class="pattern">root(…)</td><td class="example-en">root(V("love"),subj(Pro("me").c("nom")))</td><td class="realisation">It loves.</td></tr>
+<tr><td class="description">Root of dependencies</td><td class="pattern">root(…)</td><td class="example-en">root(V("love"),subj(Pro("me").c("nom")))</td><td class="realisation">It loves. </td></tr>
 <tr><td class="description">Subject</td><td class="pattern">subj(…)</td><td class="example-en">subj(N("child").n("p"),det(D("a")))</td><td class="realisation">children</td></tr>
 <tr><td class="description">Determiner</td><td class="pattern">det(…)</td><td class="example-en">det(D("the"))</td><td class="realisation">the</td></tr>
 <tr><td class="description">Verb complement</td><td class="pattern">comp(…)</td><td class="example-en">comp(N("cheese"),det(D("the")))</td><td class="realisation">the cheese</td></tr>
 <tr><td class="description">Modifier</td><td class="pattern">mod(…)</td><td class="example-en">mod(A("good").f("su"))</td><td class="realisation">best</td></tr>
-<tr><td class="description">Coordination</td><td class="pattern">coord(…)</td><td class="example-en">root(V("run"),coord(C("and"),subj(N("cat").n("p")),subj(N("dog").n("p"))))</td><td class="realisation">Cats and dogs run.</td></tr>
+<tr><td class="description">Coordination</td><td class="pattern">coord(…)</td><td class="example-en">root(V("run"),coord(C("and"),subj(N("cat").n("p")),subj(N("dog").n("p"))))</td><td class="realisation">Cats and dogs run. </td></tr>
 </table>
 <div lang="fr">
     <p>Le premier paramètre d'une dépendance est un terminal. Les autres paramètres doivent être d'autres dépendances. La dépendance <code>root</code> ne peut apparaître qu'une seule fois à la racine.</p>
@@ -266,7 +266,7 @@ for the determiner <code>my</code>.</p>
 <tr class="groupe"><td>Pronom sujet</td><td colspan="3" class="pattern"></td></tr>
 <tr><td class="description">1ère personne du singulier</td><td class="pattern">.pe(1)</td><td class="example-fr">Pro("je").pe(1)</td><td class="realisation">je</td></tr>
 <tr><td class="description">2e personne du singulier</td><td class="pattern">.pe(2)</td><td class="example-fr">Pro("je").pe(2)</td><td class="realisation">tu</td></tr>
-<tr><td class="description">3e personne du singulier</td><td class="pattern">.pe(3)</td><td class="example-fr">Pro("je").pe(3)</td><td class="realisation">il</td></tr>
+<tr><td class="description">3e personne du masculin singulier</td><td class="pattern">.pe(3)</td><td class="example-fr">Pro("je").pe(3)</td><td class="realisation">il</td></tr>
 <tr><td class="description">3e personne du féminin singulier</td><td class="pattern">.pe(3).g("f")</td><td class="example-fr">Pro("je").pe(3).g("f")</td><td class="realisation">elle</td></tr>
 <tr><td class="description">1ère personne du pluriel</td><td class="pattern">.pe(1).n("p")</td><td class="example-fr">Pro("je").pe(1).n("p")</td><td class="realisation">nous</td></tr>
 <tr><td class="description">2e personne du pluriel</td><td class="pattern">.pe(2).n("p")</td><td class="example-fr">Pro("je").pe(2).n("p")</td><td class="realisation">vous</td></tr>
@@ -276,7 +276,7 @@ for the determiner <code>my</code>.</p>
 <tr class="groupe"><td>Pronom sujet accentué</td><td colspan="3" class="pattern"></td></tr>
 <tr><td class="description">1ère personne du singulier</td><td class="pattern">.pe(1)</td><td class="example-fr">Pro("moi").pe(1)</td><td class="realisation">moi</td></tr>
 <tr><td class="description">2e personne du singulier</td><td class="pattern">.pe(2)</td><td class="example-fr">Pro("moi").pe(2)</td><td class="realisation">toi</td></tr>
-<tr><td class="description">3e personne du singulier</td><td class="pattern">.pe(3)</td><td class="example-fr">Pro("moi").pe(3)</td><td class="realisation">lui</td></tr>
+<tr><td class="description">3e personne du masculin singulier</td><td class="pattern">.pe(3)</td><td class="example-fr">Pro("moi").pe(3)</td><td class="realisation">lui</td></tr>
 <tr><td class="description">3e personne du féminin singulier</td><td class="pattern">.pe(3).g("f")</td><td class="example-fr">Pro("moi").pe(3).g("f")</td><td class="realisation">elle</td></tr>
 <tr><td class="description">1ère personne du pluriel</td><td class="pattern">.pe(1).n("p")</td><td class="example-fr">Pro("moi").pe(1).n("p")</td><td class="realisation">nous</td></tr>
 <tr><td class="description">2e personne du pluriel</td><td class="pattern">.pe(2).n("p")</td><td class="example-fr">Pro("moi").pe(2).n("p")</td><td class="realisation">vous</td></tr>
@@ -294,18 +294,18 @@ for the determiner <code>my</code>.</p>
 <tr class="groupe"><td>Pronoun as subject</td><td colspan="3" class="pattern"></td></tr>
 <tr><td class="description">First person singular</td><td class="pattern">.pe(1)</td><td class="example-en">Pro("I").pe(1)</td><td class="realisation">I</td></tr>
 <tr><td class="description">Second person singular</td><td class="pattern">.pe(2)</td><td class="example-en">Pro("I").pe(2)</td><td class="realisation">you</td></tr>
-<tr><td class="description">Third person singular</td><td class="pattern">.pe(3)</td><td class="example-en">Pro("I").pe(3)</td><td class="realisation">it</td></tr>
+<tr><td class="description">Third person masculine singular</td><td class="pattern">.pe(3)</td><td class="example-en">Pro("I").pe(3).g("m")</td><td class="realisation">he</td></tr>
 <tr><td class="description">Third person feminine singular</td><td class="pattern">.pe(3).g("f")</td><td class="example-en">Pro("I").pe(3).g("f")</td><td class="realisation">she</td></tr>
-<tr><td class="description">Third person neutral singular</td><td class="pattern">.pe(3).g("n")</td><td class="example-en">Pro("I").pe(3).g("n")</td><td class="realisation">it</td></tr>
+<tr><td class="description">Third person neutral singular</td><td class="pattern">.pe(3).g("n")</td><td class="example-en">Pro("I").pe(3)</td><td class="realisation">it</td></tr>
 <tr><td class="description">First person plural</td><td class="pattern">.pe(1).n("p")</td><td class="example-en">Pro("I").pe(1).n("p")</td><td class="realisation">we</td></tr>
 <tr><td class="description">Second person plural</td><td class="pattern">.pe(2).n("p")</td><td class="example-en">Pro("I").pe(2).n("p")</td><td class="realisation">you</td></tr>
 <tr><td class="description">Third person plural</td><td class="pattern">.pe(3).n("p")</td><td class="example-en">Pro("I").pe(3).n("p")</td><td class="realisation">they</td></tr>
 <tr class="groupe"><td>Pronoun as subject itself</td><td colspan="3" class="pattern"></td></tr>
 <tr><td class="description">First person singular</td><td class="pattern">.pe(1)</td><td class="example-en">Pro("me").pe(1)</td><td class="realisation">me</td></tr>
 <tr><td class="description">Second person singular</td><td class="pattern">.pe(2)</td><td class="example-en">Pro("me").pe(2)</td><td class="realisation">you</td></tr>
-<tr><td class="description">Third person singular</td><td class="pattern">.pe(3)</td><td class="example-en">Pro("me").pe(3)</td><td class="realisation">it</td></tr>
+<tr><td class="description">Third person masculine singular</td><td class="pattern">.pe(3)</td><td class="example-en">Pro("me").pe(3).g("m")</td><td class="realisation">him</td></tr>
 <tr><td class="description">Third person feminine singular</td><td class="pattern">.pe(3).g("f")</td><td class="example-en">Pro("me").pe(3).g("f")</td><td class="realisation">her</td></tr>
-<tr><td class="description">Third person neutral singular</td><td class="pattern">.pe(3).g("n")</td><td class="example-en">Pro("me").pe(3).g("n")</td><td class="realisation">it</td></tr>
+<tr><td class="description">Third person neutral singular</td><td class="pattern">.pe(3).g("n")</td><td class="example-en">Pro("me").pe(3)</td><td class="realisation">it</td></tr>
 <tr><td class="description">First person plural</td><td class="pattern">.pe(1).n("p")</td><td class="example-en">Pro("me").pe(1).n("p")</td><td class="realisation">us</td></tr>
 <tr><td class="description">Second person plural</td><td class="pattern">.pe(2).n("p")</td><td class="example-en">Pro("me").pe(2).n("p")</td><td class="realisation">you</td></tr>
 <tr><td class="description">Third person plural</td><td class="pattern">.pe(3).n("p")</td><td class="example-en">Pro("me").pe(3).n("p")</td><td class="realisation">them</td></tr>
@@ -806,12 +806,12 @@ otherwise the content is added without spacing.</p>
 <tr><td class="description">pré-posé</td><td class="pattern">.pos("pre")</td><td class="example-fr">NP(D("le"),A("bleu").pos("pre"),N("jouet"))</td><td class="realisation">le bleu jouet</td></tr>
 <tr><td class="description">postposé</td><td class="pattern">.pos("post")</td><td class="example-fr">NP(D("le"),A("petit").pos("post"),N("jouet"))</td><td class="realisation">le jouet petit</td></tr>
 <tr class="groupe"><td>Pronominalisation</td><td colspan="3" class="pattern">.pro()</td></tr>
-<tr><td class="description">du sujet</td><td class="pattern"></td><td class="example-fr">S(NP(D("le"),N("joueur")).pro(),VP(V("jouer")))</td><td class="realisation">Il joue.</td></tr>
+<tr><td class="description">du sujet</td><td class="pattern"></td><td class="example-fr">S(NP(D("le"),N("joueur")).pro(),VP(V("jouer")))</td><td class="realisation">Il joue. </td></tr>
 <tr><td class="description">de l'objet direct sur</td><td class="pattern"></td><td class="example-fr">S(Pro("je").pe(1),
-   VP(V("aimer"),NP(D("le"),N("pomme")).pro()))</td><td class="realisation">Je l'aime.</td></tr>
+   VP(V("aimer"),NP(D("le"),N("pomme")).pro()))</td><td class="realisation">Je l'aime. </td></tr>
 <tr><td class="description">de l'objet indirect sur <code>PP</code></td><td class="pattern"></td><td class="example-fr">S(Pro("je").pe(1),
    VP(V("aller"),
-       PP(P("vers"),NP(D("le"),N("maison"))).pro()))</td><td class="realisation">J'y vais.</td></tr>
+       PP(P("vers"),NP(D("le"),N("maison"))).pro()))</td><td class="realisation">J'y vais. </td></tr>
 </table>
 <table lang="en">
 <tr><th>Name</th><th>Representation</th><th>Example</th><th>Realisation</th></tr>
@@ -819,12 +819,12 @@ otherwise the content is added without spacing.</p>
 <tr><td class="description">Default</td><td class="pattern"></td><td class="example-en">NP(D("the"),A("small"),N("toy"))</td><td class="realisation">the small toy</td></tr>
 <tr><td class="description">Default</td><td class="pattern"></td><td class="example-en">NP(D("the"),N("toy"),A("blue"))</td><td class="realisation">the blue toy</td></tr>
 <tr class="groupe"><td>Pronominalisation</td><td colspan="3" class="pattern">.pro()</td></tr>
-<tr><td class="description">of the subject</td><td class="pattern"></td><td class="example-en">S(NP(D("the"),N("player")).pro(),VP(V("play")))</td><td class="realisation">She plays.</td></tr>
+<tr><td class="description">of the subject</td><td class="pattern"></td><td class="example-en">S(NP(D("the"),N("player")).pro(),VP(V("play")))</td><td class="realisation">She plays. </td></tr>
 <tr><td class="description">of the direct object</td><td class="pattern"></td><td class="example-en">S(Pro("I").pe(1),
-   VP(V("love"),NP(D("a"),N("apple").g("n")).pro()))</td><td class="realisation">I love it.</td></tr>
+   VP(V("love"),NP(D("a"),N("apple").g("n")).pro()))</td><td class="realisation">I love it. </td></tr>
 <tr><td class="description">of the indirect object</td><td class="pattern"></td><td class="example-en">S(Pro("I").pe(1),
    VP(V("go"),
-      PP(P("to"),NP(D("a"),N("house").g("n")).pro())))</td><td class="realisation">I go to it.</td></tr>
+      PP(P("to"),NP(D("a"),N("house").g("n")).pro())))</td><td class="realisation">I go to it. </td></tr>
 </table>
 <h2 lang="fr" id="changeType">Modification du type de phrase</h2>
 <h2 lang="en" id="typeChange">Sentence type modification</h2>
@@ -846,33 +846,33 @@ of <code>type</code>. The use of contractions such as <code>I'll</code> for <cod
 <table lang="fr">
 <tr><th>Nom</th><th>Représentation</th><th>Exemple</th><th>Réalisation</th></tr>
 <tr><td class="description">Négation</td><td class="pattern">.typ({"neg":True})</td><td class="example-fr">S(NP(D("le"),N("chat")),
-  VP(V("aimer"),NP(D("le"),N("souris")))).typ({"neg":True})</td><td class="realisation">Le chat n'aime pas la souris.</td></tr>
+  VP(V("aimer"),NP(D("le"),N("souris")))).typ({"neg":True})</td><td class="realisation">Le chat n'aime pas la souris. </td></tr>
 <tr><td class="description">Négation spéciale</td><td class="pattern">.typ({"neg":"..."})</td><td class="example-fr">S(NP(D("le"),N("chat")),
-  VP(V("aimer"),NP(D("le"),N("souris")))).typ({"neg":"plus"})</td><td class="realisation">Le chat n'aime plus la souris.</td></tr>
+  VP(V("aimer"),NP(D("le"),N("souris")))).typ({"neg":"plus"})</td><td class="realisation">Le chat n'aime plus la souris. </td></tr>
 <tr><td class="description">Passif</td><td class="pattern">.typ({"pas":True})</td><td class="example-fr">S(NP(D("le"),N("chat")),
-  VP(V("aimer"),NP(D("le"),N("souris")))).typ({"pas":True})</td><td class="realisation">La souris est aimée par le chat.</td></tr>
+  VP(V("aimer"),NP(D("le"),N("souris")))).typ({"pas":True})</td><td class="realisation">La souris est aimée par le chat. </td></tr>
 <tr><td class="description">Perfect <i>Ignoré</i></td><td class="pattern">.typ({"perf":True})</td><td class="example-fr">S(NP(D("le"),N("chat")),
-  VP(V("aimer"),NP(D("le"),N("souris")))).typ({"perf":True})</td><td class="realisation">Le chat aime la souris.</td></tr>
+  VP(V("aimer"),NP(D("le"),N("souris")))).typ({"perf":True})</td><td class="realisation">Le chat aime la souris. </td></tr>
 <tr><td class="description">Progressif</td><td class="pattern">.typ({"prog":True})</td><td class="example-fr">S(NP(D("le"),N("chat")),
-  VP(V("aimer"),NP(D("le"),N("souris")))).typ({"prog":True})</td><td class="realisation">Le chat est en train d'aimer la souris.</td></tr>
+  VP(V("aimer"),NP(D("le"),N("souris")))).typ({"prog":True})</td><td class="realisation">Le chat est en train d'aimer la souris. </td></tr>
 <tr><td class="description">Réflexif</td><td class="pattern">.typ({"refl":True})</td><td class="example-fr">S(NP(D("le"),N("chat")),
-  VP(V("laver"))).typ({"refl":True})</td><td class="realisation">Le chat se lave.</td></tr>
+  VP(V("laver"))).typ({"refl":True})</td><td class="realisation">Le chat se lave. </td></tr>
 <tr><td class="description">Exclamatif</td><td class="pattern">.typ({"exc":True})</td><td class="example-fr">S(NP(D("le"),N("chat")),
   VP(V("aimer"),NP(D("le"),N("souris")))).typ({"exc":True})</td><td class="realisation">Le chat aime la souris! </td></tr>
 <tr><td class="description">Contraction (ignorée en français)</td><td class="pattern">.typ({"contr":True})</td><td class="example-fr">S(NP(D("le"),N("chat")),
   VP(V("aimer"),NP(D("le"),N("souris")))).typ(
-    {"neg":True,"contr":True})</td><td class="realisation">Le chat n'aime pas la souris.</td></tr>
+    {"neg":True,"contr":True})</td><td class="realisation">Le chat n'aime pas la souris. </td></tr>
 <tr class="groupe"><td>Modalité</td><td colspan="3" class="pattern">.typ({"mod":"..."})</td></tr>
 <tr><td class="description">Possibilité</td><td class="pattern">.typ({"mod":"poss"})</td><td class="example-fr">S(NP(D("le"),N("chat")),
-  VP(V("aimer"),NP(D("le"),N("souris")))).typ({"mod":"poss"})</td><td class="realisation">Le chat peut aimer la souris.</td></tr>
+  VP(V("aimer"),NP(D("le"),N("souris")))).typ({"mod":"poss"})</td><td class="realisation">Le chat peut aimer la souris. </td></tr>
 <tr><td class="description">Permission</td><td class="pattern">.typ({"mod":"perm"})</td><td class="example-fr">S(NP(D("le"),N("chat")),
-  VP(V("aimer"),NP(D("le"),N("souris")))).typ({"mod":"perm"})</td><td class="realisation">Le chat peut aimer la souris.</td></tr>
+  VP(V("aimer"),NP(D("le"),N("souris")))).typ({"mod":"perm"})</td><td class="realisation">Le chat peut aimer la souris. </td></tr>
 <tr><td class="description">Nécessité</td><td class="pattern">.typ({"mod":"nece"})</td><td class="example-fr">S(NP(D("le"),N("chat")),
-  VP(V("aimer"),NP(D("le"),N("souris")))).typ({"mod":"nece"})</td><td class="realisation">Le chat doit aimer la souris.</td></tr>
+  VP(V("aimer"),NP(D("le"),N("souris")))).typ({"mod":"nece"})</td><td class="realisation">Le chat doit aimer la souris. </td></tr>
 <tr><td class="description">Obligation</td><td class="pattern">.typ({"mod":"obli"})</td><td class="example-fr">S(NP(D("le"),N("chat")),
-  VP(V("aimer"),NP(D("le"),N("souris")))).typ({"mod":"obli"})</td><td class="realisation">Le chat doit aimer la souris.</td></tr>
+  VP(V("aimer"),NP(D("le"),N("souris")))).typ({"mod":"obli"})</td><td class="realisation">Le chat doit aimer la souris. </td></tr>
 <tr><td class="description">Volonté</td><td class="pattern">.typ({"mod":"will"})</td><td class="example-fr">S(NP(D("le"),N("chat")),
-  VP(V("aimer"),NP(D("le"),N("souris")))).typ({"mod":"will"})</td><td class="realisation">Le chat veut aimer la souris.</td></tr>
+  VP(V("aimer"),NP(D("le"),N("souris")))).typ({"mod":"will"})</td><td class="realisation">Le chat veut aimer la souris. </td></tr>
 <tr class="groupe"><td>Interrogation</td><td colspan="3" class="pattern">.typ({"int":"..."})</td></tr>
 <tr><td class="description">Interrogative (oui/non)</td><td class="pattern">.typ({"int":"yon"})</td><td class="example-fr">S(NP(D("le"),N("chat")),
   VP(V("aimer"),NP(D("le"),N("souris")))).typ({"int":"yon"})</td><td class="realisation">Le chat aime-t-il la souris? </td></tr>
@@ -902,31 +902,31 @@ of <code>type</code>. The use of contractions such as <code>I'll</code> for <cod
 <table lang="en">
 <tr><th>Name</th><th>Representation</th><th>Example</th><th>Realisation</th></tr>
 <tr><td class="description">Negation</td><td class="pattern">.typ({"neg":True})</td><td class="example-en">S(NP(D("the"),N("cat")),
-  VP(V("love"),NP(D("the"),N("mouse")))).typ({"neg":True})</td><td class="realisation">The cat does not love the mouse.</td></tr>
+  VP(V("love"),NP(D("the"),N("mouse")))).typ({"neg":True})</td><td class="realisation">The cat does not love the mouse. </td></tr>
 <tr><td class="description">Passive</td><td class="pattern">.typ({"pas":True})</td><td class="example-en">S(NP(D("the"),N("cat")),
-  VP(V("love"),NP(D("the"),N("mouse")))).typ({"pas":True})</td><td class="realisation">The mouse is loved by the cat.</td></tr>
+  VP(V("love"),NP(D("the"),N("mouse")))).typ({"pas":True})</td><td class="realisation">The mouse is loved by the cat. </td></tr>
 <tr><td class="description">Perfect</td><td class="pattern">.typ({"perf":True})</td><td class="example-en">S(NP(D("the"),N("cat")),
-  VP(V("love"),NP(D("the"),N("mouse")))).typ({"perf":True})</td><td class="realisation">The cat has loved the mouse.</td></tr>
+  VP(V("love"),NP(D("the"),N("mouse")))).typ({"perf":True})</td><td class="realisation">The cat has loved the mouse. </td></tr>
 <tr><td class="description">Progressive</td><td class="pattern">.typ({"prog":True})</td><td class="example-en">S(NP(D("the"),N("cat")),
-  VP(V("love"),NP(D("the"),N("mouse")))).typ({"prog":True})</td><td class="realisation">The cat is loving the mouse.</td></tr>
+  VP(V("love"),NP(D("the"),N("mouse")))).typ({"prog":True})</td><td class="realisation">The cat is loving the mouse. </td></tr>
 <tr><td class="description">Reflexive</td><td class="pattern">.typ({"refl":True})</td><td class="example-en">S(NP(D("the"),N("cat")),
-  VP(V("wash"))).typ({"refl":True})</td><td class="realisation">The cat washes itself.</td></tr>
+  VP(V("wash"))).typ({"refl":True})</td><td class="realisation">The cat washes itself. </td></tr>
 <tr><td class="description">Exclamative</td><td class="pattern">.typ({"exc":True})</td><td class="example-en">S(NP(D("the"),N("cat")),
   VP(V("love"),NP(D("the"),N("mouse")))).typ({"exc":True})</td><td class="realisation">The cat loves the mouse! </td></tr>
 <tr><td class="description">Contraction</td><td class="pattern">.typ({"contr":True})</td><td class="example-en">S(NP(D("the"),N("cat")),
   VP(V("love"),NP(D("the"),N("mouse")))).typ(
-   {"neg":True,"contr":True})</td><td class="realisation">The cat doesn’t love the mouse.</td></tr>
+   {"neg":True,"contr":True})</td><td class="realisation">The cat doesn't love the mouse. </td></tr>
 <tr class="groupe"><td>Modality</td><td colspan="3" class="pattern">.typ({"mod":"..."})</td></tr>
 <tr><td class="description">Possibility</td><td class="pattern">.typ({"mod":"poss"})</td><td class="example-en">S(NP(D("the"),N("cat")),
-  VP(V("love"),NP(D("the"),N("mouse")))).typ({"mod":"poss"})</td><td class="realisation">The cat can love the mouse.</td></tr>
+  VP(V("love"),NP(D("the"),N("mouse")))).typ({"mod":"poss"})</td><td class="realisation">The cat can love the mouse. </td></tr>
 <tr><td class="description">Permission</td><td class="pattern">.typ({"mod":"perm"})</td><td class="example-en">S(NP(D("the"),N("cat")),
-  VP(V("love"),NP(D("the"),N("mouse")))).typ({"mod":"perm"})</td><td class="realisation">The cat may love the mouse.</td></tr>
+  VP(V("love"),NP(D("the"),N("mouse")))).typ({"mod":"perm"})</td><td class="realisation">The cat may love the mouse. </td></tr>
 <tr><td class="description">Necessity</td><td class="pattern">.typ({"mod":"nece"})</td><td class="example-en">S(NP(D("the"),N("cat")),
-  VP(V("love"),NP(D("the"),N("mouse")))).typ({"mod":"nece"})</td><td class="realisation">The cat shall love the mouse.</td></tr>
+  VP(V("love"),NP(D("the"),N("mouse")))).typ({"mod":"nece"})</td><td class="realisation">The cat shall love the mouse. </td></tr>
 <tr><td class="description">Obligation</td><td class="pattern">.typ({"mod":"obli"})</td><td class="example-en">S(NP(D("the"),N("cat")),
-  VP(V("love"),NP(D("the"),N("mouse")))).typ({"mod":"obli"})</td><td class="realisation">The cat must love the mouse.</td></tr>
+  VP(V("love"),NP(D("the"),N("mouse")))).typ({"mod":"obli"})</td><td class="realisation">The cat must love the mouse. </td></tr>
 <tr><td class="description">Willingness</td><td class="pattern">.typ({"mod":"will"})</td><td class="example-en">S(NP(D("the"),N("cat")),
-  VP(V("love"),NP(D("the"),N("mouse")))).typ({"mod":"will"})</td><td class="realisation">The cat will love the mouse.</td></tr>
+  VP(V("love"),NP(D("the"),N("mouse")))).typ({"mod":"will"})</td><td class="realisation">The cat will love the mouse. </td></tr>
 <tr class="groupe"><td>Interrogation</td><td colspan="3" class="pattern">.typ({"int":"..."})</td></tr>
 <tr><td class="description">Interrogative (yes/no)</td><td class="pattern">.typ({"int":"yon"})</td><td class="example-en">S(NP(D("the"),N("cat")),
   VP(V("love"),NP(D("the"),N("mouse")))).typ({"int":"yon"})</td><td class="realisation">Does the cat love the mouse? </td></tr>
@@ -967,7 +967,7 @@ corresponding to <code>YYYY-MM-DD hh:mm:ss</code>. When no parameter is given, <
 <h3 lang="fr">Création d'une date</h3>
 <table lang="fr">
 <tr><th>Nom</th><th>Représentation</th><th>Exemple</th><th>Réalisation</th></tr>
-<tr><td class="description">Date courante</td><td class="pattern">DT()</td><td class="example-fr">DT()</td><td class="realisation">le lundi 9 mai 2022 à 8 h 55 min 44 s</td></tr>
+<tr><td class="description">Date courante</td><td class="pattern">DT()</td><td class="example-fr">DT()</td><td class="realisation">le vendredi 10 juin 2022 à 17 h 20 min 10 s</td></tr>
 <tr><td class="description">Date passée</td><td class="pattern">DT("...")</td><td class="example-fr">DT("2014-11-21 21:00:00")</td><td class="realisation">le vendredi 21 novembre 2014 à 21 h 0 min 0 s</td></tr>
 <tr><td class="description">Date sans temps</td><td class="pattern">DT("...")</td><td class="example-fr">DT("2017-12-31")</td><td class="realisation">le dimanche 31 décembre 2017 à 0 h 0 min 0 s</td></tr>
 <tr><td class="description">Date à partir de datetime</td><td class="pattern">DT(datetime)</td><td class="example-fr">DT(datetime.datetime(2014,12,31))</td><td class="realisation">le mercredi 31 décembre 2014 à 0 h 0 min 0 s</td></tr>
@@ -975,7 +975,7 @@ corresponding to <code>YYYY-MM-DD hh:mm:ss</code>. When no parameter is given, <
 <h3 lang="en">Date creation</h3>
 <table lang="en">
 <tr><th>Name</th><th>Representation</th><th>Example</th><th>Realisation</th></tr>
-<tr><td class="description">Current date</td><td class="pattern">DT()</td><td class="example-en">DT()</td><td class="realisation">on Monday, May 9, 2022 at 8:55:44 a.m.</td></tr>
+<tr><td class="description">Current date</td><td class="pattern">DT()</td><td class="example-en">DT()</td><td class="realisation">on Friday, June 10, 2022 at 5:20:10 p.m.</td></tr>
 <tr><td class="description">Date in the past</td><td class="pattern">DT("...")</td><td class="example-en">DT("2014-11-21 21:00:00")</td><td class="realisation">on Friday, November 21, 2014 at 9:00:00 p.m.</td></tr>
 <tr><td class="description">Date without time </td><td class="pattern">DT("...")</td><td class="example-en">DT("2017-12-31")</td><td class="realisation">on Sunday, December 31, 2017 at 0:00:00 a.m.</td></tr>
 <tr><td class="description">Date from datetime</td><td class="pattern">DT(datetime)</td><td class="example-en">DT(datetime.datetime(2014,12,31))</td><td class="realisation">on Wednesday, December 31, 2014 at 0:00:00 a.m.</td></tr>
@@ -983,28 +983,28 @@ corresponding to <code>YYYY-MM-DD hh:mm:ss</code>. When no parameter is given, <
 <h3 lang="fr">Formatage d'une date (défaut <code>.nat()</code>)</h3>
 <table lang="fr">
 <tr><th>Nom</th><th>Représentation</th><th>Exemple</th><th>Réalisation</th></tr>
-<tr><td class="description">en lettres, par défaut</td><td class="pattern">.nat()</td><td class="example-fr">DT()</td><td class="realisation">le lundi 9 mai 2022 à 8 h 55 min 44 s</td></tr>
-<tr><td class="description">en chiffres</td><td class="pattern">.nat(False)</td><td class="example-fr">DT().nat(False)</td><td class="realisation">lundi 5/9/2022 08:55:44</td></tr>
+<tr><td class="description">en lettres, par défaut</td><td class="pattern">.nat()</td><td class="example-fr">DT()</td><td class="realisation">le vendredi 10 juin 2022 à 17 h 20 min 10 s</td></tr>
+<tr><td class="description">en chiffres</td><td class="pattern">.nat(False)</td><td class="example-fr">DT().nat(False)</td><td class="realisation">vendredi 10/6/2022 17:20:10</td></tr>
 <tr class="groupe"><td>Contrôle de l'affichage de chacun des éléments de la date</td><td colspan="3" class="pattern">.dOpt({"year": , "month": , "date": , "day": , "hour": , "minute": , "second": , "nat":, "det":, "rtime":})</td></tr>
-<tr><td class="description">Heure seulement</td><td class="pattern">.dOpt(..)</td><td class="example-fr">DT().dOpt({"year": False, "month": False, "date": False, "day": False})</td><td class="realisation">à 8 h 55 min 44 s</td></tr>
+<tr><td class="description">Heure seulement</td><td class="pattern">.dOpt(..)</td><td class="example-fr">DT().dOpt({"year": False, "month": False, "date": False, "day": False})</td><td class="realisation">à 17 h 20 min 10 s</td></tr>
 <tr><td class="description">Affichage de l'heure et des minutes (en chiffres)</td><td class="pattern">{"nat":False}</td><td class="example-fr">DT().dOpt({"year": False, "month": False, "date": False,
- "day": False, "second": False, "nat":False})</td><td class="realisation">08:55</td></tr>
-<tr><td class="description">Non affichage des déterminants de la date</td><td class="pattern">{"det":False}</td><td class="example-fr">DT().dOpt({"det": False})</td><td class="realisation">lundi 9 mai 2022 8 h 55 min 44 s</td></tr>
-<tr><td class="description">Date relative par rapport à aujourd'hui</td><td class="pattern">{"rtime":True}</td><td class="example-fr">DT().dOpt({"rtime": True})</td><td class="realisation">hier à 8 h 55 min 44 s</td></tr>
+ "day": False, "second": False, "nat":False})</td><td class="realisation">17:20</td></tr>
+<tr><td class="description">Non affichage des déterminants de la date</td><td class="pattern">{"det":False}</td><td class="example-fr">DT().dOpt({"det": False})</td><td class="realisation">vendredi 10 juin 2022 17 h 20 min 10 s</td></tr>
+<tr><td class="description">Date relative par rapport à aujourd'hui</td><td class="pattern">{"rtime":True}</td><td class="example-fr">DT().dOpt({"rtime": True})</td><td class="realisation">hier à 17 h 20 min 10 s</td></tr>
 <tr><td class="description">Date relative après une autre</td><td class="pattern">{"rtime":".." or Date}</td><td class="example-fr">DT("2021-09-01").dOpt({"rtime": "2021-08-27","hour":False,"minute":False,"second":False})</td><td class="realisation">mercredi prochain</td></tr>
 <tr><td class="description">Date relative avant une autre date</td><td class="pattern">{"rtime":".." or Date}</td><td class="example-fr">DT("2021-09-01").dOpt({"rtime":datetime.datetime(2021,9,10),"hour":False,"minute":False,"second":False})</td><td class="realisation">il y a 9 jours</td></tr>
 </table>
 <h3 lang="en">Date formatting (default <code>.nat()</code>)</h3>
 <table lang="en">
 <tr><th>Name</th><th>Representation</th><th>Example</th><th>Realisation</th></tr>
-<tr><td class="description">as words, by default</td><td class="pattern">.nat()</td><td class="example-en">DT()</td><td class="realisation">on Monday, May 9, 2022 at 8:55:44 a.m.</td></tr>
-<tr><td class="description">as digits</td><td class="pattern">.nat(False)</td><td class="example-en">DT().nat(False)</td><td class="realisation">Monday 5/9/2022 08:55:44 a.m.</td></tr>
+<tr><td class="description">as words, by default</td><td class="pattern">.nat()</td><td class="example-en">DT()</td><td class="realisation">on Friday, June 10, 2022 at 5:20:10 p.m.</td></tr>
+<tr><td class="description">as digits</td><td class="pattern">.nat(False)</td><td class="example-en">DT().nat(False)</td><td class="realisation">Friday 6/10/2022 17:20:10 p.m.</td></tr>
 <tr class="groupe"><td>Control over the display of date components</td><td colspan="3" class="pattern">.dOpt({"year": , "month": , "date": , "day": , "hour": , "minute": , "second": , "nat":, "det":, "rtime":})</td></tr>
-<tr><td class="description">Time only</td><td class="pattern">.dOpt(..)</td><td class="example-en">DT().dOpt({"year": False, "month": False, "date": False, "day": False})</td><td class="realisation">at 8:55:44 a.m.</td></tr>
+<tr><td class="description">Time only</td><td class="pattern">.dOpt(..)</td><td class="example-en">DT().dOpt({"year": False, "month": False, "date": False, "day": False})</td><td class="realisation">at 5:20:10 p.m.</td></tr>
 <tr><td class="description">Display hour and minutes as digits</td><td class="pattern">{"nat":False}</td><td class="example-en">DT().dOpt({"year": False, "month": False, "date": False,
- "day": False, "second": False, "nat":False})</td><td class="realisation">8:55 a.m.</td></tr>
-<tr><td class="description">Do not display determiner</td><td class="pattern">{"det":False}</td><td class="example-en">DT().dOpt({"det": False})</td><td class="realisation">Monday, May 9, 2022 8:55:44 a.m.</td></tr>
-<tr><td class="description">Relative date compared with today</td><td class="pattern">{"rtime":True}</td><td class="example-en">DT().dOpt({"rtime": True})</td><td class="realisation">yesterday at 8:55:44 a.m.</td></tr>
+ "day": False, "second": False, "nat":False})</td><td class="realisation">5:20 p.m.</td></tr>
+<tr><td class="description">Do not display determiner</td><td class="pattern">{"det":False}</td><td class="example-en">DT().dOpt({"det": False})</td><td class="realisation">Friday, June 10, 2022 5:20:10 p.m.</td></tr>
+<tr><td class="description">Relative date compared with today</td><td class="pattern">{"rtime":True}</td><td class="example-en">DT().dOpt({"rtime": True})</td><td class="realisation">yesterday at 5:20:10 p.m.</td></tr>
 <tr><td class="description">Relative date after another one</td><td class="pattern">{"rtime":".." or Date}</td><td class="example-en">DT("2021-09-01").dOpt({"rtime": "2021-08-27","hour":False,"minute":False,"second":False})</td><td class="realisation">Wednesday</td></tr>
 <tr><td class="description">Relative date before another one</td><td class="pattern">{"rtime":".." or Date}</td><td class="example-en">DT("2021-09-01").dOpt({"rtime":datetime.datetime(2021,9,10),"hour":False,"minute":False,"second":False})</td><td class="realisation">9 days ago</td></tr>
 </table>
@@ -1072,18 +1072,18 @@ the element is added as the last child.</p>
 <tr><th>Nom</th><th>Représentation</th><th>Exemple</th><th>Réalisation</th></tr>
 <tr><td class="description">déclaration</td><td class="pattern"></td><td class="example-fr">pomme = NP(D("le"),N("pomme"))</td><td class="realisation"></tr>
 <tr><td class="description">déclaration</td><td class="pattern"></td><td class="example-fr">gars = NP(D("le"),N("garçon"))</td><td class="realisation"></tr>
-<tr><td class="description">ajout à un syntagme vide</td><td class="pattern"></td><td class="example-fr">S().add(pomme)</td><td class="realisation">La pomme.</td></tr>
+<tr><td class="description">ajout à un syntagme vide</td><td class="pattern"></td><td class="example-fr">S().add(pomme)</td><td class="realisation">La pomme. </td></tr>
 <tr><td class="description">ajouts à un syntagme existant</td><td class="pattern"></td><td class="example-fr">CP(C("et"),NP(D("le"),N("fruit"))).add(pomme).add(gars)</td><td class="realisation">le fruit, la pomme et le garçon</td></tr>
-<tr><td class="description">ajout avec position</td><td class="pattern"></td><td class="example-fr">S(VP().add(V("aimer")).add(pomme)).add(gars,0)</td><td class="realisation">Le garçon aime la pomme.</td></tr>
+<tr><td class="description">ajout avec position</td><td class="pattern"></td><td class="example-fr">S(VP().add(V("aimer")).add(pomme)).add(gars,0)</td><td class="realisation">Le garçon aime la pomme. </td></tr>
 </table>
 <h3 lang="en">Simple example of use of <code>.add(..)</code></h3>
 <table lang="en">
 <tr><th>Name</th><th>Representation</th><th>Example</th><th>Realisation</th></tr>
 <tr><td class="description">declaration</td><td class="pattern"></td><td class="example-en">apple = NP(D("the"),N("apple"))</td><td class="realisation"></tr>
 <tr><td class="description">declaration</td><td class="pattern"></td><td class="example-en">boy = NP(D("the"),N("boy"))</td><td class="realisation"></tr>
-<tr><td class="description">add to an empty phrase</td><td class="pattern"></td><td class="example-en">S().add(apple)</td><td class="realisation">The apple.</td></tr>
+<tr><td class="description">add to an empty phrase</td><td class="pattern"></td><td class="example-en">S().add(apple)</td><td class="realisation">The apple. </td></tr>
 <tr><td class="description">add to an existing phrase</td><td class="pattern"></td><td class="example-en">CP(C("and"),NP(D("a"),N("fruit"))).add(apple).add(boy)</td><td class="realisation">a fruit, the apple and the boy</td></tr>
-<tr><td class="description">add with position</td><td class="pattern"></td><td class="example-en">S(VP().add(V("love")).add(apple)).add(boy,0)</td><td class="realisation">The boy loves the apple.</td></tr>
+<tr><td class="description">add with position</td><td class="pattern"></td><td class="example-en">S(VP().add(V("love")).add(apple)).add(boy,0)</td><td class="realisation">The boy loves the apple. </td></tr>
 </table>
 <h3><code>.toSource()</code></h3>
 <p lang="fr">

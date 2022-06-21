@@ -1,3 +1,4 @@
+import copy
 import re,datetime,sys
 
 from .Lexicon import getLexicon, getLemma, getRules, currentLanguage
@@ -286,7 +287,7 @@ class Constituent():
               "refl":[False,True],
               "contr":[False,True],
               "mod": [False,"poss","perm","nece","obli","will"],
-              "int": [False,"yon","wos","wod","woi","was","wad","wai","whe","why","whn","how","muc"]
+              "int": [False,"yon","wos","wod","woi","was","wad","wai","whe","why","whn","how","muc","tag"]
         }
         self.addOptSource("typ",types)
         if not isinstance(types, dict):
@@ -317,20 +318,20 @@ class Constituent():
         acronymRE=re.compile(r"^[A-Z]+$")
         # Common Contractions in the English Language taken from :http:#www.everythingenglishblog.com/?p=552
         contractionEnTable={
-            "are+not":"aren’t", "can+not":"can’t", "did+not":"didn’t", "do+not":"don’t", "does+not":"doesn’t", 
-            "had+not":"hadn’t", "has+not":"hasn’t", "have+not":"haven’t", "is+not":"isn’t", "must+not":"mustn’t", 
-            "need+not":"needn’t", "should+not":"shouldn’t", "was+not":"wasn’t", "were+not":"weren’t", 
-            "will+not":"won’t", "would+not":"wouldn’t",
-            "let+us":"let’s",
-            "I+am":"I’m", "I+will":"I’ll", "I+have":"I’ve", "I+had":"I’d", "I+would":"I’d",
-            "she+will":"she’ll", "he+is":"he’s", "he+has":"he’s", "she+had":"she’d", "she+would":"she’d",
-            "he+will":"he’ll", "she+is":"she’s", "she+has":"she’s", "he+would":"he’d", "he+had":"he’d",
-            "you+are":"you’re", "you+will":"you’ll", "you+would":"you’d", "you+had":"you’d", "you+have":"you’ve",
-            "we+are":"we’re", "we+will":"we’ll", "we+had":"we’d", "we+would":"we’d", "we+have":"we’ve",
-            "they+will":"they’ll", "they+are":"they’re", "they+had":"they’d", "they+would":"they’d", "they+have":"they’ve",
-            "it+is":"it’s", "it+will":"it’ll", "it+had":"it’d", "it+would":"it’d",
-            "there+will":"there’ll", "there+is":"there’s", "there+has":"there’s", "there+have":"there’ve",
-            "that+is":"that’s", "that+had":"that’d", "that+would":"that’d", "that+will":"that’ll"
+            "are+not":"aren't", "can+not":"can't", "did+not":"didn't", "do+not":"don't", "does+not":"doesn't",
+            "had+not":"hadn't", "has+not":"hasn't", "have+not":"haven't", "is+not":"isn't", "must+not":"mustn't", 
+            "need+not":"needn't", "should+not":"shouldn't", "was+not":"wasn't", "were+not":"weren't", 
+            "will+not":"won't", "would+not":"wouldn't",
+            "let+us":"let's",
+            "I+am":"I'm", "I+will":"I'll", "I+have":"I've", "I+had":"I'd", "I+would":"I'd",
+            "she+will":"she'll", "he+is":"he's", "he+has":"he's", "she+had":"she'd", "she+would":"she'd",
+            "he+will":"he'll", "she+is":"she's", "she+has":"she's", "he+would":"he'd", "he+had":"he'd",
+            "you+are":"you're", "you+will":"you'll", "you+would":"you'd", "you+had":"you'd", "you+have":"you've",
+            "we+are":"we're", "we+will":"we'll", "we+had":"we'd", "we+would":"we'd", "we+have":"we've",
+            "they+will":"they'll", "they+are":"they're", "they+had":"they'd", "they+would":"they'd", "they+have":"they've",
+            "it+is":"it's", "it+will":"it'll", "it+had":"it'd", "it+would":"it'd",
+            "there+will":"there'll", "there+is":"there's", "there+has":"there's", "there+have":"there've",
+            "that+is":"that's", "that+had":"that'd", "that+would":"that'd", "that+will":"that'll"
         } 
         # search for terminal "a" and check if it should be "an" depending on the next word
         last=len(cList)-1
@@ -473,12 +474,12 @@ class Constituent():
                     # find the appropriate clitic table to use
                     t = c.getProp("t")
                     if t == "ip":
-                        cliticTable = Constituent.proclitiqueOrdreImperatifNeg if hasattr(c, "neg2") \
-                            else Constituent.proclitiqueOrdreImperatifPos
+                        cliticTable = proclitiqueOrdreImperatifNeg if hasattr(c, "neg2") \
+                            else proclitiqueOrdreImperatifPos
                     elif t == "b":
-                        cliticTable = Constituent.proclitiqueOrdreInfinitif
+                        cliticTable = proclitiqueOrdreInfinitif
                     else:
-                        cliticTable = Constituent.proclitiqueOrdre
+                        cliticTable = proclitiqueOrdre
                     # check for negation
                     if hasattr(c, "neg2") and c.neg2 is not None:
                         c.insertReal(pros, Adv("ne", "fr"))
@@ -601,8 +602,8 @@ class Constituent():
                 # check for adding -t- in French between a verb and a pronoun
                 if self.isFr() and terminal.isA("V") and terminals[i+1].isA("Pro"):
                     # According to Antidote:
-                    # C’est le cas, notamment, quand le verbe à la 3e personne du singulier du passé, du présent ou 
-                    # du futur de l’indicatif se termine par une autre lettre que d ou t et qu’il est suivi 
+                    # C'est le cas, notamment, quand le verbe à la 3e personne du singulier du passé, du présent ou 
+                    # du futur de l'indicatif se termine par une autre lettre que d ou t et qu'il est suivi 
                     # des pronoms sujets il, elle ou on. Dans ce cas, on ajoute un ‑t‑ entre le verbe 
                     # et le pronom sujet inversé.
                     if re.search(r"[^dt]$",terminal.realization) and re.match(r"[ieo]",terminals[i+1].realization):
@@ -642,11 +643,11 @@ class Constituent():
         ## This makes it hard to follow when tracing... a classic case of Heisenbug!
         ## I found more useful during development to (un)comment the following two lines
         ## but then realization must be launched with ".realize()"
-        # return self.toSource(-1)
-        return self.realize()
-    
-    def clone(self,env=None):
-        return eval(self.toSource(),globals() if env is None else env)
+        return self.toSource(-1)
+        # return self.realize()
+
+    def clone(self):
+        return copy.deepcopy(self)
     
     def toSource(self):
         return self.optSource
@@ -721,7 +722,7 @@ setattr(Constituent,"tn",makeOptionMethod("tn",["","refl"],["Pro"]))
 setattr(Constituent,"c",makeOptionMethod("c",["nom","acc","dat","refl","gen"],["Pro"]))
 
 setattr(Constituent,"pos",makeOptionMethod("pos",["post","pre"],["A"]))
-setattr(Constituent,"pro",makeOptionMethod("pro",None,["NP","PP"]))
+setattr(Constituent,"pro",makeOptionMethod("pro",None,["NP","PP","N"]))
 # English only
 setattr(Constituent,"ow",makeOptionMethod("ow",["s","p","x"],["D","Pro"],"own"))
 

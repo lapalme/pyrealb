@@ -208,11 +208,11 @@ dataDir="/Users/lapalme/Dropbox/AMR/"
 resultDir=os.path.join(sys.path[0],"Results/")
 ## Files with examples
 #     fileName=dataDir+"amr-release-2.0-amrs-training-guidelines.txt"
-fileName=dataDir+"abstract_meaning_representation_amr_2.0/data/amrs/unsplit/amr-release-2.0-amrs-bolt.txt"
+# fileName=dataDir+"abstract_meaning_representation_amr_2.0/data/amrs/unsplit/amr-release-2.0-amrs-bolt.txt"
 #     fileName=dataDir+"inverse-relations.txt"
 #     fileName=dataDir+"amr-examples/amr-reifications-examples.txt"
 #     fileName=dataDir+"amr-bank-PetitPrince-dev.txt"
-# fileName=dataDir+"amr-examples/amr-examples.txt"
+fileName=dataDir+"amr-examples/amr-examples.txt"
 #     fileName="/Users/lapalme/Dropbox/AMR2en/data/morph-examples.txt"   
 # fileName=dataDir+"amr-examples/amr-dict-examples.txt"
 # fileName=dataDir+"amr-examples/amr-guidelines-1_2_5.txt"

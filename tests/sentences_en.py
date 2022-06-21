@@ -132,6 +132,30 @@ def sentences_en():
          "message":"Pronominalization of subject, object and indirect object"
          },
         # # 22
+        {"expression":S(Pro("him").c("nom"),
+                        VP(V("eat"),
+                           NP(D("a"),N("apple").n("p")).tag("em")
+                        )).typ({"int":"tag"}),
+         "expected":"He eats <em>apples</em>, doesn't he? ",
+         "message":"question tag affirmative sentence"
+         },
+        # # 23
+        {"expression":S(Pro("him").c("nom"),
+                        VP(V("eat"),
+                           NP(D("a"),N("apple").n("p")).tag("em")
+                        )).typ({"int":"tag","neg":True}),
+         "expected":"He does not eat <em>apples</em>, does he? ",
+         "message":"question tag negative sentence"
+         },
+        # # 22
+        {"expression":S(Pro("him").c("nom"),
+                        VP(V("eat").t("f"),
+                           NP(D("a"),N("apple").n("p")).tag("em")
+                        )).typ({"int":"tag"}),
+         "expected":"He will eat <em>apples</em>, won't he? ",
+         "message":"question tag affirmative sentence future"
+         },
+        # # 22
         # {"expression":,
         #  "expected":"",
         #  "message":

@@ -102,14 +102,14 @@ def examples_en():
     tests = [{}]
     for exp, expected in examples_en:
         tests.append({
-            "expression": exp.clone(globals()),
+            "expression": exp.clone(),
             "expected": expected,
             "message": f"Phrase complète:  {expected}"
         })
     # add also the dependent version
     for exp, expected in examples_en:
         tests.append({
-            "expression": exp.clone(globals()).toDependent(),
+            "expression": exp.clone().toDependent(),
             "expected": expected,
             "message": f"Phrase complète:  {expected}"
         })

@@ -248,6 +248,11 @@ def exemples_fr():
                NP(D('le'),
                   N('fromage')))).typ({"neg":true,"int":"yon"}),
          "N'a-t-il pas mangé le fromage? "],
+        [S(Pro("je"),  # 60
+            VP(V('manger').t("pc"),
+               NP(D('le'),
+                  N('fromage')))).typ({"neg":true,"int":"tag"}),
+         "Il n'a pas mangé le fromage, n'est-ce pas? "],
     ]
     tests = [{}]
     for exp, expected in exemples_fr:
@@ -259,7 +264,7 @@ def exemples_fr():
     # add also the dependent version
     for exp, expected in exemples_fr:
         tests.append({
-            "expression": exp.clone(globals()).toDependent(),
+            "expression": exp.clone().toDependent(),
             "expected": expected,
             "message": f"Phrase complète:  {expected}"
         })

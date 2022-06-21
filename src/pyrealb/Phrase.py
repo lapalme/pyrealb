@@ -32,12 +32,12 @@ prepositionsList = {
 negMod = {"can": "cannot", "may": "may not", "shall": "shall not", "will": "will not", "must": "must not",
           "could": "could not", "might": "might not", "should": "should not", "would": "would not"}
 
-# insert a list of elements that are not None flattening an embedded list
+# insert a list of elements that are not None flattening embedded lists
 def _getElems(es):
     res = []
     for e in es:
         if e != None:
-            if isinstance(e, list):res.extend([e0 for e0 in e if e0 != None])
+            if isinstance(e, list):res.extend([e0 for e0 in _getElems(e) if e0 != None])
             else:res.append(e)
     return res
 
@@ -182,7 +182,7 @@ class Phrase(Constituent):
                 if pro is not None:
                     v = pro.parentConst.getFromPath(["VP", "V"])
                     if v is not None:
-                        if pro.lemma in ["qui", "who"]:  # agrees with self NP
+                        if pro.lemma in ["qui", "who", "which", "that"]:  # agrees with self NP
                             v.peng = self.peng
                         elif self.isFr() and pro.lemma == "que":
                             # in French past participle can agree with a cod appearing before... keep that info just in case
@@ -633,7 +633,7 @@ class Phrase(Constituent):
         elif (interro is not None and
               len(auxils) == 0 and v.lemma != "be" and v.lemma != "have"):
             # add auxiliary for interrogative if not already there
-            if interro != "wos" and interro != "was":
+            if interro not in ["wos","was","tag"]:
                 auxils.append("do")
                 affixes.append("b")
         auxils.append(v.lemma)
@@ -747,7 +747,8 @@ class Phrase(Constituent):
                 v.parentConst.addElement(pro, idx + 1)  # add pronoun after verb
                 v.lier()  # add - after verb
 
-    def processInt(self, int_):
+    def processInt(self, types):
+        int_=types["int"]
         sentenceTypeInt = getRules()["sentence_type"]["int"]
         intPrefix = sentenceTypeInt["prefix"]
         prefix = None
@@ -814,6 +815,60 @@ class Phrase(Constituent):
                     self.moveAuxToFront()
                 else:
                     self.invertSubject()
+        elif int_=="tag":
+            # according to Antidote: Syntax Guide - Question tag
+            # Question tags are short questions added after affirmations to ask for verification
+            if self.isOneOf(["S", "SP", "VP"]):
+                if self.isFr(): # in French really simple, add "n'est-ce pas"
+                    self.a(", n'est-ce pas")
+                else: # in English, sources: https://www.anglaisfacile.com/exercices/exercice-anglais-2/exercice-anglais-95625.php
+                      # must find  and pronoun and conjugate the auxiliary
+                    currV=self.getFromPath(["VP","V"])
+                    if currV is not None:
+                        if "mod" in types and types["mod"] != False :
+                            aux=getRules()["compound"][types["mod"]]["aux"]
+                        else:
+                            if currV.lemma in ["have","be","can","will","shall","may","must"]:
+                                aux=currV.lemma
+                            else:
+                                aux="do"
+                    neg="neg" in types and types["neg"]==True
+                    pe = currV.getProp("pe")
+                    t  = currV.getProp("t")
+                    n  = currV.getProp("n")
+                    g  = currV.getProp("g")
+                    pro = Pro("I").pe(pe).n(n).g(g); # get default pronoun
+                    subjIdx = self.getIndex(["NP","N","Pro","SP"])
+                    if subjIdx is not None:
+                        vbIdx=self.getIndex(["VP","V"])
+                        if vbIdx is not None and subjIdx<vbIdx: # subject should be before the verb
+                            subj=self.elements[subjIdx]
+                            if subj.isA("Pro"):
+                                if subj.getProp("pe")==1 and aux=="be" and t=="p" and not neg:
+                                    # very special case : I am => aren't I
+                                    pe=2
+                                elif subj.lemma in ["this","that","nothing"]:
+                                    pro=Pro("I","en").g("n") # it
+                                elif subj.lemma in ["somebody","anybody","nobody","everybody",
+                                                     "someone","anyone","everyone"]:
+                                    pro=Pro("I","en").n("p") # they
+                                    if subj.lemma=="nobody":neg=True
+                                else:
+                                    pro=subj.clone()
+                            else:
+                                pro=subj.clone().pro()
+                    # check for negative adverb
+                    adv = currV.parentConst.getConst("Adv")
+                    if adv is not None and adv.lemma in ["hardly","scarcely","never","seldom"]:
+                        neg=True
+                    currV.parentConst.a(",")
+                    #   this is a nice illustration of jsRealB using itself for realization
+                    if aux=="have" and not neg:
+                        # special case because it should be realized as "have not" instead of "does not have"
+                        self.addElement(VP(V("have").t(t).pe(pe).n(n),Adv("not"),pro).typ({"contr":True}))
+                    else: # use jsRealB itself for realizing the tag by adding a new VP
+                        self.addElement(VP(V(aux).t(t).pe(pe).n(n),pro).typ({"neg":not neg,"contr":True}))
+            prefix = intPrefix[int_]
         else:
             self.warn("not implemented", "int:" + int_)
         if self.isFr() or int_ != "yon":  # add the interrogative prefix
@@ -834,7 +889,7 @@ class Phrase(Constituent):
         else:
             self.processTyp_en(types)
         if "int" in types and types["int"] != False:
-            self.processInt(types["int"])
+            self.processInt(types)
         if "exc" in types and types["exc"] == True:
             self.a(getRules()["sentence_type"]["exc"]["punctuation"], True)
         return self
