@@ -251,8 +251,8 @@ def dependentTransformation():
     print(s().toDependent())
 
 ## test a single expression (useful for launching the debugger on a given expression
-def test(exp,lang):
-    loadEn() if lang=="en" else loadFr()
+## proper language must be chosen before calling... because the parameter is evaluated before the function call
+def test(exp):
     print(exp.toSource(0))
     print(exp.realize())
 
@@ -273,11 +273,18 @@ def test(exp,lang):
 # dependentTransformation()
 
 # check list of list of parameters for Phrase
-test(S(NP(D("the"),[N("cat"),A("white")],VP([V("sit"),[PP(P("on"),[NP(D("the"),N("mat"))])]]))),
-     "en")
+loadEn()
+test(S(NP(D("the"),[N("cat"),A("white")],VP([V("sit"),[PP(P("on"),[NP(D("the"),N("mat"))])]]))))
+# check position of an adjective
+test(NP(oneOf(N("family").lier(),N("kid")),A("friendly").pos("post")))
 
+loadFr()
+test(NP(N("chat"),A("blanc").pos("pre")))
+test(NP(N("chat"),A("petit")))
+test(NP(N("chat"),A("noir")))
+
+loadEn()
 test(root(V("be").t("p"),
          subj(Pro("I").n("s").pe(1)),
-            comp(P("on"),mod(N("couch"),det(D("the"))))).typ({"int":"yon","perf":False}),
-     "en")
-test(S(Pro("I").pe(1),VP(V("be"),PP(P("on"),NP(D("the"),N("couch"))))).typ({"int":"yon"}),"en")
+            comp(P("on"),mod(N("couch"),det(D("the"))))).typ({"int":"tag","perf":True}))
+test(S(Pro("I").pe(1),VP(V("be"),PP(P("on"),NP(D("the"),N("couch"))))).typ({"int":"tag"}))

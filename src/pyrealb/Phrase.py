@@ -128,10 +128,11 @@ class Phrase(Constituent):
             e = self.elements[i]
             if e.isA("A"):  # check for adjective position
                 idx = self.getIndex("N")
-                if e.isFr():
-                    pos = e.props["pos"] if "pos" in e.props else "post"
+                # unless specified the position of an English adjective is pre, but is post for a French one
+                if "pos" in e.props:
+                    pos = e.props["pos"]  
                 else:
-                    pos = "pre"
+                    pos = "pre" if e.isEn() else "post"
                 if idx >= 0:
                     if (pos == "pre" and i > idx) or (pos == "post" and i < idx):
                         if allAorN(self.elements, i, idx):
