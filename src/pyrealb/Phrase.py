@@ -605,20 +605,19 @@ class Phrase(Constituent):
         auxils = []  # list of Aux followed by V
         affixes = []
         isFuture = False
-        if t == "f":
+        if t == "f" or t =="c":
             isFuture = True
-            t = "p"  # the auxiliary will be generated here so remove it from the V
+            t = "p" if t=="f" else "ps"# the auxiliary will be generated here so remove it from the V
         prog = "prog" in types and types["prog"] != False
         perf = "perf" in types and types["perf"] != False
         pas = "pas" in types and types["pas"] != False
         interro = types["int"] if "int" in types and types["int"] != False else None
         modality = types["mod"] if "mod" in types and types["mod"] != False else None
-        # compound = getRules()["compound"]
         if modality is not None:
             auxils.append(compound[modality]["aux"])
             affixes.append("b")
         elif isFuture:
-            # caution: future in English is done with the modal will, so another modal cannot be used
+            # caution: future and conditional in English are done with the modal will, so another modal cannot be used
             auxils.append(compound["future"]["aux"])
             affixes.append("b")
         if perf or prog or pas:
@@ -635,8 +634,9 @@ class Phrase(Constituent):
               len(auxils) == 0 and v.lemma != "be" and v.lemma != "have"):
             # add auxiliary for interrogative if not already there
             if interro not in ["wos","was","tag"]:
-                auxils.append("do")
-                affixes.append("b")
+                if t not in ["pp","pr","b-to","b"]: # do not add auxiliary for participle and infinitive
+                    auxils.append("do")
+                    affixes.append("b")
         auxils.append(v.lemma)
         # realise the first verb, modal or auxiliary
         # but make the difference between "have" as an auxiliary and "have" as a verb
@@ -644,9 +644,15 @@ class Phrase(Constituent):
         words = []
         # conjugate the first verb
         if neg:  # negate the first verb
-            if t == "pp" or t == "pr":  # special case for these tenses
+            if t in ["pp","pr","b-to","b"]:  # special case for these tenses
                 words.append(Adv("not", "en"))
+                if t == "b" : words.append(P("to","en"))
                 words.append(V(vAux, "en").t(t))
+            elif t == "ip" and v_peng["pe"] == 1 and v_peng["n"]=="p":
+                # very special case: insert "not" between "let's" and verb
+                words.push(Q("let's"))
+                words.push(Adv("not","en"))
+                words.push(V(vAux,"en").t("b"))
             elif vAux in negMod:
                 if vAux == "can" and t == "p":
                     words.append(Q("cannot"))
@@ -661,8 +667,7 @@ class Phrase(Constituent):
                 words.append(Adv("not", "en"))
                 if vAux != "do": words.append(V(vAux).t("b"))
         else:  # must only set necessary options, so that shared properties will work ok
-            newAux = V(vAux)
-            if not isFuture: newAux.t(t)
+            newAux = V(vAux).t(t)
             if v in negMod: newAux.pe(1)
             words.append(newAux)
         # recover the original agreement info and set it to the first pyrealb verb...
@@ -717,7 +722,8 @@ class Phrase(Constituent):
         if self.isEn():
             if self.isOneOf(["S", "SP"]):
                 (idx, vpElems) = self.getIdxCtx("VP", "V")
-                if idx is not None:
+                if idx is not None and self.getProp("t") not in ["pp","pr","b-to"]:
+                    # do not move when tense is participle or infinitive
                     v = vpElems.pop(0)  # remove first V
                     # check if V is followed by a negation, if so move it also
                     if len(vpElems) > 0 and vpElems[0].isA("Adv") and vpElems[0].lemma == "not":
@@ -774,6 +780,7 @@ class Phrase(Constituent):
                         del self.elements[subjIdx]
             prefix = intPrefix[int_]
         elif int_ in ["wod", "wad"]:  # remove direct object (first NP,N,Pro or SP in the first VP)
+            cmp=None
             if self.isOneOf(["S", "SP", "VP"]):
                 idx, obj = self.getIdxCtx("VP", ["NP", "N", "Pro", "SP"])
                 if idx is not None:
@@ -783,10 +790,14 @@ class Phrase(Constituent):
                     if idx is not None:
                         pp = ppElems[idx].getConst("P")
                         if pp is not None and pp.lemma == "par":
-                            ppElems[0].parentConst.removeElement(idx)  # remove the passive subject
+                            cmp = ppElems[0].parentConst.removeElement(idx)  # remove the passive subject
                         else:
                             pp = None
-                prefix = intPrefix[int_]
+                if self.isEn() and int == "wod" and cmp is not None and cmp.getProp("g") in ["m","f"]:
+                    # human direct object
+                    prefix = "whom"
+                else:
+                    prefix = intPrefix[int_]
                 if self.isEn():
                     self.moveAuxToFront()
                 else:

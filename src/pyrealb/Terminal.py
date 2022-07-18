@@ -508,11 +508,19 @@ class Terminal(Constituent):
             elif t in ["b","pp","pr"]:
                 self.realization=self.stem+conjugation
                 return [self]
-        elif t=="f":
+        elif t == "f":
             self.realization=self.lemma
-            self.insertReal(res,Q("will"),0)
-        elif t=="ip":
+            self.insertReal(res,V("will"),0)
+        elif t == "c":
             self.realization=self.lemma
+            self.insertReal(res,V("will").t("ps"),0)
+        elif t == "b-to":
+            self.realization = self.lemma
+            self.insertReal(res,P("to"),0)
+        elif t == "ip":
+            self.realization=self.lemma
+            if pe == 1 and n == "p":
+                self.insertReal(res,Q("let's"),0)
         else:
             return [self.morphoError("conjugate_en:tab",{"pe":pe,"n":n,"t":t})]
         return res 
@@ -588,7 +596,8 @@ class Terminal(Constituent):
         if isinstance(dOpts["rtime"],datetime.datetime):
             relativeDate = dateRule["format"]["relative_time"]
             # find the number of days of difference between relDay and the current date
-            diffDays=(dateObj-dOpts["rtime"]).days  # use datetime arithmetic to create timedelta
+            # use the "proleptic Gregorian ordinal number" to get the right number of days
+            diffDays=dateObj.toordinal()-dOpts["rtime"].toordinal()
             if str(diffDays) in relativeDate: # within a week before or after
                 dateS = relativeDate[str(diffDays)].replace("[l]",
                             dateRule["text"]["weekday"][(dateObj.weekday()+1)%7])

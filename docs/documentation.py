@@ -27,7 +27,11 @@ def evaluate(s):
     if m is not None:
         exec(s,globals())
     else:
-        return str(eval(s))
+        exp=eval(s)
+        if isinstance(exp,Constituent):
+            return exp.realize()
+        else:
+            return str(exp)
 
 ## create a table from the information in userinfos.py and add it to the page 
 def addTable(infos):
@@ -78,7 +82,7 @@ def makeOptions(opts):
 
 def makeCell(const,terminal,options):
     exp=f'{const}("{terminal}")'+options
-    page.td(e.span(str(eval(exp)),class_="realisation")+
+    page.td(e.span(eval(exp).realize(),class_="realisation")+
                 e.br()+
                 e.span(exp,class_="pattern"))
 
@@ -91,7 +95,7 @@ def pronomsPersonnels(pro,opts,tnC):
     for i in range(0,lOpts):
         os=opts[i]
         exp=f'Pro("{pro}")'+os
-        citation="on" if pro=="on" else str(eval(exp))
+        citation="on" if pro=="on" else eval(exp).realize()
         page.tr(class_="last" if i==last else "")
         makeCell("Pro",pro,os)
         for j in range(1,len(tnC)):
@@ -104,7 +108,7 @@ def flexionsGenreNombre(const,singPlur,gns):
         for j in range(1,4):
             page.tr(class_="last" if j==3 else "")
             exp=f'{const}("{mot}").pe({j})'
-            citation=str(eval(exp))
+            citation=eval(exp).realize()
             makeCell(const,mot,f'.pe({j})')
             for k in range(1,len(gns)):
                 makeCell(const,citation,(".pe(1)" if j==1 else "")+gns[k])
@@ -198,9 +202,20 @@ page.span("["+e.span("FR",lang="en")+e.span("EN",lang="fr")+"]",id="langSelect")
 # start of page
 page.h1(e.span("pyRealB",class_="jsr")+" (Version "+pyRealB_version+") Documentation")
 
-page.p("""<span class="jsr">pyRealB</span> est un réalisateur de texte pour l'anglais et le français écrit en Python. Une fois le package Python installé selon les <a href="https://github.com/lapalme/pyrealb" title="GitHub - lapalme/pyrealb: French and English text realisator">instructions données dans le répertoire GitHub</a>,
-pour l'utiliser, il suffit d'ajouter la ligne suivante à son programme.""",lang="fr")
-page.p("""<span class="jsr">pyRealB</span> is a text realizer for French and English written in Python. Once installed according to <a href="https://github.com/lapalme/pyrealb" title="GitHub - lapalme/pyrealb: French and English text realisator">the instructions on the GitHub</a>, using it
+page.p("""<span class="jsr">pyRealB</span> est un réalisateur de texte pour l'anglais et le français écrit en Python.
+Des appels de fonctions Python, rappelant les notations de syntaxe en constituants ou en dépendences, 
+créent une structure qui sera réalisée en appelant la fonction <code>str()</code>, souvent de façon implicite 
+via la fonction <code>print</code>. 
+<br/>Pour l'utiliser, une fois le package Python installé selon les 
+<a href="https://github.com/lapalme/pyrealb" title="GitHub - lapalme/pyrealb: French and English text realisator">instructions 
+données dans le répertoire GitHub</a>,
+il suffit d'ajouter la ligne suivante à son programme.""",lang="fr")
+page.p("""<span class="jsr">pyRealB</span> is a text realizer for French and English written in Python. 
+Calls to Python functions, similar to the syntactic constituency or dependencies notations create a structure 
+that can be realized with <code>str()</code> , most often implicitely within a <code>print</code> function.
+<br/>Once installed according to 
+<a href="https://github.com/lapalme/pyrealb" title="GitHub - lapalme/pyrealb: French and English text realisator">the 
+instructions on the GitHub</a>, using it
 is only a matter of adding the following line to the program.""",lang="en")
 page.code("from pyrealb import *")
 page.p("""
@@ -244,8 +259,14 @@ page.div("""
 
 addTable(dependentsSect)
 page.div("""
-    <p>Le premier paramètre d'une dépendance est un terminal. Les autres paramètres doivent être d'autres dépendances. La dépendance <code>root</code> ne peut apparaître qu'une seule fois à la racine.</p>
-    <p><code>coord</code> regroupe des <strong>dépendances de même type</strong> coordonnées par la conjonction donnée comme terminal. Les dépendents seront séparés par une virgule sauf les deux derniers qui seront séparés par la conjonction. <code>coord</code> sans dépendent sera ignoré à la réalisation. <code>coord</code> avec un seul dépendent apparaitra sans la conjonction. <code>coord</code> doit être inclus dans une autre dépendance pour être réalisé correctement.</p>
+    <p>Le premier paramètre d'une dépendance est un terminal. Les autres paramètres doivent être d'autres 
+    dépendances.</p> 
+
+    <p><code>coord</code> regroupe des <strong>dépendances de même type</strong> coordonnées par la conjonction 
+    donnée comme terminal. Les dépendents seront séparés par une virgule sauf les deux derniers qui seront séparés 
+    par la conjonction. <code>coord</code> sans dépendent sera ignoré à la réalisation. <code>coord</code> avec un 
+    seul dépendent apparaitra sans la conjonction.</p> 
+
     <p>Les accords <em>simples</em> sont effectués automatiquement entre les dépendents:</p>
     <ul>
         <li>Le verbe d'un <code>root</code> s'accorde en personne, en genre et en nombre avec le sujet indiqué par la dépendance <code>subj</code>. Ceci peut être un <code>N</code>, un <code>Pro</code> ou même des dépendents d'un <code>coord</code>. Les attributs et participes passés des verbes copules sont accordés avec leur sujet. Les participes passés des verbes conjugés avec avoir s'accordent avec leur complément d'objet direct s'ils sont placés avant le verbe. Un complément d'objet direct est le terminal d'un <code>comp</code> dont le terminal n'est pas un <code>P</code>.</li>
@@ -255,8 +276,13 @@ page.div("""
 """,lang="fr")
 
 page.div("""
-    <p>The first parameter of a dependency is a terminal. The other parameters must be dependents. The <code>root</code> dependency can only appear once, at the root of the tree.</p>
-    <p><code>coord</code> combine <strong>dependencies of the same type</strong> coordinated by the conjunction given as terminal. Dependencies will comma separated except for the last two that will be separated by the conjunction. A  <code>coord</code> without dependent will not be realized. A <code>coord</code> with a single dependent will be realized without the conjunction. A <code>coord</code> must not be used as root in order to be properly dealt with.</p>
+    <p>The first parameter of a dependency is a terminal. The other parameters must be dependents.</p> 
+
+    <p><code>coord</code> combines <strong>dependencies of the same type</strong> coordinated by the conjunction given 
+    as terminal. Dependencies will comma separated except for the last two that will be separated by the conjunction. 
+    A  <code>coord</code> without dependent will not be realized. A <code>coord</code> with a single dependent will 
+    be realized without the conjunction.</p> 
+ 
     <p>Simple agreements are realized between dependents:</p>
     <ul>
         <li>A verb agrees in person and number with a subject indicated by a <code>subj</code> dependency,. The subject can be a <code>N</code>, a <code>Pro</code> or dependents of a <code>coord</code>.</li>

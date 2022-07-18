@@ -7,6 +7,11 @@ defaultProps = {"en":{"g":"n","n":"s","pe":3,"t":"p"},             # language de
                 "fr":{"g":"m","n":"s","pe":3,"t":"p","aux":"av"}}
 
 quoteOOV=False # TODO: make this settable globally
+
+# TODO: make this settable globally or from the command line
+# hack taken from https://intellij-support.jetbrains.com/hc/en-us/community/posts/205819799/comments/206004059
+debug = sys.gettrace() is not None or "-d" in sys.argv # used in Constituent.__str__()
+
 optionListMethods = ('a', 'b', 'ba', 'en')
 
 deprels = ["root","subj","det","mod","comp","coord"] # list of implemented dependency relations
@@ -268,7 +273,7 @@ class Constituent():
         if self.isOneOf(["DT","NO"]):
             if "dOpt" not in self.props:self.props["dOpt"]={}
             if isNat is None:
-                self.props["dOpt"]["nat"]=False
+                self.props["dOpt"]["nat"]=True
             elif isinstance(isNat,bool):
                 self.props["dOpt"]["nat"]=isNat
             else:
@@ -615,7 +620,9 @@ class Constituent():
         s+=terminals[-1].realization
         # apply capitalization and final full stop unless .cap(False)
         if self.parentConst is None:
-            if self.isOneOf(["S","root"]) and len(s)>0: ## this is a top-level S
+            if ((self.isOneOf(["S","root"])
+                 or (self.isA("coord") and len(self.dependents)>0 and self.dependents[0].isA("root")))
+                and len(s)>0): ## this is a top-level S
                 if "cap" not in self.props or self.props["cap"]!=False:
                     sepWordRE=sepWordREen if self.isEn() else sepWordREfr
                     m=sepWordRE.match(s)
@@ -626,7 +633,7 @@ class Constituent():
                         # and a full stop at the end unless there is already one
                         # taking into account any trailing HTML tag
                         m=re.search(r"(.)( |(<[^>]+>))*$",s)
-                        if m!=None and m.group(1) not in "?!.:;/":
+                        if m!=None and m.group(1) not in "?!.:;/)]}":
                             s+=". "   # add a space after "." , like for rule "pc4"
         return s
     
@@ -641,10 +648,9 @@ class Constituent():
         ## the Python debugger in PyCharm also uses str() to display information
         ## which can in some cases change the structure.
         ## This makes it hard to follow when tracing... a classic case of Heisenbug!
-        ## I found more useful during development to (un)comment the following two lines
+        ## When debug is True (tested with sys.gettrace()) : return the source of the expression
         ## but then realization must be launched with ".realize()"
-        return self.toSource(-1)
-        # return self.realize()
+        return self.toSource(-1) if debug else self.realize()
 
     def clone(self):
         return copy.deepcopy(self)
@@ -713,7 +719,7 @@ setattr(Constituent,"pe",makeOptionMethod("pe",[1,2,3,'1','2','3'],["D","Pro","N
 setattr(Constituent,"n",makeOptionMethod("n",["s","p","x"],["D","Pro","N","NP","A","AP","V","VP","S","SP","CP"],None))
 setattr(Constituent,"g",makeOptionMethod("g",["m","f","n","x"],["D","Pro","N","NP","A","AP","V","VP","S","SP","CP"]))
 #  t, aux : can be applied to VP and sentence
-setattr(Constituent,"t",makeOptionMethod("t",["p", "i", "f", "ps", "c", "s", "si", "ip", "pr", "pp", "b", # simple tenses
+setattr(Constituent,"t",makeOptionMethod("t",["p", "i", "f", "ps", "c", "s", "si", "ip", "pr", "pp", "b","b-to", # simple tenses
                    "pc", "pq", "cp", "fa", "spa", "spq"],["V","VP","S","SP","CP"]))  # composed tenses
 setattr(Constituent,"aux",makeOptionMethod("aux",["av","êt","aê"],["V","VP","S","SP","CP"]))
 # ordinary properties
@@ -721,7 +727,7 @@ setattr(Constituent,"f",makeOptionMethod("f",["co","su"],["A","Adv"]))
 setattr(Constituent,"tn",makeOptionMethod("tn",["","refl"],["Pro"]))
 setattr(Constituent,"c",makeOptionMethod("c",["nom","acc","dat","refl","gen"],["Pro"]))
 
-setattr(Constituent,"pos",makeOptionMethod("pos",["post","pre"],["A"]))
+setattr(Constituent,"pos",makeOptionMethod("pos",["post","pre"],[]))
 setattr(Constituent,"pro",makeOptionMethod("pro",None,["NP","PP","N"]))
 # English only
 setattr(Constituent,"ow",makeOptionMethod("ow",["s","p","x"],["D","Pro"],"own"))

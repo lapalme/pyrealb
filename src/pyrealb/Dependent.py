@@ -156,7 +156,8 @@ class Dependent(Constituent):
                     if self.isFr() and depTerm.getProp("t")=="pp":
                         depTerm.peng=self.peng
             elif deprel=="root":
-                self.error("An internal root was found")
+                # self.error("An internal root was found")
+                pass
             elif deprel=="coord":
                 if len(d.dependents)>0:
                     firstDep=d.dependents[0]
@@ -394,7 +395,7 @@ class Dependent(Constituent):
 
     def moveAuxToFront(self):
         auxIdx = self.findIndex(lambda d: d.isA("*pre*"))  # added by affixHopping
-        if auxIdx >= 0:
+        if auxIdx >= 0 and self.getProp("t") not in ["pp","pr"]: # do not move when tense is participle
             aux = self.dependents[auxIdx].terminal
             self.removeDependent(auxIdx)
             self.addPre(aux, 0)  # put auxiliary before
@@ -444,17 +445,24 @@ class Dependent(Constituent):
                 self.removeDependent(subjIdx)
             prefix = intPrefix[int_]
         elif int_ in ["wod", "wad"]:  # remove direct object (first comp starting with N)
-            for i in range(0, len(self.dependents)):
+            cmp=None
+            i=0
+            while i<len(self.dependents) and cmp is None:
                 d = self.dependents[i]
                 if d.isA("comp") and d.terminal.isA("N"):
-                    self.removeDependent(i)
+                    cmp=self.removeDependent(i)
+                i+=1
             if self.isFr():  # check for passive subject starting with par
                 parIdx = self.findIndex(
                     lambda d: d.isA("comp") and d.terminal.isA("P") and d.terminal.lemma == "par")
                 if parIdx >= 0:
                     pp = self.dependents[parIdx].terminal
                     self.removeDependent(parIdx)  # remove the passive subject
-            prefix = intPrefix[int_]
+            if self.isEn() and int_ == "wod" and cmp is not None and cmp.getProp("g") in ["m","f"]:
+                # human direct object
+                prefix = "whom"
+            else:
+                prefix = intPrefix[int_]
             if self.isEn():
                 self.moveAuxToFront()
             else:
@@ -623,10 +631,9 @@ class Dependent(Constituent):
         return res
 
     def depPosition(self):
-        myPos = self.props["pos"] if "pos" in self.props else None
-        if myPos=="pre": return "pre"
+        if "pos" in self.props: return self.props["pos"]
         pos="post" # default is post
-        if self.isOneOf(["subj","det","*pre*"]) and myPos!="post":
+        if self.isOneOf(["subj","det","*pre*"]):
             # subject and det are always pre except when specified
             pos="pre"
         elif self.isA("mod") and self.terminal.isA("A") and self.parentConst.terminal.isA("N"):
@@ -635,29 +642,30 @@ class Dependent(Constituent):
                 pos=self.terminal.props["pos"] if "pos" in self.terminal.props else "post"
             else:
                 pos="pre" # all English adjectives are pre
-        elif self.isA("coord"):
-            if myPos is not None:
-                pos=myPos
-            elif len(self.dependents)>0:
-                pos=self.dependents[0].depPosition() #take the position of the first element of the coordination
+        elif self.isA("coord") and len(self.dependents)>0:
+            pos=self.dependents[0].depPosition() #take the position of the first element of the coordination
         return pos
 
     def real(self):
         self.pronominalizeChildren()
         if "typ" in self.props:
             self.processTyp(self.props["typ"])
-        # realize coordinations before anything elso to compute their final number and person
-        for d in self.dependents:
-            if d.isA("coord"):d.tokens=d.coordReal()
-        before=[]
-        after=[]
-        # realize and order them by gathering the dependents that should appear before and after the terminal
-        for d in self.dependents:
-            if d.depPosition()=="pre":
-                before += d.tokens if d.isA("coord") else d.real()
-            else:
-                after += d.tokens if d.isA("coord") else d.real()
-        res=[*before,*self.terminal.real(),*after]
+        if self.isA("coord") and self.parentConst is None:
+            # special case of coord at the root
+            res=self.coordReal()
+        else:
+            # realize coordinations before anything elso to compute their final number and person
+            for d in self.dependents:
+                if d.isA("coord"):d.tokens=d.coordReal()
+            before=[]
+            after=[]
+            # realize and order them by gathering the dependents that should appear before and after the terminal
+            for d in self.dependents:
+                if d.depPosition()=="pre":
+                    before += d.tokens if d.isA("coord") else d.real()
+                else:
+                    after += d.tokens if d.isA("coord") else d.real()
+            res=[*before,*self.terminal.real(),*after]
         return self.doFormat(res)
 
     # recreate a jsRealB expression
