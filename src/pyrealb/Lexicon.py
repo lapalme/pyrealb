@@ -76,14 +76,14 @@ def getLemma(lemma,lang=None):
     lexicon=getLexicon(lang)
     return lexicon[lemma] if lemma in lexicon else None
 
-# return the current lexicon    
+# return the current lexicon or the one specified
 def getLexicon(lang=None):
     if lang is not None:
-        __lexicon.lang=lang
+        return __lexicon.lexicon[lang]
     return __lexicon.getLexicon()
 
-# return the current rules
+# return the current rules or the ones specified
 def getRules(lang=None):
     if lang is not None:
-        __lexicon.lang=lang
+        return __lexicon.rules[lang]
     return __lexicon.getRules()

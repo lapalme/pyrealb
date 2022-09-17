@@ -71,7 +71,7 @@ class Terminal(Constituent):
                     self.value=int(self.lemma)
                 except ValueError:
                     self.value=float(self.lemma)
-                self.nbDecimals=self.lemma[::-1].find(".")
+                self.nbDecimals=str(self.lemma)[::-1].find(".")
             else:
                 self.value=lemma
                 self.nbDecimals=str(lemma)[::-1].find(".")
@@ -106,7 +106,7 @@ class Terminal(Constituent):
                         self.constType="Q"
                 else:
                     lexInfo=lexInfo[terminalType]
-                    rules=getRules()
+                    rules=getRules(self.lang)
                     for (key,info) in lexInfo.items():
                         if key=="tab": # save table number and compute stem
                             ending=None 
@@ -155,7 +155,7 @@ class Terminal(Constituent):
             # according to http:#bdl.oqlf.gouv.qc.ca/bdl/gabarit_bdl.asp?id=1582
             return "s" if -2<number<2 else "p"
         else:
-            # according to https:#www.chicagomanualofstyle.org/book/ed17/part2/ch09/psec019.html
+            # according to https://www.chicagomanualofstyle.org/book/ed17/part2/ch09/psec019.html
             #   any number other than 1 is plural... 
             # even 1.0 but this case is not handled here because nbDecimal(1.0)=>0
             return "s" if abs(number)==1 and self.nbDecimals==0 else "p"
@@ -192,7 +192,7 @@ class Terminal(Constituent):
         return bestMatch[1]                 
                                      
     def decline(self,setPerson):
-        rules=getRules()
+        rules=getRules(self.lang)
         declension=rules["declension"][self.tab]["declension"]
         stem=self.stem
         res=None 
@@ -293,7 +293,7 @@ class Terminal(Constituent):
                 return f"[[{self.lemma}]]"
             if self.isFr() and self.isA("N"):
                 # check is French noun gender specified corresponds to the one given in the lexicon
-                lexiconG=getLexicon()[self.lemma]["N"]
+                lexiconG=getLexicon("fr")[self.lemma]["N"]
                 if "g" not in lexiconG:
                     self.morphoError("absent du lexique",{"g":g,"n":n})
                     return f"[[{self.lemma}]]"
@@ -367,8 +367,8 @@ class Terminal(Constituent):
         t = self.getProp("t")
         if self.tab is None:
             return [self.morphoError("conjugate_fr:tab",{"pe":pe,"n":n,"t":t})] 
-        if t in ["pc","pq","cp","fa","spa","spq"]: # temps composés
-            tempsAux={"pc":"p","pq":"i","cp":"c","fa":"f","spa":"s","spq":"si"}[t]
+        if t in ["pc","pq","cp","pa","fa","spa","spq","bp"]: # temps composés
+            tempsAux={"pc":"p","pq":"i","cp":"c","pa":"ps","fa":"f","spa":"s","spq":"si","bp":"b"}[t]
             aux=V("avoir","fr")
             aux.parentConst=self.parentConst
             aux.peng=self.peng
@@ -429,7 +429,7 @@ class Terminal(Constituent):
                         self.error("Terminal.conjugate_fr:: Strange parent:" + type(myParent).__name__)
             return [aux,self]
         else: # simple tense
-            conjugationTable=getRules()["conjugation"][self.tab]
+            conjugationTable=getRules(self.lang)["conjugation"][self.tab]
             if "t" in conjugationTable and t in conjugationTable["t"]:
                 conjugation=conjugationTable["t"]
                 if t in ["p","i","f","ps","c","s","si"]:
@@ -462,10 +462,13 @@ class Terminal(Constituent):
                         self.insertReal(res, Pro("moi","fr").c("refl").pe(pe).n(n).g(g), 0)
                     if t=="pp" and self.realization!="été": # HACK: frequent case of être that does not change
                         g=self.getProp("g")
-                        if g=="x":g="m"
+                        if g=="x" or g=="n":g="m"   # neutre peut arriver si le sujet est en anglais
                         n=self.getProp("n")
                         if n=="x":n="s"
-                        term={"ms":"","mp":"s","fs":"e","fp":"es"}[g+n]
+                        if (g+n)=="mp" and self.realization.endswith("s"):
+                            term=""    # pas d'ajout de s au masculin pluriel si la réalisation termine en s
+                        else:
+                            term={"ms":"","mp":"s","fs":"e","fp":"es"}[g+n]
                         self.realization+=term
                     # neg=self.neg2 if hasattr(self,"neg2") else None
                     # if neg is not None and neg!="":
@@ -489,7 +492,7 @@ class Terminal(Constituent):
         # subjonctive present is like present except that it does not end in s at 3rd person
         # subjonctive past is like simple past
         t1 = "p" if t=="s" else ("ps" if t=="si" else t)
-        conjugationTable=getRules()["conjugation"][self.tab]
+        conjugationTable=getRules(self.lang)["conjugation"][self.tab]
         res=[self]
         if "t" in conjugationTable and t1 in conjugationTable["t"]:
             conjugation=conjugationTable["t"][t1]
@@ -538,7 +541,7 @@ class Terminal(Constituent):
         else:
             precision = 2 if maxPrecision  is None else maxPrecision
         res=("{:,."+str(precision)+"f}").format(self.value)
-        symbol = getRules()["number"]["symbol"]
+        symbol = getRules(self.lang)["number"]["symbol"]
         if symbol["group"]!=",":res=res.replace(",",symbol["group"])
         if symbol["decimal"]!=".":res=res.replace(".",symbol["decimal"]) 
         return res
@@ -561,7 +564,7 @@ class Terminal(Constituent):
     ### Date
     def dateFormat(self,dateObj,dOpts):
         fmtRE=re.compile(r"(.*?)\[(.+?)]|(.+$)")
-        dateRule = getRules()["date"]
+        dateRule = getRules(self.lang)["date"]
         fmts=dateRule["format"]["natural" if dOpts["nat"] else "non_natural"]
 
         def interpret(fields):

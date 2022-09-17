@@ -93,7 +93,7 @@ def conjuguer(verbe,lang,typs):
                 return VP(V(verbe).t(t).pe(pe).n(n)).typ(typs).realize()
         else:
             sp=SP(Pro("moi" if lang=="fr" else "me").c("nom").pe(pe).n(n),VP(V(verbe).t(t))).typ(typs)
-            if t.startswith("s"): # subjonctif
+            if t.startswith("s") and lang=="fr": # subjonctif
                 sp=SP(Q("que"),sp)
             return sp.realize()
     
@@ -101,11 +101,11 @@ def conjuguer(verbe,lang,typs):
         loadFr()
         temps= [
             [["Présent","p"],["Imparfait","i"],["Futur simple","f"],["Passé simple","ps"]],
-            [["Passé composé","pc"],["Plus-que-parfait","pq"],["Futur antérieur","fa"]],
+            [["Passé composé","pc"],["Plus-que-parfait","pq"],["Passé antérieur","pa"],["Futur antérieur","fa"]],
             [["Subjonctif présent","s"],["Subjonctif imparfait","si"],["Subjonctif passé","spa"],
              ["Subjonctif plus-que-parfait","spq"]],
             [["Conditionnel présent","c"],["Conditionnel passé","cp"],["Impératif","ip"]],
-            [["Participe présent","pr"],["Participe passé","pp"],["Infinitif","b"]]
+            [["Participe présent","pr"],["Participe passé","pp"],["Infinitif","b"],["Infinitif passé","bp"]]
         ]
     else:
         loadEn()
@@ -113,6 +113,9 @@ def conjuguer(verbe,lang,typs):
             [["Present","p"]],
             [["Simple past","ps"]],
             [["Future","f"]],
+            [["Subjonctive","s"]],
+            [["Conditional","c"]],
+            [["Imperative","ip"]],
         ]
     
     print("***",verbe,"comme verbe" if lang=="fr" else "as verb",str(typs))

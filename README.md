@@ -8,16 +8,15 @@ It facilitates its integration within Python applications by simply adding
 
 	from pyrealb import *
 
-
 ### Installing the distribution package from PyPI
 
-1. `pip install pyrealb`
+    `pip install pyrealb`
 
-## Upgrading the version 
+### Upgrading the version 
 
-1. `pip install pyrealb --upgrade`
+    `pip install pyrealb --upgrade`
 
-### building and installing the package from the sources
+### Building and installing the package from the sources
 
 1. `cd` into this directory (with `pyproject.toml` file) 
 2. Build the distribution package `python3 -m build`
@@ -81,6 +80,7 @@ Some directories include `markup.py` which should be loaded using `pip`. Unfortu
 * `kilometresapied/kilometresapied.py` : simple generation of a classic repetitive text in French.
 * `methodius/methodius.py` : generation of English sentences from a logical form expressed in XML.
 * `randomgen/randomgen.py`: Generation of random English sentences
+* `RDFpyrealb/WebGenerate.py` : Generation from RDF triples
 * `report/report.py` : Single sentence parameterized by language, tense and subject
 * `simple_example/simple_example.py`: a few examples of English and French expressions to be realized
 * `variantes/variantes.py`: French or English sentences realized with all possible sentence modifiers; some challenging examples are in `examples.py`.

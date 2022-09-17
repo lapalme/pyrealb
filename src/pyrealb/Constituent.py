@@ -401,7 +401,7 @@ class Constituent():
                 if lexiconInfo  is None: 
                     lexiconInfo=getLemma(lemma.toLowerCase()) # check with lower case
                     if lexiconInfo  is None: return True       # elide when unknown
-                if pos not in lexiconInfo:pos=lexiconInfo.keys()[0] # try the first pos if current not found
+                if pos not in lexiconInfo:pos=next(iter(lexiconInfo)) # try the first pos if current not found
                 if pos in lexiconInfo and "h" in lexiconInfo[pos] and lexiconInfo[pos]["h"]==1: return False # h aspiré found
                 return True
             return False
@@ -427,7 +427,7 @@ class Constituent():
                 cList[i].realization=m1[1]+w1[:-1]+"'"+m1[3]
                 i+=1
             elif euphonieFrRE.match(w1) and isElidableFr(w2,cList[i+1].lemma,cList[i+1].constType) and  w3NoWords: # euphonie
-                if re.match(r"ce",w1,re.I) and re.match(r"(^est$)|(^étai)",w2,re.I):
+                if re.match(r"ce",w1,re.I) and re.match(r"(^est$)|(^étai)|(^a$)",w2,re.I):
                     # very special case but very frequent
                     cList[i].realization=m1[1]+w1[:-1]+"'"+m1[3]
                 else:
@@ -522,8 +522,8 @@ class Constituent():
     # applies to a list of Constituents (can be a single one)
     # adds either to the first or last token (which can be the same)
     def doFormat(self,cList):
-        punctuation=getRules()["punctuation"]
-        lex=getLexicon()   
+        punctuation=getRules(self.lang)["punctuation"]
+        lex=getLexicon(self.lang)
     
         def getBeforeAfterString(punct):
             if punct in lex and "Pc" in lex[punct]:
@@ -720,7 +720,7 @@ setattr(Constituent,"n",makeOptionMethod("n",["s","p","x"],["D","Pro","N","NP","
 setattr(Constituent,"g",makeOptionMethod("g",["m","f","n","x"],["D","Pro","N","NP","A","AP","V","VP","S","SP","CP"]))
 #  t, aux : can be applied to VP and sentence
 setattr(Constituent,"t",makeOptionMethod("t",["p", "i", "f", "ps", "c", "s", "si", "ip", "pr", "pp", "b","b-to", # simple tenses
-                   "pc", "pq", "cp", "fa", "spa", "spq"],["V","VP","S","SP","CP"]))  # composed tenses
+                   "pc", "pq", "cp", "pa", "fa", "spa", "spq","bp"],["V","VP","S","SP","CP"]))  # compound tenses
 setattr(Constituent,"aux",makeOptionMethod("aux",["av","êt","aê"],["V","VP","S","SP","CP"]))
 # ordinary properties
 setattr(Constituent,"f",makeOptionMethod("f",["co","su"],["A","Adv"]))

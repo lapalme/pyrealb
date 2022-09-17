@@ -650,9 +650,9 @@ class Phrase(Constituent):
                 words.append(V(vAux, "en").t(t))
             elif t == "ip" and v_peng["pe"] == 1 and v_peng["n"]=="p":
                 # very special case: insert "not" between "let's" and verb
-                words.push(Q("let's"))
-                words.push(Adv("not","en"))
-                words.push(V(vAux,"en").t("b"))
+                words.append(Q("let's"))
+                words.append(Adv("not","en"))
+                words.append(V(vAux,"en").t("b"))
             elif vAux in negMod:
                 if vAux == "can" and t == "p":
                     words.append(Q("cannot"))

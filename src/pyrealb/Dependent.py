@@ -647,13 +647,13 @@ class Dependent(Constituent):
         return pos
 
     def real(self):
-        self.pronominalizeChildren()
-        if "typ" in self.props:
-            self.processTyp(self.props["typ"])
         if self.isA("coord") and self.parentConst is None:
             # special case of coord at the root
             res=self.coordReal()
         else:
+            self.pronominalizeChildren()
+            if "typ" in self.props:
+                self.processTyp(self.props["typ"])
             # realize coordinations before anything elso to compute their final number and person
             for d in self.dependents:
                 if d.isA("coord"):d.tokens=d.coordReal()
