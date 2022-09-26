@@ -153,7 +153,6 @@ if __name__ == '__main__':
     print(enToutesLettres("300", "fr"))
     print(ordinal(34,"en","f"))
     for n in range(7,100000, 397):
-        print(enToutesLettres(str(n), "en"))
-        print(enToutesLettres(str(n), "fr"))
-        
+        print(n,":",enToutesLettres(str(n), "en"),":",enToutesLettres(str(n), "fr"))
+
 

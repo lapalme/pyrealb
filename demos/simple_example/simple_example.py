@@ -262,62 +262,62 @@ def test(exp):
 
 # test_warnings()
 
-# print("** English **")
-# english()
-# print("======")
-# print("** Français **")
-# francais()
-# print("======")
-# print("** Dépendances françaises **")
-# dependent_fr()
-# print("======")
-# print("** English dependencies **")
-# dependent_en()
-# print("======")
-# dependentTransformation()
+print("** English **")
+english()
+print("======")
+print("** Français **")
+francais()
+print("======")
+print("** Dépendances françaises **")
+dependent_fr()
+print("======")
+print("** English dependencies **")
+dependent_en()
+print("======")
+dependentTransformation()
 
 # check list of list of parameters for Phrase
-# loadEn()
-# test(S(NP(D("the"),[N("cat"),A("white")],VP([V("sit"),[PP(P("on"),[NP(D("the"),N("mat"))])]]))))
-# # check position of an adjective
-# test(NP(oneOf(N("family").lier(),N("kid")),A("friendly").pos("post")))
-#
-# loadFr()
-# test(NP(N("chat"),A("blanc").pos("pre")))
-# test(NP(N("chat"),A("petit")))
-# test(NP(N("chat"),A("noir")))
-#
-# loadEn()
-# test(root(V("be").t("p"),
-#          subj(Pro("I").n("s").pe(1)),
-#             comp(P("on"),mod(N("couch"),det(D("the"))))).typ({"int":"tag","perf":True}))
-# test(S(Pro("I").pe(1),VP(V("be"),PP(P("on"),NP(D("the"),N("couch"))))).typ({"int":"tag"}))
-#
-# test(S(VP(V("go").t("b"))).typ({"neg":True}))
-# test(S(VP(V("go").t("b-to"))).typ({"neg":True}))
-# test(V("love").t("ip").pe(1).n("p"))
-# test(S(Pro("I").n("p"),VP(V("answer").t("c"))))
-#
-# addToLexicon("John", {"N": {"tab": "nI", "g": "m"}})
-# addToLexicon("Mary", {"N": {"tab": "nI", "g": "f"}})
-# addToLexicon("Fred", {"N": {"tab": "nI", "g": "m"}})
-# addToLexicon("Maria-Luz", {"N": {"tab": "nI", "g": "f"}})
-# addToLexicon("firefighter", getLemma("fighter"))
-# # test(root(V("like"),comp(N("John")),subj(N("Mary"))).typ({'int': 'wod'}))
-#
-# test(coord(C("but"),root(V("laugh").t('ps'),subj(N("John"))),
-#                     root(V("smack").t('ps'),subj(N("Mary")),
-#                          coord(C("and"),comp(N("butler"),det(D("the"))),
-#                                comp(N("maid"),det(D("the")))))))
-# loadFr()
-# test(PP(P("de"),NO(8).nat()))
-# test(V("asseoir").t("pp").n("p"))
-#
+loadEn()
+test(S(NP(D("the"),[N("cat"),A("white")],VP([V("sit"),[PP(P("on"),[NP(D("the"),N("mat"))])]]))))
+# check position of an adjective
+test(NP(oneOf(N("family").lier(),N("kid")),A("friendly").pos("post")))
+
 loadFr()
-# test(S(NP(D("le"), N("chat")).n("p"),
-#          VP(V("asseoir").t("pc"),
-#             PP(P("sur"),
-#                NP(D("le"), N("tapis"))))).typ({"int": "tag", "neg": True, "refl": True}))
+test(NP(N("chat"),A("blanc").pos("pre")))
+test(NP(N("chat"),A("petit")))
+test(NP(N("chat"),A("noir")))
+
+loadEn()
+test(root(V("be").t("p"),
+         subj(Pro("I").n("s").pe(1)),
+            comp(P("on"),mod(N("couch"),det(D("the"))))).typ({"int":"tag","perf":True}))
+test(S(Pro("I").pe(1),VP(V("be"),PP(P("on"),NP(D("the"),N("couch"))))).typ({"int":"tag"}))
+
+test(S(VP(V("go").t("b"))).typ({"neg":True}))
+test(S(VP(V("go").t("b-to"))).typ({"neg":True}))
+test(V("love").t("ip").pe(1).n("p"))
+test(S(Pro("I").n("p"),VP(V("answer").t("c"))))
+
+addToLexicon("John", {"N": {"tab": "nI", "g": "m"}})
+addToLexicon("Mary", {"N": {"tab": "nI", "g": "f"}})
+addToLexicon("Fred", {"N": {"tab": "nI", "g": "m"}})
+addToLexicon("Maria-Luz", {"N": {"tab": "nI", "g": "f"}})
+addToLexicon("firefighter", getLemma("fighter"))
+# test(root(V("like"),comp(N("John")),subj(N("Mary"))).typ({'int': 'wod'}))
+
+test(coord(C("but"),root(V("laugh").t('ps'),subj(N("John"))),
+                    root(V("smack").t('ps'),subj(N("Mary")),
+                         coord(C("and"),comp(N("butler"),det(D("the"))),
+                               comp(N("maid"),det(D("the")))))))
+loadFr()
+test(PP(P("de"),NO(8).nat()))
+test(V("asseoir").t("pp").n("p"))
+
+loadFr()
+test(S(NP(D("le"), N("chat")).n("p"),
+         VP(V("asseoir").t("pc"),
+            PP(P("sur"),
+               NP(D("le"), N("tapis"))))).typ({"int": "tag", "neg": True, "refl": True}))
 test(V("asseoir").t("pc").pe(3).n("p").tag("em"))
 
 loadEn()

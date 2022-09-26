@@ -30,7 +30,7 @@ class Dependent(Constituent):
             self.peng=self.terminal.peng
         if self.terminal.isA("V"):
             self.taux=self.terminal.taux
-        params = [e for e in params if e != None]  # ignore None dependents
+        params = [e for e in params if e is not None]  # ignore None dependents
         # list of dependents to create the source of the parameters at the time of the call
         # self can be different from the dependents lists because of structure modifications
         self.dependentsSource = []
@@ -51,7 +51,7 @@ class Dependent(Constituent):
         if isinstance(dependent,Dependent):
             dependent.parentConst=self
             # add it to the list of dependents
-            if position==None:
+            if position is None:
                 self.dependents.append(dependent)
             elif isinstance(position,int) and position <= len(self.dependents) and position>=0:
                 self.dependents.insert(position,dependent)
@@ -189,7 +189,7 @@ class Dependent(Constituent):
                 if propG=="m" or propG=="x" or e.isA("Q"):g="m" # masculine if gender is unspecified
                 if e.getProp("n")=="p":n="p"
                 propPe=e.getProp("pe")
-                if propPe != None and propPe<pe:pe=propPe
+                if propPe is not None and propPe<pe:pe=propPe
         if nb==0: g="m"
         elif nb>1 and n=="s" and andCombination:n="p"
         return {"g":g,"n":n,"pe":pe}
@@ -221,7 +221,7 @@ class Dependent(Constituent):
                     return self.warn("no appropriate pronoun")
         else:
             pro = self.getTonicPro("acc")
-            if self.parentConst != None and self.parentConst.terminal.isA("V"):  # consider that it is direct complement
+            if self.parentConst is not None and self.parentConst.terminal.isA("V"):  # consider that it is direct complement
                 self.parentConst.terminal.cod = self  # indicate that self is a COD
         # replace the original with the pronoun
         pro.parentConst = self
@@ -298,7 +298,7 @@ class Dependent(Constituent):
                 # add new subject at the front of the sentence
                 self.addPre(obj)
                 self.peng=obj.peng
-                 # add original subject after the verb to serve as an object
+                # add original subject after the verb to serve as an object
                 self.addDependent(comp(P("par" if self.isFr() else "by",self.lang),subj))
             if self.isFr():
                 # do self only for French because in English self is done by processTyp_en
@@ -362,7 +362,7 @@ class Dependent(Constituent):
             rules = getRules()
             origLemma = deprel.terminal.lemma
             for key in rules["verb_option"]["modalityVerb"]:
-                if (key.startswith(mod)):
+                if key.startswith(mod):
                     deprel.terminal.setLemma(rules["verb_option"]["modalityVerb"][key])
                     break
             deprel.terminal.isMod = True
@@ -381,7 +381,7 @@ class Dependent(Constituent):
     def processTyp_en(self, types):
         # replace current verb with the list new words
         #  TODO: take into account the fact that there might be already a verb with modals...
-        if ("contr" in types and types["contr"] is not False):
+        if "contr" in types and types["contr"] is not False:
             # necessary because we want the negation to be contracted within the VP before the S or SP
             self.contraction = True
         words = Phrase.affixHopping(self.terminal, self.getProp("t"), getRules()["compound"], types)
@@ -468,7 +468,6 @@ class Dependent(Constituent):
             else:
                 self.invertSubject()
         elif int_ in ["woi", "wai", "whe", "whn"]:  # remove indirect object first comp or mod with a P as terminal
-            remove = False
             prefix = intPrefix[int_]  # get default prefix
             for i in range(0, len(self.dependents)):
                 d = self.dependents[i]
@@ -499,7 +498,7 @@ class Dependent(Constituent):
             if self.isFr(): # in French really simple, add "n'est-ce pas"
                 self.a(", n'est-ce pas")
             else: # in English, sources: https://www.anglaisfacile.com/exercices/exercice-anglais-2/exercice-anglais-95625.php
-                  # must find  the pronoun and conjugate the auxiliary
+                # must find  the pronoun and conjugate the auxiliary
                 # look for the first verb or auxiliary (added by affixHopping)
                 vIdx = self.findIndex(lambda d:d.terminal.isA("V") and d.depPosition()=="pre")
                 currV = self.terminal if vIdx<0 else self.dependents[vIdx].terminal
@@ -549,8 +548,7 @@ class Dependent(Constituent):
                 if aux=="have" and not neg:
                     # special case because it should be realized as "have not" instead of "does not have"
                     self.addDependent(comp(V("have").t(t).pe(pe).n(n),
-                                           mod(Adv("not")),
-                                           pro).typ({"contr":True}))
+                                           mod(Adv("not")),pro).typ({"contr":True}))
                 else:
                     self.addDependent(comp(V(aux).t(t).pe(pe).n(n),
                                            pro).typ({"neg":not neg,"contr":True}))
@@ -559,7 +557,7 @@ class Dependent(Constituent):
             self.warn("not implemented", "int:" + int_)
         if self.isFr() or (int_ != "yon"):   # add the interrogative prefix
             self.addPre(Q(prefix), 0)
-        if pp != None:  # add "par" in front of some French passive interrogative
+        if pp is not None:  # add "par" in front of some French passive interrogative
             self.addPre(pp, 0)
         if int_ == "wad":  # replace "que" by "quoi" for French passive wad
             self.dependents[1].terminal.lemma = "quoi"
@@ -595,7 +593,7 @@ class Dependent(Constituent):
             self.setProp("g",dep.getProp("g"))
             self.setProp("n",dep.getProp("n"))
             pe=dep.getProp("pe")
-            self.setProp("pe",pe if pe!=None else 3)
+            self.setProp("pe",pe if pe is not None else 3)
             return self.doFormat(res) # process format for the CP
         # check that all dependents use the same deprel
         deprel=self.dependents[0].constType
@@ -692,7 +690,7 @@ class Dependent(Constituent):
         return res
 
     @classmethod
-    def fromJSON(self, constType, json, lang):
+    def fromJSON(cls, constType, json, lang):
         from .utils import fromJSON
         if "terminal" not in json:
             print("Dependent.fromJSON: no terminal found in Dependent:"+str(json))
@@ -716,4 +714,3 @@ def compObj(*params): return Dependent(params,"comp")
 def compObl(*params): return Dependent(params,"comp")
 
 def coord(*params): return Dependent(params,"coord")
-

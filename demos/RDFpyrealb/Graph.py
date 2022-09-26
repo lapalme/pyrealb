@@ -78,7 +78,7 @@ class Graph:
         if isinstance(phrase,(S,SP)):
             vp=phrase.elements[-1]
             if isinstance(vp,VP):
-                vp.add(newObj)
+                vp.add(newObj,None,True) # HACK: insert directly in the VP without keeping track of .add(...)
                 return
         print("addToLastObject: unrecognized structure")
         print(phrase.show())
@@ -131,13 +131,6 @@ class Graph:
     def getPro(self,subject,pred):
         g=getGender(subject)
         return Pro("I").g("n" if g==None else "f" if g=="female" else "m")
-        # isH=isHuman(pred)
-        # # print("getPro(%s,%s,%s)"%(isH,subject,pred))
-        # if isH==None:
-        # else:
-        #     #,# it is human
-        #     g=getGender(subject)
-        #     return Pro("I").g("f" if g=="female" else "m")
 
     #$ realize:: (Graph) -> str
     def realize(self,show):
@@ -168,7 +161,9 @@ class Graph:
                         else:
                             pro = self.getPro(node.subj,preds[i])
                             expi = S(pro if i<nb-1 else Q(""),self.getVP(preds[i],predObj))
-                            cp.add(expi)
+                            cp.add(expi,None,True) # HACK: insert directly in the CP without keeping track of .add(...)
                         j=i+1 # to set the start of the preds index for the next rng loop step 
                     res.append(S(cp))
+        if show:
+            print("\n".join([r.toSource(0) for r in res]))
         return " ".join([r.realize() for r in res])
