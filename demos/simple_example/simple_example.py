@@ -330,3 +330,9 @@ test(S(en1,
                en2))).typ({"refl": true, "int": "tag"}))
 
 test(S(Pro("ce"),V("être").t("pc")))
+
+loadEn()
+test(S(V("show").t("ip"),
+                 NP(D("a"),N("airline").n("p"),
+                    SP(Pro("that"),
+                       VP(V(oneOf("fly","go")))))))

@@ -1,0 +1,10 @@
+version: "3.1"
+nlu:
+- intent: restriction
+  examples: |
+    - 'what are the air restrictions on flights from [seattle]{"entity":"city_name","role":"fromloc"} to [denver]{"entity":"city_name","role":"toloc"} for the airfare of [416 dollars](fare_amount)'
+    - 'what is restriction [ap57](restriction_code)'
+    - 'what are the restrictions on the [cheapest](cost_relative) [one way](round_trip) fare between [los angeles]{"entity":"city_name","role":"fromloc"} and [atlanta]{"entity":"city_name","role":"toloc"}'
+    - 'what ''s restriction [ap68](restriction_code)'
+    - 'what is restriction [ap57](restriction_code)'
+    - 'what is restriction [ap80](restriction_code)'

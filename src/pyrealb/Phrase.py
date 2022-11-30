@@ -37,7 +37,7 @@ def _getElems(es):
     res = []
     for e in es:
         if e != None:
-            if isinstance(e, list):res.extend([e0 for e0 in _getElems(e) if e0 != None])
+            if isinstance(e, (list,tuple)):res.extend([e0 for e0 in _getElems(e) if e0 != None])
             else:res.append(e)
     return res
 

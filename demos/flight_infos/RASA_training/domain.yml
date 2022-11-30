@@ -1,0 +1,134 @@
+version: "3.1"
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+
+intents:
+  - greet
+  - flight
+  - flight_time
+  - airfare
+  - aircraft
+  - ground_service
+  - airport
+  - airline
+  - distance
+  - abbreviation
+  - ground_fare
+  - quantity
+  - city
+  - flight_no
+  - capacity
+  - flight+airfare
+  - meal
+  - restriction
+  - airline+flight_no
+
+entities:
+  - city_name:
+      roles:
+      - fromloc
+      - toloc
+      - stoploc
+  - time:
+      roles:
+      - arrive_time
+      - depart_time
+  - period_of_day:
+      roles:
+      - return_time
+      - arrive_time
+      - depart_time
+  - day_name:
+      roles:
+      - arrive_date
+      - depart_date
+      - return_date
+  - flight_time
+  - cost_relative
+  - round_trip
+  - fare_amount
+  - today_relative:
+      roles:
+      - arrive_date
+      - depart_date
+      - return_date
+  - airport_code:
+      roles:
+      - fromloc
+      - toloc
+  - time_relative:
+      roles:
+      - arrive_time
+      - depart_time
+  - class_type
+  - date_relative:
+      roles:
+      - arrive_date
+      - depart_date
+      - return_date
+  - airline_name
+  - start_time:
+      roles:
+      - arrive_time
+      - depart_time
+  - end_time:
+      roles:
+      - arrive_time
+      - depart_time
+  - airport_name:
+      roles:
+      - fromloc
+      - toloc
+      - stoploc
+  - state_name:
+      roles:
+      - fromloc
+      - toloc
+  - day_number:
+      roles:
+      - arrive_date
+      - depart_date
+      - return_date
+  - month_name:
+      roles:
+      - arrive_date
+      - depart_date
+      - return_date
+  - mod
+  - fare_basis_code
+  - transport_type
+  - flight_mod
+  - meal
+  - state_code:
+      roles:
+      - fromloc
+      - toloc
+      - stoploc
+  - meal_description
+  - airline_code
+  - period_mod:
+      roles:
+      - return_time
+      - arrive_time
+      - depart_time
+  - flight_stop
+  - or
+  - economy
+  - flight_number
+  - flight_days
+  - year:
+      roles:
+      - depart_date
+  - aircraft_code
+  - connect
+  - restriction_code
+  - country_name:
+      roles:
+      - toloc
+  - days_code
+  - meal_code
+
+actions:
+  - give_flight_info

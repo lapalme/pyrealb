@@ -1,0 +1,8 @@
+version: "3.1"
+responses:
+  utter_greet:
+  - text: |
+      Hello! what information about flights do you want ?
+  - text: |
+      Hi! Any flight info ?
+

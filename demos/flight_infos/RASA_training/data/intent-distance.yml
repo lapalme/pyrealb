@@ -1,0 +1,24 @@
+version: "3.1"
+nlu:
+- intent: distance
+  examples: |
+    - 'how far is it from [orlando airport]{"entity":"airport_name","role":"fromloc"} to [philadelphia]{"entity":"city_name","role":"toloc"}'
+    - 'what is the distance from [los angeles international airport]{"entity":"airport_name","role":"fromloc"} to [new york]{"entity":"city_name","role":"toloc"}'
+    - 'tell me distance from [orlando airport]{"entity":"airport_name","role":"fromloc"} to the city'
+    - 'how far is downtown from the airport in [new york]{"entity":"city_name","role":"fromloc"}'
+    - 'how long does it take to get from [atlanta airport]{"entity":"airport_name","role":"fromloc"} into the city of [los angeles]{"entity":"city_name","role":"toloc"}'
+    - 'how long does it take to get from [atlanta]{"entity":"city_name","role":"fromloc"} to [san francisco]{"entity":"city_name","role":"toloc"}'
+    - 'what is the distance between [pittsburgh airport]{"entity":"airport_name","role":"fromloc"} and downtown [los angeles]{"entity":"city_name","role":"toloc"}'
+    - 'how long does it take to fly from [philadelphia]{"entity":"city_name","role":"fromloc"} to [new york]{"entity":"city_name","role":"toloc"}'
+    - 'how far is the airport from [philadelphia]{"entity":"city_name","role":"fromloc"}'
+    - 'what is the distance from [la guardia]{"entity":"airport_name","role":"fromloc"} to [san francisco]{"entity":"city_name","role":"toloc"} downtown'
+    - 'how far from the airport in the [dallas fort worth airport]{"entity":"airport_name","role":"fromloc"} is [seattle]{"entity":"city_name","role":"fromloc"}'
+    - 'how far is the airport from downtown [new york]{"entity":"city_name","role":"fromloc"}'
+    - 'how far is it from [salt lake city airport]{"entity":"airport_name","role":"fromloc"} to [atlanta]{"entity":"city_name","role":"toloc"}'
+    - 'how long does it take to get from [chicago]{"entity":"city_name","role":"fromloc"} to [denver]{"entity":"city_name","role":"toloc"}'
+    - 'what is the distance from [san francisco international airport]{"entity":"airport_name","role":"fromloc"} to [denver]{"entity":"city_name","role":"toloc"}'
+    - 'how long is a trip from [philadelphia airport]{"entity":"airport_name","role":"fromloc"} to downtown [new york]{"entity":"city_name","role":"toloc"}'
+    - 'what is the distance from [toronto international airport]{"entity":"airport_name","role":"fromloc"} to [philadelphia]{"entity":"city_name","role":"toloc"}'
+    - 'what is the distance from [boston airport]{"entity":"airport_name","role":"fromloc"} to [philadelphia]{"entity":"city_name","role":"toloc"}'
+    - 'how far is [oakland airport]{"entity":"airport_name","role":"fromloc"} from downtown'
+    - 'how long is the flight from [new york]{"entity":"city_name","role":"fromloc"} to [atlanta]{"entity":"city_name","role":"toloc"} at [noon]{"entity":"time","role":"depart_time"} on [november]{"entity":"month_name","role":"depart_date"} [seventh]{"entity":"day_number","role":"depart_date"}'

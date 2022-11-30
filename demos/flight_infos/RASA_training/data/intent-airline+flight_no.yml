@@ -1,0 +1,6 @@
+version: "3.1"
+nlu:
+- intent: airline+flight_no
+  examples: |
+    - 'airline and flight number from [san francisco]{"entity":"city_name","role":"fromloc"} to [new york]{"entity":"city_name","role":"toloc"}'
+    - 'may i please see airlines and flight numbers from [philadelphia]{"entity":"city_name","role":"fromloc"} to [seattle]{"entity":"city_name","role":"toloc"} on the [same]{"entity":"date_relative","role":"depart_date"} date [june]{"entity":"month_name","role":"depart_date"} [seventeenth]{"entity":"day_number","role":"depart_date"} also arriving in [seattle]{"entity":"city_name","role":"toloc"} [before]{"entity":"time_relative","role":"arrive_time"} [noon]{"entity":"time","role":"arrive_time"} thank you'

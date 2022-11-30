@@ -1,0 +1,6 @@
+version: "3.1"
+nlu:
+- intent: day_name
+  examples: |
+    - 'what day of the week do flights from [atlanta]{"entity":"city_name","role":"fromloc"} to [seattle]{"entity":"city_name","role":"toloc"} fly on'
+    - 'what days of the week do flights from [chicago]{"entity":"city_name","role":"fromloc"} to [denver]{"entity":"city_name","role":"toloc"} fly on'

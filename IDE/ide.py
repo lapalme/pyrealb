@@ -242,7 +242,7 @@ def _en():
     rules=getRules("en")
     lexicon=getLexicon("en")
     lang="en"
-    print("English rules and lexicon loaded")
+    loadEn(True)
 
 def _fr():
     global lemmata,lexicon,rules,lang
@@ -250,7 +250,7 @@ def _fr():
     rules=getRules("fr")
     lexicon=getLexicon("fr")
     lang="fr"
-    print("Règles et lexique français chargés")
+    loadFr(True)
 
 
 

@@ -1,0 +1,20 @@
+version: "3.1"
+nlu:
+- intent: capacity
+  examples: |
+    - 'how many seats in a [100](aircraft_code)'
+    - 'how many passengers fit on a [d9s](aircraft_code)'
+    - 'how many seats in a [72s](aircraft_code)'
+    - 'what is the [total](mod) seating capacity of all aircraft of [us air](airline_name)'
+    - 'what ''s the capacity of an [f28](aircraft_code)'
+    - 'what are the seating capacities of planes between [new york]{"entity":"city_name","role":"fromloc"} and [los angeles]{"entity":"city_name","role":"toloc"}'
+    - 'list number of people that can be carried on each type of plane that flies between [new york]{"entity":"city_name","role":"fromloc"} and [los angeles]{"entity":"city_name","role":"toloc"}'
+    - 'how many people fit on a [73s](aircraft_code)'
+    - 'how many people fit on a [72s](aircraft_code) airplane'
+    - 'what is the seating capacity of a boeing [767](aircraft_code)'
+    - 'what ''s the capacity of a [733](aircraft_code)'
+    - 'what is the seating capacity for the [f28](aircraft_code)'
+    - 'how many people fly on a turboprop'
+    - 'how many seats in a [734](aircraft_code)'
+    - 'what is the seating capacity of the various airplanes that [delta](airline_name) uses'
+    - 'how many passengers can a boeing [737](aircraft_code) hold'

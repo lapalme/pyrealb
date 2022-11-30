@@ -316,9 +316,9 @@ class Constituent():
                 
     def doElisionEn(self,cList):
         # English elision rule only for changing "a" to "an"
-        # according to https:#owl.english.purdue.edu/owl/resource/591/1/
+        # according to https://owl.english.purdue.edu/owl/resource/591/1/
         hAnRE=re.compile(r"^(heir|herb|honest|honou?r(able)?|hour)",re.I)
-        # https:#www.quora.com/Where-can-I-find-a-list-of-words-that-begin-with-a-vowel-but-use-the-article-a-instead-of-an
+        # https://www.quora.com/Where-can-I-find-a-list-of-words-that-begin-with-a-vowel-but-use-the-article-a-instead-of-an
         uLikeYouRE=re.compile(r"^(uni.*|ub.*|use.*|usu.*|uv.*)",re.I)
         acronymRE=re.compile(r"^[A-Z]+$")
         # Common Contractions in the English Language taken from :http:#www.everythingenglishblog.com/?p=552
@@ -356,8 +356,10 @@ class Constituent():
             w1=m1.group(2)
             w2=m2.group(2)
             if (w1=="a" or w1=="A") and cList[i].isA("D"):
-                if (re.match(r"^[aeio]",w2,re.I) or   # starts with a vowel
-                    (re.match(r"^u",w2,re.I) and not uLikeYouRE.match(w2) or  # u does not sound like you
+                if (re.match(r"^[ai]",w2,re.I) or   # starts with a or a i
+                    (re.match(r"^e",w2,re.I) and not re.match(r"^eu",w2,re.I) or # starts with e but not eu
+                     re.match(r"^o",w2,re.I) and not re.match(r"^onc?e",w2,re.I) or # starts with o but not one or once
+                    re.match(r"^u",w2,re.I) and not uLikeYouRE.match(w2) or  # u does not sound like you
                     hAnRE.match(w2) or       # silent h
                     acronymRE.match(w2))):   # is an acronym
                         cList[i].realization=m1.group(1)+w1+"n"+m1.group(3)

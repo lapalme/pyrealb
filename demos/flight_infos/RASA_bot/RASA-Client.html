@@ -1,0 +1,22 @@
+<!--taken from: https://rasa.com/docs/rasa/connectors/your-own-website/#chat-widget -->
+<html>
+<head>
+	<title>Query a flight database</title>
+</head>
+<body>
+    <h1>Query a flight database</h1>
+    <div style="width:400px">
+    <p>Using an <i>official RASA chat widget</i> on the right, you can ask questions, in English, about flights, fares and airports. The answers are realized using <code>pyrealb</code>.</p>
+    <p>The information is available
+        for flights between the following cities and airports:
+        <i>Atlanta, Denver, New York (JFK and La Guardia), Los Angeles, Chicago, Philadephia, Seattle</i> and <i>San
+            Francisco</i>. Only flights on <i>United, American, US Airways, Delta</i> and <i>Virgin</i> will be returned.</p>
+    <p>Make sure that the RASA server has been launched with <code>rasa run</code> command.</p>
+    </div>
+    <!-- si on veut lancer la conversation: data-initial-payload="Hello" -->
+    <div id="rasa-chat-widget" data-websocket-url="http://localhost:5005"
+         data-default-open="true"
+         data-width="500" data-height="600"></div>
+    <script src="https://unpkg.com/@rasahq/rasa-chat" type="application/javascript"></script>
+</body>
+</html>
