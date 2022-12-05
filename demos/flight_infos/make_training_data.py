@@ -1,14 +1,14 @@
 import json, os
 from collections import Counter
-from RASA_bot.response.parse_examples import parse_example
+from parse_examples import parse_example
 
-q="'"
-qq="''"
 
-def create_nlu(allIntents,allEntities,rasadir):
+def create_intents(allIntents, allEntities, rasa_dir):
+    q="'"
+    qq="''"
     for intent in allIntents:
         if len(allIntents[intent])>1:  # RASA needs at least 2 examples of each intent...
-            nlu_yaml=open(f"{rasadir}/data/intent-{intent}.yml", "w", encoding="utf-8")
+            nlu_yaml=open(os.path.join(rasa_dir, "data", f"intent-{intent}.yml"), "w", encoding="utf-8")
             print('version: "3.1"\nnlu:', file=nlu_yaml)
             print(f"- intent: {intent}", file=nlu_yaml)
             print( "  examples: |", file=nlu_yaml)
@@ -23,7 +23,7 @@ def create_nlu(allIntents,allEntities,rasadir):
             print("Wrote", nlu_yaml.name)
 
 def create_domain(allIntents,allEntities,rasadir):
-    domain_yaml=open(f"{rasadir}/domain.yml", "w", encoding="utf-8")
+    domain_yaml=open(os.path.join(rasadir,"domain.yml"), "w", encoding="utf-8")
     print("""version: "3.1"
 
 session_config:
@@ -31,7 +31,8 @@ session_config:
   carry_over_slots_to_new_session: true
 
 intents:""",file=domain_yaml)
-    print("  - greet",file=domain_yaml)
+    for intent in ["greet","goodbye","bot_challenge"]:
+        print("  - %s"%intent,file=domain_yaml)
     for intent in allIntents:
         if len(allIntents[intent]) > 1:
             print("  -",intent,file=domain_yaml)
@@ -45,41 +46,39 @@ intents:""",file=domain_yaml)
             print("      roles:",file=domain_yaml)
             for role in roleSet:
                 print("      - %s"%role,file=domain_yaml)
-    print("""
-actions:
-  - give_flight_info""",file=domain_yaml)
     print("Wrote", domain_yaml.name)
 
-def create_responses(rasadir):
-    responses_yaml = open(f"{rasadir}/data/responses.yml", "w", encoding="utf-8")
+def create_simple_intents(rasadir):
+    simple_intents_yaml = open(os.path.join(rasadir,"data","simple_intents.yml"), "w", encoding="utf-8")
     print("""version: "3.1"
-responses:
-  utter_greet:
-  - text: |
-      Hello! what information about flights do you want ?
-  - text: |
-      Hi! Any flight info ?
-""",file=responses_yaml)
-    print("Wrote", responses_yaml.name)
+nlu:
+- intent: greet
+  examples: |
+    - good morning
+    - good evening
+    - good afternoon
 
-def create_stories(rasadir):
-    stories_yaml = open(f"{rasadir}/data/stories.yml", "w", encoding="utf-8")
-    print("""version: "3.1"    
-stories:
-  - story: greet and show intent
-    steps:
-    - intent: greet
-    - action: utter_greet
-    - intent: flight
-    - action: give_flight_info
-""",file=stories_yaml)
-    print("Wrote",stories_yaml.name)
+- intent: goodbye
+  examples: |
+    - bye
+    - goodbye
+    - have a nice day
+    - see you later
+
+- intent: bot_challenge
+  examples: |
+    - are you a bot?
+    - are you a human?
+    - am I talking to a bot?
+    - am I talking to a human?
+""",file=simple_intents_yaml)
+    print("Wrote", simple_intents_yaml.name)
 
 
 if __name__ == '__main__':
     pwd = os.path.dirname(__file__)
     inputFN = os.path.join(pwd,"Examples","train.json")
-    rasadir = os.path.join(pwd,"RASA_training")
+    rasa_dir = os.path.join(pwd, "RASA_bot")
     inputF = open(inputFN, "r", encoding="utf-8")
     data = json.load(inputF)
     allIntents = {}
@@ -89,7 +88,6 @@ if __name__ == '__main__':
     examples=data["rasa_nlu_data"]["common_examples"]
     for example in examples:
         parse_example(example,False,allIntents,allEntities,allRoles,allValues)
-    create_nlu(allIntents,allEntities,rasadir)
-    create_domain(allIntents,allEntities,rasadir)
-    create_responses(rasadir)
-    create_stories(rasadir)
+    create_intents(allIntents, allEntities, rasa_dir)
+    create_simple_intents(rasa_dir)
+    create_domain(allIntents, allEntities, rasa_dir)

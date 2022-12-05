@@ -1,0 +1,32 @@
+<!--taken from: https://rasa.com/docs/rasa/connectors/your-own-website/#chat-widget -->
+<!-- this file could be served "locally" (port 8080) using the node simple server (disable cache for development)
+         http.server -c-1
+     in the browser then type the url: http://127.0.0.1:8080/RASA-Client.html
+  -->
+<html>
+<head>
+	<title>Query a flight database</title>
+</head>
+<body>
+    <h1>Query a flight database</h1>
+    <div style="width:400px">
+    <p>Using an <i>official RASA chat widget</i> on the right, you can ask questions, in English, about flights, fares and airports.
+        The answers are realized using <code>pyrealb</code>.</p>
+    <p>The information is available
+        for flights between the following cities and airports:
+        <i>Atlanta, Denver, New York (JFK and La Guardia), Los Angeles, Chicago, Philadephia, Seattle</i> and <i>San
+            Francisco</i>. Only flights on <i>United, American, US Airways, Delta</i> and <i>Virgin</i> will be returned.</p>
+    <p>Make sure that</p>
+        <ul>
+            <li>the RASA server (port 5005) has been launched with <code>rasa run</code> command.</li>
+            <li>to launch the http server (port 8081) for the RASA NLG realizer using <code>pyrealb</code> with <code>python3 nlg_server.py 8081</code></li>
+            <li>cross origin restrictions are removed on your browser served by yet another http server (port 8080)</li>
+        </ul>
+    </div>
+    <!-- To send an initial query: data-initial-payload="Good morning" -->
+    <div id="rasa-chat-widget" data-websocket-url="http://localhost:5005"
+         data-default-open="true"
+         data-width="500" data-height="600"></div>
+    <script src="https://unpkg.com/@rasahq/rasa-chat" type="application/javascript"></script>
+</body>
+</html>

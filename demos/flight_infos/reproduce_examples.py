@@ -9,9 +9,9 @@ import json,re,copy,os,sys
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), 'RASA_bot','response')))
 from calculatebleu import BLEU
-from RASA_bot.response.Entities_module import Entities
+from Entities_module import Entities
 from show_example import show_example
-from RASA_bot.response.realize_example import realize_example
+from realize_example import realize_example
 
 from pyrealb import Constituent
 from typing import Callable

@@ -1,9 +1,0 @@
-version: "3.1"    
-stories:
-  - story: greet and show intent
-    steps:
-    - intent: greet
-    - action: utter_greet
-    - intent: flight
-    - action: give_flight_info
-

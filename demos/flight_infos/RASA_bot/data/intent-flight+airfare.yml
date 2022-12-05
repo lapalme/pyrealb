@@ -1,0 +1,25 @@
+version: "3.1"
+nlu:
+- intent: flight+airfare
+  examples: |
+    - 'give me the flights and fares on [december]{"entity":"month_name","role":"depart_date"} [twenty seventh]{"entity":"day_number","role":"depart_date"} from [new york]{"entity":"city_name","role":"fromloc"} to [atlanta]{"entity":"city_name","role":"toloc"}'
+    - 'all flights and fares from [chicago]{"entity":"city_name","role":"fromloc"} to [san francisco]{"entity":"city_name","role":"toloc"} [round trip](round_trip) [after]{"entity":"time_relative","role":"depart_time"} [12 pm]{"entity":"time","role":"depart_time"} [less](cost_relative) than [1100 dollars](fare_amount)'
+    - '[first](flight_mod) flights and fares from [atlanta]{"entity":"city_name","role":"fromloc"} to [denver]{"entity":"city_name","role":"toloc"} on a [thursday]{"entity":"day_name","role":"depart_date"}'
+    - 'all flights and fares from [new york]{"entity":"city_name","role":"fromloc"} to [new york]{"entity":"city_name","role":"toloc"} [round trip](round_trip) [after]{"entity":"time_relative","role":"depart_time"} [12 pm]{"entity":"time","role":"depart_time"} [less](cost_relative) than [1100 dollars](fare_amount)'
+    - 'all flights and fares from [los angeles]{"entity":"city_name","role":"fromloc"} to [atlanta]{"entity":"city_name","role":"toloc"} [round trip](round_trip) [after]{"entity":"time_relative","role":"depart_time"} [12 pm]{"entity":"time","role":"depart_time"} [less](cost_relative) than [1100 dollars](fare_amount)'
+    - 'give me the flights and fares on [december]{"entity":"month_name","role":"depart_date"} [twenty seventh]{"entity":"day_number","role":"depart_date"} from [new york]{"entity":"city_name","role":"fromloc"} to [los angeles]{"entity":"city_name","role":"toloc"}'
+    - 'show all flights and fares from [new york]{"entity":"city_name","role":"fromloc"} to [philadelphia]{"entity":"city_name","role":"toloc"}'
+    - 'show me all flights and fares from [denver]{"entity":"city_name","role":"fromloc"} to [chicago]{"entity":"city_name","role":"toloc"}'
+    - 'all flights and fares from [denver]{"entity":"city_name","role":"fromloc"} to [chicago]{"entity":"city_name","role":"toloc"} [round trip](round_trip) [after]{"entity":"time_relative","role":"depart_time"} [12 pm]{"entity":"time","role":"depart_time"} [less](cost_relative) than [1100 dollars](fare_amount)'
+    - 'again i will repeat i want to make a [one way](round_trip) flight from [new york]{"entity":"city_name","role":"fromloc"} to [atlanta]{"entity":"city_name","role":"toloc"} will you tell me how much the fares are i would like the [cheapest](cost_relative) fare'
+    - 'show all flights and fares from [los angeles]{"entity":"city_name","role":"fromloc"} to [seattle]{"entity":"city_name","role":"toloc"}'
+    - 'all flights and fares from [atlanta]{"entity":"city_name","role":"fromloc"} to [denver]{"entity":"city_name","role":"toloc"} [round trip](round_trip) [after]{"entity":"time_relative","role":"depart_time"} [12 pm]{"entity":"time","role":"depart_time"} [less](cost_relative) than [1100 dollars](fare_amount)'
+    - 'all flights and fares from [new york]{"entity":"city_name","role":"fromloc"} to [denver]{"entity":"city_name","role":"toloc"} on [virgin](airline_name) number [1039](flight_number) on a [thursday]{"entity":"day_name","role":"depart_date"}'
+    - 'flights and fares from [philadelphia]{"entity":"city_name","role":"fromloc"} to [atlanta]{"entity":"city_name","role":"toloc"}'
+    - 'what are the flights and fares from [san francisco]{"entity":"city_name","role":"fromloc"} to [los angeles]{"entity":"city_name","role":"toloc"}'
+    - 'show me all flights and fares from [new york]{"entity":"city_name","role":"fromloc"} to [seattle]{"entity":"city_name","role":"toloc"}'
+    - 'all flights and fares from [chicago]{"entity":"city_name","role":"fromloc"}'
+    - 'what are the flights and fares from [new york]{"entity":"city_name","role":"fromloc"} to [san francisco]{"entity":"city_name","role":"toloc"}'
+    - 'please list me the flights and their cost of all airlines flying from [san francisco]{"entity":"city_name","role":"fromloc"} to [philadelphia]{"entity":"city_name","role":"toloc"}'
+    - 'please give me a list of all the flights between [philadelphia]{"entity":"city_name","role":"fromloc"} and [new york]{"entity":"city_name","role":"toloc"} and their cost'
+    - 'give me the flights and fares on [december]{"entity":"month_name","role":"depart_date"} [twenty seventh]{"entity":"day_number","role":"depart_date"} from [atlanta]{"entity":"city_name","role":"fromloc"} to [denver]{"entity":"city_name","role":"toloc"} airfare'

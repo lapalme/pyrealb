@@ -1,0 +1,10 @@
+version: "3.1"
+nlu:
+- intent: meal
+  examples: |
+    - 'show me all [meals](meal) on flights from [philadelphia]{"entity":"city_name","role":"fromloc"} to [denver]{"entity":"city_name","role":"toloc"}'
+    - 'is there a [meal](meal) on [virgin](airline_name) flight [852](flight_number) from [new york]{"entity":"city_name","role":"fromloc"} to [denver]{"entity":"city_name","role":"toloc"}'
+    - 'what are all the available [meals](meal)'
+    - 'what are my [meal](meal) options from [los angeles]{"entity":"city_name","role":"fromloc"} to [denver]{"entity":"city_name","role":"toloc"}'
+    - 'do i get a [meal](meal) on the [atlanta]{"entity":"city_name","role":"fromloc"} to [JFK]{"entity":"airport_code","role":"toloc"} flight [american](airline_name) [210](flight_number)'
+    - 'what types of [meals](meal) are available'

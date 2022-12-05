@@ -28,7 +28,7 @@ So I suggest not to spend any time with this demo, and instead use the initial p
 
 Here are the steps to a working _RASA Open Source_ environment on my machine (MacBook Pro-2018) running macOS Monterey (12.6)
 
-1. Ensure the use of Python version 3.8 or 3.9, **not the latest current version 3.10**
+1. Ensure the use of Python version 3.8 or 3.9, **not the latest current version 3.10 or higher**
 2. Create a directory in which the next steps will be run
 3. Create a virtual environment   
      `python3 -m venv ./venv`
@@ -146,9 +146,15 @@ Another _quirk_ for custom actions is the fact that the RASA loader cannot deal 
    _function1_ = _module_._function1_  
    _function2_ = _module_._function2_
 
+## Creating an NLG server
+
+As described in the [NLG servers](https://rasa.com/docs/rasa/nlg/) section of the RASA documentation, « _Rasa also allows you to outsource the response generation and separate it from the dialogue learning_ ».  This is the path we follow to make `pyrealb` realize the sentences for the bot.
+
+The idea is to set up (yet) another HTTP server that receives a POST request containing a JSON structure similar to the `Tracker` information described in the previous section. The reply of the server is another JSON structure containing a field having `text` as key and the realized sentence as value. The address and port of the server are specified in `endpoints.yml`.
+
 ## Conclusion
 
-This is a very short overview of RASA to get started, originally aimed at serving as a reminder for me. It took me some time to gather this information and I wanted to keep somme track of it.
+This is a very short overview of RASA to get started, originally aimed at serving as a reminder for me. It took me some time to gather this information and I wanted to keep some track of it.
 
 ### Contact: [Guy Lapalme](mailto:lapalme@iro.umontreal.ca)
 

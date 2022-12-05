@@ -2,7 +2,7 @@
 # this code uses a similar organization as the one in realize_example.py
 # in which the functions starting with "show..." are named "realize..."
 
-from RASA_bot.response.Entities_module import flight_fields, Entities
+from Entities_module import flight_fields, Entities
 from typing import Callable
 
 def show(prefix:str, entities:Entities, fields:list[str], parent=None) -> [str]:
