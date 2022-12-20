@@ -74,6 +74,7 @@ Some directories include `markup.py` which should be loaded using `pip`. Unfortu
 
 * `99bottlesofbeer/99bottlesofbeer.py` : simple generation of a classic repetitive text in English.
 * `evenementsDemo/evenements.py` : Description (in French) of a list of events, it creates HTML.
+* `flight_infos/README.md` : development of a RASA NLG server giving information about flights, aircrafts, etc...
 * `gophypi/amr2text.py` : generate a literal reading of an AMR (Abstract Meaning Representation);  
                           [paper describing the approach](gophypi/Doc/GoPhiPy.pdf) 
 * `inflectionDemo/inflection.py` : French or English conjugation and declension of a form.

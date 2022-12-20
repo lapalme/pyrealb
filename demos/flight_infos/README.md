@@ -346,6 +346,7 @@ entities. It illustrates how `pyrealb` can be used for generating text for a RAS
 * `calculatebleu.py` : compute BLEU score between strings
 * `convertJSON.py` : convert original data by adding roles and ensuring that flights only go between _known_ cities
 * `Entities_module.py` : Python classes that simplify access to and modification of entities
+* `flight_time.py` : function for dealing with time information in flights
 * `flightDB.json` : current copy of the flight information
 * `make_training_data.py` : convert `train.json` into yaml NLU files for RASA, in the `RASA_bot` directory
 * `nlg_server.py` : RASA NLG server using `pyrealb`

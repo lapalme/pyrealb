@@ -5,7 +5,7 @@ import math
 import operator
 # import json
 
-## from https://github.com/vikasnar/Bleu
+# from https://github.com/vikasnar/Bleu
 # adapted for Python 3 (reduce call)
 
 def fetch_data(cand, ref):
@@ -116,7 +116,7 @@ def geometric_mean(precisions):
 
 
 def BLEU(candidate, references):
-    if len(candidate)==0: return 0
+    if len(candidate) == 0: return 0
     precisions = []
     for i in range(4):
         pr, bp = count_ngram(candidate, references, i+1)

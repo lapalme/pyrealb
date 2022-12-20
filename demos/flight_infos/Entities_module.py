@@ -29,7 +29,7 @@ class Entity:
         return self.role
 
 class Entities:
-    def __init__(self,data:list[Entity]) -> None:
+    def __init__(self,data:Union[list[Entity],list[dict[str,int|str]]]) -> None:
         if len(data)==0 or type(data[0]) is Entity:
             self.entities = data
         else:
@@ -48,7 +48,7 @@ class Entities:
     def pop(self,n:int=None) -> Entity:
         return self.entities.pop(n)
 
-    def split(self,sep:str) -> list[list[Entity]]:
+    def split(self,sep:str) -> list["Entities"]:
         # split entities into lists at entity named "sep"
         ess=[]
         es=[]
@@ -87,7 +87,7 @@ class Entities:
         return ", ".join(res)
 
     # get all values, ignoring their names and clear the list
-    def grab_values(self) -> list[str]:
+    def grab_values(self) -> str:
         values = ", ".join(e.get_value() for e in self.entities)
         self.entities.clear()
         return values

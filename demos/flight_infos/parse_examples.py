@@ -1,4 +1,4 @@
-import json,re,random,os
+import json,random,os
 from collections import Counter
 
 # get information from the flight database

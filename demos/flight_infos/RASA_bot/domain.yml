@@ -30,22 +30,22 @@ intents:
 entities:
   - city_name:
       roles:
-      - toloc
       - stoploc
+      - toloc
       - fromloc
   - time:
       roles:
-      - arrive_time
       - depart_time
+      - arrive_time
   - period_of_day:
       roles:
-      - arrive_time
       - depart_time
+      - arrive_time
       - return_time
   - day_name:
       roles:
-      - depart_date
       - return_date
+      - depart_date
       - arrive_date
   - flight_time
   - cost_relative
@@ -53,8 +53,8 @@ entities:
   - fare_amount
   - today_relative:
       roles:
-      - depart_date
       - return_date
+      - depart_date
       - arrive_date
   - airport_code:
       roles:
@@ -62,27 +62,27 @@ entities:
       - fromloc
   - time_relative:
       roles:
-      - arrive_time
       - depart_time
+      - arrive_time
   - class_type
   - date_relative:
       roles:
-      - depart_date
       - return_date
+      - depart_date
       - arrive_date
   - airline_name
   - start_time:
       roles:
-      - arrive_time
       - depart_time
+      - arrive_time
   - end_time:
       roles:
-      - arrive_time
       - depart_time
+      - arrive_time
   - airport_name:
       roles:
-      - toloc
       - stoploc
+      - toloc
       - fromloc
   - state_name:
       roles:
@@ -90,13 +90,13 @@ entities:
       - fromloc
   - day_number:
       roles:
-      - depart_date
       - return_date
+      - depart_date
       - arrive_date
   - month_name:
       roles:
-      - depart_date
       - return_date
+      - depart_date
       - arrive_date
   - mod
   - fare_basis_code
@@ -105,15 +105,15 @@ entities:
   - meal
   - state_code:
       roles:
-      - toloc
       - stoploc
+      - toloc
       - fromloc
   - meal_description
   - airline_code
   - period_mod:
       roles:
-      - arrive_time
       - depart_time
+      - arrive_time
       - return_time
   - flight_stop
   - or

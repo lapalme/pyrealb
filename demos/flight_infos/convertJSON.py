@@ -6,7 +6,7 @@
 #  The airport, airlines and cities are also changed so that the
 
 import json, os, re
-from RASA_bot.response.parse_examples import parse_example
+from parse_examples import parse_example
 
 value_ent_role_re = re.compile(r'\[(?P<val>.*?)](\((?P<ent0>.*?)\)|{"entity":"(?P<ent>.*?)","role":"(?P<role>.*?)"})')
 
