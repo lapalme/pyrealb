@@ -29,7 +29,7 @@ class Entity:
         return self.role
 
 class Entities:
-    def __init__(self,data:Union[list[Entity],list[dict[str,int|str]]]) -> None:
+    def __init__(self,data:Union[list[Entity],list[dict[str,Union[int,str]]]]) -> None:
         if len(data)==0 or type(data[0]) is Entity:
             self.entities = data
         else:
@@ -44,6 +44,9 @@ class Entities:
 
     def __getitem__(self,i:int) -> Entity :
         return self.entities[i]
+
+    def append(self,entity):
+        self.entities.append(entity)
 
     def pop(self,n:int=None) -> Entity:
         return self.entities.pop(n)

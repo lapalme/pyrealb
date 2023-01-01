@@ -3,16 +3,12 @@
 
 This document relates my experience with the installation of [RASA Open Source (3.0)](https://rasa.com/docs/rasa/). 
 As this turned out to be quite an endeavour, I decided to keep track of the good and bad tries that finally lead to 
-a working system.  I initially found the documentation quite hard to follow, it seems to have been designed for being used as a reference for experienced users. Many tutorials are either copies of the official RASA documentation or long YouTube videos. 
+a working system.  I found the documentation quite hard to follow, it seems to have been designed for being used as a reference for experienced users. Many tutorials are either copies of the official RASA documentation or long YouTube videos. 
 
 It also turned out that _Google was not my friend_, because a search starting with `RASA`  leads most often to official
 RASA pages mixing the many commercial RASA offerings (RASA X, RASA enterprise) and often about RASA 2.x for which the format of the input is not YAML (it can be json or markdown) as is required for RASA 3.x. Here is [a chatbot use case](https://omdena.com/blog/how-to-build-a-chatbot-using-rasa/), not created by the _official_ RASA themselves, that I found useful.
 
 So this a reminder of _one path to success_ for my own use that perhaps others might find useful. It is the result of many unsuccessful experiments and false starts and some findings in the documentation.
-
-## What does RASA do ?
-
-RASA is a conversation manager for dealing with interactions with users. It is aimed at businesses that want to streamline the communication with their customers through chatbots that can answer to the most frequently asked questions. RASA parses the input from users in which it identifies specific entities (e.g. names, dates, amounts, etc.); it also determines the conveyed _intent_ (e.g. greeting, order, request for information, etc.) of the message.  This intent is then used to guide the user through some predefined scenarii (dubbed _stories_) to guide the conversation. In order to achieve this goal, RASA uses learning algorithms to determine entities and intent. It is thus important to provide many annotated examples for each intent.
 
 ## Wasting time with the RASA Playground
 I started with the [RASA Playground](https://rasa.com/docs/rasa/playground) to create a simplistic 
@@ -26,12 +22,12 @@ So I suggest not to spend any time with this demo, and instead use the initial p
 
 ## Initial install and test of the RASA environment
 
-Here are the steps to a working _RASA Open Source_ environment on my machine (MacBook Pro-2018) running macOS Monterey (12.6)
+Here are the steps to a working _RASA Open Source_ environment on my machine (MacBook Pro-2018) running macOS Monterey (12.6). As my laptop does not have a GPU, this might explain why the training process takes so long (2 hours for a few thousand learning examples),
 
 1. Ensure the use of Python version 3.8 or 3.9, **not the latest current version 3.10 or higher**
 2. Create a directory in which the next steps will be run
 3. Create a virtual environment   
-     `python3 -m venv ./venv`
+     `python3.9 -m venv ./venv`
 4. Activate the virtual environment  
      `source ./venv/bin/activate`
 5. Install RASA and its hundreds of dependencies; this takes a long time and generates many warnings and messages, so be patient.  

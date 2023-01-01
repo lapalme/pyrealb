@@ -47,9 +47,18 @@ class S(BaseHTTPRequestHandler):
         logging.info("pyrealb:%s",realize_example.realize_example(intent,Entities(entities)))
         ## answer using pyrealb
         self._set_response()
-        self.wfile.write(json.dumps({"text":query_flight_db.process_intent(intent,entities)}).encode("utf-8"))
+        response_text = query_flight_db.process_intent(intent,entities)
+        # there seems to be an undocumented limit on the length of the response accepted by RASA from an NLG server
+        # around 1K but we use slightly less to take into account the transformation into JSON
+        limit = 900
+        if len(response_text) > limit:
+            last_NL_index=response.rfind("\n") # skip to previous NL
+            response_text = response_text[:(last_NL_index if last_NL_index>0 else limit)]+"\n..."
+        response_json = json.dumps({"text":response_text}).encode("utf-8")
+        logging.info("response lengths: text:%d json:%d"%(len(response_text),len(response_json)))
+        self.wfile.write(response_json)
 
-def run(server_class=HTTPServer, handler_class=S, port=8080):
+def run(server_class=HTTPServer, handler_class=S, port=8081):
     logging.basicConfig(level=logging.INFO)
     server_address = ('', port)
     httpd = server_class(server_address, handler_class)

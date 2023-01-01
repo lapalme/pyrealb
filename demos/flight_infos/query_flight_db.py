@@ -220,6 +220,13 @@ def answer_nb_flights(entities: Entities, flights: Flights) -> str:
         s = S(Pro("there"),
               VP(V("be").n("s" if nb == 1 else "p"),
                  NP(NO(nb), N("flight"))))
+        ## add default origin and destination if they are not specified
+        orig = entities.get_value("city_name","fromloc")
+        dest = entities.get_value("city_name","toloc")
+        if orig == "" and dest != "":
+            entities.append(Entity({"entity":"city_name","value":airports[here]["city"],"role":"fromloc"}))
+        elif orig != "" and dest == "":
+            entities.append(Entity({"entity":"city_name","value":airports[here]["city"],"role":"toloc"}))
     return s.add(realize_example.realize_common(entities)).realize()
 
 
@@ -487,11 +494,11 @@ def process_examples_by_intent(examples: dict[str, list[tuple[str, Entities]]]) 
 
 if __name__ == '__main__':
     # single example for débugging... just change the following bool
-    if False:
+    if True:
         example = json.loads("""
           {
         "text": "round trip fares from los angeles to philadelphia under 3000 dollars",
-        "intent": "airfare",
+        "intent": "flight",
         "entities": [
           {
             "start": 0,
@@ -500,30 +507,11 @@ if __name__ == '__main__':
             "entity": "round_trip"
           },
           {
-            "start": 22,
-            "end": 33,
-            "value": "los angeles",
-            "entity": "city_name",
-            "role": "fromloc"
-          },
-          {
             "start": 37,
             "end": 49,
             "value": "philadelphia",
             "entity": "city_name",
             "role": "toloc"
-          },
-          {
-            "start": 50,
-            "end": 55,
-            "value": "under",
-            "entity": "cost_relative"
-          },
-          {
-            "start": 56,
-            "end": 68,
-            "value": "3000 dollars",
-            "entity": "fare_amount"
           }
         ]
          }
@@ -531,7 +519,6 @@ if __name__ == '__main__':
         debug = True
         print("Entities:", example["entities"])
         print(process_intent(example["intent"], example["entities"]))
-        sys.exit()
     else:
         examples: dict[str, list[tuple[str, Entities]]] = {}
         file_name = os.path.normpath(os.path.join(pwd, "Examples", "train.json"))

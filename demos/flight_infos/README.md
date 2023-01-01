@@ -1,26 +1,44 @@
-# Question generation of flight information
+# A chatbot for flight information
 
-This demo presents a flight information question-answering system connected to a RASA conversation manager. See the [accompanying text](RASA-INTRO.md) for a quick introduction to the implementation of a conversation bot using RASA. After a few false starts, we decided to build an _NLG server_ using pyrealb as this design choice separates the input parsing from the answer generation.
+This demo presents a flight information question-answering system connected to a RASA conversation manager that uses `pyrealb` for realizing answers. See the [accompanying text](RASA-INTRO.md) for a quick introduction to the implementation of a conversation bot using RASA. 
 
-As examples of questions, we use a version of the [Air Travel Information System (ATIS) corpus](https://catalog.ldc.upenn.edu/docs/LDC93S4B/corpus.html) which was originally collected to develop and evaluate speech systems that understand 
-spontaneous speech. The corpus was gathered in a _Wizard of Oz_ experiment in which users were asking about 
-flights, fares, airlines, cities, airports, and ground services for which the information was contained in a 
-relational database. Given the availability of this corpus, the text part (ignoring the speech aspects, e.g. waveform files) has often been used as test for Natural Language Generation (NLG) experiments to try to reproduce the texts from the meticulous data annotations of the different entities in the text.  Of course, these experiments bypass the important _What to say_ step of NLG, but they allow focusing on the _How to say_ step. 
+RASA is a conversation manager for dealing with interactions with users. It is aimed at businesses that want to streamline the communication with their customers through chatbots that can answer to the most frequently asked questions. RASA parses the input from users in which it identifies specific entities (e.g. names, dates, amounts, etc.); it also determines the conveyed _intent_ (e.g. greeting, order, request for information, etc.) of the message.  This intent is then used to guide the user through some predefined scenarii (dubbed _stories_) to guide the conversation. In order to achieve this goal, RASA uses learning algorithms to determine entities and intent. It is thus important to provide many annotated examples of questions for each intent.
 
-In order to have a working bot that can answer the questions in a somewhat realistic database, we extracted 
-a very small subset of flights between a few airports only on selected airlines. 
-The original data is [2015 Flight Delays and Cancellations](https://www.kaggle.com/datasets/usdot/flight-delays) [592 MB]
-from which we created the following files:
-* `airlines.csv` : only 5 airlines were manually selected from the 14 in the original
-* `airports.csv` : only 9 airports were manually selected from the 322 in the original
-* `flightDB.json` : created by `selectFlights.py` that picks flights 
-operated by the selected airlines departing from and arriving in the selected airports.
-Only the first 10 days of January were kept which we consider as sufficient for our small demo.
-The selected airlines, airports and flights are combined in a single file `flightDB.json` [1,8 MB]
+## A corpus of questions and intents over a database
+As examples of questions, we use a version of the [Air Travel Information System (ATIS) corpus](https://catalog.ldc.upenn.edu/docs/LDC93S4B/corpus.html) which was originally collected to develop and evaluate speech systems that understand spontaneous speech. The corpus was gathered in a _Wizard of Oz_ experiment in which users were asking about flights, fares, airlines, cities, airports, and ground services for which the information was contained in a relational database. Given the availability of this corpus, the text part (ignoring the speech aspects, e.g. waveform files) has often been used as test for Natural Language Generation (NLG) experiments to try to reproduce the texts from the meticulous data annotations of the different entities in the text.  Of course, these experiments bypass the important _What to say_ step of NLG, but they allow focusing on the _How to say_ step. 
 
-For example of questions that will be used for training the RASA utterance parser, we use this [version of the dataset](https://github.com/howl-anderson/ATIS_dataset/blob/master/README.en-US.md) slightly modified by `convertJSON.py` so that the roles are indicated as an explicit field instead of being integrated into the entity name.  The departing and arriving airports and the airlines are changed so that only the ones in `flightDB.json` are used. This format is used as output of the RASA 3.0 parser.
+In order to have a working bot that can answer questions in a somewhat realistic database, we extracted 
+a very small subset of flights taken from [2015 Flight Delays and Cancellations](https://www.kaggle.com/datasets/usdot/flight-delays) [592 MB]
+* `airlines.csv` : we selected 5 airlines from the 14 in the original
+* `airports.csv` : we selected 9 airports from the 322 in the original
+* `flightDB.json` : a 1,8 MB file created by `selectFlights.py` that picks flights operated by the selected airlines departing from and arriving in the selected airports. Only flights in the first complete week of January 2015 were kept which we considered as sufficient for our small demo. The selected airlines and airports are also included in this file.
 
-The following is an example of a question (there are 893 questions in the test corpus) which associates the`text`, as a list of tokens, with an `intent` (there are 26 different intents) and a list of _typed_ entities with their position in the `text`. 
+For training the RASA utterance (in our case, questions) parser, we use this [version of the dataset](https://github.com/howl-anderson/ATIS_dataset/blob/master/README.en-US.md) slightly modified by `convertJSON.py` so that the roles are indicated as an explicit field instead of being integrated into the entity name as required for RASA 3.0.  The departing and arriving airports and the airlines are changed so that only the ones in `flightDB.json` are used. 
+
+## Launching the RASA bot
+
+**CAUTION**: 
+* Because of the need of a special environment (RASA runs only in Python 3.8 or 3.9), it is preferable to test with a copy of the `RASA_bot` directory in a Python 3.9 virtual environment which includes RASA instead of the version in this directory.  
+* As our goal was to show how to show how `pyrealb` could be used as a RASA NLG server, we did not spend time _tuning_ the learning parameters of RASA. This might explain why intent determination is not always _ideal_.
+
+There is already a _vanilla_ pretrained model in the RASA_bot directory. Make sure that you have an appropriate RASA system installed as described in the [accompanying text](RASA-INTRO.md). 
+
+1. `cd RASA_bot`
+2. If some examples have changed, run `make_training_data.py` and retrain with `rasa train`  (be patient!)
+3. Launch the NLG server with `python3 nlg_server.py`
+4. Interact with RASA using one of the following:
+   1. the console: `rasa shell` and type questions at the `Your input ->` prompt
+   2. the RASA chat widget:
+      1. in another console, type `rasa run` wait until `Rasa server is up and running.`
+      2. launch a local web server to serve the file `RASA-Client.html` and type questions in the chat box.   
+      3. After a few interactions, this could display something like:  
+![](images/RASA_with_server.jpg)
+      
+
+## Implementation of the system
+
+###  Structure of the questions in the training corpus
+The following is an example of an annotated question (there are 4978 questions in the training corpus and 893 in the test corpus) which associates a tokenized `text` with an `intent` (there are 26 different intents, the most frequent being `flight` which accounts for 70% of all intents in the test corpus) and a list of entities and roles that have been identified in the original question with their positions in the `text`. 
 
 ```javascript
     { "text": "i need a nonstop flight from denver to atlanta",
@@ -32,10 +50,11 @@ The following is an example of a question (there are 893 questions in the test c
         ]
     }
 ```
+### Re-realization of the questions
+Before answering the questions, we decided to realize the original questions using `pyrealb`. We originally felt this step was important to learn how to _juggle_ with the information contained in a question before attempting answering it. As this exercise revealed to be an interesting learning experience, we give some details about it in the following sections.
 
-Before answering the questions, we decided to realize the original questions using `pyrealb`.
 Our goal is not to reproduce _verbatim_ the original `text`, but to illustrate how the information about the entities 
-can be used to realize well-formed English sentences such as: 
+can be used to realize different well-formed English sentences for the example given previously such as: 
 
     I need to travel nonstop from Denver to Atlanta. 
     Show a nonstop flight from Denver to Atlanta. 
@@ -47,11 +66,9 @@ rendered as:
 
     show nonstop flights from denver to atlanta
 
-## Organization of the information
+### Organization of the information
 
-An important aspect of a *data to text* system  is the fact that **all the data, and nothing but the data**, should be realized as text. In our case, this means that all `entities` must be _consumed_ once, and only once, when the text is fully rendered. To achieve this, we define a class called `Entities`to manage the list of entities, an entity being itself represented by another class `Entity`. As entities can be repeated we should not use a _dictionary_ of entities.  The following 
-method returns a comma separated list of all values associated with a given entity name taking into account an 
-optional role. It also removes the found entities from the list. It returns an empty string if the entity is not found.
+An important aspect of a *data to text* system  is the fact that **all the data, and nothing but the data**, should be realized as text. In our case, this means that all `entities` must be _consumed_ once, and only once, when the text is fully rendered. To achieve this, we define a class called `Entities`to manage the list of entities, an entity being itself represented by another class `Entity`. As entities can be repeated we should not use a _dictionary_ of entities.  The following method returns a comma separated list of all values associated with a given entity name taking into account an optional role. It also removes the found entities from the list. It returns an empty string if the entity is not found.
 
 ```python
     def grab_value(self, field:str, role:str=None) -> str:
@@ -68,7 +85,7 @@ optional role. It also removes the found entities from the list. It returns an e
 ```
 This organization allows checking that all entity values have been realized at the end of the generation process.
 
-## Text generation using `pyrealb` (file `realize_example.py`)
+### Text generation using `pyrealb` (file `realize_example.py`)
 
 The goal is to transform entities into an internal data structure that can be realized as an English sentence by 
 `pyrealb`.  For the first sentence above, this means creating a structure equivalent to the following calls:
@@ -85,7 +102,7 @@ The goal is to transform entities into an internal data structure that can be re
 
 ```
 
-### `Terminal` realization
+#### `Terminal` realization
 `pyrealb` words are instances of the `Terminal` class, so values of entities must be transformed.
 The  following function creates a `Terminal` from an entity value guessing its  type from the entity name.
 
@@ -103,7 +120,7 @@ def get_terminal(val:str,entity:str) -> Terminal:
     return Q(val)  # if not found, return a Quoted string
 ```
 
-### `Phrase` realization
+#### `Phrase` realization
 This is used in the following function that is the _basic block_ of most types of realizations. It builds a list of the terminals corresponding to the fields (entity names) appearing in the entities. These terminals are then used as parameters for the `Phrase` constructor given as first parameter. If no matching field names are found then the function returns `None`, a value ignored by `pyrealb` constructors. 
 
 ```python
@@ -135,7 +152,7 @@ to realize the departure and arrival airports with a possible stop in between.
 
 Similar functions are defined for date and time information.
 
-### Common flight information realization
+#### Common flight information realization
 
 Given the fact that almost all requests need general information about flights such as departure, arrival times and places. The following function return a list of `Phrase` combining the values of the relevant entities. Remember that the realization functions return `None` if no relevant entity is found without calling the `Phrase` constructor.
 
@@ -171,7 +188,7 @@ Many of these realization functions use the following _helper_ which creates a p
 def pp(prep:str) -> Callable[[Constituent],Phrase]:
     return lambda *x:PP(P(prep),*x)
 ```
-For example, the resulting of the call to `realize_common` on our running example:
+For example, the result of the call to `realize_common` on our running example:
 
 ```python
 [PP(P("from"),Q("Denver")), PP(P("to"),Q("Atlanta")), None, ...]
@@ -179,7 +196,7 @@ For example, the resulting of the call to `realize_common` on our running exampl
 
 The list of entities if now left with only the first original element.
 
-### Questions with a specific _intent_ realization
+#### Questions with a specific _intent_ realization
 
 For each intent, we define a function to create an appropriate `pyrealb` expression that can be realized as a sentence.
 We only describe here the content of the function for the _flight_ intent which is by far the most frequently encountered, accounting for 74% of all intents in the training corpus. The other 25 intents are dealt similarly.
@@ -198,21 +215,22 @@ Even though not necessary in this application, it is often interesting to allow 
                      realize_common(entities)))
     )
 ```
-#### Baseline generator (file `show_example.py`)
+### Baseline generator (file `show_example.py`)
 
 A simplified version of the question realizer using only Python string manipulations was also developed. In this simple use case, this approach seems sufficient for an output without any variation nor capitalization. This type of output is similar in format as the original text and in fact, the BLEU score on the test corpus is higher, thus _better_, with this baseline (42.3) than with the realizer (34.7).
 
 Although the output of the _real_ realizer would most probably be preferred in a production context, the fact that its automatic score is much lower than the baseline is an indication of the limits of these types of scores.
 
-## Answer questions using the flight database
+### Answering questions using a flight database
 
-As described in the [File Organization section](#file-organization) in the `Flight Data` directory, we limit the queries to a very small subset of US airports, cities and flights from an existing dataset found in Kaggle in order to create `flightDB.json` which is used for answering the questions according to the _intents_ determined by RASA. 
+#### Demo Flight Database
+As described in the [Corpus description section](#A corpus of questions and intents over a database) in the `Flight Data` directory, we limit the queries to a very small subset of US airports, cities and flights from an existing dataset found in Kaggle in order to create `flightDB.json` which is used for answering the questions according to the _intents_ determined by RASA. 
 
-There are 6,109 flights in the database (between the January 1st and 10th 2015) with the following fields:
+There are 6,109 flights in the database (between the January 4th and 10th 2015) with the following fields:
 ```javascript
      {"MONTH": 1,
-      "DAY": 1,
-      "DAY_OF_WEEK": 4,
+      "DAY": 4,
+      "DAY_OF_WEEK": 7,
       "AIRLINE": "DL",
       "FLIGHT_NUMBER": "2336",
       "ORIGIN_AIRPORT": "DEN",
@@ -225,7 +243,7 @@ Days in the week are coded as Monday=1 through Sunday=7.
 
 Finding and realizing an answer to a question is described in `query_flight_db.py` (in the `RASA_bot/response` directory). When this file is called as a main program, it realizes the answers for all examples in `test.json`. This allows testing the answering process on different intentions. 
 
-Given the information available in the database, only a subset of intentions are dealt with (_flight_, _airfare_, _airline_, _abbreviation_ and _day_name_) which account for the vast majority of cases. Less frequent intents such as _ground_service_, _capacity_, _meal_ are not currently dealt with.  The _distance_ intent is not dealt with, even though there is an intercity distance information in the database,  because most of the questions ask for the distance between an airport and the nearby city, an information that is not available.
+Given the information available in the database, only a subset of intentions are dealt with (_flight_, _airfare_, _airline_, _abbreviation_ and _day_name_) which account for the vast majority of cases. Less frequent intents such as _ground_service_, _capacity_, _meal_ are not currently dealt with.  The _distance_ intent is not dealt with, even though there is an intercity distance information in the database,  because most of the questions ask for the distance between an airport and the nearby city, an information that is not available in our database.
 
 Finding flights that satisfy a query is a relatively straightforward process: the list of entities is mapped into a structure similar to the flight information in the database. The essential mapping process is done with the following function to create a dictionary (type `Flight`) with fields such as `origin`, `destination`, `day_name`, etc. The fields `orig_time_rng` and `dest_time_rng` are tuples that define a range of allowed departure or arrival times taking into account loose time specifications such as _morning_ or _evening_ possibly modified with relative time information such as _before_ or _around_,
 
@@ -286,7 +304,9 @@ def find_flights(infos: Flight) -> list[Flight]:
 ```
 
 These functions are called from functions dealing with specific intents return list of strings that can either be printed or sent to a RASA process for display. 
-Here is the function for the _flight_ intent.
+Here is the function for the _flight_ intent which first realizes a sentence giving the number of flights between two airports reusing the function defined for questions. It then calls another function that returns a list of flights.
+The functions for answring questions return list of strings that are either printed separated by a newline or sent to the NLG server of RASA.
+
 ```python
 def process_flight(entities: Entities) -> list[str]:
     flights = find_flights(extract_flight_infos(entities))
@@ -294,13 +314,36 @@ def process_flight(entities: Entities) -> list[str]:
         answer_nb_flights(entities, flights),
         *show_flights(flights)
     ]
+
+def answer_nb_flights(entities: Entities, flights: Flights) -> str:
+    nb = len(flights)
+    if nb == 0:
+        s = oneOf(lambda: S(Pro("there"),
+                            VP(V("be").n("p"),
+                               NP(D("no"), N("flight").n("p")))),
+                  lambda: S(NP(D("no"), N("flight").n("p")),
+                            VP(V("be").t("ps"),
+                               V("find").t("pp"))))
+    else:
+        s = S(Pro("there"),
+              VP(V("be").n("s" if nb == 1 else "p"),
+                 NP(NO(nb), N("flight"))))
+    return s.add(realize_example.realize_common(entities)).realize()
 ```
 
-### Implementing a RASA NLG server 
+## Implementing the RASA NLG server 
 
-As described in [this document](RASA-INTRO.md), it is possible to define an NLG server that will realize an answer given an intent and entities identified by RASA. `nlg_server.py` shows an example that uses `pyrealb` for sentence realization. The challenging part is the handling of a POST request that retrieves the information from the JSON data associated with the request and builds a reply embedding the text realized by `pyrealb`. 
+As described in [this document](RASA-INTRO.md), it is possible to define an NLG server that will realize an answer given an intent and entities identified by RASA. `nlg_server.py` shows an example that uses `pyrealb` for sentence realization. 
+Two important issues to notice:
+1. the response must be in JSON: this must be specified in the header and encoding and decoding must be performed before creating the JSON output
+2. RASA seems to put a limit on the length of an answer from an NLG server.
 
 ```python
+    def _set_response(self):
+        self.send_response(200)
+        self.send_header('Content-type', 'application/json') # <-- the response is in json format
+        self.end_headers()
+
     def do_POST(self):
         content_length = int(self.headers['Content-Length']) # <--- Gets the size of data
         post_data = self.rfile.read(content_length).decode('utf-8') # <--- Gets the data itself
@@ -309,36 +352,24 @@ As described in [this document](RASA-INTRO.md), it is possible to define an NLG 
         message = fields["tracker"]["latest_message"]
         intent = message["intent"]["name"]
         entities = message.get("entities",[]) # fields: entity, value
-        text = message.get("text")
         ## answer using pyrealb
+        response_text = query_flight_db.process_intent(intent,entities)
+        # there seems to be an undocumented limit on the length of the response accepted by RASA from an NLG server
+        # around 1K, but we use slightly less to take into account the transformation into JSON
+        limit = 900
+        if len(response_text) > limit:
+            last_NL_index=response.rfind("\n") # skip to previous NL
+            response_text = response_text[:(last_NL_index if last_NL_index>0 else limit)]+"\n..."
+        response_json = json.dumps({"text":response_text}).encode("utf-8")
+        self.wfile.write(response_json)
         self._set_response()
         self.wfile.write(json.dumps({"text":query_flight_db.process_intent(intent,entities)}).encode("utf-8"))
 ```
 
-### Launching the RASA bot
-
-**CAUTION**: 
-* Because of the need of a special environment (RASA runs only in Python 3.8 or 3.9), it is preferable to test with a copy of the `RASA_bot`
-directory in a Python 3.9 virtual environment which includes RASA instead of the version in this directory.  
-* As our goal was to show how to show how `pyrealb` could be used as a RASA NLG server, we did not spend time _tuning_ the learning parameters of RASA. This might explain why intent determination is not always _ideal_.
-
-Make sure that there is already a trained model in the RASA_bot directory.
-
-1. `cd RASA_bot`
-2. If some examples have changed, run `make_training_data.py` and retrain with `rasa train`  (be patient!)
-3. Launch the NLG server with `python3 nlg_server.py`
-4. Interact with RASA using one of the following:
-   1. the console: `rasa shell` and type questions at the `Your input ->` prompt
-   2. the RASA chat widget:
-      1. in a console, type `rasa run` wait until `Rasa server is up and running.`
-      2. launch a local web server to serve the file `RASA-Client.html` and type questions in the chat box.   
-      3. After a few interactions, this could display something like:  
-![](images/RASA_with_server.jpg)
-      
 ## Conclusion
 
 This demo shows a way to use `pyrealb` to realize sentences (both questions and answers) from data in the form of 
-entities. It illustrates how `pyrealb` can be used for generating text for a RASA chatbot using an NLG server.
+tagged entities. It illustrates how `pyrealb` can be used for implementing an NLG server for generating text for a RASA chatbot.
 
 ## Contact: [Guy Lapalme](mailto:lapalme@iro.umontreal.ca)
 

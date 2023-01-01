@@ -30,12 +30,20 @@ def process_example(example):
 def process_file(fileN):
     print("Processing",fileN)
     data = json.load(open(fileN+".json","r",encoding="utf-8"))
+    nb=0
     for example in data["rasa_nlu_data"]["common_examples"]:
         process_example(example)
+        nb += 1
     json.dump(data,open(fileN[:-5]+".json","w",encoding="utf-8"),indent=2)
-    print(fileN[:-5]+".json","written")
+    print("%d examples written on file %s.json"%(nb,fileN[:-5]))
 
 if __name__ == '__main__':
     pwd = os.path.dirname(__file__)
     process_file(os.path.join(pwd, "Examples", "test-orig"))
     process_file(os.path.join(pwd,"Examples","train-orig"))
+
+#  sortie
+# Processing /Users/lapalme/Dropbox/pyrealb/demos/flight_infos/Examples/test-orig
+# 893 examples written on file /Users/lapalme/Dropbox/pyrealb/demos/flight_infos/Examples/test.json
+# Processing /Users/lapalme/Dropbox/pyrealb/demos/flight_infos/Examples/train-orig
+# 4978 examples written on file /Users/lapalme/Dropbox/pyrealb/demos/flight_infos/Examples/train.json
