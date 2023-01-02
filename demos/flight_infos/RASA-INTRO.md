@@ -24,13 +24,13 @@ So I suggest not to spend any time with this demo, and instead use the initial p
 
 Here are the steps to a working _RASA Open Source_ environment on my machine (MacBook Pro-2018) running macOS Monterey (12.6). As my laptop does not have a GPU, this might explain why the training process takes so long (2 hours for a few thousand learning examples),
 
-1. Ensure the use of Python version 3.8 or 3.9, **not the latest current version 3.10 or higher**
+1. Ensure the use of an _old_ Python version 3.9 at the time of writing, **not the latest current version 3.10 or higher**
 2. Create a directory in which the next steps will be run
 3. Create a virtual environment   
      `python3.9 -m venv ./venv`
 4. Activate the virtual environment  
      `source ./venv/bin/activate`
-5. Install RASA and its hundreds of dependencies; this takes a long time and generates many warnings and messages, so be patient.  
+5. Install RASA and more than 150 dependencies (see [this file](requirements.txt)); this takes a long time and generates many warnings and messages, so be patient.  
      `pip3 install RASA`
 6. Create the initial project: configuration and domain files, data and action directories  
       `rasa init`

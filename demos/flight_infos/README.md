@@ -388,6 +388,7 @@ tagged entities. It illustrates how `pyrealb` can be used for implementing an NL
 * `README.md` : this file
 * `realize_example.py` : realize an example using `pyrealb`
 * `reproduce_examples.py` : main file to realize all examples both using the string based realizer and the one using `pyrealb`
+* `requirements.txt` : list of dependencies created by `pip freeze` with Python 3.9.13
 * `show_example.py` : realize an example using Python string manipulation, mainly concatenation
 * `Examples` directory:
   * `train-orig.json`: [original test data ](https://github.com/howl-anderson/ATIS_dataset/blob/master/README.en-US.md)
