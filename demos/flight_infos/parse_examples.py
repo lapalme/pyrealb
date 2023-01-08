@@ -1,32 +1,35 @@
-import json,random,os
+import json, random, os
 from collections import Counter
 
 # get information from the flight database
-flightDB=json.load(open(os.path.join(os.path.dirname(__file__),"flightDB.json"),"r",encoding="utf-8"))
-airlines=[flightDB["airlines"][key].lower() for key in flightDB["airlines"]]
+flightDB = json.load(open(os.path.join(os.path.dirname(__file__), "flightDB.json"), "r", encoding="utf-8"))
+airlines = [flightDB["airlines"][key].lower() for key in flightDB["airlines"]]
 # print(airlines)
-cities  =[flightDB["airports"][airport]["city"].lower() for airport in flightDB["airports"]]
-airport_codes=list(flightDB["airports"].keys())
+cities = [flightDB["airports"][airport]["city"].lower() for airport in flightDB["airports"]]
+airport_codes = list(flightDB["airports"].keys())
+
+
 # print(cities)
 
 # ensure that cities and airlines are ones that are in the database...
 def changeCitiesAirlines(entities):
     # check cities
-    cityMap={}
-    newCities=random.sample(cities,4) # sample 3 different cities
-    iCity=0                           # index in city replacement
-    for entity in entities: # find systematic replacements
+    cityMap = {}
+    newCities = random.sample(cities, 4)  # sample 3 different cities
+    iCity = 0  # index in city replacement
+    for entity in entities:  # find systematic replacements
         if entity["entity"] == "city_name":
             if entity["value"] not in cityMap:
-                cityMap[entity["value"]]=newCities[iCity]
-                iCity+=1
+                cityMap[entity["value"]] = newCities[iCity]
+                iCity += 1
     for entity in entities:
-        if entity["entity"]=="city_name":
-            entity["value"]=cityMap[entity["value"]]
-        elif entity["entity"]=="airline_name":
-            entity["value"]=random.choice(airlines)
-        elif entity["entity"]=="airport_code":
-            entity["value"]=random.choice(airport_codes)
+        if entity["entity"] == "city_name":
+            entity["value"] = cityMap[entity["value"]]
+        elif entity["entity"] == "airline_name":
+            entity["value"] = random.choice(airlines)
+        elif entity["entity"] == "airport_code":
+            entity["value"] = random.choice(airport_codes)
+
 
 # Parse all examples from the {train|test}.json files and compute statistics
 # if change is True :
@@ -38,19 +41,19 @@ def parse_example(example, change, allIntents=None, all_entities=None, allRoles=
     if change:
         changeCitiesAirlines(entities)
     newText = ""
-    entitySet=set()
+    entitySet = set()
     last = 0
     shift = 0  # differences in length between old and new values
     if len(entities) > 0:
         for e in entities:
             newText += text[last:e["start"]]
-            entity = e["entity"] # save values of fields
+            entity = e["entity"]  # save values of fields
             value = e["value"]
             start = e["start"]
-            end   = e["end"]
+            end = e["end"]
             if allValues is not None:
                 allValues[value] += 1
-            newText+=f'[{value}]'
+            newText += f'[{value}]'
             if change:
                 e["start"] += shift
                 shift += len(value) - (end - start)
@@ -65,7 +68,7 @@ def parse_example(example, change, allIntents=None, all_entities=None, allRoles=
                     allRoles[role] += 1
             if all_entities is not None:
                 if entity not in all_entities:
-                    all_entities[entity]=[1,set()]
+                    all_entities[entity] = [1, set()]
                 else:
                     all_entities[entity][0] += 1
                 if role is not None:
@@ -81,32 +84,33 @@ def parse_example(example, change, allIntents=None, all_entities=None, allRoles=
     if change:
         example["text"] = newText
 
+
 #  show statistics on the file
 if __name__ == '__main__':
-    inputFN = os.path.normpath(os.path.join(os.path.dirname(__file__),"..","..","Examples","train.json"))
+    inputFN = os.path.normpath(os.path.join(os.path.dirname(__file__), "..", "..", "Examples", "train.json"))
     inputF = open(inputFN, "r", encoding="utf-8")
     data = json.load(inputF)
     allIntents = {}  # {str:[[str,set(str)]} : [(texte avec entités annotées,ensemble d'entités)]
-    allEntities = {} # {str: [int,set(str)]}  : [(nombre d'occurrences,ensemble de roles)]
+    allEntities = {}  # {str: [int,set(str)]}  : [(nombre d'occurrences,ensemble de roles)]
     allValues = Counter()
     allRoles = Counter()
-    examples=data["rasa_nlu_data"]["common_examples"]
+    examples = data["rasa_nlu_data"]["common_examples"]
     for example in examples:
-        parse_example(example,True,allIntents,allEntities,allRoles,allValues)
+        parse_example(example, True, allIntents, allEntities, allRoles, allValues)
     ### print statistics...
-    print("FILE:%s [%d examples]"%(inputF.name,len(examples)))
-    print("\nALL INTENTS :",sum(len(v) for v in allIntents.values()))
-    for (n,i) in sorted([(len(ins),i) for (i,ins) in allIntents.items()],reverse=True):
-        print("%5d:%s"%(n,i))
-    print("\nALL ENTITIES :",sum(len(v) for v in allEntities.values()))
-    for (e,[n,roles]) in sorted(allEntities.items()):
-        print("%-30s:%5d:%s"%(e,n,", ".join(role for role in roles)))
-    print("\nALL ROLES :",allRoles.total())
-    for (e,n) in sorted(allRoles.items()):
-        print("%-30s:%5d"%(e,n))
-    print("\nALL VALUES :",allValues.total())
-    for (e,n) in sorted(allValues.items()):
-        print("%-30s:%5d"%(e,n))
+    print("FILE:%s [%d examples]" % (inputF.name, len(examples)))
+    print("\nALL INTENTS :", sum(len(v) for v in allIntents.values()))
+    for (n, i) in sorted([(len(ins), i) for (i, ins) in allIntents.items()], reverse=True):
+        print("%5d:%s" % (n, i))
+    print("\nALL ENTITIES :", sum(len(v) for v in allEntities.values()))
+    for (e, [n, roles]) in sorted(allEntities.items()):
+        print("%-30s:%5d:%s" % (e, n, ", ".join(role for role in roles)))
+    print("\nALL ROLES :", allRoles.total())
+    for (e, n) in sorted(allRoles.items()):
+        print("%-30s:%5d" % (e, n))
+    print("\nALL VALUES :", allValues.total())
+    for (e, n) in sorted(allValues.items()):
+        print("%-30s:%5d" % (e, n))
 
 """
 FILE:data/test.json [893 examples]

@@ -3,6 +3,8 @@ import codecs
 import os
 import math
 import operator
+
+
 # import json
 
 # from https://github.com/vikasnar/Bleu
@@ -42,7 +44,7 @@ def count_ngram(candidate, references, n):
             limits = len(words) - n + 1
             # loop through the sentance consider the ngram length
             for i in range(limits):
-                ngram = ' '.join(words[i:i+n]).lower()
+                ngram = ' '.join(words[i:i + n]).lower()
                 if ngram in ngram_d.keys():
                     ngram_d[ngram] += 1
                 else:
@@ -88,11 +90,11 @@ def clip_count(cand_d, ref_ds):
 
 def best_length_match(ref_l, cand_l):
     """Find the closest length of reference to that of candidate"""
-    least_diff = abs(cand_l-ref_l[0])
+    least_diff = abs(cand_l - ref_l[0])
     best = ref_l[0]
     for ref in ref_l:
-        if abs(cand_l-ref) < least_diff:
-            least_diff = abs(cand_l-ref)
+        if abs(cand_l - ref) < least_diff:
+            least_diff = abs(cand_l - ref)
             best = ref
     return best
 
@@ -101,8 +103,9 @@ def brevity_penalty(c, r):
     if c > r:
         bp = 1
     else:
-        bp = math.exp(1-(float(r)/c))
+        bp = math.exp(1 - (float(r) / c))
     return bp
+
 
 # taken from https://stackoverflow.com/questions/44070877/one-liner-reduce-in-python3
 def reduce(func, seq):
@@ -110,6 +113,7 @@ def reduce(func, seq):
     for item in seq[1:]:
         tmp = func(tmp, item)
     return tmp
+
 
 def geometric_mean(precisions):
     return (reduce(operator.mul, precisions)) ** (1.0 / len(precisions))
@@ -119,10 +123,11 @@ def BLEU(candidate, references):
     if len(candidate) == 0: return 0
     precisions = []
     for i in range(4):
-        pr, bp = count_ngram(candidate, references, i+1)
+        pr, bp = count_ngram(candidate, references, i + 1)
         precisions.append(pr)
     bleu = geometric_mean(precisions) * bp
     return bleu
+
 
 if __name__ == "__main__":
     candidate, references = fetch_data(sys.argv[1], sys.argv[2])

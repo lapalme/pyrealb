@@ -1,4 +1,4 @@
-# process some time aspect infos for flights
+# process time related infos for flights
 
 import re
 from typing import Optional, Union
