@@ -53,7 +53,7 @@ class S(BaseHTTPRequestHandler):
         # around 1K but we use slightly less to take into account the transformation into JSON
         limit = 900
         if len(response_text) > limit:
-            last_nl_idx = response.rfind("\n")  # skip to previous NL
+            last_nl_idx = response_text.rfind("\n",0,limit)  # skip to the last NL before limit
             response_text = response_text[:(last_nl_idx if last_nl_idx > 0 else limit)] + "\n..."
         response_json = json.dumps({"text": response_text}).encode("utf-8")
         logging.info("response lengths: text:%d json:%d" % (len(response_text), len(response_json)))

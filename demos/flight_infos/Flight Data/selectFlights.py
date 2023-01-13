@@ -31,7 +31,7 @@ print(airlines)
 
 flights=[]
 fields = ['MONTH', 'DAY', 'DAY_OF_WEEK', 'AIRLINE', 'FLIGHT_NUMBER', 'ORIGIN_AIRPORT', 'DESTINATION_AIRPORT', 'SCHEDULED_DEPARTURE', 'DISTANCE', 'SCHEDULED_ARRIVAL']
-numericfields=['MONTH', 'DAY', 'DAY_OF_WEEK']
+numericfields=['MONTH', 'DAY', 'DAY_OF_WEEK', 'DISTANCE']
 with open(os.path.join(pwd,"Original","flights.csv")) as airline_csv:
     airlinesReader = csv.DictReader(airline_csv)
     i=0
@@ -41,6 +41,11 @@ with open(os.path.join(pwd,"Original","flights.csv")) as airline_csv:
             for f in numericfields:
                 row[f]=int(row[f])
             flight = {f:row[f] for f in fields}
+            # make up a cost for a flight
+            # cost = fixed cost (100$) + 0.20$ per mile + 200$ on Friday, Saturday and Sunday
+            dist = row["DISTANCE"]
+            day = row["DAY_OF_WEEK"]
+            flight["COST"] = 100 + (dist // 5 * 5) + (200 if day > 4 else 0)
             # print(flight)
             flights.append(flight)
             i+=1

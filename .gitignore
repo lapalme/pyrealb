@@ -116,3 +116,4 @@ dmypy.json
 demos/flight_infos/Flight Data/Original/flights.csv
 demos/flight_infos/Flight Data/Original/flights.csv
 demos/flight_infos/Flight Data/Original/flights.csv
+.idea/*.xml

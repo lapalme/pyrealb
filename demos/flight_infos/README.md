@@ -11,7 +11,7 @@ In order to have a working bot that can answer questions in a somewhat realistic
 a very small subset of flights taken from [2015 Flight Delays and Cancellations](https://www.kaggle.com/datasets/usdot/flight-delays) [592 MB]
 * `airlines.csv` : we selected 5 airlines from the 14 in the original
 * `airports.csv` : we selected 9 airports from the 322 in the original
-* `flightDB.json` : a 1,8 MB file created by `selectFlights.py` that picks flights operated by the selected airlines departing from and arriving in the selected airports. Only flights in the first complete week of January 2015 were kept which we considered as sufficient for our small demo. The selected airlines and airports are also included in this file.
+* `flightDB.json` : a 1,8 MB file created by `selectFlights.py` that picks flights operated by the selected airlines departing from and arriving in the selected airports. Only flights in the first complete week of January 2015 were kept which we considered as sufficient for our small demo. The selected airlines and airports are also included in this file. A fictive cost based on the distance and day of the week is added to each flight.
 
 For training the RASA utterance (in our case, questions) parser, we use this [version of the dataset](https://github.com/howl-anderson/ATIS_dataset/blob/master/README.en-US.md) slightly modified by `convertJSON.py` so that the roles are indicated as an explicit field instead of being integrated into the entity name as required for RASA 3.0.  The departing and arriving airports and the airlines are changed so that only the ones in `flightDB.json` are used. 
 
@@ -21,17 +21,20 @@ For training the RASA utterance (in our case, questions) parser, we use this [ve
 * Because of the need of a special environment (RASA runs only in Python 3.8 or 3.9), it is preferable to test with a copy of the `RASA_bot` directory in a Python 3.9 virtual environment which includes RASA instead of the version in this directory.  
 * As our goal was to show how to show how `pyrealb` could be used as a RASA NLG server, we did not spend time _tuning_ the learning parameters of RASA. This might explain why intent determination is not always _ideal_.
 
-There is already a _vanilla_ pretrained model in the RASA_bot directory. Make sure that you have an appropriate RASA system installed as described in the [accompanying text](RASA-INTRO.md). 
+There is already a _vanilla_ pretrained model in the RASA_bot directory. Make sure that you have an appropriate RASA system installed as described in the first five steps of the [accompanying text](RASA-INTRO.md#Initial-install-and-test-of-the-RASA-environment). 
 
 1. `cd RASA_bot`
 2. If some examples have changed, run `make_training_data.py` and retrain with `rasa train`  (be patient!)
 3. Launch the NLG server with `python3 nlg_server.py`
 4. Interact with RASA using one of the following:
    1. the console: `rasa shell` and type questions at the `Your input ->` prompt
+      1. to check that the NLG server is working: type `good morning`, it should answer by `Monday in Chicago:...`
+      2. 
    2. the RASA chat widget:
       1. in another console, type `rasa run` wait until `Rasa server is up and running.`
-      2. launch a local web server to serve the file `RASA-Client.html` and type questions in the chat box.   
-      3. After a few interactions, this could display something like:  
+      2. launch a local web server, such as `http-server -c-1` if using [this server](https://www.npmjs.com/package/http-server), which should be run from the parent directory of RASA_bot
+      3. load the file `RASA-Client.html` and type questions in the chat box. Note that because of the many websites interacting, _Cross Origin Requests_ should not be **blocked**.
+      4. after a few interactions, this could display something like:  
 ![](images/RASA_with_server.jpg)
       
 
@@ -357,7 +360,7 @@ Two important issues to notice:
         # there seems to be an undocumented limit on the length of the response accepted by RASA from an NLG server
         # around 1K, but we use slightly less to take into account the transformation into JSON
         limit = 900
-        if len(response_text) > limit:
+        if len(response_text) > limit:  # truncate to the last complete line within the limit
             last_NL_index=response.rfind("\n") # skip to previous NL
             response_text = response_text[:(last_NL_index if last_NL_index>0 else limit)]+"\n..."
         response_json = json.dumps({"text":response_text}).encode("utf-8")
@@ -375,13 +378,13 @@ tagged entities. It illustrates how `pyrealb` can be used for implementing an NL
 
 ## File organization
 * `calculatebleu.py` : compute BLEU score between strings
-* `convertJSON.py` : convert original data by adding roles and ensuring that flights only go between _known_ cities
-* `Entities_module.py` : Python classes that simplify access to and modification of entities
+* `convert_examples.py` : convert original data by adding roles and ensuring that flights only go between _known_ cities
+* `Entities.py` : Python classes that simplify access to and modification of entities
 * `flight_time.py` : function for dealing with time information in flights
-* `flightDB.json` : current copy of the flight information
+* `Flights.py` : class for extracted Flight data from the database and list of flights
 * `make_training_data.py` : convert `train.json` into yaml NLU files for RASA, in the `RASA_bot` directory
 * `nlg_server.py` : RASA NLG server using `pyrealb`
-* `parseExamples.py` : parse all examples from the `{train|test}.json` files and compute statistics, it can be parameterized to ensure that only airlines and cities in `flightDB.json` are used 
+* `parse_examples.py` : parse all examples from the `{train|test}.json` files and compute statistics, it can be parameterized to ensure that only airlines and cities in `flightDB.json` are used 
 * `query_flight_db.py` : use information found by RASA and query the flight database and realize an answer. When called as main, call the answer process on the examples from `test.json`
 * `RASA-Client.html` : web page to interact using an _official RASA chat widget_
 * `RASA-INTRO.md` : introduction to RASA, relating my own experience and serving as a reminder for a simple use of RASA
@@ -406,4 +409,17 @@ tagged entities. It illustrates how `pyrealb` can be used for implementing an NL
   * `actions` directory in which the RASA custom action is defined, the RASA action server should be run in this directory.
   * `data` directory : its content is filled by `make_training_data.py`
   * `models` : trained model with default parameters
+  * `config.yml` : configuration file for RASA
+  * `credentials.yml` : credentials for RASA (especially for making the _chat widget_ available)
+  * `domain.yml` : list of all intents (created by `make_training_data.py`)
+  * `endpoints.yml` : information for RASA (especially for making the _NLG server_ available)
 
+## Steps for creating data and running the system
+1. Select Flight [data](https://www.kaggle.com/datasets/usdot/flight-delays)
+   1. select airlines
+   2. select airports
+   3. run `Flight Data/selectFlights.py`
+2. Convert [examples](Examples) with `convert_examples.py`
+3. Check that the examples can be reproduced with and without `pyrealb` using `reproduce_examples.py`
+4. Answer all example questions with `query_flight_db.py`
+5. Run with RASA as discussed [above](#Launching-the-RASA-bot)

@@ -1,10 +1,10 @@
 # Sentence realization using pyrealb from ATIS data
 # this code uses a similar organization as the one in show_example.py
 # in which the functions starting with "realize..." are named "show..."
-import sys, re
-from typing import Callable
+import re
+from typing import Callable, Optional
 from pyrealb import *
-from Entities import flight_fields, Entity, Entities
+from Entities import flight_fields, Entities
 
 loadEn()
 
@@ -22,7 +22,7 @@ def get_terminal(val: str, entity: str) -> Terminal:
     return Q(val)  # if not found, return a Quoted string
 
 
-def realize(phrase: Phrase, entities: Entities, fields: list[str], role: str = None) -> Constituent:
+def realize(phrase: Phrase, entities: Entities, fields: list[str], role: Optional[str] = None) -> Constituent:
     res = []
     for f in fields:
         val = entities.grab_value(f, role)
@@ -31,19 +31,19 @@ def realize(phrase: Phrase, entities: Entities, fields: list[str], role: str = N
     return phrase(*res) if len(res) > 0 else None
 
 
-def realize_loc(phrase: Phrase, entities: Entities, role: str) -> Constituent:
+def realize_loc(phrase: Phrase, entities: Entities, role: Optional[str]) -> Constituent:
     return realize(phrase, entities,
                    ["city_name", "state_name", "state_code", "country_name",
                     "airport_name", "airport_code"], role)
 
 
-def realize_date(entities: Entities, role: str) -> Constituent:
+def realize_date(entities: Entities, role: Optional[str]) -> Constituent:
     return realize(SP, entities,
                    ["date_relative", "today_relative", "day_name", "month_name",
                     "day_number", "year"], role)
 
 
-def realize_time(entities: Entities, role: str) -> [Constituent]:
+def realize_time(entities: Entities, role: Optional[str]) -> [Constituent]:
     res = []
     if entities.has_entity("start_time", role) and entities.has_entity("end_time", role):
         res.append(PP(P("between"),
@@ -187,7 +187,7 @@ def realize_intent(intent: str, entities: Entities) -> Phrase:
         val = entities.grab_value("flight_time")
         if len(val) > 0:
             vals = []
-            for v in re.split(r" |_", val):
+            for v in re.split(r"[ _]", val):
                 if v.endswith("s"):
                     n = "p"
                     vals.append(get_terminal(v[:-1], "flight_time"))

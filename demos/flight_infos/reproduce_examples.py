@@ -5,7 +5,7 @@
 #     - a realizer that uses pyrealb
 #   It computes the BLEU score of each realizer
 
-import json, re, copy, os, sys
+import json, re, copy, os
 
 from calculatebleu import BLEU
 from Entities import Entities
@@ -16,7 +16,8 @@ from typing import Callable, Optional
 
 Realizer = Callable[[str, Entities, Optional[bool]], str]
 
-## testing of a single example
+
+# testing of a single example
 def process_example(exampleStr: str, realizer: Realizer) -> None:
     example = json.loads(exampleStr)
     entities = Entities(example['entities'])

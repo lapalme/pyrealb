@@ -146,7 +146,9 @@ Another _quirk_ for custom actions is the fact that the RASA loader cannot deal 
 
 As described in the [NLG servers](https://rasa.com/docs/rasa/nlg/) section of the RASA documentation, « _Rasa also allows you to outsource the response generation and separate it from the dialogue learning_ ».  This is the path we follow to make `pyrealb` realize the sentences for the bot.
 
-The idea is to set up (yet) another HTTP server that receives a POST request containing a JSON structure similar to the `Tracker` information described in the previous section. The reply of the server is another JSON structure containing a field having `text` as key and the realized sentence as value. The address and port of the server are specified in `endpoints.yml`.
+The idea is to set up (yet) another HTTP server that receives a POST request containing a JSON structure similar to the `Tracker` information described in the previous section. The reply of the server is another JSON structure containing a field having `text` as key and the realized sentence as value. The address and port of the server are specified in `endpoints.yml`. Note that because of the many websites interacting, _Cross Origin Requests_ should not be **blocked** on the browser or in the request.
+
+In our experiments, we discovered that there seems to be a hidden and undocumented limit (about 1K bytes) on the length of the response text that can be sent from an NLG server. This should not be a problem in the context of a chat conversation, but this limit is useful to know.
 
 ## Conclusion
 

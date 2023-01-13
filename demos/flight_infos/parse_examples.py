@@ -4,9 +4,11 @@ from collections import Counter
 # get information from the flight database
 flightDB = json.load(open(os.path.join(os.path.dirname(__file__), "flightDB.json"), "r", encoding="utf-8"))
 airlines = [flightDB["airlines"][key].lower() for key in flightDB["airlines"]]
+airports = flightDB["airports"]
 # print(airlines)
-cities = [flightDB["airports"][airport]["city"].lower() for airport in flightDB["airports"]]
-airport_codes = list(flightDB["airports"].keys())
+cities = [flightDB["airports"][airport]["city"].lower() for airport in airports]
+airport_names = [flightDB["airports"][airport]["name"].lower() for airport in airports]
+airport_codes = list(airports.keys())
 
 
 # print(cities)
@@ -29,6 +31,8 @@ def changeCitiesAirlines(entities):
             entity["value"] = random.choice(airlines)
         elif entity["entity"] == "airport_code":
             entity["value"] = random.choice(airport_codes)
+        elif entity["entity"] == "airport_name":
+            entity["value"] = random.choice(airport_names)
 
 
 # Parse all examples from the {train|test}.json files and compute statistics

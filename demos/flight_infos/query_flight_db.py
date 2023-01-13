@@ -12,21 +12,26 @@
 # When called as a main,
 #       "process_examples_by_intent" is called with the entities from the {training|test}.json files
 
-import json, re, os
+import json, re
 from typing import Optional, Union, Callable, Tuple
 
 from pyrealb import *
 
 from Entities import Entities, Entity
-import realize_example
 
 from flight_time import day_numbers, days_int, int_days, months, numbers, process_time_period
-from Flights import Flights, Flight, group_flights, match_flights, flights, airports, airlines
+from Flights import Flights, Flight, show_flights, group_flights, match_flights, flights, airports, airlines
 
-debug = True  # show extracted entities and information used for querying the database
+debug = False  # show extracted entities and information used for querying the database
 
-# type of information extracted from entities
-Infos = dict[str, Union[str, int, Tuple[int, int]]]
+# extracted information (by extract_flight_info and process_time_period in flight_time.py) used for matching flights
+# { "origin" : <city name>, "destination": <city name>,
+#   "airline": <airline name>, "flight_number": <flight id>,
+#   "[{depart|arrive}_time.]time_relative": str, "date_relative": str,
+#   "days": int|set(int), "month":str, "date":int, "year": int,
+#   "orig_time_rng":int|Tuple[int] "dest_time_rng":int|Tuple[int]
+# }
+Info = dict[str, Union[str, int, Tuple[int, int]]]
 
 # current day and town
 today = 1  # Monday
@@ -56,45 +61,46 @@ def airline_code(name: str) -> Optional[str]:
     return None
 
 
-def find_flights(infos: Infos) -> list[Flight]:
+def find_flights(info: Info) -> list[Flight]:
     # simple-minded approach to flight matching
-    orig = airport_code(infos.get("origin"))
-    if orig is None and infos.get("origin") is not None:
-        print("@@@ could not find origin:", infos.get("origin"))
-    dest = airport_code(infos.get("destination"))
-    if dest is None and infos.get("destination") is not None:
-        print("@@@ could not find destination:", infos.get("destination"))
+    orig = airport_code(info.get("origin"))
+    if orig is None and info.get("origin") is not None:
+        print("@@@ could not find origin:", info.get("origin"))
+    dest = airport_code(info.get("destination"))
+    if dest is None and info.get("destination") is not None:
+        print("@@@ could not find destination:", info.get("destination"))
     # add default airport when both are not specified (but leave it when both are not specified)
     if orig is None and dest is not None:
         orig = here
     elif orig is not None and dest is None:
         dest = here
-    air_code = airline_code(infos.get("airline"))
-    if air_code is None and infos.get("airline") is not None:
-        print("@@@ could not find airline:", infos.get("airline"))
+    air_code = airline_code(info.get("airline"))
+    if air_code is None and info.get("airline") is not None:
+        print("@@@ could not find airline:", info.get("airline"))
     return match_flights(flights, orig, dest, air_code,
-                         infos["flight_number"] if "flight_number" in infos else None,
-                         infos["orig_time_rng"], infos["dest_time_rng"],
-                         infos["days"] if "days" in infos else None)
+                         info["flight_number"] if "flight_number" in info else None,
+                         info["orig_time_rng"], info["dest_time_rng"],
+                         info["days"] if "days" in info else None)
 
 
 def show_airlines(flights: Flights) -> list[str]:
     res = []
-    rlines = group_flights(flights, "AIRLINE")
-    for rline in rlines:
+    for (airline, flights) in group_flights(flights, "AIRLINE").items():
         # show total number of flights
-        res.append(S(NP(NO(len(rline)), N("flight")),
-                     PP(P("by"), Q(airlines[rline[0]["AIRLINE"]]))).realize())
-        orig_dests = group_flights(flights, lambda f: f["ORIGIN_AIRPORT"] + "=>" + f["DESTINATION_AIRPORT"])
-        for orig_dest in orig_dests:
-            # show origin and destination and number of flights
-            res.append(S(PP(P("from"), Q(airports[orig_dest[0]["ORIGIN_AIRPORT"]]["city"])),
-                         PP(P("to"), Q(airports[orig_dest[0]["DESTINATION_AIRPORT"]]["city"])).a(":"),
-                         NP(NO(len(orig_dest)), N("flight"))).realize())
+        res.append(S(NP(NO(len(flights)), N("flight")),
+                     PP(P("by"), Q(airlines[airline]))).realize())
+        # orig_dests = group_flights(flights, lambda f: f["ORIGIN_AIRPORT"] + "=>" + f["DESTINATION_AIRPORT"])
+        for (orig, o_flights) in sorted(group_flights(flights, "ORIGIN_AIRPORT").items()):
+            s = S(PP(NO(len(o_flights)), P("from"), airports[orig]["city"]).a(":")).b("- ")
+            cp = CP()
+            for (dest, d_flights) in sorted(group_flights(o_flights, "DESTINATION_AIRPORT").items()):
+                cp.add(NP(NO(len(d_flights)), N("flight"),
+                          PP(P("to"), Q(airports[dest]["city"]))))
+            res.append(s.add(cp).realize())
     return res
 
 
-def answer_nb_flights(entities: Entities, flights: Union[Flights, list[Flight]] = None) -> str:
+def answer_nb_flights(info:Info, flights: Flights) -> str:
     nb = 0 if flights is None else len(flights)
     if nb == 0:
         s = oneOf(lambda: S(Pro("there"),
@@ -107,18 +113,25 @@ def answer_nb_flights(entities: Entities, flights: Union[Flights, list[Flight]] 
         s = S(Pro("there"),
               VP(V("be").n("s" if nb == 1 else "p"),
                  NP(NO(nb), N("flight"))))
-        # add default origin and destination if they are not specified
-        orig = entities.get_value("city_name", "fromloc")
-        dest = entities.get_value("city_name", "toloc")
-        if orig == "" and dest != "":
-            entities.append(Entity({"entity": "city_name", "value": airports[here]["city"], "role": "fromloc"}))
-        elif orig != "" and dest == "":
-            entities.append(Entity({"entity": "city_name", "value": airports[here]["city"], "role": "toloc"}))
-    return s.add(realize_example.realize_common(entities)).realize()
+    # add default origin and destination if they are not specified
+    if "origin" not in info and "destination" in info:
+        info["origin"] = airports[here]["city"]
+    elif "origin" in info and "destination" not in info:
+        info["destination"] = airports[here]["city"]
+    # add flight details
+    details = []
+    if "origin" in info:
+        details.append(PP(P("from"),Q(info["origin"].title())))
+    if "destination" in info:
+        details.append(PP(P("to"),Q(info["destination"].title())))
+    if "airline" in info:
+        details.append(PP(P("by"),Q(info["airline"])))
+    if "days" in info and isinstance(info["days"],int) and (1 <= info["days"] <= 7):
+        details.append(PP(P("on"),N(int_days[info["days"]])))
+    return s.add(details).realize()
 
-
-def extract_flight_infos(entities: Entities) -> Infos:
-    infos = {}
+def extract_flight_info(entities: Entities) -> Info:
+    info = {}
     orig_time = {}
     dest_time = {}
     for e in entities:
@@ -127,30 +140,40 @@ def extract_flight_infos(entities: Entities) -> Infos:
         role = e.get_role()
         if entity == "city_name":
             if role == "fromloc":
-                infos["origin"] = value
+                info["origin"] = value
             elif role == "toloc":
-                infos["destination"] = value
+                info["destination"] = value
         elif entity == "airport_code":
             if value in airports:
                 if role == "fromloc":
-                    infos["origin"] = airports[value]["city"]
+                    info["origin"] = airports[value]["city"]
                 elif role == "toloc":
-                    infos["destination"] = airports[value]["city"]
+                    info["destination"] = airports[value]["city"]
             else:
                 print("@@@ unknown airport_code", role, value)
+        elif entity == "airport_name":
+            if any(airports[code]["name"].lower() == value.lower() for code in airports):
+                if role == "fromloc":
+                    info["origin"] = value
+                elif role == "toloc":
+                    info["destination"] = value
+                else:
+                    print("@@@ unknown airport_name role", role, value)
+            else:
+                print("@@@ unknown airport_name", role, value)
         elif entity == "airline_name":
-            infos["airline"] = value
+            info["airline"] = value
         elif entity == "flight_number":
-            infos["flight_number"] = value
+            info["flight_number"] = value
         elif entity == "time_relative":
             if role == "depart_time":
-                infos["depart_time.time_relative"] = value
+                info["depart_time.time_relative"] = value
             elif role == "arrive_time":
-                infos["arrive_time.time_relative"] = value
+                info["arrive_time.time_relative"] = value
             else:
-                infos["time_relative"] = value
+                info["time_relative"] = value
         elif entity == "date_relative":
-            infos["date_relative"] = value  # current ignored in further processing
+            info["date_relative"] = value  # currently ignored in further processing
         elif role == "depart_time":
             orig_time[entity] = value
         elif role == "arrive_time":
@@ -163,85 +186,173 @@ def extract_flight_infos(entities: Entities) -> Infos:
                 elif value.endswith("s"):
                     value = value[:-1]  # e.g. mondays => monday
                 if value in days_int:
-                    infos["days"] = days_int[value]
+                    info["days"] = days_int[value]
                 elif value == "weekday":
-                    infos["days"] = {1, 2, 3, 4, 5}
+                    info["days"] = {1, 2, 3, 4, 5}
                 else:
                     print("@@@ unknown day_name:", value)
             elif entity == "month_name":
                 value = value.lower()
                 if value in months:
-                    infos["month"] = months.index(value)
+                    info["month"] = months.index(value)
                 else:
                     print("@@@ unknown month", value)
             elif entity == "day_number":
                 value = value.lower()
                 if value in day_numbers:
-                    infos["date"] = day_numbers.index(value)
+                    info["date"] = day_numbers.index(value)
                 elif value in numbers:
-                    infos["date"] = numbers.index(value)
+                    info["date"] = numbers.index(value)
                 else:
                     print("@@@ unknown day_number", value)
             elif entity == "today_relative":
                 if value in ["today", "this", "tonight"]:
-                    infos["days"] = today
+                    info["days"] = today
                 elif value == "tomorrow":
-                    infos["days"] = today % 7 + 1
+                    info["days"] = today % 7 + 1
                 elif value == "the day after tomorrow":
-                    infos["days"] = today % 7 + 2  # TODO: check this more carefully
+                    info["days"] = today % 7 + 2  # TODO: check this more carefully
                 else:
                     print("@@@ unknown today_relative", value)
             elif entity == "year":
-                infos["year"] = value
+                info["year"] = value
             else:
                 print("@@@ unknown entity for depart_date", entity, value)
-    infos["orig_time_rng"] = process_time_period(orig_time,
-                                                 infos.get("depart_time.time_relative",
-                                                           infos.get("time_relative")))
-    infos["dest_time_rng"] = process_time_period(dest_time,
-                                                 infos.get("arrive_time.time_relative",
-                                                           infos.get("time_relative")))
-    if debug: print("Infos:", infos)
-    return infos
+    info["orig_time_rng"] = process_time_period(orig_time,
+                                                info.get("depart_time.time_relative",
+                                                         info.get("time_relative")))
+    info["dest_time_rng"] = process_time_period(dest_time,
+                                                info.get("arrive_time.time_relative",
+                                                         info.get("time_relative")))
+    if debug: print("info:", info)
+    return info
 
 
 ########
 #   intent processing
+conversation_intent:Optional[str] = None
+conversation_context:Info = {}
 
-def process_flight(entities: Entities) -> list[str]:
+
+def process_flight(entities: Entities, multiturn:bool) -> list[str]:  # version with single turn
+    global conversation_context,conversation_intent
+    info = extract_flight_info(entities)
     if entities.has_entity("cost_relative"):  # fix bad intent....
-        return process_airfare(entities)
-    # query the database
-    infos = extract_flight_infos(entities)
-    flights = find_flights(infos)
-    if "origin" not in infos and "destination" not in infos:
-        return show_airlines(flights)
+        return process_airfare(entities,multiturn)
+    if multiturn:
+        if conversation_context:
+            print("process_flight_multi: entities:",entities)
+            print("context",conversation_context,conversation_intent)
+            conversation_context.update(info)
+            info = conversation_context
+            print("updated context", conversation_context)
+            if conversation_intent == "airfare":
+                return process_airfare(entities,True)
+        else:
+            conversation_intent = "flight"
+            conversation_context = info
+    flights = find_flights(info)
+    nb_flights = len(flights)
+    answer_nb = answer_nb_flights(info, flights)
+    if multiturn:
+        if nb_flights <= 5:  # only few flights, so answer directly
+            # realize the number of flights followed by the table of flights
+            conversation_context.clear()
+            return [
+                answer_nb,
+                *show_flights(flights, {"airline", "city", "week_day", "day"})
+            ]
+        return ask_details(answer_nb)
     else:
+        if "origin" not in info and "destination" not in info:
+            return show_airlines(flights)
         # realize the number of flights followed by the table of flights
         return [
-            answer_nb_flights(entities, flights),
-            *[f.show() for f in flights]
+            answer_nb_flights(info, flights),
+            *show_flights(flights,{"airline", "city", "week_day", "day"})
         ]
 
 
-def process_airfare(entities: Entities) -> list[str]:
+def ask_details(answer_nb:str) -> list[str]:
+    details = []
+    if "origin" not in conversation_context:
+        details.append(NP(N("departure"),N("city")))
+    if "destination" not in conversation_context:
+        details.append(NP(N("destination")))
+    if "days" not in conversation_context:
+        details.append(NP(N("weekday"),PP(P("of"),N("departure"))))
+    if "airline" not in conversation_context:
+        details.append(NP(V("prefer").t("pp"),N("airline")))
+    if len(details) == 1:
+        return [
+            answer_nb,
+            S(Pro("I").pe(2), VP(V("specify"), D("my").pe(2),details)) \
+                .typ({"mod": "poss", "int": "yon"}).realize()
+        ]
+    return [
+        answer_nb,
+        S(S(Pro("I").pe(2), VP(V("give"), NP(Adv("more"), N("detail").n("p"))))\
+            .typ({"mod": "poss", "int": "yon"}),
+          S(D("such"), Adv("as"),D("my").pe(2),CP(C("or"),details))).realize()
+    ]
+
+
+# def process_flight_multi(entities: Entities) -> list[str]:  # version with multiple turns
+#     global conversation_context,conversation_intent
+#     print("process_flight_multi: entities:",entities)
+#     print("context",conversation_context,conversation_intent)
+#     if entities.has_entity("cost_relative"):  # fix bad intent....
+#         conversation_context.clear()
+#         return process_airfare(entities)
+#     # query the database
+#     if conversation_context:
+#         conversation_context.update(extract_flight_info(entities))
+#         if conversation_intent == "airfare":
+#             return process_airfare(entities)
+#     else:
+#         conversation_intent = "flight"
+#         conversation_context = extract_flight_info(entities)
+#     # print("updated context",conversation_context)
+#     flights = find_flights(conversation_context)
+#     nb_flights = len(flights)
+#     answer_nb=answer_nb_flights(conversation_context, flights)
+#     if nb_flights <= 5: # only few flights, so answer directly
+#         # realize the number of flights followed by the table of flights
+#         conversation_context.clear()
+#         return [
+#             answer_nb,
+#             *show_flights(flights,{"airline", "city", "week_day", "day"})
+#         ]
+#     return ask_details(answer_nb)
+
+
+def process_airfare(entities: Entities, multiturn:bool) -> list[str]:
+    global conversation_context,conversation_intent
+    if conversation_context and conversation_intent != "airfare":
+        conversation_intent = "airfare"
+        conversation_context.clear()
     #  extract specific about fares
-    cost_relative = None
-    if entities.has_entity("cost_relative"):
-        cost_relative = entities.get_value("cost_relative")
+    cost_relative = entities.get_value("cost_relative") if entities.has_entity("cost_relative") else None
     # query the database
-    flights = find_flights(extract_flight_infos(entities))
+    info = extract_flight_info(entities)
+    flights = find_flights(info)
     if len(flights) == 0:
-        return [answer_nb_flights(entities, None)]
+        return [answer_nb_flights(info,[])]
     else:
         # find costs of flights
         if cost_relative is None:
             return [f.show({"airline", "city", "week_day", "day", "cost"}) for f in flights]
         else:
             if cost_relative in ["cheapest", "lowest", "lowest price", "lowest cost", "least expensive"]:
-                return [min(flights, key=Flight.cost).show({"airline", "city", "week_day", "day", "cost"})]
+                return [
+                    S(NP(D("the"), Adv("least"), A("expensive"), N("flight")), VP(V("be"))).a(":").realize(),
+                    min(flights, key=lambda f:f["COST"]).show({"airline", "city", "week_day", "day", "cost"}),
+                ]
             elif cost_relative in ["highest", "most expensive"]:
-                return [max(flights, key=Flight.cost).show({"airline", "city", "week_day", "day", "cost"})]
+                return [
+                    S(NP(D("the"), A("expensive").f("su"), N("flight")), VP(V("be"))).a(":").realize(),
+                    max(flights, key=lambda f:f["COST"]).show({"airline", "city", "week_day", "day", "cost"})
+                ]
             elif cost_relative in ["under", "less"] and entities.has_entity("fare_amount"):
                 amount = entities.get_value("fare_amount")
                 m = re.match(r"(\d+)(\s+dollar)?", amount)
@@ -249,29 +360,30 @@ def process_airfare(entities: Entities) -> list[str]:
                     return ["@@@ strange amount", amount]
                 else:
                     amount = int(m[1])
-                    fl = [f for f in flights if f.cost() <= amount]
-                    return ["Under %d: " % amount + answer_nb_flights(entities, fl),
+                    fl = [f for f in flights if f["COST"] <= amount]
+                    return ["Under %d: " % amount + answer_nb_flights(info, fl),
                             *[f.show({"airline", "city", "week_day", "day", "cost"}) for f in fl]]
             else:
                 return ["@@@ unprocessed cost_relative", cost_relative]
 
 
-def process_airline(entities: Entities) -> list[str]:
+def process_airline(entities: Entities, _multiturn:bool) -> list[str]:
     if entities.has_entity("airline_code"):
         value = entities.get_value("airline_code")
         code = value.upper()
         return [S(Q(airlines[code]) if code in airlines else NP(D("no"), N("airline").n("p")),
                   VP(V("have"),
                      NP(D("the"), N("code"), Q(value)))).realize()]
-    flights = find_flights(extract_flight_infos(entities))
+    info = extract_flight_info(entities)
+    flights = find_flights(info)
     if len(flights) == 0:
-        return [answer_nb_flights(entities, [])]
+        return [answer_nb_flights(info, [])]
     else:
         als = {airlines[f["AIRLINE"]] for f in flights}
         return [CP(C("and"), list(map(Q, als))).realize()]
 
 
-def process_abbreviation(entities: Entities) -> list[str]:
+def process_abbreviation(entities: Entities, _multiturn:bool) -> list[str]:
     if entities.has_entity("airline_code"):
         value = entities.get_value("airline_code")
         code = value.upper()
@@ -293,8 +405,8 @@ def process_abbreviation(entities: Entities) -> list[str]:
         return ["no abbreviation found"]
 
 
-def process_day_name(entities: Entities) -> list[str]:
-    flights = find_flights(extract_flight_infos(entities))
+def process_day_name(entities: Entities, _multiturn:bool) -> list[str]:
+    flights = find_flights(extract_flight_info(entities))
     days = sorted({f["DAY_OF_WEEK"] for f in flights})
     return [CP(C("and"), list(map(lambda d: N(int_days[d]), days))).realize()]
 
@@ -331,15 +443,15 @@ def process_intent(intent: str, entity_list: list[Entity]) -> str:
     if intent in ["greet", "goodbye", "bot_challenge"]:
         return process_simple_response(intent)
     if intent in ["flight", "flight_no", "flight_time"]:
-        return "\n".join(process_flight(entities))
+        return "\n".join(process_flight(entities,True))
     if intent in ["airfare", "flight+airfare"]:
-        return "\n".join(process_airfare(entities))
+        return "\n".join(process_airfare(entities,True))
     if intent == "airline":
-        return "\n".join(process_airline(entities))
+        return "\n".join(process_airline(entities,True))
     if intent == "abbreviation":
-        return "\n".join(process_abbreviation(entities))
+        return "\n".join(process_abbreviation(entities,True))
     if intent == "day_name":
-        return "\n".join(process_day_name(entities))
+        return "\n".join(process_day_name(entities,True))
     if intent in ["ground_service", "capacity", "distance", "aircraft",
                   "ground_fare", "meal", "quantity", "city", "airport"]:
         return "%s information not in database" % intent
@@ -347,17 +459,26 @@ def process_intent(intent: str, entity_list: list[Entity]) -> str:
         return "@@@ intent not yet implemented:" + intent
 
 
+RASA_limit = 0  # to limit responses to those that are longer than allowed by RASA (900 in nlg_server.py)
+
+
 def process_examples_by_intent(examples: dict[str, list[tuple[str, Entities]]]) -> None:
     value_ent_role_re = re.compile(
         r'\[(?P<val>.*?)](\((?P<ent0>.*?)\)|{"entity":"(?P<ent>.*?)","role":"(?P<role>.*?)"})')
 
-    def do_all_exs(intent: str, fn: Callable[[Entities], list[str]], exs: list[tuple[str, Entities]]):
+    def do_all_exs(intent: str, fn: Callable[[Entities,bool], list[str]], exs: list[tuple[str, Entities]]):
+        nb = 0
         for txt, entities in exs:
-            # print the original text by replacing entities by their value
-            print("** %s : %s" % (intent, value_ent_role_re.sub(r"\g<val>", txt)))
             if debug: print("Entities:", entities)
-            print("\n".join(fn(entities)))
-            print("----")
+            response = "\n".join(fn(entities,False))
+            if len(response) > RASA_limit:
+                # print the original text by replacing entities by their value
+                print("** %s : %s" % (intent, value_ent_role_re.sub(r"\g<val>", txt)))
+                print(response)
+                print("----", len(response))
+                nb += 1
+        if RASA_limit > 0:
+            print(nb, "long responses")
 
     # process intents in decreasing numer of examples:
     for intent, exs in sorted(examples.items(), key=lambda x: len(x[1]), reverse=True):
@@ -384,22 +505,15 @@ if __name__ == '__main__':
     # single example for débugging... just change the following bool
     if False:
         example = json.loads("""
-          {
-        "text": "round trip fares from los angeles to philadelphia under 3000 dollars",
-        "intent": "flight",
+        {
+        "text": "what is the minimum connection time for san francisco international airport",
+        "intent": "flight_time",
         "entities": [
           {
-            "start": 0,
-            "end": 10,
-            "value": "round trip",
-            "entity": "round_trip"
-          },
-          {
-            "start": 37,
-            "end": 49,
-            "value": "philadelphia",
-            "entity": "city_name",
-            "role": "toloc"
+            "start": 40,
+            "end": 75,
+            "value": "san francisco international airport",
+            "entity": "airport_name"
           }
         ]
          }
@@ -408,13 +522,14 @@ if __name__ == '__main__':
         print("Entities:", example["entities"])
         print(process_intent(example["intent"], example["entities"]))
     else:
+        import os
         examples: dict[str, list[tuple[str, Entities]]] = {}
         pwd = os.path.dirname(__file__)
         file_name = os.path.normpath(os.path.join(pwd, "Examples", "train.json"))
         print("*** Processing", file_name)
-        print(f"{int_days[today]} in {here}")
+        print(f"{int_days[today]} in {airports[here]['city']}")
         common_examples = json.load(open(file_name, "r", encoding="utf-8"))["rasa_nlu_data"]["common_examples"]
-        for e in common_examples:
+        for e in common_examples[:100]:
             intent = e["intent"]
             if intent not in examples: examples[intent] = []
             examples[e["intent"]].append((e["text"], Entities(e["entities"])))
