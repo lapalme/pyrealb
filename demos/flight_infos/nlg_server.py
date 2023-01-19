@@ -48,7 +48,7 @@ class S(BaseHTTPRequestHandler):
         logging.info("pyrealb:%s", realize_example.realize_example(intent, Entities(entities)))
         # answer using pyrealb
         self._set_response()
-        response_text = query_flight_db.process_intent(intent, entities)
+        response_text = query_flight_db.process_intent_conversation(intent, Entities(entities))
         # there seems to be an undocumented limit on the length of the response accepted by RASA from an NLG server
         # around 1K but we use slightly less to take into account the transformation into JSON
         limit = 900
@@ -64,7 +64,7 @@ def run(server_class=HTTPServer, handler_class=S, port=8081):
     logging.basicConfig(level=logging.INFO)
     server_address = ('', port)
     httpd = server_class(server_address, handler_class)
-    logging.info('Starting httpd... on port %d\n' % port)
+    logging.info('Starting a pyrealb NLG server for RASA... on port %d\n' % port)
     try:
         httpd.serve_forever()
     except KeyboardInterrupt:

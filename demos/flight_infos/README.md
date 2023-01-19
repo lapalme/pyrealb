@@ -4,38 +4,43 @@ This demo presents a flight information question-answering system connected to a
 
 RASA is a conversation manager for dealing with interactions with users. It is aimed at businesses that want to streamline the communication with their customers through chatbots that can answer to the most frequently asked questions. RASA parses the input from users in which it identifies specific entities (e.g. names, dates, amounts, etc.); it also determines the conveyed _intent_ (e.g. greeting, order, request for information, etc.) of the message.  This intent is then used to guide the user through some predefined scenarii (dubbed _stories_) to guide the conversation. In order to achieve this goal, RASA uses learning algorithms to determine entities and intent. It is thus important to provide many annotated examples of questions for each intent.
 
+In this document, we first present the data used for the queries in the chatbot and then show how to launch the demo. The main implementation choices are then described focusing on the NLG aspects.
+
 ## A corpus of questions and intents over a database
 As examples of questions, we use a version of the [Air Travel Information System (ATIS) corpus](https://catalog.ldc.upenn.edu/docs/LDC93S4B/corpus.html) which was originally collected to develop and evaluate speech systems that understand spontaneous speech. The corpus was gathered in a _Wizard of Oz_ experiment in which users were asking about flights, fares, airlines, cities, airports, and ground services for which the information was contained in a relational database. Given the availability of this corpus, the text part (ignoring the speech aspects, e.g. waveform files) has often been used as test for Natural Language Generation (NLG) experiments to try to reproduce the texts from the meticulous data annotations of the different entities in the text.  Of course, these experiments bypass the important _What to say_ step of NLG, but they allow focusing on the _How to say_ step. 
 
-In order to have a working bot that can answer questions in a somewhat realistic database, we extracted 
-a very small subset of flights taken from [2015 Flight Delays and Cancellations](https://www.kaggle.com/datasets/usdot/flight-delays) [592 MB]
+To create a bot that can answer questions in a somewhat realistic database, we extracted 
+a subset of flights taken from [2015 Flight Delays and Cancellations](https://www.kaggle.com/datasets/usdot/flight-delays) [592 MB]
 * `airlines.csv` : we selected 5 airlines from the 14 in the original
 * `airports.csv` : we selected 9 airports from the 322 in the original
-* `flightDB.json` : a 1,8 MB file created by `selectFlights.py` that picks flights operated by the selected airlines departing from and arriving in the selected airports. Only flights in the first complete week of January 2015 were kept which we considered as sufficient for our small demo. The selected airlines and airports are also included in this file. A fictive cost based on the distance and day of the week is added to each flight.
+* `flightDB.json` : a 1,8 MB file created by `selectFlights.py` that picks flights operated by the selected airlines departing from and arriving in the selected airports. Only flights in the first complete week of January 2015 were kept which we considered as sufficient for our demo. The selected airlines and airports are also included in this file. A _fictive_ cost based on the distance and day of the week is added to each flight.
 
-For training the RASA utterance (in our case, questions) parser, we use this [version of the dataset](https://github.com/howl-anderson/ATIS_dataset/blob/master/README.en-US.md) slightly modified by `convertJSON.py` so that the roles are indicated as an explicit field instead of being integrated into the entity name as required for RASA 3.0.  The departing and arriving airports and the airlines are changed so that only the ones in `flightDB.json` are used. 
+For training the RASA utterance parser, we use this [version of the dataset](https://github.com/howl-anderson/ATIS_dataset/blob/master/README.en-US.md) slightly modified by `convertJSON.py` so that the roles are indicated as an explicit field instead of being integrated into the entity name as required for RASA 3.0.  The departing and arriving airports and the airlines are changed so that only the ones in `flightDB.json` are used. 
 
 ## Launching the RASA bot
 
 **CAUTION**: 
-* Because of the need of a special environment (RASA runs only in Python 3.8 or 3.9), it is preferable to test with a copy of the `RASA_bot` directory in a Python 3.9 virtual environment which includes RASA instead of the version in this directory.  
-* As our goal was to show how to show how `pyrealb` could be used as a RASA NLG server, we did not spend time _tuning_ the learning parameters of RASA. This might explain why intent determination is not always _ideal_.
+* Because of the need of a special environment (RASA runs only in Python 3.9), it is preferable to test with a copy of the `RASA_bot` directory in a Python 3.9 virtual environment that includes RASA.  
+* As our goal was to explore how `pyrealb` could be used as a RASA NLG server, we did not  _tune_ the learning parameters of RASA. This might explain why intent determination is not always _ideal_.
 
 There is already a _vanilla_ pretrained model in the RASA_bot directory. Make sure that you have an appropriate RASA system installed as described in the first five steps of the [accompanying text](RASA-INTRO.md#Initial-install-and-test-of-the-RASA-environment). 
 
 1. `cd RASA_bot`
-2. If some examples have changed, run `make_training_data.py` and retrain with `rasa train`  (be patient!)
-3. Launch the NLG server with `python3 nlg_server.py`
-4. Interact with RASA using one of the following:
+2. Activate the virtual environment  
+     `source ./venv/bin/activate`
+3. If some examples have changed, run `make_training_data.py` and retrain with `rasa train`  (be patient!)
+4. Launch the NLG server with `python3 nlg_server.py` 
+5. Interact with RASA using one of the following:
    1. the console: `rasa shell` and type questions at the `Your input ->` prompt
       1. to check that the NLG server is working: type `good morning`, it should answer by `Monday in Chicago:...`
-      2. 
+      2. type a query such as `show flights by American from Denver to Chicago on Monday`
    2. the RASA chat widget:
       1. in another console, type `rasa run` wait until `Rasa server is up and running.`
       2. launch a local web server, such as `http-server -c-1` if using [this server](https://www.npmjs.com/package/http-server), which should be run from the parent directory of RASA_bot
-      3. load the file `RASA-Client.html` and type questions in the chat box. Note that because of the many websites interacting, _Cross Origin Requests_ should not be **blocked**.
-      4. after a few interactions, this could display something like:  
-![](images/RASA_with_server.jpg)
+      3. in a browser, load the url `http://127.0.0.1:8080/RASA-Client.html` and type a a query such as `show flights by American from Denver to Chicago on Monday`in the chat box. Note that because of the many web servers interacting, _Cross Origin Requests_ should not be **blocked**.
+      4. this should display something like, the initial greeting is sent automatically by HTML page:  
+      
+![](images/RASA_chat_with_server.jpg)
       
 
 ## Implementation of the system
@@ -229,7 +234,7 @@ Although the output of the _real_ realizer would most probably be preferred in a
 #### Demo Flight Database
 As described in the [Corpus description section](#A corpus of questions and intents over a database) in the `Flight Data` directory, we limit the queries to a very small subset of US airports, cities and flights from an existing dataset found in Kaggle in order to create `flightDB.json` which is used for answering the questions according to the _intents_ determined by RASA. 
 
-There are 6,109 flights in the database (between the January 4th and 10th 2015) with the following fields:
+There are 4,269 flights in the database (between the January 4th and 10th 2015) with the following fields:
 ```javascript
      {"MONTH": 1,
       "DAY": 4,
@@ -244,102 +249,24 @@ There are 6,109 flights in the database (between the January 4th and 10th 2015) 
 ```
 Days in the week are coded as Monday=1 through Sunday=7.
 
-Finding and realizing an answer to a question is described in `query_flight_db.py` (in the `RASA_bot/response` directory). When this file is called as a main program, it realizes the answers for all examples in `test.json`. This allows testing the answering process on different intentions. 
+Finding and realizing an answer to a question is described in `query_flight_db.py`. When this file is called as a main program, it realizes the answers for all examples in `{test|train}.json`. This allows testing the answering process on many intentions. 
 
 Given the information available in the database, only a subset of intentions are dealt with (_flight_, _airfare_, _airline_, _abbreviation_ and _day_name_) which account for the vast majority of cases. Less frequent intents such as _ground_service_, _capacity_, _meal_ are not currently dealt with.  The _distance_ intent is not dealt with, even though there is an intercity distance information in the database,  because most of the questions ask for the distance between an airport and the nearby city, an information that is not available in our database.
 
-Finding flights that satisfy a query is a relatively straightforward process: the list of entities is mapped into a structure similar to the flight information in the database. The essential mapping process is done with the following function to create a dictionary (type `Flight`) with fields such as `origin`, `destination`, `day_name`, etc. The fields `orig_time_rng` and `dest_time_rng` are tuples that define a range of allowed departure or arrival times taking into account loose time specifications such as _morning_ or _evening_ possibly modified with relative time information such as _before_ or _around_,
+Finding flights that satisfy a query is a relatively straightforward process:`extract_flight_info(entities: Entities) -> Info` maps the list of entities to a structure similar to the flight information in the database. 
 
-```python
-def extract_flight_infos(entities: Entities) -> Flight:
-    infos = {}
-    orig_time = {}
-    dest_time = {}
-    for e in entities:
-        value = e.get_value()
-        entity = e.get_entity()
-        role = e.get_role()
-        if entity == "city_name":
-            if role == "fromloc":
-                infos["origin"] = value
-            elif role == "toloc":
-                infos["destination"] = value
-        elif entity == "airline_name":
-            infos["airline"] = value
-        elif entity == "flight_number":
-            infos["flight_number"] = value
-        elif entity == "time_relative":
-            infos["time_relative"] = value
-        elif role == "depart_time":
-            orig_time[entity] = value
-        elif role == "arrive_time":
-            dest_time[entity] = value
-        elif entity == "day_name" and role == "depart_date":
-            value = value.lower()
-            if value in days_int:
-                infos["days"] = days_int[value]
-            else:
-                print("@@@ unknown day_name:", value)
-    infos["orig_time_rng"] = process_time_period(orig_time, infos.get("time_relative"))
-    infos["dest_time_rng"] = process_time_period(dest_time, infos.get("time_relative"))
-    return infos
-```
-The flight dictionary is used in the following function which traverses the list of flights and return the flights that match the values of the fields, an unspecified field (denoted by `None`) is ignored.
-
-```python
-def find_flights(infos: Flight) -> list[Flight]:
-    orig = airport_code(infos.get("origin"))
-    dest = airport_code(infos.get("destination"))
-    air_code = airline_code(infos.get("airline"))
-    ## find matching flights
-    res = []
-    for flight in flights:
-        if all((
-                orig is None or orig == flight["ORIGIN_AIRPORT"],
-                dest is None or dest == flight["DESTINATION_AIRPORT"],
-                air_code is None or air_code == flight["AIRLINE"],
-                "flight_number" not in infos or infos["flight_number"] == ["FLIGHT_NUMBER"],
-                "orig_time_rng" not in infos or time_match(infos["orig_time_rng"], int(flight["SCHEDULED_DEPARTURE"][0:2])),
-                "dest_time_rng" not in infos or time_match(infos["dest_time_rng"], int(flight["SCHEDULED_ARRIVAL"][0:2])),
-                "days" not in infos or check_day(flight["DAY_OF_WEEK"], infos["days"])
-        )): res.append(flight)
-    return res
-```
+`find_flights(info: Info) -> list[Flight]` traverses the list of flights and return the flights that match the values of the fields, an unspecified field  is ignored.
 
 These functions are called from functions dealing with specific intents return list of strings that can either be printed or sent to a RASA process for display. 
-Here is the function for the _flight_ intent which first realizes a sentence giving the number of flights between two airports reusing the function defined for questions. It then calls another function that returns a list of flights.
-The functions for answring questions return list of strings that are either printed separated by a newline or sent to the NLG server of RASA.
-
-```python
-def process_flight(entities: Entities) -> list[str]:
-    flights = find_flights(extract_flight_infos(entities))
-    return [
-        answer_nb_flights(entities, flights),
-        *show_flights(flights)
-    ]
-
-def answer_nb_flights(entities: Entities, flights: Flights) -> str:
-    nb = len(flights)
-    if nb == 0:
-        s = oneOf(lambda: S(Pro("there"),
-                            VP(V("be").n("p"),
-                               NP(D("no"), N("flight").n("p")))),
-                  lambda: S(NP(D("no"), N("flight").n("p")),
-                            VP(V("be").t("ps"),
-                               V("find").t("pp"))))
-    else:
-        s = S(Pro("there"),
-              VP(V("be").n("s" if nb == 1 else "p"),
-                 NP(NO(nb), N("flight"))))
-    return s.add(realize_example.realize_common(entities)).realize()
-```
+For example `process_flight(_entities: Entities, info:Info) -> list[str] ` deals with the _flight_ intent which first realizes a sentence giving the number of flights between two airports reusing the function defined for questions. It then calls another function that returns a list of flights.
+The functions for answering questions return list of strings that are either printed separated by a newline or sent to the NLG server of RASA.
 
 ## Implementing the RASA NLG server 
 
 As described in [this document](RASA-INTRO.md), it is possible to define an NLG server that will realize an answer given an intent and entities identified by RASA. `nlg_server.py` shows an example that uses `pyrealb` for sentence realization. 
 Two important issues to notice:
 1. the response must be in JSON: this must be specified in the header and encoding and decoding must be performed before creating the JSON output
-2. RASA seems to put a limit on the length of an answer from an NLG server.
+2. RASA limits the length of an answer (about 1K bytes) from an NLG server, which is reasonable in the context of a chatbot in which questions and answers should be kept short.  
 
 ```python
     def _set_response(self):
@@ -356,18 +283,47 @@ Two important issues to notice:
         intent = message["intent"]["name"]
         entities = message.get("entities",[]) # fields: entity, value
         ## answer using pyrealb
-        response_text = query_flight_db.process_intent(intent,entities)
+        response_text = query_flight_db.process_intent_conversation(intent,entities)
         # there seems to be an undocumented limit on the length of the response accepted by RASA from an NLG server
         # around 1K, but we use slightly less to take into account the transformation into JSON
         limit = 900
-        if len(response_text) > limit:  # truncate to the last complete line within the limit
-            last_NL_index=response.rfind("\n") # skip to previous NL
-            response_text = response_text[:(last_NL_index if last_NL_index>0 else limit)]+"\n..."
+        if len(response_text) > limit:
+            last_nl_idx = response_text.rfind("\n",0,limit)  # skip to the last NL before limit
+            response_text = response_text[:(last_nl_idx if last_nl_idx > 0 else limit)] + "\n..."
         response_json = json.dumps({"text":response_text}).encode("utf-8")
         self.wfile.write(response_json)
         self._set_response()
         self.wfile.write(json.dumps({"text":query_flight_db.process_intent(intent,entities)}).encode("utf-8"))
 ```
+
+### Maintaining a conversation context
+
+In the context of a flight information system, it can happen that there are (too) many possible answers for a given query (e.g. `show flights by American`). To avoid information overload for the user, the system only gives the number of flights found and ask for more information such as departure city or weekday for the travel. 
+
+Here is an example of interaction with the RASA shell. The user query, shown here in bold, appears after the prompt `Your input ->`; the following lines are returned by the NLG server which uses `pyrealb` to realize the sentences. When a query would return too many different flights, the NLG server asks the user to be more precise. As the server keeps the context of the current conversation, the user does not have to repeat previously given information. 
+
+Following the first greeting, the system indicates that it considers that the user is in Chicago and that the current day is Monday. This information is added to the context of any query. The second query being quite broad, it would return all flights of the database, so the system ask for details. The answer `American` is tagged by RASA as an airline, so the system indicates that there are still too many flights by this airline. So giving the destination and taking the current city as departure, the system identifies 14 daily flights. Note that similar flights are grouped so that the answer is more convenient for the user.
+
+<pre><code>
+Your input ->  <b>good morning</b>                                                     
+Monday in Chicago: Hi, any flight information?
+
+Your input ->  <b>show flights</b>                                                     
+There are 4,269 flights. 
+Can you give more details? such as your departure city, destination, weekday of departure or preferred airline.
+
+Your input ->  <b>American</b>                                                         
+There are 816 flights by American. 
+Can you give more details? such as your departure city, destination or weekday of departure.
+
+Your input ->  <b>to New York</b>                                                      
+There are 14 flights from Chicago to New York by American. 
+14 flights by American. 
+AA149  19:55 => 23:05 everyday. 
+AA198  12:55 => 16:05 everyday.
+</code></pre>
+
+Once a complete answer has been returned, the conversation context is reinitialized.
 
 ## Conclusion
 
@@ -403,7 +359,7 @@ tagged entities. It illustrates how `pyrealb` can be used for implementing an NL
   * `selectFlights.py` : create `flightDB.json` by choosing only a few flights
   * `airlines.csv` : selected airlines (done manually)
   * `airports.csv` : selected airports (done manually)
-  * `flightDB.json` : selected airlines, airports and flights (should be copied into `RASA_bot/response`)
+  * `flightDB.json` : selected airlines, airports and flights
 * `images` : images for Markdown files
 * `RASA_BOT` directory with already a few configuration files (use a copy for testing):
   * `actions` directory in which the RASA custom action is defined, the RASA action server should be run in this directory.
@@ -416,8 +372,8 @@ tagged entities. It illustrates how `pyrealb` can be used for implementing an NL
 
 ## Steps for creating data and running the system
 1. Select Flight [data](https://www.kaggle.com/datasets/usdot/flight-delays)
-   1. select airlines
-   2. select airports
+   1. select airlines in `airlines.csv`
+   2. select airports in `airports.csv`
    3. run `Flight Data/selectFlights.py`
 2. Convert [examples](Examples) with `convert_examples.py`
 3. Check that the examples can be reproduced with and without `pyrealb` using `reproduce_examples.py`

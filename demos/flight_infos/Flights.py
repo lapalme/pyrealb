@@ -32,8 +32,6 @@ class Flight:
         return self.flight[item]
 
     def show(self, show) -> str:
-        # if show is None:
-        #     show = {"airline", "city", "week_day", "day"}
         airline = self.flight["AIRLINE"]
         res = [f'{airlines[airline].ljust(9) if "airline" in show else airline}{self.flight["FLIGHT_NUMBER"]:<4}']
         if "city" in show:
@@ -51,13 +49,6 @@ class Flight:
             res.append(": %5d $" % self.flight["COST"])
         return " ".join(res)
 
-    # def cost(self) -> int:
-    #     # make up a cost for a flight
-    #     # cost = fixed cost (100$) + 0.20$ per mile + 200$ on Friday, Saturday and Sunday
-    #     dist = int(self.flight["DISTANCE"])
-    #     day = self.flight["DAY_OF_WEEK"]
-    #     return 100 + (dist // 5 * 5) + (200 if day > 4 else 0)
-
 
 # Originally we had defined a class for Flights, but it turned out to be simpler to define
 # Flights as list[Flight], because this list can be grouped many times and used as a list (index, iterated...)
@@ -74,7 +65,6 @@ def show_flights(flights: Flights, show_params) -> list[str]:
             for f in flights:
                 res.append(f.show(show_params))
         else:  # regroup by Airline
-            params = {"cost"} if show_params is not None and "cost" in show_params else {}
             rlines = group_flights(flights, "AIRLINE")
             for (rline, flights) in sorted(rlines.items()):
                 res.append(S(NP(NO(len(flights)), N("flight")),
