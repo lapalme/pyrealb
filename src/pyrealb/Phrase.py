@@ -569,6 +569,7 @@ class Phrase(Constituent):
             for key in rules["verb_option"]["modalityVerb"]:
                 if key.startswith(mod):
                     v.setLemma(rules["verb_option"]["modalityVerb"][key])
+                    if hasattr(v,"cod"): del v.cod
                     break
             v.isMod=True
             i = idxV - 1

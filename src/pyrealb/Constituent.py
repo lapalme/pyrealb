@@ -425,17 +425,22 @@ class Constituent():
             w1=m1.group(2)
             w2=m2.group(2)
             w3NoWords = not re.match(r"^\s*\w",m1.group(3)) # check that the rest of the first word does not start with a word
-            if (elidableWordFrRE.match(w1) and isElidableFr(w2,cList[i+1].lemma,cList[i+1].constType) and w3NoWords):
-                cList[i].realization=m1[1]+w1[:-1]+"'"+m1[3]
-                i+=1
-            elif euphonieFrRE.match(w1) and isElidableFr(w2,cList[i+1].lemma,cList[i+1].constType) and  w3NoWords: # euphonie
-                if re.match(r"ce",w1,re.I) and re.match(r"(^est$)|(^étai)|(^a$)",w2,re.I):
-                    # very special case but very frequent
+            elisionFound = False
+            if isElidableFr(w2,cList[i+1].lemma,cList[i+1].constType):
+                if elidableWordFrRE.match(w1) and w3NoWords:
                     cList[i].realization=m1[1]+w1[:-1]+"'"+m1[3]
-                else:
-                    cList[i].realization=m1[1]+euphonieFrTable[w1]+m1[3]
-                i+=1
+                    elisionFound = True
+                elif euphonieFrRE.match(w1) and  w3NoWords and cList[i].getProp("n")=="s": # euphonie
+                    if re.match(r"ce",w1,re.I) and re.match(r"(^est$)|(^étai)|(^a$)",w2,re.I):
+                        # very special case but very frequent
+                        cList[i].realization=m1[1]+w1[:-1]+"'"+m1[3]
+                    else:
+                        cList[i].realization=m1[1]+euphonieFrTable[w1]+m1[3]
+                    elisionFound = True
+            if elisionFound:
+                i += 1
             elif (w1+"+"+w2) in contractionFrTable and w3NoWords:
+                # try contraction
                 contr=contractionFrTable[w1+"+"+w2]
                 # check if the next word would be elidable, so instead elide it instead of contracting
                 # except when the next word is a date which has a "strange" realization
@@ -450,14 +455,14 @@ class Constituent():
 
 
     def doFrenchPronounPlacement(self, cList):
-        from .Terminal import Adv,Pro
+        from .Terminal import Adv,Pro,Q
         iDeb = 0
         i = iDeb
         while i < len(cList):
             c = cList[i]
             if c.isA("V") and hasattr(c, "neg2"):
                 if hasattr(c, "isMod") or hasattr(c, "isProg"):
-                    c.insertReal(cList, Adv(c.neg2, "fr"), i + 1)
+                    c.insertReal(cList, Q(c.neg2, "fr"), i + 1)
                     c.insertReal(cList, Adv("ne", "fr"), i)
                     del c.neg2  # remove negation from the original verb
                     iDeb = i + 3  # skip these in the following loop
@@ -491,7 +496,7 @@ class Constituent():
                     if hasattr(c, "neg2") and c.neg2 is not None:
                         c.insertReal(pros, Adv("ne", "fr"))
                         if t == "b":
-                            c.insertReal(pros, Adv(c.neg2, "fr"))
+                            c.insertReal(pros, Q(c.neg2, "fr"))
                         else:
                             neg2 = c.neg2
                 if c.isReflexive() and c.getProp("t") != "pp":
@@ -515,7 +520,7 @@ class Constituent():
         # add ending "pas" after the verb unless it is "lié" in which cas it goes after the next word
         if neg2 != None:
             vb = cList[verbPos]
-            vb.insertReal(cList, Adv(neg2, "fr"), verbPos + (1 if "lier" not in vb.props else 2))
+            vb.insertReal(cList, Q(neg2, "fr"), verbPos + (1 if "lier" not in vb.props else 2))
         if len(pros) > 1:
             pros.sort(key=lambda pro: cliticTable[pro] if pro in cliticTable else 100)
         # insert pronouns before the verb

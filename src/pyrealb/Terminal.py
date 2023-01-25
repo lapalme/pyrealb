@@ -198,33 +198,42 @@ class Terminal(Constituent):
         res=None 
         if self.isOneOf(["A","Adv"]):
             if self.isFr():
+                # special case of French adjectives or adv, they can have more than one token
                 g = self.getProp("g")
                 n = self.getProp("n")
                 ending=self.bestMatch("déclinaison d'adjectif", declension,{"g":g,"n":n})
                 if ending is None:
-                    return f"[[{self.lemma}]]"
-                res=stem+ending
+                    [self.morphoError("decline [fr]: A", {"g":g,"n":n})]
                 f = self.getProp("f") # comparatif d'adjectif
                 if f is not None and f != False:
                     specialFRcomp={"bon":"meilleur","mauvais":"pire"}
+                    res = []
                     if f=="co":
                         if self.lemma in specialFRcomp:
-                            return A(specialFRcomp[self.lemma]).g(g).n(n).realize()
+                            self.insertReal(res,A(specialFRcomp[self.lemma]).g(g).n(n))
                         else:
-                            return "plus "+res
-                    if f=="su":
-                        art=D("le").g(g).n(n).realize()+" "
+                            self.insertReal(res,Adv("plus"))
+                            self.insertReal(res,A(self.lemma).g(g).n(n))
+                    elif f=="su":
+                        self.insertReal(res,D("le").g(g).n(n))
                         if self.lemma in specialFRcomp:
-                            return art+A(specialFRcomp[self.lemma]).g(g).n(n).realize()
+                            self.insertReal(res,A(specialFRcomp[self.lemma]).g(g).n(n))
                         else:
-                            return art+"plus "+res
-            else: 
-                # English adjective/adverbs are invariable but they can have comparative
-                res=self.lemma
+                            self.insertReal(res,Adv("plus"))
+                            self.insertReal(res,A(self.lemma).g(g).n(n))
+                    return res
+                else:
+                    self.realization = self.stem+ending
+                    return [self]
+            else:
+                # English adjective/adverbs are invariable but they can have comparative, thus return more than one token
+                self.realization = self.lemma
                 f = self.getProp("f")
                 if f is not None and f!=False:
                     if self.tab=="a1":
-                        res=("more " if f=="co" else "most ")+res
+                        comp=A("more " if f=="co" else "most ")
+                        comp.realization = comp.lemma
+                        return [comp,self]
                     else:
                         if self.tab=="b1": # adverb without comparative/superlative, try the adjective table
                             adjAdv=getLemma(self.lemma)
@@ -233,14 +242,15 @@ class Terminal(Constituent):
                                 ending=rules["declension"][adjAdv["A"]["tab"]]["ending"]
                                 stem=stem[0:-len(ending)]
                             else:  # adverb without adjective
-                                return res
+                                return [self]
                         # look in the adjective declension table
                         ending=self.bestMatch("adjective declension",declension,{"f":f})
                         if ending is None:
-                            return f"[[{self.lemma}]]"
-                        res=stem+ending
+                            [self.morphoError("decline [en]: A", {"f":f})]
+                        self.realization = self.stem + ending
+                        return [self]
         elif len(declension)==1: # no declension
-            res=stem+declension[0]["val"]
+            self.realization = self.stem+declension[0]["val"]
         else: # for N,D,Pro
             g=self.getProp("g")
             if self.isOneOf(["D","N"]) and g is None:g="m"
@@ -290,20 +300,18 @@ class Terminal(Constituent):
                     if self.lemma!="on": keyVals["tn"]=""
             ending=self.bestMatch("déclinaison" if self.isFr() else "declension",declension,keyVals)
             if ending is None:
-                return f"[[{self.lemma}]]"
+                return [self.morphoError("decline [en]: N,D Pro", {"g": g, "n": n, "pe":pe})]
             if self.isFr() and self.isA("N"):
                 # check is French noun gender specified corresponds to the one given in the lexicon
                 lexiconG=getLexicon("fr")[self.lemma]["N"]
                 if "g" not in lexiconG:
-                    self.morphoError("absent du lexique",{"g":g,"n":n})
-                    return f"[[{self.lemma}]]"
+                    return [self.morphoError("absent du lexique",{"g":g,"n":n})]
                 lexiconG=lexiconG["g"]
                 if lexiconG != "x" and lexiconG != g:
-                    self.morphoError(
-                        "genre différent de celui du lexique",{"g":g, "lexique":lexiconG})
-                    return f"[[{self.lemma}]]"
-            res=stem+ending
-        return res
+                    return [self.morphoError(
+                        "genre différent de celui du lexique",{"g":g, "lexique":lexiconG})]
+            self.realization = self.stem+ending
+        return [self]
 
     def removeNextConstInSentence(self):
         parentElems=self.parentConst.elements
@@ -466,16 +474,12 @@ class Terminal(Constituent):
                         n=self.getProp("n")
                         if n=="x":n="s"
                         if (g+n)=="mp" and self.realization.endswith("s"):
-                            term=""    # pas d'ajout de s au masculin pluriel si la réalisation termine en s
+                            pass    # pas d'ajout de s au masculin pluriel si la réalisation termine en s
                         else:
-                            term={"ms":"","mp":"s","fs":"e","fp":"es"}[g+n]
-                        self.realization+=term
-                    # neg=self.neg2 if hasattr(self,"neg2") else None
-                    # if neg is not None and neg!="":
-                    #     if t=="b" or t=="pp":
-                    #         self.insertReal(res,Adv(neg,"fr"),0)
-                    #     else:
-                    #         self.insertReal(res,Adv(neg,"fr"))
+                            if (g+n)!="ms" and self.realization.endswith("û"): #changer "dû" en "du" sauf pour masc sing
+                                self.realization = self.realization[:-1]+"u"+{"ms":"","mp":"s","fs":"e","fp":"es"}[g+n]
+                            else:
+                                self.realization+={"ms":"","mp":"s","fs":"e","fp":"es"}[g+n]
                     return res
                 else:
                     return [self.morphoError("conjugate_fr",{"pe":pe,"n":n,"t":t})]
@@ -620,10 +624,10 @@ class Terminal(Constituent):
     def real(self):
         if self.isOneOf(["N","A"]):
             if hasattr(self, "tab") and self.tab  is not None:
-                self.realization=self.decline(False)
+                return self.doFormat(self.decline(False))
         elif self.isA("Adv"):
             if hasattr(self, "tab") and self.tab  is not None:
-                self.realization=self.decline(False)
+                return self.doFormat(self.decline(False))
             else:
                 self.realization=self.lemma
         elif self.isOneOf(["C","P","Q"]):
@@ -631,7 +635,7 @@ class Terminal(Constituent):
                 self.realization=self.lemma
         elif self.isOneOf(["D","Pro"]):
             if hasattr(self, "tab") and self.tab is not None:
-                self.realization=self.decline(True)
+                return self.doFormat(self.decline(True))
         elif self.isA("V"):
             return self.doFormat(self.conjugate())
         elif self.isA("DT"):
