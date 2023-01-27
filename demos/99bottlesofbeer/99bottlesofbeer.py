@@ -28,6 +28,7 @@ def verse(n):
 
 if __name__ == '__main__':
     loadEn()
+    Constituent.debug = false
     for n in range(max,-1,-1):
         verse(n)
         print()
