@@ -107,8 +107,3 @@ These steps take for granted that the password for PyPI has already been given..
       `twine upload dist/*`
 5. Install new version from PyPI  
     `python3 -m pip install pyrealb --upgrade`
-
-### Debugging by launching a single expression when changes have been made
-1. in the `IDE` directory, launch `python3 -i ide.py` 
-2. this will run some examples and then go into a _read-eval-print loop_ 
-3. simplest is +S(...)
