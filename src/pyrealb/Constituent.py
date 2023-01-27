@@ -8,10 +8,6 @@ defaultProps = {"en":{"g":"n","n":"s","pe":3,"t":"p"},             # language de
 
 quoteOOV=False # TODO: make this settable globally
 
-# TODO: make this settable globally or from the command line
-# hack taken from https://intellij-support.jetbrains.com/hc/en-us/community/posts/205819799/comments/206004059
-debug = sys.gettrace() is not None or "-d" in sys.argv # used in Constituent.__str__()
-
 optionListMethods = ('a', 'b', 'ba', 'en')
 
 deprels = ["root","subj","det","mod","comp","coord"] # list of implemented dependency relations
@@ -87,6 +83,11 @@ class Constituent():
         self.realization=None 
         self.optSource=""     # string corresponding to the calls to the options
     
+    # TODO: make this settable globally or from the command line
+    # HACK: taken from https://intellij-support.jetbrains.com/hc/en-us/community/posts/205819799/comments/206004059
+    # This is a class variable
+    debug = sys.gettrace() is not None or "-d" in sys.argv # used in Constituent.__str__()
+
     def error(self,mess):
         raise Exception ("Internal error: this should never have happened,sorry!\n"+self.me()+"::"+mess)
     
@@ -657,7 +658,7 @@ class Constituent():
         ## This makes it hard to follow when tracing... a classic case of Heisenbug!
         ## When debug is True (tested with sys.gettrace()) : return the source of the expression
         ## but then realization must be launched with ".realize()"
-        return self.toSource(-1) if debug else self.realize()
+        return self.toSource(-1) if Constituent.debug else self.realize()
 
     def clone(self):
         return copy.deepcopy(self)

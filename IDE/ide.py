@@ -308,7 +308,7 @@ def _help():
 print(f"** pyRealB {pyRealB_version} Interactive Development Environment [_help() for info]")
 _en()
   
-## some unit tests
+## some unit tests, when called with -i (it starts the Python REPL)_lm
 if __name__ == '__main__':
     def show(cmd):
         print("==>"+cmd)
