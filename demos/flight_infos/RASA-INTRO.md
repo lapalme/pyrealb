@@ -2,7 +2,7 @@
 ## or RASA for the dummy (me...)
 
 This document relates my experience with the installation of [RASA Open Source (3.0)](https://rasa.com/docs/rasa/). 
-As this turned out to be quite an endeavour, I decided to keep track of the good and bad tries that finally lead to 
+As this turned out to be quite an endeavor, I decided to keep track of the good and bad tries that finally lead to 
 a working system.  I found the documentation quite hard to follow, it seems to have been designed for being used as a reference for experienced users. Many tutorials are either copies of the official RASA documentation or long YouTube videos. 
 
 It also turned out that _Google was not my friend_, because a search starting with `RASA`  leads most often to official

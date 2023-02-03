@@ -10,6 +10,6 @@ __all__ = ['Constituent',
      'AP',  'AdvP',  'CP', 'NP', 'PP',  'VP', 'S', 'SP', 'Phrase',                      # from Phrase
      'root', 'subj', 'det', 'mod', 'comp', 'compObj', 'compObl', 'coord', 'Dependent',  # from Dependent
      'currentLanguage', 'addToLexicon', 'getLemma', 'loadEn', 'loadFr',                 # from Lexicon
-     'fromJSON', 'oneOf', 'false', 'true', 'null', 'pyRealB_version',                   # from utils
+     'fromJSON', 'oneOf', 'false', 'true', 'null', 'pyrealb_version',                   # from utils
      'test_warnings'                                                                    # from Warning
  ]

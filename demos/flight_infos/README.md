@@ -25,19 +25,20 @@ For training the RASA utterance parser, we use this [version of the dataset](htt
 
 There is already a _vanilla_ pretrained model in the RASA_bot directory. Make sure that you have an appropriate RASA system installed as described in the first five steps of the [accompanying text](RASA-INTRO.md#Initial-install-and-test-of-the-RASA-environment). 
 
+
 1. `cd RASA_bot`
 2. Activate the virtual environment  
      `source ./venv/bin/activate`
-3. If some examples have changed, run `make_training_data.py` and retrain with `rasa train`  (be patient!)
-4. Launch the NLG server with `python3 nlg_server.py` 
+3. If some some training examples in the `Examples/train.json` have changed, run `make_training_data.py` and retrain with `rasa train` in the `RASA_bot` directory (be patient!)
+4. In a separate console, launch the NLG server with `python3 nlg_server.py` found in the source files of this demo
 5. Interact with RASA using one of the following:
    1. the console: `rasa shell` and type questions at the `Your input ->` prompt
       1. to check that the NLG server is working: type `good morning`, it should answer by `Monday in Chicago:...`
       2. type a query such as `show flights by American from Denver to Chicago on Monday`
    2. the RASA chat widget:
-      1. in another console, type `rasa run` wait until `Rasa server is up and running.`
-      2. launch a local web server, such as `http-server -c-1` if using [this server](https://www.npmjs.com/package/http-server), which should be run from the parent directory of RASA_bot
-      3. in a browser, load the url `http://127.0.0.1:8080/RASA-Client.html` and type a a query such as `show flights by American from Denver to Chicago on Monday`in the chat box. Note that because of the many web servers interacting, _Cross Origin Requests_ should not be **blocked**.
+      1. in another console, type `rasa run --cors "*"` wait until `Rasa server is up and running.`
+      2. launch a local web server, such as `python3 -m http.server 8080` which should be run from the parent directory of RASA_bot
+      3. in a browser, load the url `http://127.0.0.1:8080/RASA-Client.html` and type a a query such as `show flights by American from Denver to Chicago on Monday`in the chat box. 
       4. this should display something like, the initial greeting is sent automatically by HTML page:  
       
 ![](images/RASA_chat_with_server.jpg)

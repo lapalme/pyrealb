@@ -1,20 +1,20 @@
 # *pyRealB* - A Python Bilingual Text Realizer
 
-*Version 2.2 - September 2022*
+*Version 2.3 - February 2023*
 
 *pyRealB* is a Python adaptation of the JavaScript [**jsRealB**](http://rali.iro.umontreal.ca/jsRealB) 
-with the same constituent and dependency syntax notation. 
+text realizer with the same constituent and dependency syntax notation. 
 It facilitates its integration within Python applications by simply adding
 
 	from pyrealb import *
 
 ### Installing the distribution package from PyPI
 
-    `pip install pyrealb`
+    pip install pyrealb
 
 ### Upgrading the version 
 
-    `pip install pyrealb --upgrade`
+    pip install pyrealb --upgrade
 
 ### Building and installing the package from the sources
 
@@ -24,11 +24,18 @@ It facilitates its integration within Python applications by simply adding
 
 ## First realization tests at the Python 3 prompt
 
-1. `from pyrealb import *` 
-2. `print(S(Pro("I").g("f"),VP(V("say"),"hello",PP(P("to"),NP(D("the"),N("world"))))))`
-3. this should print `She says hello to the world.`
-4. `print(root(V("say").t("ps"),subj(Pro("him").c("nom")),comp(N("goodbye"))).typ({"neg":True}))`
-5. this should print `He did not say goodbye.`
+1. `from pyrealb import *`
+2. `loadEn()` 
+3. `print(S(Pro("I").g("f"),VP(V("say"),"hello",PP(P("to"),NP(D("the"),N("world"))))))`
+4. this should print `She says hello to the world.`
+5. `print(root(V("say").t("ps"),subj(Pro("him").c("nom")),comp(N("goodbye"))).typ({"neg":True}))`
+6. this should print `He did not say goodbye.`
+
+## Use pyrealb in a _Jupyter notebook_ thru _Binder_
+
+1. in a browser, load one of these links:
+  * [English](https://mybinder.org/v2/gh/lapalme/pyrealb-jupyter/HEAD?labpath=pyrealb-en.ipynb). 
+  * [French](https://mybinder.org/v2/gh/lapalme/pyrealb-jupyter/HEAD?labpath=pyrealb-fr.ipynb). 
 
 ## Directories
 

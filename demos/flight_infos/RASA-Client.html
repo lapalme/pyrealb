@@ -18,9 +18,8 @@
             Francisco</i>. Only flights on <i>United, American, US Airways, Delta</i> and <i>Virgin</i> will be returned.</p>
     <p>Make sure that</p>
         <ul>
-            <li>the RASA server (port 5005) has been launched with <code>rasa run</code> command.</li>
-            <li>to launch the http server (port 8081) for the RASA NLG realizer using <code>pyrealb</code> with <code>python3 nlg_server.py 8081</code></li>
-            <li>cross origin restrictions are removed on your browser served by yet another http server (port 8080)</li>
+            <li>the RASA server (port 5005) has been launched with <code>rasa run --cors "*"</code> command.</li>
+            <li>the http server (port 8081) for the RASA NLG realizer has been launched using <code>pyrealb</code> with <code>python3 nlg_server.py</code></li>
         </ul>
     </div>
     <!-- To send an initial query: data-initial-payload="Good morning" -->

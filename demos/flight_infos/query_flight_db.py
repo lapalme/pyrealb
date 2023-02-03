@@ -244,7 +244,7 @@ def process_flight(_entities: Entities, info:Info) -> list[str]:  # version with
 
 def process_airfare(entities: Entities, info:Info) -> list[str]:
     #  extract specific about fares
-    cost_relative = entities.get_value("cost_relative") if entities.has_entity("cost_relative") else None
+    cost_relative = entities.get_value("cost_relative").lower() if entities.has_entity("cost_relative") else None
     # query the database
     flights = find_flights(info)
     if len(flights) == 0:

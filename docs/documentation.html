@@ -4,9 +4,9 @@
 <meta name="name" content="viewport" />
 <meta name="content" content="width=device-width, initial-scale=1.0" />
 <meta name="charset" content="UTF-8" />
-<meta name="date" content="2022-09-16 13:21:56.880424" />
+<meta name="date" content="2023-01-29 23:27:27.534478" />
 <link href="style.css" rel="stylesheet" type="text/css" media="all" />
-<title>pyRealB - Documentation</title>
+<title>pyrealb - Documentation</title>
 <script src="https://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 <script src="user.js" type="text/javascript"></script>
 </head>
@@ -17,8 +17,8 @@
 <span class="dropdown-content"></span>
 </span>
 <span id="langSelect">[<span lang="en">FR</span><span lang="fr">EN</span>]</span>
-<h1><span class="jsr">pyRealB</span> (Version 2.2) Documentation</h1>
-<p lang="fr"><span class="jsr">pyRealB</span> est un réalisateur de texte pour l'anglais et le français écrit en Python.
+<h1><span class="jsr">pyrealb</span> (Version 2.3) Documentation</h1>
+<p lang="fr"><span class="jsr">pyrealb</span> est un réalisateur de texte pour l'anglais et le français écrit en Python.
 Des appels de fonctions Python, rappelant les notations de syntaxe en constituants ou en dépendences, 
 créent une structure qui sera réalisée en appelant la fonction <code>str()</code>, souvent de façon implicite 
 via la fonction <code>print</code>. 
@@ -26,7 +26,7 @@ via la fonction <code>print</code>.
 <a href="https://github.com/lapalme/pyrealb" title="GitHub - lapalme/pyrealb: French and English text realisator">instructions 
 données dans le répertoire GitHub</a>,
 il suffit d'ajouter la ligne suivante à son programme.</p>
-<p lang="en"><span class="jsr">pyRealB</span> is a text realizer for French and English written in Python. 
+<p lang="en"><span class="jsr">pyrealb</span> is a text realizer for French and English written in Python. 
 Calls to Python functions, similar to the syntactic constituency or dependencies notations create a structure 
 that can be realized with <code>str()</code> , most often implicitely within a <code>print</code> function.
 <br/>Once installed according to 
@@ -35,11 +35,11 @@ instructions on the GitHub</a>, using it
 is only a matter of adding the following line to the program.</p>
 <code>from pyrealb import *</code>
 <p lang="fr">
-<span class="jsr">pyRealB</span> peut aussi être utilisé pour créer une page web comme celle-ci dans laquelle 
-les exemples ont été réalisés par <span class="jsr">pyRealB</span>  lors de la création de la page.</p>
-<p lang="en"><span class="jsr">pyRealB</span> can be used to build web pages such as this one in which all examples 
+<span class="jsr">pyrealb</span> peut aussi être utilisé pour créer une page web comme celle-ci dans laquelle 
+les exemples ont été réalisés par <span class="jsr">pyrealb</span>  lors de la création de la page.</p>
+<p lang="en"><span class="jsr">pyrealb</span> can be used to build web pages such as this one in which all examples 
  were realized using
-<span class="jsr">pyRealB</span> when the page was created.</p>
+<span class="jsr">pyrealb</span> when the page was created.</p>
 <h2 lang="fr" id="constituants">Constituants</h2>
 <h2 lang="en" id="constituents">Constituents</h2>
 <h3 lang="fr">Terminaux</h3>
@@ -53,7 +53,7 @@ les exemples ont été réalisés par <span class="jsr">pyRealB</span>  lors de 
 <tr><td class="description">Adverbe</td><td class="pattern">Adv(…)</td><td class="example-fr">Adv("bien")</td><td class="realisation">bien</td></tr>
 <tr><td class="description">Préposition</td><td class="pattern">P(…)</td><td class="example-fr">P("dans")</td><td class="realisation">dans</td></tr>
 <tr><td class="description">Conjonction</td><td class="pattern">C(…)</td><td class="example-fr">C("et")</td><td class="realisation">et</td></tr>
-<tr><td class="description">Date avec <a href='#dateFr'>options</a> facultatives</td><td class="pattern">DT(…)</td><td class="example-fr">DT()</td><td class="realisation">le vendredi 16 septembre 2022 à 13 h 21 min 56 s</td></tr>
+<tr><td class="description">Date avec <a href='#dateFr'>options</a> facultatives</td><td class="pattern">DT(…)</td><td class="example-fr">DT()</td><td class="realisation">le dimanche 29 janvier 2023 à 23 h 27 min 27 s</td></tr>
 <tr><td class="description">Nombre avec <a href='#nombres'>options</a> facultatives</td><td class="pattern">NO(…)</td><td class="example-fr">NO(2)</td><td class="realisation">2</td></tr>
 <tr><td class="description">Texte brut</td><td class="pattern">"…"</td><td class="example-fr">"Wow"</td><td class="realisation">Wow</td></tr>
 <tr><td class="description">Texte brut auquel on peut ajouter des <a href='#optionsFr'>options</a></td><td class="pattern">Q(…)</td><td class="example-fr">Q("Bang !").tag("i")</td><td class="realisation"><i>Bang !</i></td></tr>
@@ -69,7 +69,7 @@ les exemples ont été réalisés par <span class="jsr">pyRealB</span>  lors de 
 <tr><td class="description">Adverb</td><td class="pattern">Adv(…)</td><td class="example-en">Adv("well")</td><td class="realisation">well</td></tr>
 <tr><td class="description">Preposition</td><td class="pattern">P(…)</td><td class="example-en">P("in")</td><td class="realisation">in</td></tr>
 <tr><td class="description">Conjunction</td><td class="pattern">C(…)</td><td class="example-en">C("and")</td><td class="realisation">and</td></tr>
-<tr><td class="description">Date possibly with <a href='#dateEn'>options</a></td><td class="pattern">DT(…)</td><td class="example-en">DT()</td><td class="realisation">on Friday, September 16, 2022 at 1:21:56 p.m.</td></tr>
+<tr><td class="description">Date possibly with <a href='#dateEn'>options</a></td><td class="pattern">DT(…)</td><td class="example-en">DT()</td><td class="realisation">on Sunday, January 29, 2023 at 11:27:27 p.m.</td></tr>
 <tr><td class="description">Number possibly with <a href='#numbers'>options</a></td><td class="pattern">NO(…)</td><td class="example-en">NO(2)</td><td class="realisation">2</td></tr>
 <tr><td class="description">Raw text</td><td class="pattern">"…"</td><td class="example-en">"Wow"</td><td class="realisation">Wow</td></tr>
 <tr><td class="description">Raw text to which <a href='#optionsEn'>options</a> can be added</td><td class="pattern">Q(…)</td><td class="example-en">Q("Bang !").tag("i")</td><td class="realisation"><i>Bang !</i></td></tr>
@@ -368,7 +368,7 @@ for the determiner <code>my</code>.</p>
     et toniques des pronoms doivent spécifier <code>.pe(1)</code> pour le pronom <code>moi</code>. 
     Il en est de même pour les pronoms possessifs <code>mien</code> et <code>nôtre</code> ainsi que pour les déterminants possessifs <code>mon</code> et <code>notre</code>.</p>
     <p>Le tableau suivant présente la forme obtenue au-dessus de la spécification 
-    <span class="jsr">pyRealB</span>.</p>
+    <span class="jsr">pyrealb</span>.</p>
 </div>
 <table>
 <tr><th>lemme</th>
@@ -497,7 +497,7 @@ for the determiner <code>my</code>.</p>
 </tr>
 </table>
 <p>Le tableau suivant présente la forme obtenue au-dessus de la 
-    spécification <span class="jsr">pyRealB</span>.</p>
+    spécification <span class="jsr">pyrealb</span>.</p>
 <table>
 <tr><th>lemme</th>
 <th>masculin singulier</th>
@@ -609,7 +609,7 @@ for the determiner <code>my</code>.</p>
    <p>In order to stay compatible with the previous form of specification, when using tonic or clitic form,
       <code>pe(1)</code> must be specified for the pronoun <code>me</code>.</p>
    <p>The following table shows the realized form above the corresponding 
-       <span class="jsr">pyRealB</span> expression.</p>
+       <span class="jsr">pyrealb</span> expression.</p>
 </div>
 <table>
 <tr><th>lemma</th>
@@ -741,7 +741,7 @@ for the determiner <code>my</code>.</p>
 Possessive determiners are specified by giving options for the number, the person, 
 the gender (when at the third person) and also if the owner (<code>.ow(..)</code>) 
 is singular or plural. The following table shows the realization above its 
-pyRealB specification.</p>
+pyrealb specification.</p>
 <table>
 <tr><th>Possessive determiner</th></tr>
 <tr>
@@ -999,7 +999,7 @@ corresponding to <code>YYYY-MM-DD hh:mm:ss</code>. When no parameter is given, <
 <h3 lang="fr">Création d'une date</h3>
 <table lang="fr">
 <tr><th>Nom</th><th>Représentation</th><th>Exemple</th><th>Réalisation</th></tr>
-<tr><td class="description">Date courante</td><td class="pattern">DT()</td><td class="example-fr">DT()</td><td class="realisation">le vendredi 16 septembre 2022 à 13 h 21 min 56 s</td></tr>
+<tr><td class="description">Date courante</td><td class="pattern">DT()</td><td class="example-fr">DT()</td><td class="realisation">le dimanche 29 janvier 2023 à 23 h 27 min 27 s</td></tr>
 <tr><td class="description">Date passée</td><td class="pattern">DT("...")</td><td class="example-fr">DT("2014-11-21 21:00:00")</td><td class="realisation">le vendredi 21 novembre 2014 à 21 h 0 min 0 s</td></tr>
 <tr><td class="description">Date sans temps</td><td class="pattern">DT("...")</td><td class="example-fr">DT("2017-12-31")</td><td class="realisation">le dimanche 31 décembre 2017 à 0 h 0 min 0 s</td></tr>
 <tr><td class="description">Date à partir de datetime</td><td class="pattern">DT(datetime)</td><td class="example-fr">DT(datetime.datetime(2014,12,31))</td><td class="realisation">le mercredi 31 décembre 2014 à 0 h 0 min 0 s</td></tr>
@@ -1007,7 +1007,7 @@ corresponding to <code>YYYY-MM-DD hh:mm:ss</code>. When no parameter is given, <
 <h3 lang="en">Date creation</h3>
 <table lang="en">
 <tr><th>Name</th><th>Representation</th><th>Example</th><th>Realisation</th></tr>
-<tr><td class="description">Current date</td><td class="pattern">DT()</td><td class="example-en">DT()</td><td class="realisation">on Friday, September 16, 2022 at 1:21:56 p.m.</td></tr>
+<tr><td class="description">Current date</td><td class="pattern">DT()</td><td class="example-en">DT()</td><td class="realisation">on Sunday, January 29, 2023 at 11:27:27 p.m.</td></tr>
 <tr><td class="description">Date in the past</td><td class="pattern">DT("...")</td><td class="example-en">DT("2014-11-21 21:00:00")</td><td class="realisation">on Friday, November 21, 2014 at 9:00:00 p.m.</td></tr>
 <tr><td class="description">Date without time </td><td class="pattern">DT("...")</td><td class="example-en">DT("2017-12-31")</td><td class="realisation">on Sunday, December 31, 2017 at 0:00:00 a.m.</td></tr>
 <tr><td class="description">Date from datetime</td><td class="pattern">DT(datetime)</td><td class="example-en">DT(datetime.datetime(2014,12,31))</td><td class="realisation">on Wednesday, December 31, 2014 at 0:00:00 a.m.</td></tr>
@@ -1015,28 +1015,28 @@ corresponding to <code>YYYY-MM-DD hh:mm:ss</code>. When no parameter is given, <
 <h3 lang="fr">Formatage d'une date (défaut <code>.nat()</code>)</h3>
 <table lang="fr">
 <tr><th>Nom</th><th>Représentation</th><th>Exemple</th><th>Réalisation</th></tr>
-<tr><td class="description">en lettres, par défaut</td><td class="pattern">.nat()</td><td class="example-fr">DT()</td><td class="realisation">le vendredi 16 septembre 2022 à 13 h 21 min 56 s</td></tr>
-<tr><td class="description">en chiffres</td><td class="pattern">.nat(False)</td><td class="example-fr">DT().nat(False)</td><td class="realisation">vendredi 16/9/2022 13:21:56</td></tr>
+<tr><td class="description">en lettres, par défaut</td><td class="pattern">.nat()</td><td class="example-fr">DT()</td><td class="realisation">le dimanche 29 janvier 2023 à 23 h 27 min 27 s</td></tr>
+<tr><td class="description">en chiffres</td><td class="pattern">.nat(False)</td><td class="example-fr">DT().nat(False)</td><td class="realisation">dimanche 29/1/2023 23:27:27</td></tr>
 <tr class="groupe"><td>Contrôle de l'affichage de chacun des éléments de la date</td><td colspan="3" class="pattern">.dOpt({"year": , "month": , "date": , "day": , "hour": , "minute": , "second": , "nat":, "det":, "rtime":})</td></tr>
-<tr><td class="description">Heure seulement</td><td class="pattern">.dOpt(..)</td><td class="example-fr">DT().dOpt({"year": False, "month": False, "date": False, "day": False})</td><td class="realisation">à 13 h 21 min 56 s</td></tr>
+<tr><td class="description">Heure seulement</td><td class="pattern">.dOpt(..)</td><td class="example-fr">DT().dOpt({"year": False, "month": False, "date": False, "day": False})</td><td class="realisation">à 23 h 27 min 27 s</td></tr>
 <tr><td class="description">Affichage de l'heure et des minutes (en chiffres)</td><td class="pattern">{"nat":False}</td><td class="example-fr">DT().dOpt({"year": False, "month": False, "date": False,
- "day": False, "second": False, "nat":False})</td><td class="realisation">13:21</td></tr>
-<tr><td class="description">Non affichage des déterminants de la date</td><td class="pattern">{"det":False}</td><td class="example-fr">DT().dOpt({"det": False})</td><td class="realisation">vendredi 16 septembre 2022 13 h 21 min 56 s</td></tr>
-<tr><td class="description">Date relative par rapport à aujourd'hui</td><td class="pattern">{"rtime":True}</td><td class="example-fr">DT().dOpt({"rtime": True})</td><td class="realisation">aujourd'hui à 13 h 21 min 56 s</td></tr>
+ "day": False, "second": False, "nat":False})</td><td class="realisation">23:27</td></tr>
+<tr><td class="description">Non affichage des déterminants de la date</td><td class="pattern">{"det":False}</td><td class="example-fr">DT().dOpt({"det": False})</td><td class="realisation">dimanche 29 janvier 2023 23 h 27 min 27 s</td></tr>
+<tr><td class="description">Date relative par rapport à aujourd'hui</td><td class="pattern">{"rtime":True}</td><td class="example-fr">DT().dOpt({"rtime": True})</td><td class="realisation">aujourd'hui à 23 h 27 min 27 s</td></tr>
 <tr><td class="description">Date relative après une autre</td><td class="pattern">{"rtime":".." or Date}</td><td class="example-fr">DT("2021-09-01").dOpt({"rtime": "2021-08-27","hour":False,"minute":False,"second":False})</td><td class="realisation">mercredi prochain</td></tr>
 <tr><td class="description">Date relative avant une autre date</td><td class="pattern">{"rtime":".." or Date}</td><td class="example-fr">DT("2021-09-01").dOpt({"rtime":datetime.datetime(2021,9,10),"hour":False,"minute":False,"second":False})</td><td class="realisation">il y a 9 jours</td></tr>
 </table>
 <h3 lang="en">Date formatting (default <code>.nat()</code>)</h3>
 <table lang="en">
 <tr><th>Name</th><th>Representation</th><th>Example</th><th>Realisation</th></tr>
-<tr><td class="description">as words, by default</td><td class="pattern">.nat()</td><td class="example-en">DT()</td><td class="realisation">on Friday, September 16, 2022 at 1:21:56 p.m.</td></tr>
-<tr><td class="description">as digits</td><td class="pattern">.nat(False)</td><td class="example-en">DT().nat(False)</td><td class="realisation">Friday 9/16/2022 13:21:56 p.m.</td></tr>
+<tr><td class="description">as words, by default</td><td class="pattern">.nat()</td><td class="example-en">DT()</td><td class="realisation">on Sunday, January 29, 2023 at 11:27:27 p.m.</td></tr>
+<tr><td class="description">as digits</td><td class="pattern">.nat(False)</td><td class="example-en">DT().nat(False)</td><td class="realisation">Sunday 1/29/2023 23:27:27 p.m.</td></tr>
 <tr class="groupe"><td>Control over the display of date components</td><td colspan="3" class="pattern">.dOpt({"year": , "month": , "date": , "day": , "hour": , "minute": , "second": , "nat":, "det":, "rtime":})</td></tr>
-<tr><td class="description">Time only</td><td class="pattern">.dOpt(..)</td><td class="example-en">DT().dOpt({"year": False, "month": False, "date": False, "day": False})</td><td class="realisation">at 1:21:56 p.m.</td></tr>
+<tr><td class="description">Time only</td><td class="pattern">.dOpt(..)</td><td class="example-en">DT().dOpt({"year": False, "month": False, "date": False, "day": False})</td><td class="realisation">at 11:27:27 p.m.</td></tr>
 <tr><td class="description">Display hour and minutes as digits</td><td class="pattern">{"nat":False}</td><td class="example-en">DT().dOpt({"year": False, "month": False, "date": False,
- "day": False, "second": False, "nat":False})</td><td class="realisation">1:21 p.m.</td></tr>
-<tr><td class="description">Do not display determiner</td><td class="pattern">{"det":False}</td><td class="example-en">DT().dOpt({"det": False})</td><td class="realisation">Friday, September 16, 2022 1:21:56 p.m.</td></tr>
-<tr><td class="description">Relative date compared with today</td><td class="pattern">{"rtime":True}</td><td class="example-en">DT().dOpt({"rtime": True})</td><td class="realisation">today at 1:21:56 p.m.</td></tr>
+ "day": False, "second": False, "nat":False})</td><td class="realisation">11:27 p.m.</td></tr>
+<tr><td class="description">Do not display determiner</td><td class="pattern">{"det":False}</td><td class="example-en">DT().dOpt({"det": False})</td><td class="realisation">Sunday, January 29, 2023 11:27:27 p.m.</td></tr>
+<tr><td class="description">Relative date compared with today</td><td class="pattern">{"rtime":True}</td><td class="example-en">DT().dOpt({"rtime": True})</td><td class="realisation">today at 11:27:27 p.m.</td></tr>
 <tr><td class="description">Relative date after another one</td><td class="pattern">{"rtime":".." or Date}</td><td class="example-en">DT("2021-09-01").dOpt({"rtime": "2021-08-27","hour":False,"minute":False,"second":False})</td><td class="realisation">Wednesday</td></tr>
 <tr><td class="description">Relative date before another one</td><td class="pattern">{"rtime":".." or Date}</td><td class="example-en">DT("2021-09-01").dOpt({"rtime":datetime.datetime(2021,9,10),"hour":False,"minute":False,"second":False})</td><td class="realisation">9 days ago</td></tr>
 </table>
@@ -1119,11 +1119,11 @@ the element is added as the last child.</p>
 </table>
 <h3><code>.toSource()</code></h3>
 <p lang="fr">
-Cette fonction retourne une version <em>chaîne</em> d'une expression <span class="jsr">pyRealB</span>, 
+Cette fonction retourne une version <em>chaîne</em> d'une expression <span class="jsr">pyrealb</span>, 
 ceci peut être utile pour la mise au point d'une expression complexe. En passant 0 comme paramètre 
 à ce fonction, on obtient une expression indentée qui fait ressortir la structure de l'expression.</p>
 <p lang="en">
-This function returns a <em>string</em> version of a  <span class="jsr">pyRealB</span> expression, this 
+This function returns a <em>string</em> version of a  <span class="jsr">pyrealb</span> expression, this 
 can be useful for debugging complex expressions. When 0 is given as parameter of this function, 
 the string is on on multiple lines indented to highlight the underlying structure of the expression.</p>
 <h3><code>getLanguage()</code></h3>
@@ -1185,14 +1185,14 @@ for example once the appropriate language has been loaded. It is also possible t
 <h2 lang="fr" id="gestion_des_lexiques">Gestion des lexiques</h2>
 <h2 lang="en" id="lexicon_management">Lexicon Management</h2>
 <p lang="fr">
- <span class="jsr">pyRealB</span> 
+ <span class="jsr">pyrealb</span> 
 intègre déjà deux lexiques assez détaillés: français (plus de 52 500 entrées) et anglais (plus de 33 900 entrées) 
 qu'il est possible de consulter et de modifier à l'aide des fonctions suivantes. Lorsque <code>lang</code> (<code>"en"</code> 
 ou <code>"fr"</code>) est spécifié, la fonction s'applique au lexique de cette langue, sinon au lexique courant, 
 celui du dernier appel à <code>loadEn()</code> ou <code>loadFr()</code>.
 </p>
 <p lang="en">
-<span class="jsr">pyRealB</span> 
+<span class="jsr">pyrealb</span> 
 provides already two comprehensive lexicons: French (more than 52 500 entries) and English (more than 33 900 entries) 
 that can be queried and modified with the following functions. When <code>lang</code> (<code>"en"</code> or 
 <code>"fr"</code>) is specified, the function is applied to the lexicon of this language, otherwise it applies to 
@@ -1203,20 +1203,20 @@ the current lexicon, the one of the last call to <code>loadEn()</code> or <code>
 <p lang="fr"> 
  <code>lemma</code> est l'entrée de base et <code>newInfos</code> est
  l'information morphologique selon le format interne à <span
- class="jsr">pyRealB</span>: un objet indiquant le ou les catégories possibles
+ class="jsr">pyrealb</span>: un objet indiquant le ou les catégories possibles
  et pour chaque catégorie, des propriétés et la table de déclinaison ou
  conjugaison correspondantes.
-Par exemple, <code>addToLexicon("pyRealB",{"N":{"g":"m", "pe":3, "tab":"nI"})</code> ajoutera le mot 
-<code>pyRealB</code> comme nom masculin invariable au lexique courant. 
+Par exemple, <code>addToLexicon("pyrealb",{"N":{"g":"m", "pe":3, "tab":"nI"})</code> ajoutera le mot 
+<code>pyrealb</code> comme nom masculin invariable au lexique courant. 
 Cette fonction peut aussi être appelée avec un seul paramètre qui est un objet dont la clé est le lemme. 
-L'exemple précédent peut donc s'écrire: <code>addToLexicon({"pyRealB":{"N":{"g":"m", "pe":3, "tab": "nI"}})</code>. 
+L'exemple précédent peut donc s'écrire: <code>addToLexicon({"pyrealb":{"N":{"g":"m", "pe":3, "tab": "nI"}})</code>. 
 <ul>
 <li>Si le lemme et la catégorie existent déjà dans le lexique, alors l'entrée pour cette catégorie est remplacée 
 par <code>newInfos</code>. </li>
 <li>Cette fonction retourne la nouvelle entrée modifié pour <code>lemma</code>.</li>
 <li><a href="../data/lexiconFormat.html">Plus d'information (en anglais) sur le format des lexiques</a></li>
 <li>Pour déterminer les informations à ajouter, le plus simple est de copier les informations d'un mot du 
-lexique qui se conjugue ou se décline de la même façon. L'<a href="../IDE/index.html">IDE de pyRealB</a> 
+lexique qui se conjugue ou se décline de la même façon. L'<a href="../IDE/index.html">IDE de pyrealb</a> 
 permet de consulter les informations du lexique.</li>
 <li>Pour enlever une entrée d'un lexique, il de mettre <code>newInfos</code> à <code>None</code>.</li>
 </ul>
@@ -1224,12 +1224,12 @@ permet de consulter les informations du lexique.</li>
 <div lang="en">
 <p> 
  <code>lemma</code> is the basic form and <code>newInfos</code> is the morphologic information according 
- to the internal  <span class="jsr">pyRealB</span> format: an object indicating one or many possible categories. 
+ to the internal  <span class="jsr">pyrealb</span> format: an object indicating one or many possible categories. 
  For each category, properties and declension or conjugation are given.
-For example, <code>addToLexicon("pyRealB",{"N":{"g":"m", "pe":3, "tab":"nI"})</code> will add 
-the <code>pyRealB</code> as a masculine invariable word. This function can also be called with a 
+For example, <code>addToLexicon("pyrealb",{"N":{"g":"m", "pe":3, "tab":"nI"})</code> will add 
+the <code>pyrealb</code> as a masculine invariable word. This function can also be called with a 
 single parameter: an object whose key is the lemma. The previous example could also have been 
-written: <code>addToLexicon({"pyRealB":{"N":{"g":"m", "pe":3, "tab":"nI"})</code>.
+written: <code>addToLexicon({"pyrealb":{"N":{"g":"m", "pe":3, "tab":"nI"})</code>.
 <ul>  
 <li>If the lemma and category are already present in the lexicon, then the category of this entry is 
 replaced by <code>newInfos</code>.</li>
@@ -1237,7 +1237,7 @@ replaced by <code>newInfos</code>.</li>
 <li><a href="../data/lexiconFormat.html">More information about the lexicon format</a></li>
 <li>In order to find the informations to add, the simplest way is to copy the lexicon information 
 for a similar word already in the lexicon. 
-The <a href="../IDE/index.html">pyRealB IDE</a> provides access to the lexicon information.
+The <a href="../IDE/index.html">pyrealb IDE</a> provides access to the lexicon information.
 </li>
 <li>To remove an entry, set <code>newInfos</code> to <code>None</code>.</li>
 </ul>
@@ -1264,7 +1264,7 @@ Returns the current lexicon.</p>
 <h2 lang="en" id="variant_selection">Variant selection</h2>
 <p lang="fr">
 La fonction <code>oneOf(e<sub>1</sub>,e<sub>2</sub>,...)</code> où <code>e<sub>i</sub></code> est est une valeur, 
-choisit un <code>e<sub>i</sub></code> au hasard. En <code>pyRealB</code>, ces éléments sont souvent des 
+choisit un <code>e<sub>i</sub></code> au hasard. En <code>pyrealb</code>, ces éléments sont souvent des 
 constructeurs correspondant à des structures de phrases différentes. Si <code>e<sub>1</sub></code> est une 
 liste alors la sélection est faite dans cette liste, en ignorant les autres paramètres.
 </p>
@@ -1278,7 +1278,7 @@ les deux constructeurs. Dans ce cas, très simple, il aurait été aussi possibl
 <code>N(oneOf("amour","amitié"))</code>.</p>
 <p lang="en">
 The function <code>oneOf(e<sub>1</sub>,e<sub>2</sub>,...)</code> where <code>e<sub>i</sub></code> is a value, 
-selects randomly a <code>e<sub>i</sub></code>. In <code>pyRealB</code>, these elements are often constructors
+selects randomly a <code>e<sub>i</sub></code>. In <code>pyrealb</code>, these elements are often constructors
 corresponding to different phrase structures. If <code>e<sub>1</sub></code> is a list, the selection is performed 
 within this list, ignoring other parameters.</p>
 <p lang="en">
@@ -1291,24 +1291,24 @@ both constructors. In this simplistic case, this could have also been written as
 <h2 lang="fr" id="traitement_en_json">Traitement en JSON</h2>
 <h2 lang="en" id="json_processing">JSON processing</h2>
 <p lang="fr">
-Pour faciliter l'utilisation de <code>pyRealB</code> en sortie d'un système externe. 
+Pour faciliter l'utilisation de <code>pyrealb</code> en sortie d'un système externe. 
 Il est possible d'utiliser un format d'entrée JSON <a href="../data/jsRealB-jsonInput.html">
 décrit dans ce document (en anglais)</a> où sont décrites deux API permettant 
 d'appeler un serveur <i>node.js</i> <code>jsRealB</code> <a href="jsRealBfromPython.html">depuis un autre programme Python</a> ou Prolog. 
-Il est également possible d"obtenir une expression JSON correspondant à une expression <code>pyRealB</code>.</p>
+Il est également possible d"obtenir une expression JSON correspondant à une expression <code>pyrealb</code>.</p>
 <p lang="en">
-To simplify the use of <code>pyRealB</code> as output of an external system, a JSON input format has been defined. 
+To simplify the use of <code>pyrealb</code> as output of an external system, a JSON input format has been defined. 
 <a href="../data/jsRealB-jsonInput.html">It is described in this document.</a> in which two APIs are described 
-for calling a <code>pyRealB</code> <i>node.js</i> server <a href="jsRealBfromPython.html">from another Python</a> or Prolog. 
-It is also possible to obtain the JSON expression corresponding to a given <code>pyRealB</code> expression.</p>
+for calling a <code>pyrealb</code> <i>node.js</i> server <a href="jsRealBfromPython.html">from another Python</a> or Prolog. 
+It is also possible to obtain the JSON expression corresponding to a given <code>pyrealb</code> expression.</p>
 <h2 lang="fr" id="informations_sur_la_version">Informations sur la version</h2>
 <h2 lang="en" id="informations_about_the_version">Informations about the version</h2>
-<h3><code>pyRealB_version</code></h3>
-<p lang="fr">Indique le numéro de version de <code>pyRealB</code>.</p>
-<p lang="en">Gives the version number of <code>pyRealB</code>.</p>
-<h3><code>pyRealB_dateCreated</code></h3>
-<p lang="fr">Indique la date de la création de la version courante de <code>pyRealB</code>.</p>
-<p lang="en">Gives the creation date of the current <code>pyRealB</code>.</p>
+<h3><code>pyrealb_version</code></h3>
+<p lang="fr">Indique le numéro de version de <code>pyrealb</code>.</p>
+<p lang="en">Gives the version number of <code>pyrealb</code>.</p>
+<h3><code>pyrealb_dateCreated</code></h3>
+<p lang="fr">Indique la date de la création de la version courante de <code>pyrealb</code>.</p>
+<p lang="en">Gives the creation date of the current <code>pyrealb</code>.</p>
 <h2 lang="fr" id="relation_fr">Relation avec <code>jsRealB</code></h2>
 <h2 lang="en" id="relation_en">Relation with <code>jsRealB</code></h2>
 <p lang="fr">

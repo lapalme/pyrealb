@@ -125,7 +125,7 @@ def tableauFrancais():
     page.table.close()
     
     page.p("""Le tableau suivant présente la forme obtenue au-dessus de la 
-    spécification <span class="jsr">pyRealB</span>.""")
+    spécification <span class="jsr">pyrealb</span>.""")
     
     page.table()
     page.tr(e.th(["lemme","masculin singulier","féminin singulier","masculin pluriel","féminin pluriel"]))
@@ -170,7 +170,7 @@ def englishTable():
 Possessive determiners are specified by giving options for the number, the person, 
 the gender (when at the third person) and also if the owner (<code>.ow(..)</code>) 
 is singular or plural. The following table shows the realization above its 
-pyRealB specification.""")
+pyrealb specification.""")
     page.table()
     page.tr(e.th("Possessive determiner"))
     englishPossessiveDeterminers()
@@ -178,7 +178,7 @@ pyRealB specification.""")
 #### start of HTML generation
 
 page=markup.page()
-page.init(title="pyRealB - Documentation",
+page.init(title="pyrealb - Documentation",
           css="style.css",
           lang="",
           metainfo={"name":"viewport", 
@@ -200,9 +200,9 @@ page.span.close()
 page.span("["+e.span("FR",lang="en")+e.span("EN",lang="fr")+"]",id="langSelect")
 
 # start of page
-page.h1(e.span("pyRealB",class_="jsr")+" (Version "+pyRealB_version+") Documentation")
+page.h1(e.span("pyrealb",class_="jsr")+" (Version "+pyrealb_version+") Documentation")
 
-page.p("""<span class="jsr">pyRealB</span> est un réalisateur de texte pour l'anglais et le français écrit en Python.
+page.p("""<span class="jsr">pyrealb</span> est un réalisateur de texte pour l'anglais et le français écrit en Python.
 Des appels de fonctions Python, rappelant les notations de syntaxe en constituants ou en dépendences, 
 créent une structure qui sera réalisée en appelant la fonction <code>str()</code>, souvent de façon implicite 
 via la fonction <code>print</code>. 
@@ -210,7 +210,7 @@ via la fonction <code>print</code>.
 <a href="https://github.com/lapalme/pyrealb" title="GitHub - lapalme/pyrealb: French and English text realisator">instructions 
 données dans le répertoire GitHub</a>,
 il suffit d'ajouter la ligne suivante à son programme.""",lang="fr")
-page.p("""<span class="jsr">pyRealB</span> is a text realizer for French and English written in Python. 
+page.p("""<span class="jsr">pyrealb</span> is a text realizer for French and English written in Python. 
 Calls to Python functions, similar to the syntactic constituency or dependencies notations create a structure 
 that can be realized with <code>str()</code> , most often implicitely within a <code>print</code> function.
 <br/>Once installed according to 
@@ -219,12 +219,12 @@ instructions on the GitHub</a>, using it
 is only a matter of adding the following line to the program.""",lang="en")
 page.code("from pyrealb import *")
 page.p("""
-<span class="jsr">pyRealB</span> peut aussi être utilisé pour créer une page web comme celle-ci dans laquelle 
-les exemples ont été réalisés par <span class="jsr">pyRealB</span>  lors de la création de la page.""",
+<span class="jsr">pyrealb</span> peut aussi être utilisé pour créer une page web comme celle-ci dans laquelle 
+les exemples ont été réalisés par <span class="jsr">pyrealb</span>  lors de la création de la page.""",
 lang="fr")
-page.p("""<span class="jsr">pyRealB</span> can be used to build web pages such as this one in which all examples 
+page.p("""<span class="jsr">pyrealb</span> can be used to build web pages such as this one in which all examples 
  were realized using
-<span class="jsr">pyRealB</span> when the page was created.""",
+<span class="jsr">pyrealb</span> when the page was created.""",
 lang="en")
 
 
@@ -335,7 +335,7 @@ page.div("""
     et toniques des pronoms doivent spécifier <code>.pe(1)</code> pour le pronom <code>moi</code>. 
     Il en est de même pour les pronoms possessifs <code>mien</code> et <code>nôtre</code> ainsi que pour les déterminants possessifs <code>mon</code> et <code>notre</code>.</p>
     <p>Le tableau suivant présente la forme obtenue au-dessus de la spécification 
-    <span class="jsr">pyRealB</span>.</p>
+    <span class="jsr">pyrealb</span>.</p>
 """)
 tableauFrancais()
 page.div.close() # lang="fr"
@@ -363,7 +363,7 @@ page.div("""
    <p>In order to stay compatible with the previous form of specification, when using tonic or clitic form,
       <code>pe(1)</code> must be specified for the pronoun <code>me</code>.</p>
    <p>The following table shows the realized form above the corresponding 
-       <span class="jsr">pyRealB</span> expression.</p>
+       <span class="jsr">pyrealb</span> expression.</p>
 """)
 englishTable()
 page.div.close() # lang="en"
@@ -444,12 +444,12 @@ addTable(addUse)
 
 page.h3("<code>.toSource()</code>")
 page.p("""
-Cette fonction retourne une version <em>chaîne</em> d'une expression <span class="jsr">pyRealB</span>, 
+Cette fonction retourne une version <em>chaîne</em> d'une expression <span class="jsr">pyrealb</span>, 
 ceci peut être utile pour la mise au point d'une expression complexe. En passant 0 comme paramètre 
 à ce fonction, on obtient une expression indentée qui fait ressortir la structure de l'expression.""",
 lang="fr")
 page.p("""
-This function returns a <em>string</em> version of a  <span class="jsr">pyRealB</span> expression, this 
+This function returns a <em>string</em> version of a  <span class="jsr">pyrealb</span> expression, this 
 can be useful for debugging complex expressions. When 0 is given as parameter of this function, 
 the string is on on multiple lines indented to highlight the underlying structure of the expression.""",
 lang="en")
@@ -497,14 +497,14 @@ addTable(functionUse)
 #### *** Gestion des lexiques *** 
 h2_fr("Gestion des lexiques");h2_en("Lexicon Management")
 page.p("""
- <span class="jsr">pyRealB</span> 
+ <span class="jsr">pyrealb</span> 
 intègre déjà deux lexiques assez détaillés: français (plus de 52 500 entrées) et anglais (plus de 33 900 entrées) 
 qu'il est possible de consulter et de modifier à l'aide des fonctions suivantes. Lorsque <code>lang</code> (<code>"en"</code> 
 ou <code>"fr"</code>) est spécifié, la fonction s'applique au lexique de cette langue, sinon au lexique courant, 
 celui du dernier appel à <code>loadEn()</code> ou <code>loadFr()</code>.
 """,lang="fr")
 page.p("""
-<span class="jsr">pyRealB</span> 
+<span class="jsr">pyrealb</span> 
 provides already two comprehensive lexicons: French (more than 52 500 entries) and English (more than 33 900 entries) 
 that can be queried and modified with the following functions. When <code>lang</code> (<code>"en"</code> or 
 <code>"fr"</code>) is specified, the function is applied to the lexicon of this language, otherwise it applies to 
@@ -516,20 +516,20 @@ page.div("""
 <p lang="fr"> 
  <code>lemma</code> est l'entrée de base et <code>newInfos</code> est
  l'information morphologique selon le format interne à <span
- class="jsr">pyRealB</span>: un objet indiquant le ou les catégories possibles
+ class="jsr">pyrealb</span>: un objet indiquant le ou les catégories possibles
  et pour chaque catégorie, des propriétés et la table de déclinaison ou
  conjugaison correspondantes.
-Par exemple, <code>addToLexicon("pyRealB",{"N":{"g":"m", "pe":3, "tab":"nI"})</code> ajoutera le mot 
-<code>pyRealB</code> comme nom masculin invariable au lexique courant. 
+Par exemple, <code>addToLexicon("pyrealb",{"N":{"g":"m", "pe":3, "tab":"nI"})</code> ajoutera le mot 
+<code>pyrealb</code> comme nom masculin invariable au lexique courant. 
 Cette fonction peut aussi être appelée avec un seul paramètre qui est un objet dont la clé est le lemme. 
-L'exemple précédent peut donc s'écrire: <code>addToLexicon({"pyRealB":{"N":{"g":"m", "pe":3, "tab": "nI"}})</code>. 
+L'exemple précédent peut donc s'écrire: <code>addToLexicon({"pyrealb":{"N":{"g":"m", "pe":3, "tab": "nI"}})</code>. 
 <ul>
 <li>Si le lemme et la catégorie existent déjà dans le lexique, alors l'entrée pour cette catégorie est remplacée 
 par <code>newInfos</code>. </li>
 <li>Cette fonction retourne la nouvelle entrée modifié pour <code>lemma</code>.</li>
 <li><a href="../data/lexiconFormat.html">Plus d'information (en anglais) sur le format des lexiques</a></li>
 <li>Pour déterminer les informations à ajouter, le plus simple est de copier les informations d'un mot du 
-lexique qui se conjugue ou se décline de la même façon. L'<a href="../IDE/index.html">IDE de pyRealB</a> 
+lexique qui se conjugue ou se décline de la même façon. L'<a href="../IDE/index.html">IDE de pyrealb</a> 
 permet de consulter les informations du lexique.</li>
 <li>Pour enlever une entrée d'un lexique, il de mettre <code>newInfos</code> à <code>None</code>.</li>
 </ul>
@@ -537,12 +537,12 @@ permet de consulter les informations du lexique.</li>
 page.div("""
 <p> 
  <code>lemma</code> is the basic form and <code>newInfos</code> is the morphologic information according 
- to the internal  <span class="jsr">pyRealB</span> format: an object indicating one or many possible categories. 
+ to the internal  <span class="jsr">pyrealb</span> format: an object indicating one or many possible categories. 
  For each category, properties and declension or conjugation are given.
-For example, <code>addToLexicon("pyRealB",{"N":{"g":"m", "pe":3, "tab":"nI"})</code> will add 
-the <code>pyRealB</code> as a masculine invariable word. This function can also be called with a 
+For example, <code>addToLexicon("pyrealb",{"N":{"g":"m", "pe":3, "tab":"nI"})</code> will add 
+the <code>pyrealb</code> as a masculine invariable word. This function can also be called with a 
 single parameter: an object whose key is the lemma. The previous example could also have been 
-written: <code>addToLexicon({"pyRealB":{"N":{"g":"m", "pe":3, "tab":"nI"})</code>.
+written: <code>addToLexicon({"pyrealb":{"N":{"g":"m", "pe":3, "tab":"nI"})</code>.
 <ul>  
 <li>If the lemma and category are already present in the lexicon, then the category of this entry is 
 replaced by <code>newInfos</code>.</li>
@@ -550,7 +550,7 @@ replaced by <code>newInfos</code>.</li>
 <li><a href="../data/lexiconFormat.html">More information about the lexicon format</a></li>
 <li>In order to find the informations to add, the simplest way is to copy the lexicon information 
 for a similar word already in the lexicon. 
-The <a href="../IDE/index.html">pyRealB IDE</a> provides access to the lexicon information.
+The <a href="../IDE/index.html">pyrealb IDE</a> provides access to the lexicon information.
 </li>
 <li>To remove an entry, set <code>newInfos</code> to <code>None</code>.</li>
 </ul>
@@ -580,7 +580,7 @@ Returns the current lexicon.""",lang="en")
 h2_fr("Sélection de variantes");h2_en("Variant selection")
 page.p("""
 La fonction <code>oneOf(e<sub>1</sub>,e<sub>2</sub>,...)</code> où <code>e<sub>i</sub></code> est est une valeur, 
-choisit un <code>e<sub>i</sub></code> au hasard. En <code>pyRealB</code>, ces éléments sont souvent des 
+choisit un <code>e<sub>i</sub></code> au hasard. En <code>pyrealb</code>, ces éléments sont souvent des 
 constructeurs correspondant à des structures de phrases différentes. Si <code>e<sub>1</sub></code> est une 
 liste alors la sélection est faite dans cette liste, en ignorant les autres paramètres.
 """,lang="fr")
@@ -594,7 +594,7 @@ les deux constructeurs. Dans ce cas, très simple, il aurait été aussi possibl
 <code>N(oneOf("amour","amitié"))</code>.""",lang="fr")
 page.p("""
 The function <code>oneOf(e<sub>1</sub>,e<sub>2</sub>,...)</code> where <code>e<sub>i</sub></code> is a value, 
-selects randomly a <code>e<sub>i</sub></code>. In <code>pyRealB</code>, these elements are often constructors
+selects randomly a <code>e<sub>i</sub></code>. In <code>pyrealb</code>, these elements are often constructors
 corresponding to different phrase structures. If <code>e<sub>1</sub></code> is a list, the selection is performed 
 within this list, ignoring other parameters.""",lang="en")
 page.p("""
@@ -608,27 +608,27 @@ lang="en")
 
 h2_fr("Traitement en JSON");h2_en("JSON processing")
 page.p("""
-Pour faciliter l'utilisation de <code>pyRealB</code> en sortie d'un système externe. 
+Pour faciliter l'utilisation de <code>pyrealb</code> en sortie d'un système externe. 
 Il est possible d'utiliser un format d'entrée JSON <a href="../data/jsRealB-jsonInput.html">
 décrit dans ce document (en anglais)</a> où sont décrites deux API permettant 
 d'appeler un serveur <i>node.js</i> <code>jsRealB</code> <a href="jsRealBfromPython.html">depuis un autre programme Python</a> ou Prolog. 
-Il est également possible d"obtenir une expression JSON correspondant à une expression <code>pyRealB</code>.""",
+Il est également possible d"obtenir une expression JSON correspondant à une expression <code>pyrealb</code>.""",
 lang="fr")
 page.p("""
-To simplify the use of <code>pyRealB</code> as output of an external system, a JSON input format has been defined. 
+To simplify the use of <code>pyrealb</code> as output of an external system, a JSON input format has been defined. 
 <a href="../data/jsRealB-jsonInput.html">It is described in this document.</a> in which two APIs are described 
-for calling a <code>pyRealB</code> <i>node.js</i> server <a href="jsRealBfromPython.html">from another Python</a> or Prolog. 
-It is also possible to obtain the JSON expression corresponding to a given <code>pyRealB</code> expression.""",
+for calling a <code>pyrealb</code> <i>node.js</i> server <a href="jsRealBfromPython.html">from another Python</a> or Prolog. 
+It is also possible to obtain the JSON expression corresponding to a given <code>pyrealb</code> expression.""",
 lang="en")
 
 h2_fr("Informations sur la version");h2_en("Informations about the version")
-page.h3("<code>pyRealB_version</code>")
-page.p("""Indique le numéro de version de <code>pyRealB</code>.""",lang="fr")
-page.p("""Gives the version number of <code>pyRealB</code>.""",lang="en")
+page.h3("<code>pyrealb_version</code>")
+page.p("""Indique le numéro de version de <code>pyrealb</code>.""",lang="fr")
+page.p("""Gives the version number of <code>pyrealb</code>.""",lang="en")
 
-page.h3("<code>pyRealB_dateCreated</code>")
-page.p("""Indique la date de la création de la version courante de <code>pyRealB</code>.""",lang="fr")
-page.p("""Gives the creation date of the current <code>pyRealB</code>.""",lang="en")
+page.h3("<code>pyrealb_dateCreated</code>")
+page.p("""Indique la date de la création de la version courante de <code>pyrealb</code>.""",lang="fr")
+page.p("""Gives the creation date of the current <code>pyrealb</code>.""",lang="en")
 
 h2_fr("Relation avec <code>jsRealB</code>","relation_fr");h2_en("Relation with <code>jsRealB</code>","relation_en")
 page.p("""
