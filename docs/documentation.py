@@ -626,7 +626,7 @@ page.h3("<code>pyrealb_version</code>")
 page.p("""Indique le numéro de version de <code>pyrealb</code>.""",lang="fr")
 page.p("""Gives the version number of <code>pyrealb</code>.""",lang="en")
 
-page.h3("<code>pyrealb_dateCreated</code>")
+page.h3("<code>pyrealb_datecreated</code>")
 page.p("""Indique la date de la création de la version courante de <code>pyrealb</code>.""",lang="fr")
 page.p("""Gives the creation date of the current <code>pyrealb</code>.""",lang="en")
 

@@ -14,7 +14,8 @@ __all__ = [ # from pyRealB
      'AP',  'AdvP',  'CP', 'NP', 'PP',  'VP', 'S', 'SP',                 # from Phrase
      'root', 'subj', 'det', 'mod', 'comp', 'compObj', 'compObl', 'coord',# from Dependent
      'currentLanguage', 'addToLexicon', 'getLemma', 'loadEn', 'loadFr',  # from Lexicon
-     'fromJSON', 'oneOf', 'false', 'true', 'null', 'pyRealB_version',    # from utils
+     'fromJSON', 'oneOf', 'false', 'true', 'null', 'pyrealb_version',    # from utils
+     'pyrealb_datecreated',
      # from this IDE
      "_en", "_fr", "_cn", "_ce", "_dn", "_de", "_lm", "_lx", "_help"]
 
@@ -285,7 +286,7 @@ setattr(Constituent,"__pos__", lambda self: print(self.realize()))
 
 
 def _help():
-    print('''pyRealB_ide: special commands (starting with _)
+    print('''pyrealb_ide: special commands (starting with _)
 
  _en() : load English lexicon and rules
  _fr() : load French lexicon and rules
@@ -305,7 +306,7 @@ def _help():
 
 
 ## start of the program
-print(f"** pyRealB {pyRealB_version} Interactive Development Environment [_help() for info]")
+print(f"** pyRealB {pyrealb_version} Interactive Development Environment [_help() for info]")
 _en()
   
 ## some unit tests

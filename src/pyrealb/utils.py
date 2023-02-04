@@ -76,4 +76,4 @@ null = None
 
 # version and date informations
 pyrealb_version = "2.3"
-pyrealb_dateCreated = datetime.datetime.today()
+pyrealb_datecreated = datetime.datetime.today()

@@ -11,5 +11,6 @@ __all__ = ['Constituent',
      'root', 'subj', 'det', 'mod', 'comp', 'compObj', 'compObl', 'coord', 'Dependent',  # from Dependent
      'currentLanguage', 'addToLexicon', 'getLemma', 'loadEn', 'loadFr',                 # from Lexicon
      'fromJSON', 'oneOf', 'false', 'true', 'null', 'pyrealb_version',                   # from utils
+     'pyrealb_datecreated',
      'test_warnings'                                                                    # from Warning
  ]

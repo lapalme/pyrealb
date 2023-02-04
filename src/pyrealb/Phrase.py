@@ -533,7 +533,7 @@ class Phrase(Constituent):
                 if idxVP >= 0:
                     vp = self.elements[idxVP]
                 else:
-                    self.warn("bad const for option", '.typ("' + key + ":" + str(val) + '")', self.constType, ["VP"])
+                    self.warn("not found", "VP",self.constType+'(...).typ("' + key + ":" + str(val) + '")')
                     return
             idxV = vp.getIndex("V")
             if idxV >= 0:

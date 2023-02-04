@@ -196,9 +196,9 @@ for p,info in partInfo.items():
 # générer le texte correspondant à chaque événement
 for groupe in evenementsParVille(evList[1:], [[evList[0]]]):
     showGroupe(groupe)
-# afficher la page    
-print(page)
 
 
 if __name__ == '__main__':
-    pass
+    # afficher la page
+    print(page)
+
