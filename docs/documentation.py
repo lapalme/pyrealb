@@ -175,6 +175,8 @@ pyrealb specification.""")
     page.tr(e.th("Possessive determiner"))
     englishPossessiveDeterminers()
     page.table.close()
+
+
 #### start of HTML generation
 
 page=markup.page()
@@ -186,8 +188,10 @@ page.init(title="pyrealb - Documentation",
                     "charset":"UTF-8",
                     "date":str(datetime.datetime.now())},
           script=["https://code.jquery.com/jquery-latest.min.js","user.js"],
-          footer="""Contact: <a href="mailto:lapalme@iro.umontreal.ca">Guy Lapalme</a> 
-<a href="http://rali.iro.umontreal.ca">RALI</a>, Université de Montréal, CANADA. 2021."""
+          footer=f"""Contact: <a href="mailto:lapalme@iro.umontreal.ca">Guy Lapalme</a> 
+<a href="http://rali.iro.umontreal.ca">RALI</a>, Université de Montréal, CANADA. 2023.<br/><hr/>
+{datetime.datetime.now().strftime("%Y-%m-%d  %H:%M:%S")}
+"""
           )
 
 # top menus
@@ -200,7 +204,8 @@ page.span.close()
 page.span("["+e.span("FR",lang="en")+e.span("EN",lang="fr")+"]",id="langSelect")
 
 # start of page
-page.h1(e.span("pyrealb",class_="jsr")+" (Version "+pyrealb_version+") Documentation")
+page.h1(e.span("pyrealb",class_="jsr")+ " Documentation"+ e.span(" (Version "+pyrealb_version+")",
+        style="font-size:70%; font-weight:normal"))
 
 page.p("""<span class="jsr">pyrealb</span> est un réalisateur de texte pour l'anglais et le français écrit en Python.
 Des appels de fonctions Python, rappelant les notations de syntaxe en constituants ou en dépendences, 
@@ -623,12 +628,17 @@ lang="en")
 
 h2_fr("Informations sur la version");h2_en("Informations about the version")
 page.h3("<code>pyrealb_version</code>")
-page.p("""Indique le numéro de version de <code>pyrealb</code>.""",lang="fr")
-page.p("""Gives the version number of <code>pyrealb</code>.""",lang="en")
+page.p(f"Chaine de caractères indiquant le numéro de version de <code>pyrealb</code>, valeur actuelle:"
+       f" {pyrealb_version}.",
+       lang="fr")
+page.p(f"String showing the version number of <code>pyrealb</code>, currently: {pyrealb_version}.",lang="en")
 
 page.h3("<code>pyrealb_datecreated</code>")
-page.p("""Indique la date de la création de la version courante de <code>pyrealb</code>.""",lang="fr")
-page.p("""Gives the creation date of the current <code>pyrealb</code>.""",lang="en")
+page.p(f"Date de la création de la version courante de <code>pyrealb</code> valeur actuelle:"
+       f" {str(pyrealb_datecreated)[:10]}.",
+       lang="fr")
+page.p(f"Creation date of the current <code>pyrealb</code>, currently {str(pyrealb_datecreated)[:10]}.",
+       lang="en")
 
 h2_fr("Relation avec <code>jsRealB</code>","relation_fr");h2_en("Relation with <code>jsRealB</code>","relation_en")
 page.p("""
@@ -675,27 +685,28 @@ errors and awkwardnesses that were corrected in the original.
 ### *** Informations complémentaires ***
 h2_fr("Informations complémentaires","plusDinfo");h2_en("More information","moreInfo")
 page.ul("""
-<li><a href="https://arxiv.org/pdf/2012.15425.pdf" lang="fr">Document décrivant l'organisation du 
-système</a><a href="https://arxiv.org/pdf/2012.15425.pdf" lang="en">Document describing the organization 
-of the system</a></li>
+<li><a href="https://arxiv.org/pdf/2012.15425.pdf" lang="fr">Document décrivant l'organisation de <code>jsRealB</code>
+(section 6.7 spécifique à <code>pyrealb</code>)</a><a href="https://arxiv.org/pdf/2012.15425.pdf" lang="en"
+>Document describing the organization of the <code>jsRealB</code> (section 6.7 deals with <code>pyrealb</code></a></li>
 <li><a href="http://rali.iro.umontreal.ca/rali/?q=fr/jsrealb-realisateur-bilingue-de-texte" lang="fr">Historique 
-des versions et démonstrations</a><a href="http://rali.iro.umontreal.ca/rali/?q=en/jsrealb-bilingual-text-realiser" 
-lang="en">Previous versions and demos</a></li>
-<li><a href="https://observablehq.com/@lapalme/nouvelles-experiences-avec-jsrealb" 
-title="Nouvelles exp&#xE9;riences avec jsRealB / Guy Lapalme / Observable" lang="fr">Notebook Observable</a>
-<a href="https://observablehq.com/@lapalme/exprimenting-with-jsrealb" title="Experimenting with jsRealB / Guy Lapalme / Observable" 
-lang="en">Observable Notebook</a></li>
-<li><a href="../IDE/README.html">Interactive Development Environment</a></li>
+des versions de <code>jsRealB</code> et démonstrations</a><a 
+href="http://rali.iro.umontreal.ca/rali/?q=en/jsrealb-bilingual-text-realiser" 
+lang="en">Previous versions of <code>jsRealB</code> and demos</a></li>
+<li><a href="https://mybinder.org/v2/gh/lapalme/pyrealb-jupyter/HEAD?labpath=pyrealb-fr.ipynb" 
+title="Expérience avec pyrealb" lang="fr">Notebook Jupyter</a>
+<a href="https://mybinder.org/v2/gh/lapalme/pyrealb-jupyter/HEAD?labpath=pyrealb-en.ipynb" title="Experimenting with 
+pyrealb" lang="en">Jupyter Notebook</a></li>
 <li><a href="http://rali.iro.umontreal.ca/JSrealB/current/Tutorial/tutorial.html" title="jsRealB tutorial" 
-lang="fr">Tutoriel (en anglais)</a><a href="http://rali.iro.umontreal.ca/JSrealB/current/Tutorial/tutorial.html" 
-title="jsRealB tutorial" lang="en">Tutorial</a></li>
-<li><a href="https://github.com/rali-udem/JSrealB" lang="fr">Dépot GitHub</a>
-<a href="https://github.com/rali-udem/JSrealB" lang="en">GitHub repository</a></li>
-<li><a href="../data/lexiconFormat.html" lang="fr">Format des entrées de lexiques (en anglais)</a>
-<a href="../data/lexiconFormat.html" lang="en">Format of the lexicon entries</a></li>
+lang="fr">Tutoriel jsRealB (en anglais)</a><a 
+href="http://rali.iro.umontreal.ca/JSrealB/current/Tutorial/tutorial.html" 
+title="jsRealB tutorial" lang="en">jsRealB Tutorial</a></li>
+<li><a href="https://github.com/lapalme/pyrealb" lang="fr">Dépot GitHub</a>
+<a href="https://github.com/lapalme/pyrealb" lang="en">GitHub repository</a></li>
+<li><a href="lexiconFormat.html" lang="fr">Format des entrées de lexiques (en anglais)</a>
+<a href="lexiconFormat.html" lang="en">Format of the lexicon entries</a></li>
 <li>Publications:
     <ul>
-        <li><a href="http://rali.iro.umontreal.ca/rali/sites/default/files/publis/JSrealB-ENGL2015.pdf">Demo paper at ENLG-2015</a></li>
+        <li><a href="https://aclanthology.org/W15-4719/">Demo paper at ENLG-2015</a></li>
         <li>Daoust, N., and G. Lapalme, <em>JSreal: A Text Realizer for Web Programming</em>, Language Production, Cognition, and the Lexicon - a Festschrift in honor of Michael Zock, Text, Speech and Language Technology, Vol 48: Springer, pp. 363-378, 2014. [<a href="http://rali.iro.umontreal.ca/rali/sites/default/files/publis/JSreal.pdf">PDF</a>]</li>
     </ul>
 </li>

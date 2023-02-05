@@ -8,6 +8,8 @@ It facilitates its integration within Python applications by simply adding
 
 	from pyrealb import *
 
+[Online documentation](http://www.iro.umontreal.ca/~lapalme/pyrealb/documentation.html?lang=en)
+
 ### Installing the distribution package from PyPI
 
     pip install pyrealb
@@ -63,8 +65,9 @@ In most of the following directories, a `context.py` file is used to set the app
 Some directories include `markup.py` which should be loaded using `pip`. Unfortunately I never managed to make this "piped" version work, it does not import the name `oneliner`although it should. It works once the file is in the local directory.
 
 * [`docs`](./docs): in both English and French. 
-    * `documentation.html` : generated documentation (used for consultation) **DO NOT EDIT directly**
-    * `documentation.py`: Python program for generating `documentation.html` using `markup.py`
+    * `documentation.html` : generated documentation (used for consultation) **DO NOT EDIT directly**  [Online version](http://www.iro.umontreal.ca/~lapalme/pyrealb/documentation.html?lang=en)
+    * `documentation.py`: Python program for generating `documentation.html` using `markup.py`  
+          once this is run `documentation.html` should be copied at `http://www.iro.umontreal.ca/~lapalme/pyrealb/documentation.html` which is used for consultation 
     * `style.css`: style sheet for the documentation
     * `userinfos.py`: definitions of variables containing the examples
     * `user.js`  : Python helper script.
@@ -82,7 +85,7 @@ Some directories include `markup.py` which should be loaded using `pip`. Unfortu
 * `99bottlesofbeer/99bottlesofbeer.py` : simple generation of a classic repetitive text in English.
 * `evenementsDemo/evenements.py` : Description (in French) of a list of events, it creates HTML.
 * `flight_infos/README.md` : development of a RASA NLG server giving information about flights, aircrafts, etc...
-* `gophypi/amr2text.py` : generate a literal reading of an AMR (Abstract Meaning Representation);  
+* `gophypi/amr2text.py` : generate a literal reading of an AMR (Abstract Meaning Representation);
                           [paper describing the approach](gophypi/Doc/GoPhiPy.pdf) 
 * `inflectionDemo/inflection.py` : French or English conjugation and declension of a form.
 * `kilometresapied/kilometresapied.py` : simple generation of a classic repetitive text in French.
@@ -106,7 +109,7 @@ see [this tutorial](https://packaging.python.org/en/latest/tutorials/packaging-p
 
 These steps take for granted that the password for PyPI has already been given...
 
-1. update version number in `setup.cfg`
+1. update version number in `setup.cfg` (it should be the same as `python_version` in `src/pyrealb/utils.py`)
 2. `cd` into the directory with the `pyproject.toml` file 
 3. Build the distribution package  
        `python3 -m build`

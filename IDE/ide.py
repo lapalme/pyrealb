@@ -302,6 +302,8 @@ def _help():
 
  +e : (unary + for a Constituent) prints the realization of a Constituent
       a shortcut for: print(str(e)) 
+ 
+ Online documentation: http://www.iro.umontreal.ca/~lapalme/pyrealb/documentation.html?lang=en
 ''')
 
 
