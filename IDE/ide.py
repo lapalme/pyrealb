@@ -1,10 +1,5 @@
-from context import pyrealb
-
-from pyrealb.Lexicon import *
-from pyrealb.Phrase import *
-from pyrealb.Dependent import *
-from pyrealb.Terminal import *
-from pyrealb.utils import *
+from pyrealb import *
+from pyrealb.Lexicon import getLexicon, getRules # specific import used by the IDE
 
 import unicodedata,re, sys
 from ppJson import ppJson

@@ -1,4 +1,3 @@
-from context import pyrealb
 from pyrealb import *
 
 import json,textwrap,re,os

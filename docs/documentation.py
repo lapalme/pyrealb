@@ -1,7 +1,6 @@
 import markup, unicodedata, re, datetime
 from markup import oneliner as e
 
-from context import pyrealb
 from pyrealb import *
 from userinfos import *
 import os

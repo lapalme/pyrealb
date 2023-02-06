@@ -470,7 +470,7 @@ def process_examples_by_intent(examples: dict[str, list[tuple[str, Entities]]]) 
 
 if __name__ == '__main__':
     # single example for débugging... just change the following bool
-    if False:
+    if True:
         example = json.loads("""
         {
         "text": "what is the minimum connection time for san francisco international airport",

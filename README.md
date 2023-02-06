@@ -57,12 +57,9 @@ It facilitates its integration within Python applications by simply adding
         * `lexicon-fr.json` : French lexicon (52,547 entries) in json format
         * `rule-fr.js` : French conjugation and declension tables 
 
-In most of the following directories, a `context.py` file is used to set the appropriate search path for  *pyRealB* functions. Thus, many example programs start with the following lines:
-
-    from context import pyrealb
-    from pyrealb import *
-
-Some directories include `markup.py` which should be loaded using `pip`. Unfortunately I never managed to make this "piped" version work, it does not import the name `oneliner`although it should. It works once the file is in the local directory.
+_Nota bene_:
+1. In the following directories, the `__init__.py` file is used to set the appropriate search path for  *pyRealB* functions; this ensures that the current Python source files are used for execution. 
+2. Some directories include `markup.py` which should be loaded using `pip`. Unfortunately I never managed to make this "piped" version work, it does not import the name `oneliner`although it should. It works once the file is in the local directory.
 
 * [`docs`](./docs): in both English and French. 
     * `documentation.html` : generated documentation (used for consultation) **DO NOT EDIT directly**  [Online version](http://www.iro.umontreal.ca/~lapalme/pyrealb/documentation.html?lang=en)
@@ -73,12 +70,12 @@ Some directories include `markup.py` which should be loaded using `pip`. Unfortu
     * `user.js`  : Python helper script.
     
 * [`IDE`](./IDE) : Integrated Development Environment 
-	* `ide.py`: built on the Python *read-eval-print loop*, it imports *pyRealB* to get the realization of an expression, to consult the lexicon, the conjugation and declension tables. It is also possible to get a *lemmatization*: i.e. the *pyRealB* expression corresponding to a form.
-	* `README.html`: documentation and examples
+    * `ide.py`: built on the Python *read-eval-print loop*, it imports *pyRealB* to get the realization of an expression, to consult the lexicon, the conjugation and declension tables. It is also possible to get a *lemmatization*: i.e. the *pyRealB* expression corresponding to a form.
+    * `README.html`: documentation and examples
 
 * [`tests`](./tests) : unit tests of special features of *pyRealB* in both French and English. Files have the pattern `*_{en|fr}.py`
-	* `test.py`: simplistic function to check if a function returns the expected answer and display appropriate message
-	* `testAll.html` : run this file to run all tests
+    * `test.py`: simplistic function to check if a function returns the expected answer and display appropriate message
+    * `testAll.html` : run this file to run all tests
 
 ## Demos
 
@@ -93,17 +90,18 @@ Some directories include `markup.py` which should be loaded using `pip`. Unfortu
 * `randomgen/randomgen.py`: Generation of random English sentences
 * `RDFpyrealb/WebGenerate.py` : Generation from RDF triples
 * `report/report.py` : Single sentence parameterized by language, tense and subject
-* `simple_example/simple_example.py`: a few examples of English and French expressions to be realized
+* `simple_example/simple_example.py`: a few examples of English and French expressions to be realized, useful for debugging
 * `variantes/variantes.py`: French or English sentences realized with all possible sentence modifiers; some challenging examples are in `examples.py`.
 * `weather/Bulletin.py`: French and English weather bulletins generated from information in a *json-line* file. (`weather-data.jsonl`). It uses the packages in the `Realization` directory.
 
 ## Contact
 [Guy Lapalme](http://rali.iro.umontreal.ca/lapalme)
 
-### Acknowledgement
+## Acknowledgement
 Thanks to Fabrizio Gotti for helping to organize the Python package.
 
-### Updating package version on PyPI (for the maintainer only)
+## For the maintainer mainly
+### Updating package version on PyPI 
 
 see [this tutorial](https://packaging.python.org/en/latest/tutorials/packaging-projects/)
 
@@ -117,3 +115,8 @@ These steps take for granted that the password for PyPI has already been given..
       `twine upload dist/*`
 5. Install new version from PyPI  
     `python3 -m pip install pyrealb --upgrade`
+
+### Useful trick for debugging with breaking point and tracing
+1. add `pyrealb` expression to debug at the end of `demo/simple_example.py`
+2. comment the line calling `testPrevious()`
+3. debug `demo/simple_example.py`

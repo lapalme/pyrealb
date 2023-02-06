@@ -305,7 +305,7 @@ class Terminal(Constituent):
                 # check is French noun gender specified corresponds to the one given in the lexicon
                 lexiconG=getLexicon("fr")[self.lemma]["N"]
                 if "g" not in lexiconG:
-                    return [self.morphoError("absent du lexique",{"g":g,"n":n})]
+                    return [self.morphoError("genre absent du lexique",{"g":g,"n":n})]
                 lexiconG=lexiconG["g"]
                 if lexiconG != "x" and lexiconG != g:
                     return [self.morphoError(

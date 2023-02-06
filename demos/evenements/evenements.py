@@ -1,4 +1,3 @@
-from context import pyrealb
 from pyrealb import *
 
 # Adaptation en python de l'adaptation en JavaScript

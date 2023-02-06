@@ -55,7 +55,7 @@ def generate(examples,types,checkboxes):
             
 loadFr()
 generate(examplesFr,types["fr"],
-         ## checkbox simulation: " " (unchecked), "*" (checked), "-":indeterminate
+         # checkbox simulation: " " (unchecked), "*" (checked), "-":indeterminate
          {"neg":" ","pas":"*","prog":" ","int":"-","mod":"*"})
 
 loadEn()
@@ -65,5 +65,5 @@ addToLexicon({"Bill":{"N":{"g":"m","tab":"n4"}}})
 addToLexicon({"Mary":{"N":{"g":"f","tab":"n4"}}})
 
 generate(examplesEn,types["en"],
-         ## checkbox simulation: " " (unchecked), "*" (checked), "-":indeterminate
+         # checkbox simulation: " " (unchecked), "*" (checked), "-":indeterminate
          {"neg":"*","contr":" ","pas":"*","prog":"*","perf":"*","int":"*","mod":"-"})
