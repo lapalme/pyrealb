@@ -1,4 +1,3 @@
-from context import pyrealb
 from pyrealb import *
 
 ### generate sentence variations on sentences in examples.py
