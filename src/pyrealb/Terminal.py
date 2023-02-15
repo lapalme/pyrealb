@@ -628,7 +628,7 @@ class Terminal(Constituent):
         elif self.isA("Adv"):
             if hasattr(self, "tab") and self.tab  is not None:
                 return self.doFormat(self.decline(False))
-            else:
+            elif self.realization is None:
                 self.realization=self.lemma
         elif self.isOneOf(["C","P","Q"]):
             if self.realization is None:

@@ -275,10 +275,6 @@ def _lx(word,terminal=None):
         res=[(key,val) for key,val in res if terminal in val]
     displayResults(word,res,
                    "no lexicon entry found" if lang=="en" else "pas d'entrée dans le lexique")
-    
-# prefix + :: useful trick for testing top-level expression realization    
-setattr(Constituent,"__pos__", lambda self: print(self.realize()))
-
 
 def _help():
     print('''pyrealb_ide: special commands (starting with _)
@@ -294,9 +290,6 @@ def _help():
  _lx("word"[,"terminal"]) : show lexical information about word, 
             if terminal is present, show only entries having terminal in its table
  a parameter for these functions can be a regex that matches fully 
-
- +e : (unary + for a Constituent) prints the realization of a Constituent
-      a shortcut for: print(str(e)) 
  
  Online documentation: http://www.iro.umontreal.ca/~lapalme/pyrealb/documentation.html?lang=en
 ''')

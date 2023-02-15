@@ -277,6 +277,11 @@ page.div("""
         <li>Le déterminant d'un <code>det</code> s'accorde en genre et en nombre avec son sujet, i.e. le terminal englobant.</li>
         <li>L'adjectif d'un <code>mod</code> s'accorde en genre et en nombre avec son sujet, i.e. le terminal englobant.</li>
     </ul>
+    <p>Position des dépendents: <code>det</code> et <code>subj</code> sont réalisées avant le terminal, alors que 
+       <code>mod</code>, <code>comp</code> et <code>coord</code> sont réalisées dans l'ordre où
+       elles sont spécifiées. Il est possible de modifier cet ordre en utilisant la méthode <code>.mod("pre")</code> pour 
+        forcer une dépendance à apparaître avant, ou <code>.mod("post")</code> pour apparaître après.</p>
+
 """,lang="fr")
 
 page.div("""
@@ -292,6 +297,12 @@ page.div("""
         <li>A verb agrees in person and number with a subject indicated by a <code>subj</code> dependency,. The subject can be a <code>N</code>, a <code>Pro</code> or dependents of a <code>coord</code>.</li>
         <li>The determiner of a <code>det</code> agrees in number with its determinee, i.e. its enclosing terminal.</li>
     </ul>
+    <p>Dependent position: <code>det</code> et <code>subj</code> are realized before the terminal, while
+        <code>mod</code>, <code>comp</code> et <code>coord</code> are realized after in the order of their specification. 
+        This ordering can be changed using <code>.mod("pre")</code> to force a dependent to be realized before, or 
+        <code>.mod("post")</code> to be realized after.
+    </p>
+
 """,lang="en")
 
 ### Déclinaisons et conjugaisons 
@@ -385,7 +396,7 @@ then the appropriate spacing is added before and after the punctuation sign,
 otherwise the content is added without spacing.""",lang="en")
 addTable(formatSect)
 
-h2_fr("Modification du syntagme nominal","modSN");h2_en("noun phrase modification","npMod")
+h2_fr("Position et pronominalization","modSN");h2_en("Position and pronominalization","npMod")
 addTable(nPmods)
 
 ## *** Modification du type de phrase ***
@@ -446,17 +457,56 @@ page.p("""Add a pyrealb phrase <code>element</code> as a child of an existing ph
 the element is added as the last child.""",lang="en")
 addTable(addUse)
 
-page.h3("<code>.toSource()</code>")
+page.h3("<code>.toSource(indent=-1)</code>")
 page.p("""
 Cette fonction retourne une version <em>chaîne</em> d'une expression <span class="jsr">pyrealb</span>, 
-ceci peut être utile pour la mise au point d'une expression complexe. En passant 0 comme paramètre 
-à ce fonction, on obtient une expression indentée qui fait ressortir la structure de l'expression.""",
+ceci peut être utile pour la mise au point d'une expression complexe. En passant un nombre positif ou nul (souvent 0) 
+comme paramètre, on obtient une expression indentée qui fait ressortir la structure de l'expression.""",
 lang="fr")
 page.p("""
 This function returns a <em>string</em> version of a  <span class="jsr">pyrealb</span> expression, this 
-can be useful for debugging complex expressions. When 0 is given as parameter of this function, 
-the string is on on multiple lines indented to highlight the underlying structure of the expression.""",
+can be useful for debugging complex expressions. When a non negative number (often 0) is given as parameter, 
+the string is indented on multiple lines to highlight the structure of the expression.""",
 lang="en")
+
+page.h3("<code>Constituent</code> realization",lang="en")
+page.h3("Réalisation d'un <code>Constituent</code>",lang="fr")
+page.dl("""
+<dt><code>str(...)</code></dt>
+<dd>Lancer la reéalisation d'un constituent qui dans certains cas modifie la structure d'un ou plusieurs autres constituents.
+Dans la majorité des cas, la réalisation est obtenue avec <code>str( )</code> appelé implicitement par <code>print(..)</code>.</dd>
+<dt><code>.realize()</code></dt>
+<dd>La réalisation peut aussi être lancée explicitement avec la méthode <code>realize()</code>. 
+Ceci est pratique lors du déboguage dans certains environnement de programation 
+(p.ex. Visual Studio Code ou PyCharm) qui utilisent <code>str(..)</code> pour afficher des valeurs internes pouvant ainsi
+changer la structure des constituents au cours de la mise au point, un cas typique de <i>Heisenbug</i>. 
+Dans la majorité des cas, <span class="jsr">pyrealb</span> détecte automatiquement l'exécution dans le cadre d'un environnement 
+de mise au point Python, et change le comportement de <code>str(..)</code> 
+pour qu'il retourne plutôt le source de l'expression (voir <code>.toSource()</code> plus haut) 
+ce qui, à l'usage, s'est avéré être très pratique. 
+La réalisation doit alors être obtenue en appelant <code>.realize()</code>.
+Pour obtenir ce comportement dans tous les cas, on peut utiliser cette affectation <code>Constituent.debug=true</code>.</dd>
+<dt><code>+</code> (opérateur préfixe unaire)</dt>
+<dd>L'opérateur unaire <code>+</code> peut être utilisé devant un <code>Constituent</code> 
+pour imprimer sa réalisation; cette abréviation est surtout utile lors de tests dans une boucle <i>real-eval-print</i>.<dd>
+""",lang="fr")
+page.dl("""
+<dt><code>str(...)</code></dt>
+<dd>Launch the realization of a constituent which in some cases modifies the structure of one or more constituents. 
+In the majority of cases, realization is obtained with <code>str( )</code> called implicitely by <code>print(..)</code></dd>
+<dt><code>.realize()</code></dt>
+<dd>Realization can also be launched explicitly with the <code>realize()</code> method.
+This is useful when debugging in some programming environments 
+(e.g. Visual Studio Code or PyCharm) in which <code>str(..)</code> is used for displaying internal values and thus risk changing 
+the constituents during debugging, a typical case of <i>Heisenbug</i>. 
+In most cases <span class="jsr">pyrealb</span> detects its execution within a Python debugger and changes
+<code>str(..)</code> to return the source of the constituent (see <code>.toSource()</code> above). 
+Realization must then be obtained by calling <code>.realize()</code>.
+This behavior can be obtained in all cases with the following assignment <code>Constituent.debug=true</code>.</dd>
+<dt><code>+</code> (unary prefix operator)</dt>
+<dd>The unary <code>+</code> operator can be used in front of a <code>Constituent</code> to print its realization, a useful abbreviation
+when testing within a <i>read-eval-print</i> loop.</dd>
+""",lang="en")
 
 page.h3("<code>getLanguage()</code>")
 page.p("""
@@ -492,7 +542,7 @@ page.p("""
 As options modify a constituent for all following uses, it is often convenient to keep the original expression 
 intact in order to be able to reuse it and modify it independently. 
 The easiest way to create a copy of expression <code>exp</code> is to make a function of it by adding 
-<code>lambda:</code> in front of it. <code>exp()</code> calls the function and creates a pyrealb instance of the 
+<code>lambda:</code> in front of it. <code>exp()</code> calls the function and creates a <span class="jsr">pyrealb</span> instance of the 
 expression at each call. This allows to <i>delay</i> the evaluation of the expression until it is needed, 
 for example once the appropriate language has been loaded. It is also possible to create parameterized expressions.
 """,lang="en")
@@ -531,9 +581,9 @@ L'exemple précédent peut donc s'écrire: <code>addToLexicon({"pyrealb":{"N":{"
 <li>Si le lemme et la catégorie existent déjà dans le lexique, alors l'entrée pour cette catégorie est remplacée 
 par <code>newInfos</code>. </li>
 <li>Cette fonction retourne la nouvelle entrée modifié pour <code>lemma</code>.</li>
-<li><a href="../data/lexiconFormat.html">Plus d'information (en anglais) sur le format des lexiques</a></li>
+<li><a href="lexiconFormat.html">Plus d'information (en anglais) sur le format des lexiques</a></li>
 <li>Pour déterminer les informations à ajouter, le plus simple est de copier les informations d'un mot du 
-lexique qui se conjugue ou se décline de la même façon. L'<a href="../IDE/index.html">IDE de pyrealb</a> 
+lexique qui se conjugue ou se décline de la même façon. L'<i>IDE</i> de <span class="jsr">pyrealb</span> 
 permet de consulter les informations du lexique.</li>
 <li>Pour enlever une entrée d'un lexique, il de mettre <code>newInfos</code> à <code>None</code>.</li>
 </ul>
@@ -551,10 +601,10 @@ written: <code>addToLexicon({"pyrealb":{"N":{"g":"m", "pe":3, "tab":"nI"})</code
 <li>If the lemma and category are already present in the lexicon, then the category of this entry is 
 replaced by <code>newInfos</code>.</li>
 <li>This function returns the modified lexicon entry for <code>lemma</code>.</li>
-<li><a href="../data/lexiconFormat.html">More information about the lexicon format</a></li>
+<li><a href="lexiconFormat.html">More information about the lexicon format</a></li>
 <li>In order to find the informations to add, the simplest way is to copy the lexicon information 
 for a similar word already in the lexicon. 
-The <a href="../IDE/index.html">pyrealb IDE</a> provides access to the lexicon information.
+The <i>IDE</i> provides access to the lexicon information.
 </li>
 <li>To remove an entry, set <code>newInfos</code> to <code>None</code>.</li>
 </ul>
@@ -572,19 +622,13 @@ Fusionner les entrées de <code>newLexicon</code> avec le lexique spécifié. Ce
 remplacera les entrées existantes par celles du nouveau lexique. La fusion est effectuée au niveau des entrées, 
 mais non des catégories.""",lang="fr")
 page.p("""
-Merge the entries of <code>newLexicon</code> with the specified lexicon. This adds the pyrealb entries and replaces 
-the existing entries by the ones of the pyrealb lexicon. Merging is done at the entry level, not at the category level.""",lang="en")
-
-page.h3("<code>getLanguage()</code>")
-page.p("""
-Retourne le langage de réalisation courant.""",lang="fr")
-page.p("""
-Returns the current lexicon.""",lang="en")
+Merge the entries of <code>newLexicon</code> with the specified lexicon. This adds the <span class="jsr">pyrealb</span> entries and replaces 
+the existing entries by the ones of the <span class="jsr">pyrealb</span> lexicon. Merging is done at the entry level, not at the category level.""",lang="en")
 
 h2_fr("Sélection de variantes");h2_en("Variant selection")
 page.p("""
 La fonction <code>oneOf(e<sub>1</sub>,e<sub>2</sub>,...)</code> où <code>e<sub>i</sub></code> est est une valeur, 
-choisit un <code>e<sub>i</sub></code> au hasard. En <code>pyrealb</code>, ces éléments sont souvent des 
+choisit un <code>e<sub>i</sub></code> au hasard. En <span class="jsr">pyrealb</span>, ces éléments sont souvent des 
 constructeurs correspondant à des structures de phrases différentes. Si <code>e<sub>1</sub></code> est une 
 liste alors la sélection est faite dans cette liste, en ignorant les autres paramètres.
 """,lang="fr")
@@ -598,7 +642,7 @@ les deux constructeurs. Dans ce cas, très simple, il aurait été aussi possibl
 <code>N(oneOf("amour","amitié"))</code>.""",lang="fr")
 page.p("""
 The function <code>oneOf(e<sub>1</sub>,e<sub>2</sub>,...)</code> where <code>e<sub>i</sub></code> is a value, 
-selects randomly a <code>e<sub>i</sub></code>. In <code>pyrealb</code>, these elements are often constructors
+selects randomly a <code>e<sub>i</sub></code>. In <span class="jsr">pyrealb</span>, these elements are often constructors
 corresponding to different phrase structures. If <code>e<sub>1</sub></code> is a list, the selection is performed 
 within this list, ignoring other parameters.""",lang="en")
 page.p("""
@@ -612,31 +656,31 @@ lang="en")
 
 h2_fr("Traitement en JSON");h2_en("JSON processing")
 page.p("""
-Pour faciliter l'utilisation de <code>pyrealb</code> en sortie d'un système externe. 
+Pour faciliter l'utilisation de <span class="jsr">pyrealb</span> en sortie d'un système externe. 
 Il est possible d'utiliser un format d'entrée JSON <a href="../data/jsRealB-jsonInput.html">
 décrit dans ce document (en anglais)</a> où sont décrites deux API permettant 
 d'appeler un serveur <i>node.js</i> <code>jsRealB</code> <a href="jsRealBfromPython.html">depuis un autre programme Python</a> ou Prolog. 
-Il est également possible d"obtenir une expression JSON correspondant à une expression <code>pyrealb</code>.""",
+Il est également possible d"obtenir une expression JSON correspondant à une expression <span class="jsr">pyrealb</span>.""",
 lang="fr")
 page.p("""
-To simplify the use of <code>pyrealb</code> as output of an external system, a JSON input format has been defined. 
+To simplify the use of <span class="jsr">pyrealb</span> as output of an external system, a JSON input format has been defined. 
 <a href="../data/jsRealB-jsonInput.html">It is described in this document.</a> in which two APIs are described 
-for calling a <code>pyrealb</code> <i>node.js</i> server <a href="jsRealBfromPython.html">from another Python</a> or Prolog. 
-It is also possible to obtain the JSON expression corresponding to a given <code>pyrealb</code> expression.""",
+for calling a <span class="jsr">pyrealb</span> <i>node.js</i> server <a href="jsRealBfromPython.html">from another Python</a> or Prolog. 
+It is also possible to obtain the JSON expression corresponding to a given <span class="jsr">pyrealb</span> expression.""",
 lang="en")
 
 h2_fr("Informations sur la version");h2_en("Informations about the version")
 page.h3("<code>pyrealb_version</code>")
-page.p(f"Chaine de caractères indiquant le numéro de version de <code>pyrealb</code>, valeur actuelle:"
+page.p(f"Chaine de caractères indiquant le numéro de version de <span class='jsr'>pyrealb</span>, valeur actuelle:"
        f" {pyrealb_version}.",
        lang="fr")
-page.p(f"String showing the version number of <code>pyrealb</code>, currently: {pyrealb_version}.",lang="en")
+page.p(f"String showing the version number of <span class='jsr'>pyrealb</span>, currently: {pyrealb_version}.",lang="en")
 
 page.h3("<code>pyrealb_datecreated</code>")
-page.p(f"Date de la création de la version courante de <code>pyrealb</code> valeur actuelle:"
+page.p(f"Date de la création de la version courante de <span class='jsr'>pyrealb</span> valeur actuelle:"
        f" {str(pyrealb_datecreated)[:10]}.",
        lang="fr")
-page.p(f"Creation date of the current <code>pyrealb</code>, currently {str(pyrealb_datecreated)[:10]}.",
+page.p(f"Creation date of the current <span class='jsr'>pyrealb</span>, currently {str(pyrealb_datecreated)[:10]}.",
        lang="en")
 
 h2_fr("Relation avec <code>jsRealB</code>","relation_fr");h2_en("Relation with <code>jsRealB</code>","relation_en")
@@ -685,22 +729,22 @@ errors and awkwardnesses that were corrected in the original.
 h2_fr("Informations complémentaires","plusDinfo");h2_en("More information","moreInfo")
 page.ul("""
 <li><a href="https://arxiv.org/pdf/2012.15425.pdf" lang="fr">Document décrivant l'organisation de <code>jsRealB</code>
-(section 6.7 spécifique à <code>pyrealb</code>)</a><a href="https://arxiv.org/pdf/2012.15425.pdf" lang="en"
->Document describing the organization of the <code>jsRealB</code> (section 6.7 deals with <code>pyrealb</code></a></li>
+(section 6.7 spécifique à <span class='jsr'>pyrealb</span>)</a><a href="https://arxiv.org/pdf/2012.15425.pdf" lang="en"
+>Document describing the organization of the <code>jsRealB</code> (section 6.7 deals with <span class='jsr'>pyrealb</span></a></li>
 <li><a href="http://rali.iro.umontreal.ca/rali/?q=fr/jsrealb-realisateur-bilingue-de-texte" lang="fr">Historique 
 des versions de <code>jsRealB</code> et démonstrations</a><a 
 href="http://rali.iro.umontreal.ca/rali/?q=en/jsrealb-bilingual-text-realiser" 
 lang="en">Previous versions of <code>jsRealB</code> and demos</a></li>
-<li><a href="https://mybinder.org/v2/gh/lapalme/pyrealb-jupyter/HEAD?labpath=pyrealb-fr.ipynb" 
-title="Expérience avec pyrealb" lang="fr">Notebook Jupyter</a>
-<a href="https://mybinder.org/v2/gh/lapalme/pyrealb-jupyter/HEAD?labpath=pyrealb-en.ipynb" title="Experimenting with 
-pyrealb" lang="en">Jupyter Notebook</a></li>
 <li><a href="http://rali.iro.umontreal.ca/JSrealB/current/Tutorial/tutorial.html" title="jsRealB tutorial" 
 lang="fr">Tutoriel jsRealB (en anglais)</a><a 
 href="http://rali.iro.umontreal.ca/JSrealB/current/Tutorial/tutorial.html" 
 title="jsRealB tutorial" lang="en">jsRealB Tutorial</a></li>
-<li><a href="https://github.com/lapalme/pyrealb" lang="fr">Dépot GitHub</a>
-<a href="https://github.com/lapalme/pyrealb" lang="en">GitHub repository</a></li>
+<li><a href="https://mybinder.org/v2/gh/lapalme/pyrealb-jupyter/HEAD?labpath=pyrealb-fr.ipynb" 
+title="Expérience avec pyrealb" lang="fr">Notebook Jupyter</a>
+<a href="https://mybinder.org/v2/gh/lapalme/pyrealb-jupyter/HEAD?labpath=pyrealb-en.ipynb" title="Experimenting with 
+pyrealb" lang="en">Jupyter Notebook</a></li>
+<li><a href="https://github.com/lapalme/pyrealb" lang="fr">Dépot GitHub pyrealb</a>
+<a href="https://github.com/lapalme/pyrealb" lang="en">pyreealb GitHub repository</a></li>
 <li><a href="lexiconFormat.html" lang="fr">Format des entrées de lexiques (en anglais)</a>
 <a href="lexiconFormat.html" lang="en">Format of the lexicon entries</a></li>
 <li>Publications:

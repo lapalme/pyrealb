@@ -4,7 +4,7 @@
 <meta name="name" content="viewport" />
 <meta name="content" content="width=device-width, initial-scale=1.0" />
 <meta name="charset" content="UTF-8" />
-<meta name="date" content="2023-02-06 09:45:03.651023" />
+<meta name="date" content="2023-02-13 15:45:28.809947" />
 <link href="style.css" rel="stylesheet" type="text/css" media="all" />
 <title>pyrealb - Documentation</title>
 <script src="https://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
@@ -53,7 +53,7 @@ les exemples ont été réalisés par <span class="jsr">pyrealb</span>  lors de 
 <tr><td class="description">Adverbe</td><td class="pattern">Adv(…)</td><td class="example-fr">Adv("bien")</td><td class="realisation">bien</td></tr>
 <tr><td class="description">Préposition</td><td class="pattern">P(…)</td><td class="example-fr">P("dans")</td><td class="realisation">dans</td></tr>
 <tr><td class="description">Conjonction</td><td class="pattern">C(…)</td><td class="example-fr">C("et")</td><td class="realisation">et</td></tr>
-<tr><td class="description">Date avec <a href='#dateFr'>options</a> facultatives</td><td class="pattern">DT(…)</td><td class="example-fr">DT()</td><td class="realisation">le lundi 6 février 2023 à 9 h 45 min 3 s</td></tr>
+<tr><td class="description">Date avec <a href='#dateFr'>options</a> facultatives</td><td class="pattern">DT(…)</td><td class="example-fr">DT()</td><td class="realisation">le lundi 13 février 2023 à 15 h 45 min 28 s</td></tr>
 <tr><td class="description">Nombre avec <a href='#nombres'>options</a> facultatives</td><td class="pattern">NO(…)</td><td class="example-fr">NO(2)</td><td class="realisation">2</td></tr>
 <tr><td class="description">Texte brut</td><td class="pattern">"…"</td><td class="example-fr">"Wow"</td><td class="realisation">Wow</td></tr>
 <tr><td class="description">Texte brut auquel on peut ajouter des <a href='#optionsFr'>options</a></td><td class="pattern">Q(…)</td><td class="example-fr">Q("Bang !").tag("i")</td><td class="realisation"><i>Bang !</i></td></tr>
@@ -69,7 +69,7 @@ les exemples ont été réalisés par <span class="jsr">pyrealb</span>  lors de 
 <tr><td class="description">Adverb</td><td class="pattern">Adv(…)</td><td class="example-en">Adv("well")</td><td class="realisation">well</td></tr>
 <tr><td class="description">Preposition</td><td class="pattern">P(…)</td><td class="example-en">P("in")</td><td class="realisation">in</td></tr>
 <tr><td class="description">Conjunction</td><td class="pattern">C(…)</td><td class="example-en">C("and")</td><td class="realisation">and</td></tr>
-<tr><td class="description">Date possibly with <a href='#dateEn'>options</a></td><td class="pattern">DT(…)</td><td class="example-en">DT()</td><td class="realisation">on Monday, February 6, 2023 at 9:45:03 a.m.</td></tr>
+<tr><td class="description">Date possibly with <a href='#dateEn'>options</a></td><td class="pattern">DT(…)</td><td class="example-en">DT()</td><td class="realisation">on Monday, February 13, 2023 at 3:45:28 p.m.</td></tr>
 <tr><td class="description">Number possibly with <a href='#numbers'>options</a></td><td class="pattern">NO(…)</td><td class="example-en">NO(2)</td><td class="realisation">2</td></tr>
 <tr><td class="description">Raw text</td><td class="pattern">"…"</td><td class="example-en">"Wow"</td><td class="realisation">Wow</td></tr>
 <tr><td class="description">Raw text to which <a href='#optionsEn'>options</a> can be added</td><td class="pattern">Q(…)</td><td class="example-en">Q("Bang !").tag("i")</td><td class="realisation"><i>Bang !</i></td></tr>
@@ -157,6 +157,11 @@ les exemples ont été réalisés par <span class="jsr">pyrealb</span>  lors de 
         <li>Le déterminant d'un <code>det</code> s'accorde en genre et en nombre avec son sujet, i.e. le terminal englobant.</li>
         <li>L'adjectif d'un <code>mod</code> s'accorde en genre et en nombre avec son sujet, i.e. le terminal englobant.</li>
     </ul>
+    <p>Position des dépendents: <code>det</code> et <code>subj</code> sont réalisées avant le terminal, alors que 
+       <code>mod</code>, <code>comp</code> et <code>coord</code> sont réalisées dans l'ordre où
+       elles sont spécifiées. Il est possible de modifier cet ordre en utilisant la méthode <code>.mod("pre")</code> pour 
+        forcer une dépendance à apparaître avant, ou <code>.mod("post")</code> pour apparaître après.</p>
+
 </div>
 <div lang="en">
     <p>The first parameter of a dependency is a terminal. The other parameters must be dependents.</p> 
@@ -171,6 +176,12 @@ les exemples ont été réalisés par <span class="jsr">pyrealb</span>  lors de 
         <li>A verb agrees in person and number with a subject indicated by a <code>subj</code> dependency,. The subject can be a <code>N</code>, a <code>Pro</code> or dependents of a <code>coord</code>.</li>
         <li>The determiner of a <code>det</code> agrees in number with its determinee, i.e. its enclosing terminal.</li>
     </ul>
+    <p>Dependent position: <code>det</code> et <code>subj</code> are realized before the terminal, while
+        <code>mod</code>, <code>comp</code> et <code>coord</code> are realized after in the order of their specification. 
+        This ordering can be changed using <code>.mod("pre")</code> to force a dependent to be realized before, or 
+        <code>.mod("post")</code> to be realized after.
+    </p>
+
 </div>
 <h2 lang="fr" id="optionsFr">Déclinaisons et conjugaisons</h2>
 <h2 lang="en" id="optionsEn">Declension and conjugation</h2>
@@ -824,15 +835,17 @@ otherwise the content is added without spacing.</p>
 <tr><td class="description">hyperlink</td><td class="pattern"></td><td class="example-en">N("player").tag("a",{"href":"http://www.google.com"})</td><td class="realisation"><a href="http://www.google.com">player</a></td></tr>
 <tr><td class="description">combining tags</td><td class="pattern"></td><td class="example-en">N("house").tag("b").tag("i")</td><td class="realisation"><i><b>house</b></i></td></tr>
 </table>
-<h2 lang="fr" id="modSN">Modification du syntagme nominal</h2>
-<h2 lang="en" id="npMod">noun phrase modification</h2>
+<h2 lang="fr" id="modSN">Position et pronominalization</h2>
+<h2 lang="en" id="npMod">Position and pronominalization</h2>
 <table lang="fr">
 <tr><th>Nom</th><th>Représentation</th><th>Exemple</th><th>Réalisation</th></tr>
-<tr class="groupe"><td>Placement de l'adjectif (dépendant de la langue)</td><td colspan="3" class="pattern"></td></tr>
-<tr><td class="description">Par défaut</td><td class="pattern"></td><td class="example-fr">NP(D("le"),A("petit"),N("jouet"))</td><td class="realisation">le petit jouet</td></tr>
-<tr><td class="description">Par défaut</td><td class="pattern"></td><td class="example-fr">NP(D("le"),A("bleu"),N("jouet"))</td><td class="realisation">le jouet bleu</td></tr>
-<tr><td class="description">pré-posé</td><td class="pattern">.pos("pre")</td><td class="example-fr">NP(D("le"),A("bleu").pos("pre"),N("jouet"))</td><td class="realisation">le bleu jouet</td></tr>
-<tr><td class="description">postposé</td><td class="pattern">.pos("post")</td><td class="example-fr">NP(D("le"),A("petit").pos("post"),N("jouet"))</td><td class="realisation">le jouet petit</td></tr>
+<tr class="groupe"><td>Placement de l'adjectif ou de l'adverbe (dépendant de la langue)</td><td colspan="3" class="pattern"></td></tr>
+<tr><td class="description">Adjectif: par défaut</td><td class="pattern"></td><td class="example-fr">NP(D("le"),A("petit"),N("jouet"))</td><td class="realisation">le petit jouet</td></tr>
+<tr><td class="description">Adjectif: par défaut</td><td class="pattern"></td><td class="example-fr">NP(D("le"),A("bleu"),N("jouet"))</td><td class="realisation">le jouet bleu</td></tr>
+<tr><td class="description">Adverbe: par défaut</td><td class="pattern"></td><td class="example-fr">VP(V("aller"),Adv("bien")).t("pc")</td><td class="realisation">est bien allé</td></tr>
+<tr><td class="description">Adjectif:pré-posé</td><td class="pattern">.pos("pre")</td><td class="example-fr">NP(D("le"),A("bleu").pos("pre"),N("jouet"))</td><td class="realisation">le bleu jouet</td></tr>
+<tr><td class="description">Adjectif:postposé</td><td class="pattern">.pos("post")</td><td class="example-fr">NP(D("le"),A("petit").pos("post"),N("jouet"))</td><td class="realisation">le jouet petit</td></tr>
+<tr><td class="description">Adverbe:postposé</td><td class="pattern">.pos("post")</td><td class="example-fr">VP(V("aller"),Adv("bien").pos("post")).t("pc")</td><td class="realisation">est allé bien</td></tr>
 <tr class="groupe"><td>Pronominalisation</td><td colspan="3" class="pattern">.pro()</td></tr>
 <tr><td class="description">du sujet</td><td class="pattern"></td><td class="example-fr">S(NP(D("le"),N("joueur")).pro(),VP(V("jouer")))</td><td class="realisation">Il joue. </td></tr>
 <tr><td class="description">de l'objet direct sur</td><td class="pattern"></td><td class="example-fr">S(Pro("je").pe(1),
@@ -843,9 +856,11 @@ otherwise the content is added without spacing.</p>
 </table>
 <table lang="en">
 <tr><th>Name</th><th>Representation</th><th>Example</th><th>Realisation</th></tr>
-<tr class="groupe"><td>Adjective positioning (language dependent)</td><td colspan="3" class="pattern"></td></tr>
-<tr><td class="description">Default</td><td class="pattern"></td><td class="example-en">NP(D("the"),A("small"),N("toy"))</td><td class="realisation">the small toy</td></tr>
-<tr><td class="description">Default</td><td class="pattern"></td><td class="example-en">NP(D("the"),N("toy"),A("blue"))</td><td class="realisation">the blue toy</td></tr>
+<tr class="groupe"><td>Adjective or adverb position (language dependent)</td><td colspan="3" class="pattern"></td></tr>
+<tr><td class="description">Adjective: by default</td><td class="pattern"></td><td class="example-en">NP(D("the"),A("small"),N("toy"))</td><td class="realisation">the small toy</td></tr>
+<tr><td class="description">Adjective: by default</td><td class="pattern"></td><td class="example-en">NP(D("the"),N("toy"),A("blue"))</td><td class="realisation">the blue toy</td></tr>
+<tr><td class="description">Adverb: by default</td><td class="pattern"></td><td class="example-en">VP(V("perform"),Adv("well")).typ({"perf":True})</td><td class="realisation">has well performed</td></tr>
+<tr><td class="description">Adverb: postpositive</td><td class="pattern">.pos("post")</td><td class="example-en">VP(V("perform"),Adv("well").pos("post")).typ({"perf":True})</td><td class="realisation">has performed well</td></tr>
 <tr class="groupe"><td>Pronominalisation</td><td colspan="3" class="pattern">.pro()</td></tr>
 <tr><td class="description">of the subject</td><td class="pattern"></td><td class="example-en">S(NP(D("the"),N("player")).pro(),VP(V("play")))</td><td class="realisation">She plays. </td></tr>
 <tr><td class="description">of the direct object</td><td class="pattern"></td><td class="example-en">S(Pro("I").pe(1),
@@ -999,7 +1014,7 @@ corresponding to <code>YYYY-MM-DD hh:mm:ss</code>. When no parameter is given, <
 <h3 lang="fr">Création d'une date</h3>
 <table lang="fr">
 <tr><th>Nom</th><th>Représentation</th><th>Exemple</th><th>Réalisation</th></tr>
-<tr><td class="description">Date courante</td><td class="pattern">DT()</td><td class="example-fr">DT()</td><td class="realisation">le lundi 6 février 2023 à 9 h 45 min 3 s</td></tr>
+<tr><td class="description">Date courante</td><td class="pattern">DT()</td><td class="example-fr">DT()</td><td class="realisation">le lundi 13 février 2023 à 15 h 45 min 28 s</td></tr>
 <tr><td class="description">Date passée</td><td class="pattern">DT("...")</td><td class="example-fr">DT("2014-11-21 21:00:00")</td><td class="realisation">le vendredi 21 novembre 2014 à 21 h 0 min 0 s</td></tr>
 <tr><td class="description">Date sans temps</td><td class="pattern">DT("...")</td><td class="example-fr">DT("2017-12-31")</td><td class="realisation">le dimanche 31 décembre 2017 à 0 h 0 min 0 s</td></tr>
 <tr><td class="description">Date à partir de datetime</td><td class="pattern">DT(datetime)</td><td class="example-fr">DT(datetime.datetime(2014,12,31))</td><td class="realisation">le mercredi 31 décembre 2014 à 0 h 0 min 0 s</td></tr>
@@ -1007,7 +1022,7 @@ corresponding to <code>YYYY-MM-DD hh:mm:ss</code>. When no parameter is given, <
 <h3 lang="en">Date creation</h3>
 <table lang="en">
 <tr><th>Name</th><th>Representation</th><th>Example</th><th>Realisation</th></tr>
-<tr><td class="description">Current date</td><td class="pattern">DT()</td><td class="example-en">DT()</td><td class="realisation">on Monday, February 6, 2023 at 9:45:03 a.m.</td></tr>
+<tr><td class="description">Current date</td><td class="pattern">DT()</td><td class="example-en">DT()</td><td class="realisation">on Monday, February 13, 2023 at 3:45:28 p.m.</td></tr>
 <tr><td class="description">Date in the past</td><td class="pattern">DT("...")</td><td class="example-en">DT("2014-11-21 21:00:00")</td><td class="realisation">on Friday, November 21, 2014 at 9:00:00 p.m.</td></tr>
 <tr><td class="description">Date without time </td><td class="pattern">DT("...")</td><td class="example-en">DT("2017-12-31")</td><td class="realisation">on Sunday, December 31, 2017 at 0:00:00 a.m.</td></tr>
 <tr><td class="description">Date from datetime</td><td class="pattern">DT(datetime)</td><td class="example-en">DT(datetime.datetime(2014,12,31))</td><td class="realisation">on Wednesday, December 31, 2014 at 0:00:00 a.m.</td></tr>
@@ -1015,28 +1030,28 @@ corresponding to <code>YYYY-MM-DD hh:mm:ss</code>. When no parameter is given, <
 <h3 lang="fr">Formatage d'une date (défaut <code>.nat()</code>)</h3>
 <table lang="fr">
 <tr><th>Nom</th><th>Représentation</th><th>Exemple</th><th>Réalisation</th></tr>
-<tr><td class="description">en lettres, par défaut</td><td class="pattern">.nat()</td><td class="example-fr">DT()</td><td class="realisation">le lundi 6 février 2023 à 9 h 45 min 3 s</td></tr>
-<tr><td class="description">en chiffres</td><td class="pattern">.nat(False)</td><td class="example-fr">DT().nat(False)</td><td class="realisation">lundi 6/2/2023 09:45:03</td></tr>
+<tr><td class="description">en lettres, par défaut</td><td class="pattern">.nat()</td><td class="example-fr">DT()</td><td class="realisation">le lundi 13 février 2023 à 15 h 45 min 28 s</td></tr>
+<tr><td class="description">en chiffres</td><td class="pattern">.nat(False)</td><td class="example-fr">DT().nat(False)</td><td class="realisation">lundi 13/2/2023 15:45:28</td></tr>
 <tr class="groupe"><td>Contrôle de l'affichage de chacun des éléments de la date</td><td colspan="3" class="pattern">.dOpt({"year": , "month": , "date": , "day": , "hour": , "minute": , "second": , "nat":, "det":, "rtime":})</td></tr>
-<tr><td class="description">Heure seulement</td><td class="pattern">.dOpt(..)</td><td class="example-fr">DT().dOpt({"year": False, "month": False, "date": False, "day": False})</td><td class="realisation">à 9 h 45 min 3 s</td></tr>
+<tr><td class="description">Heure seulement</td><td class="pattern">.dOpt(..)</td><td class="example-fr">DT().dOpt({"year": False, "month": False, "date": False, "day": False})</td><td class="realisation">à 15 h 45 min 28 s</td></tr>
 <tr><td class="description">Affichage de l'heure et des minutes (en chiffres)</td><td class="pattern">{"nat":False}</td><td class="example-fr">DT().dOpt({"year": False, "month": False, "date": False,
- "day": False, "second": False, "nat":False})</td><td class="realisation">09:45</td></tr>
-<tr><td class="description">Non affichage des déterminants de la date</td><td class="pattern">{"det":False}</td><td class="example-fr">DT().dOpt({"det": False})</td><td class="realisation">lundi 6 février 2023 9 h 45 min 3 s</td></tr>
-<tr><td class="description">Date relative par rapport à aujourd'hui</td><td class="pattern">{"rtime":True}</td><td class="example-fr">DT().dOpt({"rtime": True})</td><td class="realisation">aujourd'hui à 9 h 45 min 3 s</td></tr>
+ "day": False, "second": False, "nat":False})</td><td class="realisation">15:45</td></tr>
+<tr><td class="description">Non affichage des déterminants de la date</td><td class="pattern">{"det":False}</td><td class="example-fr">DT().dOpt({"det": False})</td><td class="realisation">lundi 13 février 2023 15 h 45 min 28 s</td></tr>
+<tr><td class="description">Date relative par rapport à aujourd'hui</td><td class="pattern">{"rtime":True}</td><td class="example-fr">DT().dOpt({"rtime": True})</td><td class="realisation">aujourd'hui à 15 h 45 min 28 s</td></tr>
 <tr><td class="description">Date relative après une autre</td><td class="pattern">{"rtime":".." or Date}</td><td class="example-fr">DT("2021-09-01").dOpt({"rtime": "2021-08-27","hour":False,"minute":False,"second":False})</td><td class="realisation">mercredi prochain</td></tr>
 <tr><td class="description">Date relative avant une autre date</td><td class="pattern">{"rtime":".." or Date}</td><td class="example-fr">DT("2021-09-01").dOpt({"rtime":datetime.datetime(2021,9,10),"hour":False,"minute":False,"second":False})</td><td class="realisation">il y a 9 jours</td></tr>
 </table>
 <h3 lang="en">Date formatting (default <code>.nat()</code>)</h3>
 <table lang="en">
 <tr><th>Name</th><th>Representation</th><th>Example</th><th>Realisation</th></tr>
-<tr><td class="description">as words, by default</td><td class="pattern">.nat()</td><td class="example-en">DT()</td><td class="realisation">on Monday, February 6, 2023 at 9:45:03 a.m.</td></tr>
-<tr><td class="description">as digits</td><td class="pattern">.nat(False)</td><td class="example-en">DT().nat(False)</td><td class="realisation">Monday 2/6/2023 09:45:03 a.m.</td></tr>
+<tr><td class="description">as words, by default</td><td class="pattern">.nat()</td><td class="example-en">DT()</td><td class="realisation">on Monday, February 13, 2023 at 3:45:28 p.m.</td></tr>
+<tr><td class="description">as digits</td><td class="pattern">.nat(False)</td><td class="example-en">DT().nat(False)</td><td class="realisation">Monday 2/13/2023 15:45:28 p.m.</td></tr>
 <tr class="groupe"><td>Control over the display of date components</td><td colspan="3" class="pattern">.dOpt({"year": , "month": , "date": , "day": , "hour": , "minute": , "second": , "nat":, "det":, "rtime":})</td></tr>
-<tr><td class="description">Time only</td><td class="pattern">.dOpt(..)</td><td class="example-en">DT().dOpt({"year": False, "month": False, "date": False, "day": False})</td><td class="realisation">at 9:45:03 a.m.</td></tr>
+<tr><td class="description">Time only</td><td class="pattern">.dOpt(..)</td><td class="example-en">DT().dOpt({"year": False, "month": False, "date": False, "day": False})</td><td class="realisation">at 3:45:28 p.m.</td></tr>
 <tr><td class="description">Display hour and minutes as digits</td><td class="pattern">{"nat":False}</td><td class="example-en">DT().dOpt({"year": False, "month": False, "date": False,
- "day": False, "second": False, "nat":False})</td><td class="realisation">9:45 a.m.</td></tr>
-<tr><td class="description">Do not display determiner</td><td class="pattern">{"det":False}</td><td class="example-en">DT().dOpt({"det": False})</td><td class="realisation">Monday, February 6, 2023 9:45:03 a.m.</td></tr>
-<tr><td class="description">Relative date compared with today</td><td class="pattern">{"rtime":True}</td><td class="example-en">DT().dOpt({"rtime": True})</td><td class="realisation">today at 9:45:03 a.m.</td></tr>
+ "day": False, "second": False, "nat":False})</td><td class="realisation">3:45 p.m.</td></tr>
+<tr><td class="description">Do not display determiner</td><td class="pattern">{"det":False}</td><td class="example-en">DT().dOpt({"det": False})</td><td class="realisation">Monday, February 13, 2023 3:45:28 p.m.</td></tr>
+<tr><td class="description">Relative date compared with today</td><td class="pattern">{"rtime":True}</td><td class="example-en">DT().dOpt({"rtime": True})</td><td class="realisation">today at 3:45:28 p.m.</td></tr>
 <tr><td class="description">Relative date after another one</td><td class="pattern">{"rtime":".." or Date}</td><td class="example-en">DT("2021-09-01").dOpt({"rtime": "2021-08-27","hour":False,"minute":False,"second":False})</td><td class="realisation">Wednesday</td></tr>
 <tr><td class="description">Relative date before another one</td><td class="pattern">{"rtime":".." or Date}</td><td class="example-en">DT("2021-09-01").dOpt({"rtime":datetime.datetime(2021,9,10),"hour":False,"minute":False,"second":False})</td><td class="realisation">9 days ago</td></tr>
 </table>
@@ -1117,15 +1132,53 @@ the element is added as the last child.</p>
 <tr><td class="description">add to an existing phrase</td><td class="pattern"></td><td class="example-en">CP(C("and"),NP(D("a"),N("fruit"))).add(apple).add(boy)</td><td class="realisation">a fruit, the apple and the boy</td></tr>
 <tr><td class="description">add with position</td><td class="pattern"></td><td class="example-en">S(VP().add(V("love")).add(apple)).add(boy,0)</td><td class="realisation">The boy loves the apple. </td></tr>
 </table>
-<h3><code>.toSource()</code></h3>
+<h3><code>.toSource(indent=-1)</code></h3>
 <p lang="fr">
 Cette fonction retourne une version <em>chaîne</em> d'une expression <span class="jsr">pyrealb</span>, 
-ceci peut être utile pour la mise au point d'une expression complexe. En passant 0 comme paramètre 
-à ce fonction, on obtient une expression indentée qui fait ressortir la structure de l'expression.</p>
+ceci peut être utile pour la mise au point d'une expression complexe. En passant un nombre positif ou nul (souvent 0) 
+comme paramètre, on obtient une expression indentée qui fait ressortir la structure de l'expression.</p>
 <p lang="en">
 This function returns a <em>string</em> version of a  <span class="jsr">pyrealb</span> expression, this 
-can be useful for debugging complex expressions. When 0 is given as parameter of this function, 
-the string is on on multiple lines indented to highlight the underlying structure of the expression.</p>
+can be useful for debugging complex expressions. When a non negative number (often 0) is given as parameter, 
+the string is indented on multiple lines to highlight the structure of the expression.</p>
+<h3 lang="en"><code>Constituent</code> realization</h3>
+<h3 lang="fr">Réalisation d'un <code>Constituent</code></h3>
+<dl lang="fr">
+<dt><code>str(...)</code></dt>
+<dd>Lancer la reéalisation d'un constituent qui dans certains cas modifie la structure d'un ou plusieurs autres constituents.
+Dans la majorité des cas, la réalisation est obtenue avec <code>str( )</code> appelé implicitement par <code>print(..)</code>.</dd>
+<dt><code>.realize()</code></dt>
+<dd>La réalisation peut aussi être lancée explicitement avec la méthode <code>realize()</code>. 
+Ceci est pratique lors du déboguage dans certains environnement de programation 
+(p.ex. Visual Studio Code ou PyCharm) qui utilisent <code>str(..)</code> pour afficher des valeurs internes pouvant ainsi
+changer la structure des constituents au cours de la mise au point, un cas typique de <i>Heisenbug</i>. 
+Dans la majorité des cas, <span class="jsr">pyrealb</span> détecte automatiquement l'exécution dans le cadre d'un environnement 
+de mise au point Python, et change le comportement de <code>str(..)</code> 
+pour qu'il retourne plutôt le source de l'expression (voir <code>.toSource()</code> plus haut) 
+ce qui, à l'usage, s'est avéré être très pratique. 
+La réalisation doit alors être obtenue en appelant <code>.realize()</code>.
+Pour obtenir ce comportement dans tous les cas, on peut utiliser cette affectation <code>Constituent.debug=true</code>.</dd>
+<dt><code>+</code> (opérateur préfixe unaire)</dt>
+<dd>L'opérateur unaire <code>+</code> peut être utilisé devant un <code>Constituent</code> 
+pour imprimer sa réalisation; cette abréviation est surtout utile lors de tests dans une boucle <i>real-eval-print</i>.<dd>
+</dl>
+<dl lang="en">
+<dt><code>str(...)</code></dt>
+<dd>Launch the realization of a constituent which in some cases modifies the structure of one or more constituents. 
+In the majority of cases, realization is obtained with <code>str( )</code> called implicitely by <code>print(..)</code></dd>
+<dt><code>.realize()</code></dt>
+<dd>Realization can also be launched explicitly with the <code>realize()</code> method.
+This is useful when debugging in some programming environments 
+(e.g. Visual Studio Code or PyCharm) in which <code>str(..)</code> is used for displaying internal values and thus risk changing 
+the constituents during debugging, a typical case of <i>Heisenbug</i>. 
+In most cases <span class="jsr">pyrealb</span> detects its execution within a Python debugger and changes
+<code>str(..)</code> to return the source of the constituent (see <code>.toSource()</code> above). 
+Realization must then be obtained by calling <code>.realize()</code>.
+This behavior can be obtained in all cases with the following assignment <code>Constituent.debug=true</code>.</dd>
+<dt><code>+</code> (unary prefix operator)</dt>
+<dd>The unary <code>+</code> operator can be used in front of a <code>Constituent</code> to print its realization, a useful abbreviation
+when testing within a <i>read-eval-print</i> loop.</dd>
+</dl>
 <h3><code>getLanguage()</code></h3>
 <p lang="fr">
 Cette fonction retourne le langage courant de réalisation: <code>"fr"</code> pour le français et 
@@ -1158,7 +1211,7 @@ d'une fonction est le fait que l'expression peut être paramétrisée.</p>
 As options modify a constituent for all following uses, it is often convenient to keep the original expression 
 intact in order to be able to reuse it and modify it independently. 
 The easiest way to create a copy of expression <code>exp</code> is to make a function of it by adding 
-<code>lambda:</code> in front of it. <code>exp()</code> calls the function and creates a pyrealb instance of the 
+<code>lambda:</code> in front of it. <code>exp()</code> calls the function and creates a <span class="jsr">pyrealb</span> instance of the 
 expression at each call. This allows to <i>delay</i> the evaluation of the expression until it is needed, 
 for example once the appropriate language has been loaded. It is also possible to create parameterized expressions.
 </p>
@@ -1214,9 +1267,9 @@ L'exemple précédent peut donc s'écrire: <code>addToLexicon({"pyrealb":{"N":{"
 <li>Si le lemme et la catégorie existent déjà dans le lexique, alors l'entrée pour cette catégorie est remplacée 
 par <code>newInfos</code>. </li>
 <li>Cette fonction retourne la nouvelle entrée modifié pour <code>lemma</code>.</li>
-<li><a href="../data/lexiconFormat.html">Plus d'information (en anglais) sur le format des lexiques</a></li>
+<li><a href="lexiconFormat.html">Plus d'information (en anglais) sur le format des lexiques</a></li>
 <li>Pour déterminer les informations à ajouter, le plus simple est de copier les informations d'un mot du 
-lexique qui se conjugue ou se décline de la même façon. L'<a href="../IDE/index.html">IDE de pyrealb</a> 
+lexique qui se conjugue ou se décline de la même façon. L'<i>IDE</i> de <span class="jsr">pyrealb</span> 
 permet de consulter les informations du lexique.</li>
 <li>Pour enlever une entrée d'un lexique, il de mettre <code>newInfos</code> à <code>None</code>.</li>
 </ul>
@@ -1234,10 +1287,10 @@ written: <code>addToLexicon({"pyrealb":{"N":{"g":"m", "pe":3, "tab":"nI"})</code
 <li>If the lemma and category are already present in the lexicon, then the category of this entry is 
 replaced by <code>newInfos</code>.</li>
 <li>This function returns the modified lexicon entry for <code>lemma</code>.</li>
-<li><a href="../data/lexiconFormat.html">More information about the lexicon format</a></li>
+<li><a href="lexiconFormat.html">More information about the lexicon format</a></li>
 <li>In order to find the informations to add, the simplest way is to copy the lexicon information 
 for a similar word already in the lexicon. 
-The <a href="../IDE/index.html">pyrealb IDE</a> provides access to the lexicon information.
+The <i>IDE</i> provides access to the lexicon information.
 </li>
 <li>To remove an entry, set <code>newInfos</code> to <code>None</code>.</li>
 </ul>
@@ -1253,18 +1306,13 @@ Fusionner les entrées de <code>newLexicon</code> avec le lexique spécifié. Ce
 remplacera les entrées existantes par celles du nouveau lexique. La fusion est effectuée au niveau des entrées, 
 mais non des catégories.</p>
 <p lang="en">
-Merge the entries of <code>newLexicon</code> with the specified lexicon. This adds the pyrealb entries and replaces 
-the existing entries by the ones of the pyrealb lexicon. Merging is done at the entry level, not at the category level.</p>
-<h3><code>getLanguage()</code></h3>
-<p lang="fr">
-Retourne le langage de réalisation courant.</p>
-<p lang="en">
-Returns the current lexicon.</p>
+Merge the entries of <code>newLexicon</code> with the specified lexicon. This adds the <span class="jsr">pyrealb</span> entries and replaces 
+the existing entries by the ones of the <span class="jsr">pyrealb</span> lexicon. Merging is done at the entry level, not at the category level.</p>
 <h2 lang="fr" id="selection_de_variantes">Sélection de variantes</h2>
 <h2 lang="en" id="variant_selection">Variant selection</h2>
 <p lang="fr">
 La fonction <code>oneOf(e<sub>1</sub>,e<sub>2</sub>,...)</code> où <code>e<sub>i</sub></code> est est une valeur, 
-choisit un <code>e<sub>i</sub></code> au hasard. En <code>pyrealb</code>, ces éléments sont souvent des 
+choisit un <code>e<sub>i</sub></code> au hasard. En <span class="jsr">pyrealb</span>, ces éléments sont souvent des 
 constructeurs correspondant à des structures de phrases différentes. Si <code>e<sub>1</sub></code> est une 
 liste alors la sélection est faite dans cette liste, en ignorant les autres paramètres.
 </p>
@@ -1278,7 +1326,7 @@ les deux constructeurs. Dans ce cas, très simple, il aurait été aussi possibl
 <code>N(oneOf("amour","amitié"))</code>.</p>
 <p lang="en">
 The function <code>oneOf(e<sub>1</sub>,e<sub>2</sub>,...)</code> where <code>e<sub>i</sub></code> is a value, 
-selects randomly a <code>e<sub>i</sub></code>. In <code>pyrealb</code>, these elements are often constructors
+selects randomly a <code>e<sub>i</sub></code>. In <span class="jsr">pyrealb</span>, these elements are often constructors
 corresponding to different phrase structures. If <code>e<sub>1</sub></code> is a list, the selection is performed 
 within this list, ignoring other parameters.</p>
 <p lang="en">
@@ -1291,24 +1339,24 @@ both constructors. In this simplistic case, this could have also been written as
 <h2 lang="fr" id="traitement_en_json">Traitement en JSON</h2>
 <h2 lang="en" id="json_processing">JSON processing</h2>
 <p lang="fr">
-Pour faciliter l'utilisation de <code>pyrealb</code> en sortie d'un système externe. 
+Pour faciliter l'utilisation de <span class="jsr">pyrealb</span> en sortie d'un système externe. 
 Il est possible d'utiliser un format d'entrée JSON <a href="../data/jsRealB-jsonInput.html">
 décrit dans ce document (en anglais)</a> où sont décrites deux API permettant 
 d'appeler un serveur <i>node.js</i> <code>jsRealB</code> <a href="jsRealBfromPython.html">depuis un autre programme Python</a> ou Prolog. 
-Il est également possible d"obtenir une expression JSON correspondant à une expression <code>pyrealb</code>.</p>
+Il est également possible d"obtenir une expression JSON correspondant à une expression <span class="jsr">pyrealb</span>.</p>
 <p lang="en">
-To simplify the use of <code>pyrealb</code> as output of an external system, a JSON input format has been defined. 
+To simplify the use of <span class="jsr">pyrealb</span> as output of an external system, a JSON input format has been defined. 
 <a href="../data/jsRealB-jsonInput.html">It is described in this document.</a> in which two APIs are described 
-for calling a <code>pyrealb</code> <i>node.js</i> server <a href="jsRealBfromPython.html">from another Python</a> or Prolog. 
-It is also possible to obtain the JSON expression corresponding to a given <code>pyrealb</code> expression.</p>
+for calling a <span class="jsr">pyrealb</span> <i>node.js</i> server <a href="jsRealBfromPython.html">from another Python</a> or Prolog. 
+It is also possible to obtain the JSON expression corresponding to a given <span class="jsr">pyrealb</span> expression.</p>
 <h2 lang="fr" id="informations_sur_la_version">Informations sur la version</h2>
 <h2 lang="en" id="informations_about_the_version">Informations about the version</h2>
 <h3><code>pyrealb_version</code></h3>
-<p lang="fr">Chaine de caractères indiquant le numéro de version de <code>pyrealb</code>, valeur actuelle: 2.3.1.</p>
-<p lang="en">String showing the version number of <code>pyrealb</code>, currently: 2.3.1.</p>
+<p lang="fr">Chaine de caractères indiquant le numéro de version de <span class='jsr'>pyrealb</span>, valeur actuelle: 2.3.1.</p>
+<p lang="en">String showing the version number of <span class='jsr'>pyrealb</span>, currently: 2.3.1.</p>
 <h3><code>pyrealb_datecreated</code></h3>
-<p lang="fr">Date de la création de la version courante de <code>pyrealb</code> valeur actuelle: 2023-02-06.</p>
-<p lang="en">Creation date of the current <code>pyrealb</code>, currently 2023-02-06.</p>
+<p lang="fr">Date de la création de la version courante de <span class='jsr'>pyrealb</span> valeur actuelle: 2023-02-13.</p>
+<p lang="en">Creation date of the current <span class='jsr'>pyrealb</span>, currently 2023-02-13.</p>
 <h2 lang="fr" id="relation_fr">Relation avec <code>jsRealB</code></h2>
 <h2 lang="en" id="relation_en">Relation with <code>jsRealB</code></h2>
 <p lang="fr">
@@ -1354,22 +1402,22 @@ errors and awkwardnesses that were corrected in the original.
 <h2 lang="en" id="moreInfo">More information</h2>
 <ul>
 <li><a href="https://arxiv.org/pdf/2012.15425.pdf" lang="fr">Document décrivant l'organisation de <code>jsRealB</code>
-(section 6.7 spécifique à <code>pyrealb</code>)</a><a href="https://arxiv.org/pdf/2012.15425.pdf" lang="en"
->Document describing the organization of the <code>jsRealB</code> (section 6.7 deals with <code>pyrealb</code></a></li>
+(section 6.7 spécifique à <span class='jsr'>pyrealb</span>)</a><a href="https://arxiv.org/pdf/2012.15425.pdf" lang="en"
+>Document describing the organization of the <code>jsRealB</code> (section 6.7 deals with <span class='jsr'>pyrealb</span></a></li>
 <li><a href="http://rali.iro.umontreal.ca/rali/?q=fr/jsrealb-realisateur-bilingue-de-texte" lang="fr">Historique 
 des versions de <code>jsRealB</code> et démonstrations</a><a 
 href="http://rali.iro.umontreal.ca/rali/?q=en/jsrealb-bilingual-text-realiser" 
 lang="en">Previous versions of <code>jsRealB</code> and demos</a></li>
-<li><a href="https://mybinder.org/v2/gh/lapalme/pyrealb-jupyter/HEAD?labpath=pyrealb-fr.ipynb" 
-title="Expérience avec pyrealb" lang="fr">Notebook Jupyter</a>
-<a href="https://mybinder.org/v2/gh/lapalme/pyrealb-jupyter/HEAD?labpath=pyrealb-en.ipynb" title="Experimenting with 
-pyrealb" lang="en">Jupyter Notebook</a></li>
 <li><a href="http://rali.iro.umontreal.ca/JSrealB/current/Tutorial/tutorial.html" title="jsRealB tutorial" 
 lang="fr">Tutoriel jsRealB (en anglais)</a><a 
 href="http://rali.iro.umontreal.ca/JSrealB/current/Tutorial/tutorial.html" 
 title="jsRealB tutorial" lang="en">jsRealB Tutorial</a></li>
-<li><a href="https://github.com/lapalme/pyrealb" lang="fr">Dépot GitHub</a>
-<a href="https://github.com/lapalme/pyrealb" lang="en">GitHub repository</a></li>
+<li><a href="https://mybinder.org/v2/gh/lapalme/pyrealb-jupyter/HEAD?labpath=pyrealb-fr.ipynb" 
+title="Expérience avec pyrealb" lang="fr">Notebook Jupyter</a>
+<a href="https://mybinder.org/v2/gh/lapalme/pyrealb-jupyter/HEAD?labpath=pyrealb-en.ipynb" title="Experimenting with 
+pyrealb" lang="en">Jupyter Notebook</a></li>
+<li><a href="https://github.com/lapalme/pyrealb" lang="fr">Dépot GitHub pyrealb</a>
+<a href="https://github.com/lapalme/pyrealb" lang="en">pyreealb GitHub repository</a></li>
 <li><a href="lexiconFormat.html" lang="fr">Format des entrées de lexiques (en anglais)</a>
 <a href="lexiconFormat.html" lang="en">Format of the lexicon entries</a></li>
 <li>Publications:
@@ -1381,7 +1429,7 @@ title="jsRealB tutorial" lang="en">jsRealB Tutorial</a></li>
 </ul>
 Contact: <a href="mailto:lapalme@iro.umontreal.ca">Guy Lapalme</a> 
 <a href="http://rali.iro.umontreal.ca">RALI</a>, Université de Montréal, CANADA. 2023.<br/><hr/>
-2023-02-06  09:45:03
+2023-02-13  15:45:28
 
 </body>
 </html>

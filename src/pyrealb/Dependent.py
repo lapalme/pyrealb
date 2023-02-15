@@ -268,10 +268,7 @@ class Dependent(Constituent):
             if subjIdx>=0:
                 subj=self.dependents[subjIdx]
                 if subj.terminal.isA("Pro"):
-                    # as self pronoun will be preceded by "par" or "by", the "bare" tonic form is needed
-                    # to which we assign the original person, number, gender
-                    subj.terminal=subj.terminal.getTonicPro().g(subj.getProp("g"))\
-                                            .n(subj.getProp("n")).pe(subj.getProp("pe"))
+                    subj.terminal = subj.terminal.getTonicPro()
             else:
                 subj=None
             # find direct object (first N or Pro of a comp) from dependents
@@ -296,6 +293,8 @@ class Dependent(Constituent):
                 #create a dummy subject with a "il"/"it"
                 obj=Pro("lui" if self.isFr() else "it",self.lang).c("nom") #HACK: obj is the new subject
                 # add new subject at the front of the sentence
+                subj.changeDeprel("mod")
+                self.removeDependent(subjIdx)
                 self.addPre(obj)
                 self.peng=obj.peng
                 # add original subject after the verb to serve as an object
@@ -664,6 +663,8 @@ class Dependent(Constituent):
                 else:
                     after += d.tokens if d.isA("coord") else d.real()
             res=[*before,*self.terminal.real(),*after]
+            if self.terminal.isA("V"):
+                self.checkAdverbPos(res)
         return self.doFormat(res)
 
     # recreate a jsRealB expression

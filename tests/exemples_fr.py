@@ -253,6 +253,42 @@ def exemples_fr():
                NP(D('le'),
                   N('fromage')))).typ({"neg":true,"int":"tag"}),
          "Il n'a pas mangé le fromage, n'est-ce pas? "],
+         # adverb position
+         [S(Pro('je').pe(2),  # 60
+            VP(V('travailler').t("pc"),
+               Adv('bien'))).typ({"mod":"nece"}),
+         "Tu as dû bien travailler. "],
+         [S(Pro('je'),          # 61
+           VP(V('aller').t("pc"),
+              Adv('hier'),
+              PP(P('à'),
+                 NP(D('le'),
+                    N('maison'))))).typ({"neg":True}),
+         "Il n'est pas allé hier à la maison. "],
+          [S(Pro('je'),         # 62
+             VP(V('aller').t("pc"),
+                Adv('souvent'),
+                PP(P('à'),
+                   NP(D('le'),
+                      N('maison'))),
+                Adv('sûrement'))).typ({"neg":True}),
+          "Il n'est pas souvent allé à la maison sûrement. "],
+          [S(Pro('je'),          # 63
+            VP(V('aller').t("pc"),
+               Adv('souvent').pos("post"),
+               PP(P('à'),
+                  NP(D('le'),
+                     N('maison'))))).typ({"neg":True}),
+          "Il n'est pas allé souvent à la maison. "],
+          [S(NP(D('le'),         # 64
+               N('chat')),
+            VP(V('manger'),
+               Adv('bien'),
+               Adv('souvent'),
+               NP(D('le'),
+                  N('souris')))).typ({"pas":True}),
+          "La souris est bien souvent mangée par le chat. "],
+
     ]
     tests = [{}]
     for exp, expected in exemples_fr:

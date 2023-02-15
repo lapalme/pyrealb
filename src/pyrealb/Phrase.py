@@ -453,10 +453,7 @@ class Phrase(Constituent):
                 if len(self.elements) > 0 and self.elements[0].isOneOf(["N", "NP", "Pro"]):
                     subject = self.removeElement(0)
                     if subject.isA("Pro"):
-                        # as self pronoun will be preceded by "par" or "by", the "bare" tonic form is needed
-                        # to which the original pe, gender and number are added
-                        subject = subject.getTonicPro(None).pe(subject.getProp("pe")).g(subject.getProp("g")).n(
-                            subject.getProp("n"))
+                         subject = subject.getTonicPro()
                 else:
                     subject = None
             else:
@@ -852,9 +849,9 @@ class Phrase(Constituent):
                     g  = currV.getProp("g")
                     pro = Pro("I").pe(pe).n(n).g(g); # get default pronoun
                     subjIdx = self.getIndex(["NP","N","Pro","SP"])
-                    if subjIdx is not None:
+                    if subjIdx >= 0:
                         vbIdx=self.getIndex(["VP","V"])
-                        if vbIdx is not None and subjIdx<vbIdx: # subject should be before the verb
+                        if vbIdx >= 0 and subjIdx<vbIdx: # subject should be before the verb
                             subj=self.elements[subjIdx]
                             if subj.isA("Pro"):
                                 if subj.getProp("pe")==1 and aux=="be" and t=="p" and not neg:
@@ -870,6 +867,10 @@ class Phrase(Constituent):
                                     pro=subj.clone()
                             else:
                                 pro=subj.clone().pro()
+                    else: # no subject, but check if the verb is imperative
+                        if t == "ip":
+                            if aux =="do": aux = "will" # change aux when the aux is default
+                            pro = Pro("I","en").pe(2).n(n).g(g)
                     # check for negative adverb
                     adv = currV.parentConst.getConst("Adv")
                     if adv is not None and adv.lemma in ["hardly","scarcely","never","seldom"]:
@@ -972,6 +973,8 @@ class Phrase(Constituent):
                 else:
                     r = e.real()
                 res.extend(r)
+            if self.isA("VP"):
+                self.checkAdverbPos(res)
         return self.doFormat(res)
 
     # recreate a jsRealB expression

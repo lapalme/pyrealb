@@ -45,7 +45,7 @@ def sentences_fr():
         # 7
         {"expression":S(Pro("je").pe(2), VP(V("travailler").t("pc"),
                       AdvP(Adv("bien")))).typ({"mod":"nece"}),
-         "expected":"Tu as dû travailler bien. ",
+         "expected":"Tu as dû bien travailler. ",
          "message":"Phrase au passé avec modalité de nécessité"},
         # 8
         {"expression":S(CP(C("et"), NP(D("le"), N("garçon")), NP(D("le"), N("fille"))), 
@@ -231,9 +231,49 @@ def sentences_fr():
          "expected":"Il lui en a parlé. ",
          "message":"Pronominalisation de deux objets indirects"},
         # 37
-        # {"expression":,
-        #  "expected":"",
-        #  "message":""},
+        {"expression":S(Pro('je').pe(2),
+                        VP(V('travailler').t("pc"),
+                           Adv('bien'))).typ({"mod":"nece"}),
+         "expected":"Tu as dû bien travailler. ",
+         "message":"Position de l'adverbe"},
+        # 38
+        {"expression":S(Pro('je'),
+                        VP(V('aller').t("pc"),
+                           Adv('hier'),
+                           PP(P('à'),
+                              NP(D('le'),
+                                 N('maison'))))).typ({"neg":True}),
+         "expected":"Il n'est pas allé hier à la maison. ",
+         "message":"Position de l'adverbe dans une négation"},
+        # 39
+        {"expression":S(Pro('je'),
+                        VP(V('aller').t("pc"),
+                           Adv('souvent'),
+                           PP(P('à'),
+                              NP(D('le'),
+                                 N('maison'))),
+                           Adv('sûrement'))).typ({"neg":True}),
+         "expected":"Il n'est pas souvent allé à la maison sûrement. ",
+         "message":"Position d'adverbes séparés"},
+        # 40
+        {"expression":S(Pro('je'),
+                        VP(V('aller').t("pc"),
+                           Adv('souvent').pos("post"),
+                           PP(P('à'),
+                              NP(D('le'),
+                                 N('maison'))))).typ({"neg":True}),
+         "expected":"Il n'est pas allé souvent à la maison. ",
+         "message":"Position d'un adverbe avec .pos()"},
+        # 41
+        {"expression":S(NP(D('le'),
+                          N('chat')),
+                       VP(V('manger'),
+                          Adv('bien'),
+                          Adv('souvent'),
+                          NP(D('le'),
+                             N('souris')))).typ({"pas":True}),
+         "expected":"La souris est bien souvent mangée par le chat. ",
+         "message":"Position d'adverbes contigus"},
     ];
 
 if __name__ == '__main__':

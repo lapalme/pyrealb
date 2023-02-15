@@ -1,4 +1,3 @@
-from context import pyrealb
 from pyrealb import *
 import datetime, sys
 
@@ -138,6 +137,7 @@ def francais():
                   VP(V("manger").t('pc')))),
             VP(V("être").t('p'),
                AP(A("gris")))))
+
 
 def dependent_fr():
     loadFr()

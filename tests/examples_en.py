@@ -38,7 +38,7 @@ def examples_en():
           NP(D("a"),N("apple").n("p"))
      )).typ({"neg":true}),"He does not eat apples. "],
     # Figure 5
-    [S(Pro("him").c("nom"),                          #10
+    [S(Pro("him").c("nom").g("m"),                   #10
        VP(V("eat"),
           NP(D("a"),N("apple").n("p"))
      )).typ({"neg":true,"pas":true}),

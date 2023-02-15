@@ -87,6 +87,11 @@ class Constituent():
     # hack taken from https://intellij-support.jetbrains.com/hc/en-us/community/posts/205819799/comments/206004059
     debug = sys.gettrace() is not None or "-d" in sys.argv # used in Constituent.__str__()
 
+    #  unary plus to print the realization of a Constituent
+    #  useful within a real-eval-print loop
+    def __pos__(self):
+        print(self.realize())
+
     def error(self,mess):
         raise Exception ("Internal error: this should never have happened,sorry!\n"+self.me()+"::"+mess)
     
@@ -110,10 +115,10 @@ class Constituent():
         if propName in self.props:
             return self.props[propName] 
         if propName in ["pe","n","g"]:
-            if not hasattr(self, "peng") or self.peng==None: return None
+            if not hasattr(self, "peng") or self.peng is None: return None
             return self.peng[propName] if propName in self.peng else None
         if propName in ["t","aux"]:
-            if not hasattr(self,"taux") or self.taux==None: return None
+            if not hasattr(self,"taux") or self.taux is None: return None
             return self.taux[propName] if propName in self.taux else None 
         return None
     
@@ -155,29 +160,42 @@ class Constituent():
             return None
         return c.getFromPath(path)
 
-    # return a pronoun corresponding to this object 
+    tonicForms = {
+        "fr" : {"toi","lui","nous","vous","eux","elle","elles","on","soi"},
+        "en" : {"us","her","you","him","them","it"}
+    }
+    # return a pronoun corresponding to this object
     # taking into account the current gender, number and person
     #  do not change the current pronoun, if it is already using the tonic form or does not have one (e.g. this)
     # if case_ is not given, return the tonic form else return the corresponding case
     # HACK:: parameter case_ is followed by _ so that it is not displayed as a keyword in the editor
     def getTonicPro(self,case_=None):
         from .Terminal import Pro
-        if self.isA("Pro"):
-            if ("tn" in self.props or "c" in self.props):
+        if self.isA("Pro"): # this is already a pronoun
+            if ("tn" in self.props or "c" in self.props): # already has tn() or c()
                 if case_ is not None:
                     self.props["c"]=case_
                 else: # ensure tonic form
                     self.props["tn"]=""
                     if "c" in self.props: del self.props["c"]
-            return self
+                return self
+            else:
+                if self.lemma in Constituent.tonicForms[self.lang]:
+                    # the lemma is already in tonic form
+                    if case_ is not None:
+                        return Pro(self.lemma).c(case_)
+                else:
+                    if case_ is not None:
+                        return Pro(self.realize()).c(case_)
+                return self
         else: # generate the string corresponding to the tonic form
             pro=Pro("moi" if self.isFr() else "me",self.lang)
             g=self.getProp("g")
-            if g!=None: pro.g(g)
+            if g is not None: pro.g(g)
             n=self.getProp("n")
-            if n!=None: pro.n(n)
+            if n is not None: pro.n(n)
             pe=self.getProp("pe")
-            if pe!=None: pro.pe(pe)
+            if pe is not None: pro.pe(pe)
             if case_ is None:return Pro(pro.realize(),self.lang).tn("")
             return Pro(pro.realize(),self.lang).c(case_)
     
@@ -207,16 +225,15 @@ class Constituent():
     def parseDateString(self,dateS):
         try:  ## parse the string as an iso-like time format 
             m=re.match(r"(\d{4}-\d{2}-\d{2})([T ](\d{2}:\d{2}:\d{2}))?",dateS)
-            if m==None:
+            if m is None:
                 self.warn("bad parameter","an isotime format string",dateS)
                 return datetime.datetime.today()
+            if m[2] is None:
+                return datetime.datetime(int(m[1][0:4]),int(m[1][5:7]),int(m[1][8:10]))
             else:
-                if m[2]==None:
-                    return datetime.datetime(int(m[1][0:4]),int(m[1][5:7]),int(m[1][8:10]))
-                else:
-                    return datetime.datetime(int(m[1][0:4]),int(m[1][5:7]),int(m[1][8:10]),
-                                                hour=int(m[3][0:2]),minute=int(m[3][3:5]),
-                                                second=int(m[3][6:8]))
+                return datetime.datetime(int(m[1][0:4]),int(m[1][5:7]),int(m[1][8:10]),
+                                            hour=int(m[3][0:2]),minute=int(m[3][3:5]),
+                                            second=int(m[3][6:8]))
         except ValueError as e:
             self.warn("bad parameter","an isotime format string",dateS+":"+str(e))
             return datetime.datetime.today()
@@ -401,7 +418,7 @@ class Constituent():
                 #  check for a French "h aspiré" for which no elision should be done
                 lexiconInfo=getLemma(lemma if isinstance(lemma,str) else realization) # get the lemma with the right pos
                 if lexiconInfo  is None: 
-                    lexiconInfo=getLemma(lemma.toLowerCase()) # check with lower case
+                    lexiconInfo=getLemma(lemma.lower()) # check with lower case
                     if lexiconInfo  is None: return True       # elide when unknown
                 if pos not in lexiconInfo:pos=next(iter(lexiconInfo)) # try the first pos if current not found
                 if pos in lexiconInfo and "h" in lexiconInfo[pos] and lexiconInfo[pos]["h"]==1: return False # h aspiré found
@@ -413,12 +430,12 @@ class Constituent():
         if last==0:return # do not try to elide a single word
         i=0
         while i < last:
-            if i>0 and cList[i-1].getProp("lier")!=None: # ignore if the preceding word is "lié" to this one
+            if i>0 and cList[i-1].getProp("lier") is not None: # ignore if the preceding word is "lié" to this one
                 i+=1
                 continue
-            m1=sepWordREfr.match(cList[i].realization) if cList[i].realization!=None else None
+            m1=sepWordREfr.match(cList[i].realization) if cList[i].realization is not None else None
             if m1  is None or m1.group(2) is None: continue
-            m2=sepWordREfr.match(cList[i+1].realization) if cList[i].realization!=None else None
+            m2=sepWordREfr.match(cList[i+1].realization) if cList[i].realization is not None else None
             if m2  is None or m2.group(2) is None: continue
             # HACK: m1 and m2 save the parts before and after the first word (w1 and w2) which is in m_i[2]
             # for a single word
@@ -477,7 +494,7 @@ class Constituent():
         while i < len(cList):
             c = cList[i]
             if c.isA("V"):
-                if verbPos == None:
+                if verbPos is None:
                     if hasattr(c, "isProg") or hasattr(c, "isMod"):
                         if hasattr(c, "isProg"): prog = c
                         i += 1
@@ -500,31 +517,114 @@ class Constituent():
                         else:
                             neg2 = c.neg2
                 if c.isReflexive() and c.getProp("t") != "pp":
-                    if prog != None: c = prog
+                    if prog is not None: c = prog
                     c.insertReal(pros,
                                  Pro("moi", "fr").c("refl").pe(c.getProp("pe")).n(c.getProp("n")).g(c.getProp("g")))
                 i += 1
-            elif c.isA("Pro") and verbPos != None:
+            elif c.isA("Pro") and verbPos is not None:
                 if c.getProp("c") in ["refl", "acc", "dat"] or c.lemma == "y" or c.lemma == "en":
                     pros.append(cList.pop(i))
                 else:
                     i += 1
-                    # HACK: stop when seeing a preposition (except "par" introduced by a passivee) or a conjunction
-                    #          or a "strange" pronoun that might start a phrase
-                    #       whose structure has been flattened at this stage
-            elif c.isOneOf(["P", "C", "Adv", "Pro"]) and verbPos != None and c.lemma != "par":
-                break
+            elif c.isOneOf(["P", "C", "Adv", "Pro"]) and verbPos is not None:
+                # HACK: stop when seeing a preposition or a conjunction
+                #          or a "strange" pronoun that might start a phrase
+                #       whose structure has been flattened at this stage
+                if c.lemma == "par" and i<len(cList)-1 and cList[i+1].isA("Pro"):
+                    # if "par"  followed by a Pro is encountered (probably for passive), keep them together
+                    i += 2
+                else:
+                    break
             else:
                 i += 1
-        if verbPos == None: return
+        if verbPos is None: return
         # add ending "pas" after the verb unless it is "lié" in which cas it goes after the next word
-        if neg2 != None:
+        if neg2 is not None:
             vb = cList[verbPos]
             vb.insertReal(cList, Q(neg2, "fr"), verbPos + (1 if "lier" not in vb.props else 2))
         if len(pros) > 1:
             pros.sort(key=lambda pro: cliticTable[pro] if pro in cliticTable else 100)
         # insert pronouns before the verb
         cList[verbPos:verbPos] = pros
+
+    #
+    # In a VP, place the first consecutive adverbs at a correct position according to the rules of the language.
+    # Usually an adverb is set according to either .pos("pre"|"post")
+    # The problem occurs mainly with verbs with an auxiliary.
+    # TODO: deal with more than one sequence of adverbs (although it should be rare)
+    # this method is called by Phrase.real() and Dependent.real(), this is why it is moved to Constituent
+    # @param {Terminal[]} res : list of Termnals possibly modified in place
+    #
+    def checkAdverbPos(self,res):
+        # move n elements starting at start to position toIdx (shifting the rest)
+        def moveTo(startIdx,n,toIdx):
+            save = res[startIdx:startIdx+n]
+            del res[startIdx:startIdx+n]
+            res[toIdx:toIdx]=save
+
+        # find first consecutive adverbs (ignoring "not")
+        advIdxes = [i for (i,e) in zip(range(0,len(res)),res) if e.isA("Adv") and e.lemma != "not"  ]
+        if len(advIdxes) == 0:
+            return
+        advIdx = advIdxes[0]
+        advTerminal = res[advIdx]
+        # check that the indexes of adverbs are consecutive, remove those that are not
+        for i in range(1, len(advIdxes)):
+            if advIdxes[i] != advIdxes[i - 1] + 1:
+                del advIdxes[i:]
+                break
+
+        def moveAfterAux(auxMods):
+            for auxIdx in range(0, advIdx - 1):
+                e = res[auxIdx]
+                if e.isA("V") and e.lemma in auxMods:
+                    if res[auxIdx + 1].isA("V"):
+                        if e.isFr() and res[auxIdx + 1].lemma in auxMods:
+                            # another French modal ()
+                            moveTo(advIdx,len(advIdxes),auxIdx+2)
+                        else:
+                            # there is an auxiliary/modals followed by a verb, insert adverb after the auxiliary
+                            moveTo(advIdx, len(advIdxes), auxIdx + 1)
+                    elif e.isEn():
+                        # in English insert after negation (in French, negation [ne  ... pas] is added after this step)
+                        if res[auxIdx + 1].lemma == "not" and res[auxIdx + 2].isA("V"):
+                            moveTo(advIdx, len(advIdxes), auxIdx + 2)
+                    else:
+                        # in French
+                        # check for infinitive verb (the adverb should go before it)
+                        infinitiveFound = False
+                        for idx in range(advIdx - 1, auxIdx, -1):
+                            if "t" in res[idx].props and res[idx].props["t"] == "b":
+                                moveTo(advIdx, len(advIdxes), idx)
+                                infinitiveFound = True
+                                break
+                        if not infinitiveFound:
+                            # check for inverted pronoun (added by .typ("int":"yon")
+                            if res[auxIdx + 1].isA("Pro") and res[auxIdx + 2].isA("V"):
+                                moveTo(advIdx, len(advIdxes), auxIdx + 2)
+                    break
+
+        if advIdx >= 2 and "pos" not in advTerminal.props:
+            # do not touch adverb with pos specified
+            if advTerminal.isEn():
+                # English: the adverb must be put after the first auxiliary
+                moveAfterAux(["have", "can", "will", "shall", "may", "must"])
+            else:
+                # French : https:#fr.tsedryk.ca/grammaire/presentations/adverbes/4_La_place_de_l_adverbe.pdf (page 3)
+                # place immediately after the auxiliary
+                advLemma = advTerminal.lemma
+                if advLemma.endswith("ment"): return;  # adverbe qui finit en -ment, laisser après le verbe
+                #  adverbes de temps et de lieu qu'il faut laisser après le verbe
+                #  extraits d'une liste de types d'adverbes à https:#www.scribbr.fr/elements-linguistiques/adverbe/
+                tempsAdv = ["hier", "demain", "longtemps", "aujourd'hui", "tôt", "tard", "auparavant", "autrefois"]
+                lieuAdv = ["ici", "là", "là-bas", "là-haut", "ailleurs", "autour", "derrière", "dessus", "dessous",
+                           "devant",
+                           "dedans", "dehors", "loin", "près", "alentour", "après", "avant", "partout",
+                           "où", "partout", "au-dessus", "au-dessous", "au-devant", "nulle part", "quelque part"]
+                if advLemma in tempsAdv or advLemma in lieuAdv: return
+                if len(advLemma) <= 6 or advLemma in ["toujours", "souvent"]:
+                    # adverbe court ou commun: déjà, très, trop, toujours, souvent ...
+                    moveAfterAux(["avoir", "être", "vouloir", "devoir", "savoir"])
 
     # applies to a list of Constituents (can be a single one)
     # adds either to the first or last token (which can be the same)
@@ -640,7 +740,7 @@ class Constituent():
                         # and a full stop at the end unless there is already one
                         # taking into account any trailing HTML tag
                         m=re.search(r"(.)( |(<[^>]+>))*$",s)
-                        if m!=None and m.group(1) not in "?!.:;/)]}":
+                        if m is not None and m.group(1) not in "?!.:;/)]}":
                             s+=". "   # add a space after "." , like for rule "pc4"
         return s
     
@@ -696,7 +796,7 @@ def makeOptionMethod(option,validVals,allowedConsts,optionName=None):
     def _method(self, val=None,prog=None):
         nonlocal optionName
         if val is None:
-            if validVals!=None and "" not in validVals:
+            if validVals is not None and "" not in validVals:
                 return self.warn("no value for option",option,validVals)
         if self.isA("CP") and option not in ["cap","lier"]:
             # propagate an option through the children of a CP except for "cap" and "lier"
@@ -706,7 +806,7 @@ def makeOptionMethod(option,validVals,allowedConsts,optionName=None):
                     getattr(e,option)(val)
             return self
         if len(allowedConsts)==0 or self.isOneOf(allowedConsts) or self.isOneOf(deprels):
-            if validVals!=None and val not in validVals:
+            if validVals is not None and val not in validVals:
                 return self.warn("ignored value for option",option,val)
             # start of the real work
             if optionName is None:optionName=option
@@ -734,7 +834,7 @@ setattr(Constituent,"f",makeOptionMethod("f",["co","su"],["A","Adv"]))
 setattr(Constituent,"tn",makeOptionMethod("tn",["","refl"],["Pro"]))
 setattr(Constituent,"c",makeOptionMethod("c",["nom","acc","dat","refl","gen"],["Pro"]))
 
-setattr(Constituent,"pos",makeOptionMethod("pos",["post","pre"],[]))
+setattr(Constituent,"pos",makeOptionMethod("pos",["post","pre"],["A","Adv",*deprels]))
 setattr(Constituent,"pro",makeOptionMethod("pro",None,["NP","PP","N"]))
 # English only
 setattr(Constituent,"ow",makeOptionMethod("ow",["s","p","x"],["D","Pro"],"own"))

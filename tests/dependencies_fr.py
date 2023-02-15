@@ -64,7 +64,7 @@ def dependencies_fr():
              root(V('travailler').t("pc"),
                   comp(Adv('bien')),
                   subj(Pro('je').pe(2))).typ({"mod": "nece"}),
-         "expected": "Tu as dû travailler bien. ",
+         "expected": "Tu as dû bien travailler. ",
          "message": "Phrase au passé avec modalité de nécessité"},
          #   8
         {"expression":

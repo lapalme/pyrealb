@@ -58,5 +58,6 @@ if __name__ == '__main__':
     if totalOK==totaltests:
         print("all tests succeeded")
     else:
-        print(f"still {totaltests-totalOK} tests to check")
+        nb = totaltests-totalOK
+        print(f"still {nb} test{'s' if nb > 1 else ''} to check")
     
