@@ -112,6 +112,7 @@ class Dependent(Constituent):
             # must create self.peng already because it might be used in the current dependents (for adjectives, attributes...)
             # the information will be computed at realization time (see Dependent.coordReal)
             self.peng={}
+            headTerm.peng = self.peng
         for d in self.dependents:
             depTerm=d.terminal
             deprel=d.constType
@@ -128,9 +129,7 @@ class Dependent(Constituent):
                         else: #some strange determiner construct do not have peng
                             depTerm.peng=self.peng
                 elif depTerm.isA("NO"):
-                    headTerm.peng["n"]=depTerm.grammaticalNumber()
-                    # gender agreement between a French numbeer and subject
-                    depTerm.peng["g"]=headTerm.peng["g"]
+                    depTerm.peng=headTerm.peng
                 elif depTerm.isA("P") and depTerm.lemma=="de": # HACK: deal with specific case : det(P("de"),mod(D(...)))
                     if len(d.dependents)==1 and d.dependents[0].isA("mod") and d.dependents[0].terminal.isA("D"):
                         d.dependents[0].terminal.peng = self.peng
@@ -163,6 +162,8 @@ class Dependent(Constituent):
                     firstDep=d.dependents[0]
                     if firstDep.isA("subj"):
                         headTerm.peng=d.peng
+                    elif firstDep.isA("det"):
+                        d.peng=headTerm.peng
                     elif firstDep.isOneOf(["mod","comp"]) and firstDep.terminal.isOneOf(["V","A"]):
                         # consider this as coordination of verb sharing a subject (the current root)
                         # or coordination of adjectives
@@ -183,7 +184,7 @@ class Dependent(Constituent):
         nb=0
         for i in range(0,len(self.dependents)):
             e=self.dependents[i].terminal
-            if e.isOneOf(["NP","N","Pro","Q"]):
+            if e.isOneOf(["NP","N","Pro","Q","NO"]):
                 nb += 1
                 propG=e.getProp("g")
                 if propG=="m" or propG=="x" or e.isA("Q"):g="m" # masculine if gender is unspecified
@@ -288,9 +289,13 @@ class Dependent(Constituent):
                 if subj is not None:   # the original subject is now the indirect object
                     subj.changeDeprel("mod")
                     self.removeDependent(subjIdx)
-                    self.addDependent(comp(P("par" if self.isFr() else "by",self.lang),subj))
+                    if subj.terminal.isA("V"):  # the subject is a V
+                        prep = "de" if self.isFr() else "to"
+                    else:
+                        prep = "par" if self.isFr() else "by"
+                    self.addDependent(comp(P(prep,self.lang),subj))
             elif subj is not None: # no object, but with a subject
-                #create a dummy subject with a "il"/"it"
+                # create a dummy subject with a "il"/"it"
                 obj=Pro("lui" if self.isFr() else "it",self.lang).c("nom") #HACK: obj is the new subject
                 # add new subject at the front of the sentence
                 subj.changeDeprel("mod")
@@ -298,13 +303,17 @@ class Dependent(Constituent):
                 self.addPre(obj)
                 self.peng=obj.peng
                 # add original subject after the verb to serve as an object
-                self.addDependent(comp(P("par" if self.isFr() else "by",self.lang),subj))
+                if subj.terminal.isA("V"):  # the subject is a V
+                    prep = "de" if self.isFr() else "to"
+                else:
+                    prep = "par" if self.isFr() else "by"
+                self.addDependent(comp(P(prep,self.lang),subj))
             if self.isFr():
                 # do self only for French because in English self is done by processTyp_en
                 # change verbe into an "être" auxiliary and make it agree with the newSubj
                 # force person to be 3rd (number and tense will come from the new subject)
                 verbe=self.terminal.lemma
-                self.terminal.setLemma("être")
+                self.terminal.setLemma("avoir" if verbe == "être" else "être")
                 self.terminal.pe(3)
                 if self.getProp("t")=="ip":
                     self.t("s") # set subjonctive present tense for an imperativ
@@ -314,7 +323,7 @@ class Dependent(Constituent):
                     pp.peng=obj.peng
                 # insert the pp before the comp, so that it appears immediately after the verb
                 #  calling addPost(pp) would not put it at the right place
-                compIdx=self.findIndex(lambda d:d.isA("comp"))
+                compIdx=self.findIndex(lambda d:d.isOneOf(["comp","mod"]))
                 if compIdx==-1: compIdx=0
                 self.addDependent(Dependent([pp],"*post*"),compIdx)
         else:
@@ -651,18 +660,35 @@ class Dependent(Constituent):
             self.pronominalizeChildren()
             if "typ" in self.props:
                 self.processTyp(self.props["typ"])
-            # realize coordinations before anything elso to compute their final number and person
-            for d in self.dependents:
-                if d.isA("coord"):d.tokens=d.coordReal()
-            before=[]
-            after=[]
-            # realize and order them by gathering the dependents that should appear before and after the terminal
-            for d in self.dependents:
+
+            # move all "pre" dependents at the front
+            # HACK: we must move these in place because realization might remove some of them
+            nextPre = 0
+            for i in range(0,len(self.dependents)):
+                d = self.dependents[i]
                 if d.depPosition()=="pre":
-                    before += d.tokens if d.isA("coord") else d.real()
-                else:
-                    after += d.tokens if d.isA("coord") else d.real()
-            res=[*before,*self.terminal.real(),*after]
+                    if nextPre != i:
+                        save = self.dependents[i]
+                        del self.dependents[i]
+                        self.dependents[nextPre:nextPre] = [save]
+                    nextPre += 1
+            # realize dependents
+            if len(self.dependents) == 0:
+                res = self.terminal.real()
+            elif nextPre == 0:  # no pre
+                res = self.terminal.real()
+                for d in self.dependents:
+                    res.extend(d.coordReal() if d.isA("coord") else d.real())
+            else:
+                res = []
+                i=0
+                # cannot use "for i in range()" because dependents list might change during realization
+                while i<len(self.dependents):
+                    d = self.dependents[i]
+                    res.extend(d.coordReal() if d.isA("coord") else d.real())
+                    if i == nextPre-1:
+                        res.extend(self.terminal.real())
+                    i += 1
             if self.terminal.isA("V"):
                 self.checkAdverbPos(res)
         return self.doFormat(res)

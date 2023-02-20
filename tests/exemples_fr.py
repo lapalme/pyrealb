@@ -288,7 +288,18 @@ def exemples_fr():
                NP(D('le'),
                   N('souris')))).typ({"pas":True}),
           "La souris est bien souvent mangée par le chat. "],
-
+          [S(Pro("tout"),
+             VP(V("sembler").t("pa"),
+                V("fonctionner").t("bp"))),
+           "Tout eut semblé avoir fonctionné. "],
+          [S(Pro("lui"),
+             VP(V("manger"),
+                NP(D("le"), N("fromage")))).typ({"pas": True}),
+           "Le fromage est mangé par lui. "],
+          [NP(NO(2), N("fille"), CP(C("et"), A("joli"), A("vieux"))),
+           "2 filles jolies et vieilles"],
+          [NP(CP(C("ou"), NO(2), NO(3)), N("fille"), CP(C("et"), A("jeune"), A("joli"))),
+           "2 ou 3 filles jeunes et jolies"],
     ]
     tests = [{}]
     for exp, expected in exemples_fr:

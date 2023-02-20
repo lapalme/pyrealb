@@ -166,9 +166,7 @@ class Phrase(Constituent):
                         e = self.elements[i]
                         if hasattr(self, "peng"):  # do not try to modify if current peng does not exist e.g. Q
                             if e.isA("NO") and i < headIndex:  # NO must appear before the N for agreement
-                                self.peng["n"] = e.grammaticalNumber()
-                                # gender agreement between a French number and subject
-                                e.peng["g"] = self.peng["g"]
+                                e.peng = self.peng
                             elif e.isOneOf(["D", "A"]):
                                 # link gender and number of the noun to the determiners and adjectives
                                 # in English possessive determiner should not depend on the noun but on the "owner"
@@ -176,7 +174,7 @@ class Phrase(Constituent):
                                     e.peng = self.peng
                             elif e.isA("CP"): # check for a coordination of adjectives
                                 for el in e.elements:
-                                    if el.isA("A"):
+                                    if el.isOneOf(["A","NO"]):
                                         el.peng=self.peng
                 # set agreement between the subject of a subordinate or the object of a subordinate
                 pro = self.getFromPath([["S", "SP"], "Pro"])
@@ -322,7 +320,7 @@ class Phrase(Constituent):
         pe = 3
         nb = 0
         for e in self.elements:
-            if e.isOneOf(["NP", "N", "Pro", "Q"]):
+            if e.isOneOf(["NP", "N", "Pro", "Q","NO"]):
                 nb += 1
                 propG = e.getProp("g")
                 if propG == "m" or propG == "x" or e.isA("q"): g = "m"  # masculine if gender is unspecified
@@ -450,7 +448,7 @@ class Phrase(Constituent):
         else:
             vp = self.getConst("VP")
             if vp is not None:
-                if len(self.elements) > 0 and self.elements[0].isOneOf(["N", "NP", "Pro"]):
+                if len(self.elements) > 0 and self.elements[0].isOneOf(["N", "NP", "Pro","S"]):
                     subject = self.removeElement(0)
                     if subject.isA("Pro"):
                          subject = subject.getTonicPro()
@@ -478,7 +476,11 @@ class Phrase(Constituent):
                 if self.isEn():
                     self.linkPengWithSubject("VP", "V", newSubject)
                 if subject is not None:  # insert subject where the object was
-                    vp.addElement(PP(P("par" if self.isFr() else "by", self.lang), subject), objIdx)
+                    if subject.isA("S"):  # take for granted that the S subject is a VP
+                        prep = "de" if self.isFr() else "to"
+                    else:
+                        prep = "par" if self.isFr() else "by"
+                    vp.addElement(PP(P(prep, self.lang), subject), objIdx)
             elif subject is not None:  # no object, but with a subject
                 # create a dummy subject with a "il"/"it" 
                 newSubject = Pro("lui" if self.isFr() else "it", self.lang).c("nom")
@@ -488,13 +490,19 @@ class Phrase(Constituent):
                 vp.peng = newSubject.peng
                 # add original subject after the verb to serve as an object
                 vpIdx = vp.getIndex("V")
-                vp.addElement(PP(P("par" if self.isFr() else "by", self.lang), subject), vpIdx + 1)
+                if subject.isA("S"):  # take for granted that the S subject is a VP
+                    prep = "de" if self.isFr() else "to"
+                    pos = None
+                else:
+                    prep = "par" if self.isFr() else "by"
+                    pos = vpIdx + 1
+                vp.addElement(PP(P(prep, self.lang), subject), pos)
             if self.isFr():
                 # do this only for French because in English this is done by processTyp_en
                 # change verbe to "être" auxiliary and make it agree with the newSubject
                 verbeIdx = vp.getIndex("V")
                 verbe = vp.removeElement(verbeIdx)
-                aux = V("être", "fr")
+                aux = V("avoir" if verbe.lemma == "être" else "être", "fr")
                 aux.parentConst = vp
                 aux.taux = verbe.taux
                 if newSubject is not None:  # this can happen when a subject is Q
@@ -1010,6 +1018,7 @@ class Phrase(Constituent):
             return self.warn(Q(""),"user-warning","Phrase.fromJSON: no elements found in " + str(json))
 
     # create a Dependent version of a Phrase
+    #   CAUTION:  this is useful for "common cases", this is not "foolproof" in all cases
     def toDependent(self,depName=None):
         from .Dependent import Dependent
 

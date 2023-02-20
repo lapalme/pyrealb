@@ -274,6 +274,44 @@ def sentences_fr():
                              N('souris')))).typ({"pas":True}),
          "expected":"La souris est bien souvent mangée par le chat. ",
          "message":"Position d'adverbes contigus"},
+        #   42
+          {"expression":S(S(VP(V("trouver").t("b"),
+                               NP(D("un"),N("livre"),
+                                  SP(Pro("dont"),
+                                     Pro("on"),
+                                     VP(V("dire").t("s"),
+                                        SP(Pro("que"),
+                                            VP(V("traduire").t("pc"),Pro("lui").c("acc")).typ({'neg':True,"pas":True}))
+                                        ).typ({"mod":"poss"}))))),
+                          VP(V("être"),A("difficile"))).typ({"pas":True,"neg":True}),
+          "expected": "Il n'a pas été difficile de trouver un livre dont on puisse dire qu'il n'a pas été traduit. ",
+          "message": "Subordonnées modifiées imbriquées"},
+        #   43
+        {"expression":S(S(VP(V("trouver").t("b"),
+                             NP(D("un"),N("livre"),
+                                SP(Pro("que"),
+                                   Pro("lui").c("nom"),
+                                   VP(V("traduire").t("pc")).typ({'neg':True,"pas":False}))))),
+                        VP(V("être"),A("difficile"))).typ({"pas":True,"neg":True}),
+          "expected": "Il n'a pas été difficile de trouver un livre qu'il n'a pas traduit. ",
+          "message": "Subordonnées modifiées imbriquées - bis"},
+        #   44
+        {"expression":CP(C("et"),
+                         NP(D("de"),
+                            A("multiple").pos('pre'),
+                            N("tâche")),
+                         N("démarche")).n('p'),
+          "expected": "de multiples tâches et démarches",
+          "message": "propagation d'option dans un CP"},
+        #   39
+        #   {"expression":,
+        #   "expected": "",
+        #   "message": ""},
+        #   39
+        #   {"expression":,
+        #   "expected": "",
+        #   "message": ""},
+
     ];
 
 if __name__ == '__main__':

@@ -562,8 +562,8 @@ class Constituent():
             del res[startIdx:startIdx+n]
             res[toIdx:toIdx]=save
 
-        # find first consecutive adverbs (ignoring "not")
-        advIdxes = [i for (i,e) in zip(range(0,len(res)),res) if e.isA("Adv") and e.lemma != "not"  ]
+        # find first consecutive adverbs (ignoring "not" or "ne")
+        advIdxes = [i for (i,e) in zip(range(0,len(res)),res) if e.isA("Adv") and e.lemma not in ["not","ne"] ]
         if len(advIdxes) == 0:
             return
         advIdx = advIdxes[0]
@@ -795,21 +795,28 @@ class Constituent():
 def makeOptionMethod(option,validVals,allowedConsts,optionName=None):
     def _method(self, val=None,prog=None):
         nonlocal optionName
+        if optionName is None: optionName = option
         if val is None:
             if validVals is not None and "" not in validVals:
                 return self.warn("no value for option",option,validVals)
-        if self.isA("CP") and option not in ["cap","lier"]:
-            # propagate an option through the children of a CP except for "cap" and "lier"
+        if self.isOneOf("CP") and option not in ["cap","lier","pos"]:
+            # propagate an option through the children of a CP except for "cap", "lier" and "pos"
             if prog is None:self.addOptSource(optionName,val)
             for e in self.elements:
                 if len(allowedConsts)==0 or e.isOneOf(allowedConsts):
-                    getattr(e,option)(val)
+                    getattr(e,option)(val,True)  # do not add this option in the source
+            return self
+        if self.isA("coord") and option not in ["cap","lier","pos"]:
+            # propagate an option through the head of the children of a coord except for "cap", "lier" and "pos"
+            if prog is None: self.addOptSource(optionName, val)
+            for e in self.dependents:
+                if len(allowedConsts) == 0 or e.terminal.isOneOf(allowedConsts):
+                    getattr(e.terminal, option)(val, True)  # do not add this option in the source
             return self
         if len(allowedConsts)==0 or self.isOneOf(allowedConsts) or self.isOneOf(deprels):
             if validVals is not None and val not in validVals:
                 return self.warn("ignored value for option",option,val)
             # start of the real work
-            if optionName is None:optionName=option
             self.setProp(optionName,val)
             if prog is None:self.addOptSource(option,val)
             return self
@@ -823,7 +830,7 @@ def makeOptionMethod(option,validVals,allowedConsts,optionName=None):
 # shared properties 
 #   pe,n and g : can be applied to components of NP and Sentences
 setattr(Constituent,"pe",makeOptionMethod("pe",[1,2,3,'1','2','3'],["D","Pro","N","NP","A","AP","V","VP","S","SP","CP"]))
-setattr(Constituent,"n",makeOptionMethod("n",["s","p","x"],["D","Pro","N","NP","A","AP","V","VP","S","SP","CP"],None))
+setattr(Constituent,"n",makeOptionMethod("n",["s","p","x"],["D","Pro","N","NP","A","AP","V","VP","S","SP","CP"]))
 setattr(Constituent,"g",makeOptionMethod("g",["m","f","n","x"],["D","Pro","N","NP","A","AP","V","VP","S","SP","CP"]))
 #  t, aux : can be applied to VP and sentence
 setattr(Constituent,"t",makeOptionMethod("t",["p", "i", "f", "ps", "c", "s", "si", "ip", "pr", "pp", "b","b-to", # simple tenses

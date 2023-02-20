@@ -263,6 +263,7 @@ def test(exp):
 # test_warnings()
 
 def testPrevious():
+    print(f"Previous tests of pyrealb: Version {pyrealb_version} Date: {pyrealb_datecreated}")
     print("** English **")
     english()
     print("======")
@@ -341,3 +342,5 @@ def testPrevious():
 if __name__ == '__main__':
     testPrevious()
     # insert here a single example for debugging perhaps commenting the line above
+    # do not forget to load the appropriate language
+    loadFr()

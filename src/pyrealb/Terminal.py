@@ -639,13 +639,15 @@ class Terminal(Constituent):
         elif self.isA("V"):
             return self.doFormat(self.conjugate())
         elif self.isA("DT"):
-            self.realization=self.dateFormat(self.date,self.props["dOpt"])
+            self.realization=self.dateFormat(self.date,self.getProp("dOpt"))
         elif self.isA("NO"):
             if "dOpt" in self.props:
-                opts=self.props["dOpt"]
+                self.setProp("n",self.grammaticalNumber())
+                opts=self.getProp("dOpt")
                 if "nat" in opts and opts["nat"]==True:
                     self.realization=self.numberToWord()
                 elif "ord" in opts and opts["ord"]==True:
+                    self.setProp("n","s")  # the number of an ordinal is always singular
                     self.realization=self.numberToOrdinal()
                 elif "raw" in opts and opts["raw"]==False:
                     self.realization=self.numberFormatter(opts["mprecision"])
