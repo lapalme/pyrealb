@@ -1,4 +1,4 @@
-from .Constituent import Constituent
+from .Constituent import Constituent,_getElems
 from .Terminal import Terminal, N, A, Pro, D, Adv, V, P, C, DT, NO, Q
 from .Lexicon import getLexicon, getRules, currentLanguage
 import sys
@@ -31,15 +31,6 @@ prepositionsList = {
 # negation of modal auxiliaries
 negMod = {"can": "cannot", "may": "may not", "shall": "shall not", "will": "will not", "must": "must not",
           "could": "could not", "might": "might not", "should": "should not", "would": "would not"}
-
-# insert a list of elements that are not None flattening embedded lists
-def _getElems(es):
-    res = []
-    for e in es:
-        if e != None:
-            if isinstance(e, (list,tuple)):res.extend([e0 for e0 in _getElems(e) if e0 != None])
-            else:res.append(e)
-    return res
 
 class Phrase(Constituent):
     def __init__(self, constType, elements, lang=None):
@@ -85,7 +76,7 @@ class Phrase(Constituent):
             else:
                 self.warn("bad position", position, len(self.elements))
         else:
-            self.warn("bad Constituent", NO(position + 1).dOpt({"ord": True}), type(elem).__name__+":"+str(e))
+            self.warn("bad Constituent", NO(position + 1).dOpt({"ord": True}), type(elem).__name__+":"+str(elem))
         return self
 
     # remove a child from this Phrase and return it
@@ -855,7 +846,7 @@ class Phrase(Constituent):
                     t  = currV.getProp("t")
                     n  = currV.getProp("n")
                     g  = currV.getProp("g")
-                    pro = Pro("I").pe(pe).n(n).g(g); # get default pronoun
+                    pro = Pro("I").pe(pe).n(n).g(g)  # get default pronoun
                     subjIdx = self.getIndex(["NP","N","Pro","SP"])
                     if subjIdx >= 0:
                         vbIdx=self.getIndex(["VP","V"])

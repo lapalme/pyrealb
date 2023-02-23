@@ -8,6 +8,7 @@ import pronouns_en, pronouns_fr
 import sentences_en, sentences_fr
 import examples_en, exemples_fr
 import realPro_dep_en
+import Bonfante_examples
 import json_tests
 
 from test import test
@@ -51,6 +52,9 @@ if __name__ == '__main__':
     update(test("Exemples en français", "fr", exemples_fr.exemples_fr, badOnly=badOnly))
 
     update(test("English RealPro dependencies", "en", realPro_dep_en.realPro_dep_en, badOnly=badOnly))
+
+    update(test("Bonfante et al. exemples en français","fr",Bonfante_examples.bonfante_fr_ex,badOnly=badOnly))
+    update(test("Bonfante et al. English examples","en",Bonfante_examples.bonfante_en_ex,badOnly=badOnly))
 
     update(test("JSON tests", "en", json_tests.json_tests, badOnly=badOnly))
 

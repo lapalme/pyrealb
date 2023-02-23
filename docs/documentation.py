@@ -269,7 +269,8 @@ page.div("""
     <p><code>coord</code> regroupe des <strong>dépendances de même type</strong> coordonnées par la conjonction 
     donnée comme terminal. Les dépendents seront séparés par une virgule sauf les deux derniers qui seront séparés 
     par la conjonction. <code>coord</code> sans dépendent sera ignoré à la réalisation. <code>coord</code> avec un 
-    seul dépendent apparaitra sans la conjonction.</p> 
+    seul dépendent apparaitra sans la conjonction. Si le terminal est une chaîne vide, alors tous les éléments seront 
+    séparés par une virgule.</p> 
 
     <p>Les accords <em>simples</em> sont effectués automatiquement entre les dépendents:</p>
     <ul>
@@ -290,7 +291,7 @@ page.div("""
     <p><code>coord</code> combines <strong>dependencies of the same type</strong> coordinated by the conjunction given 
     as terminal. Dependencies will comma separated except for the last two that will be separated by the conjunction. 
     A  <code>coord</code> without dependent will not be realized. A <code>coord</code> with a single dependent will 
-    be realized without the conjunction.</p> 
+    be realized without the conjunction. If the terminal is an empty string, then all dependents will be comma separated.</p> 
  
     <p>Simple agreements are realized between dependents:</p>
     <ul>

@@ -1,4 +1,4 @@
-from .Constituent import Constituent,quoteOOV
+from .Constituent import Constituent,quoteOOV, deprels
 from .Number import enToutesLettres, ordinal
 from .Lexicon import getLexicon,currentLanguage,getLemma,getRules
 
@@ -354,7 +354,7 @@ class Terminal(Constituent):
         # check for "refl" typ (only called for V): Terminal.conjugate_fr
         pc=self.parentConst
         while pc is not None:
-            if pc.isOneOf(["VP","SP","S"]):
+            if pc.isOneOf(["VP","SP","S",*deprels]):
                 if "typ" in pc.props:
                     typs=pc.props["typ"]
                     if "refl" in typs and typs["refl"]==True:
@@ -388,12 +388,13 @@ class Terminal(Constituent):
                 aux.setLemma("être")
             else: # auxiliary "avoir"
                 # check the gender and number of a cod appearing before the verb to do proper agreement
-                # of its part participle
-                g="m"
-                n="s"
-                if hasattr(self,"cod"):
-                    g=self.cod.getProp("g")
-                    n=self.cod.getProp("n")
+                # of its part participle, except when the verb is "être" which will always agree
+                if self.lemma != "être":
+                    g="m"
+                    n="s"
+                    if hasattr(self,"cod"):
+                        g=self.cod.getProp("g")
+                        n=self.cod.getProp("n")
             aux.taux["t"]=tempsAux
             aux.realization=aux.realize()
             # change this verb to pp

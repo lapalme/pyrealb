@@ -1,4 +1,4 @@
-from .Constituent import Constituent
+from .Constituent import Constituent,_getElems
 from .Terminal import Terminal, N, A, Pro, D, Adv, V, P, C, DT, NO, Q
 from .Phrase import Phrase, prepositionsList
 from .Lexicon import getLexicon, getRules, currentLanguage
@@ -30,7 +30,7 @@ class Dependent(Constituent):
             self.peng=self.terminal.peng
         if self.terminal.isA("V"):
             self.taux=self.terminal.taux
-        params = [e for e in params if e is not None]  # ignore None dependents
+        params = _getElems(params)  # flatten dependents and ignore None dependents
         # list of dependents to create the source of the parameters at the time of the call
         # self can be different from the dependents lists because of structure modifications
         self.dependentsSource = []
@@ -42,7 +42,7 @@ class Dependent(Constituent):
                 self.addDependent(d)
                 self.dependentsSource.append(d)
             else:
-                self.warn("bad Dependent", NO(i + 1).dOpt({"ord":True}), type(d).__name__+str(d))
+                self.warn("bad Dependent", NO(i + 2).dOpt({"ord":True}), type(d).__name__+":"+str(d))
         if len(params) > 0:
             # terminate the list with add which does other checks on the final list
             self.add(params[-1], None, True)
@@ -138,7 +138,7 @@ class Dependent(Constituent):
                     depTerm.peng=self.peng
                     # check for an attribute of a copula with an adjective
                     if self.isFr() and headTerm.lemma in ["être", "paraître", "sembler", "devenir", "rester"]:
-                        iSubj=self.findIndex(lambda d0:d0.isA("subj") and d0.terminal.isA("N"))
+                        iSubj=self.findIndex(lambda d0:d0.isA("subj") and d0.terminal.isOneOf(["N","Pro"]))
                         if iSubj>=0: depTerm.peng=self.dependents[iSubj].peng
                 elif depTerm.isA("V"):
                     # set agreement between the subject of a subordinate or the object of a relative subordinate
@@ -316,7 +316,7 @@ class Dependent(Constituent):
                 self.terminal.setLemma("avoir" if verbe == "être" else "être")
                 self.terminal.pe(3)
                 if self.getProp("t")=="ip":
-                    self.t("s") # set subjonctive present tense for an imperativ
+                    self.t("s") # set subjonctive present tense for an imperative
                 pp = V(verbe,"fr").t("pp")
                 if obj is not None: # self can be undefined when a subject is Q or missing
                     self.terminal.peng=obj.peng
@@ -605,11 +605,14 @@ class Dependent(Constituent):
             return self.doFormat(res) # process format for the CP
         # check that all dependents use the same deprel
         deprel=self.dependents[0].constType
+        noConnect = self.terminal.lemma == ""
         for j in range(0,last): #insert comma after each element
             dj=self.dependents[j]
             if not dj.isA(deprel):
                 self.warn("inconsistent dependents within a coord",deprel,dj.constType)
-            if j<last-1: dj.props["a"]=[","]
+            if noConnect or j<last-1:
+                if "a" not in dj.props or "," in dj.props["a"]:
+                    dj.props["a"]=[","]
             res.extend(dj.real())
         # insert realisation of the terminal before last...
         res.extend(self.terminal.real())

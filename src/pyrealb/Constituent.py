@@ -73,6 +73,16 @@ proclitiqueOrdreInfinitif = {  # page 17 du PDF
 
 modalityVerbs = ["vouloir", "devoir", "pouvoir"]
 
+# return a list of elements that are not None flattening embedded lists (used by Phrase and Dependent)
+def _getElems(es):
+    res = []
+    for e in es:
+        if e != None:
+            if isinstance(e, (list,tuple)):res.extend([e0 for e0 in _getElems(e) if e0 != None])
+            else:res.append(e)
+    return res
+
+
 
 class Constituent():
     def __init__(self,constType):
@@ -397,7 +407,7 @@ class Constituent():
     def doElisionFr(self,cList):
         # Elision rules for French
         # implements the obligatory elision rules of the "Office de la langue française du Québec"
-        #    http:#bdl.oqlf.gouv.qc.ca/bdl/gabarit_bdl.asp?Th=2&t1=&id=1737
+        #    https://vitrinelinguistique.oqlf.gouv.qc.ca/21737/lorthographe/elision-et-apostrophe/elision-obligatoire
         # for Euphonie, rules were taken from Antidote (Guide/Phonétique)
 
         elidableWordFrRE=re.compile(r"^(la|le|je|me|te|se|de|ne|que|puisque|lorsque|jusque|quoique)$",re.I)
@@ -553,7 +563,7 @@ class Constituent():
     # The problem occurs mainly with verbs with an auxiliary.
     # TODO: deal with more than one sequence of adverbs (although it should be rare)
     # this method is called by Phrase.real() and Dependent.real(), this is why it is moved to Constituent
-    # @param {Terminal[]} res : list of Termnals possibly modified in place
+    # @param {Terminal[]} res : list of Terminals possibly modified in place
     #
     def checkAdverbPos(self,res):
         # move n elements starting at start to position toIdx (shifting the rest)
@@ -562,8 +572,15 @@ class Constituent():
             del res[startIdx:startIdx+n]
             res[toIdx:toIdx]=save
 
+        relpron = ["that","who","which"] if self.isEn() else ["qui","que","dont","où"]
+        # find the start of the current "sentence" in order not to move an adverb across the boundary of a relative
+        start=len(res)-1
+        while start>=0 and not (res[start].isA("Pro") and res[start].lemma in relpron):
+            start -= 1
+        start += 1
         # find first consecutive adverbs (ignoring "not" or "ne")
-        advIdxes = [i for (i,e) in zip(range(0,len(res)),res) if e.isA("Adv") and e.lemma not in ["not","ne"] ]
+        advIdxes = [i for (i,e) in zip(range(start,len(res)),res[start:])
+                                if e.isA("Adv") and e.lemma not in ["not","ne"] ]
         if len(advIdxes) == 0:
             return
         advIdx = advIdxes[0]
@@ -604,7 +621,7 @@ class Constituent():
                                 moveTo(advIdx, len(advIdxes), auxIdx + 2)
                     break
 
-        if advIdx >= 2 and "pos" not in advTerminal.props:
+        if advIdx >= start+2 and "pos" not in advTerminal.props:
             # do not touch adverb with pos specified
             if advTerminal.isEn():
                 # English: the adverb must be put after the first auxiliary
@@ -842,7 +859,7 @@ setattr(Constituent,"tn",makeOptionMethod("tn",["","refl"],["Pro"]))
 setattr(Constituent,"c",makeOptionMethod("c",["nom","acc","dat","refl","gen"],["Pro"]))
 
 setattr(Constituent,"pos",makeOptionMethod("pos",["post","pre"],["A","Adv",*deprels]))
-setattr(Constituent,"pro",makeOptionMethod("pro",None,["NP","PP","N"]))
+setattr(Constituent,"pro",makeOptionMethod("pro",None,["NP","PP"]))
 # English only
 setattr(Constituent,"ow",makeOptionMethod("ow",["s","p","x"],["D","Pro"],"own"))
 

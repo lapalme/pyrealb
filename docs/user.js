@@ -15,14 +15,14 @@ $.urlParam = function(name){
 
 // go the corresponding element in the other language
 function changeLanguage(){
-    // find the index first h2 element displayed on the page in the current language
-    let h2Tops = $(`h2[lang=${currentLang}]`).map(function(){return this.offsetTop}).get();
+    // find the index first h2 or h3 element displayed on the page in the current language
+    let h2Tops = $(`h2[lang=${currentLang}],h3[lang=${currentLang}]`).map(function(){return this.offsetTop}).get();
     const currTop = window.scrollY;
     const idx=h2Tops.findIndex(v => v>=currTop);
     setLanguage(currentLang=="en"?"fr":"en");
     if (idx>=0){
         // scroll to the corresponding element in the new language
-        h2Tops = $(`h2[lang=${currentLang}]`).map(function(){return this.offsetTop}).get();
+        h2Tops = $(`h2[lang=${currentLang}],h3[lang=${currentLang}]`).map(function(){return this.offsetTop}).get();
         window.scrollTo(0,h2Tops[idx])
     }
 }
@@ -203,28 +203,10 @@ function englishTable(){
 
 
 $(document).ready(function() {
-    // $("#jsRealB-en").append(jsRealBdir+"jsRealB-en.min.js");
-    // $("#jsRealB-fr").append(jsRealBdir+"jsRealB-fr.min.js");
-    // $("#jsRealB-enfr").append(jsRealBdir+"jsRealB-enfr.min.js");
-    // $("#version-no").text("1.0");
     insertQuickLinks("fr");
     insertQuickLinks("en");
-    // $("div[id]").each(function(){
-    //     var $art=$(this);
-    //     var infos=eval($art.attr("id"));
-    //     if (infos.ex!==undefined){
-    //         insertArticle($art,infos,"fr");
-    //         insertArticle($art,infos,"en");
-    //     }
-    // });
     $("#langSelect").css({"cursor":"pointer"})
     $("#langSelect").click(changeLanguage);
-    
-    // // add pronoun section
-    // tableauFrancais();
-    // englishTable();
-    // //
-
     var lang=$.urlParam("lang");
     // console.log("lang="+lang);
     if (lang=="en" || lang=="fr")

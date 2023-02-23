@@ -2,7 +2,7 @@ from context import pyrealb
 from pyrealb import *
 from test import test
 
-# tests adapted from the RealPro sample-dsynts for which the pyrelab expressed were hand coded
+# tests adapted from the RealPro sample-dsynts for which the pyrealb expressions were hand coded
 
 def realPro_dep_en():
     loadEn()

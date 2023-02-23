@@ -21,13 +21,13 @@ def test(title,lang,testsFn,kept=None,badOnly=False,showExpr=False):
                             print("---")
                     else:
                         print("KO",i,message)
-                        print("exp" if isinstance(expression,str) else expression.toSource())
-                        print(realized)
-                        print(expected)
+                        print("exp" if isinstance(expression,str) else expression.toSource(0))
+                        print(f"=>{realized}|")
+                        print(f"**{expected}|")
                         print("---")
                 except Exception as e:
                     print("KO **** Exception: ",i,repr(e))
-                    print(expression.toSource())
+                    print(expression.toSource(0))
                     print(expected)
                     print("---")
 
