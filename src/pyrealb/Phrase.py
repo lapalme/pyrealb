@@ -953,7 +953,7 @@ class Phrase(Constituent):
                 self.pronoun.props["g"] = gn["g"]
                 self.pronoun.props["n"] = gn["n"]
                 self.pronoun.props["pe"] = gn["pe"]
-        return res
+        return self.doFormat(res)
 
     def real(self):
         res = []

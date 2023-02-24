@@ -340,7 +340,16 @@ def testPrevious():
                            VP(V(oneOf("fly","go")))))))
 
 if __name__ == '__main__':
-    testPrevious()
+    # testPrevious()
     # insert here a single example for debugging perhaps commenting the line above
     # do not forget to load the appropriate language
     loadFr()
+    test(root(V("être").t("ps"),
+              subj(N("sorcier"),
+                   det(D("le"))),
+              coord(C("et"),
+                    mod(V("condamner").t("pp"),
+                        comp(P("à"),
+                             mod(N("mort")))),
+                    mod(V("torturer").t("pp")),
+                    mod(V("brûler").t("pp"))).g("f")))

@@ -111,7 +111,8 @@ class Dependent(Constituent):
         if self.isA("coord"):
             # must create self.peng already because it might be used in the current dependents (for adjectives, attributes...)
             # the information will be computed at realization time (see Dependent.coordReal)
-            self.peng={}
+            Constituent.pengNO += 1
+            self.peng={"pengNO":Constituent.pengNO}
             headTerm.peng = self.peng
         for d in self.dependents:
             depTerm=d.terminal
@@ -134,9 +135,9 @@ class Dependent(Constituent):
                     if len(d.dependents)==1 and d.dependents[0].isA("mod") and d.dependents[0].terminal.isA("D"):
                         d.dependents[0].terminal.peng = self.peng
             elif deprel=="mod" or deprel=="comp":
-                if depTerm.isA("A"):
+                if depTerm.isA("A") or (depTerm.isA("V") and depTerm.getProp("t")=="pp"):
                     depTerm.peng=self.peng
-                    # check for an attribute of a copula with an adjective
+                    # check for an attribute of a copula with an adjective or past participle
                     if self.isFr() and headTerm.lemma in ["être", "paraître", "sembler", "devenir", "rester"]:
                         iSubj=self.findIndex(lambda d0:d0.isA("subj") and d0.terminal.isOneOf(["N","Pro"]))
                         if iSubj>=0: depTerm.peng=self.dependents[iSubj].peng
@@ -637,7 +638,7 @@ class Dependent(Constituent):
         elif not selfCoord.isA("Q"):
             # in some cases the coordination can be a quoted string (possibly empty)
             self.warn("bad parameter","C",selfCoord.constType)
-        return res
+        return self.doFormat(res)
 
     def depPosition(self):
         if "pos" in self.props: return self.props["pos"]

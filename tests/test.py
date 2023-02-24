@@ -1,3 +1,5 @@
+from pyrealb import *
+
 def test(title,lang,testsFn,kept=None,badOnly=False,showExpr=False):
     print("===",title,"===")
     nbTests=0
@@ -30,8 +32,10 @@ def test(title,lang,testsFn,kept=None,badOnly=False,showExpr=False):
                     print(expression.toSource(0))
                     print(expected)
                     print("---")
-
-    print(nbOK,"réussites sur" if lang=="fr" else "successes over",nbTests)
+    if lang=="fr":
+        +NP(NO(nbOK),N("réussite"),P("sur"),NO(nbTests))
+    else:
+        +NP(NO(nbOK), N("success"), P("over"),NO(nbTests))
     print("="*40+"\n")
     return (nbOK,nbTests)
 

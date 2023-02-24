@@ -145,11 +145,11 @@ class Constituent():
    
     def initProps(self):
         if self.isOneOf(["N","A","D","V","NO","Pro","Q","DT"]):
+            Constituent.pengNO+=1
             self.peng={"pe":defaultProps[self.lang]["pe"],
                        "n" :defaultProps[self.lang]["n"],
-                       "g" :defaultProps[self.lang]["g"]}
-            Constituent.pengNO+=1
-            self.peng["pengNO"]=Constituent.pengNO
+                       "g" :defaultProps[self.lang]["g"],
+                       "pengNO":Constituent.pengNO}
             if self.isA("V"):
                 self.taux={"t":defaultProps[self.lang]["t"]}
                 Constituent.tauxNO+=1

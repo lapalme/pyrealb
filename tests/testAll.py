@@ -8,10 +8,11 @@ import pronouns_en, pronouns_fr
 import sentences_en, sentences_fr
 import examples_en, exemples_fr
 import realPro_dep_en
-import Bonfante_examples
+import Bonfante_dependances
 import json_tests
 
 from test import test
+from pyrealb import *
 
 totalOK=0
 totaltests=0
@@ -53,15 +54,15 @@ if __name__ == '__main__':
 
     update(test("English RealPro dependencies", "en", realPro_dep_en.realPro_dep_en, badOnly=badOnly))
 
-    update(test("Bonfante et al. exemples en français","fr",Bonfante_examples.bonfante_fr_ex,badOnly=badOnly))
-    update(test("Bonfante et al. English examples","en",Bonfante_examples.bonfante_en_ex,badOnly=badOnly))
+    update(test("Bonfante et al. dépendances en français","fr",Bonfante_dependances.bonfante_fr_ex,badOnly=badOnly))
+    update(test("Bonfante et al. English dependencies","en",Bonfante_dependances.bonfante_en_ex,badOnly=badOnly))
 
     update(test("JSON tests", "en", json_tests.json_tests, badOnly=badOnly))
 
-    print(f"{totalOK} successes over {totaltests}")
+    loadEn()
+    +NP(NO(totalOK),N("success"),PP(P("over"),NO(totaltests)))
     if totalOK==totaltests:
-        print("all tests succeeded")
+        +VP(NP(D("all"),N("test").n("p")),VP(V("succeed").t("ps")))
     else:
         nb = totaltests-totalOK
-        print(f"still {nb} test{'s' if nb > 1 else ''} to check")
-    
+        +NP(Adv("still"),NO(nb),N("test"),V("check").t("b-to"))
