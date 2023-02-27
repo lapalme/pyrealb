@@ -169,8 +169,8 @@ class Dependent(Constituent):
                         # consider this as coordination of verb sharing a subject (the current root)
                         # or coordination of adjectives
                         for d0 in d.dependents:
-                            d0.peng=self.peng
-                            d0.terminal.peng=self.peng
+                            d0.peng=headTerm.peng
+                            d0.terminal.peng=headTerm.peng
             else:
                 self.error("Strange dependent:"+d.constType)
 

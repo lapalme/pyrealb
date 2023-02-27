@@ -80,7 +80,7 @@ def bonfante_fr_ex():
                           comp(N("cérémonie"),
                                det(D("le")))))),
          "expected":"Le curé et le maire du village, demain, seront présents à la cérémonie. ",
-         "message":" Exercice 2.6 p 48 / REM:"},
+         "message":" Exercice 2.6 p 48"},
         # 5
         {"expression":
              root(V("demander").t("pc").aux("êt"),
@@ -91,7 +91,7 @@ def bonfante_fr_ex():
                             comp(N("problème"),
                                  det(D("le")))))),
          "expected":"Il vous est demandé de régler le problème. ",
-         "message":" Figure 2.11 p 49 / REM:"},
+         "message":" Figure 2.11 p 49"},
         # 6
         {"expression":
              root(V("désoler"),
@@ -124,9 +124,9 @@ def bonfante_fr_ex():
                            comp(P("à"),
                                 mod(N("mort")))),
                        mod(V("torturer").t("pp")),
-                       mod(V("brûler").t("pp"))).g("f")),
+                       mod(V("brûler").t("pp")))),
          "expected":"La sorcière fut condamnée à mort, torturée et brûlée. ",
-         "message":" Figure 2.19 p 58 / REM: sujet féminin pour vérifier les accords dans un coord, mais il faut les forcer..."},
+         "message":" Figure 2.19 p 58 / REM: sujet féminin pour vérifier les accords dans un coord"},
         # 9
         {"expression":
              root(V("être").t("pc"),
@@ -253,7 +253,7 @@ def bonfante_fr_ex():
                   comp(N("chose"),
                        mod(A("autre")))),
          "expected": "L'ASE, c'est autre chose. ",
-         "message": " Figure 2.37 p 68 / REM:"},
+         "message": " Figure 2.37 p 68 "},
         # 20
         {"expression":
              root(V("être"),
@@ -264,7 +264,7 @@ def bonfante_fr_ex():
                        comp(P("de"),
                             comp(V("dire").t("b"))))),
          "expected": "C'est un lieu commun de dire. ",
-         "message": " Figure 2.38 p 68 / REM:"},
+         "message": " Figure 2.38 p 68"},
         # 21
         {"expression":
              root(V("être").n("p"),
@@ -287,7 +287,7 @@ def bonfante_fr_ex():
                        mod(V("courir"),
                            subj(Pro("qui"))))),
          "expected": "Le garçon qui court tombe. ",
-         "message": " Figure 2.39 p 70 / REM:"},
+         "message": " Figure 2.39 p 70 "},
         # 23
         {"expression":
              root(N("tour").a(","),
@@ -300,7 +300,7 @@ def bonfante_fr_ex():
                            comp(P("à"),
                                 comp(Q("Faulx")))))),
          "expected": "Trois tours, dont le prochain aura lieu à Faulx. ",
-         "message": " Figure 2.40 p 70 / REM:"},
+         "message": " Figure 2.40 p 70"},
         # 24
         {"expression": root(V("toucher").t('p'),
                             coord(C("et"),
@@ -337,13 +337,13 @@ def bonfante_fr_ex():
                  comp(P("à"),
                       comp(Q("Paris"))),
                  coord(C("mais"),
-                       mod(A("confiant").g("f")),
+                       mod(A("confiant")),
                        mod(V("connaître").t("b"),
                            mod(P("sans")).pos("pre"),
                            comp(N("ville"),
                                 det(D("le")))))),
          "expected":"Elle arrive à Paris confiante mais sans connaître la ville. ",
-         "message":" Exercice 2.49 p 72 / REM: doit spécifier l'accord de l'adjectif dans la coordonnée"},
+         "message":" Exercice 2.49 p 72"},
         # 27
         {"expression": root(V("être"),
                             comp(A("difficile")),
@@ -429,7 +429,7 @@ def bonfante_en_ex():
                        comp(V("look").t("b"),
                             mod(A("weak"))))).cap(False),
          "expected": "so this kidnapping makes him look weak",
-         "message": " Figure ii p jj / REM:"},
+         "message": " Figure 2.26 p 62"},
 
     ]
 

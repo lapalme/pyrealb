@@ -226,21 +226,35 @@ class Phrase(Constituent):
                 if vpv is not None:
                     self.taux = vpv.taux
                     if self.isFr() and vpv.lemma in ["être", "paraître", "sembler", "devenir", "rester"]:
-                        # check for a French attribute of copula verb
-                        # with an adjective
-                        attribute = vpv.parentConst.linkPengWithSubject("AP", "A", subject)
-                        if attribute is None:
-                            elems = vpv.parentConst.elements
-                            try:
-                                vpvIdx = elems.index(vpv)
-                                for i in range(vpvIdx + 1, len(elems)):
-                                    pp = elems[i]
-                                    if pp.isA("V") and pp.getProp("t") == "pp":
-                                        pp.peng = subject.peng
-                                        break
-                            except ValueError:
-                                self.error("linkProperties    : verb not found")
-
+                        # check for a coordination of attributes or past participles
+                        vpcp = self.getFromPath([["VP"],["CP"]])
+                        if vpcp is not None:
+                            for e in vpcp.elements:
+                                if e.isA("A"):
+                                    e.peng = subject.peng
+                                elif e.isA("V") and e.getProp("t")=="pp":
+                                    e.peng = subject.peng
+                                elif e.isA("AP"):
+                                    e.linkPengWithSubject("AP", "A", subject)
+                                elif e.isA("VP"):
+                                    v = e.getFromPath(["VP"],["V"])
+                                    if v is not None and v.getProp("t")=="pp":
+                                        v.peng = subject.peng
+                        else:
+                            # check for a single French attribute of a copula verb
+                            # with an adjective
+                            attribute = vpv.parentConst.linkPengWithSubject("AP", "A", subject)
+                            if attribute is None:
+                                elems = vpv.parentConst.elements
+                                try:
+                                    vpvIdx = elems.index(vpv)
+                                    for i in range(vpvIdx + 1, len(elems)):
+                                        pp = elems[i]
+                                        if pp.isA("V") and pp.getProp("t") == "pp":
+                                            pp.peng = subject.peng
+                                            break
+                                except ValueError:
+                                    self.error("linkProperties    : verb not found")
                 else:
                     # check for a coordination of verbs that share the subject
                     cvs = self.getFromPath(["CP", "VP"])
