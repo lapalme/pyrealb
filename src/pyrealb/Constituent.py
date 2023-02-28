@@ -117,9 +117,6 @@ class Constituent():
     def isEn(self):
         return self.lang=="en"
     
-    # def __pos__(self): # prefix + :: useful trick for testing top-level expression realization
-    #     print(str(self))
-    
     # get/set the value of a property by first checking the special shared properties
     def getProp(self,propName):
         if propName in self.props:
@@ -135,8 +132,10 @@ class Constituent():
     def setProp(self,propName,val):
         if propName in ["pe","n","g"] and hasattr(self,"peng") and self.peng is not None:
             self.peng[propName]=val
+            return
         if propName in ["t","aux"] and hasattr(self,"taux") and self.taux is not None:
             self.taux[propName]=val
+            return
         self.props[propName]=val
 
     # should be in Terminal.prototype... but here for consistency with three previous definitions

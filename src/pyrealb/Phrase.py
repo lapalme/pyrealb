@@ -237,7 +237,7 @@ class Phrase(Constituent):
                                 elif e.isA("AP"):
                                     e.linkPengWithSubject("AP", "A", subject)
                                 elif e.isA("VP"):
-                                    v = e.getFromPath(["VP"],["V"])
+                                    v = e.getConst("V")
                                     if v is not None and v.getProp("t")=="pp":
                                         v.peng = subject.peng
                         else:

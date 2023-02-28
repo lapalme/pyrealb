@@ -345,11 +345,18 @@ if __name__ == '__main__':
     # do not forget to load the appropriate language
     loadFr()
     test(root(V("être").t("ps"),
-              subj(N("sorcier").g("f"),
-                   det(D("le"))),
+              subj(N("sorcier"),
+                   det(D("le"))).g("f"),
               coord(C("et"),
-                    mod(V("condamner").t("pp"),
+                    mod(V("condamner"),
                         comp(P("à"),
                              mod(N("mort")))),
-                    mod(V("torturer").t("pp")),
-                    mod(V("brûler").t("pp")))))
+                    mod(V("torturer")),
+                    mod(V("brûler"))).t("pp")))
+    test(S(NP(D("le"),N("sorcier")).g("f"),
+           VP(V("être").t("ps"),
+              CP(C("et"),
+                 VP(V("condamner"),
+                    PP(P("à"),N("mort"))),
+                 VP(V("torturer")),
+                 VP(V("brûler"))).t("pp"))))
