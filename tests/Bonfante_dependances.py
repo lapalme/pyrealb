@@ -273,7 +273,7 @@ def bonfante_fr_ex():
                       det(D("le")),
                       mod(A("différent")).pos("pre"),
                       comp(N("mafia").n("p"),
-                           det(P("de")))),
+                           det(D("de")))),
                   mod(V("organiser").n("p"),
                       subj(Pro("qui")),
                       comp(Pro("lui").c("acc")))),
@@ -360,10 +360,60 @@ def bonfante_fr_ex():
                             ).typ({'pas': True, 'neg': False}),
          "expected": "Il a été difficile de trouver un livre dont on puisse dire qu'il n'a pas été traduit. ",
          "message": "Exercice 2.51 p 72"},
+        # 28
+        {"expression":
+             coord(C("et"),
+                   root(V("perdre"),
+                        subj(N("automobile"),
+                             det(D("le"))),
+                        comp(N("roue"),
+                             det(D("son")),
+                             mod(A("gauche")))),
+                   root(V("décoller"),
+                        comp(P("pour"),
+                             coord(C("et"),
+                                   comp(V("retourner").t("b")).typ({"refl": True}),
+                                   comp(V("terminer").t("b"),
+                                        comp(N("course"),
+                                             det(D("son"))),
+                                        comp(P("sur"),
+                                             comp(N("toit"),
+                                                  det(D("le"))))))))).t("pc"),
+         "expected": "L'automobile a perdu sa roue gauche et a décollé pour se retourner et terminer sa course sur le toit. ",
+         "message": " Figure 3.4 p 86"},
+
+        # 29
+        {"expression":
+             root(V("indiquer").t("c"),
+                  subj(Pro("lui").c("nom")),
+                  comp(C("si"),
+                       comp(V("plaider"),
+                            subj(Pro("lui").c("nom")),
+                            mod(A("coupable"),
+                                comp(P("de"),
+                                     comp(N("fait").n("p"),
+                                          det(D("le")),
+                                          comp(Pro("qui"),
+                                               comp(V("être"),
+                                                    comp(V("reprocher").t("pp"),
+                                                         comp(Pro("lui").c("dat"))))))))))).typ({"mod": "nece"}),
+         "expected": "Il devrait indiquer s'il plaide coupable des faits qui lui sont reprochés. ",
+         "message": " Exemple 3.1 p 82 / REM: relative avec attributs"},
+
     ]
 
 def bonfante_en_ex():
     loadEn()
+    def fool_voters(nb0, nb1,n1, nb2,n2, nb3):
+        return SP(NP(nb0,N("politician")),
+                  VP(V("fool"),
+                     NP(nb1,N("voter").n(n1)),
+                     PP(P("on"),
+                        NP(nb2,N("issue").n(n2)),
+                        NP(nb3,
+                           PP(P("of"),
+                              NP(D("the"),
+                                 N("time"))))))).typ({"mod":"poss"})
     return [
         {}, # dummy 0
         # 1
@@ -431,6 +481,14 @@ def bonfante_en_ex():
          "expected": "so this kidnapping makes him look weak",
          "message": " Figure 2.26 p 62"},
 
+        # 6
+        {"expression":
+             S(CP(C("but"),
+                  fool_voters(D("a"), D("most"), "p", D("most"), "p", D("most")).a(","),
+                  fool_voters(D("no"), D("all"), "p", AP(D("every"), A("single")), "s", D("all")))),
+         "expected": "A politician can fool most voters on most issues most of the time, "
+                     "but no politician can fool all voters on every single issue all of the time. ",
+         "message": " Figure 4.21 p 116 / REM: utile une fonction pour factoriser le code"},
     ]
 
 if __name__ == '__main__':

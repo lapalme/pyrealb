@@ -343,20 +343,5 @@ if __name__ == '__main__':
     # testPrevious()
     # insert here a single example for debugging perhaps commenting the line above
     # do not forget to load the appropriate language
+    loadEn()
     loadFr()
-    test(root(V("être").t("ps"),
-              subj(N("sorcier"),
-                   det(D("le"))).g("f"),
-              coord(C("et"),
-                    mod(V("condamner"),
-                        comp(P("à"),
-                             mod(N("mort")))),
-                    mod(V("torturer")),
-                    mod(V("brûler"))).t("pp")))
-    test(S(NP(D("le"),N("sorcier")).g("f"),
-           VP(V("être").t("ps"),
-              CP(C("et"),
-                 VP(V("condamner"),
-                    PP(P("à"),N("mort"))),
-                 VP(V("torturer")),
-                 VP(V("brûler"))).t("pp"))))

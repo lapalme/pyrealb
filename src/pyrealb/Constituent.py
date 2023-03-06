@@ -129,14 +129,15 @@ class Constituent():
             return self.taux[propName] if propName in self.taux else None 
         return None
     
-    def setProp(self,propName,val):
+    def setProp(self,propName,val,inSetLemma=False):
         if propName in ["pe","n","g"] and hasattr(self,"peng") and self.peng is not None:
             self.peng[propName]=val
-            return
         if propName in ["t","aux"] and hasattr(self,"taux") and self.taux is not None:
             self.taux[propName]=val
-            return
-        self.props[propName]=val
+        # this is important for to ensure that locol options override global values
+        # but it must not be done at initialization for peng and taux in Terminal.setLemma
+        if propName not in ["pe","n","g","t","aux"] or not inSetLemma:
+            self.props[propName]=val
 
     # should be in Terminal.prototype... but here for consistency with three previous definitions
     pengNO=0 # useful for debugging: identifier of peng struct to check proper sharing in the debugger
@@ -531,11 +532,17 @@ class Constituent():
                                  Pro("moi", "fr").c("refl").pe(c.getProp("pe")).n(c.getProp("n")).g(c.getProp("g")))
                 i += 1
             elif c.isA("Pro") and verbPos is not None:
-                if c.getProp("c") in ["refl", "acc", "dat"] or c.lemma == "y" or c.lemma == "en":
-                    pros.append(cList.pop(i))
+                if c.getProp("pos") is None or (c.parentConst is not None and c.parentConst.getProp("pos") is None):
+                    # do not try to change position of a constituent with specified pos
+                    if c.getProp("c") in ["refl", "acc", "dat"] or c.lemma == "y" or c.lemma == "en":
+                        pros.append(cList.pop(i))
+                    elif c.lemma in ["qui","que","quoi","dont","où"]: # do not cross boundary of a relative
+                        break
+                    else:
+                        i += 1
                 else:
                     i += 1
-            elif c.isOneOf(["P", "C", "Adv", "Pro"]) and verbPos is not None:
+            elif c.isOneOf(["P", "C", "Adv"]) and verbPos is not None:
                 # HACK: stop when seeing a preposition or a conjunction
                 #          or a "strange" pronoun that might start a phrase
                 #       whose structure has been flattened at this stage

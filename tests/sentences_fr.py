@@ -274,7 +274,7 @@ def sentences_fr():
                              N('souris')))).typ({"pas":True}),
          "expected":"La souris est bien souvent mangée par le chat. ",
          "message":"Position d'adverbes contigus"},
-        #   42
+        #   42 version en constituant de Bonfante et al. Exercice 2.51 p 72
           {"expression":S(S(VP(V("trouver").t("b"),
                                NP(D("un"),N("livre"),
                                   SP(Pro("dont"),
@@ -286,7 +286,7 @@ def sentences_fr():
                           VP(V("être"),A("difficile"))).typ({"pas":True,"neg":True}),
           "expected": "Il n'a pas été difficile de trouver un livre dont on puisse dire qu'il n'a pas été traduit. ",
           "message": "Subordonnées modifiées imbriquées"},
-        #   43
+        #   43 version simplifiée en constituant de Bonfante et al. Exercice 2.51 p 72
         {"expression":S(S(VP(V("trouver").t("b"),
                              NP(D("un"),N("livre"),
                                 SP(Pro("que"),
@@ -303,6 +303,34 @@ def sentences_fr():
                          N("démarche")).n('p'),
           "expected": "de multiples tâches et démarches",
           "message": "propagation d'option dans un CP"},
+        #   45 - version cosntituant de Bonfante et al. Figure 2.19 p 58
+        {"expression":
+             S(NP(D("le"), N("sorcier")).g("f"),
+               VP(V("être").t("ps"),
+                  CP(C("et"),
+                     VP(V("condamner"),
+                        PP(P("à"), N("mort"))),
+                     VP(V("torturer")),
+                     VP(V("brûler"))).t("pp"))),
+          "expected": "La sorcière fut condamnée à mort, torturée et brûlée. ",
+          "message": "attributs coordonnés"},
+        #   46 - version en constituants de Bonfante et al. Exemple 3.1 p 82
+          {"expression":
+               S(Pro("lui").c("nom"),
+                 VP(V("indiquer").t("c"),
+                    SP(C("si"),
+                       Pro("lui").c("nom"),
+                       VP(V("plaider"),
+                          AP(A("coupable"),
+                             PP(P("de"),
+                                NP(D("le"),
+                                   N("fait").n("p"),
+                                   SP(Pro("qui"),
+                                      VP(V("être"),
+                                         V("reprocher").t("pp"),
+                                         Pro("lui").c("dat")))))))))).typ({"mod": "nece"}),
+          "expected": "Il devrait indiquer s'il plaide coupable des faits qui lui sont reprochés. ",
+          "message": "NP avec une relative contenant un attribut"},
         #   39
         #   {"expression":,
         #   "expected": "",

@@ -141,6 +141,37 @@ class Phrase(Constituent):
             headIndex = 0
         return headIndex
 
+    def linkAttributes(self,vpv,vpcp,subject):
+        if self.isFr() and vpv.lemma in ["être", "paraître", "sembler", "devenir", "rester"]:
+            # check for a coordination of attributes or past participles
+            # vpcp = self.getFromPath([["VP"], ["CP"]])
+            if vpcp is not None:
+                for e in vpcp.elements:
+                    if e.isA("A"):
+                        e.peng = subject.peng
+                    elif e.isA("V") and e.getProp("t") == "pp":
+                        e.peng = subject.peng
+                    elif e.isA("AP"):
+                        e.linkPengWithSubject("AP", "A", subject)
+                    elif e.isA("VP"):
+                        v = e.getConst("V")
+                        if v is not None and v.getProp("t") == "pp":
+                            v.peng = subject.peng
+            else:
+                # check for a single French attribute of a copula verb
+                # with an adjective
+                attribute = vpv.parentConst.linkPengWithSubject("AP", "A", subject)
+                if attribute is None:
+                    elems = vpv.parentConst.elements
+                    try:
+                        vpvIdx = elems.index(vpv)
+                        for i in range(vpvIdx + 1, len(elems)):
+                            e = elems[i]
+                            if e.isA("V") and e.getProp("t") == "pp":
+                                e.peng = subject.peng
+                    except ValueError:
+                        self.error("linkProperties    : verb not found")
+
     def linkProperties(self):
         #  loop over children to set the peng and taux to their head or subject
         #  so that once a value is changed this change will be propagated correctly...
@@ -157,13 +188,15 @@ class Phrase(Constituent):
                         e = self.elements[i]
                         if hasattr(self, "peng"):  # do not try to modify if current peng does not exist e.g. Q
                             if e.isA("NO") and i < headIndex:  # NO must appear before the N for agreement
-                                e.peng = self.peng
+                                self.peng["n"] = e.grammaticalNumber()
+                                # gender agreement between a French number and subject
+                                e.peng["g"] = self.peng["g"]
                             elif e.isOneOf(["D", "A"]):
                                 # link gender and number of the noun to the determiners and adjectives
                                 # in English possessive determiner should not depend on the noun but on the "owner"
-                                if self.isFr() or not e.isA("D") or "own" not in e.props:
+                                if self.isFr() or not (e.isA("D") and "own" in e.props):
                                     e.peng = self.peng
-                            elif e.isA("CP"): # check for a coordination of adjectives
+                            elif e.isA("CP"): # check for a coordination of adjectives and numbers
                                 for el in e.elements:
                                     if el.isOneOf(["A","NO"]):
                                         el.peng=self.peng
@@ -174,6 +207,7 @@ class Phrase(Constituent):
                     if v is not None:
                         if pro.lemma in ["qui", "who", "which", "that"]:  # agrees with self NP
                             v.peng = self.peng
+                            self.linkAttributes(v,self.getFromPath([["VP"],["CP"]]),self)
                         elif self.isFr() and pro.lemma == "que":
                             # in French past participle can agree with a cod appearing before... keep that info just in case
                             v.cod = self
@@ -218,43 +252,11 @@ class Phrase(Constituent):
                             # finally self generates too many spurious messages
                             # self.warning("no possible subject found")
                             return self
-                if hasattr(subject,"peng"):
-                    self.peng = subject.peng
-                    vpv = self.linkPengWithSubject("VP", "V", subject)
-                else:
-                    vpv = None
+                self.peng = subject.peng
+                vpv = self.linkPengWithSubject("VP", "V", subject)
                 if vpv is not None:
                     self.taux = vpv.taux
-                    if self.isFr() and vpv.lemma in ["être", "paraître", "sembler", "devenir", "rester"]:
-                        # check for a coordination of attributes or past participles
-                        vpcp = self.getFromPath([["VP"],["CP"]])
-                        if vpcp is not None:
-                            for e in vpcp.elements:
-                                if e.isA("A"):
-                                    e.peng = subject.peng
-                                elif e.isA("V") and e.getProp("t")=="pp":
-                                    e.peng = subject.peng
-                                elif e.isA("AP"):
-                                    e.linkPengWithSubject("AP", "A", subject)
-                                elif e.isA("VP"):
-                                    v = e.getConst("V")
-                                    if v is not None and v.getProp("t")=="pp":
-                                        v.peng = subject.peng
-                        else:
-                            # check for a single French attribute of a copula verb
-                            # with an adjective
-                            attribute = vpv.parentConst.linkPengWithSubject("AP", "A", subject)
-                            if attribute is None:
-                                elems = vpv.parentConst.elements
-                                try:
-                                    vpvIdx = elems.index(vpv)
-                                    for i in range(vpvIdx + 1, len(elems)):
-                                        pp = elems[i]
-                                        if pp.isA("V") and pp.getProp("t") == "pp":
-                                            pp.peng = subject.peng
-                                            break
-                                except ValueError:
-                                    self.error("linkProperties    : verb not found")
+                    self.linkAttributes(vpv,self.getFromPath([["VP"],["CP"]]),subject)
                 else:
                     # check for a coordination of verbs that share the subject
                     cvs = self.getFromPath(["CP", "VP"])
@@ -276,7 +278,7 @@ class Phrase(Constituent):
             else:
                 # finally, self generates too many spurious messages
                 # self.warning("no possible subject found")
-                self.peng = None
+                pass
         else:
             self.error("linkProperties    ,unimplemented type:" + self.constType)
         return self
@@ -300,9 +302,9 @@ class Phrase(Constituent):
         return self.error("***: should never happen: setLemma: called on a Phrase")
 
     # find the index of a Constituent type (or one of the constituents) in the list of elements
-    def getIndex(self, constTypes):
+    def getIndex(self, constTypes,start=0):
         if isinstance(constTypes, str): constTypes = [constTypes]
-        for i in range(0, len(self.elements)):
+        for i in range(start, len(self.elements)):
             if self.elements[i].isOneOf(constTypes):
                 return i
         return -1
@@ -320,7 +322,7 @@ class Phrase(Constituent):
     #   set plural if one is plural or more than one combined with and
     #   set person to the minimum one encountered (i.e. 1st < 2nd < 3rd) mostly useful for French 
     def findGenderNumberPerson(self, andCombination):
-        g = "f"
+        g = None
         n = "s"
         pe = 3
         nb = 0
@@ -328,13 +330,14 @@ class Phrase(Constituent):
             if e.isOneOf(["NP", "N", "Pro", "Q","NO"]):
                 nb += 1
                 propG = e.getProp("g")
-                if propG == "m" or propG == "x" or e.isA("q"): g = "m"  # masculine if gender is unspecified
+                if g is None and propG is not None: g = propG
+                if propG == "m": g = "m"  # masculine if one is specified
                 if e.getProp("n") == "p": n = "p"
                 propPe = e.getProp("pe")
                 if propPe is not None and propPe < pe: pe = propPe
         if nb == 0:
             g = "m"
-        elif nb > 1 and n == "s" and andCombination:
+        elif nb > 1 and andCombination:
             n = "p"
         return {"g": g, "n": n, "pe": pe}
 
@@ -958,7 +961,8 @@ class Phrase(Constituent):
             c = self.elements[idxC]
             _and = "et" if self.isFr() else "and"
             gn = self.findGenderNumberPerson(c.lemma == _and)
-            self.setProp("g", gn["g"])
+            if gn["g"] is not None:
+                self.setProp("g", gn["g"])
             self.setProp("n", gn["n"])
             self.setProp("pe", gn["pe"])
             # for the pronoun, we must override its existing properties...

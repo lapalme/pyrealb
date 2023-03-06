@@ -32,10 +32,15 @@ def test(title,lang,testsFn,kept=None,badOnly=False,showExpr=False):
                     print(expression.toSource(0))
                     print(expected)
                     print("---")
+
+    def file_name():
+        # taken from https://stackoverflow.com/questions/50620029/determine-from-which-file-a-function-is-defined-in-python
+        return Q(testsFn.__globals__['__file__'].split("/")[-1]).en("[")
+
     if lang=="fr":
-        +NP(NO(nbOK),N("réussite"),P("sur"),NO(nbTests))
+        +NP(NO(nbOK),N("réussite"),P("sur"),NO(nbTests),file_name())
     else:
-        +NP(NO(nbOK), N("success"), P("over"),NO(nbTests))
+        +NP(NO(nbOK), N("success"), P("over"),NO(nbTests),file_name())
     print("="*40+"\n")
     return (nbOK,nbTests)
 

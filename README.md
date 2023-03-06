@@ -108,7 +108,7 @@ see [this tutorial](https://packaging.python.org/en/latest/tutorials/packaging-p
 These steps take for granted that the password for PyPI has already been given...
 
 1. update version number in `setup.cfg` (it should be the same as `python_version` in `src/pyrealb/utils.py`)
-2. `cd` into the directory with the `pyproject.toml` file 
+2. `cd` into the directory with the `pyproject.toml` file (the same as this `README.md`)
 3. Build the distribution package  
        `python3 -m build`
 4. Upload to PyPi  

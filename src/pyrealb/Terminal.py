@@ -141,7 +141,7 @@ class Terminal(Constituent):
                                     self.warn("bad lexicon table",lemma,ending)
                         else:
                             # if isinstance(info,list) and len(info)==1:info=info[0]
-                            self.setProp(key,info)
+                            self.setProp(key,info,True)
         else:
             self.warn("not implemented",terminalType)
     
@@ -203,7 +203,7 @@ class Terminal(Constituent):
                 n = self.getProp("n")
                 ending=self.bestMatch("déclinaison d'adjectif", declension,{"g":g,"n":n})
                 if ending is None:
-                    [self.morphoError("decline [fr]: A", {"g":g,"n":n})]
+                    return [self.morphoError("decline [fr]: A", {"g":g,"n":n})]
                 f = self.getProp("f") # comparatif d'adjectif
                 if f is not None and f != False:
                     specialFRcomp={"bon":"meilleur","mauvais":"pire"}
@@ -246,7 +246,7 @@ class Terminal(Constituent):
                         # look in the adjective declension table
                         ending=self.bestMatch("adjective declension",declension,{"f":f})
                         if ending is None:
-                            [self.morphoError("decline [en]: A", {"f":f})]
+                            return [self.morphoError("decline [en]: A", {"f":f})]
                         self.realization = self.stem + ending
                         return [self]
         elif len(declension)==1: # no declension
@@ -538,7 +538,7 @@ class Terminal(Constituent):
         return self.conjugate_fr() if self.isFr() else self.conjugate_en()       
 
     ### Number 
-    ###   implementation differes from the javascript one using format 
+    ###   implementation differes from the JavaScript one using the Python format function
     ###    we avoid using locale...
     def numberFormatter(self,maxPrecision=None):
         if isinstance(self.value,int):
