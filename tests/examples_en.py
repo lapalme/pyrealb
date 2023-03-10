@@ -2,7 +2,6 @@
 # some "hard" expressions used for debugging "corner cases"
 
 import datetime
-from context import pyrealb
 from pyrealb import *
 from test import test
 

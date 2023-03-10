@@ -111,8 +111,8 @@ These steps take for granted that the password for PyPI has already been given..
 2. `cd` into the directory with the `pyproject.toml` file (the same as this `README.md`)
 3. Build the distribution package  
        `python3 -m build`
-4. Upload to PyPi  
-      `twine upload dist/*`
+4. Upload to PyPi the last version I.J.K
+      `twine upload dist/*-I.J.K.*`
 5. Install new version from PyPI  
     `python3 -m pip install pyrealb --upgrade`
 

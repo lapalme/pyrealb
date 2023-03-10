@@ -1,4 +1,3 @@
-from context import pyrealb
 from pyrealb import *
 
 loadEn()
@@ -53,5 +52,6 @@ if __name__ == '__main__':
 
     show(S(eval(cat.toSource()).n("p"),VP(V("eat"),eval(mouse.toSource()).n("p").pro())))
     show(S(cat,VP(V("eat"),mouse)))
+    print("======")
     for i in range(0,10):
         show(S(np(),vp()))

@@ -9,7 +9,7 @@ def title_block(wInfo,lang):
     if lang=="en":
         s1=S(NP(N("forecast").n("p")),
              VP(V("issue").t("pp"),
-                PP(P("by"),Q("jsRealB"),
+                PP(P("by"),Q("pyrealb"),
                    DT(issueDate).dOpt(noSecond),
                    P("for"),CP(C("and"),
                                N("today"),
@@ -20,7 +20,7 @@ def title_block(wInfo,lang):
     else:
         s1=S(NP(N("prévision").n("p")),
              VP(V("émettre").t("pp"),
-                PP(P("par"),Q("jsRealB"),
+                PP(P("par"),Q("pyrealb"),
                    DT(issueDate).dOpt(noSecond),
                    P("pour"),CP(C("et"),
                                Adv("aujourd'hui"),

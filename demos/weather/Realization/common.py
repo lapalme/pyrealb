@@ -1,32 +1,16 @@
 from pyrealb import *
 
-## the jsRealB server should be launched from the jsRealB directory with
-##    node dist/jsRealB-server.js demos/Weather/weatherLexicon.js
-savedJsrIO=None
-
-def clearSavedJsrIO():
-    global savedJsrIO
-    savedJsrIO=[]
-
-def getSavedJsrIO():
-    return savedJsrIO
-
 def realize(jsrExpr,_lang,addS=True):
     if addS and not isinstance(jsrExpr,S):
         jsrExpr=S(jsrExpr)
-    # realization=jsRealB(jsrExpr.set_lang(lang).pp())
-    realization=str(jsrExpr)
-    if savedJsrIO is not None:
-        # savedJsrIO.append((jsrExpr.show(),realization))
-        savedJsrIO.append((jsrExpr.toSource(),realization))
+    realization=jsrExpr.realize()
     return realization
 
 dayPeriods=[(0,5,{"en":lambda:NP(N("night")),"fr":lambda:NP(N("nuit"))}),
             (5,9,{"en":lambda:NP(Adv("early"),N("morning")),"fr":lambda:NP(N("début"),PP(P("de"),N("matinée")))}),
             (9,12,{"en":lambda:NP(N("morning")),"fr":lambda:NP(N("matin"))}),
             (12,18,{"en":lambda:NP(N("afternoon")),"fr":lambda:NP(N("après-midi"))}),
-            (18,24,{"en":lambda:NP(N("tonight")),"fr":lambda:NP(N("soir"))}),
-            ]
+            (18,24,{"en":lambda:NP(N("tonight")),"fr":lambda:NP(N("soir"))})]
 
 def jsrDayPeriod(hour,lang):
     isTomorrow=hour>23

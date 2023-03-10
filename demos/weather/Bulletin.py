@@ -37,17 +37,12 @@ def forecast_text(wInfo,lang):
     paragraphs=[]
     for period in wInfo.get_periods():
         if lang=="en" : wInfo.show_data(period)
-        # clearSavedJsrIO()
         paragraphs.append(
             textwrap.fill(
                 realize(periodNames[period][lang](wInfo.get_issue_date()+timedelta(days=1)).cap(True),lang,False)
                           +" : "+forecast_period(wInfo, period, lang)
                         ,width=70,subsequent_indent=" ")
             )
-        # for (jsrInput,realization) in getSavedJsrIO():
-        #     print(jsrInput)
-        #     print(realization)
-        #     print(" ---")
     return "\n".join(paragraphs)
 
 def end_statement(lang):
@@ -94,9 +89,6 @@ def compare_with_orig(wInfo,lang):
     return "\n"+"\n".join(res)
 
 def paperExample():
-    # from jsRealBclass import jsRealB, N,A,Adv,V,D,P,C,DT,NO,Q, NP,AP,AdvP,VP,S,SP,PP,CP
-    from pyRealB import N,A,Adv,V,D,P,C,DT,NO,Q, NP,AP,AdvP,VP,S,PP,CP
-
     ##  example function used in the paper
     def pcpn(type,action,tense,moment,quantity=None,unit=None):
         return S(type,
@@ -109,8 +101,6 @@ def paperExample():
     print(realize(pcpn(N("snow"),"stop","pr","evening"),"en"))
     print(realize(pcpn(NP(V("freeze").t("pr"),N("drizzle")),"start","f","morning"),"en"))
 
-# paperExample()
-
 def weatherLexicon():
     loadFr()
     addToLexicon("ennuagement",{"N":{"g":"m","tab":"n3"}})
@@ -121,11 +111,11 @@ def weatherLexicon():
     addToLexicon({"cloudiness":{"N":{"tab":"n2"}}})
     addToLexicon({"cent":{"N":{"tab":"n1"}}})
 
-compare=True
+compare=False
 if __name__ == '__main__':
+    # paperExample()
     weatherLexicon()
     for line in open(os.path.abspath(os.path.join(os.path.dirname(__file__),"weather-data.jsonl")),"r",encoding="utf-8"):
-    # for line in open("Data preparation/weather-data.jsonl","r",encoding="utf-8"):
         wInfo=WeatherInfo(json.loads(line))
         # if wInfo.data["id"]!="fpto11-2019-01-26-1600-r1116d":continue
         if compare:
