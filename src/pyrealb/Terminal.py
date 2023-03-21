@@ -398,10 +398,12 @@ class Terminal(Constituent):
             aux.taux["t"]=tempsAux
             aux.realization=aux.realize()
             # change this verb to pp
-            self.setProp("g",g)
-            self.setProp("n",n)
-            self.setProp("t","pp")
-            self.realization=self.realize()
+            pp = V(self.lemma,"fr")
+            pp.setProp("g",g)
+            pp.setProp("n",n)
+            pp.setProp("t","pp")
+            pp.realization=pp.realize()   # realize the pp using jsRealB without other options
+            self.realization=pp.realization  # set verb realization to the pp realization
             if hasattr(self,"neg2"):
                 aux.neg2=self.neg2 # save this flag to put on the auxiliary, 
                 del self.neg2      # delete it on this verb

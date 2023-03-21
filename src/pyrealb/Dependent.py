@@ -142,7 +142,8 @@ class Dependent(Constituent):
                     depTerm.peng=headTerm.peng
             elif deprel=="mod" or deprel=="comp":
                 if depTerm.isA("A") or (depTerm.isA("V") and depTerm.getProp("t")=="pp"):
-                    depTerm.peng=self.peng
+                    if hasattr(self,"peng"):
+                        depTerm.peng=self.peng
                     # check for an attribute of a copula with an adjective or past participle
                     if self.isFr() and headTerm.lemma in ["être", "paraître", "sembler", "devenir", "rester"]:
                         iSubj=self.findIndex(lambda d0:d0.isA("subj") and d0.terminal.isOneOf(["N","Pro"]))
@@ -168,7 +169,8 @@ class Dependent(Constituent):
                         depTerm.peng=self.peng
                 elif depTerm.isA("Pro") and depTerm.lemma in ["qui","que","who","that"]:
                     # a relative linked to depTerm in which the new peng should be propagated
-                    depTerm.peng = self.peng
+                    if hasattr(self,"peng"):
+                        depTerm.peng=self.peng
                     for d0 in d.dependents:
                         self.setPengRecursive(d0,d0.peng["pengNO"],self.peng)
             elif deprel=="root":
@@ -624,23 +626,32 @@ class Dependent(Constituent):
             self.setProp("pe",pe if pe is not None else 3)
             return self.doFormat(res) # process format for the CP
         # check that all dependents use the same deprel
+        # except if a dependent is another coord
         deprel=self.dependents[0].constType
         noConnect = self.terminal.lemma == ""
         for j in range(0,last): #insert comma after each element
             dj=self.dependents[j]
-            if not dj.isA(deprel):
-                self.warn("inconsistent dependents within a coord",deprel,dj.constType)
             if noConnect or j<last-1:
                 if "a" not in dj.props or "," in dj.props["a"]:
                     dj.props["a"]=[","]
-            res.extend(dj.real())
+            if dj.isA("coord"):
+                res.extend(dj.coordReal())
+            elif not dj.isA(deprel) and deprel != "coord":
+                self.warn("inconsistent dependents within a coord",deprel,dj.constType)
+            else:
+                res.extend(dj.real())
         # insert realisation of the terminal before last...
         res.extend(self.terminal.real())
-        if not self.dependents[last].isA(deprel):
+        lastD = self.dependents[last]
+        if lastD.isA("coord"):
+            res.extend(lastD.coordReal())
+            return self.doFormat(res)
+        elif not lastD.isA(deprel) and deprel != "coord":
             self.warn("inconsistent dependents within a coord",deprel,self.dependents[last].constType)
         # insert last element
         res.extend(self.dependents[last].real())
         # compute the combined gender and number of the coordination once children have been realized
+        # CAUTION: gender and person might not be correct in the case of embedded coord
         selfCoord=self.terminal
         if selfCoord.isA("C"):
             andC="et" if self.isFr() else "and"

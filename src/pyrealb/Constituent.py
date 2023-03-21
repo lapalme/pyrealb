@@ -363,7 +363,8 @@ class Constituent():
             "they+will":"they'll", "they+are":"they're", "they+had":"they'd", "they+would":"they'd", "they+have":"they've",
             "it+is":"it's", "it+will":"it'll", "it+had":"it'd", "it+would":"it'd",
             "there+will":"there'll", "there+is":"there's", "there+has":"there's", "there+have":"there've",
-            "that+is":"that's", "that+had":"that'd", "that+would":"that'd", "that+will":"that'll"
+            "that+is":"that's", "that+had":"that'd", "that+would":"that'd", "that+will":"that'll",
+            "what+is": "what's"
         } 
         # search for terminal "a" and check if it should be "an" depending on the next word
         last=len(cList)-1
@@ -526,10 +527,10 @@ class Constituent():
                             c.insertReal(pros, Q(c.neg2, "fr"))
                         else:
                             neg2 = c.neg2
-                if c.isReflexive() and c.getProp("t") != "pp":
-                    if prog is not None: c = prog
-                    c.insertReal(pros,
-                                 Pro("moi", "fr").c("refl").pe(c.getProp("pe")).n(c.getProp("n")).g(c.getProp("g")))
+                    if c.isReflexive() and c.getProp("t") != "pp":
+                        if prog is not None: c = prog
+                        c.insertReal(pros,
+                                     Pro("moi", "fr").c("refl").pe(c.getProp("pe")).n(c.getProp("n")).g(c.getProp("g")))
                 i += 1
             elif c.isA("Pro") and verbPos is not None:
                 if c.getProp("pos") is None or (c.parentConst is not None and c.parentConst.getProp("pos") is None):
