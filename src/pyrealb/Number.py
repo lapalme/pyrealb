@@ -146,12 +146,27 @@ def ordinal(s,lang,gender):
         if s[-1]=="e" or s.endswith("quatre-vingts"): return s[:-1]+"ième";
         return s+"ième"
 
+def roman(val):
+    def units(i,v,x,value):
+        return ["",i,i+i,i+i+i,i+v,v,v+i,v+i+i,v+i+i+i,i+x,x][value]
+
+    if val < 0 : return "*roman too small*"
+    if val <= 10 : return units("I","V","X",val);
+    if val <= 100 : return units("X","L","C",val//10)+roman(val%10)
+    if val <= 1000 : return units("C","D","M",val//100)+roman(val%100)
+    if val < 4000 : return "M"*(val//1000)+roman(val%1000)
+    return "*roman too big*"
+
 if __name__ == '__main__':
     print(enToutesLettres("1234567","en"))
     print(enToutesLettres("1234567","fr"))
     print(enToutesLettres("-45", "en"))
     print(enToutesLettres("300", "fr"))
     print(ordinal(34,"en","f"))
+    print(roman(-23))
+    print(roman(1285))
+    print(roman(300))
+    print(roman(188))
     for n in range(7,100000, 397):
         print(n,":",enToutesLettres(str(n), "en"),":",enToutesLettres(str(n), "fr"))
 

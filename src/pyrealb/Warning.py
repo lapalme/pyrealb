@@ -79,6 +79,12 @@ warnings = {
          "fr":lambda value : # $value ne peut pas être réalisé comme un ordinal.
             S(Q(value),VP(V("réaliser"),AdvP(Adv("comme"),NP(D("un"),N("ordinal")))))
               .typ({"neg":True,"mod":"poss","pas":True})},
+    "bad roman":
+        {"en":lambda value : # cannot realize $value as a Roman number.
+            S(VP(V("realize"),Q(value),AdvP(Adv("as"),NP(D("a"),A("Roman"),N("number"))))).typ({"neg":True,"mod":"poss"}),
+         "fr":lambda value : # $value ne peut pas être réalisé comme un nombre romain.
+            S(Q(value),VP(V("réaliser"),AdvP(Adv("comme"),NP(D("un"),N("nombre"),A("romain")))))
+              .typ({"neg":True,"mod":"poss","pas":True})},
     "bad number in word":
         {"en":lambda value : # cannot realize $value in words.
             S(VP(V("realize"),Q(value),PP(P("in"),N("word").n("p")))).typ({"neg":True,"mod":"poss"}),

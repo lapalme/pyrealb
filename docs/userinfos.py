@@ -479,7 +479,9 @@ numberFormat={"fr":"Formatage d'un nombre","en":"Number formatting",
                                 "en":["number in words",'NO("125").dOpt({"nat": True})']},
         {"pattern":"{\"ord\":True}","fr":["nombre ordinal",'NO("10").dOpt({"ord": True})'],
                                 "en":["ordinal number",'NO("10").dOpt({"ord": True})']},
-        ]} 
+        {"pattern":"{\"rom\":True}","fr":["nombre romain",'NO("267").dOpt({"rom": True})'],
+                                "en":["Roman number",'NO("267").dOpt({"rom": True})']},
+        ]}
 
 numberAgreement={"fr":"Accord du nom selon le nombre","en":"Noun agreement in number",
     "ex":[{"pattern":"","fr":["avec zéro",'NP(NO(0), N("avion"))'],

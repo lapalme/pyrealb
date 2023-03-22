@@ -275,7 +275,7 @@ class Constituent():
                 else:
                     return self.warn("ignored value for option","DT.dOpt",key)
         elif self.isA("NO"):
-            allowedKeys = ["mprecision","raw","nat","ord"]
+            allowedKeys = ["mprecision","raw","nat","ord","rom"]
             if "dOpt" not in self.props:self.props["dOpt"]={}
             for key,val in dOptions.items():
                 if key in allowedKeys:

@@ -1,5 +1,5 @@
 from .Constituent import Constituent,quoteOOV, deprels
-from .Number import enToutesLettres, ordinal
+from .Number import enToutesLettres, ordinal, roman
 from .Lexicon import getLexicon,currentLanguage,getLemma,getRules
 
 import datetime, re
@@ -565,9 +565,15 @@ class Terminal(Constituent):
     def numberToOrdinal(self):
         if not isinstance(self.value,int) or self.value<0:
             self.warn("bad ordinal",self.value)
-            return str(self.value)
+            return f"[[{self.value}]]"
         return ordinal(self.value,self.lang,self.peng["g"])
-    
+
+    def numberToRoman(self):
+        if not isinstance(self.value,int) or self.value<0 or self.value>=4000:
+            self.warn("bad roman",self.value)
+            return f"[[{self.value}]]"
+        return roman(self.value)
+
     ### Date
     def dateFormat(self,dateObj,dOpts):
         fmtRE=re.compile(r"(.*?)\[(.+?)]|(.+$)")
@@ -652,6 +658,8 @@ class Terminal(Constituent):
                 elif "ord" in opts and opts["ord"]==True:
                     self.setProp("n","s")  # the number of an ordinal is always singular
                     self.realization=self.numberToOrdinal()
+                elif "rom" in opts and opts["rom"]==True:
+                    self.realization=self.numberToRoman()
                 elif "raw" in opts and opts["raw"]==False:
                     self.realization=self.numberFormatter(opts["mprecision"])
                 else: # opts["raw"]==True

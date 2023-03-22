@@ -441,7 +441,7 @@ On crée un nombre avec <code>NO(...)</code> dont le paramètre est soit un nomb
 qui peut être analysée comme un nombre.""",lang="fr")
 page.p("""
 A number is created with <code>NO(...)</code> whose parameter is either a number (integer or real) or a string 
-that can be parsed as a number. In English, numbers less than one hundred written in letters can also be used as input.""",
+that can be parsed as a number.""",
 lang="en")
 addTable(numberFormat)
 addTable(numberAgreement)
