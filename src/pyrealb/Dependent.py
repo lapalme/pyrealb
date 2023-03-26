@@ -123,12 +123,12 @@ class Dependent(Constituent):
             self.peng={"pengNO":Constituent.pengNO}
             headTerm.peng = self.peng
         for i in range(0,len(self.dependents)): # should use "for d in dependents:"
-            d = self.dependents[i]              # but this "kills" the PyCharm debugger
-            depTerm=d.terminal
-            deprel=d.constType
+            dep = self.dependents[i]              # but this "kills" the PyCharm debugger
+            depTerm=dep.terminal
+            deprel=dep.constType
             if deprel=="subj":
                 if headTerm.isA("V"):
-                    headTerm.peng=d.peng
+                    headTerm.peng=dep.peng
             elif deprel=="det":
                 if depTerm.isA("D"):
                     if hasattr(self,"peng"):
@@ -140,6 +140,9 @@ class Dependent(Constituent):
                             depTerm.peng=self.peng
                 elif depTerm.isA("NO"):
                     depTerm.peng=headTerm.peng
+                elif depTerm.isA("P") and depTerm.lemma == "de":  # HACK: deal with specific case : det(P("de"),mod(D(...)))
+                    if len(dep.dependents)==1 and dep.dependents[0].isA("mod") and dep.dependents[0].isA("D"):
+                        dep.dependents[0].terminal.peng = self.peng
             elif deprel=="mod" or deprel=="comp":
                 if depTerm.isA("A") or (depTerm.isA("V") and depTerm.getProp("t")=="pp"):
                     if hasattr(self,"peng"):
@@ -149,20 +152,21 @@ class Dependent(Constituent):
                         iSubj=self.findIndex(lambda d0:d0.isA("subj") and d0.terminal.isOneOf(["N","Pro"]))
                         if iSubj>=0:
                             depTerm.peng=self.dependents[iSubj].peng
-                        iAttr=self.findIndex(lambda d0:d0.isA("comp") and
-                                                       (d0.terminal.isA("A") or (d0.terminal.isA("V") and d0.terminal.getProp("t")=="pp")))
-                        if iAttr>=0:
-                            self.dependents[iAttr].peng=depTerm.peng
+                #         iAttr=self.findIndex(lambda d0:d0.isA("comp") and
+                #                                        (d0.terminal.isA("A") or (d0.terminal.isA("V") and d0.terminal.getProp("t")=="pp")))
+                #         if iAttr>=0:
+                #             self.dependents[iAttr].peng=depTerm.peng
                 elif depTerm.isA("V"):
                     # set agreement between the subject of a subordinate or the object of a relative subordinate
-                    iRel=d.findIndex(lambda d0:d0.isOneOf(["subj","comp","mod"]) and
-                                                  d0.terminal.isA("Pro") and
-                                                  d0.terminal.lemma in ["qui","que","who","that"])
+                    iRel=dep.findIndex(lambda depI: depI.isOneOf(["subj", "comp", "mod"]) and
+                                                    depI.terminal.isA("Pro") and
+                                                    depI.terminal.lemma in ["qui", "que", "who", "that"])
                     if iRel>=0:
-                        rel = d.dependents[iRel].constType
+                        rel = dep.dependents[iRel].constType
                         if rel=="subj": # verb agrees with this subject
                             depTerm.peng=self.peng
-                        elif self.isFr():
+                        elif self.isFr(): # rel is comp or mod
+                            # in French past participle can agree with a cod appearing before... keep that info in case
                             depTerm.cod=headTerm
                     # check for past participle in French that should agree with the head
                     if self.isFr() and depTerm.getProp("t")=="pp":
@@ -171,25 +175,26 @@ class Dependent(Constituent):
                     # a relative linked to depTerm in which the new peng should be propagated
                     if hasattr(self,"peng"):
                         depTerm.peng=self.peng
-                    for d0 in d.dependents:
-                        self.setPengRecursive(d0,d0.peng["pengNO"],self.peng)
+                    for depI in dep.dependents:
+                        self.setPengRecursive(depI,depI.peng["pengNO"],self.peng)
             elif deprel=="root":
                 # self.error("An internal root was found")
                 pass
             elif deprel=="coord":
-                if len(d.dependents)>0:
-                    firstDep=d.dependents[0]
+                if len(dep.dependents)>0:
+                    firstDep=dep.dependents[0]
                     if firstDep.isA("subj"):
-                        headTerm.peng=d.peng
+                        headTerm.peng=dep.peng
                     elif firstDep.isA("det"):
-                        d.peng=headTerm.peng
+                        dep.peng=headTerm.peng
                     elif firstDep.isOneOf(["mod","comp"]) and firstDep.terminal.isOneOf(["V","A"]):
                         # consider this as a coordination of verb sharing a subject (the current root)
                         #            or as a coordination of adjectives
                         if hasattr(headTerm,"peng"):
-                            for d0 in d.dependents:
-                                d0.peng=headTerm.peng
-                                d0.terminal.peng=headTerm.peng
+                            dep.peng = headTerm.peng
+                            for depI in dep.dependents:
+                                depI.peng=headTerm.peng
+                                depI.terminal.peng=headTerm.peng
             else:
                 self.error("Strange dependent:"+deprel)
         return
@@ -200,7 +205,7 @@ class Dependent(Constituent):
 
     def findGenderNumberPerson(self,andCombination):
         g=None
-        n="s"
+        n=None
         pe=3
         nb=0
         for i in range(0,len(self.dependents)):
@@ -213,8 +218,7 @@ class Dependent(Constituent):
                 if e.getProp("n")=="p":n="p"
                 propPe=e.getProp("pe")
                 if propPe is not None and propPe<pe:pe=propPe
-        if nb==0: g="m"
-        elif nb>1 and n=="s" and andCombination:n="p"
+        if nb>1 and andCombination:n="p"
         return {"g":g,"n":n,"pe":pe}
 
     # Dependency structure modification but that must be called in the context of the parentConst
@@ -658,7 +662,8 @@ class Dependent(Constituent):
             gn=self.findGenderNumberPerson(selfCoord.lemma==andC)
             if gn["g"] is not None:
                 self.setProp("g",gn["g"])
-            self.setProp("n",gn["n"])
+            if gn["n"] is not None:
+                self.setProp("n",gn["n"])
             self.setProp("pe",gn["pe"])
             # for an inserted pronoun, we must override its existing properties...
             if  hasattr(selfCoord,"pronoun"):

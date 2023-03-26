@@ -354,7 +354,8 @@ class Terminal(Constituent):
         # check for "refl" typ (only called for V): Terminal.conjugate_fr
         pc=self.parentConst
         while pc is not None:
-            if pc.isOneOf(["VP","SP","S",*deprels]):
+            # look for the first enclosing S, SP or Dependent with a terminal V
+            if pc.isOneOf(["VP","SP","S"]) or (pc.isOneOf(deprels) and pc.terminal.isA("V")):
                 if "typ" in pc.props:
                     typs=pc.props["typ"]
                     if "refl" in typs and typs["refl"]==True:
@@ -364,6 +365,8 @@ class Terminal(Constituent):
                                 self.warn("ignored reflexive",pat)
                             return False
                         return True
+                if not pc.isA("VP"):  # unless it is VP stop at the first sentence
+                    return False
             pc=pc.parentConst
         return False
 

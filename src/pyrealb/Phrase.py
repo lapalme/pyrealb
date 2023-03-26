@@ -323,7 +323,7 @@ class Phrase(Constituent):
     #   set person to the minimum one encountered (i.e. 1st < 2nd < 3rd) mostly useful for French 
     def findGenderNumberPerson(self, andCombination):
         g = None
-        n = "s"
+        n = None
         pe = 3
         nb = 0
         for e in self.elements:
@@ -335,9 +335,7 @@ class Phrase(Constituent):
                 if e.getProp("n") == "p": n = "p"
                 propPe = e.getProp("pe")
                 if propPe is not None and propPe < pe: pe = propPe
-        if nb == 0:
-            g = "m"
-        elif nb > 1 and andCombination:
+        if nb > 1 and andCombination:
             n = "p"
         return {"g": g, "n": n, "pe": pe}
 
@@ -963,7 +961,8 @@ class Phrase(Constituent):
             gn = self.findGenderNumberPerson(c.lemma == _and)
             if gn["g"] is not None:
                 self.setProp("g", gn["g"])
-            self.setProp("n", gn["n"])
+            if gn["n"] is not None:
+                self.setProp("n", gn["n"])
             self.setProp("pe", gn["pe"])
             # for the pronoun, we must override its existing properties...
             if hasattr(self, "pronoun"):

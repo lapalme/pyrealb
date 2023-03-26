@@ -22,7 +22,8 @@ warnings = {
                .typ({"mod":"nece","pas":True}),
          "fr":lambda info,goods,bad: # $info devrait être appliqué à $good, non à $bad.
             S(Q(info),VP(V("appliquer").t("c"),
-                         PP(P("à"),makeDisj("ou",goods)).a(','),Adv("non"),PP(P("à"),Q(bad))))
+              # HACK: Q("non") au lieu de Adv("non") pour éviter son déplacement avant "appliqué"
+                         PP(P("à"),makeDisj("ou",goods)).a(','),Q("non"),PP(P("à"),Q(bad))))
               .typ({"mod":"nece","pas":True})},
     "bad position":
         {"en":lambda bad,limit : # $bad should be smaller than $limit.
