@@ -5,9 +5,11 @@ exemplesEn = []
 dependancesFr = []
 dependenciesEn = []
 constituentEnFr = None
+dependentEnFr = None
+
 
 def makeExamples():
-    global exemplesFr, exemplesEn, dependancesFr, dependenciesEn, constituentEnFr
+    global exemplesFr, exemplesEn, dependancesFr, dependenciesEn, constituentEnFr, dependentEnFr
     loadFr()
     addToLexicon({"John": {"N": {"g": "m", "tab": "n4"}}})
     addToLexicon({"Mary": {"N": {"g": "f", "tab": "n16"}}})
@@ -116,187 +118,187 @@ def makeExamples():
         [DT(),
          None],
         [DT().nat(false),
-                        None],
-    [DT().dOpt({"rtime": True}),
-                    None],
-    [NO(1.847584).dOpt({"mprecision": 0}),
-     "2"],
-    [NO(1.847584).dOpt({"mprecision": 4}),
-     "1,8476"],
-    [NO(1.847584).dOpt({"raw": false}),
-     "1,85"],
-    [NO(1.847584).dOpt({"raw": True}),
-     "1.847584"],
-    [NO(125).dOpt({"nat": True}),
-     "cent vingt-cinq"],
-    [NO(10).dOpt({"ord": True}),
-     "dixième"],
-    [NP(NO(0), N("avion")),
-     "0 avion"],
-    [NP(NO(2), N("avion")),
-     "2 avions"],
-    [NP(NO(1.5), N("livre")),
-     "1,50 livre"],
-    [NP(NO(2.4), N("livre")),
-     "2,40 livres"],
-    [NP(NO(2), A("rouge"), N("avion")),
-     "2 avions rouges"],
-    # [N("pomme").g("w"),
-    #     "pomme"],
-    [S(Pro("lui").c("nom"),
-       VP(V("donner").t("pc"),
-          NP(D("un"), N("pomme")).pro(),
-          PP(P("à"), NP(D("le"), A("jeune"), N("femme"))
-             ))),
-     "Il l'a donnée à la jeune femme. "],
-    [S(Pro("lui").c("nom"),
-       VP(V("donner").t("pc"),
-          NP(D("un"), N("pomme")).pro(),
-          PP(P("à"), NP(D("le"), A("jeune"), N("femme"))).pro())),
-     "Il la lui a donnée. "],
-    [S(Pro("je").pe(1),
-       VP(V("mettre").t("pc"),
-          NP(D("le"), N("lettre")),
-          PP(P("sur"), NP(D("le"), N("table"))).pro())),
-     "J'y ai mis la lettre. "],
-    [S(Pro("je").pe(1),
-       VP(V("mettre").t("pc"),
-          NP(D("le"), N("lettre")).pro(),
-          PP(P("sur"), NP(D("le"), N("table"))).pro())).typ({"neg": True}),
-     "Je ne l'y ai pas mise. "],
-    # exemples du papier "Architecture..."
-    # Figure 6
-    [S(Pro("lui").c("nom"),
-       VP(V("donner").t("pc"),
-          NP(D("un"), N("pomme")).pro())),
-     "Il l'a donnée. "],
-    # Table 1 - 1
-    [S(Pro("lui").c("nom"),
-       VP(V("donner").t("pc"),
-          NP(D("un"), N("pomme")).pro())).typ({"neg": True}),
-     "Il ne l'a pas donnée. "],
-    # Table 1 - 2
-    [S(Pro("lui").c("nom"),
-       VP(V("donner").t("pc"),
-          NP(D("un"), N("pomme")).pro(),
-          PP(P("à"), NP(D("le"), N("fille"))))).typ({"neg": True}),
-     "Il ne l'a pas donnée à la fille. "],
-    # Table 1 - 3
-    [S(Pro("lui").c("nom"),
-       VP(V("donner").t("pc"),
-          NP(D("un"), N("pomme")).pro(),
-          PP(P("à"), NP(D("le"), N("fille"))).pro())).typ({"neg": True}),
-     "Il ne la lui a pas donnée. "],
-    # Table 1 - 4
-    [S(Pro("lui").c("nom"),
-       VP(V("donner").t("pc"),
-          NP(D("un"), N("pomme")).pro(),
-          PP(P("à"), NP(D("le"), N("fille"))).pro())).typ({"neg": True, "pas": True}),
-     "Elle ne lui a pas été donnée par lui. "],
-    # position des pronoms devant le verbe
-    [S(Pro('lui').c("nom"),
-       VP(V('donner').t("pc"),
-          NP(D('un'), N('chat')).pro(),
-          Pro("elle").c("dat"))),
-     "Il le lui a donné. "],
-    # modifications globales de propriétés
-    [S(NP(D("le"), N("chat").g("f")),
-       VP(V("manger"),
-          NP(D("le"), N("souris")))).t("f"),
-     "La chatte mangera la souris. "],
-    [S(CP(C("et"),
-          Pro("elle").tn(""),
-          Pro("moi").tn("")),
-       VP(V("aller"),
-          PP(P("à"),
-             NP(D("le"), N("plage"))))).t("pc"),
-     "Elle et moi sommes allés à la plage. "],
-    # changement de personne dans le déterminant
-    [S(NP(D("notre").pe(2), N("chef")),
-       VP(V("aller"))),
-     "Votre chef va. "],
-    # nouveau type de question "yon" par inversion du sujet
-    [S(NP(D('le'),  # 54
-          N('chat')),
-       VP(V('manger'),
-          NP(D('le'),
-             N('souris')))).typ({"int": "yon"}),
-     "Le chat mange-t-il la souris? "],
-    [S(NP(D('le'),  # 55
-          N('chat')),
-       VP(V('manger'),
-          NP(D('le'),
-             N('souris')))).typ({"int": "yon", "neg": True}),
-     "Le chat ne mange-t-il pas la souris? "],
-    [S(NP(D('le'),  # 56
-          N('chat')),
-       VP(V('manger'),
-          NP(D('le'),
-             N('souris')))).typ({"int": "yon", "pas": True}),
-     "La souris est-elle mangée par le chat? "],
-    [S(Pro("je"),  # 57
-       VP(V('manger'),
-          NP(D('le'),
-             N('fromage')))).typ({"int": "yon"}),
-     "Mange-t-il le fromage? "],
-    [S(Pro("je"),  # 58
-       VP(V('manger').t("pc"),
-          NP(D('le'),
-             N('fromage')))).typ({"int": "yon"}),
-     "A-t-il mangé le fromage? "],
-    # question tag
-    [S(Pro("je"),  # 59
-       VP(V('manger').t("pc"),
-          NP(D('le'),
-             N('fromage')))).typ({"int": "tag"}),
-     "Il a mangé le fromage, n'est-ce pas? "],
-    # adverb position
-    [S(Pro('je').pe(2),  # 60
-       VP(V('travailler').t("pc"),
-          Adv('bien'))).typ({"mod": "nece"}),
-     "Tu as dû bien travailler. "],
-    [S(Pro('je'),  # 61
-       VP(V('aller').t("pc"),
-          Adv('hier'),
-          PP(P('à'),
-             NP(D('le'),
-                N('maison'))))).typ({"neg": True}),
-     "Il n'est pas allé hier à la maison. "],
-    [S(Pro('je'),  # 62
-       VP(V('aller').t("pc"),
-          Adv('souvent'),
-          PP(P('à'),
-             NP(D('le'),
-                N('maison'))),
-          Adv('sûrement'))).typ({"neg": True}),
-     "Il n'est pas souvent allé à la maison sûrement. "],
-    [S(Pro('je'),  # 63
-       VP(V('aller').t("pc"),
-          Adv('souvent').pos("post"),
-          PP(P('à'),
-             NP(D('le'),
-                N('maison'))))).typ({"neg": True}),
-     "Il n'est pas allé souvent à la maison. "],
-    [S(NP(D('le'),  # 64
-          N('chat')),
-       VP(V('manger'),
-          Adv('bien'),
-          Adv('souvent'),
-          NP(D('le'),
-             N('souris')))).typ({"pas": True}),
-     "La souris est bien souvent mangée par le chat. "],
-    [S(Pro("tout"),
-       VP(V("sembler").t("pa"),
-          V("fonctionner").t("bp"))),
-     "Tout eut semblé avoir fonctionné. "],
-    [S(Pro("lui"),
-       VP(V("manger"),
-          NP(D("le"), N("fromage")))).typ({"pas": True}),
-     "Le fromage est mangé par lui. "],
-    [NP(NO(2), N("fille"), CP(C("et"), A("joli"), A("vieux"))),
-     "2 filles jolies et vieilles"],
-    [NP(CP(C("ou"), NO(2), NO(3)), N("fille"), CP(C("et"), A("jeune"), A("joli"))),
-     "2 ou 3 filles jeunes et jolies"],
+         None],
+        [DT().dOpt({"rtime": True}),
+         None],
+        [NO(1.847584).dOpt({"mprecision": 0}),
+         "2"],
+        [NO(1.847584).dOpt({"mprecision": 4}),
+         "1,8476"],
+        [NO(1.847584).dOpt({"raw": false}),
+         "1,85"],
+        [NO(1.847584).dOpt({"raw": True}),
+         "1.847584"],
+        [NO(125).dOpt({"nat": True}),
+         "cent vingt-cinq"],
+        [NO(10).dOpt({"ord": True}),
+         "dixième"],
+        [NP(NO(0), N("avion")),
+         "0 avion"],
+        [NP(NO(2), N("avion")),
+         "2 avions"],
+        [NP(NO(1.5), N("livre")),
+         "1,50 livre"],
+        [NP(NO(2.4), N("livre")),
+         "2,40 livres"],
+        [NP(NO(2), A("rouge"), N("avion")),
+         "2 avions rouges"],
+        # [N("pomme").g("w"),
+        #     "pomme"],
+        [S(Pro("lui").c("nom"),
+           VP(V("donner").t("pc"),
+              NP(D("un"), N("pomme")).pro(),
+              PP(P("à"), NP(D("le"), A("jeune"), N("femme"))
+                 ))),
+         "Il l'a donnée à la jeune femme. "],
+        [S(Pro("lui").c("nom"),
+           VP(V("donner").t("pc"),
+              NP(D("un"), N("pomme")).pro(),
+              PP(P("à"), NP(D("le"), A("jeune"), N("femme"))).pro())),
+         "Il la lui a donnée. "],
+        [S(Pro("je").pe(1),
+           VP(V("mettre").t("pc"),
+              NP(D("le"), N("lettre")),
+              PP(P("sur"), NP(D("le"), N("table"))).pro())),
+         "J'y ai mis la lettre. "],
+        [S(Pro("je").pe(1),
+           VP(V("mettre").t("pc"),
+              NP(D("le"), N("lettre")).pro(),
+              PP(P("sur"), NP(D("le"), N("table"))).pro())).typ({"neg": True}),
+         "Je ne l'y ai pas mise. "],
+        # exemples du papier "Architecture..."
+        # Figure 6
+        [S(Pro("lui").c("nom"),
+           VP(V("donner").t("pc"),
+              NP(D("un"), N("pomme")).pro())),
+         "Il l'a donnée. "],
+        # Table 1 - 1
+        [S(Pro("lui").c("nom"),
+           VP(V("donner").t("pc"),
+              NP(D("un"), N("pomme")).pro())).typ({"neg": True}),
+         "Il ne l'a pas donnée. "],
+        # Table 1 - 2
+        [S(Pro("lui").c("nom"),
+           VP(V("donner").t("pc"),
+              NP(D("un"), N("pomme")).pro(),
+              PP(P("à"), NP(D("le"), N("fille"))))).typ({"neg": True}),
+         "Il ne l'a pas donnée à la fille. "],
+        # Table 1 - 3
+        [S(Pro("lui").c("nom"),
+           VP(V("donner").t("pc"),
+              NP(D("un"), N("pomme")).pro(),
+              PP(P("à"), NP(D("le"), N("fille"))).pro())).typ({"neg": True}),
+         "Il ne la lui a pas donnée. "],
+        # Table 1 - 4
+        [S(Pro("lui").c("nom"),
+           VP(V("donner").t("pc"),
+              NP(D("un"), N("pomme")).pro(),
+              PP(P("à"), NP(D("le"), N("fille"))).pro())).typ({"neg": True, "pas": True}),
+         "Elle ne lui a pas été donnée par lui. "],
+        # position des pronoms devant le verbe
+        [S(Pro('lui').c("nom"),
+           VP(V('donner').t("pc"),
+              NP(D('un'), N('chat')).pro(),
+              Pro("elle").c("dat"))),
+         "Il le lui a donné. "],
+        # modifications globales de propriétés
+        [S(NP(D("le"), N("chat").g("f")),
+           VP(V("manger"),
+              NP(D("le"), N("souris")))).t("f"),
+         "La chatte mangera la souris. "],
+        [S(CP(C("et"),
+              Pro("elle").tn(""),
+              Pro("moi").tn("")),
+           VP(V("aller"),
+              PP(P("à"),
+                 NP(D("le"), N("plage"))))).t("pc"),
+         "Elle et moi sommes allés à la plage. "],
+        # changement de personne dans le déterminant
+        [S(NP(D("notre").pe(2), N("chef")),
+           VP(V("aller"))),
+         "Votre chef va. "],
+        # nouveau type de question "yon" par inversion du sujet
+        [S(NP(D('le'),  # 54
+              N('chat')),
+           VP(V('manger'),
+              NP(D('le'),
+                 N('souris')))).typ({"int": "yon"}),
+         "Le chat mange-t-il la souris? "],
+        [S(NP(D('le'),  # 55
+              N('chat')),
+           VP(V('manger'),
+              NP(D('le'),
+                 N('souris')))).typ({"int": "yon", "neg": True}),
+         "Le chat ne mange-t-il pas la souris? "],
+        [S(NP(D('le'),  # 56
+              N('chat')),
+           VP(V('manger'),
+              NP(D('le'),
+                 N('souris')))).typ({"int": "yon", "pas": True}),
+         "La souris est-elle mangée par le chat? "],
+        [S(Pro("je"),  # 57
+           VP(V('manger'),
+              NP(D('le'),
+                 N('fromage')))).typ({"int": "yon"}),
+         "Mange-t-il le fromage? "],
+        [S(Pro("je"),  # 58
+           VP(V('manger').t("pc"),
+              NP(D('le'),
+                 N('fromage')))).typ({"int": "yon"}),
+         "A-t-il mangé le fromage? "],
+        # question tag
+        [S(Pro("je"),  # 59
+           VP(V('manger').t("pc"),
+              NP(D('le'),
+                 N('fromage')))).typ({"int": "tag"}),
+         "Il a mangé le fromage, n'est-ce pas? "],
+        # adverb position
+        [S(Pro('je').pe(2),  # 60
+           VP(V('travailler').t("pc"),
+              Adv('bien'))).typ({"mod": "nece"}),
+         "Tu as dû bien travailler. "],
+        [S(Pro('je'),  # 61
+           VP(V('aller').t("pc"),
+              Adv('hier'),
+              PP(P('à'),
+                 NP(D('le'),
+                    N('maison'))))).typ({"neg": True}),
+         "Il n'est pas allé hier à la maison. "],
+        [S(Pro('je'),  # 62
+           VP(V('aller').t("pc"),
+              Adv('souvent'),
+              PP(P('à'),
+                 NP(D('le'),
+                    N('maison'))),
+              Adv('sûrement'))).typ({"neg": True}),
+         "Il n'est pas souvent allé à la maison sûrement. "],
+        [S(Pro('je'),  # 63
+           VP(V('aller').t("pc"),
+              Adv('souvent').pos("post"),
+              PP(P('à'),
+                 NP(D('le'),
+                    N('maison'))))).typ({"neg": True}),
+         "Il n'est pas allé souvent à la maison. "],
+        [S(NP(D('le'),  # 64
+              N('chat')),
+           VP(V('manger'),
+              Adv('bien'),
+              Adv('souvent'),
+              NP(D('le'),
+                 N('souris')))).typ({"pas": True}),
+         "La souris est bien souvent mangée par le chat. "],
+        [S(Pro("tout"),
+           VP(V("sembler").t("pa"),
+              V("fonctionner").t("bp"))),
+         "Tout eut semblé avoir fonctionné. "],
+        [S(Pro("lui"),
+           VP(V("manger"),
+              NP(D("le"), N("fromage")))).typ({"pas": True}),
+         "Le fromage est mangé par lui. "],
+        [NP(NO(2), N("fille"), CP(C("et"), A("joli"), A("vieux"))),
+         "2 filles jolies et vieilles"],
+        [NP(CP(C("ou"), NO(2), NO(3)), N("fille"), CP(C("et"), A("jeune"), A("joli"))),
+         "2 ou 3 filles jeunes et jolies"],
 
     ]
 
@@ -416,18 +418,18 @@ def makeExamples():
               Adv('really'),
               Pro('him').g("f").c("acc"))).typ({"perf": True, "mod": "poss"}),
          "He can really have loved him. "],
-        [S(NP(D("the"), N("cat")).n("p"), # 28
+        [S(NP(D("the"), N("cat")).n("p"),  # 28
            VP(V("sit").t("ps"),
               PP(P("on"),
                  NP(D("the"), N("mat"))))).typ({"int": "tag", "neg": True}),
          "The cats did not sit on the mat, did they? "],
-        [CP(C("or"), # 29
+        [CP(C("or"),  # 29
             NP(D("a"), N("elevator")),
             NP(D("a"), N("eucalyptus"))),
          "an elevator or a eucalyptus"],
         [S(VP(V("go").t('ip'), Adv("away"))).typ({"int": "tag"}),
          "Go away, won't you? "],
-        [S(Pro("them"), # 30
+        [S(Pro("them"),  # 30
            VP(V("eat"),
               NP(D("the"), N("cheese")))).typ({"pas": True}),
          "The cheese is eaten by them. "],
@@ -695,15 +697,26 @@ def makeExamples():
          "The cheese is eaten by him. "],
     ]
 
-    # bilingual example
+    # bilingual examples
     loadFr()
     dest = NP(D("le"), N("monde"))
     loadEn()
     constituentEnFr = \
         S(Pro("I").pe(1),
-            VP(V("say"),
+          VP(V("say"),
              "hello",
-            PP(P("to"), dest.tag("b"))))
+             PP(P("to"), dest.tag("b"))))
+
+    loadFr()
+    dest1 = comp(N("monde"), det(D("le")))
+    loadEn()
+    dependentEnFr = \
+        root(V("say"),
+             subj(Pro("I").pe(1)),
+             comp("hello"),
+             comp(P("to"),
+                  dest1.tag("b")))
+
 
 def showEx(exemple):
     print(exemple[0].realize())
@@ -735,6 +748,7 @@ def showDiffs(nomEx, nbDiffs, nbTests):
             print(f"{nomEx} :: *** {nbDiffs} différence{'' if nbDiffs == 0 else 's'} sur {nbTests} tests")
 
 
+#  realize examples and compare with the expected output
 def checkAllEx(nomEx, exemples):
     nb = len(exemples)
     nbDiffs = 0
@@ -749,14 +763,15 @@ def checkAllEx(nomEx, exemples):
     showDiffs(nomEx, nbDiffs, nb)
 
 
+#  transform constituency examples into dependencies, realize them and compare with expected
 def checkAllExDep(nomEx, exemples):
     lang = currentLanguage()
     nb = len(exemples)
     nbDiffs = 0
     nbTests = 0
     for i in range(nb):
-        if len(exemples[i])>2:
-            print(("**:skip example %d: %s" if lang == "en" else "**:saute exemple %d:%s")%(i, exemples[i][2]))
+        if len(exemples[i]) > 2:
+            print(("**:skip example %d: %s" if lang == "en" else "**:saute exemple %d:%s") % (i, exemples[i][2]))
         else:
             exp = exemples[i][0].clone()
             dep = exp.toDependent()
@@ -765,52 +780,55 @@ def checkAllExDep(nomEx, exemples):
             if expected is not None and gen != expected:
                 print("%d:%s\n %s\n => %s\n ** %s" % (i, exp.toSource(), dep.toSource(), gen, expected))
                 nbDiffs += 1
-            nbTests +=1
+            nbTests += 1
     showDiffs(nomEx, nbDiffs, nbTests)
 
 
-def checkAllExJSON(nomEx,exemples):
+#  transform constituency examples into JSON, recreate constituency, realize them and compare with expected
+def checkAllExJSON(nomEx, exemples):
     nb = len(exemples)
-    nbDiffs=0
+    nbDiffs = 0
     for i in range(nb):
-        expJS=exemples[i][0].toJSON()
-        genJS=fromJSON(expJS).realize()
-        expected=exemples[i][1]
+        expJS = exemples[i][0].toJSON()
+        genJS = fromJSON(expJS).realize()
+        expected = exemples[i][1]
         if expected is not None and genJS != expected:
-            print("%d:%s\n => %s\n ** %s"%(i,expJS,genJS,expected))
-            nbDiffs +=1
-    showDiffs(nomEx+"-JSON",nbDiffs,len(exemples))
+            print("%d:%s\n => %s\n ** %s" % (i, expJS, genJS, expected))
+            nbDiffs += 1
+    showDiffs(nomEx + "-JSON", nbDiffs, len(exemples))
 
 
 def testPreviousExamples():
     makeExamples()
     loadFr()
     checkAllEx("exemplesFr", exemplesFr)
-    checkAllExDep("exempleFrDep",exemplesFr)
-    checkAllExJSON("exemplesFr",exemplesFr)
-    checkAllEx("dependancesFr",dependancesFr)
+    checkAllExDep("exempleFrDep", exemplesFr)
+    checkAllExJSON("exemplesFrJSON", exemplesFr)
+    checkAllEx("dependancesFr", dependancesFr)
     print("----")
     loadEn()
-    checkAllEx("exemplesEn",exemplesEn)
-    checkAllExDep("exempleEnDep",exemplesEn)
-    checkAllExJSON("exemplesEn",exemplesEn)
-    checkAllEx("dependenciesEn",dependenciesEn)
+    checkAllEx("exemplesEn", exemplesEn)
+    checkAllExDep("exempleEnDep", exemplesEn)
+    checkAllExJSON("exemplesEnJSON", exemplesEn)
+    checkAllEx("dependenciesEn", dependenciesEn)
     print("----")
     # cannot use checkAllEx because it does a clone() and the language is changed...
-    realEnFr = constituentEnFr.realize()
-    if realEnFr == "I say hello to <b>le monde</b>. ":
-        print("bilingual: OK")
-    else:
-        print("bilingual:KO",realEnFr)
+    for c in [constituentEnFr, dependentEnFr]:
+        realEnFr = c.realize()
+        if realEnFr == "I say hello to <b>le monde</b>. ":
+            print("bilingual: OK")
+        else:
+            print("bilingual:KO", realEnFr)
     print("----")
     # from pyrealb.Warning import test_warnings
     # test_warnings()
+
 
 if __name__ == '__main__':
     # testPreviousExamples()
     # insert here a single example for debugging perhaps commenting the line above
     # do not forget to load the appropriate language
     loadEn()
-    test(S(Pro("this"),VP(V("be"),Adv("so"),A("simple"))).typ({"neg":True,"int":"tag"}))
+    test(S(Pro("this"), VP(V("be"), Adv("so"), A("simple"))).typ({"neg": True, "int": "tag"}))
     loadFr()
-    test(S(Pro("ce"),VP(V("être"),Adv("si"),A("simple"))).typ({"neg":True,"int":"tag"}))
+    test(S(Pro("ce"), VP(V("être"), Adv("si"), A("simple"))).typ({"neg": True, "int": "tag"}))

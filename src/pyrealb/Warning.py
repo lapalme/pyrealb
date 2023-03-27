@@ -13,8 +13,9 @@ warnings = {
             S(NP(D("the"),N("parameter")),
               VP(V("be").t("ps"),Q(good).a(","),Adv("not"),Q(bad))).typ({"mod":"nece"}),
          "fr":lambda good,bad: # le paramètre devrait être $good, pas $bad
+             # HACK: Q("non") au lieu de Adv("non") pour éviter son déplacement avant "appliqué"
             S(NP(D("le"),N("paramètre")),
-              VP(V("être").t("c"),Q(good).a(","),Adv("non"),Q(bad))).typ({"mod":"nece"})},
+              VP(V("être").t("c"),Q(good).a(","),Q("non"),Q(bad))).typ({"mod":"nece"})},
     "bad application":
         {"en":lambda info,goods,bad: # $info should be applied to $good, not to $bad
             S(Q(info),VP(V("apply").t("ps"),
@@ -78,13 +79,13 @@ warnings = {
         {"en":lambda value : # cannot realize $value as ordinal.
             S(VP(V("realize"),Q(value),AdvP(Adv("as"),N("ordinal")))).typ({"neg":True,"mod":"poss"}),
          "fr":lambda value : # $value ne peut pas être réalisé comme un ordinal.
-            S(Q(value),VP(V("réaliser"),AdvP(Adv("comme"),NP(D("un"),N("ordinal")))))
+            S(Q(value),VP(V("réaliser"),AdvP(P("comme"),NP(D("un"),N("ordinal")))))
               .typ({"neg":True,"mod":"poss","pas":True})},
     "bad roman":
         {"en":lambda value : # cannot realize $value as a Roman number.
             S(VP(V("realize"),Q(value),AdvP(Adv("as"),NP(D("a"),A("Roman"),N("number"))))).typ({"neg":True,"mod":"poss"}),
          "fr":lambda value : # $value ne peut pas être réalisé comme un nombre romain.
-            S(Q(value),VP(V("réaliser"),AdvP(Adv("comme"),NP(D("un"),N("nombre"),A("romain")))))
+            S(Q(value),VP(V("réaliser"),AdvP(P("comme"),NP(D("un"),N("nombre"),A("romain")))))
               .typ({"neg":True,"mod":"poss","pas":True})},
     "bad number in word":
         {"en":lambda value : # cannot realize $value in words.
