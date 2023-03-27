@@ -35,7 +35,7 @@ class Terminal(Constituent):
     # TODO: add lang as last parameter
     def setLemma(self,lemma,terminalType=None):
         if terminalType is None: # when it is not called from a Constructor, keep the current terminalType
-            terminalType=type(self).__name__
+            terminalType=self.constType
         if isinstance(lemma, str):
             lemma=lemma.replace("œ","oe").replace("æ","ae")
         self.lemma=lemma

@@ -893,9 +893,11 @@ class Phrase(Constituent):
                     #   this is a nice illustration of jsRealB using itself for realization
                     if aux=="have" and not neg:
                         # special case because it should be realized as "have not" instead of "does not have"
-                        self.addElement(VP(V("have").t(t).pe(pe).n(n),Adv("not"),pro).typ({"contr":True}))
+                        vp = VP(V("have").t(t).pe(pe).n(n),Adv("not"),pro).typ({"contr":True})
                     else: # use jsRealB itself for realizing the tag by adding a new VP
-                        self.addElement(VP(V(aux).t(t).pe(pe).n(n),pro).typ({"neg":not neg,"contr":True}))
+                        vp = VP(V(aux).t(t).pe(pe).n(n),pro).typ({"neg":not neg,"contr":True})
+                    pro.peng = vp.peng  #  ensure that the head of the vp is the pronoun for pronominalize_en
+                    self.addElement(vp)
             prefix = intPrefix[int_]
         else:
             self.warn("not implemented", "int:" + int_)

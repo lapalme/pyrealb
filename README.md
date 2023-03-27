@@ -80,6 +80,8 @@ _Nota bene_:
 ## Demos
 
 * `99bottlesofbeer/99bottlesofbeer.py` : simple generation of a classic repetitive text in English.
+* `dev_example/dev_example.py`: examples of English and French expressions to be realized and checked against expected output,  
+useful for debugging when adding a new expression and enabling tracing
 * `evenementsDemo/evenements.py` : Description (in French) of a list of events, it creates HTML.
 * `flight_infos/README.md` : development of a RASA NLG server giving information about flights, aircrafts, etc...
 * `gophypi/amr2text.py` : generate a literal reading of an AMR (Abstract Meaning Representation);
@@ -90,7 +92,6 @@ _Nota bene_:
 * `randomgen/randomgen.py`: Generation of random English sentences
 * `RDFpyrealb/WebGenerate.py` : Generation from RDF triples
 * `report/report.py` : Single sentence parameterized by language, tense and subject
-* `simple_example/simple_example.py`: a few examples of English and French expressions to be realized, useful for debugging
 * `variantes/variantes.py`: French or English sentences realized with all possible sentence modifiers; some challenging examples are in `examples.py`.
 * `weather/Bulletin.py`: French and English weather bulletins generated from information in a *json-line* file. (`weather-data.jsonl`). It uses the packages in the `Realization` directory.
 

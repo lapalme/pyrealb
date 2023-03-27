@@ -708,6 +708,10 @@ class Constituent():
         if "cap" in self.props and self.props["cap"]!=False:
             cList[0].realization=cList[0].realization.capitalize()
  
+        if "tag" in self.props:
+            for attName,attVal in self.props["tag"]:
+                wrapWith(startTag(attName,attVal),"</"+attName+">")
+
         if "a" in self.props:
             for a in self.props["a"]:
                 wrapWith("",getBeforeAfterString(a)["b"])
@@ -722,10 +726,6 @@ class Constituent():
                 ba=getBeforeAfterString(en)
                 wrapWith(ba["b"],ba["a"])
         
-        if "tag" in self.props:
-            for attName,attVal in self.props["tag"]:
-                wrapWith(startTag(attName,attVal),"</"+attName+">")
-
         return cList
     
     def detokenize(self,terminals):
@@ -799,9 +799,9 @@ class Constituent():
                                 getattr(self,opt)(*o)
                             else:
                                 getattr(self,opt)(o)
-                    elif opt not in ["pat","h"]: # do not copy the pat or h properties of a verb
-                        getattr(self,opt)(val)
-                else:
+                    else:
+                        getattr(self, opt)(val)
+                elif opt not in ["pat","h"]: # do not copy the pat or h properties of a verb
                     print("Constituent.fromJSON: illegal prop:"+opt,file=sys.stderr)
         return self                    
     

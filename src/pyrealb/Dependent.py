@@ -555,22 +555,31 @@ class Dependent(Constituent):
                 if advIdx>=0 and self.dependents[advIdx].terminal.lemma in ["hardly","scarcely","never","seldom"]:
                     neg=True
                 if subjIdx >=0 :
-                    subj=self.dependents[subjIdx].terminal
-                    if subj.isA("Pro"):
-                        if subj.getProp("pe")==1 and aux=="be" and t=="p" and not neg:
+                    subject=self.dependents[subjIdx].terminal
+                    if subject.isA("Pro"):
+                        if subject.getProp("pe")==1 and aux=="be" and t=="p" and not neg:
                             pe=2 # I am => aren't I
-                        elif subj.lemma in ["this","that","nothing"]:
+                        elif subject.lemma in ["this","that","nothing"]:
                             pro=Pro("I").g("n") # it
-                        elif subj.lemma in ["somebody","anybody","nobody","everybody",
+                        elif subject.lemma in ["somebody","anybody","nobody","everybody",
                                             "someone","anyone","everyone"] :
                             pro=Pro("I").n("p") # they
-                            if subj.lemma=="nobody":neg=True
+                            if subject.lemma=="nobody":neg=True
                         else:
-                            pro=subj.clone()
-                        pro=comp(pro)
+                            pro=subject.clone()
+                        pro=subj(pro).pos("post")
+                    elif subject.isA("N"):
+                        pro = self.dependents[subjIdx].clone().pro().pos("post")
                     else:
                         # must wrap into comp("",...) to force pronominalization of children
-                        pro=comp("",self.dependents[subjIdx].clone().pro())
+                        pro=subj(Pro("it").c("nom")).pos("post")
+                else:  #  no subject, but check if the verb is imperative
+                    if t == "ip":
+                        if aux == "do": aux = "will" # change aux when the aux is default
+                        pro = Pro("I").pe(2).n(n).g(g)
+                    else:
+                        pro = Pro("it").c("nom")
+                    pro = subj(pro).pos("post")
                 iDeps=len(self.dependents)-1
                 while iDeps>=0 and self.dependents[iDeps].depPosition()!="post":
                     iDeps-=1
