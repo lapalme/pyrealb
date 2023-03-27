@@ -7,12 +7,12 @@ dependenciesEn = []
 constituentEnFr = None
 
 def makeExamples():
-    global exemplesFr, exemplesEn, dependancesFr, dependancesFr, constituentEnFr
+    global exemplesFr, exemplesEn, dependancesFr, dependenciesEn, constituentEnFr
     loadFr()
     addToLexicon({"John": {"N": {"g": "m", "tab": "n4"}}})
     addToLexicon({"Mary": {"N": {"g": "f", "tab": "n16"}}})
-    pomme = NP(D("le"), N("pomme"));
-    gars = NP(D("le"), N("garçon").n("p"));
+    pomme = NP(D("le"), N("pomme"))
+    gars = NP(D("le"), N("garçon").n("p"))
 
     exemplesFr = [
         [N("chat"),
@@ -298,12 +298,12 @@ def makeExamples():
     [NP(CP(C("ou"), NO(2), NO(3)), N("fille"), CP(C("et"), A("jeune"), A("joli"))),
      "2 ou 3 filles jeunes et jolies"],
 
-    ];
+    ]
 
     #  exemples en anglais
-    loadEn();
-    apple = NP(D("a"), N("apple"));
-    appleC = apple.clone();
+    loadEn()
+    apple = NP(D("a"), N("apple"))
+    appleC = apple.clone()
     appleF = lambda: NP(D("a"), N("apple"))
     addToLexicon({"John": {"N": {"g": "m", "tab": "n4"}}})
     addToLexicon({"Mary": {"N": {"g": "f", "tab": "n4"}}})
@@ -696,9 +696,9 @@ def makeExamples():
     ]
 
     # bilingual example
-    loadFr();
-    dest = NP(D("le"), N("monde"));
-    loadEn();
+    loadFr()
+    dest = NP(D("le"), N("monde"))
+    loadEn()
     constituentEnFr = \
         S(Pro("I").pe(1),
             VP(V("say"),
@@ -730,17 +730,17 @@ def showDiffs(nomEx, nbDiffs, nbTests):
             print(f"{nomEx} :: *** {nbDiffs} difference{'' if nbDiffs == 0 else 's'} over {nbTests} tests")
     else:
         if nbDiffs == 0:
-            print(f"{nomEx} :: *** aucune différence sur {nbTests} tests");
+            print(f"{nomEx} :: *** aucune différence sur {nbTests} tests")
         else:
             print(f"{nomEx} :: *** {nbDiffs} différence{'' if nbDiffs == 0 else 's'} sur {nbTests} tests")
 
 
 def checkAllEx(nomEx, exemples):
     nb = len(exemples)
-    nbDiffs = 0;
+    nbDiffs = 0
     for i in range(nb):
         exp = exemples[i][0].clone()
-        # console.log(exp.toSource());
+        # console.log(exp.toSource())
         gen = exp.realize()
         expected = exemples[i][1]
         if expected is not None and gen != expected:
@@ -760,7 +760,6 @@ def checkAllExDep(nomEx, exemples):
         else:
             exp = exemples[i][0].clone()
             dep = exp.toDependent()
-            # show(dep);
             gen = dep.realize()
             expected = exemples[i][1]
             if expected is not None and gen != expected:
@@ -788,13 +787,13 @@ def testPreviousExamples():
     loadFr()
     checkAllEx("exemplesFr", exemplesFr)
     checkAllExDep("exempleFrDep",exemplesFr)
-    checkAllExJSON("exemplesFr",exemplesFr);
+    checkAllExJSON("exemplesFr",exemplesFr)
     checkAllEx("dependancesFr",dependancesFr)
     print("----")
     loadEn()
     checkAllEx("exemplesEn",exemplesEn)
-    checkAllExDep("exempleEnDep",exemplesEn);
-    checkAllExJSON("exemplesEn",exemplesEn);
+    checkAllExDep("exempleEnDep",exemplesEn)
+    checkAllExJSON("exemplesEn",exemplesEn)
     checkAllEx("dependenciesEn",dependenciesEn)
     print("----")
     # cannot use checkAllEx because it does a clone() and the language is changed...
