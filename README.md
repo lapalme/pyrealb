@@ -1,6 +1,6 @@
 # *pyRealB* - A Python Bilingual Text Realizer
 
-*Version 2.3 - February 2023*
+*Version 2.3.3 - March 2023*
 
 *pyRealB* is a Python adaptation of the JavaScript [**jsRealB**](http://rali.iro.umontreal.ca/jsRealB) 
 text realizer with the same constituent and dependency syntax notation. 
@@ -118,6 +118,6 @@ These steps take for granted that the password for PyPI has already been given..
     `python3 -m pip install pyrealb --upgrade`
 
 ### Useful trick for debugging with breaking point and tracing
-1. add `pyrealb` expression to debug at the end of `demo/simple_example.py`
-2. comment the line calling `testPrevious()`
-3. debug `demo/simple_example.py`
+1. add `pyrealb` expression to debug at the end of `demo/dev_example/dev_example.py`
+2. comment the line calling `testPreviousExamples()`
+3. debug `demo/dev_example/dev_example.py`
