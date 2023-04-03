@@ -991,7 +991,7 @@ class Phrase(Constituent):
                 else:
                     r = e.real()
                 res.extend(r)
-            if self.isA("VP"):
+            if self.isA("VP") and len(res) > 1:
                 self.checkAdverbPos(res)
         return self.doFormat(res)
 

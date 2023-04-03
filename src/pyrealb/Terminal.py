@@ -51,7 +51,6 @@ class Terminal(Constituent):
                 else:
                     self.warn("bad parameter","str,datetime.datetime",type(lemma).__name__)
                     self.date=datetime.datetime.today()                   
-            self.lemma=str(self.date)
             ## set defaults
             self.props["dOpt"]={"year":True,"month":True,"date":True,"day":True,
                         "hour":True,"minute":True,"second":True,
