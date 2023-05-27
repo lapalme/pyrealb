@@ -825,10 +825,8 @@ def testPreviousExamples():
 
 
 if __name__ == '__main__':
-    # testPreviousExamples()
+    testPreviousExamples()
     # insert here a single example for debugging perhaps commenting the line above
     # do not forget to load the appropriate language
     loadEn()
-    test(S(Pro("this"), VP(V("be"), Adv("so"), A("simple"))).typ({"neg": True, "int": "tag"}))
     loadFr()
-    test(S(Pro("ce"), VP(V("être"), Adv("si"), A("simple"))).typ({"neg": True, "int": "tag"}))

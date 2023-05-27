@@ -457,7 +457,14 @@ class Phrase(Constituent):
                 if len(self.elements) > 0 and self.elements[0].isOneOf(["N", "NP", "Pro","S"]):
                     subject = self.removeElement(0)
                     if subject.isA("Pro"):
-                         subject = subject.getTonicPro()
+                        if self.isEn() and subject.lemma == "I":
+                            subject = Pro("me").tn("").g(subject.getProp("g")) \
+                                .n(subject.getProp("n")).pe(subject.getProp("pe"))
+                        elif self.isFr() and subject.lemma == "je":
+                            subject = Pro("moi").tn("").g(subject.getProp("g")) \
+                                .n(subject.getProp("n")).pe(subject.getProp("pe"))
+                        else:
+                            subject = subject.getTonicPro()
                 else:
                     subject = None
             else:
@@ -514,7 +521,6 @@ class Phrase(Constituent):
                 if newSubject is not None:  # this can happen when a subject is Q
                     aux.peng = newSubject.peng
                 aux.props = verbe.props
-                aux.pe(3)  # force person to be 3rd (number and tense will come from the pyrealb subject)
                 if vp.getProp("t") == "ip":
                     aux.t("s")  # set subjonctive present tense for an imperative
                 pp = V(verbe.lemma, "fr").t("pp")
@@ -656,9 +662,9 @@ class Phrase(Constituent):
         words = []
         # conjugate the first verb
         if neg:  # negate the first verb
-            if t in ["pp","pr","b-to","b"]:  # special case for these tenses
+            if t in ["pp","pr","b-to","b","bp","bp-to"]:  # special case for these tenses
                 words.append(Adv("not", "en"))
-                if t == "b" : words.append(P("to","en"))
+                if t == "b" or t=="bp" : words.append(P("to","en"))
                 words.append(V(vAux, "en").t(t))
             elif t == "ip" and v_peng["pe"] == 1 and v_peng["n"]=="p":
                 # very special case: insert "not" between "let's" and verb
@@ -737,23 +743,23 @@ class Phrase(Constituent):
                 if idx is not None and self.getProp("t") not in ["pp","pr","b-to"]:
                     # do not move when tense is participle or infinitive
                     v = vpElems.pop(0)  # remove first V
-                    # check if V is followed by a negation, if so move it also
-                    if len(vpElems) > 0 and vpElems[0].isA("Adv") and vpElems[0].lemma == "not":
-                        not_ = vpElems[0].parentConst.removeElement(0)
-                        self.addElement(v, 0).addElement(not_, 1)
-                    else:
-                        self.addElement(v, 0)
+                    self.addElement(v, 0)
 
     def invertSubject(self):
         # in French : use inversion rule which is quite "delicate"
         # rules from https:#francais.lingolia.com/fr/grammaire/la-phrase/la-phrase-interrogative
         # if subject is a pronoun, invert and add "-t-" or "-"
+        # except for first person singular ("je") which is most often non colloquial (e.g. aime-je or prends-je)
         # if subject is a noun, the subject stays but add a pyrealb pronoun
         subjIdx = self.getIndex(["NP", "N", "Pro", "SP", "CP"])
         if subjIdx >= 0:
             subj = self.elements[subjIdx]
             if subj.isA("Pro"):
-                pro = self.removeElement(subjIdx)  # remove subject pronoun
+                if subj.getProp("pe")==1 and subj.getProp("n")=="s": # add "est-ce que" at the start
+                    self.add(Q("est-ce que"),subjIdx)
+                    return
+                else:
+                    pro = self.removeElement(subjIdx)  # remove subject pronoun
             elif subj.isA("CP"):
                 pro = Pro("moi", "fr").c("nom").g("m").n("p").pe(
                     3)  # create a "standard" pronoun, to be patched by cpReal

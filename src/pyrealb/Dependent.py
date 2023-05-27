@@ -132,12 +132,13 @@ class Dependent(Constituent):
             elif deprel=="det":
                 if depTerm.isA("D"):
                     if hasattr(self,"peng"):
-                        if hasattr(depTerm,"peng") and "pe" in depTerm.peng: # save person (for possessives)
-                            pe=depTerm.peng["pe"]
-                            depTerm.peng=self.peng
-                            depTerm.peng["pe"]=pe
-                        else: #some strange determiner construct do not have peng
-                            depTerm.peng=self.peng
+                    #     if hasattr(depTerm,"peng") and "pe" in depTerm.peng: # save person (for possessives)
+                    #         pe=depTerm.peng["pe"]
+                    #         depTerm.peng=self.peng
+                    #         depTerm.peng["pe"]=pe
+                    #     else: #some strange determiner construct do not have peng
+                    #         depTerm.peng=self.peng
+                        depTerm.peng=self.peng
                 elif depTerm.isA("NO"):
                     depTerm.peng=headTerm.peng
                 elif depTerm.isA("P") and depTerm.lemma == "de":  # HACK: deal with specific case : det(P("de"),mod(D(...)))
@@ -176,7 +177,8 @@ class Dependent(Constituent):
                     if hasattr(self,"peng"):
                         depTerm.peng=self.peng
                     for depI in dep.dependents:
-                        self.setPengRecursive(depI,depI.peng["pengNO"],self.peng)
+                        if hasattr(depI,"peng"):
+                            self.setPengRecursive(depI,depI.peng["pengNO"],self.peng)
             elif deprel=="root":
                 # self.error("An internal root was found")
                 pass
@@ -294,8 +296,18 @@ class Dependent(Constituent):
             subjIdx=self.findIndex(lambda d:d.isA("subj"))
             if subjIdx>=0:
                 subj=self.dependents[subjIdx]
-                if subj.terminal.isA("Pro"):
-                    subj.terminal = subj.terminal.getTonicPro()
+                # if subj.terminal.isA("Pro"):
+                #     subj.terminal = subj.terminal.getTonicPro()
+                subject = subj.terminal
+                if subject.isA("Pro"):
+                    if self.isEn() and subject.lemma=="I":
+                        subj.terminal = Pro("me").tn("").g(subject.getProp("g"))\
+                                         .n(subject.getProp("n")).pe(subject.getProp("pe"))
+                    elif self.isFr() and subject.lemma=="je":
+                        subj.terminal = Pro("moi").tn("").g(subject.getProp("g"))\
+                                         .n(subject.getProp("n")).pe(subject.getProp("pe"))
+                    else:
+                        subj.terminal=subject.getTonicPro()
             else:
                 subj=None
             # find direct object (first N or Pro of a comp) from dependents
@@ -340,7 +352,6 @@ class Dependent(Constituent):
                 # force person to be 3rd (number and tense will come from the new subject)
                 verbe=self.terminal.lemma
                 self.terminal.setLemma("avoir" if verbe == "être" else "être")
-                self.terminal.pe(3)
                 if self.getProp("t")=="ip":
                     self.t("s") # set subjonctive present tense for an imperative
                 pp = V(verbe,"fr").t("pp")
@@ -443,17 +454,21 @@ class Dependent(Constituent):
         # in French : use inversion rule which is quite "delicate"
         # rules from https:#francais.lingolia.com/fr/grammaire/la-phrase/la-phrase-interrogative
         # if subject is a pronoun, invert and add "-t-" or "-"
+        # except for first person singular ("je") which is most often non colloquial (e.g. aime-je or prends-je)
         # if subject is a noun, the subject stays but add a new pronoun
         subjIdx = self.findIndex(lambda d: d.isA("subj"))
         if subjIdx >= 0:
-            subj = self.dependents[subjIdx].terminal
-            if subj.isA("Pro"):
+            subject = self.dependents[subjIdx].terminal
+            if subject.isA("Pro"):
+                if subject.getProp("pe")==1 and subject.getProp("n")=="s": # add est-ce que at the start
+                    self.add(det(Q("est-ce que")),0)
+                    return
                 pro = self.removeDependent(subjIdx).terminal  # remove subject
-            elif subj.isA("C"):
+            elif subject.isA("C"):
                 pro = Pro("moi", "fr").c("nom").g("m").n("p").pe(3)  # create a "standard" pronoun, to be patched by cpReal
-                subj.pronoun = pro  # add a flag to be processed by cpReal
+                subject.pronoun = pro  # add a flag to be processed by cpReal
             else:
-                pro = Pro("moi", "fr").g(subj.getProp("g")).n(subj.getProp("n")).pe(3).c("nom")  # create a pronoun
+                pro = Pro("moi", "fr").g(subject.getProp("g")).n(subject.getProp("n")).pe(3).c("nom")  # create a pronoun
             if self.terminal.isA("V"):
                 self.addPost(pro)
                 self.terminal.lier()
@@ -570,6 +585,7 @@ class Dependent(Constituent):
                         pro=subj(pro).pos("post")
                     elif subject.isA("N"):
                         pro = self.dependents[subjIdx].clone().pro().pos("post")
+                        pro.g(subject.getProp("g")).n(subject.getProp("n")) # ensure proper number and gender
                     else:
                         # must wrap into comp("",...) to force pronominalization of children
                         pro=subj(Pro("it").c("nom")).pos("post")

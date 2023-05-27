@@ -1,6 +1,6 @@
 # *pyRealB* - A Python Bilingual Text Realizer
 
-*Version 2.3.3 - March 2023*
+*Version 2.3.5 - May 2023*
 
 *pyRealB* is a Python adaptation of the JavaScript [**jsRealB**](http://rali.iro.umontreal.ca/jsRealB) 
 text realizer with the same constituent and dependency syntax notation. 
@@ -108,7 +108,7 @@ see [this tutorial](https://packaging.python.org/en/latest/tutorials/packaging-p
 
 These steps take for granted that the password for PyPI has already been given...
 
-1. update version number in `setup.cfg` (it should be the same as `python_version` in `src/pyrealb/utils.py`)
+1. update version number in `setup.cfg` (it should be the same as `python_version` in `src/pyrealb/utils.py` and at the beginning of this document)
 2. `cd` into the directory with the `pyproject.toml` file (the same as this `README.md`)
 3. Build the distribution package  
        `python3 -m build`

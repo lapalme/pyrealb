@@ -62,7 +62,7 @@ def sentences_en():
         {"expression":S(NP(D("the"),N("cat")),
                       VP(V("eat").t("f"),NP(D("a"),A("grey"),N("mouse"))))
                          .typ({"int":"why","pas":True,"neg":True}),
-         "expected":"Why will not a grey mouse be eaten by the cat? ",
+         "expected":"Why will a grey mouse not be eaten by the cat? ",
          "message":"Interrogative, passive and negative"},
         # 15
         {"expression":S(CP(C("and"),

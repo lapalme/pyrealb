@@ -46,6 +46,13 @@ def loadFr(trace=False):
     __lexicon.lang="fr"
     if trace: print("Règles et lexique français chargés",file=sys.stderr)
 
+def load(lang,trace=False):
+    from .Terminal import Q
+    if lang=="en": loadEn(trace)
+    elif lang=="fr": loadFr(trace)
+    else:
+        Q(lang).warn("bad language",lang)
+
 # add to lexicon and return the updated object
 #     to remove from lexicon (give None as newInfos)
 def addToLexicon(lemma,newInfos=None,lang=None):

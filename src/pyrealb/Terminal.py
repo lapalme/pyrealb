@@ -60,21 +60,29 @@ class Terminal(Constituent):
                 self.warn("bad parameter",["str","int","float"],type(lemma).__name__)
                 self.lemma=0
             elif isinstance(lemma,str):
+                lexInfo = getLemma(self.lemma)
+                if "value" in lexInfo:
+                    self.lemma=self.value=lexInfo["value"]
+                    self.nbDecimals=0
+                    self.props["dOpt"] = {"nat":True}
+                    self.addOptSource("nat",True)
+                    return
                 # check if this looks like a legal number
-                if not re.match(r"^[-+]?[0-9]+([., ][0-9]*)?([Ee][-+][0-9]+)?$",lemma):
-                    self.warn("bad parameter","number",type(lemma).__name__)
-                    self.lemma=0
                 else:
-                    self.lemma=re.sub(r"," if self.isEn() else r" ","",self.lemma)
-                try:
-                    self.value=int(self.lemma)
-                except ValueError:
-                    self.value=float(self.lemma)
-                self.nbDecimals=str(self.lemma)[::-1].find(".")
+                    if not re.match(r"^[-+]?[0-9]+([., ][0-9]*)?([Ee][-+][0-9]+)?$",lemma):
+                        self.warn("bad parameter","number",type(lemma).__name__)
+                        self.lemma=0
+                    else:
+                        self.lemma=re.sub(r"," if self.isEn() else r" ","",self.lemma)
+                    try:
+                        self.value=int(self.lemma)
+                    except ValueError:
+                        self.value=float(self.lemma)
+                    self.nbDecimals=str(self.lemma)[::-1].find(".")
             else:
                 self.value=lemma
                 self.nbDecimals=str(lemma)[::-1].find(".")
-            if self.nbDecimals<0:self.nbDecimals=0
+                if self.nbDecimals<0:self.nbDecimals=0
             self.props["dOpt"]={"mprecision":2,"raw":False,"ord":False}
         elif terminalType=="Q":
             self.lemma=str(lemma)
@@ -526,6 +534,14 @@ class Terminal(Constituent):
         elif t == "c":
             self.realization=self.lemma
             self.insertReal(res,V("will").t("ps"),0)
+        elif t=="bp" or t=="bp-to":
+            if t in conjugationTable and "pp" in conjugationTable.t:
+                self.realization = self.stem+conjugationTable.t["pp"]
+            else:
+                self.realization = self.lemma
+            self.insertReal(res,V("have").t("b"),0)
+            if t=="bp-to":
+                self.insertReal(res,P("to"),0)
         elif t == "b-to":
             self.realization = self.lemma
             self.insertReal(res,P("to"),0)

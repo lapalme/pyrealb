@@ -1,7 +1,7 @@
 import copy
 import re,datetime,sys
 
-from .Lexicon import getLexicon, getLemma, getRules, currentLanguage
+from .Lexicon import getLexicon, getLemma, getRules, currentLanguage, load
 
 defaultProps = {"en":{"g":"n","n":"s","pe":3,"t":"p"},             # language dependent default properties
                 "fr":{"g":"m","n":"s","pe":3,"t":"p","aux":"av"}}
@@ -445,9 +445,13 @@ class Constituent():
                 i+=1
                 continue
             m1=sepWordREfr.match(cList[i].realization) if cList[i].realization is not None else None
-            if m1  is None or m1.group(2) is None: continue
+            if m1  is None or m1.group(2) is None:
+                i+=1
+                continue
             m2=sepWordREfr.match(cList[i+1].realization) if cList[i].realization is not None else None
-            if m2  is None or m2.group(2) is None: continue
+            if m2  is None or m2.group(2) is None:
+                i+=1
+                continue
             # HACK: m1 and m2 save the parts before and after the first word (w1 and w2) which is in m_i[2]
             # for a single word
             w1=m1.group(2)
@@ -462,7 +466,8 @@ class Constituent():
                     if re.match(r"ce",w1,re.I) and re.match(r"(^est$)|(^étai)|(^a$)",w2,re.I):
                         # very special case but very frequent
                         cList[i].realization=m1[1]+w1[:-1]+"'"+m1[3]
-                    else:
+                    elif w2 not in ["et","ou","où","aujourd'hui"]:
+                        # avoid euphonie before "et", "or" ....: e.g. "beau et fort" and not "bel et fort"
                         cList[i].realization=m1[1]+euphonieFrTable[w1]+m1[3]
                     elisionFound = True
             if elisionFound:
@@ -490,11 +495,15 @@ class Constituent():
             c = cList[i]
             if c.isA("V") and hasattr(c, "neg2"):
                 if hasattr(c, "isMod") or hasattr(c, "isProg"):
-                    c.insertReal(cList, Q(c.neg2, "fr"), i + 1)
+                    if (c.getProp("lier")==None):
+                        c.insertReal(cList, Q(c.neg2, "fr"), i + 2)
+                    else:
+                        c.insertReal(cList, Q(c.neg2, "fr"), i + 1)
                     c.insertReal(cList, Adv("ne", "fr"), i)
                     del c.neg2  # remove negation from the original verb
                     iDeb = i + 3  # skip these in the following loop
                     if hasattr(c, "isProg"): iDeb += 2  # skip "en train","de"
+                    break
             i += 1
         # gather verb position and pronouns coming after the verb possibly adding a reflexive pronoun
         verbPos = None
@@ -527,6 +536,7 @@ class Constituent():
                             c.insertReal(pros, Q(c.neg2, "fr"))
                         else:
                             neg2 = c.neg2
+                            del c.neg2
                     if c.isReflexive() and c.getProp("t") != "pp":
                         if prog is not None: c = prog
                         c.insertReal(pros,
@@ -769,7 +779,8 @@ class Constituent():
         return s
     
     ## this looks very simple, but it is the start of the realization process
-    def realize(self) -> str:
+    def realize(self,lang=None) -> str:
+        if lang is not None:load(lang)
         terminals=self.real()
         return self.detokenize(terminals)
     
@@ -858,7 +869,7 @@ setattr(Constituent,"n",makeOptionMethod("n",["s","p","x"],["D","Pro","N","NP","
 setattr(Constituent,"g",makeOptionMethod("g",["m","f","n","x"],["D","Pro","N","NP","A","AP","V","VP","S","SP","CP"]))
 #  t, aux : can be applied to VP and sentence
 setattr(Constituent,"t",makeOptionMethod("t",["p", "i", "f", "ps", "c", "s", "si", "ip", "pr", "pp", "b","b-to", # simple tenses
-                   "pc", "pq", "cp", "pa", "fa", "spa", "spq","bp"],["V","VP","S","SP","CP"]))  # compound tenses
+                   "pc", "pq", "cp", "pa", "fa", "spa", "spq","bp","bp-to"],["V","VP","S","SP","CP"]))  # compound tenses
 setattr(Constituent,"aux",makeOptionMethod("aux",["av","êt","aê"],["V","VP","S","SP","CP"]))
 # ordinary properties
 setattr(Constituent,"f",makeOptionMethod("f",["co","su"],["A","Adv"]))

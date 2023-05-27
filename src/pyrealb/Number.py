@@ -54,7 +54,6 @@ def enToutesLettres(s,lang):
 
     # traiter un nombre entre 0 et 999
     def centaines(ns): # ns est une chaine d'au plus trois chiffres
-        if trace:print("centaines:"+ns)
         if len(ns)==1: return unites(ns)
         if len(ns)==2: return dizaines(ns)
         c=ns[0]       # centaines
@@ -69,7 +68,6 @@ def enToutesLettres(s,lang):
 
     # traiter un nombre entre 10 et 99
     def dizaines(ns):# ns est une chaine de deux chiffres
-        if trace: print("dizaines:",ns);
         d=ns[0] # dizaines
         u=ns[1] # unités
         if d=="0": return unites(u)
@@ -85,7 +83,7 @@ def enToutesLettres(s,lang):
             return tens + ( ("-one" if en else " et un") if u=="1" else ("-"+unites(u)))
         elif d=="7":
             if u=="0": return "seventy" if en else "soixante-dix"
-            return ("seventy-"+unites(u))if en else ("soixante-"+dizaines("1"+u))
+            return ("seventy-"+unites(u))if en else ("soixante"+(" et " if u=="1" else "-")+dizaines("1"+u))
         elif d=="8":
             if u=="0": return "eighty" if en else "quatre-vingts"
             return ("eighty-" if en else "quatre-vingt-")+unites(u)

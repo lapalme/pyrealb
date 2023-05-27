@@ -30,7 +30,7 @@ def elision_fr():
             PP(P("à"),NP(D("le"),N("ami").n("p"))).tag("i"),
             NP(D("mon").pe(1),NP(N("ami"),A("beau").tag("b"))),
             NP(D("mon").pe(1),NP(N("étudiant"),A("vieux")).tag("i"))),
-         "du <b>chapeau</b>, <i>aux amis, </i> mon <b>bel</b> ami, mon <i>vieil étudiant</i>"],
+         "du <b>chapeau</b>, <i>aux amis</i>, mon <b>bel</b> ami, mon <i>vieil étudiant</i>"],
         [CP(PP(P("jusque"),PP(P("à"),NP(D("le"),N("bord")).n("p"))),
             PP(P("jusque"),PP(P("à"),NP(D("un"),N("bord")).n("p")))),
          "jusqu'aux bords, jusqu'à des bords"],

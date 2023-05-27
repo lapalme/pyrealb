@@ -842,7 +842,7 @@ def conjugation_en():
         "show": {
             "p3": "shows",
             "ps": "showed",
-            "pp": "showed",
+            "pp": "shown",
             "pr": "showing"
         },
         "shrink": {
