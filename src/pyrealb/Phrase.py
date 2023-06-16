@@ -211,6 +211,13 @@ class Phrase(Constituent):
                         elif self.isFr() and pro.lemma == "que":
                             # in French past participle can agree with a cod appearing before... keep that info just in case
                             v.cod = self
+                            # HACK: check for a "temps composé" formed by "avoir" followed by a past participle
+                            if v.lemma == "avoir":
+                                idx = v.parentConst.getIndex("V")
+                                if len(v.parentConst.elements)>idx+1:
+                                    next=v.parentConst.elements[idx+1]
+                                    if next.isA("V") and next.getProp("t") == "pp":
+                                        next.cod=self
         elif self.isA("VP"):
             headIndex = self.getHeadIndex("VP")  # head is the first internal V
             self.peng = self.elements[headIndex].peng

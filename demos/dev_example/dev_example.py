@@ -287,18 +287,26 @@ def makeExamples():
               NP(D('le'),
                  N('souris')))).typ({"pas": True}),
          "La souris est bien souvent mangée par le chat. "],
-        [S(Pro("tout"),
+        [S(Pro("tout"),     # 65
            VP(V("sembler").t("pa"),
               V("fonctionner").t("bp"))),
          "Tout eut semblé avoir fonctionné. "],
-        [S(Pro("lui"),
+        [S(Pro("lui"),         # 66
            VP(V("manger"),
               NP(D("le"), N("fromage")))).typ({"pas": True}),
          "Le fromage est mangé par lui. "],
-        [NP(NO(2), N("fille"), CP(C("et"), A("joli"), A("vieux"))),
+        [NP(NO(2), N("fille"), CP(C("et"), A("joli"), A("vieux"))),  # 67
          "2 filles jolies et vieilles"],
-        [NP(CP(C("ou"), NO(2), NO(3)), N("fille"), CP(C("et"), A("jeune"), A("joli"))),
+        [NP(CP(C("ou"), NO(2), NO(3)), N("fille"), CP(C("et"), A("jeune"), A("joli"))), #68
          "2 ou 3 filles jeunes et jolies"],
+        [S(NP(D("le"),  # 69
+              N("pomme"),
+              SP(Pro("que"),
+                 Pro("je").pe(1),
+                 VP(V("avoir"),
+                    V("manger").t('pp'))))),
+         "La pomme que j'ai mangée. "
+         ],
 
     ]
 
@@ -582,7 +590,7 @@ def makeExamples():
                    det(D('le'))),
               subj(Pro('elles'))).typ({"pas": True}),
          "Le fromage est mangé par elles. "],
-        [root(N("fille"),
+        [root(N("fille"),                           # 17
               coord(C("ou"),
                     det(NO(2)),
                     det(NO(3))),
@@ -590,6 +598,14 @@ def makeExamples():
                     mod(A("jeune")),
                     mod(A("joli"))).pos("pre")),
          "2 ou 3 jeunes et jolies filles. "],
+        [root(N("pomme"),                          # 18
+              det(D("le")),
+              comp(V("avoir"),
+                   comp(V("manger").t('pp')),
+                   comp(Pro("que")).pos('pre'),
+                   subj(Pro("je").pe(1)))),
+         "La pomme que j'ai mangée. "
+        ],
     ]
 
     # English dependences

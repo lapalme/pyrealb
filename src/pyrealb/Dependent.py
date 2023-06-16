@@ -169,6 +169,13 @@ class Dependent(Constituent):
                         elif self.isFr(): # rel is comp or mod
                             # in French past participle can agree with a cod appearing before... keep that info in case
                             depTerm.cod=headTerm
+                            # HACK: check for a "temps composé" formed by "avoir" followed by a past participle
+                            if depTerm.lemma == "avoir":
+                                iVerb = dep.findIndex(lambda depI:depI.isA("comp") and
+                                                      depI.terminal.isA("V") and
+                                                      depI.terminal.getProp("t") == "pp")
+                                if iVerb >= 0:
+                                    dep.dependents[iVerb].terminal.cod = headTerm
                     # check for past participle in French that should agree with the head
                     if self.isFr() and depTerm.getProp("t")=="pp":
                         depTerm.peng=self.peng

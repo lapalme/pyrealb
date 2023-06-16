@@ -43,6 +43,7 @@ class Terminal(Constituent):
         if terminalType=="DT":
             if lemma is None or lemma=="":
                 self.date=datetime.datetime.today()
+                self.lemma=str(self.date)
             else:
                 if isinstance(lemma,str):
                     self.date=self.parseDateString(lemma)
@@ -482,9 +483,10 @@ class Terminal(Constituent):
                     if t!="pp" and self.isReflexive() and self.parentConst is None:
                         self.insertReal(res, Pro("moi","fr").c("refl").pe(pe).n(n).g(g), 0)
                     if t=="pp" and self.realization!="été": # HACK: frequent case of être that does not change
-                        g=self.getProp("g")
+                        x = self.cod if hasattr(self,"cod") else self
+                        g=x.getProp("g")
                         if g=="x" or g=="n":g="m"   # neutre peut arriver si le sujet est en anglais
-                        n=self.getProp("n")
+                        n=x.getProp("n")
                         if n=="x":n="s"
                         if (g+n)=="mp" and self.realization.endswith("s"):
                             pass    # pas d'ajout de s au masculin pluriel si la réalisation termine en s
