@@ -62,7 +62,7 @@ class Terminal(Constituent):
                 self.lemma=0
             elif isinstance(lemma,str):
                 lexInfo = getLemma(self.lemma)
-                if "value" in lexInfo:
+                if lexInfo is not None and "value" in lexInfo:
                     self.lemma=self.value=lexInfo["value"]
                     self.nbDecimals=0
                     self.props["dOpt"] = {"nat":True}
@@ -156,7 +156,7 @@ class Terminal(Constituent):
     def grammaticalNumber(self):
         if not self.isA("NO"):
             return self.warn("bad application","grammaticalNumber","NO",self.constType)
-        if "ord" in self.props and self.props["ord"]==True:
+        if "dOpt" in self.props and "ord" in self.props["dOpt"] and self.props["dOpt"]["ord"]:
             return "s"
         number=self.value
         if self.isFr():
@@ -380,7 +380,8 @@ class Terminal(Constituent):
 
     
     def conjugate_fr(self):
-        pe=int(self.getProp("pe"))
+        pe = self.getProp("pe")
+        pe = 3 if pe is None else int(pe)
         g = self.getProp("g")
         n = self.getProp("n")
         t = self.getProp("t")

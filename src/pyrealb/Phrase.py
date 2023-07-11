@@ -990,7 +990,7 @@ class Phrase(Constituent):
     def real(self):
         res = []
         if self.isA("CP"):
-            res = self.cpReal()
+            return self.cpReal()
         else:
             self.pronominalizeChildren()
             if "typ" in self.props:

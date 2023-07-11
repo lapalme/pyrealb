@@ -841,7 +841,7 @@ def testPreviousExamples():
 
 
 if __name__ == '__main__':
-    testPreviousExamples()
+    # testPreviousExamples()
     # insert here a single example for debugging perhaps commenting the line above
     # do not forget to load the appropriate language
     loadEn()

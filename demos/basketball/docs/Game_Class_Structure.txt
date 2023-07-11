@@ -1,0 +1,71 @@
+Games:
+    __init__(split)
+    __getitem__(item): Game
+    __len__(): int
+
+Game:
+    date() -> Date
+    game_id() -> int
+    city() -> str
+    stadium()-> str
+    home() -> Team
+    visitors() -> Team
+    summaries() -> [str]  # returns the untokenized references
+    show_title() -> str
+    show_summaries() -> str
+
+Team:
+    __init__(obj)
+    __str__() -> str
+    - name() -> str
+    - place() -> str
+    - wins() -> int
+    - losses() -> int
+    - previous_game() -> int
+    - next_game() -> int
+    - line_scores() -> {str:Score}
+      line_scores(str) -> Score
+    - players_scores() -> [Player] # sorted decreasing by points
+    - show_name() ::str
+
+Player (Score):
+    - __init__(obj)
+    - __str__() -> str
+    - name() -> str
+    - starter() -> bool
+    - minutes() -> int
+    - double() -> str   # "none" if no special double
+
+Score:
+    __init__(obj)
+    __str__() -> str
+    - goals() -> int
+    - goals_attempted() ->  int
+    - goals3() -> int
+    - goals3_attempted() -> int
+    - free_throws() -> int
+    - free_throws_attempted() -> int
+    - offensive_rebounds() -> int
+    - rebounds() -> int
+    - assists() -> int
+    - steals() -> int
+    - blocks() -> int
+    - turnovers() -> int
+    - fouls() -> int
+    - plus_minus() -> int
+    - points() -> int
+    - allScores() -> {str:int|str}
+    score_top_line() -> str # @class method
+    score_titles : [str]  # class var
+
+---
+Structure of "-aggregate.json"
+
+field_name : "MIN"|"FGM"|"FGA"|"FG3M"|"FG3A"|"FTM"|"FTA"|"OREB"|"TREB"|"AST"|"STL"|"BLK"|"TOV"|"PF"|"PTS"|"+/-"
+
+stat_elem: [float,[float,float,float]]
+            mean followed by quartiles boundaries
+{
+  "teams"  :{name:str,{field_name:stat_elem}},
+  "players":{name:str,{field_name:stat_elem}}
+}

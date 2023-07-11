@@ -80,6 +80,7 @@ _Nota bene_:
 ## Demos
 
 * `99bottlesofbeer/99bottlesofbeer.py` : simple generation of a classic repetitive text in English.
+* `basketball/sportsettsum.py` : generation of French and English basketball summaries
 * `dev_example/dev_example.py`: examples of English and French expressions to be realized and checked against expected output,  
 useful for debugging when adding a new expression and enabling tracing
 * `evenementsDemo/evenements.py` : Description (in French) of a list of events, it creates HTML.
