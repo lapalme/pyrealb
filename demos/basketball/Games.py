@@ -1,4 +1,4 @@
-# get the split set of the GEM dataset
+from typing import Iterator
 import datasets
 
 dataset_name = 'GEM/sportsett_basketball'
@@ -15,13 +15,13 @@ class Games:
         # print(self.games.column_names)
         # print(json.dumps(self.games[0],indent=3,ensure_ascii=False))
 
-    def __getitem__(self, item):
+    def __getitem__(self, item) -> Game | None:
         if item in self.games:
             return Game(self.games[item])
         return None
 
-    def __len__(self):
+    def __len__(self) -> len:
         return len(self.games)
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator[Game]:
         return iter(self.games)

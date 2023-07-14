@@ -99,7 +99,7 @@ def summarize(realizer, game) -> str:
     next_game_info = next_game(loser)
     if next_game_info is not None:
         next_games += realizer.show_next_game(*next_game_info)
-    if len(next_games)>0:
+    if len(next_games) > 0:
         paras.append(next_games)
     return "\n\n".join(paras)
 
@@ -123,7 +123,7 @@ def display_side_by_side(gen_sum, orig_sum, width):
             print(left + " | " + right)
 
 
-def show_summaries(game, realizerCs, show_data=False, show_refs=False):
+def show_summaries(game, realisers, show_data=False, show_refs=False):
     print("*** ", game.show_title(), "\n")
     # show the data used for summarization
     if show_data:
@@ -131,8 +131,8 @@ def show_summaries(game, realizerCs, show_data=False, show_refs=False):
         print()
         print(game.visitors())
         print()
-    for realizerC in realizerCs:
-        realizer = realizerC()
+    for realizer in realisers:
+        realizer.set_language() # must set the appropriate language before each summary
         print("***", realizer.name)
         gen_sum = summarize(realizer, game)
         print(gen_sum)
@@ -150,6 +150,6 @@ if __name__ == "__main__":
     nb = 0
     for i in games:
         g = games[i]
-        show_summaries(g, [FStrings, English, French])
+        show_summaries(g, [FStrings(), English(), French()])
         nb += 1
         if nb > 10: break

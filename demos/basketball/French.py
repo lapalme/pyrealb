@@ -12,6 +12,8 @@ class French(Realizer):
         self.tense = tense
         self.name = "French jsRealB"
         # language specifics
+
+    def set_language(self):
         loadFr()
 
     best_player_VPs = [
@@ -39,20 +41,20 @@ class French(Realizer):
     ]
 
     # quelques expressions toutes faites qui reviennent
-    def pts_3(self, n):
-        return NP(self.no(3),
+    def pts_3(self, n) -> NP:
+        return NP(self.no(n),
                   N("panier"),
                   PP(P("à"), self.nb(3, "point")))
 
-    def nb_assists(self, n):
+    def nb_assists(self, n) -> NP:
         return NP(self.no(n),
                   N("passe").g("f"),  # important de spécifier le genre
                   A("décisif"))
 
-    def m_for_n(self, m, n):
+    def m_for_n(self, m, n) -> [Terminal]:
         return [NO(m).lier(), P("sur").lier(), NO(n)]
 
-    def team_np(self, team, with_place=False):
+    def team_np(self, team, with_place=False) -> NP:
         return NP(D("le"),
                   Q(team.name()),
                   PP(P("de"), Q(team.place())) if with_place else None).n("p")

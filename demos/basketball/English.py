@@ -18,6 +18,9 @@ class English(Realizer):
         addToLexicon({"free throw": {"N": {"tab": "n1"}}})
         addToLexicon({"outscore": {"V": {"tab": "v3"}}})
 
+    def set_language(self):
+        loadEn()
+
     best_player_VPs = [
         lambda: VP(V("score"), NP(D("a"), N("game"), Adv("high"), P("with"))),
         lambda: VP(V("finish"), P("with")),
@@ -39,13 +42,13 @@ class English(Realizer):
         lambda: VP(V("have")),
     ]
 
-    def pts_3(self, n):
+    def pts_3(self, n) -> NP:
         return self.nb(n, "three-pointer")
 
-    def nb_assists(self, n):
+    def nb_assists(self, n) -> NP:
         return self.nb(n, "assist")
 
-    def m_for_n(self, m, n):
+    def m_for_n(self, m, n) -> [Terminal]:
         return [NO(m).lier(), P("for").lier(), NO(n)]
 
     def team_np(self, team, with_place=False):
@@ -53,7 +56,7 @@ class English(Realizer):
                   Q(team.place()) if with_place else None,
                   Q(team.name())).n("p")
 
-    def game_part(self, part):
+    def game_part(self, part) -> Constituent:
         if part == "game":
             return NP(D("the"), N("game"))
         if part.startswith("Q"):

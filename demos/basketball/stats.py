@@ -1,48 +1,13 @@
 import sys
 from statistics import mean, quantiles
 import json
+
 from Games import Games
 
-#
 nb_quantiles = 5
 
-#
-# CREATE aggregated data that is then saved in a json file
-team_game_scores = {}
-player_scores = {}
 
-
-def add_team_game_score(name, score):
-    if name not in team_game_scores:
-        team_game_scores[name] = []
-    team_game_scores[name].append(score)
-
-
-def add_player_score(name, score):
-    if name not in player_scores:
-        player_scores[name] = []
-    player_scores[name].append(score)
-
-
-def aggregate_scores(scores):
-    # caution scores are changed in place
-    ignored = []
-    for name in scores:
-        sc_n = scores[name]
-        nb_values = len(sc_n)
-        if nb_values > 1:
-            aggregate = {}
-            for key in sc_n[0].keys():
-                data = [row[key] for row in sc_n]
-                aggregate[key] = mean(data), quantiles(data,n=nb_quantiles,method="inclusive")
-            scores[name] = (nb_values, aggregate)
-        else:
-            ignored.append(name)
-    for name in ignored:
-        del scores[name]
-
-
-def show_aggregate_scores(title, scores, keys):
+def show_aggregate_scores(title: str, scores, keys: [str]) -> str:
     titles = scores[next(iter(scores))][1].keys()
     line_width = 20 + 6 * (len(titles) + 1)
     # sep = "-" * line_width
@@ -57,10 +22,36 @@ def show_aggregate_scores(title, scores, keys):
     return "\n".join(lines)
 
 
-def compute_stats(games):
-    global aggregate
+def compute_stats(games: Games):
+    # CREATE aggregated data to be saved in a json file
+    team_game_scores: dict[str, [dict[str, int]]] = {}
+    player_scores: dict[str, [dict[str, int]]] = {}
+
+    def add_team_game_score(name: str, score: dict[str, int]):
+        if name not in team_game_scores:
+            team_game_scores[name] = []
+        team_game_scores[name].append(score)
+
+    def add_player_score(name: str, score: dict[str, int]):
+        if name not in player_scores:
+            player_scores[name] = []
+        player_scores[name].append(score)
+
+    def aggregate_scores(scores: dict[str, [dict[str, int]]]) -> dict[str, (float, dict[str, (int, [float])])]:
+        new_scores = {}
+        for name in scores:
+            sc_n: [dict[str, int]] = scores[name]
+            nb_values = len(sc_n)
+            if nb_values > 1:
+                aggr: dict[str, (int, [float])] = {}
+                for key in sc_n[0].keys():
+                    data: [int] = [row[key] for row in sc_n]
+                    aggr[key] = mean(data), quantiles(data, n=nb_quantiles, method="inclusive")
+                new_scores[name] = (nb_values, aggr)
+        return new_scores
+
     # collect team and player statistics
-    for i in range(0, len(games)):
+    for i in games:
         game = games[i]
         for team in [game.home(), game.visitors()]:
             add_team_game_score(team.name(), team.line_scores("game").allScores())
@@ -68,65 +59,69 @@ def compute_stats(games):
                 if player.minutes() > 1 and player.points() > 2:
                     add_player_score(player.name(), player.allScores())
     # aggregate statistics
-    aggregate_scores(team_game_scores)
+    agg_team_game_scores = aggregate_scores(team_game_scores)
     # print(team_game_scores)
-    print(show_aggregate_scores(f"{len(team_game_scores)} Teams", team_game_scores, sorted(team_game_scores.keys())))
-    aggregate_scores(player_scores)
+    print(show_aggregate_scores(f"{len(agg_team_game_scores)} Teams", agg_team_game_scores,
+                                sorted(agg_team_game_scores.keys())))
+    agg_player_scores = aggregate_scores(player_scores)
     # print(player_scores)
-    print(show_aggregate_scores(f"{len(player_scores)} Players", player_scores,
+    print(show_aggregate_scores(f"{len(agg_player_scores)} Players", agg_player_scores,
                                 # sort lines by "Family name" taken as the word after the last space.
-                                sorted(player_scores.keys(), key=lambda s: s[s.rindex(" ") + 1:] if " " in s else s)))
+                                sorted(agg_player_scores.keys(),
+                                       key=lambda s: s[s.rindex(" ") + 1:] if " " in s else s)))
+    return {"teams": agg_team_game_scores, "players": agg_player_scores}
 
 
 #
 #  USE aggregated data read from a json file
-# aggregated data goes here...
-aggregate = None
+# aggregated data will go here...
+aggregate: dict[str, (float, dict[str, (int, [float])])] = {}
 
 
-def player_has_statistics(name):
+def player_has_statistics(name) -> bool:
     return name in aggregate["players"]
 
 
-def team_has_statistics(name):
+def team_has_statistics(name) -> bool:
     return name in aggregate["teams"]
 
 
-def getStats(kind, name, stat_type):
+def getStats(kind, name, stat_type) -> [float]:
     agg = aggregate[kind]
     if name in agg:
-        if stat_type == "NB":
-            return agg[name][0]
-        elif stat_type in agg[name][1]:
+        if stat_type in agg[name][1]:
             return agg[name][1][stat_type]
         else:
-            print(f"*** {stat_type} not found for {name}",file=sys.stderr)
+            print(f"*** {stat_type} not found for {name}", file=sys.stderr)
             return None
     else:
-        print(f"*** {name} not found in {kind}",file=sys.stderr)
+        print(f"*** {name} not found in {kind}", file=sys.stderr)
         return None
 
 
-def is_inquantile(kind, name, stat_type, value, nth):
+def is_in_quantile(kind, name, stat_type, value, nth) -> bool:
     data = getStats(kind, name, stat_type)
-    if data is None: return False
+    if data is None:
+        return False
     if nth == -1:
         return value > data[1][-1]
     elif nth == 1:
         return value < data[1][0]
     else:
-        print('quantile should be 1 or -1 but is', nth,file=sys.stderr)
+        print('quantile should be 1 or -1 but is', nth, file=sys.stderr)
         return False
 
 
-def is_high(kind, name, stat_type, value):
-    if value == 0: return False
-    return is_inquantile(kind, name, stat_type, value, -1)
+def is_high(kind, name, stat_type, value) -> bool:
+    if value == 0:
+        return False
+    return is_in_quantile(kind, name, stat_type, value, -1)
 
 
-def is_low(kind, name, stat_type, value):
-    if value == 0: return False
-    return is_inquantile(kind, name, stat_type, value, 1)
+def is_low(kind, name, stat_type, value) -> bool:
+    if value == 0:
+        return False
+    return is_in_quantile(kind, name, stat_type, value, 1)
 
 
 split = "train"
@@ -134,14 +129,13 @@ json_file_name = f"./data/{split}-aggregate.json"
 
 if __name__ == "__main__":
     games = Games("train")
-    compute_stats(games)
+    aggregate = compute_stats(games)
     # save the json file
-    aggregate = {"teams": team_game_scores, "players": player_scores, }
     json.dump(aggregate,
               open(json_file_name, "w", encoding="utf-8"),
               ensure_ascii=False)
     print(f"{json_file_name}:written")
-    # a few tests
+    # perform a few tests
     print(getStats("teams", "76ers", "NB"))
     print(getStats("teams", "Heat", "FG3M"))
     print(getStats("teams", "Test", "FG3M"))
