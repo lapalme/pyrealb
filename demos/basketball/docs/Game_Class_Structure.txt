@@ -1,7 +1,9 @@
 Games:
-    __init__(split)
-    __getitem__(item): Game
-    __len__(): int
+    - __init__(split)
+    - __getitem__(item) -> Game | None
+    - __len__() -> int
+    - __iter__ -> Iterator[Game]
+    - keys() -> [str]
 
 Game:
     date() -> Date
@@ -15,30 +17,42 @@ Game:
     show_summaries() -> str
 
 Team:
+    period_scores: dict[str,Score]
+    players : [Player]
     __init__(obj)
-    __str__() -> str
+    - show() -> str
     - name() -> str
     - place() -> str
     - wins() -> int
     - losses() -> int
+    - conference_standing() -> int
     - previous_game() -> int
     - next_game() -> int
-    - line_scores() -> {str:Score}
-      line_scores(str) -> Score
-    - players_scores() -> [Player] # sorted decreasing by points
-    - show_name() ::str
+    - player_names() -> [str]
+    - get_player(name:str) -> Player
+    - players_sorted() -> [Player] # sorted decreasing by points
+    - show_name() -> str
+    - get_points(key=None) -> {str:int} | int
+    - final_score() -> int
+    - minutes_overtime () -> int
 
 Player (Score):
+   this_game : Game
+   team_name : str
+   scores: Score
     - __init__(obj)
-    - __str__() -> str
+    - show() -> str
     - name() -> str
     - starter() -> bool
     - minutes() -> int
     - double() -> str   # "none" if no special double
+    class method
+    player_top_line() -> str
 
 Score:
-    __init__(obj)
-    __str__() -> str
+    - __init__(obj)
+    - show() -> str
+    - minutes -> int
     - goals() -> int
     - goals_attempted() ->  int
     - goals3() -> int
@@ -54,10 +68,11 @@ Score:
     - fouls() -> int
     - plus_minus() -> int
     - points() -> int
-    - allScores() -> {str:int|str}
-    score_top_line() -> str # @class method
-    score_titles : [str]  # class var
-
+    - allScores() -> {str:int}
+    Class method and vars
+    score_top_line() -> str
+    score_titles : [str]
+    score_width: int
 ---
 Structure of "-aggregate.json"
 

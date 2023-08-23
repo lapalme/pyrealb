@@ -6,25 +6,33 @@ This demo features a rule-based data-to-text Natural Language Generation (NLG) f
 
 ## File organization
 
+- `BasketballSummarizer.py` : abstract class for a basketball summarizer
 - `English.py` : English realizer class
 - `French.py` : French realizer class
-- `Fstrings.py` : Realizer using only Python string concatenation
+- `FStrings.py` : Realizer using only Python string concatenation
 - `Game.py` : Class for storing information about a game
 - `Games.py` : Class for hiding access to the Gem dataset
+- `LexicalChoices.py` : abstract class for a realizer
 - `Player.py` : Class for storing information about a player
 - `Realizer.py` : Class with functions shared by English.py and French.py
+- `Score.py` : Class for keeping numeric scores (for both Team line-scores and Play box-scores) 
+- `seasons_stats.py` : functions for querying information in past game of the current season 
 - `sportsettsum.py` : summarizer (this is the main program)
-- `stats.py` : computation and use of statistics about teams and players; when launched as main, it creates the data/aggregate.json file
+- `stats.py` : computation and use of statistics about teams and players; when launched as main, it creates the `data/aggregate.json` file
 - `Team.py` : Class for storing information about a team
 - `data`/
+  - `Seasons-train.txt` : listing of the all games for a given team in each season in the *train* split
   - `train-aggregate.json`: aggregated data about teams and players
 - `docs`/
   - `Game_Class_Structure.txt` : global organisation of the main classes for information
   - `SportSett-GEM.md` : reminder of basketball terms and tricks for using the data
   - `SportSettSum.md`: paper about the rationale and organization of the whole realizer system
-  
 
-#### Contact: [Guy Lapalme](mailto:lapalme@iro.umontreal.ca)
+- `output`/
+  - `test`, `train` and `validation`: directories with a sample of generated summaries from the given corpus
+
+
+**Contact**: [Guy Lapalme](mailto:lapalme@iro.umontreal.ca)
 
 
 

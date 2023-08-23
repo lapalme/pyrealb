@@ -6,22 +6,25 @@ from Game import Game
 
 
 class Games:
-    # save all json structures in self.games, transformation into Game instace is done lazily on indexing
+    # save all json structures in self.games
     def __init__(self, split):
-        self.games = {int(g["sportsett_id"]): g for g in datasets.load_dataset(dataset_name,
-                                                                               split=split)}
-        # uncomment the following to get idea of the data
-        # print(self.games.shape)
-        # print(self.games.column_names)
-        # print(json.dumps(self.games[0],indent=3,ensure_ascii=False))
+        self.games = {g["sportsett_id"]: Game(g) for g in datasets.load_dataset(dataset_name,split=split)}
 
-    def __getitem__(self, item) -> Game | None:
-        if item in self.games:
-            return Game(self.games[item])
+    def __getitem__(self, key:str) -> Game | None:
+        if key in self.games:
+            return self.games[key]
         return None
 
-    def __len__(self) -> len:
+    def __len__(self) -> int:
         return len(self.games)
 
     def __iter__(self) -> Iterator[Game]:
         return iter(self.games)
+
+    def keys(self) -> [str]:
+        return list(self.games.keys())
+
+
+if __name__ == "__main__":
+    games = Games("train")
+    print(games["1"].show())

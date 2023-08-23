@@ -196,6 +196,8 @@ class Phrase(Constituent):
                                 # in English possessive determiner should not depend on the noun but on the "owner"
                                 if self.isFr() or not (e.isA("D") and "own" in e.props):
                                     e.peng = self.peng
+                            elif e.isA("V") and e.isFr() and e.getProp("t") == "pp":
+                                e.peng = self.peng
                             elif e.isA("CP"): # check for a coordination of adjectives and numbers
                                 for el in e.elements:
                                     if el.isOneOf(["A","NO"]):

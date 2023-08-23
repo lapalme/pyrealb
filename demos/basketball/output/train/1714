@@ -1,0 +1,136 @@
+***  1714:2016-03-13: Sacramento Kings receives Utah Jazz  [99-108]
+
+                    |                                    Sacramento Kings (25-40)                                   
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|    7|   17|    2|    6|    2|    4|    0|    5|    5|    1|    0|    2|     |   18|     
+Q2                  |               60|   10|   18|    2|    2|    5|    6|    1|    7|    5|    3|    0|    2|     |   27|     
+Q3                  |               60|   11|   23|    2|    5|    0|    4|    3|   13|    9|    2|    2|    2|     |   24|     
+Q4                  |               60|   10|   23|    3|    8|    7|    7|    4|   11|    6|    2|    3|    4|     |   30|     
+H1                  |              120|   17|   35|    4|    8|    7|   10|    1|   12|   10|    4|    0|    4|     |   45|     
+H2                  |              120|   21|   46|    5|   13|    7|   11|    7|   24|   15|    4|    5|    6|     |   54|     
+game                |              240|   38|   81|    9|   21|   14|   21|    8|   36|   25|    8|    5|   10|   20|   99|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+DeMarcus Cousins    |True |doubl|   34|   10|   23|    3|    6|    8|   11|    2|   10|    5|    2|    2|    1|    5|   31|   -9
+Omri Casspi         |False|     |   26|    8|   12|    4|    4|    0|    0|    1|    3|    0|    1|    0|    1|    2|   20|    5
+Darren Collison     |True |     |   32|    5|    9|    0|    4|    4|    4|    0|    2|    5|    2|    0|    2|    3|   14|   -1
+Willie Cauley-Stein |False|     |   28|    4|    6|    0|    0|    2|    6|    2|    7|    0|    1|    1|    0|    1|   10|    4
+Rajon Rondo         |True |     |   35|    3|    9|    1|    4|    0|    0|    1|    4|    9|    0|    0|    5|    3|    7|  -14
+Rudy Gay            |True |     |   30|    3|    9|    0|    1|    0|    0|    2|    4|    2|    0|    0|    1|    1|    6|   -9
+Seth Curry          |False|     |   16|    2|    4|    1|    2|    0|    0|    0|    1|    2|    1|    0|    0|    1|    5|    2
+Kosta Koufos        |False|     |   12|    2|    6|    0|    0|    0|    0|    0|    4|    0|    0|    2|    0|    2|    4|    1
+Quincy Acy          |True |     |   10|    1|    2|    0|    0|    0|    0|    0|    1|    0|    0|    0|    0|    2|    2|  -17
+Marco Belinelli     |False|     |   11|    0|    1|    0|    0|    0|    0|    0|    0|    2|    1|    0|    0|    0|    0|   -7
+James Anderson      |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Caron Butler        |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Ben McLemore        |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+                    |                                       Utah Jazz (31-35)                                       
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|   13|   22|    6|   10|    4|    4|    4|   15|    9|    2|    0|    1|     |   36|     
+Q2                  |               60|   10|   17|    2|    4|    3|    5|    1|    8|    7|    1|    1|    5|     |   25|     
+Q3                  |               60|   10|   24|    2|    9|    1|    1|    2|   13|    8|    1|    2|    3|     |   23|     
+Q4                  |               60|    6|   19|    2|    5|   10|   12|    4|   11|    2|    4|    0|    7|     |   24|     
+H1                  |              120|   23|   39|    8|   14|    7|    9|    5|   23|   16|    3|    1|    6|     |   61|     
+H2                  |              120|   16|   43|    4|   14|   11|   13|    6|   24|   10|    5|    2|   10|     |   47|     
+game                |              240|   39|   82|   12|   28|   18|   22|   11|   47|   26|    8|    3|   16|   22|  108|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Derrick Favors      |True |doubl|   37|   10|   16|    0|    0|    8|   10|    5|   14|    4|    3|    1|    1|    2|   28|    7
+Gordon Hayward      |True |     |   39|    9|   19|    4|    9|    5|    5|    1|    4|    3|    1|    0|    1|    4|   27|    2
+Shelvin Mack        |True |     |   30|    5|   11|    4|    6|    0|    0|    1|    5|    8|    2|    0|    5|    3|   14|   11
+Rodney Hood         |True |     |   34|    6|   10|    0|    1|    0|    0|    1|    3|    1|    0|    0|    2|    1|   12|   15
+Trevor Booker       |False|     |   25|    3|   10|    0|    4|    4|    4|    2|    8|    1|    1|    2|    0|    1|   10|   -4
+Chris Johnson       |False|     |   11|    2|    3|    2|    2|    0|    0|    1|    1|    1|    0|    0|    1|    0|    6|    2
+Trey Burke          |False|     |   10|    2|    3|    1|    2|    0|    0|    0|    0|    1|    0|    0|    2|    1|    5|  -10
+Trey Lyles          |False|     |   10|    1|    3|    1|    2|    0|    0|    0|    1|    0|    0|    0|    1|    3|    3|  -10
+Raul Neto           |False|     |    7|    1|    2|    0|    1|    1|    1|    0|    0|    2|    0|    0|    0|    0|    3|    8
+Rudy Gobert         |True |     |   22|    0|    3|    0|    0|    0|    2|    0|    8|    2|    0|    0|    2|    6|    0|   23
+Joe Ingles          |False|     |   10|    0|    2|    0|    1|    0|    0|    0|    3|    3|    1|    0|    1|    1|    0|    1
+Jeff Withey         |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+*** English jsRealB
+The Jazz  (31-35) overcame the Kings  (25-40) 108-99 on Sunday in Sacramento at the Sleep
+Train Arena.
+
+The Kings outscored the Jazz 54-47 in the second half but the winner held for the win.
+
+Derrick Favors who started this game scored a game high with 28 points in 37 minutes
+(10-16 FG, 0-0 3Pt, 8-10 FT) while adding four assists and performed a double-double.
+DeMarcus Cousins who was in the starting line-up scored a game high with 31 points with
+3-for-6 from beyond the arc and performed a double-double.
+
+The Jazz showed 47 percent from the field and 18-22 free throws.  Gordon Hayward who was
+in the starting line-up added 27 points in 39 minutes with 4-for-9 from beyond the arc.
+Shelvin Mack had 14 points  (5-11 FG, 4-6 3Pt, 0-0 FT) and eight assists.  Chris Johnson
+added six points.
+
+The Kings showed 46 percent from the field and 14-21 free throws.  Omri Casspi who was in
+the starting line-up contributed an efficient 20 points.
+
+The Jazz' next game will be at home against the Cleveland Cavaliers on Monday. Next
+Tuesday, the Kings will visit the Los Angeles Lakers.
+-------------------------
+*** French jsRealB
+Les Jazz  (31-35) ont battu les Kings  (25-40) 108-99 dimanche à Sacramento au stade Sleep
+Train Arena.
+
+Les Kings a dominé les Jazz  (54-47) dans la deuxième demie mais n'a pas pu compléter leur
+retour.
+
+Derrick Favors qui débutait la partie a mené, comptant 28 points en 37 minutes avec dix
+tirs réussis, 14 rebonds récupérés, quatre passes décisives et a terminé avec un double-
+double. DeMarcus Cousins qui était un partant a réalisé une performance excellente
+comptant 31 points a terminé avec un double-double.
+
+Les Jazz ont compté 47 pour cent de tirs réussis et 18 lancers francs sur 22.  Gordon
+Hayward qui était un partant a eu 27 points en 39 minutes avec 4-sur-9 depuis la ligne de
+trois points.  Shelvin Mack a enregistré 14 points avec 4-sur-6 depuis la ligne de trois
+points, cinq rebonds et huit passes décisives.  Chris Johnson a marqué six points avec
+2-sur-2 depuis la ligne de trois points.
+
+Les Kings ont compté 46 pour cent de tirs réussis et 14 lancers francs sur 21.  Omri
+Casspi qui figurait dans l'alignement de départ a marqué 20 points avec huit tirs réussis
+et 4-sur-4 depuis la ligne de trois points.
+
+Pour leur prochaine partie, les Jazz joueront à la maison contre les Cavaliers de
+Cleveland lundi. Ensuite les Kings voyageront à Los Angeles pour affronter les Lakers
+mardi.
+-------------------------
+*** English FStrings
+The Utah Jazz (31-35) defeated the Sacramento Kings (25-40) 108-99 on Sunday at the Sleep
+Train Arena in Sacramento .
+
+The Kings outscored the Jazz (54-47) in the second half, but the Utah held on for the win.
+
+Derrick Favors was a starter and finished with 28 points in 37 minutes, 10-for-16, 14
+rebounds, 4 assists and performed a double-double. DeMarcus Cousins started this game and
+filled the stat sheet, posting 31 points in 34 minutes (10-23 FG, 3-6 3Pt, 8-11 FT) while
+adding 5 assists and performed a double-double.
+
+The Jazz show 47 percent from the field and 18-of-22 free throws. Gordon Hayward scored 27
+points in 39 minutes (9-19 FG, 4-9 3Pt, 5-5 FT).  Shelvin Mack posted 14 points in 30
+minutes, 4 three-pointers, grabbing 5 rebounds and 8 assists.  Chris Johnson added 6
+points and 2 three-pointers.
+
+The Kings show 46 percent from the field and 14-of-21 free throws. Omri Casspi was in the
+starting line-up and finished with 20 points in 26 minutes (8-12 FG, 4-4 3Pt, 0-0 FT).
+
+For their next game, the Jazz will be at home against the Cleveland Cavaliers on Monday.
+Up next, the Kings travel to Los Angeles to take on the Lakers on Tuesday.
+-------------------------
+*** Reference summary
+The Utah Jazz (31-35) picked up a road win over the Sacramento Kings (25-40) Sunday night
+at Sleep Train Arena, 108-99. With the win, the Jazz move with two games of the Dallas
+Mavericks for the Western Conference's eighth and final playoff spot. This one wasn't as
+close as the final score suggests, as the Jazz never trailed and held leads of 20 points
+or more in each of the second, third and fourth quarters. Derrick Favors dominated the
+middle for the Jazz as he finished with a team-high 28 points and a game-high 14 rebounds.
+Gordon Hayward chipped in 27 points (9-19 FG, 4-9 3PT, 5-5 FT), four rebounds, three
+assists and a steal. The Jazz won with hot outside shooting (12-28, 43 percent from three)
+and 11 offensive rebounds, five coming from Favors. DeMarcus Cousins scored a game-high 31
+(10-23 FG, 3-6 3PT, 8-11 FT) and grabbed 10 rebounds in the losing effort. Omri Casspi hit
+all four of his three-point attempts to pitch in 20 off the bench, and Darren Collison
+scored 14 with five assists and a pair of steals. The Kings has solid shooting of their
+own (9-21 3PT) but their offense kicked in too late to keep with Utah's onslaught. Tha
+Jazz finish a back-to-back Monday at home against the Cavaliers. The Kings hit the road
+for a Tuesday matchup against the Lakers.
+====================================================================================================

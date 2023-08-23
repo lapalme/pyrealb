@@ -1,0 +1,135 @@
+***  3739:2017-11-15: Milwaukee Bucks receives Detroit Pistons  [99-95]
+
+                    |                                     Milwaukee Bucks (8-6)                                     
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|   11|   24|    2|    8|    2|    2|    4|   10|    8|    1|    5|    0|     |   26|     
+Q2                  |               60|    6|   17|    1|    4|    2|    7|    4|   11|    5|    3|    5|    6|     |   15|     
+Q3                  |               60|   13|   18|    4|    4|    4|    4|    1|   11|    7|    4|    5|    5|     |   34|     
+Q4                  |               60|    8|   19|    1|    6|    7|    8|    2|   11|    4|    2|    1|    4|     |   24|     
+H1                  |              120|   17|   41|    3|   12|    4|    9|    8|   21|   13|    4|   10|    6|     |   41|     
+H2                  |              120|   21|   37|    5|   10|   11|   12|    3|   22|   11|    6|    6|    9|     |   58|     
+game                |              240|   38|   78|    8|   22|   15|   20|   11|   43|   24|   10|   16|   15|   19|   99|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Khris Middleton     |True |     |   40|   12|   21|    3|    7|    0|    0|    1|    6|    8|    2|    0|    2|    2|   27|    8
+Giannis Antetokounmp|True |     |   34|    8|   16|    0|    1|    5|    6|    2|    6|    1|    3|    4|    3|    5|   21|   16
+Eric Bledsoe        |True |     |   30|    4|   12|    1|    4|    5|    5|    2|    6|    8|    3|    2|    1|    3|   14|    5
+Tony Snell          |True |     |   38|    4|    7|    2|    4|    3|    3|    0|    4|    2|    0|    2|    1|    3|   13|   -5
+Malcolm Brogdon     |False|     |   26|    4|    9|    2|    3|    2|    2|    0|    6|    3|    1|    1|    4|    0|   12|   -9
+John Henson         |True |doubl|   27|    5|    9|    0|    0|    0|    4|    5|   10|    0|    0|    2|    2|    4|   10|   12
+Thon Maker          |False|     |   20|    1|    2|    0|    1|    0|    0|    1|    3|    1|    1|    4|    2|    0|    2|   -8
+DeAndre Liggins     |False|     |   19|    0|    2|    0|    2|    0|    0|    0|    1|    1|    0|    1|    0|    2|    0|    0
+D.J. Wilson         |False|     |    2|    0|    0|    0|    0|    0|    0|    0|    1|    0|    0|    0|    0|    0|    0|    1
+Rashad Vaughn       |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Jason Terry         |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Gary Payton         |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Joel Bolomboy       |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+                    |                                     Detroit Pistons (10-4)                                    
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|    7|   17|    5|    8|    4|    4|    3|   12|    6|    0|    0|    6|     |   23|     
+Q2                  |               60|    7|   25|    3|   10|    1|    2|    7|   15|    5|    1|    2|    4|     |   18|     
+Q3                  |               60|    5|   20|    1|    6|   10|   11|    4|    8|    3|    2|    0|    4|     |   21|     
+Q4                  |               60|   11|   23|    6|   13|    5|    6|    3|   10|    9|    4|    1|    2|     |   33|     
+H1                  |              120|   14|   42|    8|   18|    5|    6|   10|   27|   11|    1|    2|   10|     |   41|     
+H2                  |              120|   16|   43|    7|   19|   15|   17|    7|   18|   12|    6|    1|    6|     |   54|     
+game                |              240|   30|   85|   15|   37|   20|   23|   17|   45|   23|    7|    3|   16|   20|   95|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Avery Bradley       |True |     |   33|    8|   18|    6|   10|    6|    6|    1|    2|    5|    1|    0|    5|    1|   28|  -20
+Tobias Harris       |True |     |   34|    4|   11|    2|    4|    3|    3|    0|    3|    2|    0|    0|    1|    0|   13|  -13
+Andre Drummond      |True |doubl|   29|    4|    9|    0|    0|    5|    8|    8|   17|    4|    1|    0|    4|    4|   13|   -7
+Luke Kennard        |False|     |   13|    4|    7|    3|    4|    0|    0|    0|    2|    0|    1|    0|    0|    1|   11|    6
+Anthony Tolliver    |False|     |   30|    3|    8|    2|    7|    1|    1|    1|    3|    3|    2|    1|    1|    3|    9|   11
+Langston Galloway   |False|     |   14|    2|   10|    2|    7|    3|    3|    1|    1|    2|    1|    0|    0|    0|    9|   16
+Reggie Jackson      |True |     |   22|    2|    7|    0|    2|    2|    2|    0|    1|    2|    0|    0|    2|    1|    6|  -17
+Ish Smith           |False|     |   25|    2|   11|    0|    2|    0|    0|    0|    4|    4|    0|    0|    2|    4|    4|   13
+Stanley Johnson     |True |     |   17|    1|    2|    0|    1|    0|    0|    0|    3|    0|    1|    0|    0|    3|    2|  -12
+Eric Moreland       |False|     |   18|    0|    2|    0|    0|    0|    0|    6|    9|    1|    0|    2|    1|    3|    0|    3
+Boban Marjanović    |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Jon Leuer           |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Reggie Bullock      |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+*** English jsRealB
+The Bucks  (8-6) knocked off the Pistons  (10-4) 99-95 at the BMO Harris Bradley Center in
+Milwaukee on Wednesday giving them their fourth straight victory.
+
+Khris Middleton who was in the starting line-up led the way off the bench scoring 27
+points in 40 minutes with 12-for-21 FG and eight assists. Avery Bradley who was a starter
+finished with 28 points a season high  (8-18 FG, 6-10 3Pt, 6-6 FT) and five assists.
+
+The Bucks showed 48 percent from the field and 15-20 free throws.  Tony Snell had 13
+points in 38 minutes.  Malcolm Brogdon posted twelve points with six rebounds grabbed.
+John Henson posted ten points in 27 minutes with ten rebounds grabbed and performed a
+double-double.
+
+The Pistons showed 35 percent from the field and 20-23 free throws and committed 16
+turnovers.  Andre Drummond had 13 points  (4-9 FG, 0-0 3Pt, 5-8 FT) while adding four
+assists and performed a double-double.  Anthony Tolliver had nine points in 30 minutes
+(3-8 FG, 2-7 3Pt, 1-1 FT) while adding three assists.
+
+Up next the Bucks will travel to Dallas to take on the Mavericks on Saturday. Next Friday,
+the Pistons will be on the road against the Indiana Pacers.
+-------------------------
+*** French jsRealB
+Les Bucks  (8-6) ont défait les Pistons  (10-4) 99-95 mercredi au stade BMO Harris Bradley
+Center à Milwaukee permettant leur d'enregistrer leur quatrième série de victoires.
+
+Khris Middleton qui figurait dans l'alignement de départ a mené son équipe marquant 27
+points en 40 minutes avec 12-sur-21 LF et huit passes décisives. Avery Bradley qui
+figurait dans l'alignement de départ a réalisé une performance excellente comptant 28
+points son meilleur score jusqu'ici  (8-18 L, 6-10 L3, 6-6 LF) et cinq passes décisives.
+
+Les Bucks ont compté 48 pour cent de tirs réussis et 15 lancers francs sur 20.  Tony Snell
+a contribué un efficace 13 points en 38 minutes.  Malcolm Brogdon a enregistré douze
+points.  John Henson a terminé avec dix points en 27 minutes a terminé avec un double-
+double.
+
+Les Pistons ont compté 35 pour cent de tirs réussis et 20 lancers francs sur 23 et ont
+subi 16 pertes de ballon.  Andre Drummond a eu 13 points avec quatre passes décisives et a
+terminé avec un double-double.  Anthony Tolliver a ajouté neuf points en 30 minutes avec
+trois passes décisives.
+
+Samedi prochain, les Bucks seront sur la route contre les Mavericks de Dallas. Ensuite les
+Pistons voyageront à Indiana pour affronter les Pacers vendredi.
+-------------------------
+*** English FStrings
+The Milwaukee Bucks (8-6) topped the Detroit Pistons (10-4) 99-95 on Wednesday at the BMO
+Harris Bradley Center in Milwaukee  giving them their 4th straight victory.
+
+Khris Middleton filled the stat sheet, posting 27 points in 40 minutes (12-21 FG, 3-7 3Pt,
+0-0 FT) while adding 8 assists. Avery Bradley was a starter and lead the way with 28
+points in 33 minutes (8-18 FG, 6-10 3Pt, 6-6 FT) while adding 5 assists.
+
+The Bucks show 48 percent from the field and 15-of-20 free throws. Tony Snell contributed
+an efficient 13 points in 38 minutes (4-7 FG, 2-4 3Pt, 3-3 FT).  Malcolm Brogdon ended up
+with 12 points in 26 minutes (4-9 FG, 2-3 3Pt, 2-2 FT).  John Henson contributed an
+efficient 10 points in 27 minutes, 10 rebounds and performed a double-double.
+
+The Pistons show 35 percent from the field and 20-of-23 free throws and committed 16
+turnovers. Andre Drummond had 13 points in 29 minutes (4-9 FG, 0-0 3Pt, 5-8 FT) and
+performed a double-double.  Anthony Tolliver recorded 9 points in 30 minutes and 3
+assists.
+
+Up next, the Bucks travel to Dallas to take on the Mavericks on Saturday. Next Friday, the
+Pistons will be on the road against the Indiana Pacers.
+-------------------------
+*** Reference summary
+The Milwaukee Bucks defeated the visiting Detroit Pistons, 99-95, at BMO Harris Bradley
+Center on Wednesday evening. The Bucks (8-6) have been one of the hottest teams in the
+Eastern Conference during the current season, and their recent results definitively back
+them up. Milwaukee put a three-game winning streak on the line against the Pistons (10-4),
+who have been one of the best teams in the league so far. Milwaukee used a huge third
+quarter-a period in which they won 34-21-and never looked back despite the fact Detroit
+looked better in the final 12 minutes of action. But the Bucks closed the game out
+effectively, and pushed their winning streak to four games. Many would believe Giannis
+Antetokounmpo would be Milwaukee's biggest star on offense, but this time that role fell
+on Khris Middleton's shoulders. The talented scorer contributed with 27 points (on
+12-of-21 from the field), six rebounds and eight assists, while Antetokounmpo left his
+mark on both ends of the court after adding 21 points, six rebounds, four blocks, and
+three steals. Eric Bledsoe also added a decent effort of his own, as the veteran point
+guard chipped in with 14 points, eight assists, and six boards. Detroit had a strong
+effort from Avery Bradley, as the former Boston Celtics guard contributed with 28 points
+and five assists. Tobias Harris added 13 points, while Andre Drummond contributed with a
+double-double of 13 points and 17 rebounds. Arguably the team's biggest disappointment was
+Reggie Jackson, as the point guard finished with six points on 2-of-7 from the field,
+while posting a-17 plus-minus rating.
+====================================================================================================

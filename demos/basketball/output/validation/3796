@@ -1,0 +1,135 @@
+***  3796:2018-01-26: Chicago Bulls receives Los Angeles Lakers  [103-108]
+
+                    |                                     Chicago Bulls (18-31)                                     
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|    9|   24|    4|    7|    3|    9|    5|   13|    6|    1|    1|    2|     |   25|     
+Q2                  |               60|   11|   24|    5|   11|    5|    5|    3|   10|    7|    1|    1|    1|     |   32|     
+Q3                  |               60|    5|   18|    1|    6|    4|    4|    1|   12|    2|    0|    3|    7|     |   15|     
+Q4                  |               60|   10|   27|    7|   12|    4|    6|    7|   18|    6|    1|    2|    3|     |   31|     
+H1                  |              120|   20|   48|    9|   18|    8|   14|    8|   23|   13|    2|    2|    3|     |   57|     
+H2                  |              120|   15|   45|    8|   18|    8|   10|    8|   30|    8|    1|    5|   10|     |   46|     
+game                |              240|   35|   93|   17|   36|   16|   24|   16|   53|   21|    3|    7|   13|   25|  103|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Nikola Mirotić      |False|     |   23|    5|   13|    4|    9|    4|    4|    0|    4|    3|    0|    2|    1|    1|   18|    7
+Denzel Valentine    |False|doubl|   30|    6|   11|    4|    6|    0|    0|    1|   11|    4|    0|    1|    2|    5|   16|   -9
+Bobby Portis        |False|     |   21|    6|   13|    2|    3|    2|    2|    5|    9|    1|    0|    0|    1|    1|   16|   19
+Lauri Markkanen     |True |doubl|   30|    3|   10|    3|    6|    2|    2|    2|   11|    0|    0|    3|    2|    2|   11|  -15
+Zach LaVine         |True |     |   25|    3|   17|    2|    8|    2|    4|    0|    3|    1|    0|    0|    1|    4|   10|   -8
+Jerian Grant        |True |     |   30|    2|    6|    1|    1|    4|    6|    1|    1|    8|    2|    0|    0|    3|    9|   -5
+Robin Lopez         |True |     |   19|    4|    9|    0|    0|    0|    0|    4|    4|    1|    0|    1|    3|    1|    8|  -21
+David Nwaba         |False|     |   19|    4|    6|    0|    0|    0|    2|    2|    5|    1|    0|    0|    1|    4|    8|    1
+Justin Holiday      |True |     |   34|    2|    8|    1|    3|    2|    4|    1|    4|    2|    1|    0|    2|    4|    7|    1
+Ryan Arcidiacono    |False|     |    3|    0|    0|    0|    0|    0|    0|    0|    1|    0|    0|    0|    0|    0|    0|    5
+Paul Zipser         |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Quincy Pondexter    |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Cristiano Felício   |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+                    |                                   Los Angeles Lakers (19-29)                                  
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|   12|   29|    2|    8|    6|    7|    6|   16|    6|    0|    2|    1|     |   32|     
+Q2                  |               60|   13|   22|    2|    6|    2|    3|    2|   11|    8|    1|    0|    2|     |   30|     
+Q3                  |               60|   10|   23|    1|    8|    1|    3|    2|   11|    6|    2|    0|    3|     |   22|     
+Q4                  |               60|    6|   17|    0|    2|   12|   15|    0|   10|    3|    3|    1|    3|     |   24|     
+H1                  |              120|   25|   51|    4|   14|    8|   10|    8|   27|   14|    1|    2|    3|     |   62|     
+H2                  |              120|   16|   40|    1|   10|   13|   18|    2|   21|    9|    5|    1|    6|     |   46|     
+game                |              240|   41|   91|    5|   24|   21|   28|   10|   48|   23|    6|    3|    9|   23|  108|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Brandon Ingram      |True |     |   33|   10|   18|    0|    3|    5|    8|    2|    9|    5|    1|    0|    3|    5|   25|   22
+Jordan Clarkson     |False|     |   30|    6|   15|    1|    5|    6|    6|    0|    2|    4|    0|    0|    0|    1|   19|    4
+Brook Lopez         |True |     |   19|    7|   13|    1|    3|    2|    2|    3|    6|    1|    0|    2|    1|    4|   17|   19
+Julius Randle       |True |     |   27|    5|    9|    0|    1|    4|    5|    2|    6|    3|    1|    0|    1|    3|   14|    8
+Kyle Kuzma          |False|     |   27|    4|   12|    1|    5|    0|    0|    0|    2|    2|    1|    1|    1|    1|    9|  -12
+Alex Caruso         |False|     |   19|    3|    4|    0|    0|    2|    3|    0|    4|    3|    1|    0|    2|    2|    8|   -5
+Tyler Ennis         |True |     |   14|    3|    7|    0|    1|    0|    0|    0|    3|    1|    1|    0|    0|    2|    6|    5
+Kentavious Caldwell-|True |     |   23|    2|    7|    1|    3|    0|    0|    3|    7|    2|    0|    0|    0|    3|    5|    6
+Josh Hart           |False|     |   22|    1|    2|    1|    2|    2|    4|    0|    3|    1|    0|    0|    0|    0|    5|  -17
+Larry Nance         |False|     |   21|    0|    4|    0|    1|    0|    0|    0|    6|    1|    1|    0|    1|    2|    0|   -5
+Nigel Hayes         |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Corey Brewer        |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+*** English jsRealB
+The Lakers  (19-29) overcame the Bulls  (18-31) 108-103 in Chicago at the United Center on
+Friday giving them their fourth straight victory.
+
+The Lakers led in all four quarters.
+
+Brandon Ingram who started this game had an efficient performance scoring 25 points with
+ten goals, nine rebounds grabbed and five assists. Nikola Mirotić who was in the starting
+line-up led the way off the bench scoring 18 points with four three-pointers and three
+assists.
+
+The Lakers showed 45 percent from the field and 21-28 free throws.  Kentavious Caldwell-
+Pope recorded five points.
+
+The Bulls showed 37 percent from the field and 16-24 free throws.  Denzel Valentine who
+was in the starting line-up had 16 points in 30 minutes  (6-11 FG, 4-6 3Pt, 0-0 FT) and
+four assists and performed a double-double.  Bobby Portis scored 16 points.  Jerian Grant
+added nine points in 30 minutes with eight assists.
+
+Up next the Lakers will travel to Toronto to take on the Raptors on Sunday. The Bulls'
+next game will be at home against the Milwaukee Bucks on Sunday.
+-------------------------
+*** French jsRealB
+Les Lakers  (19-29) ont défait les Bulls  (18-31) 108-103 vendredi à Chicago au stade
+United Center permettant leur d'enregistrer leur quatrième série de victoires.
+
+Les Lakers ont mené dans les quatre quarts.
+
+Brandon Ingram qui figurait dans l'alignement de départ a obtenu le meilleur pointage du
+match avec 25 points  (10-18 L, 0-3 L3, 5-8 LF) tout en ajoutant cinq passes décisives.
+Nikola Mirotić qui débutait la partie a obtenu le meilleur pointage du match avec 18
+points avec 4-sur-9 depuis la ligne de trois points et trois passes décisives.
+
+Les Lakers ont compté 45 pour cent de tirs réussis et 21 lancers francs sur 28.
+Kentavious Caldwell-Pope a eu cinq points avec sept rebonds.
+
+Les Bulls ont compté 37 pour cent de tirs réussis et 16 lancers francs sur 24.  Denzel
+Valentine qui figurait dans l'alignement de départ a marqué 16 points en 30 minutes  (6-11
+L, 4-6 L3, 0-0 LF) tout en ajoutant quatre passes décisives et a terminé avec un double-
+double.  Bobby Portis a ajouté 16 points.  Jerian Grant a fini avec neuf points en 30
+minutes  (2-6 L, 1-1 L3, 4-6 LF) tout en ajoutant huit passes décisives.
+
+Dimanche prochain, les Lakers accueilleront les Raptors de Toronto. Le prochain match des
+Bulls sera à domicile contre les Bucks de Milwaukee dimanche.
+-------------------------
+*** English FStrings
+The Los Angeles Lakers (19-29) knocked off the Chicago Bulls (18-31) 108-103 on Friday at
+the United Center in Chicago  giving them their 4th straight victory.
+
+The Lakers lead in all four quarters.
+
+Brandon Ingram lead the way off the bench scoring 25 points in 33 minutes (10-18 FG, 0-3
+3Pt, 5-8 FT) and 5 assists. Nikola Mirotić had efficient performance scoring 18 points in
+23 minutes, 4 three-pointers and 3 assists.
+
+The Lakers show 45 percent from the field and 21-of-28 free throws. Kentavious Caldwell-
+Pope posted 5 points in 23 minutes and 7 rebounds.
+
+The Bulls show 37 percent from the field and 16-of-24 free throws. Denzel Valentine ended
+up with 16 points in 30 minutes, 6-for-11, 4-for-6 from beyond the arc, grabbing 11
+rebounds, 4 assists and performed a double-double.  Bobby Portis added 16 points in 21
+minutes, 6 goals, 2-for-3 from beyond the arc and 9 rebounds.  Jerian Grant finished with
+9 points in 30 minutes (2-6 FG, 1-1 3Pt, 4-6 FT) and 8 assists.
+
+Next Sunday, the Lakers will host the Toronto Raptors. For their next game, the Bulls will
+be at home against the Milwaukee Bucks on Sunday.
+-------------------------
+*** Reference summary
+The Los Angeles Lakers defeated the host Chicago Bulls, 108-103, at United Center on
+Friday. Despite the fact that Los Angeles led for over 40 minutes of this game, it came
+down to the wire. In fact, the Lakers blew a 13-point fourth quarter lead, as Chicago
+grabbed a small lead with five minutes remaining. The Lakers then responded by ending the
+game on a 16-8 run. The shooting disparity was critical, with Los Angeles shooting 45
+percent and Chicago hitting under 38 percent of their shots. The Lakers also won the
+fastbreak differential, 33-11 and outscored the Bulls in the paint, 52-30. The Lakers
+(19-29) were led by Brandon Ingram, as he tallied 25 points, nine rebounds and five
+assists. Brook Lopez totaled 17 points, six rebounds and two blocks. Julius Randle
+finished with 14 points, six rebounds and three assists. Jordan Clarkson led the bench
+with 19 points, two rebounds and four assists. The Bulls (18-31) three leading scorers all
+came off the bench, as Nikola Mirotic led them with 18 points, four rebounds, three
+assists and two blocks. Bobby Portis amassed 16 points and nine rebounds while Denzel
+Valentine accrued 16 points, 11 rebounds and four assists to cap off the bench. Lauri
+Markkanen led the starters with 11 points, 11 rebounds and three blocks. Both teams return
+to action on Sunday, with Chicago hosting the Milwaukee Bucks and Los Angeles traveling to
+face the Toronto Raptors.
+====================================================================================================

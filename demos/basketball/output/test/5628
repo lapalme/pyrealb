@@ -1,0 +1,141 @@
+***  5628:2018-11-23: Denver Nuggets receives Orlando Magic  [112-87]
+
+                    |                                     Denver Nuggets (12-7)                                     
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|    7|   21|    0|    5|    7|    8|    3|   15|    6|    3|    1|    4|     |   21|     
+Q2                  |               60|   13|   25|    4|    9|    3|    3|    3|   12|    9|    2|    2|    2|     |   33|     
+Q3                  |               60|   10|   21|    2|    6|    4|    5|    1|    8|    9|    3|    2|    2|     |   26|     
+Q4                  |               60|   14|   26|    3|    8|    1|    1|    5|   16|    9|    2|    0|    3|     |   32|     
+H1                  |              120|   20|   46|    4|   14|   10|   11|    6|   27|   15|    5|    3|    6|     |   54|     
+H2                  |              120|   24|   47|    5|   14|    5|    6|    6|   24|   18|    5|    2|    5|     |   58|     
+game                |              240|   44|   93|    9|   28|   15|   17|   12|   51|   33|   10|    5|   11|   20|  112|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Trey Lyles          |False|     |   18|    9|   15|    1|    5|    3|    3|    1|    2|    1|    0|    0|    1|    2|   22|   16
+Jamal Murray        |True |     |   35|    7|   18|    1|    5|    1|    3|    0|    5|    6|    2|    1|    4|    2|   16|   37
+Mason Plumlee       |False|doubl|   20|    6|    8|    0|    0|    3|    3|    3|   11|    4|    2|    2|    0|    3|   15|   23
+Paul Millsap        |True |     |   23|    5|    8|    0|    0|    4|    4|    1|    7|    2|    2|    2|    2|    3|   14|    9
+Juan Hernangómez    |True |     |   32|    3|    4|    2|    3|    2|    2|    0|    3|    1|    0|    0|    0|    1|   10|   14
+Gary Harris         |True |     |   25|    4|   13|    1|    5|    0|    0|    0|    2|    2|    0|    0|    2|    1|    9|    7
+Monte Morris        |False|     |   25|    3|    7|    2|    2|    0|    0|    1|    3|    4|    1|    0|    0|    1|    8|   10
+Nikola Jokić        |True |doubl|   22|    2|    7|    0|    3|    2|    2|    3|   10|   11|    2|    0|    0|    4|    6|    7
+Malik Beasley       |False|     |   15|    2|    3|    1|    2|    0|    0|    1|    1|    1|    1|    0|    0|    1|    5|   13
+Thomas Welsh        |False|     |    5|    2|    2|    1|    1|    0|    0|    0|    1|    0|    0|    0|    1|    0|    5|   -2
+Tyler Lydon         |False|     |    4|    1|    2|    0|    0|    0|    0|    1|    2|    0|    0|    0|    0|    0|    2|   -3
+DeVaughn Akoon-Purce|False|     |    4|    0|    2|    0|    1|    0|    0|    0|    0|    1|    0|    0|    1|    1|    0|   -3
+Torrey Craig        |False|     |    4|    0|    4|    0|    1|    0|    0|    1|    4|    0|    0|    0|    0|    1|    0|   -3
+
+                    |                                      Orlando Magic (9-10)                                     
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|    8|   21|    1|    6|    2|    2|    0|   10|    7|    3|    0|    3|     |   19|     
+Q2                  |               60|    9|   23|    2|   10|    2|    2|    2|    9|    8|    2|    0|    2|     |   22|     
+Q3                  |               60|    9|   19|    4|   11|    5|    7|    2|   12|    6|    1|    1|    4|     |   27|     
+Q4                  |               60|    6|   16|    1|    5|    6|    8|    0|    6|    3|    1|    1|    4|     |   19|     
+H1                  |              120|   17|   44|    3|   16|    4|    4|    2|   19|   15|    5|    0|    5|     |   41|     
+H2                  |              120|   15|   35|    5|   16|   11|   15|    2|   18|    9|    2|    2|    8|     |   46|     
+game                |              240|   32|   79|    8|   32|   15|   19|    4|   37|   24|    7|    2|   13|   19|   87|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Terrence Ross       |False|     |   22|    7|    8|    4|    5|    0|    0|    0|    0|    1|    0|    0|    2|    3|   18|  -17
+Nikola Vučević      |True |     |   27|    7|   14|    0|    2|    2|    2|    2|    8|    0|    1|    0|    2|    1|   16|   -9
+Aaron Gordon        |True |     |   32|    5|   11|    1|    4|    3|    4|    1|    9|    5|    1|    1|    1|    1|   14|  -20
+Jonathan Isaac      |False|     |   21|    2|   10|    0|    4|    5|    6|    1|    5|    0|    1|    0|    0|    3|    9|   -2
+Mohamed Bamba       |False|     |   14|    3|    7|    1|    2|    0|    0|    0|    2|    2|    0|    0|    1|    3|    7|  -18
+Isaiah Briscoe      |False|     |    5|    3|    4|    0|    0|    0|    0|    0|    0|    0|    0|    0|    1|    1|    6|    2
+Evan Fournier       |True |     |   31|    2|   10|    0|    5|    1|    1|    0|    1|    5|    3|    0|    2|    3|    5|  -23
+Jonathon Simmons    |False|     |    7|    1|    2|    0|    0|    3|    4|    0|    1|    0|    1|    1|    1|    0|    5|   -2
+D.J. Augustin       |True |     |   24|    1|    5|    1|    4|    1|    2|    0|    1|    4|    0|    0|    1|    1|    4|  -21
+Wesley Iwundu       |True |     |   23|    1|    4|    1|    3|    0|    0|    0|    3|    2|    0|    0|    0|    3|    3|  -13
+Jerian Grant        |False|     |   18|    0|    3|    0|    2|    0|    0|    0|    3|    5|    0|    0|    2|    0|    0|   -6
+Jarell Martin       |False|     |    5|    0|    1|    0|    1|    0|    0|    0|    4|    0|    0|    0|    0|    0|    0|    2
+Khem Birch          |False|     |    5|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    2
+
+*** English jsRealB
+The Nuggets  (12-7) defeated the Magic  (9-10) 112-87 at the Pepsi Center in Denver on
+Friday.
+
+The Nuggets led in all four quarters.
+
+Trey Lyles who was a starter scored a game high with 22 points a season high with nine
+goals. Terrence Ross who was in the starting line-up finished with 18 points.
+
+The Nuggets showed 47 percent from the field and 15-17 free throws.  Jamal Murray who was
+in the starting line-up contributed an efficient 16 points in 35 minutes with 7-for-18 FG,
+five rebounds and six assists.  Mason Plumlee added 15 points a season high performed a
+double-double.  Juan Hernangómez finished with ten points in 32 minutes.  Nikola Jokić
+added six points with eleven assists and performed a double-double.
+
+The Magic showed 40 percent from the field and 15-19 free throws.  Aaron Gordon posted 14
+points in 32 minutes with nine rebounds grabbed and five assists.  Evan Fournier scored
+five points  (2-10 FG, 0-5 3Pt, 1-1 FT) and five assists.
+
+Up next the Nuggets will travel to Oklahoma City to take on the Thunder on Saturday. Up
+next the Magic will travel to Los Angeles to take on the Lakers on Sunday.
+-------------------------
+*** French jsRealB
+Les Nuggets  (12-7) ont surpassé les Magic  (9-10) 112-87 vendredi à Denver au stade Pepsi
+Center.
+
+Les Nuggets ont mené dans les quatre quarts.
+
+Trey Lyles qui était un partant a obtenu le meilleur pointage du match avec 22 points un
+record jusqu'ici avec 9-sur-15 LF. Terrence Ross qui débutait la partie a obtenu le
+meilleur pointage du match avec 18 points avec 7-sur-8 LF et 4-sur-5 depuis la ligne de
+trois points.
+
+Les Nuggets ont compté 47 pour cent de tirs réussis et 15 lancers francs sur 17.  Jamal
+Murray qui figurait dans l'alignement de départ a marqué 16 points en 35 minutes  (7-18 L,
+1-5 L3, 1-3 LF) et six passes décisives.  Mason Plumlee a contribué un efficace 15 points
+son meilleur score pour la saison a terminé avec un double-double.  Juan Hernangómez a
+fini avec dix points en 32 minutes.  Nikola Jokić a eu six points  (2-7 L, 0-3 L3, 2-2 LF)
+et onze passes décisives et a terminé avec un double-double.
+
+Les Magic ont compté 40 pour cent de tirs réussis et 15 lancers francs sur 19.  Aaron
+Gordon a contribué un efficace 14 points en 32 minutes  (5-11 L, 1-4 L3, 3-4 LF) et cinq
+passes décisives.  Evan Fournier a eu cinq points avec cinq passes décisives.
+
+Ensuite les Nuggets voyageront à Oklahoma City pour affronter les Thunder samedi. Ensuite
+les Magic voyageront à Los Angeles pour affronter les Lakers dimanche.
+-------------------------
+*** English FStrings
+The Denver Nuggets (12-7) topped the Orlando Magic (9-10) 112-87 on Friday at the Pepsi
+Center in Denver .
+
+The Nuggets lead in all four quarters.
+
+Trey Lyles scored a game high with 22 points (9-15 FG, 1-5 3Pt, 3-3 FT). Terrence Ross
+filled the stat sheet, posting 18 points in 22 minutes, 7 goals and 4-for-5 from beyond
+the arc.
+
+The Nuggets show 47 percent from the field and 15-of-17 free throws. Jamal Murray finished
+with 16 points in 35 minutes (7-18 FG, 1-5 3Pt, 1-3 FT) and 6 assists.  Mason Plumlee
+contributed an efficient 15 points, 6-for-8, 11 rebounds and performed a double-double.
+Juan Hernangómez ended up with 10 points in 32 minutes.  Nikola Jokić scored 6 points in
+22 minutes, 11 assists and performed a double-double.
+
+The Magic show 40 percent from the field and 15-of-19 free throws. Aaron Gordon recorded
+14 points in 32 minutes, 9 rebounds and 5 assists.  Evan Fournier recorded 5 points in 31
+minutes and 5 assists.
+
+Up next, the Nuggets travel to Oklahoma City to take on the Thunder on Saturday. Next
+Sunday, the Magic will be on the road against the Los Angeles Lakers.
+-------------------------
+*** Reference summary
+The Denver Nuggets defeated the Orlando Magic, 112-87, at Pepsi Center on Friday evening.
+Following a tightly contested first quarter, the Nuggets (12-7) pulled ahead in the second
+to forge a 54-41 halftime lead. They kept their foot on the gas over the final two periods
+as well, outscoring the Magic (9-10) by a 58-46 margin. In addition to the scoreboard,
+Denver enjoyed a sizable advantage on the boards, outrebounding Orlando by a 51-37 margin.
+The Magic had only three double-digit scorers, with Terrance Ross leading the way. The
+sharpshooting wing posted 18 points and added an assist over 23 minutes off the bench.
+Nikola Vukevic turned in 16 points, hauled in eight rebounds and recorded a steal. Aaron
+Gordon delivered 14 points, nine rebounds, five assists, one steal and one block. Jonathan
+Isaac supplied nine points off the bench. Evan Fournier (five points), D.J. Augustin (four
+points) and Wesley Iwundu (three points) all underwhelmed offensively. Trey Lyles paced
+the Nuggets with 22 points off the bench. Jamal Murray registered 16 points, six assists,
+five rebounds, two steals and one block. Mason Plumlee a 15-point, 11-rebound double-
+double that also included four assists, two steals and two blocks. Paul Millsap tallied 14
+points, seven rebounds, two assists, two blocks and one steal. Juancho Hernangomez
+finished with 10 points, while Nikola Jokic mustered a modest six points but also dished
+out 11 assists and hauled in 10 rebounds. The Magic remain on the road and visit the Los
+Angeles Lakers on Sunday afternoon, while the Nuggets visit the Oklahoma City Thunder on
+Saturday night.
+====================================================================================================

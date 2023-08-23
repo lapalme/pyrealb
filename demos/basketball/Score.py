@@ -1,63 +1,67 @@
+
 class Score:
     score_titles = ["MIN", "FGM", "FGA", "FG3M", "FG3A", "FTM", "FTA", "OREB", "TREB", "AST", "STL", "BLK", "TOV", "PF",
-                    "PTS",
-                    "+/-"]
+                    "PTS", "+/-"]
     score_width = 5
 
-    def __init__(self, obj):
-        self.obj = obj
+    def __init__(self, score_dict):
+        self.score_dict = score_dict
 
-    def __str__(self) -> str:
-        all_scores = self.allScores()
-        return "|".join([f"{all_scores[k] if k in all_scores else '':{Score.score_width}}" for k in Score.score_titles])
+    def show(self) -> str:
+        return "|".join([f"{self.score_dict[k] if k in self.score_dict else '':{Score.score_width}}"
+                         for k in Score.score_titles])
+
+    def minutes(self) -> int:
+        return self.score_dict["MIN"]
 
     def goals(self) -> int:
-        return int(self.obj["FGM"])
+        return self.score_dict["FGM"]
 
     def goals_attempted(self) -> int:
-        return int(self.obj["FGA"])
+        return self.score_dict["FGA"]
 
     def goals3(self) -> int:
-        return int(self.obj["FG3M"])
+        return self.score_dict["FG3M"]
 
     def goals3_attempted(self) -> int:
-        return int(self.obj["FG3A"])
+        return self.score_dict["FG3A"]
 
     def free_throws(self) -> int:
-        return int(self.obj["FTM"])
+        return self.score_dict["FTM"]
 
     def free_throws_attempted(self) -> int:
-        return int(self.obj["FTA"])
+        return self.score_dict["FTA"]
 
     def offensive_rebounds(self) -> int:
-        return int(self.obj["OREB"])
+        return self.score_dict["OREB"]
 
     def rebounds(self) -> int:
-        return int(self.obj["TREB"])
+        return self.score_dict["TREB"]
 
     def assists(self) -> int:
-        return int(self.obj["AST"])
+        return self.score_dict["AST"]
 
     def steals(self) -> int:
-        return int(self.obj["STL"])
+        return self.score_dict["STL"]
 
     def blocks(self) -> int:
-        return int(self.obj["BLK"])
+        return self.score_dict["BLK"]
 
     def turnovers(self) -> int:
-        return int(self.obj["TOV"])
+        return self.score_dict["TOV"]
 
     def fouls(self) -> int:
-        return int(self.obj["PF"])
+        return self.score_dict["PF"]
 
     def plus_minus(self) -> int:
-        return int(self.obj["+/-"])
+        return self.score_dict["+/-"]
 
     def points(self) -> int:
-        return int(self.obj["PTS"])
+        return self.score_dict["PTS"]
 
     def allScores(self) -> dict[str, int]:
-        return {key: int(self.obj[key]) for key in Score.score_titles if key in self.obj}
+        return {key: int(self.score_dict[key]) for key in Score.score_titles
+                     if key in self.score_dict}
 
     @classmethod
     def score_top_line(cls) -> str:

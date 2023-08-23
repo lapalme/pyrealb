@@ -1,97 +1,103 @@
-# from pyrealb import *
 from datetime import datetime
 from random import sample
 from itertools import accumulate
 from stats import is_high, player_has_statistics
 from Games import Games
 from Team import Team
+from seasons_stats import winning_streak, set_games
 from FStrings import FStrings
 from English import English
 from French import French
+from textwrap import wrap
+
+games = None  # to be filled later in make_sample and in main (used in next_game())
 
 
 def player_has_interesting_statistics(player) -> bool:
     stats_to_check = {"FGM": 'goals', "FG3M": 'goals3', "TREB": 'rebounds', "AST": 'assists', "PTS": 'points'}
+    if player.scores.points() <= 2:  # ignore a player that scored 2 points or less
+        return False
     name = player.name()
     for key in stats_to_check:
-        val = getattr(player, stats_to_check[key])()
+        val = getattr(player.scores, stats_to_check[key])()
         if is_high("players", name, key, val):
             return True
     return False
 
 
 def turning_points(winner, loser) -> (Team, Team, bool, bool, bool, bool):
-    winner_pts = winner.get_points()
-    loser_pts = loser.get_points()
-    overtime = winner.line_scores("OT").points() > 0 or loser.line_scores("OT").points() > 0
-    loser_lead_in_first_half = loser_pts["H1"] > winner_pts["H1"]
-    loser_lead_in_second_half = loser_pts["H2"] > winner_pts["H2"]
-    winner_cum = list(accumulate(list(winner_pts.values())[:4]))
-    loser_cum = list(accumulate(list(loser_pts.values())[:4]))
+    overtime = winner.get_points("OT") > 0 or loser.get_points("OT") > 0
+    loser_lead_in_first_half = loser.get_points("H1") > winner.get_points("H1")
+    loser_lead_in_second_half = loser.get_points("H2") > winner.get_points("H2")
+    winner_cum = list(accumulate(winner.get_points("Q" + i) for i in "1234"))
+    loser_cum = list(accumulate(loser.get_points("Q" + i) for i in "1234"))
     always_lead = all(winner_cum[i] > loser_cum[i] for i in range(0, 4))
-    return (winner, loser, overtime, loser_lead_in_first_half, loser_lead_in_second_half, always_lead)
+    return (winner, loser, overtime, loser_lead_in_first_half,
+            loser_lead_in_second_half, always_lead)
 
 
 def next_game(team) -> (datetime, Team, bool, Team):
     # return the info about the next game of the team
     #  [date, team, is-it at home, other team]
-    next_game = games[team.next_game_id()]
-    if next_game is None:
+    next_g = games[team.next_game_id()]
+    if next_g is None:
         return None
     team_name = team.name()
-    home_name = next_game.home().name()
+    home_name = next_g.home().name()
     at_home = team_name == home_name
-    return (next_game.date(), team, at_home,
-            next_game.visitors() if at_home else next_game.home())
+    return (next_g.date(), team, at_home,
+            next_g.visitors() if at_home else next_g.home())
 
 
 def summarize(realizer, game) -> str:
     # determine winner and loser
     home = game.home()
     visitors = game.visitors()
-    if home.line_scores("game").points() > visitors.line_scores("game").points():
+    if game.winner() == home:
         winner, loser = home, visitors
     else:
         winner, loser = visitors, home
     paras = []
-    # 1 - give the winner and loser scores with location and date information about the game
+    # 1 - give the winner and loser scores with location and date of the game
+    winning_streak_length = winning_streak(game.game_id(), winner.name())
     paras.append(realizer.show_winner(winner, loser, game.date(),
-                                      game.stadium(), game.city()))
-    winner_scores = winner.players_scores()
-    loser_scores = loser.players_scores()
+                                      game.stadium(), game.city(),
+                                      winning_streak_length))
+    winner_players = winner.players_sorted()
+    loser_players = loser.players_sorted()
     # 2 - check for interesting turning points in the game
     t_points = realizer.show_turning_points(*turning_points(winner, loser))
     if len(t_points) > 0:
         paras.append(t_points)
     # 3 - give information about the best players of both teams
-    vps = sample(realizer.best_player_VPs, k=len(realizer.best_player_VPs))
     paras.append(
-        realizer.show_player_perf(winner_scores[0],
-                                  vps[0], winner_scores[0].starter()) +
-        realizer.show_player_perf(loser_scores[0],
-                                  vps[1], loser_scores[0].starter())
+        realizer.show_player_perf(winner_players[0],
+                                  realizer.best_player_VP,
+                                  winner_players[0].starter()) +
+        realizer.show_player_perf(loser_players[0],
+                                  realizer.best_player_VP,
+                                  loser_players[0].starter())
     )
     # 4 - show interesting statistics for each team and their players
-    vps = sample(realizer.player_VPs, k=len(realizer.player_VPs))
-    iVP = 0
     for team in [winner, loser]:
         # 4.1 - show global team performance
         team_para = [realizer.show_team_perf(team)]
-        # 4.2 - show player performance of the team (in decreasing order of points made)
-        first = True  # indicate starter only for the first player
-        for player in team.players_scores()[1:]:
-            if first:
-                starter = player.starter()
-                first = False
+        # 4.2 - show player performance of the team in decreasing order of points
+        # statistics for the best player have given above, so we start at index 1
+        players = team.players_sorted()
+        if player_has_statistics(players[1].name()) \
+                and player_has_interesting_statistics(players[1]):
+            # indicate starter only for the second-best player
+            team_para.append(
+                realizer.show_player_perf(players[1],
+                                          realizer.player_VP, players[1].starter()))
+        for player in players[2:]:
             if player_has_statistics(player.name()) \
                     and player_has_interesting_statistics(player):
-                # show interesting statistics about a given player in a given game
-                team_para.append(realizer.show_player_perf(player,
-                                                           vps[iVP % len(vps)], starter))
-                iVP += 1
-            starter = False
+                team_para.append(
+                    realizer.show_player_perf(player, realizer.player_VP, False))
         paras.append(" ".join(team_para))
-    # 5 - give information about the next games for the winner and the loser if available
+    # 5 - give information about the next games for the winner and the loser
     next_games = ""
     next_game_info = next_game(winner)
     if next_game_info is not None:
@@ -101,12 +107,11 @@ def summarize(realizer, game) -> str:
         next_games += realizer.show_next_game(*next_game_info)
     if len(next_games) > 0:
         paras.append(next_games)
-    return "\n\n".join(paras)
+    return "\n\n".join("\n".join(wrap(para, width=paragraph_width)) for para in paras)
 
 
 # useful for comparing the generated summary with the reference
 # unused for the moment...
-from textwrap import wrap
 
 
 def display_side_by_side(gen_sum, orig_sum, width):
@@ -123,33 +128,55 @@ def display_side_by_side(gen_sum, orig_sum, width):
             print(left + " | " + right)
 
 
-def show_summaries(game, realisers, show_data=False, show_refs=False):
-    print("*** ", game.show_title(), "\n")
+paragraph_width = 90
+
+
+def show_summaries(game, realisers, show_data=False, show_refs=False) -> str:
+    out = ["*** " + game.show_title() + "\n"]
     # show the data used for summarization
     if show_data:
-        print(game.home())
-        print()
-        print(game.visitors())
-        print()
+        out.append(game.home().show())
+        out.append("")
+        out.append(game.visitors().show())
+        out.append("")
     for realizer in realisers:
-        realizer.set_language() # must set the appropriate language before each summary
-        print("***", realizer.name)
+        realizer.set_language()  # must set the appropriate language before each summary
+        out.append("*** " + realizer.name)
         gen_sum = summarize(realizer, game)
-        print(gen_sum)
-        print("-" * 25)
+        out.append(gen_sum)
+        out.append("-" * 25)
     if show_refs:
-        print("***", "reference")
-        # orig_sum=game.summaries()[0]
-        orig_sum = game.obj["references"][0]
-        print(orig_sum)
-    print("=" * 100)
+        out.append("*** " + "Reference summary")
+        # orig_sum=game.references()[0]
+        orig_sum = game.obj["references"][0]  # the real reference...
+        out.append("\n".join(wrap(orig_sum.replace(" - ", "-"), width=paragraph_width)))
+    out.append("=" * 100)
+    return "\n".join(out)
+
+
+def make_sample(split, k=10):
+    global games
+    games = Games(split)
+    set_games(games)
+    out_dir = f"output/{split}"
+    keys_sample = sample(games.keys(), k=k)
+    for key in keys_sample:
+        out_file = open(f"{out_dir}/{key}", "w", encoding="utf-8")
+        out_file.write(show_summaries(games[key], [English(), French(), FStrings()], show_data=True, show_refs=True))
+        out_file.close()
+        print(out_file.name, "written")
 
 
 if __name__ == "__main__":
-    games = Games("train")
-    nb = 0
-    for i in games:
-        g = games[i]
-        show_summaries(g, [FStrings(), English(), French()])
-        nb += 1
-        if nb > 10: break
+    for split in ["train", "validation", "test"]:
+        make_sample(split, k=10)
+
+    # for a single test...
+    # split = "test"
+    # games = Games(split)
+    # set_games(games)
+    # keys_sample = sample(games.keys(),k=1)
+    # # keys_sample = ["1"]
+    # print(f"Split: {split}")
+    # for key in keys_sample:
+    #     print(show_summaries(games[key], [English(),French(),FStrings()],show_data=False,show_refs=False))
