@@ -383,32 +383,32 @@ As an example of a method in `Realizer`, we describe how the performance of a pl
 Calls are made to subclass functions to return `Constituent` structures as required by the `LexicalChoices` abstract class, such as the functions: `starter_player()` (line 7) or `season_high()` (line 11) whose code was given above.
 
 ```python
-    def show_player_perf(self, player,vp_func,show_starter) -> str:
-        # player [starter] vp [points] [details]
-        # show global information
-        name = player.name()
-        vp_st = None
-        if show_starter:
-            vp_st = self.starter_player()
-        vp = vp_func().t(self.t())
-        np_pts = self.nb(player.scores.points(), "point")
-        if is_season_high_player(player, "PTS", player.scores.points()):
-            np_pts.add(self.season_high())
-        vp.add(np_pts)
-        s = S(Q(name), vp_st, vp)
-        minutes = player.scores.minutes()
-        if is_high("players", name, "MIN", minutes):
-            s.add(self.nb_minutes_played(minutes))
-        # show details in either long form or only as a list of numbers
-        details = []
-        details.append(oneOf(
-            lambda: self.show_points(player),
-            lambda: self.show_points_details(player)
-        ))
-        double = player.double()
-        if double != "none":
-            details.append(self.doubles(double))
-        return s.add(self.conjunction(details)).realize()
+def show_player_perf(self, player,vp_func,show_starter) -> str:
+    # player [starter] vp [points] [details]
+    # show global information
+    name = player.name()
+    vp_st = None
+    if show_starter:
+        vp_st = self.starter_player()
+    vp = vp_func().t(self.t())
+    np_pts = self.nb(player.scores.points(), "point")
+    if is_season_high_player(player, "PTS", player.scores.points()):
+        np_pts.add(self.season_high())
+    vp.add(np_pts)
+    s = S(Q(name), vp_st, vp)
+    minutes = player.scores.minutes()
+    if is_high("players", name, "MIN", minutes):
+        s.add(self.nb_minutes_played(minutes))
+    # show details in either long form or only as a list of numbers
+    details = []
+    details.append(oneOf(
+        lambda: self.show_points(player),
+        lambda: self.show_points_details(player)
+    ))
+    double = player.double()
+    if double != "none":
+        details.append(self.doubles(double))
+    return s.add(self.conjunction(details)).realize()
 ```
 
 The sentence starts by giving the name of the player (line 4), then if needed, the fact that he is in the starting alignment (line 6), followed by *high enough* details about how many minutes he played and how many fields goals, three-pointers, rebounds and assists he achieved (line 10). The *height* is determined by the fact that the value is in the first quintile (top 20%) determined by the [Data Interpretation](#data-interpretation) step. Finally, the fact that the player achieved a *double* is shown (line 23).  These elements are gathered in an array used by `conjunction` to build a coordinated phrase which adds the appropriate commas and conjunction depending on the number of facts chosen. This can result in an English sentence such as
@@ -427,7 +427,7 @@ As a further variation, some player information can also be given in a shorter a
 
 ## Conclusion
 
-This document has described how `pyrealb` was used for generating French and English basketball summaries from numerical data. We leave it to the reader to judge the quality of the output.  [Other examples of data with the output of our three realizers with the reference summary can be seen here](../data/output/). Our goal was to give a complete example of data-to-text NLG application. It is similar in design to the [Weather `pyrealb` demo](../../weather/README.md) which generates French and English weather reports from numerical information. 
+This document has described how `pyrealb` was used for generating French and English basketball summaries from numerical data. We leave it to the reader to judge the quality of the output.  [Other examples of data with the output of our three realizers with the reference summary can be seen here](../output). Our goal was to give a complete example of data-to-text NLG application. It is similar in design to the [Weather `pyrealb` demo](../../weather/README.md) which generates French and English weather reports from numerical information. 
 
 ## Acknowledgment
 
