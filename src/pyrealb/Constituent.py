@@ -495,7 +495,7 @@ class Constituent():
             c = cList[i]
             if c.isA("V") and hasattr(c, "neg2"):
                 if hasattr(c, "isMod") or hasattr(c, "isProg"):
-                    if (c.getProp("lier")==None):
+                    if (c.getProp("lier") is not None):
                         c.insertReal(cList, Q(c.neg2, "fr"), i + 2)
                     else:
                         c.insertReal(cList, Q(c.neg2, "fr"), i + 1)
