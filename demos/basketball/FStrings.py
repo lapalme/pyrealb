@@ -2,6 +2,7 @@ from random import choice, randint
 from stats import is_high
 from BasketballSummarizer import BasketballSummarizer
 
+
 class FStrings(BasketballSummarizer):
     def __init__(self):
         self.name = "English FStrings"
@@ -29,7 +30,7 @@ class FStrings(BasketballSummarizer):
                        "had"
                        ])
 
-    def show_winner(self, winner, loser, g_date, g_stadium, g_city,winning_streak_length) -> str:
+    def show_winner(self, winner, loser, g_date, g_stadium, g_city, winning_streak_length) -> str:
         verb = choice(("defeated", "topped", "overcame", "knocked off"))
         out = f"The {winner.show_name()}"
         if winner.conference_standing() == 1:
@@ -40,7 +41,7 @@ class FStrings(BasketballSummarizer):
             out += " in overtime"
         out += f" {winner.final_score()}-{loser.final_score()}"
         out += g_date.strftime(" on %A ") + f"at the {g_stadium} in {g_city} "
-        if winning_streak_length >2 :
+        if winning_streak_length > 2:
             out += f" giving them their {winning_streak_length}th straight victory"
         return out + ". "
 
@@ -59,7 +60,7 @@ class FStrings(BasketballSummarizer):
             out.append(f"The {winner.name()} lead in all four quarters.")
         if overtime:
             out.append(f"The {winner.name()} needed overtime to win the game.")
-        return "".join(out)
+        return "".join(out) + " "
 
     def show_team_perf(self, team) -> str:
         name = team.name()
@@ -73,7 +74,42 @@ class FStrings(BasketballSummarizer):
             out += f" and committed {turnovers} turnovers"
         return out + "."
 
-    def show_points(self,player) -> [str]:
+    def show_team_facts(self, winner, loser, interesting) -> str:
+        facts = []
+        for int_fact in interesting:
+            (period, score, t1_val, t2_val, diff) = int_fact
+            if diff < 0:
+                team_2, team_1 = winner, loser
+                t2_val, t1_val = t1_val, t2_val
+            else:
+                team_1, team_2 = winner, loser
+            periods = {"Q1": "first quarter", "Q2": "second quarter", "Q3": "third quarter", "Q4": "fourth quarter",
+                       "H1": "first half", "H2": "second half", "game": "game"}
+            fact = [choice(("During", "Over", "In")), "the", periods[period] + ","]
+            score_n = score[:-1] if score.endswith("%") else score
+            if score_n in {"goals", "rebounds", "assists", "steals", "blocks", "turnovers", "fouls", "points"}:
+                score_np = score_n  # HACK remove s to get the lemma and set plur
+            elif score_n == "goals3":
+                score_np = "three-pointers"
+            elif score_n == "free_throws":
+                score_np = "free throws"
+            else:
+                print("strange score_n", score_n)
+            if score.endswith("%"):
+                fact.extend([team_1.name(),
+                             choice(("obtained", "got")),
+                             "a", "good", score_np, "percentage",
+                             str(t1_val) + "%", "to", str(t2_val) + "%"])
+            else:
+                fact.extend([team_1.name(),
+                             choice(("overcame", "dominated")),
+                             team_2.name(),
+                             "for", score_np,
+                             str(t1_val), "to", str(t2_val)])
+            facts.append(" ".join(fact) + ". ")
+        return "".join(facts)
+
+    def show_points(self, player) -> [str]:
         name = player.name()
         scores = player.scores
         goals = scores.goals()
@@ -129,14 +165,14 @@ class FStrings(BasketballSummarizer):
             elems.append(f"performed a {double}-double")
         return make_coord(elems)
 
-    def next_game_home(self,next_date,name1,name2,place2) -> str:
+    def next_game_home(self, next_date, name1, name2, place2) -> str:
         verb = choice(("will receive", "will play at home against", "will be at home against"))
         return choice((
             f"For their next game, the {name1} {verb} the {place2} {name2} on {next_date}. ",
             f"The {name1}' next game will be at home against the {name2} next {next_date}. "
         ))
 
-    def next_game_visitor(self,next_date,name1,name2,place2):
+    def next_game_visitor(self, next_date, name1, name2, place2):
         if randint(0, 1) == 0:
             verb = choice(("will visit", "will be on the road against", "will host"))
             return f"Next {next_date}, the {name1} {verb} the {place2} {name2}. "
@@ -150,6 +186,6 @@ class FStrings(BasketballSummarizer):
         name2 = team_2.name()
         place2 = team_2.place()
         if is_home:
-            return self.next_game_home(next_date,name1,name2,place2)
+            return self.next_game_home(next_date, name1, name2, place2)
         else:
-            return self.next_game_visitor(next_date,name1,name2,place2)
+            return self.next_game_visitor(next_date, name1, name2, place2)

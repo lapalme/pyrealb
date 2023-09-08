@@ -28,16 +28,17 @@ class Team:
         self.period_scores = {name: Score(line_score[name]) for name in period_names}
         self.players = [Player(player, this_game, self.name()) for player in obj["box_score"]]
 
-    def show(self) -> str:
+    def show(self, show_players=True) -> str:
         w = Score.score_width + 1
         lines = [("", self.show_name().center(len(Score.score_top_line())))]
         lines.append(("Game".center(20), " " * 2 * w + Score.score_top_line()))
         for key in period_names:
             if key != "OT" or self.period_scores["OT"].minutes() > 0:
                 lines.append((key, " " * 2 * w + self.period_scores[key].show()))
-        lines.append(("PLAYER".center(20), Player.player_top_line()))
-        for player in self.players_sorted():
-            lines.append((player.name(), player.show()))
+        if show_players:
+            lines.append(("PLAYER".center(20), Player.player_top_line()))
+            for player in self.players_sorted():
+                lines.append((player.name(), player.show()))
         return "\n".join(f"{key[:20]:20}|{val}" for key, val in lines)
 
     def name(self) -> str:

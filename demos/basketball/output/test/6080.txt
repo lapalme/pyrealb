@@ -1,0 +1,147 @@
+***  6080:2018-11-24: Golden State Warriors receives Sacramento Kings  [117-116]
+
+                    |                                  Golden State Warriors (14-7)                                 
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|    9|   20|    2|    5|    8|    9|    1|   15|    8|    1|    2|    6|     |   28|     
+Q2                  |               60|   11|   21|    1|    8|    9|   10|    2|   11|    7|    3|    1|    3|     |   32|     
+Q3                  |               60|   13|   24|    5|   13|    4|    6|    4|   14|   10|    1|    1|    3|     |   35|     
+Q4                  |               60|    8|   23|    2|    8|    4|    4|    5|   14|    3|    0|    2|    2|     |   22|     
+H1                  |              120|   20|   41|    3|   13|   17|   19|    3|   26|   15|    4|    3|    9|     |   60|     
+H2                  |              120|   21|   47|    7|   21|    8|   10|    9|   28|   13|    1|    3|    5|     |   57|     
+game                |              240|   41|   88|   10|   34|   25|   29|   12|   54|   28|    5|    6|   14|   24|  117|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Kevin Durant        |True |doubl|   40|   13|   26|    2|    8|   16|   17|    1|   13|    7|    0|    2|    7|    3|   44|    3
+Klay Thompson       |True |     |   36|   12|   26|    5|   12|    2|    2|    1|    4|    0|    0|    0|    1|    2|   31|   13
+Damian Jones        |True |     |   21|    5|    6|    0|    0|    3|    4|    3|    6|    1|    0|    0|    1|    3|   13|   14
+Kevon Looney        |False|     |   13|    3|    3|    0|    0|    1|    2|    2|    4|    3|    1|    0|    1|    4|    7|    0
+Quinn Cook          |True |     |   29|    2|   11|    2|    6|    0|    0|    1|    6|    5|    0|    1|    1|    3|    6|    5
+Damion Lee          |False|     |   16|    1|    3|    1|    3|    2|    2|    0|    3|    1|    0|    0|    1|    1|    5|   -7
+Jonas Jerebko       |False|     |   21|    2|    5|    0|    3|    0|    0|    1|    9|    2|    0|    0|    1|    4|    4|   -8
+Shaun Livingston    |False|     |   16|    2|    5|    0|    0|    0|    0|    0|    0|    3|    0|    1|    0|    0|    4|  -11
+Jordan Bell         |False|     |   13|    1|    1|    0|    0|    0|    0|    1|    2|    2|    2|    1|    0|    1|    2|  -13
+Andre Iguodala      |True |     |   31|    0|    2|    0|    2|    1|    2|    2|    7|    4|    2|    1|    1|    3|    1|   12
+Jacob Evans         |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|   -3
+
+                    |                                    Sacramento Kings (10-9)                                    
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|   11|   28|    2|    8|    5|    7|    4|   14|    6|    2|    1|    1|     |   29|     
+Q2                  |               60|   10|   22|    4|   10|   11|   12|    2|   11|    6|    2|    0|    3|     |   35|     
+Q3                  |               60|   12|   25|    3|    5|    2|    5|    4|    9|    9|    1|    0|    3|     |   29|     
+Q4                  |               60|    9|   22|    2|    5|    3|    5|    3|   13|    7|    1|    3|    1|     |   23|     
+H1                  |              120|   21|   50|    6|   18|   16|   19|    6|   25|   12|    4|    1|    4|     |   64|     
+H2                  |              120|   21|   47|    5|   10|    5|   10|    7|   22|   16|    2|    3|    4|     |   52|     
+game                |              240|   42|   97|   11|   28|   21|   29|   13|   47|   28|    6|    4|    8|   22|  116|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Buddy Hield         |True |     |   33|   12|   21|    4|    6|    0|    1|    2|    7|    3|    0|    1|    2|    3|   28|   -1
+Marvin Bagley       |False|doubl|   33|    7|   15|    0|    0|    6|    8|    7|   17|    2|    0|    0|    0|    1|   20|    5
+Iman Shumpert       |True |     |   27|    4|    7|    4|    6|    2|    2|    0|    4|    0|    1|    0|    1|    3|   14|   -3
+Justin Jackson      |False|     |   20|    4|    8|    1|    3|    3|    3|    2|    4|    3|    1|    0|    0|    1|   12|   -1
+Bogdan Bogdanović   |False|     |   27|    3|    9|    2|    6|    2|    2|    0|    2|    2|    1|    0|    0|    5|   10|   12
+Harry Giles         |False|     |   10|    4|    5|    0|    0|    2|    3|    0|    2|    4|    0|    0|    0|    2|   10|    5
+De'Aaron Fox        |True |     |   33|    3|   14|    0|    3|    3|    4|    0|    2|    9|    0|    1|    3|    1|    9|   -2
+Willie Cauley-Stein |True |     |   19|    3|    9|    0|    0|    0|    2|    2|    4|    1|    1|    1|    0|    4|    6|  -11
+Frank Mason         |False|     |    6|    1|    3|    0|    0|    2|    2|    0|    0|    2|    1|    0|    1|    0|    4|    0
+Troy Williams       |False|     |    7|    1|    3|    0|    2|    0|    0|    0|    1|    0|    0|    0|    0|    1|    2|   -2
+Nemanja Bjelica     |True |     |   18|    0|    3|    0|    2|    1|    2|    0|    4|    2|    1|    1|    1|    1|    1|   -7
+Ben McLemore        |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Yogi Ferrell        |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+*** English jsRealB
+The Warriors  (14-7) , leader in their conference, overcame the Kings  (10-9) 117-116 on
+Saturday at the Oracle Arena in Oakland.
+
+The Kings led in the first half but the Warriors managed to come back. During the second
+half, the Warriors obtained better free throws percentage 80% to 50%.
+
+Kevin Durant who started this game led the way off the bench scoring 44 points a personal
+record for the season in 40 minutes with 13-for-26 FG, 13 rebounds and performed a double-
+double. Buddy Hield who was in the starting line-up scored a game high with 28 points a
+season high in 33 minutes.
+
+The Warriors showed 46 percent from the field and 25-29 free throws.  Klay Thompson who
+started this game finished with 31 points.  Damian Jones ended up with 13 points a season
+high in 21 minutes  (5-6 FG, 0-0 3Pt, 3-4 FT) while adding one assist.  Kevon Looney
+contributed an efficient seven points  (3-3 FG, 0-0 3Pt, 1-2 FT) while adding three
+assists.  Quinn Cook had six points in 29 minutes  (2-11 FG, 2-6 3Pt, 0-0 FT) and five
+assists.  Jonas Jerebko scored four points.
+
+The Kings showed 43 percent from the field and 21-29 attempts at the charity stripe.  Iman
+Shumpert had 14 points with 4-of-6 from beyond the arc.
+
+On deck for the Warriors will be a home match versus Orlando. On deck for the Kings will
+be a home match versus Utah.
+-------------------------
+*** French jsRealB
+Les Warriors  (14-7) , meneurs dans leur conférence, ont battu les Kings  (10-9) 117-116 à
+Oakland au stade Oracle Arena samedi.
+
+Les Kings ont mené dans la première demie mais les Warriors sont parvenus à revenir.
+Durant la deuxième demie, les Warriors ont obtenu les meilleurs lancers francs en
+pourcentage, une différence de 30%.
+
+Kevin Durant qui figurait dans l'alignement de départ a réalisé une performance excellente
+comptant 44 points son meilleur score pour la saison en 40 minutes avec 13-sur-26 L, 13
+rebonds récupérés et a terminé avec un double-double. Buddy Hield qui était un partant a
+obtenu le meilleur pointage du match avec 28 points un record pour la saison en 33
+minutes.
+
+Les Warriors ont compté 46 pour cent de tirs réussis et 25 lancers francs sur 29.  Klay
+Thompson qui débutait la partie a marqué 31 points avec 12-sur-26 L.  Damian Jones a
+marqué 13 points un record jusqu'ici en 21 minutes  (5-6 L, 0-0 L3, 3-4 LF) et une passe
+décisive.  Kevon Looney a fini avec sept points  (3-3 L, 0-0 L3, 1-2 LF) tout en ajoutant
+trois passes décisives.  Quinn Cook a eu six points en 29 minutes  (2-11 L, 2-6 L3, 0-0
+LF) et cinq passes décisives.  Jonas Jerebko a eu quatre points avec neuf rebonds.
+
+Les Kings ont compté 43 pour cent de tirs réussis et 21 lancers francs sur 29.  Iman
+Shumpert a fini avec 14 points.
+
+À venir pour les Warriors, un match à domicile contre Orlando. Pour leur prochain match,
+les Kings seront à domicile contre le Jazz d'Utah dimanche.
+-------------------------
+*** English FStrings
+The Golden State Warriors (14-7), leader in their conference, overcame the Sacramento
+Kings (10-9) 117-116 on Saturday at the Oracle Arena in Oakland .
+
+The Kings lead in the first half, but the Warriors managed to come back. During the second
+half, Warriors obtained a good free throws percentage 80% to 50%. Over the first quarter,
+Warriors got a good free throws percentage 89% to 71%. During the second half, Kings got a
+good three-pointers percentage 50% to 33%. In the game, Warriors got a good free throws
+percentage 86% to 72%.
+
+Kevin Durant started this game and finished with 44 points in 40 minutes, 13 goals,
+grabbing 13 rebounds and performed a double-double. Buddy Hield finished with 28 points in
+33 minutes (12-21 FG, 4-6 3Pt, 0-1 FT).
+
+The Warriors show 46 percent from the field and 25-of-29 free throws. Klay Thompson
+started this game and recorded 31 points in 36 minutes (12-26 FG, 5-12 3Pt, 2-2 FT).
+Damian Jones had 13 points in 21 minutes (5-6 FG, 0-0 3Pt, 3-4 FT).  Kevon Looney finished
+with 7 points (3-3 FG, 0-0 3Pt, 1-2 FT).  Quinn Cook had 6 points in 29 minutes, 6
+rebounds and 5 assists.  Jonas Jerebko finished with 4 points in 21 minutes and grabbing 9
+rebounds.
+
+The Kings show 43 percent from the field and 21-of-29 free throws. Iman Shumpert posted 14
+points in 27 minutes and 4-for-6 from beyond the arc.
+
+The Warriors' next game will be at home against the Magic next Monday. For their next
+game, the Kings will receive the Utah Jazz on Sunday.
+-------------------------
+*** Reference summary
+The Golden State Warriors defeated the visiting Sacramento Kings, 117-116, at Oracle Arena
+on Saturday evening. The Kings got out to a great start on the road, as they outscored the
+Warriors, 29-28, in the first quarter. The Kings kept up their ferocity, as they outscored
+the Warriors, 35-32, in the second, to take a, 64-60, lead into half time. The Warriors
+turned the tables in the third, as they pulled ahead by five early in the quarter. They
+went on to outscore the Kings by six in the quarter, to take a, 95-93, lead into the
+fourth. The Kings did not back down, as they continued to trade the lead with the Warriors
+throughout the fourth, but Golden State was able to hang down the stretch. Kevin Durant
+led the way for the Warriors with 44 points, 13 rebounds, seven assists and two blocks, in
+40 minutes. Klay Thompson followed up with 31 points on 12-of-26 shooting, and four
+rebounds, while Damian Jones added 13 points, six rebounds and one assist, in 21 minutes.
+The Warriors shot 51 percent from the field, including 10-of-32 from long range.
+Meanwhile, Buddy Hield led the Kings with 28 points, seven rebounds, three assists and one
+block, in 33 minutes. Marvin Bagley III had a big night, with 20 points, 17 rebounds and
+two assists, in 33 minutes off the bench. Iman Shumpert chipped in 14 points, four
+rebounds and one steal. The Kings shot 44 percent from the field, including 11-of-27 from
+deep. The Kings (10-9) will look to bounce back as they play host to the Jazz on Sunday.
+The Warriors (14-7) play host to the Magic on Monday.
+====================================================================================================

@@ -4,6 +4,7 @@ from random import sample
 from seasons_stats import is_season_high_player
 from BasketballSummarizer import BasketballSummarizer
 from LexicalChoices import LexicalChoices
+from game_stats import get_most_interesting
 
 #  Language independent realizer
 #    language dependent formulations are in subclasses implementing "LexicalChoices" abstract base class
@@ -15,11 +16,6 @@ class Realizer(BasketballSummarizer,LexicalChoices):
     def nb(self, val, n) -> NP:
         return NP(self.no(val), N(n) if isinstance(n, str) else n)
 
-    def on_day(self, date) -> DT:
-        return DT(date).dOpt({"nat": True, "hour": False, "minute": False, "second": False,
-                              "month": False, "date": False, "year": False,
-                              "det": currentLanguage() == "en"})
-
     def pts(self, val1, val2, postfix=None) -> NP:
         return NP(NO(val1).lier(), NO(val2), Q(postfix) if postfix is not None else None)
 
@@ -28,7 +24,7 @@ class Realizer(BasketballSummarizer,LexicalChoices):
         winner_np = self.team_np(winner, wins_losses=show_wins_losses)
         if winner.conference_standing() == 1:
             winner_np = self.conference_leader(winner_np)
-        vp = self.defeat_vp()
+        vp = self.defeat_vp(winner.final_score()-loser.final_score())
         vp.add(self.team_np(loser, wins_losses=show_wins_losses))
         minutes_overtime = winner.minutes_overtime()
         if minutes_overtime > 0:
@@ -54,6 +50,10 @@ class Realizer(BasketballSummarizer,LexicalChoices):
             out.append(self.in_overtime(winner))
         return "".join(S(s.t(self.t())).realize() for s in out)
 
+    def show_team_facts(self,winner,loser,interesting) -> str:
+        return "".join(self.show_team_fact(winner, loser, fact).t(self.t()).realize()
+                       for fact in get_most_interesting(interesting))
+
     def show_team_perf(self, team) -> str:
         name = team.name()
         line_scores = team.period_scores["game"]
@@ -73,7 +73,7 @@ class Realizer(BasketballSummarizer,LexicalChoices):
         if is_high("players", name, "FGM", goals):
             details.append(oneOf(NP(self.m_for_n(goals,
                                                  scores.goals_attempted()),
-                                    Q("FG" if currentLanguage() == "en" else "LF")),
+                                    Q(self.pts_abbrev("FG"))),
                                  self.goals_made(player,goals)))
         goals3 = scores.goals3()
         if is_high("players", name, "FG3M", goals3):

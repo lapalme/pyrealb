@@ -1,0 +1,145 @@
+***  3103:2017-02-13: Dallas Mavericks receives Boston Celtics  [98-111]
+
+                    |                                    Dallas Mavericks (22-33)                                   
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|   12|   20|    4|    6|    0|    0|    0|    7|    7|    2|    0|    2|     |   28|     
+Q2                  |               60|    9|   21|    1|    8|    3|    4|    3|   11|    5|    1|    0|    4|     |   22|     
+Q3                  |               60|    9|   15|    3|    4|   11|   16|    1|   11|    4|    2|    2|    5|     |   32|     
+Q4                  |               60|    5|   21|    1|    9|    5|    5|    0|    8|    5|    2|    0|    1|     |   16|     
+H1                  |              120|   21|   41|    5|   14|    3|    4|    3|   18|   12|    3|    0|    6|     |   50|     
+H2                  |              120|   14|   36|    4|   13|   16|   21|    1|   19|    9|    4|    2|    6|     |   48|     
+game                |              240|   35|   77|    9|   27|   19|   25|    4|   37|   21|    7|    2|   12|   16|   98|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Yogi Ferrell        |False|     |   32|    8|   11|    2|    4|    2|    2|    0|    2|    5|    0|    0|    2|    5|   20|  -14
+Harrison Barnes     |True |     |   35|    7|   16|    2|    4|    3|    5|    0|    3|    3|    1|    1|    2|    1|   19|   -6
+Wesley Matthews     |True |     |   35|    5|   12|    1|    5|    7|   10|    0|    7|    3|    0|    0|    0|    3|   18|   -5
+Dirk Nowitzki       |True |     |   28|    7|   17|    1|    5|    3|    3|    0|    5|    3|    2|    0|    1|    0|   18|    0
+Devin Harris        |False|     |   19|    2|    6|    1|    3|    4|    5|    0|    1|    0|    0|    0|    1|    0|    9|   -2
+Seth Curry          |True |     |   32|    3|    9|    2|    5|    0|    0|    0|    5|    5|    2|    0|    1|    2|    8|  -11
+Deron Williams      |True |     |   13|    1|    1|    0|    0|    0|    0|    0|    1|    1|    1|    0|    4|    2|    2|    2
+Salah Mejri         |False|     |   13|    1|    2|    0|    0|    0|    0|    3|   10|    0|    1|    1|    1|    1|    2|    0
+Justin Anderson     |False|     |    1|    1|    1|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    2|   -1
+Dwight Powell       |False|     |   17|    0|    1|    0|    0|    0|    0|    1|    3|    1|    0|    0|    0|    1|    0|  -19
+Dorian Finney-Smith |False|     |    9|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    1|    0|   -8
+Nicolás Brussino    |False|     |    1|    0|    1|    0|    1|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|   -1
+
+                    |                                     Boston Celtics (36-19)                                    
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|   10|   18|    7|   11|    3|    4|    0|    8|    8|    0|    2|    3|     |   30|     
+Q2                  |               60|   11|   20|    3|    5|    6|    7|    1|    8|    7|    2|    1|    1|     |   31|     
+Q3                  |               60|    8|   22|    1|    8|    5|    5|    3|    9|    4|    2|    0|    4|     |   22|     
+Q4                  |               60|   11|   21|    5|   10|    1|    2|    3|   16|    9|    1|    0|    4|     |   28|     
+H1                  |              120|   21|   38|   10|   16|    9|   11|    1|   16|   15|    2|    3|    4|     |   61|     
+H2                  |              120|   19|   43|    6|   18|    6|    7|    6|   25|   13|    3|    0|    8|     |   50|     
+game                |              240|   40|   81|   16|   34|   15|   18|    7|   41|   28|    5|    3|   12|   25|  111|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Isaiah Thomas       |True |     |   34|    9|   19|    4|   10|    7|    9|    0|    1|    8|    0|    0|    1|    2|   29|   12
+Marcus Smart        |True |     |   35|    6|   11|    3|    7|    4|    4|    0|    3|    3|    2|    1|    3|    3|   19|   11
+Kelly Olynyk        |False|     |   29|    6|   10|    1|    3|    2|    2|    2|    7|    2|    0|    0|    2|    4|   15|   13
+Al Horford          |True |     |   31|    5|   12|    1|    2|    0|    0|    1|    5|    4|    1|    0|    2|    1|   11|    6
+Jae Crowder         |True |     |   29|    3|    9|    2|    5|    2|    3|    0|    4|    2|    1|    1|    1|    6|   10|    2
+Gerald Green        |False|     |   13|    4|    8|    2|    3|    0|    0|    0|    1|    2|    0|    0|    0|    1|   10|    0
+Amir Johnson        |True |     |   20|    3|    4|    1|    1|    0|    0|    2|    7|    5|    0|    1|    1|    3|    7|    7
+James Young         |False|     |   12|    2|    3|    1|    1|    0|    0|    2|    4|    0|    1|    0|    0|    1|    5|   12
+Jonas Jerebko       |False|     |   13|    1|    2|    1|    2|    0|    0|    0|    4|    0|    0|    0|    1|    3|    3|   -1
+Terry Rozier        |False|     |   19|    1|    3|    0|    0|    0|    0|    0|    4|    2|    0|    0|    1|    1|    2|    2
+Jordan Mickey       |False|     |    1|    0|    0|    0|    0|    0|    0|    0|    1|    0|    0|    0|    0|    0|    0|    1
+Demetrius Jackson   |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Tyler Zeller        |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+*** English jsRealB
+The Celtics  (36-19) overcame the Mavericks  (22-33) 111-98 in Dallas on Monday at the
+American Airlines Center en route to their third straight win.
+
+This was a dominating win for the Celtics, as it came in wire-to-wire fashion. The Celtics
+dominated the Mavericks for points by 9 over the second quarter. Over the first half, the
+Celtics obtained better three-pointers percentage 62% to 36%. Over the third quarter, the
+Celtics obtained better free throws percentage 100% to 69%. In the fourth quarter, the
+Celtics got better goals percentage 52% to 24%.
+
+Isaiah Thomas who was in the starting line-up scored a game high with 29 points. Yogi
+Ferrell who was a starter led the way, posting 20 points.
+
+The Celtics showed 49 percent from the field and 15-18 free throws.  Marcus Smart who was
+a starter recorded 19 points in 35 minutes with six goals and three three-pointers.  Amir
+Johnson ended up with seven points  (3-4 FG, 1-1 3Pt, 0-0 FT) and five assists.  James
+Young added five points with four rebounds.
+
+The Mavericks showed 45 percent from the field and 19-25 free throws.  Harrison Barnes who
+was a starter scored 19 points with three assists.  Wesley Matthews finished with 18
+points.  Seth Curry scored eight points  (3-9 FG, 2-5 3Pt, 0-0 FT) and five assists.
+
+On deck for the Celtics will be a home match versus Philadelphia. Up next the Mavericks
+will travel to Detroit to take on the Pistons on Wednesday.
+-------------------------
+*** French jsRealB
+Les Celtics  (36-19) ont défait les Mavericks  (22-33) 111-98 à Dallas lundi au stade
+American Airlines Center leur permettant d'enregistrer leur troisième victoire de suite.
+
+Les Celtics ont mené pendant les quatre quarts. Les Celtics ont vaincu les Mavericks pour
+les points 31 à 22 pendant le deuxième quart. Durant la première demie, les Celtics ont
+réussi les meilleurs tirs à 3 points en pourcentage, un avantage de 26%. Pendant le
+troisième quart, les Celtics ont réussi les meilleurs lancers francs en pourcentage, une
+différence de 31%. Pendant le quatrième quart, les Celtics ont obtenu les meilleurs
+lancers en pourcentage, 52% en comparaison avec 24%.
+
+Isaiah Thomas qui figurait dans l'alignement de départ a mené son équipe marquant 29
+points. Yogi Ferrell qui figurait dans l'alignement de départ a réalisé une performance
+excellente comptant 20 points.
+
+Les Celtics ont compté 49 pour cent de tirs réussis et 15 lancers francs sur 18.  Marcus
+Smart qui débutait la partie a contribué un efficace 19 points en 35 minutes avec six tirs
+réussis et trois lancers à trois points.  Amir Johnson a ajouté sept points avec cinq
+passes décisives.  James Young a contribué un efficace cinq points avec quatre rebonds.
+
+Les Mavericks ont compté 45 pour cent de tirs réussis et 19 lancers francs sur 25.
+Harrison Barnes qui débutait la partie a contribué un efficace 19 points avec trois passes
+décisives.  Wesley Matthews a terminé avec 18 points.  Seth Curry a contribué un efficace
+huit points avec cinq rebonds récupérés et cinq passes décisives.
+
+La prochaine partie des Celtics sera à domicile contre les 76ers de Philadelphia mercredi.
+Mercredi prochain, les Mavericks visiteront les Pistons de Detroit.
+-------------------------
+*** English FStrings
+The Boston Celtics (36-19) overcame the Dallas Mavericks (22-33) 111-98 on Monday at the
+American Airlines Center in Dallas  giving them their 3th straight victory.
+
+The Celtics lead in all four quarters. During the third quarter, Celtics got a good free
+throws percentage 100% to 69%. In the fourth quarter, Celtics obtained a good goals
+percentage 52% to 24%. In the first half, Celtics obtained a good three-pointers
+percentage 62% to 36%. In the third quarter, Mavericks got a good goals percentage 60% to
+36%. During the game, Celtics obtained a good three-pointers percentage 47% to 33%. Over
+the second quarter, Celtics got a good goals percentage 55% to 43%. In the fourth quarter,
+Celtics dominated Mavericks for points 28 to 16. In the first half, Celtics dominated
+Mavericks for points 61 to 50. Over the third quarter, Mavericks overcame Celtics for
+points 32 to 22. Over the second quarter, Celtics overcame Mavericks for points 31 to 22.
+Over the fourth quarter, Celtics overcame Mavericks for rebounds 16 to 8.
+
+Isaiah Thomas lead the way with 29 points in 34 minutes (9-19 FG, 4-10 3Pt, 7-9 FT) and 8
+assists. Yogi Ferrell lead the way off the bench scoring 20 points in 32 minutes and
+8-for-11.
+
+The Celtics show 49 percent from the field and 15-of-18 free throws. Marcus Smart posted
+19 points in 35 minutes, 6 goals and 3 three-pointers.  Amir Johnson posted 7 points and 5
+assists.  James Young added 5 points (2-3 FG, 1-1 3Pt, 0-0 FT).
+
+The Mavericks show 45 percent from the field and 19-of-25 free throws. Harrison Barnes
+contributed an efficient 19 points in 35 minutes and 3 assists.  Wesley Matthews finished
+with 18 points in 35 minutes and grabbing 7 rebounds.  Seth Curry scored 8 points in 32
+minutes (3-9 FG, 2-5 3Pt, 0-0 FT) while adding 5 assists.
+
+For their next game, the Celtics will play at home against the Philadelphia 76ers on
+Wednesday. Up next, the Mavericks travel to Detroit to take on the Pistons on Wednesday.
+-------------------------
+*** Reference summary
+Frontcourt depth was one of the biggest concerns for the Celtics heading into their
+2016-17 season. And while for the most part, the play behind starer Al Horford has been
+inconsistent at best, Kelly Olynyk is showing that he can be a legitimate reserve option
+for Boston with his play over the last three games. In Monday's outing, Olynyk played 29
+minutes off the bench and scored 15 points on 6-of-10 shooting from the field to go along
+with seven rebounds. Now, over the course of Boston's current three-game win streak,
+Olynyk has averaged 16 points and 7 rebounds over 26 minutes per game while shooting an
+impressive 6-of-12 (50 percent) from behind the arc and 19-of-30 (63 percent) from the
+field overall. There have been trade rumors brewing all season surrounding Boston and
+another big man, but Olynyk is doing his best to put those to rest.
+====================================================================================================

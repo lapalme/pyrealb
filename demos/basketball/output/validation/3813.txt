@@ -1,0 +1,159 @@
+***  3813:2018-04-11: Chicago Bulls receives Detroit Pistons  [87-119]
+
+                    |                                     Chicago Bulls (27-55)                                     
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|    8|   23|    2|    9|    3|    3|    2|    7|    6|    2|    0|    3|     |   21|     
+Q2                  |               60|   11|   20|    4|    9|    3|    4|    2|    9|    7|    1|    1|    3|     |   29|     
+Q3                  |               60|    9|   23|    3|    5|    3|    5|    4|   12|    5|    4|    0|    5|     |   24|     
+Q4                  |               60|    4|   20|    2|   11|    3|    6|    4|   12|    3|    1|    0|    7|     |   13|     
+H1                  |              120|   19|   43|    6|   18|    6|    7|    4|   16|   13|    3|    1|    6|     |   50|     
+H2                  |              120|   13|   43|    5|   16|    6|   11|    8|   24|    8|    5|    0|   12|     |   37|     
+game                |              240|   32|   86|   11|   34|   12|   18|   12|   40|   21|    8|    1|   18|   15|   87|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Lauri Markkanen     |True |     |   21|    7|   13|    3|    7|    3|    3|    2|    8|    1|    2|    0|    0|    1|   20|    0
+Sean Kilpatrick     |True |     |   29|    5|   10|    2|    5|    2|    2|    0|    2|    4|    0|    0|    3|    2|   14|  -13
+David Nwaba         |True |     |   29|    5|   16|    1|    3|    2|    3|    2|    6|    2|    1|    0|    3|    3|   13|  -18
+Bobby Portis        |False|     |   22|    5|   13|    1|    5|    0|    2|    1|    8|    0|    1|    0|    3|    0|   11|  -28
+Cristiano Felício   |True |     |   29|    3|    5|    0|    0|    4|    6|    5|    6|    1|    1|    0|    1|    1|   10|  -18
+Jerian Grant        |False|     |   32|    4|   13|    1|    6|    1|    2|    0|    1|    2|    1|    0|    3|    3|   10|  -33
+Cameron Payne       |True |     |   33|    2|    9|    2|    3|    0|    0|    0|    3|    9|    1|    0|    2|    3|    6|  -19
+Ryan Arcidiacono    |False|     |   23|    1|    5|    1|    5|    0|    0|    0|    3|    2|    1|    0|    2|    0|    3|  -17
+Ömer Aşık           |False|     |   18|    0|    2|    0|    0|    0|    0|    2|    3|    0|    0|    1|    1|    2|    0|  -14
+Robin Lopez         |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Justin Holiday      |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+                    |                                    Detroit Pistons (39-43)                                    
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|   14|   20|    5|    6|    2|    2|    1|   12|   10|    3|    0|    3|     |   35|     
+Q2                  |               60|   12|   25|    5|   13|    2|    2|    2|   10|    6|    1|    0|    2|     |   31|     
+Q3                  |               60|   12|   23|    3|    9|    1|    1|    0|   10|    5|    4|    3|    4|     |   28|     
+Q4                  |               60|    9|   21|    2|    7|    5|    5|    4|   15|    6|    4|    1|    2|     |   25|     
+H1                  |              120|   26|   45|   10|   19|    4|    4|    3|   22|   16|    4|    0|    5|     |   66|     
+H2                  |              120|   21|   44|    5|   16|    6|    6|    4|   25|   11|    8|    4|    6|     |   53|     
+game                |              240|   47|   89|   15|   35|   10|   10|    7|   47|   27|   12|    4|   11|   21|  119|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Luke Kennard        |True |     |   30|    8|   14|    3|    6|    4|    4|    0|    5|    5|    1|    0|    3|    3|   23|   17
+Anthony Tolliver    |True |     |   26|    6|   10|    4|    7|    2|    2|    1|    3|    0|    0|    0|    1|    4|   18|   16
+Eric Moreland       |True |doubl|   40|    8|   12|    0|    0|    0|    0|    4|   17|    4|    4|    4|    2|    3|   16|   24
+Henry Ellenson      |False|doubl|   28|    5|   10|    2|    3|    2|    2|    0|   10|    2|    1|    0|    1|    3|   14|   24
+Ish Smith           |False|     |   16|    6|    8|    1|    2|    0|    0|    0|    2|    2|    1|    0|    1|    1|   13|    8
+Stanley Johnson     |True |     |   20|    4|    7|    3|    4|    0|    0|    0|    4|    2|    0|    0|    1|    2|   11|    9
+James Ennis         |False|     |   21|    4|   10|    0|    4|    0|    0|    0|    0|    1|    1|    0|    0|    2|    8|   19
+Reggie Jackson      |True |     |   28|    2|    8|    1|    5|    2|    2|    0|    2|   10|    0|    0|    1|    3|    7|   22
+Langston Galloway   |False|     |   19|    3|    7|    1|    3|    0|    0|    1|    1|    1|    4|    0|    1|    0|    7|   17
+Kay Felder          |False|     |    3|    1|    2|    0|    0|    0|    0|    1|    3|    0|    0|    0|    0|    0|    2|    2
+Reggie Hearn        |False|     |    3|    0|    1|    0|    1|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    2
+Jameer Nelson       |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Dwight Buycks       |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+*** English jsRealB
+The Pistons  (39-43) topped the Bulls  (27-55) 119-87 in Chicago on Wednesday at the
+United Center.
+
+This was a dominating win for the Pistons, as it came in wire-to-wire fashion. During the
+first quarter, the Pistons got better goals percentage an advantage of 35%. During the
+first half, the Pistons got better three-pointers percentage 53% to 33%. The Pistons
+dominated the Bulls for points 25 to 13 during the fourth quarter. Over the second half,
+the Pistons got better free throws percentage a difference of 45%. The Pistons dominated
+the Bulls for goals by 15 over the game.
+
+Luke Kennard who was a starter had an efficient performance scoring 23 points a season
+high. Lauri Markkanen who was in the starting line-up had an efficient performance scoring
+20 points.
+
+The Pistons showed 52 percent from the field and 10-10 attempts at the charity stripe.
+Anthony Tolliver who started this game contributed an efficient 18 points.  Henry Ellenson
+finished with 14 points in 28 minutes with five goals, 2-of-3 from beyond the arc, ten
+rebounds, two assists and performed a double-double.  Stanley Johnson contributed an
+efficient eleven points with 3-of-4 from beyond the arc.  Reggie Jackson posted seven
+points with ten assists.
+
+The Bulls showed 37 percent from the field and 12-18 free throws and committed 18
+turnovers.  Sean Kilpatrick who was in the starting line-up recorded 14 points  (5-10 FG,
+2-5 3Pt, 2-2 FT) while adding four assists.  David Nwaba finished with 13 points in 29
+minutes.  Cristiano Felício ended up with ten points in 29 minutes.  Cameron Payne ended
+up with six points in 33 minutes  (2-9 FG, 2-3 3Pt, 0-0 FT) and nine assists.
+-------------------------
+*** French jsRealB
+Les Pistons  (39-43) ont dominé les Bulls  (27-55) 119-87 au stade United Center mercredi
+à Chicago.
+
+Les Pistons ont mené pendant les quatre quarts. Pendant le premier quart, les Pistons ont
+réussi les meilleurs tirs en pourcentage, un avantage de 35%. Durant la première demie,
+les Pistons ont réussi les meilleurs lancers à 3 points en pourcentage, une différence de
+20%. Les Pistons ont vaincu les Bulls pour les points 25 à 13 pendant le quatrième quart.
+Pendant la deuxième demie, les Pistons ont obtenu les meilleurs lancers francs en
+pourcentage, 100% en comparaison avec 55%. Les Pistons ont dominé les Bulls pour les
+lancers 47 à 32 durant la partie.
+
+Luke Kennard qui débutait la partie a obtenu le meilleur pointage du match avec 23 points
+son meilleur score pour la saison. Lauri Markkanen qui figurait dans l'alignement de
+départ a mené, comptant 20 points.
+
+Les Pistons ont compté 52 pour cent de tirs réussis et 10 lancers francs sur 10.  Anthony
+Tolliver qui était un partant a eu 18 points avec 6-sur-10 L et 4-sur-7 depuis la ligne de
+trois points.  Henry Ellenson a enregistré 14 points en 28 minutes avec 5-sur-10 L, deux
+tirs à trois points, dix rebonds récupérés, deux passes décisives et a terminé avec un
+double-double.  Stanley Johnson a contribué un efficace onze points avec trois lancers à
+trois points.  Reggie Jackson a fini avec sept points avec dix passes décisives.
+
+Les Bulls ont compté 37 pour cent de tirs réussis et 12 lancers francs sur 18 et ont subi
+18 pertes de ballon.  Sean Kilpatrick qui figurait dans l'alignement de départ a terminé
+avec 14 points  (5-10 L, 2-5 L3, 2-2 LF) et quatre passes décisives.  David Nwaba a
+terminé avec 13 points en 29 minutes.  Cristiano Felício a enregistré dix points en 29
+minutes.  Cameron Payne a contribué un efficace six points en 33 minutes avec neuf passes
+décisives.
+-------------------------
+*** English FStrings
+The Detroit Pistons (39-43) knocked off the Chicago Bulls (27-55) 119-87 on Wednesday at
+the United Center in Chicago .
+
+The Pistons lead in all four quarters. During the second half, Pistons obtained a good
+free throws percentage 100% to 55%. In the first quarter, Pistons obtained a good goals
+percentage 70% to 35%. Over the game, Pistons obtained a good free throws percentage 100%
+to 67%. Over the first half, Pistons got a good three-pointers percentage 53% to 33%. In
+the second half, Pistons got a good goals percentage 48% to 30%. During the first half,
+Pistons overcame Bulls for points 66 to 50. Over the second half, Pistons overcame Bulls
+for points 53 to 37. Over the game, Pistons obtained a good goals percentage 53% to 37%.
+In the game, Pistons dominated Bulls for goals 47 to 32. Over the first quarter, Pistons
+overcame Bulls for points 35 to 21. During the first half, Pistons got a good goals
+percentage 58% to 44%. In the third quarter, Pistons obtained a good goals percentage 52%
+to 39%. In the fourth quarter, Pistons overcame Bulls for points 25 to 13. Over the game,
+Pistons got a good three-pointers percentage 43% to 32%. In the second half, Pistons
+dominated Bulls for goals 21 to 13.
+
+Luke Kennard was a starter and scored a game high with 23 points in 30 minutes. Lauri
+Markkanen lead the way off the bench scoring 20 points in 21 minutes.
+
+The Pistons show 52 percent from the field and 10-of-10 free throws. Anthony Tolliver was
+in the starting line-up and added 18 points in 26 minutes (6-10 FG, 4-7 3Pt, 2-2 FT).
+Henry Ellenson recorded 14 points in 28 minutes, 5 goals, 2 three-pointers, grabbing 10
+rebounds, 2 assists and performed a double-double.  Stanley Johnson finished with 11
+points and 3-for-4 from beyond the arc.  Reggie Jackson added 7 points in 28 minutes and
+10 assists.
+
+The Bulls show 37 percent from the field and 12-of-18 free throws and committed 18
+turnovers. Sean Kilpatrick contributed an efficient 14 points in 29 minutes and 4 assists.
+David Nwaba recorded 13 points in 29 minutes (5-16 FG, 1-3 3Pt, 2-3 FT).  Cristiano
+Felício contributed an efficient 10 points in 29 minutes (3-5 FG, 0-0 3Pt, 4-6 FT).
+Cameron Payne finished with 6 points in 33 minutes (2-9 FG, 2-3 3Pt, 0-0 FT) and 9
+assists.
+-------------------------
+*** Reference summary
+The Detroit Pistons defeated the host Chicago Bulls, 119-87, at United Center on
+Wednesday. In a much-needed finale for both of these teams, Detroit won in dominating
+fashion. A 35-21 first quarter really set the tone, as Chicago never got the game within
+an eight-point margin from there. In addition, they led by at least 20 points for the
+entirety of the fourth quarter. The shooting disparity was drastic, with Detroit
+connecting on 53 percent of their shots while Chicago hit just 37 percent from the field.
+Defense was also key, with the Pistons recording 12 steals and four blocks while the Bulls
+had just eight steals and one block. That led to Detroit winning the turnover
+differential, 18-11. The Pistons (39-43) were led by Luke Kennard, as he tallied 23
+points, five rebounds and five assists. Eric Moreland started and accumulated 16 points,
+17 rebounds, four assists, four steals and four blocks. Henry Ellenson led the bench with
+14 points and 10 boards. The Bulls (27-55) were led by Lauri Markkanen, as he accrued 20
+points, eight rebounds and two steals. Sean Kilpatrick totaled 14 points, two rebounds and
+four assists. David Nwaba generated 13 points, six rebounds and two assists. Neither of
+these clubs reached the postseason, as Detroit finished ninth in the Eastern Conference
+while Chicago finished 13th.
+====================================================================================================

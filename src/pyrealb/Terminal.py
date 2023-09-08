@@ -96,7 +96,7 @@ class Terminal(Constituent):
             if lexInfo is None:
                 self.tab=None 
                 self.realization=f"[[{lemma}]]"
-                return self.warn("not in lexicon",self.lang)
+                return self.warn("not in lexicon",self.lang,None)
                 if quoteOOV: # not currently used
                     self.lemma=str(lemma)
                     self.realization=self.lemma

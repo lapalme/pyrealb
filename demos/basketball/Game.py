@@ -37,6 +37,12 @@ class Game:
         else:
             return self.visitors()
 
+    def loser(self) -> Team:
+        if self.home().final_score() > self.visitors().final_score():
+            return self.visitors()
+        else:
+            return self.home()
+
     def reference_sentences(self) -> [str]:
         # each summary is split in "sentences"
         # use references instead of summary because it is not split in tokens

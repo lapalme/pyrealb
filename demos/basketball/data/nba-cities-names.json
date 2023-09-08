@@ -1,0 +1,94 @@
+{
+      "Atlanta":{"N":{"tab":"nI","g":"m"}},
+      "Hawks":{"N":{"tab":"nI","g":"m","n":"p","h":1}},
+
+      "Boston":{"N":{"tab":"nI","g":"m"}},
+      "Celtics":{"N":{"tab":"nI","g":"m","n":"p"}},
+
+      "Brooklyn":{"N":{"tab":"nI","g":"m"}},
+      "Nets":{"N":{"tab":"nI","g":"m","n":"p"}},
+
+      "Charlotte":{"N":{"tab":"nI","g":"m"}},
+      "Hornets":{"N":{"tab":"nI","g":"m","n":"p","h":1}},
+
+      "Chicago":{"N":{"tab":"nI","g":"m"}},
+      "Bulls":{"N":{"tab":"nI","g":"m","n":"p"}},
+
+      "Cleveland":{"N":{"tab":"nI","g":"m"}},
+      "Cavaliers":{"N":{"tab":"nI","g":"m","n":"p"}},
+
+      "Dallas":{"N":{"tab":"nI","g":"m"}},
+      "Mavericks":{"N":{"tab":"nI","g":"m","n":"p"}},
+
+      "Denver":{"N":{"tab":"nI","g":"m"}},
+      "Nuggets":{"N":{"tab":"nI","g":"m","n":"p"}},
+
+      "Detroit":{"N":{"tab":"nI","g":"m"}},
+      "Pistons":{"N":{"tab":"nI","g":"m","n":"p"}},
+
+      "Golden State":{"N":{"tab":"nI","g":"m"}},
+      "Oakland":{"N":{"tab":"nI","g":"m"}},
+      "Warriors":{"N":{"tab":"nI","g":"m","n":"p"}},
+
+      "Houston":{"N":{"tab":"nI","g":"m","h":1}},
+      "Rockets":{"N":{"tab":"nI","g":"m","n":"p"}},
+
+      "Indiana":{"N":{"tab":"nI","g":"m"}},
+      "Indianapolis":{"N":{"tab":"nI","g":"m"}},
+      "Pacers":{"N":{"tab":"nI","g":"m","n":"p"}},
+
+      "Los Angeles":{"N":{"tab":"nI","g":"m"}},
+      "Clippers":{"N":{"tab":"nI","g":"m","n":"p"}},
+      "Lakers":{"N":{"tab":"nI","g":"m","n":"p"}},
+
+      "Memphis":{"N":{"tab":"nI","g":"m"}},
+      "Grizzlies":{"N":{"tab":"nI","g":"m","n":"p"}},
+
+      "Miami":{"N":{"tab":"nI","g":"m"}},
+      "Heat":{"N":{"tab":"nI","g":"m","n":"s","h":1}},
+
+      "Milwaukee":{"N":{"tab":"nI","g":"m"}},
+      "Bucks":{"N":{"tab":"nI","g":"m","n":"p"}},
+
+      "Minnesota":{"N":{"tab":"nI","g":"m"}},
+      "Minneapolis":{"N":{"tab":"nI","g":"m"}},
+      "Timberwolves":{"N":{"tab":"nI","g":"m","n":"p"}},
+
+      "New Orleans":{"N":{"tab":"nI","g":"m"}},
+      "Pelicans":{"N":{"tab":"nI","g":"m","n":"p"}},
+
+      "New York":{"N":{"tab":"nI","g":"m"}},
+      "New York City":{"N":{"tab":"nI","g":"m"}},
+      "Knicks":{"N":{"tab":"nI","g":"m","n":"p"}},
+
+      "Oklahoma City":{"N":{"tab":"nI","g":"m"}},
+      "Thunder":{"N":{"tab":"nI","g":"m","n":"s"}},
+
+      "Orlando":{"N":{"tab":"nI","g":"m"}},
+      "Magic":{"N":{"tab":"nI","g":"m","n":"s"}},
+
+      "Philadelphia":{"N":{"tab":"nI","g":"m"}},
+      "76ers":{"N":{"tab":"nI","g":"m","n":"p"}},
+
+      "Phoenix":{"N":{"tab":"nI","g":"m"}},
+      "Suns":{"N":{"tab":"nI","g":"m","n":"p"}},
+
+      "Portland":{"N":{"tab":"nI","g":"m"}},
+      "Trail Blazers":{"N":{"tab":"nI","g":"m","n":"p"}},
+
+      "Sacramento":{"N":{"tab":"nI","g":"m"}},
+      "Kings":{"N":{"tab":"nI","g":"m","n":"p"}},
+
+      "San Antonio":{"N":{"tab":"nI","g":"m"}},
+      "Spurs":{"N":{"tab":"nI","g":"m","n":"p"}},
+
+      "Toronto":{"N":{"tab":"nI","g":"m"}},
+      "Raptors":{"N":{"tab":"nI","g":"m","n":"p"}},
+
+      "Utah":{"N":{"tab":"nI","g":"m","h":1}},
+      "Salt Lake City":{"N":{"tab":"nI","g":"m"}},
+      "Jazz":{"N":{"tab":"nI","g":"m","n":"s"}},
+
+      "Washington":{"N":{"tab":"nI","g":"m"}},
+      "Wizards":{"N":{"tab":"nI","g":"m","n":"p"}}
+}

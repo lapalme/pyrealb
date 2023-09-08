@@ -1,0 +1,158 @@
+***   902:2015-04-15: Toronto Raptors receives Charlotte Hornets  [92-87]
+
+                    |                                    Toronto Raptors (49-33)                                    
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|   11|   20|    3|   10|    0|    0|    2|   10|    7|    2|    0|    2|     |   25|     
+Q2                  |               60|   10|   18|    6|    9|    4|    4|    0|    6|    8|    3|    1|    4|     |   30|     
+Q3                  |               60|   11|   17|    1|    5|    0|    0|    0|    5|    8|    2|    0|    3|     |   23|     
+Q4                  |               60|    6|   22|    2|    9|    0|    0|    3|   11|    4|    1|    2|    2|     |   14|     
+H1                  |              120|   21|   38|    9|   19|    4|    4|    2|   16|   15|    5|    1|    6|     |   55|     
+H2                  |              120|   17|   39|    3|   14|    0|    0|    3|   16|   12|    3|    2|    5|     |   37|     
+game                |              240|   38|   77|   12|   33|    4|    4|    5|   32|   27|    8|    3|   11|   16|   92|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Kyle Lowry          |True |     |   37|    8|   15|    6|    9|    4|    4|    1|    4|    7|    3|    0|    3|    1|   26|    5
+Jonas Valančiūnas   |True |     |   27|    9|   11|    0|    0|    0|    0|    0|    5|    1|    0|    0|    0|    2|   18|   14
+DeMar DeRozan       |True |     |   34|    8|   13|    0|    2|    0|    0|    1|    4|    6|    2|    0|    4|    1|   16|    8
+Terrence Ross       |True |     |   33|    5|   15|    3|   13|    0|    0|    0|    2|    3|    0|    0|    0|    1|   13|    8
+Greivis Vásquez     |False|     |   24|    2|    8|    2|    4|    0|    0|    0|    4|    6|    1|    0|    1|    3|    6|   -3
+Tyler Hansbrough    |True |     |   22|    2|    2|    0|    0|    0|    0|    0|    3|    2|    1|    0|    1|    3|    4|    9
+James Johnson       |False|     |   14|    2|    6|    0|    2|    0|    0|    1|    1|    0|    0|    1|    2|    3|    4|   -3
+Patrick Patterson   |False|     |   25|    1|    3|    1|    3|    0|    0|    0|    3|    1|    1|    1|    0|    0|    3|   -4
+Amir Johnson        |False|     |   20|    1|    4|    0|    0|    0|    0|    2|    6|    1|    0|    1|    0|    2|    2|   -9
+Landry Fields       |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Chuck Hayes         |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Greg Stiemsma       |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Lou Williams        |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+                    |                                   Charlotte Hornets (33-49)                                   
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|    7|   17|    3|    7|    3|    4|    1|    5|    3|    0|    0|    3|     |   20|     
+Q2                  |               60|    8|   20|    2|    8|    6|    6|    4|   12|    4|    4|    1|    4|     |   24|     
+Q3                  |               60|    8|   15|    3|    6|    4|    4|    0|    6|    5|    2|    0|    3|     |   23|     
+Q4                  |               60|    7|   19|    4|   12|    2|    2|    3|   13|    3|    2|    2|    2|     |   20|     
+H1                  |              120|   15|   37|    5|   15|    9|   10|    5|   17|    7|    4|    1|    7|     |   44|     
+H2                  |              120|   15|   34|    7|   18|    6|    6|    3|   19|    8|    4|    2|    5|     |   43|     
+game                |              240|   30|   71|   12|   33|   15|   16|    8|   36|   15|    8|    3|   12|   10|   87|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Troy Daniels        |False|     |   29|    7|   15|    6|   13|    4|    4|    1|    2|    1|    0|    0|    1|    2|   24|   -1
+Kemba Walker        |True |     |   29|    6|   15|    1|    5|    4|    4|    0|    3|    4|    3|    0|    3|    0|   17|  -16
+Gerald Henderson    |True |     |   28|    7|   12|    1|    1|    0|    0|    1|    3|    2|    0|    0|    0|    1|   15|   -9
+Noah Vonleh         |False|     |   23|    3|    7|    1|    2|    2|    2|    4|   12|    0|    0|    2|    2|    0|    9|   10
+Marvin Williams     |True |     |   24|    3|    7|    2|    4|    0|    0|    0|    2|    0|    0|    0|    0|    0|    8|  -15
+Jeffery Taylor      |True |     |   38|    2|    6|    0|    2|    2|    2|    1|    4|    3|    0|    0|    2|    2|    6|    0
+Bismack Biyombo     |True |     |   31|    0|    1|    0|    0|    3|    4|    0|    4|    0|    0|    1|    3|    3|    3|   -7
+Brian Roberts       |False|     |   18|    1|    7|    1|    6|    0|    0|    0|    0|    5|    4|    0|    0|    2|    3|   11
+Jason Maxiell       |False|     |   16|    1|    1|    0|    0|    0|    0|    1|    6|    0|    1|    0|    1|    0|    2|    2
+P.J. Hairston       |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Al Jefferson        |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Lance Stephenson    |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Mo Williams         |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+*** English jsRealB
+The Raptors  (49-33) knocked off the Hornets  (33-49) 92-87 in Toronto on Wednesday at the
+Air Canada Centre.
+
+The Hornets outscored the Raptors 43-37 in the second half but the winner held for the
+win. In the second quarter, the Raptors got better goals percentage 56% to 40%. In the
+first half, the Raptors obtained better three-pointers percentage 47% to 33%.
+
+Kyle Lowry who was a starter led the way off the bench scoring 26 points. Troy Daniels who
+started this game had an efficient performance scoring 24 points a season high in 29
+minutes.
+
+The Raptors showed 49 percent from the field and 4-4 free throws.  Jonas Valančiūnas who
+started this game posted 18 points.  Terrence Ross recorded 13 points in 33 minutes with
+three assists.  Tyler Hansbrough had four points in 22 minutes  (2-2 FG, 0-0 3Pt, 0-0 FT)
+and two assists.
+
+The Hornets showed 42 percent from the field and 15-16 attempts at the charity stripe.
+Gerald Henderson finished with 15 points with seven goals.  Noah Vonleh ended up with nine
+points.  Jeffery Taylor contributed an efficient six points in 38 minutes  (2-6 FG, 0-2
+3Pt, 2-2 FT) and three assists.  Brian Roberts scored three points  (1-7 FG, 1-6 3Pt, 0-0
+FT) and five assists.
+-------------------------
+*** French jsRealB
+Les Raptors  (49-33) ont défait les Hornets  (33-49) 92-87 à Toronto au stade Air Canada
+Centre mercredi.
+
+Les Hornets a dominé les Raptors  (43-37) dans la deuxième demie mais n'a pas pu compléter
+leur retour. Durant le deuxième quart, les Raptors ont obtenu les meilleurs tirs en
+pourcentage, une différence de 16%. Durant la première demie, les Raptors ont obtenu les
+meilleurs lancers à 3 points en pourcentage, 47% en comparaison avec 33%.
+
+Kyle Lowry qui figurait dans l'alignement de départ a mené son équipe marquant 26 points
+avec 6-sur-9 depuis la ligne de trois points. Troy Daniels qui figurait dans l'alignement
+de départ a réalisé une performance excellente comptant 24 points un record jusqu'ici en
+29 minutes avec sept tirs réussis et 6-sur-13 depuis la ligne de trois points.
+
+Les Raptors ont compté 49 pour cent de tirs réussis et 4 lancers francs sur 4.  Jonas
+Valančiūnas qui figurait dans l'alignement de départ a ajouté 18 points avec 9-sur-11 L.
+Terrence Ross a eu 13 points en 33 minutes  (5-15 L, 3-13 L3, 0-0 LF) tout en ajoutant
+trois passes décisives.  Tyler Hansbrough a enregistré quatre points en 22 minutes avec
+deux passes décisives.
+
+Les Hornets ont compté 42 pour cent de tirs réussis et 15 lancers francs sur 16.  Gerald
+Henderson a ajouté 15 points.  Noah Vonleh a eu neuf points avec douze rebonds récupérés.
+Jeffery Taylor a terminé avec six points en 38 minutes  (2-6 L, 0-2 L3, 2-2 LF) tout en
+ajoutant trois passes décisives.  Brian Roberts a contribué un efficace trois points  (1-7
+L, 1-6 L3, 0-0 LF) tout en ajoutant cinq passes décisives.
+-------------------------
+*** English FStrings
+The Toronto Raptors (49-33) knocked off the Charlotte Hornets (33-49) 92-87 on Wednesday
+at the Air Canada Centre in Toronto .
+
+The Hornets outscored the Raptors (43-37) in the second half, but the Toronto held on for
+the win. Over the second quarter, Raptors obtained a good goals percentage 56% to 40%. In
+the first quarter, Raptors obtained a good goals percentage 55% to 41%. In the first half,
+Raptors obtained a good goals percentage 55% to 41%. Over the first half, Raptors obtained
+a good three-pointers percentage 47% to 33%. During the third quarter, Raptors obtained a
+good goals percentage 65% to 53%. Over the first half, Raptors overcame Hornets for points
+55 to 44.
+
+Kyle Lowry lead the way off the bench scoring 26 points in 37 minutes (8-15 FG, 6-9 3Pt,
+4-4 FT) while adding 7 assists. Troy Daniels had efficient performance scoring 24 points
+in 29 minutes, 7-for-15 and 6 three-pointers.
+
+The Raptors show 49 percent from the field and 4-of-4 free throws. Jonas Valančiūnas
+recorded 18 points in 27 minutes (9-11 FG, 0-0 3Pt, 0-0 FT).  Terrence Ross added 13
+points in 33 minutes and 3 assists.  Tyler Hansbrough scored 4 points in 22 minutes and 2
+assists.
+
+The Hornets show 42 percent from the field and 15-of-16 free throws. Gerald Henderson
+scored 15 points in 28 minutes and 7 goals.  Noah Vonleh scored 9 points in 23 minutes
+(3-7 FG, 1-2 3Pt, 2-2 FT).  Jeffery Taylor added 6 points in 38 minutes and 3 assists.
+Brian Roberts had 3 points and 5 assists.
+-------------------------
+*** Reference summary
+The Toronto Raptors (49-33) defeated the Charlotte Hornets (33-49) 92-87 on Wednesday at
+the Air Canada Centre in Toronto. The Raptors came into this matchup as the projected
+fourth seed for the Eastern Conference playoffs, but were looking to move up into the
+third seed, where the Chicago Bulls currently sit. The win here puts them in position to
+take that spot, but only as long as the Bulls lose their matchup against the Atlanta Hawks
+on Wednesday as well. If the Raptors finish as the fourth seed, they'll play the
+Washington Wizards, but if they finish as the third seed, they'll take on the Milwaukee
+Bucks. The Hornets have been eliminated from the playoffs so this loss marks an end to
+their season. The Raptors were the superior shooters in this game, going 49 percent from
+the field and 36 percent from the three-point line, while the Hornets went 42 percent from
+the floor and 36 percent from deep. After struggling with his shot recently, Kyle Lowry
+finally broke out of his slump and went off for a game-high of 26 points (8-15 FG, 6-9
+3Pt, 4-4 FT), to go along with seven assists and three steals. He had combined to go just
+13-for-46 from the field and 3-for-17 from the three-point line over his previous three
+games, so this was a much needed confidence booster heading into the playoffs. DeMar
+DeRozan had a solid showing in the win as well, posting 16 points (8-13 FG, 0-2 3Pt), six
+assists and two steals. He had to sit out of Tuesday's game due to a groin injury, so it
+was good to see him come back and get a full games worth of work without any setbacks.
+Jonas Valanciunas and Terrence Ross were the other two Raptors in double figures.
+Valanciunas finished with 18 points (9-11) and five rebounds, while Ross added 13 points
+(5-15 FG, 3-13 3Pt) and three assists. After combining to go just 3-for-10 from the field
+and 0-for-5 from the three-point line during Monday's game against the Rockets, Gerald
+Henderson and Kemba Walker had much better performances this time around. Walker finished
+with 17 points (6-15 FG, 1-5 3Pt, 4-4 FT), four assists and three steals, while Henderson
+recorded 15 points (7-12 FG, 1-1 3Pt) and three rebounds. Neither wanted to end their
+season as poorly as they played Monday, so they'll be much happier with this performance
+despite taking the loss. The Hornets saw a nice contribution from their bench as well
+though, as Troy Daniels finished with a team-high of 24 points (7-15 FG, 6-13 3Pt, 4-4 FT)
+over 29 minutes. the 24 points were a new season-high for the guard, who has received
+extra playing time due to the injuries that have taken a toll on this roster here at the
+end of the season. This marks the final regular season game for both teams.
+====================================================================================================

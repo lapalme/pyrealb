@@ -1,6 +1,11 @@
+from typing import Dict
+
 from pyrealb import *
 from Realizer import Realizer
 from LexicalChoices import LexicalChoices
+import json
+
+from pyrealb import NP
 
 
 # Ne disposant pas de corpus français, nous traduisons littéralement en utilisant des termes
@@ -13,8 +18,7 @@ class French(Realizer, LexicalChoices):
         # language specifics
         loadFr()
         addToLexicon({"score": {"N": {"g": "m", "tab": "n3"}}})
-        addToLexicon({"Houston": {"N": {"g": "m", "tab": "nI", "h": 1}}})
-        addToLexicon({"Utah": {"N": {"g": "m", "tab": "nI", "h": 1}}})
+        updateLexicon(json.load(open("data/nba-cities-names.json")))
 
     def set_language(self):
         loadFr()
@@ -29,9 +33,14 @@ class French(Realizer, LexicalChoices):
     def with_p(self) -> P:
         return P("avec")
 
-    def pts_3(self, n) -> NP:
-        return NP(self.no(n),
-                  N("panier"),
+    def on_day(self, date) -> DT:
+        return DT(date).dOpt({"nat": True, "hour": False, "minute": False, "second": False,
+                              "month": False, "date": False, "year": False,
+                              "det": false})
+
+    def pts_3(self, n=None) -> NP:
+        return NP(self.no(n) if n is not None else None,
+                  N(oneOf("tir", "lancer")),
                   PP(P("à"), self.nb(3, "point")))
 
     def nb_assists(self, n) -> NP:
@@ -44,9 +53,23 @@ class French(Realizer, LexicalChoices):
 
     def team_np(self, team, with_place=False, wins_losses=False) -> NP:
         return NP(D("le"),
-                  Q(team.name()),
+                  N(team.name()),
                   self.pts(team.wins(), team.losses()).ba("(") if wins_losses else None,
-                  PP(P("de"), Q(team.place())) if with_place else None).n("p")
+                  PP(P("de"), N(team.place())) if with_place else None)
+
+    def pts_abbrev(self, name):
+        return {"FG": "L",  # lancer
+                "FG3": "L3",  # lancer 3
+                "FT": "LF",  # lancer franc
+                "REB": "R",  # rebond
+                "BLK": "C",  # contre
+                "AST": "PD",  # passe décisive
+                "STL": "I",  # interception
+                "TOV": "PB",  # perte de ballon
+                "PF": "F",  # faute
+                "PTS": "PTS",  # points
+                "MIN": "MIN",  # minutes
+                }[name]
 
     def game_part(self, part) -> Constituent:
         if part == "game":
@@ -79,17 +102,34 @@ class French(Realizer, LexicalChoices):
         return PP(P("à"), D("le"), N("stade"), Q(stadium))
 
     def city_pp(self, city) -> PP:
-        return PP(P("à"), Q(city))
+        return PP(P("à"), N(city))
 
-    def team_winning_streak_vp(self, streak_length):
-        return VP(V("permettre").t("pr"),
-                  Pro("leur"),
-                  PP(P("de"),
-                     VP(V("enregistrer").t("b")),
-                     NP(D("leur"),
-                        NO(streak_length).dOpt({"ord": True}),
-                        N("série"),
-                        PP(P("de"), N("victoire").n("p")))))
+    def team_winning_streak_vp(self, streak_length) -> Phrase:
+        return VP(Pro("leur"),
+                  V("permettre").t("pr"),
+                  oneOf(lambda: PP(P("de"),
+                                   VP(V(oneOf("enregistrer", "remporter")).t("b")),
+                                   NP(D("leur"),
+                                      NO(streak_length).dOpt({"ord": True}),
+                                      N("victoire"),
+                                      PP(P("de"), N("suite")))),
+                        lambda: PP(P("de"),
+                                   VP(V("allonger").t("b"),
+                                      PP(P("à"), NO(streak_length)),
+                                      NP(D("leur"),
+                                         N("série"),
+                                         PP(P("de"),
+                                            N("victoire").n("p")))))
+                        ))
+
+    def team_losing_streak_vp(self, team, streak_length) -> Phrase:
+        np = NP(D("leur"),
+                NO(4).dOpt({"ord": true}),
+                N("défaite"), PP(P("de"), N("suite")))
+        return S(P("pour"),self.team_np(team),
+                 SP(Pro("ce"),
+                    VP(V("être"),
+                       np)))
 
     def conference_leader(self, winner_np) -> NP:
         return NP(winner_np.a(","),
@@ -98,10 +138,12 @@ class French(Realizer, LexicalChoices):
                         NP(D("leur"),
                            N("conférence")))).a(","))
 
-    def defeat_vp(self) -> VP:
-        verb = oneOf("défaire", "dominer", "battre", "surpasser")
-        vp = VP(V(verb).t(self.tense).n("p"))
-        return vp
+    def defeat_vp(self, nb_points) -> VP:
+        if nb_points > 15:
+            verb = oneOf("dominer", "surpasser")
+        else:
+            verb = oneOf("défaire", "battre")
+        return VP(V(verb).t(self.tense))
 
     def overtime_pp(self, minutes):
         return PP(P("en"),
@@ -141,7 +183,7 @@ class French(Realizer, LexicalChoices):
     def always_lead(self, winner) -> S:
         return S(self.team_np(winner),
                  VP(V("mener"),
-                    PP(P("dans"),
+                    PP(P("pendant"),
                        NP(D("le"),
                           NO(4).dOpt({"nat": True}),
                           N("quart")))))
@@ -153,6 +195,59 @@ class French(Realizer, LexicalChoices):
                     NP(D("le"), N("prolongation"),
                        PP(P("pour"),
                           V("gagner").t("b"), self.game_part("game")))))
+
+
+    def show_team_fact(self, team1, team2, fact):
+        facts_fr: dict[str, NP] = {
+            "goals": NP(N(oneOf("lancer", "tir"))),
+            "goals3": NP(N(oneOf("tir", "lancer")),
+                         PP(P("à"), NP(NO(3), N("point")))),
+            "rebounds": NP(N("rebond")),
+            "free_throws": NP(N("lancer").n("p"), A("franc")),
+            "assists": NP(N("passe"), A("décisif")),
+            "steals": NP(N("interception")),
+            "blocks": NP(N("contre")),
+            "turnovers": NP(N("perte"), PP(P("de"), N("ballon"))),
+            "fouls": NP(N("faute")),
+            "points": NP(N("point"))
+        }
+        (period, score, t1_val, t2_val, diff) = fact
+        period_pp = PP(P(oneOf("durant", "pendant")), self.game_part(period))
+        if diff < 0:
+            team2, team1 = team1, team2
+            t2_val,t1_val = t1_val, t2_val
+        score_n = score[:-1] if score.endswith("%") else score
+        if score_n in facts_fr:
+            score_np = facts_fr[score_n].n("p")
+        else:
+            print("strange score_n",score_n)
+        if score.endswith("%"):
+            return S(period_pp.a(","),
+                     self.team_np(team1),
+                     VP(V(oneOf("obtenir","réussir")),
+                        NP(D("le"),A("bon").f("co"),score_np,
+                           PP(P("en"),N("pourcentage")).a(","),
+                           oneOf(
+                               lambda: PP(NO(t1_val).a("%"),
+                                          oneOf(
+                                              lambda:[P("en"),N("comparaison"),P("avec")],
+                                              lambda:[P("par"),N("rapport"),P("à")]
+                                          ),
+                                          NO(t2_val).a("%")),
+                               lambda: NP(D("un"),N(oneOf("différence","avantage")),
+                                          PP(P("de"),NO(abs(diff)).a("%")))
+                           ))
+                        ))
+        return S(self.team_np(team1),
+                 VP(V(oneOf("vaincre","dominer")),
+                    self.team_np(team2),
+                    PP(P("pour"),score_np.add(D("le"),0)),
+                    oneOf(
+                        lambda: PP(NO(t1_val),P("à"),NO(t2_val)),
+                        lambda: PP(P("par"),NO(abs(diff)))
+                    ),
+                    period_pp))
+
 
     #   show_team_perf
     def show_goals_vp(self, goals, line_scores) -> VP:
@@ -251,19 +346,20 @@ class French(Realizer, LexicalChoices):
             lambda: VP(V("être"),
                        PP(P("à"), N("domicile"), P("contre")))
         )
+        np = NP(A("prochain").pos("pre"),
+                N(oneOf("partie", "match", "affrontement")))
         return oneOf(
-            lambda: S(PP(P("pour"),
-                         NP(D("leur"),
-                            A("prochain").pos("pre"),
-                            N("partie"))).a(","),
+            lambda: S(PP(P("à"), V("venir").t("b"),
+                         PP(P("pour"), self.team_np(team_1))).a(","),
+                      NP(D("un"), N("match"), P("à"), N("domicile"),
+                         PP(P("contre"), N(team_2.place())))),
+            lambda: S(PP(P("pour"), np.add(D("leur"), 0)).a(","),
                       self.team_np(team_1),
                       vp.add(self.team_np(team_2, True)),
                       next_date),
-            lambda: S(NP(D("le"),
-                         A("prochain").pos("pre"),
-                         N("match"),
-                         PP(P("de"),
-                            self.team_np(team_1))),
+            lambda: S(np.add(D("le"), 0)
+                      .add(PP(P("de"),
+                              self.team_np(team_1))),
                       VP(V("être"),
                          PP(P("à"), N("domicile")),
                          PP(P("contre"), self.team_np(team_2, True)),
@@ -286,7 +382,7 @@ class French(Realizer, LexicalChoices):
             lambda: S(Adv("ensuite"),
                       self.team_np(team_1),
                       VP(V("voyager"),
-                         PP(P("à"), Q(team_2.place())),
+                         PP(P("à"), N(team_2.place())),
                          PP(P("pour"),
                             V("affronter").t("b"),
                             self.team_np(team_2),

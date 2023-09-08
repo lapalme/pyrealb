@@ -1,0 +1,143 @@
+***  3635:2017-02-15: Golden State Warriors receives Sacramento Kings  [109-86]
+
+                    |                                  Golden State Warriors (47-9)                                 
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|   11|   22|    2|    8|    4|    4|    1|   11|   10|    3|    2|    3|     |   28|     
+Q2                  |               60|    8|   20|    2|   10|    1|    2|    1|   10|    6|    1|    2|    2|     |   19|     
+Q3                  |               60|   14|   20|    6|   10|    8|   13|    1|   14|   12|    4|    4|    1|     |   42|     
+Q4                  |               60|    8|   22|    3|    8|    1|    2|    3|   11|    4|    2|    2|    2|     |   20|     
+H1                  |              120|   19|   42|    4|   18|    5|    6|    2|   21|   16|    4|    4|    5|     |   47|     
+H2                  |              120|   22|   42|    9|   18|    9|   15|    4|   25|   16|    6|    6|    3|     |   62|     
+game                |              240|   41|   84|   13|   36|   14|   21|    6|   46|   32|   10|   10|    8|   16|  109|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Klay Thompson       |True |     |   30|   12|   18|    7|   12|    4|    7|    2|    5|    4|    2|    0|    0|    1|   35|   35
+Kevin Durant        |True |     |   32|   10|   15|    1|    4|    0|    0|    0|    7|    7|    1|    4|    1|    1|   21|   29
+Stephen Curry       |True |     |   30|    4|   14|    2|    8|    3|    4|    0|    6|    9|    0|    2|    3|    2|   13|   23
+JaVale McGee        |True |     |   17|    4|    5|    0|    0|    0|    0|    1|   10|    1|    0|    0|    0|    2|    8|   32
+Ian Clark           |False|     |   17|    3|    6|    2|    3|    0|    0|    0|    1|    1|    0|    0|    0|    1|    8|  -10
+James Michael McAdoo|False|     |   13|    3|    6|    0|    0|    1|    2|    0|    2|    0|    0|    1|    0|    0|    7|    4
+Andre Iguodala      |False|     |   22|    2|    4|    1|    2|    0|    0|    1|    6|    3|    1|    2|    1|    2|    5|   -3
+Kevon Looney        |False|     |   16|    2|    4|    0|    1|    1|    2|    0|    2|    1|    4|    0|    0|    1|    5|  -11
+Patrick McCaw       |False|     |   17|    1|    4|    0|    3|    2|    2|    0|    2|    1|    1|    1|    1|    1|    4|   21
+Draymond Green      |True |     |   15|    0|    3|    0|    2|    2|    2|    0|    2|    3|    1|    0|    1|    3|    2|    2
+Damian Jones        |False|     |    5|    0|    0|    0|    0|    1|    2|    2|    2|    0|    0|    0|    0|    1|    1|   -7
+Shaun Livingston    |False|     |   15|    0|    2|    0|    0|    0|    0|    0|    1|    1|    0|    0|    0|    1|    0|    7
+Briante Weber       |False|     |    5|    0|    3|    0|    1|    0|    0|    0|    0|    1|    0|    0|    1|    0|    0|   -7
+
+                    |                                    Sacramento Kings (24-33)                                   
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|    9|   23|    5|    9|    2|    4|    0|    9|    8|    0|    1|    5|     |   25|     
+Q2                  |               60|   10|   23|    1|    4|    4|    5|    5|   14|    5|    2|    0|    2|     |   25|     
+Q3                  |               60|    5|   23|    0|    8|    5|    6|    5|   14|    3|    1|    2|    6|     |   15|     
+Q4                  |               60|    9|   20|    1|    3|    2|    2|    2|   13|    7|    1|    3|    5|     |   21|     
+H1                  |              120|   19|   46|    6|   13|    6|    9|    5|   23|   13|    2|    1|    7|     |   50|     
+H2                  |              120|   14|   43|    1|   11|    7|    8|    7|   27|   10|    2|    5|   11|     |   36|     
+game                |              240|   33|   89|    7|   24|   13|   17|   12|   50|   23|    4|    6|   18|   17|   86|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Matt Barnes         |False|doubl|   31|    5|   12|    1|    5|    4|    4|    3|   14|    3|    1|    0|    1|    2|   15|  -26
+Darren Collison     |True |     |   27|    5|    9|    1|    2|    3|    4|    0|    1|    3|    0|    1|    4|    0|   14|  -26
+DeMarcus Cousins    |True |     |   22|    6|   14|    1|    3|    0|    1|    0|    4|    6|    0|    1|    3|    1|   13|  -12
+Willie Cauley-Stein |False|     |   24|    6|   16|    0|    0|    1|    1|    3|    7|    1|    1|    1|    4|    2|   13|  -10
+Malachi Richardson  |False|     |   27|    4|   10|    0|    1|    2|    2|    1|    7|    2|    1|    0|    0|    2|   10|    5
+Ben McLemore        |True |     |   33|    3|   10|    3|    6|    0|    0|    0|    4|    2|    0|    1|    2|    4|    9|  -21
+Arron Afflalo       |True |     |   15|    1|    4|    1|    2|    1|    1|    0|    0|    2|    0|    0|    1|    0|    4|  -10
+Georgios Papagiannis|False|     |    7|    2|    3|    0|    0|    0|    0|    1|    4|    0|    0|    1|    0|    0|    4|    7
+Anthony Tolliver    |False|     |   29|    1|    7|    0|    5|    1|    2|    4|    7|    3|    1|    0|    2|    1|    3|  -14
+Kosta Koufos        |True |     |   11|    0|    2|    0|    0|    1|    2|    0|    2|    0|    0|    1|    0|    4|    1|  -14
+Skal Labissière     |False|     |    9|    0|    2|    0|    0|    0|    0|    0|    0|    1|    0|    0|    1|    1|    0|    6
+Ty Lawson           |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+*** English jsRealB
+The Warriors  (47-9) , leader in their conference, topped the Kings  (24-33) 109-86 on
+Wednesday at the Oracle Arena in Oakland.
+
+The Kings led in the first half but the Warriors managed to come back. In the third
+quarter, the Warriors got better goals percentage a difference of 48%. In the second half,
+the Kings obtained better free throws percentage an advantage of 28%.
+
+Klay Thompson who was a starter scored a game high with 35 points  (12-18 FG, 7-12 3Pt,
+4-7 FT) and four assists. Matt Barnes who started this game led the way off the bench
+scoring 15 points performed a double-double.
+
+The Warriors showed 48 percent from the field and 14-21 free throws.  JaVale McGee scored
+eight points in 17 minutes  (4-5 FG, 0-0 3Pt, 0-0 FT) and one assist.
+
+The Kings showed 37 percent from the field and 13-17 free throws.  Malachi Richardson had
+ten points in 27 minutes  (4-10 FG, 0-1 3Pt, 2-2 FT) and two assists.  Ben McLemore ended
+up with nine points.  Anthony Tolliver contributed an efficient three points with seven
+rebounds and three assists.
+
+On deck for the Warriors will be a home match versus Los Angeles. The Kings' next game
+will be at home against the Denver Nuggets on Thursday.
+-------------------------
+*** French jsRealB
+Les Warriors  (47-9) , meneurs dans leur conférence, ont surpassé les Kings  (24-33)
+109-86 au stade Oracle Arena à Oakland mercredi.
+
+Les Kings ont mené dans la première demie mais les Warriors sont parvenus à revenir.
+Durant le troisième quart, les Warriors ont réussi les meilleurs lancers en pourcentage,
+une différence de 48%. Durant la deuxième demie, les Kings ont réussi les meilleurs
+lancers francs en pourcentage, une différence de 28%.
+
+Klay Thompson qui était un partant a mené son équipe marquant 35 points avec 12-sur-18 L,
+7-sur-12 depuis la ligne de trois points et quatre passes décisives. Matt Barnes qui était
+un partant a mené, comptant 15 points a terminé avec un double-double.
+
+Les Warriors ont compté 48 pour cent de tirs réussis et 14 lancers francs sur 21.  JaVale
+McGee a enregistré huit points en 17 minutes  (4-5 L, 0-0 L3, 0-0 LF) et une passe
+décisive.
+
+Les Kings ont compté 37 pour cent de tirs réussis et 13 lancers francs sur 17.  Malachi
+Richardson a enregistré dix points en 27 minutes avec 4-sur-10 L, sept rebonds récupérés
+et deux passes décisives.  Ben McLemore a contribué un efficace neuf points.  Anthony
+Tolliver a contribué un efficace trois points avec sept rebonds et trois passes décisives.
+
+La prochaine partie des Warriors sera à domicile contre les Clippers de Los Angeles jeudi.
+Pour leur prochaine partie, les Kings accueilleront les Nuggets de Denver jeudi.
+-------------------------
+*** English FStrings
+The Golden State Warriors (47-9), leader in their conference, defeated the Sacramento
+Kings (24-33) 109-86 on Wednesday at the Oracle Arena in Oakland .
+
+The Kings lead in the first half, but the Warriors managed to come back. In the third
+quarter, Warriors got a good goals percentage 70% to 22%. During the second half, Kings
+got a good free throws percentage 88% to 60%. In the third quarter, Warriors overcame
+Kings for points 42 to 15. Over the second half, Warriors overcame Kings for points 62 to
+36. Over the third quarter, Kings got a good free throws percentage 83% to 62%. Over the
+second half, Warriors got a good goals percentage 52% to 33%. During the first half,
+Warriors obtained a good free throws percentage 83% to 67%. During the game, Warriors got
+a good goals percentage 49% to 37%. During the first quarter, Warriors obtained a good
+goals percentage 50% to 39%. In the second half, Warriors dominated Kings for goals 22 to
+14.
+
+Klay Thompson was in the starting line-up and scored a game high with 35 points in 30
+minutes, 12-for-18, 7 three-pointers and 4 assists. Matt Barnes was a starter and scored a
+game high with 15 points in 31 minutes, 14 rebounds and performed a double-double.
+
+The Warriors show 48 percent from the field and 14-of-21 free throws. JaVale McGee
+contributed an efficient 8 points (4-5 FG, 0-0 3Pt, 0-0 FT).
+
+The Kings show 37 percent from the field and 13-of-17 free throws. Malachi Richardson
+posted 10 points in 27 minutes (4-10 FG, 0-1 3Pt, 2-2 FT).  Ben McLemore contributed an
+efficient 9 points in 33 minutes and 3 three-pointers.  Anthony Tolliver posted 3 points
+in 29 minutes (1-7 FG, 0-5 3Pt, 1-2 FT).
+
+For their next game, the Warriors will play at home against the Los Angeles Clippers on
+Thursday. For their next game, the Kings will play at home against the Denver Nuggets on
+Thursday.
+-------------------------
+*** Reference summary
+The host Golden State Warriors destroyed the Sacramento Kings on Tuesday, 109-86. The game
+was close until the third quarter, when Golden State (47-9) pulled away with a massive
+47-12 run. Prior to the run, All-Star forward Draymond Green had been ejected from the
+game after arguing over a call he disagreed with. Green's absence did not hinder the
+Warriors, however, as the "splash brothers "helped lead a massive run to earn the blowout
+victory. Shooting guard Klay Thompson led the team with 35 points and also finished with
+five rebounds and four assists. Former MVP Kevin Durant had 21 points to go along with
+seven rebounds and seven assists. Sacramento (24-33), meanwhile, had won four games in a
+row before Wednesday's rout. On Wednesday, however, even superstar center DeMarcus Cousins
+struggled, scoring just 13 points and no points in the game's final 20 mnutes. The team's
+top scorer was forward Matt Barnes with 15, but the contest ultimately proved to be far
+too lopsided for Sacramento to overcome. The 42-15 third quarter was the worst quarter
+seen by any single team thus far this season. Both teams will enter the All-Star Break.
+====================================================================================================

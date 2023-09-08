@@ -11,6 +11,7 @@ This demo features a rule-based data-to-text Natural Language Generation (NLG) f
 - `French.py` : French realizer class
 - `FStrings.py` : Realizer using only Python string concatenation
 - `Game.py` : Class for storing information about a game
+- `game_stats.py` : functions for finding interesting facts between teams in a given game
 - `Games.py` : Class for hiding access to the Gem dataset
 - `LexicalChoices.py` : abstract class for a realizer
 - `Player.py` : Class for storing information about a player
@@ -21,6 +22,7 @@ This demo features a rule-based data-to-text Natural Language Generation (NLG) f
 - `stats.py` : computation and use of statistics about teams and players; when launched as main, it creates the `data/aggregate.json` file
 - `Team.py` : Class for storing information about a team
 - `data`/
+  - `nba-cities-names.json` : names of the NBA teams with the corresponding cities as nouns in the format that can be added to the basic lexicon of each realizer. This is especially useful for French for proper number agreement and for realizing adequate elision.
   - `Seasons-train.txt` : listing of the all games for a given team in each season in the *train* split
   - `train-aggregate.json`: aggregated data about teams and players
 - `docs`/
@@ -29,7 +31,7 @@ This demo features a rule-based data-to-text Natural Language Generation (NLG) f
   - `SportSettSum.md`: paper about the rationale and organization of the whole realizer system
 
 - `output`/
-  - `test`, `train` and `validation`: directories with a sample of generated summaries from the given corpus
+  - `test`, `train` and `validation`: directories with a sample of generated summaries from the given corpus. These directories are created by running `sportsettsum.py` as main.
 
 
 **Contact**: [Guy Lapalme](mailto:lapalme@iro.umontreal.ca)

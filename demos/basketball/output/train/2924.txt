@@ -1,0 +1,128 @@
+***  2924:2016-12-26: Sacramento Kings receives Philadelphia 76ers  [102-100]
+
+                    |                                    Sacramento Kings (14-17)                                   
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|   11|   23|    1|    5|    1|    1|    2|   10|    7|    2|    0|    4|     |   24|     
+Q2                  |               60|   11|   29|    3|    8|    2|    2|    7|   16|    6|    3|    1|    3|     |   27|     
+Q3                  |               60|    8|   18|    0|    6|    3|    4|    2|    8|    6|    4|    2|    8|     |   19|     
+Q4                  |               60|    9|   17|    3|    6|   11|   14|    2|    8|    5|    2|    1|    4|     |   32|     
+H1                  |              120|   22|   52|    4|   13|    3|    3|    9|   26|   13|    5|    1|    7|     |   51|     
+H2                  |              120|   17|   35|    3|   12|   14|   18|    4|   16|   11|    6|    3|   12|     |   51|     
+game                |              240|   39|   87|    7|   25|   17|   21|   13|   42|   24|   11|    4|   19|   19|  102|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+DeMarcus Cousins    |True |     |   34|   10|   20|    2|    4|    8|    9|    2|    7|    5|    3|    2|    5|    4|   30|  -11
+Rudy Gay            |True |     |   35|    7|   16|    1|    4|    2|    2|    2|    9|    2|    0|    1|    4|    1|   17|    8
+Ty Lawson           |False|     |   20|    4|    8|    0|    2|    4|    4|    3|    4|    4|    2|    0|    3|    3|   12|    4
+Darren Collison     |True |     |   27|    4|   10|    1|    3|    0|    0|    1|    1|    4|    1|    0|    2|    0|    9|   -4
+Willie Cauley-Stein |False|     |   12|    4|    7|    0|    0|    1|    2|    2|    4|    0|    1|    1|    0|    3|    9|   -9
+Kosta Koufos        |True |     |   14|    3|    3|    0|    0|    0|    2|    0|    3|    1|    2|    0|    0|    5|    6|   20
+Garrett Temple      |False|     |   28|    1|    4|    1|    3|    2|    2|    0|    1|    3|    1|    0|    1|    0|    5|    8
+Anthony Tolliver    |False|     |   22|    2|    5|    1|    4|    0|    0|    1|    4|    0|    0|    0|    1|    1|    5|    3
+Ben McLemore        |True |     |   16|    2|    7|    0|    3|    0|    0|    0|    2|    3|    0|    0|    1|    1|    4|   -4
+Matt Barnes         |False|     |   13|    1|    3|    1|    2|    0|    0|    0|    2|    2|    0|    0|    2|    1|    3|   -7
+Omri Casspi         |False|     |   13|    1|    4|    0|    0|    0|    0|    2|    5|    0|    1|    0|    0|    0|    2|    2
+Malachi Richardson  |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Skal Labissière     |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+                    |                                   Philadelphia 76ers (7-23)                                   
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|   10|   19|    2|    6|    1|    2|    1|   10|    4|    2|    1|    5|     |   23|     
+Q2                  |               60|   10|   24|    1|    3|    3|    4|    3|   12|    6|    1|    4|    4|     |   24|     
+Q3                  |               60|   12|   22|    3|    8|    3|    4|    3|    9|    7|    6|    0|    5|     |   30|     
+Q4                  |               60|    7|   14|    3|    8|    6|    8|    1|    7|    2|    4|    0|    8|     |   23|     
+H1                  |              120|   20|   43|    3|    9|    4|    6|    4|   22|   10|    3|    5|    9|     |   47|     
+H2                  |              120|   19|   36|    6|   16|    9|   12|    4|   16|    9|   10|    0|   13|     |   53|     
+game                |              240|   39|   79|    9|   25|   13|   18|    8|   38|   20|   13|    5|   22|   23|  100|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Joel Embiid         |True |     |   28|    8|   17|    1|    4|    8|    9|    4|    8|    1|    2|    2|    8|    5|   25|    3
+Sergio Rodríguez    |True |     |   24|    7|    9|    4|    5|    0|    0|    0|    3|    5|    3|    0|    2|    1|   18|    4
+Ersan İlyasova      |False|     |   32|    7|   12|    2|    5|    1|    2|    0|    4|    2|    2|    0|    0|    5|   17|   11
+Dario Šarić         |False|     |   26|    5|   11|    2|    5|    0|    0|    1|    9|    2|    1|    0|    1|    1|   12|    4
+Gerald Henderson    |True |     |   25|    3|    9|    0|    3|    0|    0|    0|    2|    1|    0|    0|    0|    1|    6|   -4
+Jahlil Okafor       |True |     |   19|    3|    5|    0|    0|    0|    0|    1|    2|    2|    1|    0|    3|    4|    6|   -9
+Robert Covington    |True |     |   36|    2|    6|    0|    2|    1|    2|    1|    6|    1|    2|    2|    3|    4|    5|   -6
+T.J. McConnell      |False|     |   23|    1|    4|    0|    0|    2|    4|    1|    2|    6|    1|    0|    3|    1|    4|   -6
+Nik Stauskas        |False|     |   18|    2|    4|    0|    1|    0|    0|    0|    1|    0|    1|    0|    2|    1|    4|   -3
+Nerlens Noel        |False|     |    3|    1|    2|    0|    0|    1|    1|    0|    1|    0|    0|    1|    0|    0|    3|   -4
+Richaun Holmes      |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Timothé Luwawu-Cabar|False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Hollis Thompson     |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+*** English jsRealB
+The Kings  (14-17) overcame the 76ers  (7-23) 102-100 on Monday at the Golden 1 Center in
+Sacramento en route to their fourth straight win.
+
+The 76ers outscored the Kings 53-51 in the second half but could not complete their come-
+back. The 76ers dominated the Kings for points by 11 in the third quarter.
+
+DeMarcus Cousins who was in the starting line-up led the way, posting 30 points. Joel
+Embiid who was in the starting line-up had an efficient performance scoring 25 points.
+
+The Kings showed 44 percent from the field and 17-21 attempts at the charity stripe.  Rudy
+Gay who was in the starting line-up recorded 17 points.  Ben McLemore had four points
+(2-7 FG, 0-3 3Pt, 0-0 FT) while adding three assists.
+
+The 76ers showed 49 percent from the field and 13-18 free throws and committed 22
+turnovers.  Sergio Rodríguez who started this game recorded 18 points.
+
+Up next the Kings will travel to Portland to take on the Trail Blazers on Wednesday. Next
+Thursday, the 76ers will visit the Utah Jazz.
+-------------------------
+*** French jsRealB
+Les Kings  (14-17) ont défait les 76ers  (7-23) 102-100 au stade Golden 1 Center à
+Sacramento lundi leur permettant d'allonger à 4 leur série de victoires.
+
+Les 76ers ont dominé les Kings  (53-51) dans la deuxième demie mais le gagnant a bon tenu
+pour la victoire. Les 76ers ont dominé les Kings pour les points par 11 pendant le
+troisième quart.
+
+DeMarcus Cousins qui était un partant a fini avec 30 points. Joel Embiid qui débutait la
+partie a réalisé une performance excellente comptant 25 points.
+
+Les Kings ont compté 44 pour cent de tirs réussis et 17 lancers francs sur 21.  Rudy Gay
+qui était un partant a enregistré 17 points avec neuf rebonds.  Ben McLemore a terminé
+avec quatre points avec trois passes décisives.
+
+Les 76ers ont compté 49 pour cent de tirs réussis et 13 lancers francs sur 18 et ont subi
+22 pertes de ballon.  Sergio Rodríguez qui figurait dans l'alignement de départ a
+enregistré 18 points avec 7-sur-9 L et 4-sur-5 depuis la ligne de trois points.
+
+Mercredi prochain, les Kings seront sur la route contre les Trail Blazers de Portland.
+Ensuite les 76ers voyageront à Utah pour affronter le Jazz jeudi.
+-------------------------
+*** English FStrings
+The Sacramento Kings (14-17) topped the Philadelphia 76ers (7-23) 102-100 on Monday at the
+Golden 1 Center in Sacramento  giving them their 4th straight victory.
+
+The 76ers outscored the Kings (53-51) in the second half, but the Sacramento held on for
+the win. During the third quarter, 76ers overcame Kings for points 30 to 19. During the
+third quarter, 76ers got a good goals percentage 55% to 44%. Over the fourth quarter,
+Kings dominated 76ers for points 32 to 23.
+
+DeMarcus Cousins lead the way with 30 points in 34 minutes (10-20 FG, 2-4 3Pt, 8-9 FT)
+while adding 5 assists. Joel Embiid was a starter and filled the stat sheet, posting 25
+points in 28 minutes.
+
+The Kings show 44 percent from the field and 17-of-21 free throws. Rudy Gay contributed an
+efficient 17 points in 35 minutes and grabbing 9 rebounds.  Ben McLemore scored 4 points
+(2-7 FG, 0-3 3Pt, 0-0 FT).
+
+The 76ers show 49 percent from the field and 13-of-18 free throws and committed 22
+turnovers. Sergio Rodríguez scored 18 points in 24 minutes (7-9 FG, 4-5 3Pt, 0-0 FT) and 5
+assists.
+
+Next Wednesday, the Kings will host the Portland Trail Blazers. Next Thursday, the 76ers
+will visit the Utah Jazz.
+-------------------------
+*** Reference summary
+DeMarcus Cousins led the way for the Kings with 30 points, while his clutch three-pointer
+with 20 seconds remaining and block of Joel Embiid's attempted game-winning trey insured
+the win. Rudy Gay went for a near double-double with 17 points and nine boards. Ty Lawson
+posted 12 points off the bench. Darren Collison produced nine points, but Ben McLemore and
+Kosta Koufos could only supply a combined 10 points. Embiid's 25 points paced the Sixers.
+Sergio Rodriguez followed with 18 points, but the remaining three members of the first
+unit failed to hit double digits in the scoring column, as Jahlil Okafor (six points),
+Gerald Henderson (six points) and Robert Covington (five points) under-performed on the
+scoreboard. However, Ersan Ilyasova and Dario Saric provided bench scoring with respective
+tallies of 17 and 12 points.
+====================================================================================================

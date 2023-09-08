@@ -51,7 +51,7 @@ class Score:
         return self.score_dict["TOV"]
 
     def fouls(self) -> int:
-        return self.score_dict["PF"]
+        return self.score_dict["PF"] if "PF" in self.score_dict else 0
 
     def plus_minus(self) -> int:
         return self.score_dict["+/-"]

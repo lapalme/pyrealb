@@ -1,0 +1,157 @@
+***  6143:2019-03-15: Washington Wizards receives Charlotte Hornets  [110-116]
+
+                    |                                   Washington Wizards (29-40)                                  
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|    9|   18|    3|    9|    5|    6|    1|    7|    7|    3|    1|    8|     |   26|     
+Q2                  |               60|   11|   22|    4|   10|    1|    1|    1|   13|    6|    2|    2|    6|     |   27|     
+Q3                  |               60|   10|   23|    3|    9|    2|    5|    1|   11|    6|    1|    1|    2|     |   25|     
+Q4                  |               60|   11|   21|    3|    6|    7|    7|    5|   14|    6|    2|    1|    1|     |   32|     
+H1                  |              120|   20|   40|    7|   19|    6|    7|    2|   20|   13|    5|    3|   14|     |   53|     
+H2                  |              120|   21|   44|    6|   15|    9|   12|    6|   25|   12|    3|    2|    3|     |   57|     
+game                |              240|   41|   84|   13|   34|   15|   19|    8|   45|   25|    8|    5|   17|   14|  110|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Bradley Beal        |True |     |   44|   15|   29|    7|   13|    3|    3|    2|    5|    5|    1|    1|    5|    3|   40|    1
+Jeff Green          |True |     |   34|    7|   10|    2|    3|    4|    5|    0|    2|    1|    0|    1|    5|    1|   20|    0
+Jabari Parker       |False|doubl|   35|    7|   12|    0|    4|    3|    4|    3|   11|    4|    0|    0|    1|    3|   17|    7
+Trevor Ariza        |True |     |   30|    3|   10|    2|    8|    2|    3|    0|    8|    5|    3|    2|    4|    3|   10|   -6
+Troy Brown          |False|     |   17|    4|    7|    2|    2|    0|    0|    1|    8|    2|    0|    0|    0|    0|   10|    0
+Thomas Bryant       |False|     |   19|    3|    4|    0|    1|    0|    0|    1|    4|    0|    2|    1|    0|    0|    6|   -2
+Tomáš Satoranský    |True |     |   16|    1|    3|    0|    2|    2|    2|    0|    3|    3|    0|    0|    0|    2|    4|  -18
+Bobby Portis        |True |     |   24|    1|    7|    0|    0|    1|    2|    1|    4|    1|    1|    0|    2|    1|    3|    0
+Sam Dekker          |False|     |    9|    0|    0|    0|    0|    0|    0|    0|    0|    2|    0|    0|    0|    0|    0|    5
+Chasson Randle      |False|     |    7|    0|    2|    0|    1|    0|    0|    0|    0|    2|    1|    0|    0|    1|    0|  -17
+Wesley Johnson      |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Ian Mahinmi         |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+                    |                                   Charlotte Hornets (31-37)                                   
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|   17|   27|    4|    7|    2|    3|    3|   10|    6|    4|    1|    4|     |   40|     
+Q2                  |               60|   10|   29|    3|    7|    3|    4|    7|   15|    3|    5|    1|    2|     |   26|     
+Q3                  |               60|   11|   25|    3|    8|    4|    4|    3|   15|    5|    1|    2|    3|     |   29|     
+Q4                  |               60|    8|   20|    4|    9|    1|    1|    2|    6|    4|    1|    3|    3|     |   21|     
+H1                  |              120|   27|   56|    7|   14|    5|    7|   10|   25|    9|    9|    2|    6|     |   66|     
+H2                  |              120|   19|   45|    7|   17|    5|    5|    5|   21|    9|    2|    5|    6|     |   50|     
+game                |              240|   46|  101|   14|   31|   10|   12|   15|   46|   18|   11|    7|   12|   17|  116|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Kemba Walker        |True |     |   35|   11|   30|    3|    8|    3|    3|    2|    5|    4|    3|    1|    3|    3|   28|    1
+Jeremy Lamb         |False|     |   29|    7|   13|    3|    6|    1|    1|    1|    8|    1|    2|    1|    1|    3|   18|   10
+Nicolas Batum       |True |     |   31|    6|   10|    4|    5|    0|    0|    3|    5|    6|    1|    1|    3|    2|   16|  -12
+Tony Parker         |False|     |   14|    7|   12|    2|    3|    0|    0|    0|    2|    3|    1|    0|    2|    0|   16|    0
+Dwayne Bacon        |False|     |   29|    5|    8|    1|    2|    2|    3|    0|    3|    1|    0|    0|    0|    2|   13|   16
+Bismack Biyombo     |True |     |   16|    4|    6|    0|    0|    3|    4|    4|    4|    0|    0|    1|    0|    2|   11|   -5
+Frank Kaminsky      |False|     |   23|    3|    8|    1|    3|    1|    1|    1|    6|    1|    0|    0|    1|    1|    8|   10
+Marvin Williams     |True |     |   29|    1|    9|    0|    3|    0|    0|    4|    6|    1|    2|    1|    1|    2|    2|    0
+Miles Bridges       |True |     |   13|    1|    3|    0|    1|    0|    0|    0|    5|    0|    2|    1|    1|    1|    2|   -1
+Michael Kidd-Gilchri|False|     |   16|    1|    2|    0|    0|    0|    0|    0|    2|    1|    0|    1|    0|    1|    2|   11
+Willy Hernangómez   |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Devonte' Graham     |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Malik Monk          |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+*** English jsRealB
+The Hornets  (31-37) knocked off the Wizards  (29-40) 116-110 at the Capital One Arena in
+Washington on Friday.
+
+The Wizards outscored the Hornets 57-50 in the second half but could not complete their
+come-back. The Hornets overcame the Wizards for points 40 to 26 in the first quarter. Over
+the second quarter, the Wizards got better goals percentage 50% to 34%. During the first
+half, the Hornets obtained better three-pointers percentage a difference of 13%. During
+the second half, the Hornets obtained better free throws percentage 100% to 75%.
+
+Kemba Walker who was in the starting line-up had an efficient performance scoring 28
+points. Bradley Beal who started this game led the way, posting 40 points in 44 minutes.
+
+The Hornets showed 45 percent from the field and 10-12 attempts at the charity stripe.
+Jeremy Lamb who was a starter added 18 points in 29 minutes with seven goals, 3-for-6 from
+beyond the arc and eight rebounds grabbed.  Nicolas Batum finished with 16 points with
+4-of-5 from beyond the arc.  Tony Parker scored 16 points with two three-pointers.
+Bismack Biyombo had eleven points.
+
+The Wizards showed 48 percent from the field and 15-19 free throws.  Jeff Green who was a
+starter finished with 20 points.  Jabari Parker added 17 points  (7-12 FG, 0-4 3Pt, 3-4
+FT) while adding four assists and performed a double-double.  Trevor Ariza added ten
+points with eight rebounds grabbed and five assists.
+
+Next Sunday, the Hornets will be on the road against the Miami Heat. The Wizards' next
+game will be at home against the Memphis Grizzlies on Saturday.
+-------------------------
+*** French jsRealB
+Les Hornets  (31-37) ont battu les Wizards  (29-40) 116-110 au stade Capital One Arena
+vendredi à Washington.
+
+Les Wizards ont dominé les Hornets  (57-50) dans la deuxième demie mais le gagnant a bon
+tenu pour la victoire. Les Hornets ont vaincu les Wizards pour les points par 14 durant le
+premier quart. Pendant le deuxième quart, les Wizards ont obtenu les meilleurs tirs en
+pourcentage, un avantage de 16%. Durant la première demie, les Hornets ont réussi les
+meilleurs lancers à 3 points en pourcentage, un avantage de 13%. Durant la deuxième demie,
+les Hornets ont réussi les meilleurs lancers francs en pourcentage, une différence de 25%.
+
+Kemba Walker qui débutait la partie a mené son équipe marquant 28 points. Bradley Beal qui
+était un partant a fini avec 40 points en 44 minutes avec 15 tirs réussis et 7-sur-13
+depuis la ligne de trois points.
+
+Les Hornets ont compté 45 pour cent de tirs réussis et 10 lancers francs sur 12.  Jeremy
+Lamb qui figurait dans l'alignement de départ a eu 18 points en 29 minutes.  Nicolas Batum
+a terminé avec 16 points.  Tony Parker a terminé avec 16 points.  Bismack Biyombo a
+terminé avec onze points.
+
+Les Wizards ont compté 48 pour cent de tirs réussis et 15 lancers francs sur 19.  Jeff
+Green qui figurait dans l'alignement de départ a enregistré 20 points.  Jabari Parker a
+contribué un efficace 17 points  (7-12 L, 0-4 L3, 3-4 LF) et quatre passes décisives et a
+terminé avec un double-double.  Trevor Ariza a terminé avec dix points avec huit rebonds
+et cinq passes décisives.
+
+Ensuite les Hornets voyageront à Miami pour affronter le Heat dimanche. À venir pour les
+Wizards, un match à domicile contre Memphis.
+-------------------------
+*** English FStrings
+The Charlotte Hornets (31-37) overcame the Washington Wizards (29-40) 116-110 on Friday at
+the Capital One Arena in Washington .
+
+The Wizards outscored the Hornets (57-50) in the second half, but the Charlotte held on
+for the win. During the second half, Hornets obtained a good free throws percentage 100%
+to 75%. In the second quarter, Wizards obtained a good goals percentage 50% to 34%. During
+the first half, Wizards got a good free throws percentage 86% to 71%. During the first
+quarter, Hornets dominated Wizards for points 40 to 26. During the first quarter, Hornets
+got a good goals percentage 63% to 50%. In the first half, Hornets overcame Wizards for
+points 66 to 53. Over the first half, Hornets got a good three-pointers percentage 50% to
+37%. During the fourth quarter, Wizards got a good goals percentage 52% to 40%. During the
+fourth quarter, Wizards dominated Hornets for points 32 to 21. In the first quarter,
+Hornets overcame Wizards for goals 17 to 9.
+
+Kemba Walker was a starter and filled the stat sheet, posting 28 points in 35 minutes
+(11-30 FG, 3-8 3Pt, 3-3 FT). Bradley Beal lead the way off the bench scoring 40 points in
+44 minutes, 15 goals and 7-for-13 from beyond the arc.
+
+The Hornets show 45 percent from the field and 10-of-12 free throws. Jeremy Lamb started
+this game and had 18 points in 29 minutes, 7-for-13, 3-for-6 from beyond the arc and
+grabbing 8 rebounds.  Nicolas Batum added 16 points in 31 minutes and 4 three-pointers.
+Tony Parker recorded 16 points (7-12 FG, 2-3 3Pt, 0-0 FT).  Bismack Biyombo had 11 points
+(4-6 FG, 0-0 3Pt, 3-4 FT).
+
+The Wizards show 48 percent from the field and 15-of-19 free throws. Jeff Green was in the
+starting line-up and had 20 points in 34 minutes and 7 goals.  Jabari Parker finished with
+17 points in 35 minutes, grabbing 11 rebounds, 4 assists and performed a double-double.
+Trevor Ariza added 10 points in 30 minutes (3-10 FG, 2-8 3Pt, 2-3 FT) and 5 assists.
+
+Up next, the Hornets travel to Miami to take on the Heat on Sunday. The Wizards' next game
+will be at home against the Grizzlies next Saturday.
+-------------------------
+*** Reference summary
+The Charlotte Hornets defeated the host Washington Wizards, 116-110, at Capital One Arena
+on Friday evening. The Hornets got out to a great start on the road, with a 40-26 lead
+after one quarter. The Wizards tightened up the effort in the second, but could not make
+much progress, as they outscored the Hornets by one in the quarter, and trailed by 13 at
+halftime. The Hornets retained control in the third, where they pushed their lead to more
+than 20, before taking a 17-point lead into the final frame. The Wizards did not give up
+and made a push in the fourth, making it a single-digit lead, but the Hornets held on for
+a much-needed win, ending a four-game slide. Kemba Walker led the Hornets with 28 points,
+five rebounds, four assists, three steals and one block, in 36 minutes. Jeremy Lamb
+followed up with 18 points, eight rebounds, two steals, one block and one assist, while
+Nicolas Batum added 16 points, six assists, five rebounds and one steal. The Hornets shot
+45 percent from the field, including 14-of-31 from long range. Meanwhile, Bradley Beal led
+the Wizards with 40 points, five rebounds, five assists, one steal and a block, in 45
+minutes. Jabari Parker added 17 points, 11 rebounds and four assists, while Jeff Green
+tallied 20 points, two rebounds, one assist and a block. The Wizards (29-40) will look to
+bounce back as they play host to the Grizzlies on Saturday. The Hornets (31-37) take on
+the Heat in Miami on Sunday.
+====================================================================================================

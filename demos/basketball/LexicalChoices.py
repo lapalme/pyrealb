@@ -9,6 +9,9 @@ class LexicalChoices(abc.ABC):
     def with_p(self) -> P: pass
 
     @abc.abstractmethod
+    def on_day(self, date) -> DT: pass
+
+    @abc.abstractmethod
     def pts_3(self, n) -> NP: pass
 
     @abc.abstractmethod
@@ -19,6 +22,9 @@ class LexicalChoices(abc.ABC):
 
     @abc.abstractmethod
     def team_np(self, team, with_place=False, wins_losses=False) -> NP: pass
+
+    @abc.abstractmethod
+    def pts_abbrev(self,name)->str: pass
 
     @abc.abstractmethod
     def game_part(self, part) -> Constituent: pass
@@ -32,13 +38,16 @@ class LexicalChoices(abc.ABC):
     def city_pp(self, city) -> PP: pass
 
     @abc.abstractmethod
-    def team_winning_streak_vp(self, streak_length) -> PP: pass
+    def team_winning_streak_vp(self, streak_length) -> Phrase: pass
+
+    @abc.abstractmethod
+    def team_losing_streak_vp(self, team, streak_length) -> Phrase: pass
 
     @abc.abstractmethod
     def conference_leader(self, winner_np) -> NP: pass
 
     @abc.abstractmethod
-    def defeat_vp(self) -> VP: pass
+    def defeat_vp(self,nb_points:int) -> VP: pass
 
     @abc.abstractmethod
     def overtime_pp(self, minutes): pass
@@ -64,6 +73,10 @@ class LexicalChoices(abc.ABC):
 
     @abc.abstractmethod
     def show_turnovers_vp(self, turnovers): pass
+
+    @abc.abstractmethod
+    def show_team_fact(self, winner, loser, fact): pass
+    # fact: (period:str,score:str,winner_val:int,loser_val:int,diff:int)
 
     #####################################################################
     #  show_player_perf

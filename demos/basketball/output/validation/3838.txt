@@ -1,0 +1,141 @@
+***  3838:2018-01-31: Cleveland Cavaliers receives Miami Heat  [91-89]
+
+                    |                                  Cleveland Cavaliers (30-20)                                  
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|   10|   20|    1|    4|    6|    6|    1|   12|    4|    3|    0|    4|     |   27|     
+Q2                  |               60|    4|   19|    2|    6|   11|   15|    1|    8|    4|    2|    3|    6|     |   21|     
+Q3                  |               60|    9|   24|    1|    5|    5|    8|    3|   14|    6|    2|    0|    1|     |   24|     
+Q4                  |               60|    5|   17|    2|   11|    7|    9|    2|   11|    4|    2|    2|    5|     |   19|     
+H1                  |              120|   14|   39|    3|   10|   17|   21|    2|   20|    8|    5|    3|   10|     |   48|     
+H2                  |              120|   14|   41|    3|   16|   12|   17|    5|   25|   10|    4|    2|    6|     |   43|     
+game                |              240|   28|   80|    6|   26|   29|   38|    7|   45|   18|    9|    5|   16|   20|   91|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+LeBron James        |True |doubl|   38|    8|   21|    1|    6|    7|   11|    2|   11|    5|    1|    0|    7|    1|   24|    3
+Channing Frye       |False|     |   20|    6|    9|    2|    4|    2|    2|    1|    4|    1|    1|    1|    1|    3|   16|   -7
+Isaiah Thomas       |True |     |   29|    2|   15|    0|    6|    9|    9|    1|    5|    6|    4|    0|    2|    2|   13|    2
+Jae Crowder         |True |     |   26|    4|    7|    1|    2|    2|    2|    0|    7|    1|    1|    0|    1|    4|   11|    2
+Dwyane Wade         |False|     |   26|    2|    8|    0|    1|    5|    6|    1|    5|    2|    1|    2|    2|    2|    9|    1
+Kyle Korver         |False|     |   19|    3|    6|    2|    4|    1|    2|    0|    4|    0|    0|    0|    1|    0|    9|   -3
+J.R. Smith          |True |     |   29|    3|    5|    0|    2|    0|    2|    0|    2|    1|    1|    0|    0|    2|    6|    2
+Jeff Green          |False|     |   21|    0|    2|    0|    0|    2|    2|    0|    1|    1|    0|    0|    0|    1|    2|    0
+Derrick Rose        |False|     |    5|    0|    2|    0|    1|    1|    2|    0|    0|    0|    0|    0|    0|    0|    1|    2
+Tristan Thompson    |True |     |   22|    0|    5|    0|    0|    0|    0|    2|    6|    1|    0|    2|    2|    5|    0|    8
+Iman Shumpert       |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Cedi Osman          |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+José Calderón       |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+                    |                                       Miami Heat (29-22)                                      
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|    9|   20|    1|    6|    2|    4|    1|    8|    5|    2|    0|    4|     |   21|     
+Q2                  |               60|    9|   23|    0|   10|   11|   16|    3|   18|    3|    3|    2|    6|     |   29|     
+Q3                  |               60|   10|   19|    1|    6|    1|    5|    0|   12|    6|    0|    2|    3|     |   22|     
+Q4                  |               60|    8|   21|    1|    6|    0|    0|    2|   14|    3|    3|    1|    6|     |   17|     
+H1                  |              120|   18|   43|    1|   16|   13|   20|    4|   26|    8|    5|    2|   10|     |   50|     
+H2                  |              120|   18|   40|    2|   12|    1|    5|    2|   26|    9|    3|    3|    9|     |   39|     
+game                |              240|   36|   83|    3|   28|   14|   25|    6|   52|   17|    8|    5|   19|   25|   89|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Goran Dragić        |True |     |   33|    7|   17|    1|    5|    3|    4|    0|    3|    6|    1|    0|    2|    3|   18|    5
+Josh Richardson     |True |     |   35|    7|   13|    1|    4|    0|    1|    1|    3|    2|    0|    2|    2|    3|   15|    2
+Tyler Johnson       |True |     |   31|    4|   12|    1|    7|    2|    5|    0|    6|    1|    2|    0|    0|    4|   11|   -7
+Kelly Olynyk        |False|     |   21|    5|   12|    0|    6|    0|    0|    1|    7|    2|    3|    0|    2|    3|   10|    4
+Hassan Whiteside    |True |     |   23|    2|    4|    0|    0|    5|    8|    2|    8|    1|    0|    1|    4|    2|    9|   -2
+Justise Winslow     |False|     |   25|    4|    7|    0|    1|    1|    2|    1|   10|    2|    1|    1|    3|    4|    9|   -5
+Bam Adebayo         |False|     |   18|    3|    5|    0|    0|    3|    5|    1|    5|    1|    0|    0|    3|    0|    9|   -2
+James Johnson       |True |     |   24|    4|    9|    0|    2|    0|    0|    0|    4|    1|    1|    1|    2|    4|    8|   -4
+Wayne Ellington     |False|     |   26|    0|    4|    0|    3|    0|    0|    0|    6|    1|    0|    0|    1|    2|    0|   -1
+Jordan Mickey       |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Udonis Haslem       |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+*** English jsRealB
+The Cavaliers  (30-20) knocked off the Heat  (29-22) 91-89 at the Quicken Loans Arena in
+Cleveland on Wednesday.
+
+The Heat led in the first half but the Cavaliers managed to come back. The Heat overcame
+the Cavaliers for rebounds by 10 over the second quarter. Over the third quarter, the Heat
+obtained better goals percentage a difference of 15%. Over the game, the Cavaliers got
+better free throws percentage 76% to 56%.
+
+LeBron James who was a starter finished with 24 points with eleven rebounds and performed
+a double-double. Goran Dragić who started this game scored a game high with 18 points.
+
+The Cavaliers showed 35 percent from the field and 29-38 free throws.  Channing Frye who
+was a starter recorded 16 points with six goals.  Isaiah Thomas ended up with 13 points.
+
+The Heat showed 43 percent from the field and 14-25 free throws and committed 19
+turnovers.  Josh Richardson who started this game added 15 points.  Justise Winslow posted
+nine points with ten rebounds grabbed.
+
+For their next game, the Cavaliers will be at home against the Houston Rockets on
+Saturday. Next Friday, the Heat will be on the road against the Philadelphia 76ers.
+-------------------------
+*** French jsRealB
+Les Cavaliers  (30-20) ont battu le Heat  (29-22) 91-89 au stade Quicken Loans Arena
+mercredi à Cleveland.
+
+Le Heat a mené dans la première demie mais les Cavaliers sont parvenus à revenir. Le Heat
+a dominé les Cavaliers pour les rebonds par 10 pendant le deuxième quart. Pendant le
+troisième quart, le Heat a réussi les meilleurs lancers en pourcentage, 53% en comparaison
+avec 38%. Pendant la partie, les Cavaliers ont obtenu les meilleurs lancers francs en
+pourcentage, un avantage de 20%.
+
+LeBron James qui était un partant a mené, comptant 24 points avec onze rebonds et a
+terminé avec un double-double. Goran Dragić qui figurait dans l'alignement de départ a
+mené son équipe marquant 18 points.
+
+Les Cavaliers ont compté 35 pour cent de tirs réussis et 29 lancers francs sur 38.
+Channing Frye qui était un partant a marqué 16 points.  Isaiah Thomas a marqué 13 points
+avec cinq rebonds.
+
+Le Heat a compté 43 pour cent de tirs réussis et 14 lancers francs sur 25 et ont subi 19
+pertes de ballon.  Josh Richardson qui était un partant a eu 15 points avec 7-sur-13 L.
+Justise Winslow a contribué un efficace neuf points.
+
+À venir pour les Cavaliers, un match à domicile contre Houston. Vendredi prochain, le Heat
+accueillera les 76ers de Philadelphia.
+-------------------------
+*** English FStrings
+The Cleveland Cavaliers (30-20) knocked off the Miami Heat (29-22) 91-89 on Wednesday at
+the Quicken Loans Arena in Cleveland .
+
+The Heat lead in the first half, but the Cavaliers managed to come back. Over the game,
+Cavaliers got a good free throws percentage 76% to 56%. In the first half, Cavaliers got a
+good free throws percentage 81% to 65%. During the third quarter, Heat got a good goals
+percentage 53% to 38%. In the game, Cavaliers overcame Heat for free throws 29 to 14.
+During the second half, Heat obtained a good goals percentage 45% to 34%. In the second
+quarter, Heat overcame Cavaliers for rebounds 18 to 8. Over the second quarter, Heat
+dominated Cavaliers for points 29 to 21.
+
+LeBron James had efficient performance scoring 24 points in 38 minutes, grabbing 11
+rebounds and performed a double-double. Goran Dragić started this game and lead the way
+with 18 points in 33 minutes.
+
+The Cavaliers show 35 percent from the field and 29-of-38 free throws. Channing Frye was
+in the starting line-up and recorded 16 points (6-9 FG, 2-4 3Pt, 2-2 FT).  Isaiah Thomas
+finished with 13 points in 29 minutes and grabbing 5 rebounds.
+
+The Heat show 43 percent from the field and 14-of-25 free throws and committed 19
+turnovers. Josh Richardson finished with 15 points in 35 minutes (7-13 FG, 1-4 3Pt, 0-1
+FT).  Justise Winslow finished with 9 points in 25 minutes (4-7 FG, 0-1 3Pt, 1-2 FT).
+
+For their next game, the Cavaliers will be at home against the Houston Rockets on
+Saturday. Up next, the Heat travel to Philadelphia to take on the 76ers on Friday.
+-------------------------
+*** Reference summary
+The Cleveland Cavaliers defeated the Miami Heat, 91-89, at Quicken Loans Arena on
+Wednesday. Despite the fact that Cleveland led for the majority of the first half, this
+game came down to the final seconds. In fact, it took 14 ties and 12 lead changes to
+determine a winner, as it was within a five-point margin for the entirety of the second
+half. Three-point shooting was Miami's downfall, as they went just 3-of-28 from long
+range. They couldn't hit free-throws either, as the Heat went 14-of-25 from the charity
+stripe. Cleveland won despite shooting just 35 percent from the field and 23 percent from
+three-point range while getting outrebounded 52-45. The Heat (29-22) were led by Goran
+Dragic, as he tallied 18 points, three rebounds and six assists, Josh Richardson totaled
+15 points, three rebounds, two assists and two blocks. Kelly Olynyk led the bench with 10
+points, seven rebounds and three steals while Justise Winslow provided nine points and 10
+rebounds off the bench as well. The Cavaliers (30-20) got a double-double out of LeBron
+James, as he collected 24 points, 11 rebounds and five assists. Isaiah Thomas shot just
+2-of-15 from the field, but still accrued 13 points, five rebounds, six assists and four
+steals. Channing Frye led the bench with 16 points and four rebounds. On deck for Miami is
+a road matchup versus the Philadelphia 76ers on Friday. As for Cleveland, they play host
+to the Houston Rockets on Saturday for their next fixture.
+====================================================================================================
