@@ -216,7 +216,7 @@ class English(Realizer,LexicalChoices):
             return S(period_pp.a(","),
                      self.team_np(team_1),
                      VP(V(oneOf("obtain","get")),
-                        NP(D("a"),A("good").f("co"),score_np,N("percentage"),
+                        NP(D("a"),A("good").f("co"),score_np,N("percentage").a(","),
                            oneOf(
                                lambda: PP(NO(t1_val).a("%"),P("to"),NO(t2_val).a("%")),
                                lambda: NP(D("a"),N(oneOf("difference","advantage")),

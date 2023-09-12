@@ -204,19 +204,20 @@ def make_sample(split, k=10):
 
 
 if __name__ == "__main__":
-    for split in ["train", "validation", "test"]:
-        make_sample(split, k=10)
+    # for split in ["train", "validation", "test"]:
+    #     make_sample(split, k=10)
 
     # for a single test...
-    # split = "train"
-    # games = Games(split)
-    # set_games(games)
-    # # keys_sample = sample(games.keys(), k=10)
-    # keys_sample = ["1"]
-    # print(f"Split: {split}")
-    # for key in keys_sample:
-    #     print(show_summaries(games[key], [
-    #         English(),
-    #         French(),
-    #         FStrings(),
-    #     ], show_data=False, show_refs=False))
+    split = "train"
+    games = Games(split)
+    set_games(games)
+    # keys_sample = sample(games.keys(), k=10)
+    # keys_sample = ["5274"] # test example of Thomson et. al. (INLG2023)
+    keys_sample = ["1"] # train example used in the document
+    print(f"Split: {split}")
+    for key in keys_sample:
+        print(show_summaries(games[key], [
+            English(),
+            French(),
+            FStrings(),
+        ], show_data=True, show_refs=True))

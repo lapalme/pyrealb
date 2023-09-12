@@ -14,7 +14,7 @@ def set_games(g):
     global games
     games = g
 
-
+# was useful for focusing on team performance sentences in reference summaries
 def filter_references(game):
     # show reference sentences without any player name
     player_names = set()
@@ -24,10 +24,27 @@ def filter_references(game):
                 if len(w) > 1:
                     player_names.add(w)
     player_names_re = re.compile(r"\b(" + "|".join(list(player_names)) + r")\b")
-    for sent in game.reference_sentences()[0].split("\n"):
-        if player_names_re.search(sent) is None:
-            print(sent)
+    return [sent for sent in game.reference_sentences()[0].split("\n")
+                if player_names_re.search(sent) is None]
 
+# compute some word statistics to try to show that the validation and training corpora
+# are different from the training in the number of words, but finally inconclusive
+def word_stats(game):
+    sents = game.reference_sentences()[0].split("\n")
+    words = [w for s in sents for w in re.split(r"\W",s) if len(w)>0]
+    # print(words)
+    sentsF = filter_references(game)
+    wordsF = [w for s in sentsF for w in re.split(r"\W",s) if len(w)>0]
+    # print(wordsF)
+    return (game.game_id(),len(sents), sum(map(len,words)),len(sentsF),sum(map(len,wordsF)))
+
+def word_starts_split(split):
+    games = Games(split)
+    for key in games.keys():
+        game = games[key]
+        (gid,nb_sents,nb_words,nb_sentsF,nb_words_F)=word_stats(game)
+        print(f"{gid:5}\t{game.date().strftime('%Y-%m-%d')}\t"
+              f"{nb_sents:5}\t{nb_words}\t{nb_sentsF}\t{nb_words_F}")
 
 def interesting_stats(winner_scores: dict[str,Score], loser_scores: dict[str,Score]) -> [tuple[str,str,int,int,int]]:
     fns = ["goals", "goals3", "free_throws", "rebounds", "assists", "steals","blocks",
@@ -80,15 +97,24 @@ def get_most_interesting(interesting) -> [tuple[str,str,int,int,int]]:
     most_interesting.sort(key=lambda vals: game_order[vals[0]])
     return most_interesting
 
+
+
 if __name__ == "__main__":
+    # word_starts_split("test")
+    # means computed using Excel
+    # sents words   sentsF  wordsF
+    # 13,54	1333,28	6,67	619,87	train
+    # 14,70	1374,27	7,15	686,00	validation
+    # 14,00	1290,66	6,93	659,89	test
     games = Games("validation")
-    keys_sample = sample(games.keys(), k=10)
+    keys_sample = sample(games.keys(), k=1)
     for key in keys_sample:
         game = games[key]
-        print(game.show_title())
-        print(game.home().show(False))
-        print(game.visitors().show(False))
-        for interesting in interesting_stats(game.winner().period_scores, game.loser().period_scores):
-            print(interesting)
-        filter_references(game)
+        # print(game.show_title())
+        # print(game.home().show(False))
+        # print(game.visitors().show(False))
+        # for interesting in interesting_stats(game.winner().period_scores, game.loser().period_scores):
+        #     print(interesting)
+        # filter_references(game)
+        print(word_stats(game))
         print("=====")

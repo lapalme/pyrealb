@@ -4,13 +4,15 @@
 
 This paper describes ***SportSettSum***, a rule-based data-to-text Natural Language Generation (NLG) for generating English and French *statistic-focused summaries of basketball games* using information found in the [SportSett:Basketball](https://gem-benchmark.com/data_cards/sportsett_basketball) dataset (Thomson *et al*.,2020). This dataset combines scores and performance measures about the teams and the players of thousands of NBA games with human-authored summaries about these games. This dataset is a *clean-up* and redesign of the Rotowire (Wiseman et al. 2017) dataset which had been used to develop Seq2Seq models for generating paragraph-sized texts.  
 
-*SportSett:Basketball* has been used in experiments about the evaluation of factual accuracy in automatically generated texts (Thomson *et al.*, 2023) and in an [Accuracy Evaluation shared task](https://aclanthology.org/2021.inlg-1.23.pdf), but we could not find any documented use of this dataset by an NLG (neural or not) system to produce complete summaries. This seems surprising given the recent surge of interest in NLG based on GPT-*n* systems, probably because most of these struggle not to *hallucinate* when given verifiable data. This means that NLG evaluation based on BLEU or other automatic metrics cannot be relied upon anymore and is thus much more time consuming and probably more complicated than developing the systems themselves.
+*SportSett:Basketball* has been mainly used in experiments about the evaluation of factual accuracy in automatically generated texts (Thomson, Reiter *et al.*, 2023) and in an [Accuracy Evaluation shared task](https://aclanthology.org/2021.inlg-1.23.pdf). (Thomson, Rebuffel *et al.*, 2023) were the first ones to show complete summaries produced with a neural generator. They present how *specialized views* can limit a number of factual errors such as bad player names or in scores. The fact that this is one of the very few to use this well-organized dataset is surprising given the recent surge of interest in NLG based on GPT-*n* systems, probably because most of these struggle not to *hallucinate* when given verifiable data. The elaborate evaluation protocol described Thomson is further illustration that NLG evaluation based on BLEU or other automatic metrics cannot be relied upon anymore. Error evaluation is much more time consuming and we conjecture that it was finally as complex as developing the text generators themselves. 
 
-Our goal here is not to develop an industrial system or to *beat* any GPT look-alike, but to display a use case  of the [pyrealb bilingual text realizer](https://github.com/lapalme/pyrealb) for creating French and English documents from statistical data. The system is developed in Python and its source code is available in this GitHub directory. The human-authored summaries in *SportSett:Basketball* were used as an English corpus for developing appropriate phrasings.  
+The main assumption in those works is that it will be too complicated or time consuming to develop rules for generating plans or sentence patterns for such data-to-text applications.  As accuracy in generated texts is of paramount importance (Thomson, Reiter, Sundararajan 2023), we can wonder if it would not be not easier or faster to write rules using an appropriate notation, compared with the time it takes to develop and install reliable guardrails so that the neural generators do not realize incorrect facts, dubbed *hallucination control* by (Rebuffel et al. 2022), or ensure that they follow a recommended text plan. Moreover, we have observed that our symbolic systems on stock computers run usually much faster that their neural counterparts with GPUs and this is the case even when we ignore the training time.
 
-*Warning*: we are not a basketball expert, not even a fan.  At the start of this project, we had to develop a [personal lexicon of the main terms](SportSett-GEM.md) such as field *goals*, *turnovers*, *rebounds*, *steals*, *blocks*, etc. by searching the internet. We had never read a basketball game summary before.  So seasoned basketball fans will surely find quite naive our analysis of the games and players. This warning applies even more to French for which we do not even have any reference summary. We read some texts on the French [Basket USA](https://www.basketusa.com/news/) web site to find some inspiration, although the site is more about new about the teams than game summaries.
+Our goal here is not to develop an industrial system or to *beat* any GPT look-alike, but to display a use case  of the [pyrealb bilingual text realizer](https://github.com/lapalme/pyrealb) for creating French and English documents from statistical data. The system is developed in Python and its source code is available in this GitHub directory. The human-authored summaries in *SportSett:Basketball* were used as an English corpus for developing appropriate phrasing.  
 
-But this is not the main point of this exercise whose takeaway lesson is the process of going from data to the text by roughly following the steps of the *now classical* architecture proposed by Reiter (2007): 
+*Warning* we are not a basketball expert, not even a fan.  At the start of this project, we had to develop a [personal lexicon of the main terms](SportSett-GEM.md) such as field *goals*, *turnovers*, *rebounds*, *steals* or *blocks* by searching on the internet. We had never read a basketball game summary before.  So seasoned basketball fans will surely find quite naive our analysis of the games and players. This warning applies even more to French for which we do not even have any reference summary. We read some texts on the French [Basket USA web site](https://www.basketusa.com/news/)  to find some inspiration, although this site is more about news about the teams than game summaries.
+
+The takeaway lesson of this exercise is the process of going from data to the text by roughly following the steps of the *now-classical* architecture proposed by Reiter (2007): 
 
 - **Signal analysis**: analyzing input data looking for patterns
 - **Data interpretation**:  identifying domain-specific messages from patterns and causal relations between messages
@@ -23,11 +25,11 @@ Before describing the system, we  give an overview of the input data, the specif
 
 The [SportSett:Basketball](https://gem-benchmark.com/data_cards/sportsett_basketball) dataset (Thomson *et al*.,2020) is a relational database about NBA games between 2014 and 2018 which allows very detailed queries. In our experiments, we restricted ourselves to the *JSON* version available in [GEMv2](https://aclanthology.org/2022.emnlp-demos.27/) as a *[Hugging Face dataset](https://gem-benchmark.com/data_cards/sportsett_basketball)* with three splits:
 
-| Split      |   NBA seasons    | Games |
-| ---------- | :--------------: | ----: |
-| Train      | 2014, 2015, 2016 |  3690 |
-| Validation |       2017       |  1230 |
-| Test       |       2018       |  1230 |
+| Split      |   NBA seasons    | Number of games |
+| ---------- | :--------------: | --------------: |
+| Train      | 2014, 2015, 2016 |            3690 |
+| Validation |       2017       |            1230 |
+| Test       |       2018       |            1230 |
 
 Each game is described by global information such as the date, the stadium and the city where the game was played. Each team (*home* and *visitors*) is described by its name, its city, its current conference standing and quite detailed information about the scores: 
 
@@ -36,7 +38,7 @@ Each game is described by global information such as the date, the stadium and t
 
 Finally, there is a link to the following game of each team.  There are also one or two human-written summaries per game.
 
-The detailed statistics give information about the number of points, of attempted and made field goals, of blocks, of assists, etc. The following table gives the box-scores for the Philadelphia 76ers in their game against the Miami Heat on November 1, 2014, the first game of the *Train* dataset which we use as running example in this paper. The head of tables follow the same conventions as the used for the [official scores](https://www.basketball-reference.com/boxscores/201411010PHI.html). 
+The detailed statistics give information about the number of points, of attempted and made field goals, of blocks, of assists, etc. The following table gives the box-scores for the Philadelphia 76ers in their game against the Miami Heat on November 1, 2014, the first game of the *Train* dataset which we use as running example in this paper. The head of tables follow the same conventions as the one used for the [official scores](https://www.basketball-reference.com/boxscores/201411010PHI.html). 
 
 | Game |  FGM |  FGA | FG3M | FG3A |  FTM |  FTA | OREB | TREB |  AST |  STL |  BLK |  TOV | PF   | PTS  |
 | :--: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---- | ---- |
@@ -57,52 +59,69 @@ The following shows the data for the 4  (out of the 12) Philadephia players scor
 
 The human written summary associated with this game (237 words) is the following in which we have underlined contextual information that cannot be found from a statistical analysis of the provided data (96 words, about 40%).  Note the typo in *Tornoto*, suggesting that this summary was surely written by  a human!
 
-> The Miami Heat (20) defeated the Philadelphia 76ers (0 - 3) 114 - 96 on Saturday. Chris Bosh scored a game - high 30 points to go with eight rebounds in 33 minutes. <u>Josh McRoberts made his Heat debut after missing the entire preseason recovering from toe surgery.</u> McRoberts came off the bench and played 11 minutes. <u>Shawne Williams was once again the starter at power forward in McRoberts' stead.</u> Williams finished with 15 points and three three - pointers in 29 minutes. Mario Chalmers scored 18 points in 25 minutes off the bench. <u>Luc Richard Mbah a Moute replaced Chris Johnson in the starting lineup for the Sixers on Saturday. Hollis Thompson shifted down to the starting shooting guard job to make room for Mbah a Moute.</u> Mbah a Moute finished with nine points and seven rebounds in 19 minutes. K.J. McDaniels, <u>who suffered a minor hip flexor injury in Friday's game, was available and</u> played 21 minutes off the bench, finishing with eight points and three blocks. <u>Michael Carter-Williams is expected to be out until Nov. 13, but Tony Wroten continues to put up impressive numbers in Carter-Williams' absence.</u> Wroten finished with a double - double of 21 points and 10 assists in 33 minutes. The Heat will complete a back - to - back set at home Sunday against the <u>Tornoto</u> Raptors. The Sixers' next game is at home Monday against the Houston Rockets.
+> The Miami Heat (20) defeated the Philadelphia 76ers (0-3) 114 - 96 on Saturday. Chris Bosh scored a game-high 30 points to go with eight rebounds in 33 minutes. <u>Josh McRoberts made his Heat debut after missing the entire preseason recovering from toe surgery.</u> McRoberts came off the bench and played 11 minutes. <u>Shawne Williams was once again the starter at power forward in McRoberts' stead.</u> Williams finished with 15 points and three three-pointers in 29 minutes. Mario Chalmers scored 18 points in 25 minutes off the bench. <u>Luc Richard Mbah a Moute replaced Chris Johnson in the starting lineup for the Sixers on Saturday. Hollis Thompson shifted down to the starting shooting guard job to make room for Mbah a Moute.</u> Mbah a Moute finished with nine points and seven rebounds in 19 minutes. K.J. McDaniels, <u>who suffered a minor hip flexor injury in Friday's game, was available and</u> played 21 minutes off the bench, finishing with eight points and three blocks. <u>Michael Carter-Williams is expected to be out until Nov. 13, but Tony Wroten continues to put up impressive numbers in Carter-Williams' absence.</u> Wroten finished with a double - double of 21 points and 10 assists in 33 minutes. The Heat will complete a back-to-back set at home Sunday against the <u>Tornoto</u> Raptors. The Sixers' next game is at home Monday against the Houston Rockets.
 
-### *Mundane* but important details
+Upadhyay and Massie (2022) describe this summarization task is an instance of a *time-stamped data-to-text problem* with multiple *events* described by *entities* and *features*. The summary will convey information derived from different sources either from the current record (called *intra-event content*) or across records (called *inter-event content*). Intra-event content is further distinguished into *basic* and *complex*. Here a few examples of this nomenclature that we will use later in this document:
 
-Data is often *tricky* even in well-organized directories such as the GEMv2. In this case, all the data is  represented as strings, including integers, Booleans and even `null` even though JSON can/should store these data types as such. We determined that the JSON file would be 10% smaller if appropriate types would have been used. So care must be taken when making computation, sorting or testing. We also discovered that the derived data for half-time of the games from the values of quarters had been computed by string concatenation of string values instead of the addition of the numeric values, curtesy of the overloading of the plus sign in  JavaScript or Python. There were also errors in the values of the total minutes of play which were always shown as "4" instead of 240 for a regular game (5 players that are on the field for four quarters of 12 minutes).
+- *basic intra-event content*: information is directly present in the data and must be copied verbatim, for example, the total number of points for team or each player
+- *complex intra-event* *content*: information must be computed from many records in the same game, for example, finding the best player involves a comparison between the points of all players
+- *inter-event content*: information must be computed from data of previous games, for example determining that a given player's score is a season high or that a team is in a winning streak.
 
-Over the course of this project, we read samples of summaries to get an idea of the phrasings and choices of information to convey. But we also noticed that over the years, the style of the summaries seemed to change probably because the authors or the editors decided to focus on different aspects of the games even though the global text plan remained similar.  In 2014, as shown in the previous example, there were quite a lot of *outside* player information such as injuries, contract or personal problems, etc. In 2018, most game summaries included highlights of significant team performance quarter by quarter.  We would expect that an automatic text generator might be able to learn how to adapt to this change of style.  But it must be remembered that the way the SportSett corpus has been split is by years: earlier years are for training and later years are for validation and test. This splitting reflects the fact that, in production, a text generator will generate new text based on what the system has learned previously.  Unfortunately in this case, as the texts in the test split can relatively different from the ones in the training and validation splits, it might be hard for any learning system to create new texts similar to the ones in the test and thus get good scores...
+Some of the inter-event content can be precomputed in order to be used efficiently during the summarization process. In our case, we precomputed season averages and quintiles for teams and players. 
 
-Although the data is available as a [Hugging Face dataset](https://huggingface.co/docs/datasets/index), currently we do not use any of the interesting properties for accessing efficiently columnar data, we load the whole dataset once and process it like an array (`list` in Python) of JSON structures. The numeric values are converted to `int`s and corrected when the data set is loaded.
+### Problems with the data
 
-We have `def`ined Python classes (`Games`, `Game`, `Team`,  `Player` and  `Score`) with methods to access the JSON fields with more informative names than abbreviations and three letter keys. Should we eventually want to use the database instead of the JSON as data source, we could (hopefully!) keep the same interface.  Some fields appearing in the JSON are not *exported*, because they seemed redundant (e.g., many details about the next game which can be accessed directly by fetching the game information in the data) or computable from other fields (e.g., the percentage of success that can be computed by dividing the number of *made* over the number of *attempted*).
+#### Data organization
 
-After all these caveats, we can now start transforming the data into text. As illustrated above, and confirmed by reading other summaries, the texts mostly follow the usual pyramidal structure of newspaper articles. First, they describe the global result before giving information about each team and then about the players that have a *high* scores. Mentions are often added when the a team or player performance in this game is much better than the season average or if a team is in a *long winning streak*. Finally, there is an indication of when and where will be played the next game for each team. 
+Data is often *tricky* even in well-organized directories such as the GEMv2. In SportSett, all the data is  represented as strings, including integers, Booleans and even `null` even though JSON can/should store these data types as such. We determined that the JSON file would have been 10% smaller by using appropriate types. So care must be taken when making computation, sorting or testing. We also discovered that the derived data for half-time of the games from the values of quarters had been computed by string concatenation of string values instead of the addition of the numeric values, curtesy of the overloading of the plus sign in  JavaScript or Python. There were also errors in the values of the total minutes of play which were always shown as "4" instead of 240 for a regular game (5 players that are on the field for four quarters of 12 minutes).
+
+Although the data is available as a [Hugging Face dataset](https://huggingface.co/docs/datasets/index), currently we do not use any of the interesting properties for accessing efficiently columnar data, we load the whole dataset once and process it like an array (`list` in Python) of JSON structures. The numeric values are converted to `int`s and corrected when the dataset is loaded.
+
+#### *Non representative* test corpus
+
+Over the course of this project, we read samples of reference summaries in each data split to get an idea of the phrasing and choices of information to convey. Doing this, we noticed that over the years, the style of the summaries seemed to change, probably because the authors or the editors decided to focus on different aspects of the games even though the global text plan remained similar. In 2014, as shown in the previous example, summaries focused on individual player performances including some*outside* player information such as injuries, contract or personal problems, etc. In the later years, game summaries included comparisons of performance of each team quarter by quarter.  This *concept drift* is well documented Upadhyay and Massie (2022) who showed that the proportion of *intra-event* vs *inter-event* content in SportSett differ over the years and conclude that  "*It is clear that different authors from different years have different distribution*". 
+
+We would expect that an automatic text generator might be able to learn how to adapt to this change of style.  But it must be remembered that the way the SportSett corpus has been split is by years: earlier years are for training and later years are for validation and test. This splitting reflects the fact that, in production, a text generator will generate new text based on what the system has learned previously.  Unfortunately in this case, the texts in the test split differ somewhat from the ones in the training and validation splits. Given that the training texts are not always representative of the one in the test set,  it might be hard for any learning system to create new texts similar to the ones in the test and thus get good evaluation scores compared to the original...
+
+### Organization of the system
+
+We have defined Python classes (`Games`, `Game`, `Team`,  `Player` and  `Score`) with methods to access the JSON fields with more informative names than abbreviations and three letter keys. Should we eventually want to use the database instead of the JSON as data source, we could (hopefully!) keep the same interface.  Some fields appearing in the JSON are not *exported*, because they seemed redundant (e.g. many details about the next game which can be accessed directly by fetching the game information in the data) or computable from other fields (e.g. the percentage of success that can be computed by dividing the number of *made* over the number of *attempted*).
+
+After all these caveats, we can now start transforming the data into text. As illustrated above, and confirmed by reading other summaries, the texts mostly follow the usual pyramidal structure of newspaper articles. They describe the global result before giving information about each team, followed by the players that have a *high* scores. Mentions are often added when a team or player performance in this game is much better than the season average or if a team is in a *long winning streak*. Finally, there is an indication of when and where will be played the next game for each team. 
 
 Of course, it cannot be expected to mention contextual information about the health condition of the players or some contract agreements as such information does not appear in the input data. They will not be *hallucinated* by our system.
 
-#### Examples of output
+### Examples of output
 
 For the *impatient*, here is one English summary produced by ***SportSettSum*** from the data described in the above example:
 
-> The Heat  (2-0) , leader in their conference, dominated the 76ers  (0-3) 114-96 in
-> Philadelphia at the Wells Fargo Center on Saturday.
+> The Heat  (2-0) , leader in their conference, topped the 76ers  (0-3) 114-96 at the Wells
+> Fargo Center on Saturday in Philadelphia.
 >
-> The Heat led in all four quarters. During the first quarter, the 76ers obtained better
-> goals percentage a difference of 14%. The 76ers overcame the Heat for rebounds by 8 in the
-> first half. In the third quarter, the 76ers got better free throws percentage a difference
-> of 21%. The Heat dominated the 76ers for points 27 to 13 over the fourth quarter. During
-> the game, the Heat obtained better three-pointers percentage an advantage of 20%.
+> The Heat led in all four quarters. In the first quarter, the 76ers obtained better goals
+> percentage, 62% to 48%. The 76ers overcame the Heat for rebounds by 8 in the first half.
+> During the third quarter, the 76ers got better free throws percentage, 83% to 62%. The
+> Heat overcame the 76ers for points 27 to 13 in the fourth quarter. Over the game, the Heat
+> obtained better three-pointers percentage, an advantage of 20%.
 >
-> Chris Bosh who started this game led the way off the bench scoring 30 points with four
-> assists. Tony Wroten who was in the starting line-up had an efficient performance scoring
-> 21 points  (6-11 FG, 1-4 3Pt, 8-11 FT) and ten assists and performed a double-double.
+> Chris Bosh who was a starter had an efficient performance scoring 30 points  (9-17 FG, 2-5
+> 3Pt, 10-11 FT) while adding four assists. Tony Wroten who was in the starting line-up led
+> the way off the bench scoring 21 points with ten assists and performed a double-double.
 >
-> The Heat showed 49 percent from the field and 20-29 free throws.  Mario Chalmers who was a
-> starter added 20 points.  Luol Deng had 15 points with 7-for-11 FG.  Shawne Williams
-> scored 15 points with 5-of-9 FG and four assists.  Dwyane Wade had nine points with ten
+> The Heat showed 49 percent from the field and 20-29 attempts at the charity stripe.  Mario
+> Chalmers who started this game recorded 20 points.  Luol Deng added 15 points with 7-of-11
+> FG.  Shawne Williams added 15 points with five goals and four assists.  Dwyane Wade
+> recorded nine points with ten assists.
+>
+> The 76ers showed 52 percent from the field and 19-26 attempts at the charity stripe and
+> committed 24 turnovers.  Brandon Davies who started this game ended up with 18 points with
+> seven goals.  Luc Mbah a Moute finished with nine points  (4-10 FG, 0-2 3Pt, 1-2 FT) while
+> adding three assists.  Malcolm Thomas recorded eight points in 19 minutes with nine
+> rebounds grabbed.  Alexey Shved recorded six points  (1-4 FG, 1-4 3Pt, 3-3 FT) and six
 > assists.
 >
-> The 76ers showed 52 percent from the field and 19-26 free throws and committed 24
-> turnovers.  Brandon Davies who started this game added 18 points with 7-of-9 FG.  Luc Mbah
-> a Moute added nine points with seven rebounds and three assists.  Malcolm Thomas finished
-> with eight points in 19 minutes with nine rebounds grabbed.  Alexey Shved scored six
-> points with six assists.
->
-> For their next game, the Heat will receive the Toronto Raptors on Sunday. On deck for the
-> 76ers will be a home match versus Houston.
+> The Heat' next game will be at home against the Toronto Raptors on Sunday. The 76ers' next
+> game will be at home against the Houston Rockets on Monday.
 
 ***SportSettSum*** can also generate a French summary such as the following. Because of the randomization between the phrasing choices, the French version is not a literal translation of the English, but it conveys the same information. Both realizers work from the same original data and use the same algorithm for selecting the information to convey.
 
@@ -136,6 +155,8 @@ For the *impatient*, here is one English summary produced by ***SportSettSum*** 
 
  [Sample of generated summaries with the corresponding data and reference summaries](../output)
 
+[Generated summaries for the game between the *Thunder* and the *Heat* on February 1st 2019](../output/5274.txt) used as example in (Thomson, Rebuffel *et al*. 2023). 
+
 ## Architecture of the generation process
 
 We now describe the steps going from the input data to the final text following the steps identified by Reiter. 
@@ -148,13 +169,19 @@ The game results and the information about the next game can be found directly i
 
 ### Data interpretation
 
-#### *Intra-game* data
+For characterising the type of processing performed on the data,  we borrow the nomenclature used by (Thomson, Rebuffel et al. 2023)  for determining their data views. 
+
+#### *Basic intra-event content*
+
+This is the information that appears verbatim in the data: date, place of the game, teams and their final results, the names and scores for all players and information about their next game. The main challenge in this case is *what NOT to say* in order to focus on the most interesting aspects.
+
+#### *Complex intra-event content*
 
 To determine the turning points and the relative performance of each team over a game, we compare the line-scores of each team and determine the largest differences over certain thresholds provided there are enough occurrences to be meaningful. The largest differences are considered more important and a single score is kept for each period (quarter, half or game). These performances are then sorted by period to appear in chronological order.
 
-#### *Inter-game* data
+#### *Inter-event content*
 
-In order to focus on the most significant aspects of players performance, we decided to preprocess the training corpus to aggregate the scores of each player in all games in which he played more than one minute, ignoring the team. The summary will mention a player if he has a *high* number of field goals, three-pointers, rebounds or assists. Currently *high* is defined as being in the first quintile (best 20%) of all his scores.
+In order to focus on the most significant aspects of player performance, we decided to preprocess the training corpus to aggregate the scores of each player in all games in which he played more than one minute, ignoring the team. The summary will mention a player if he has a *high* number of field goals, three-pointers, rebounds or assists. Currently *high* is defined as being in the first quintile (best 20%) of all his scores.
 
 Similarly, for each team,  points for all games in which it took part are aggregated. This information is used for choosing the aspects worth mentioning when talking about a team using the same criterion. 
 
@@ -162,11 +189,11 @@ As the statistics are only computed on the training corpus (season 2014-2016), t
 
 As each game of a team is linked to the previous game of the same within a season, we defined functions to compute statistics such as average performance or the number of consecutive victories (winning streaks) within a season. 
 
-Given the fact, that the training and validation corpora span the years 2014-2017, it would be concievable to compute multi-year statistics and use these when generating summaries for the 2018 games (test corpus). But currently, we only take into account the previous games of the current season
+Given the fact that the training and validation corpora span the years 2014-2017, it would be concievable to compute multi-year statistics and use these when generating summaries for the 2018 games (test corpus). But currently, we only take into account the previous games of the current season.
 
 ### Document planning
 
-The pseudo-code for the summarizing a `game` is the following (paragraphs numbers will be used later for reference):
+The pseudo-code for the summarizing a `game` is the following (paragraph numbers will be used later for reference):
 
 ```
 1. Give the winner and loser scores with location and date information about the game 
@@ -207,7 +234,7 @@ Features are added to these structures using the dot notation to modify their pr
 The main advantage of using a Python-based notation is the fact that programming constructs can be used to incrementally build a structure before being realized. The following example illustrates some of these capabilities in a small program to create parts of structures. 
 
 ```python
-quality = oneOf(A("strong"),A("skilled"),A("talented")) # choose a quality
+quality = oneOf(A("strong"),A("skilled"),A("talented")) # choose an adjective
 player  = NP(D("the"),N("player"),quality)   # combine player and quality
 score   = VP(V(oneOf("score","win")))        # select a verb
 score.add(NP(NO(25),N("point")))             # add object to the verb
@@ -236,7 +263,7 @@ def team_np(self, team, with_place=False):
 
 ## Realizer organization
 
-The following shows the methods that our *basketball realizer* implements, they correspond to the steps identified in [document planning](#document-planning). Checking that a realizer implements these methods is performed by means of the [abc - Abstract Base Classes](https://docs.python.org/3/library/abc.html) Python package (shown here without the `@abc.abstractmethod` annotations. 
+The following shows the methods that our *basketball realizer* implements, they correspond to the steps identified in [document planning](#document-planning). Checking that a realizer implements these methods is performed by means of the [abc - Abstract Base Classes](https://docs.python.org/3/library/abc.html) Python package (shown here without the `@abc.abstractmethod` annotations before each `def`). 
 
 ```python
 import abc
@@ -252,9 +279,11 @@ class BasketballSummarizer(abc.ABC):
     def show_next_game(self, date, team_1, is_home, team_2) -> str: pass
 ```
 
-All these methods return strings to be called by the following `summarize` function with two parameters: the first, `realizer` is an instance of a subclass of `BasketSummarizer`  implementing these six methods; the second parameter `game` gives access to the data about this game . 
+All methods returning a string are called by the following `summarize` function with two parameters: the first, `realizer` is an instance of a subclass of `BasketSummarizer`  implementing these six methods; the second parameter `game` gives access to the data about this game . 
 
-The code of `summarize` is a  *language and realizer independent* direct mapping of the [document planning](#document-planning) as shown by the numbered comments.  The strings returned by the realizer functions are concatenated into *paragraphs* themselves *joined* by two end-of-lines as a vanilla formatting. A more sophisticated presentation (e.g., in HTML) could be built, but this is independent of the sentence realization process. If needed `pyrealb` could also realize sentences with embedded HTML tags.
+The code of `summarize` is a  ***language and realizer independent*** direct mapping of the [document planning](#document-planning) as shown by the numbered comments.  The strings returned by the realizer functions are concatenated into *paragraphs* themselves *joined* by two end-of-lines as a vanilla formatting. A more sophisticated presentation (e.g. in HTML) could be built, but this is independent of the sentence realization process. If needed `pyrealb` could also realize sentences with embedded HTML tags. 
+
+The following code blocks can be skipped by a reader not interested in the programming details, they are shown only to give a *flavor* of the use of the `pyrealb` package.
 
 ```python
 def summarize(realizer, game) -> str:
@@ -329,14 +358,15 @@ def summarize(realizer, game) -> str:
         next_games += realizer.show_next_game(*next_game_info)
     if len(next_games) > 0:
         paras.append(next_games)
-    return "\n\n".join("\n".join(wrap(para, width=paragraph_width)) for para in paras)
+    return "\n\n".join("\n".join(wrap(para, width=paragraph_width)) 
+                       for para in paras)
 ```
 
 ### `BasketballSummarizer` implementations
 
 Two subclasses implement the `BasketballSummarizer` interface:
 
-- `FStrings`: an English realizer using only Python string concatenations (often *f-strings* hence the name of the class) that can be seen as a baseline. It will not be further described here but you can look at its  [source code](../FStrings.py).
+- `FStrings`: an English realizer using only Python string concatenations, often *f-strings* hence the name of the class. It will not be further described here but you can look at its  [source code](../FStrings.py).  The quality of the output is quite surprising given the low-level technology used, it can be considered as a baseline. We did not develop the French counterpart of this approach.
 
 - `Realizer` : a language independent `pyrealb` `Constituent` *sentence organizer* calling methods of two subclasses `English` and `French` to build `Constituent` structures that are then realized into strings. These subclasses must implement the methods that defined in the  [`LexicalChoices` abstract class](../LexicalChoices.py) . The global organization for the `pyrealb` realizers is thus as follows:
 
@@ -349,9 +379,9 @@ Two subclasses implement the `BasketballSummarizer` interface:
     ...
   ```
 
-`Realizer`  defines the sentence organization using high level `Phrase`s (e.g. sentences, subordinates, coordinates, etc) while the `Terminal`s and lower level `Phrase`s (e.g. `NP`, `VP`, etc.) are defined either in the subclasses `English` and `French`.
+`Realizer`  defines the sentence organization using high-level `Phrase`s (e.g. sentences, subordinates, coordinates, etc.) while the `Terminal`s and lower-level `Phrase`s (e.g. `NP`, `VP`, etc.) are defined either in the subclasses `English` and `French`.
 
-Here a are two examples of functions in the  [English](../English.py) class: the first to realize *who started this game* or *who was in the starting line-up* for the first function, the verb tense is determined in the calling function (see line 8 of the `show_player_perf` below ; the second for realizing *a season high*.
+Here are two examples of functions in the  [English](../English.py) class: the first to realize *who started this game* or *who was in the starting line-up* for the first function, the verb tense is determined in the calling function (see line 8 of the `show_player_perf` below ; the second for realizing *a season high*.
 
 ```python
 def starter_player(self) -> SP:
@@ -373,7 +403,7 @@ def season_high(self) -> NP:
     )
 ```
 
-The function with the same name in the  [French](../French.py)  class realizes *débutait la partie* or *figurait dans l'alignement de départ*. The second function realizes *un record pour la saison*.
+The corresponding function in the  [French](../French.py)  class realizes *débutait la partie* or *figurait dans l'alignement de départ*. The second function realizes *un record pour la saison*.
 
 ```python
 def starter_player(self) -> SP:
@@ -400,7 +430,7 @@ def season_high(self) -> NP:
     )
 ```
 
-So we see that there is a clear separation between the word choice and the organization within a sentence which is the job of the  [Realizer](../Realizer.py)  class. This clear separation ensures that the sentence organization is the same between both English and French sentences. 
+So we see that there is a clear separation between the word choice and the organization within a sentence which is the job of the  [Realizer](../Realizer.py)  class. Sentence organization is thus identical between English and French sentences. 
 
 As an example of a method in `Realizer`, we describe how the performance of a player is realized. It has three parameters:
 
@@ -457,6 +487,8 @@ As a further variation, some player information can also be given in a shorter a
 
 This document has described how `pyrealb` was used for generating French and English basketball summaries from numerical data. We leave it to the reader to judge the quality of the output.  [Other examples of data with the output of our three realizers with the reference summary can be seen here](../output). Our goal was to give a complete example of data-to-text NLG application. It is similar in design to the [Weather `pyrealb` demo](../../weather/README.md) which generates French and English weather reports from numerical information. 
 
+It would be interesting to apply the evaluation protocol used by (Thomson, Rebuffel et al. 2023) to the output of SportSettSum. Given the fact that this evaluation was mainly focused on determining the number of factual errors (names or numbers) between the source data and generated texts, in principle there should be very few, ideally none, unless there is a bug in the computations, because the realizer merely conveys information found in the data.
+
 ## Acknowledgment
 
 We want to thank Craig Thomson and Fabrizio Gotti for their insights and suggestions about a previous version of this document.
@@ -464,7 +496,11 @@ We want to thank Craig Thomson and Fabrizio Gotti for their insights and suggest
 ## References
 
 - Albert Gatt and Ehud Reiter, 2009. *SimpleNLG: A realisation engine for practical applications*. In Proceedings of the 12th European Workshop on Natural Language Generation (ENLG 2009), pages 90–93, Athens, Greece, March 2009. Association for Computational Linguistics.
+- Ratish Puduppully, Mirella Lapata,  2021. *Data-to-text Generation with Macro Planning.* Transactions of the Association for Computational Linguistics; 9 510–527. doi: [https://doi.org/10.1162/tacl_a_00381](https://doi.org/10.1162/tacl_a_00381)
+- Rebuffel, C., Roberti, M., Soulier, L. *et al.* 2022. *Controlling hallucinations at word level in data-to-text generation.* Data Mining and Knowledge Discovery 36, 318–354. [https://doi.org/10.1007/s10618-021-00801-4](https://doi.org/10.1007/s10618-021-00801-4)
 - Ehud Reiter. 2007. [An Architecture for Data-to-Text Systems](https://aclanthology.org/W07-2315). In *Proceedings of the Eleventh European Workshop on Natural Language Generation (ENLG 07)*, pages 97–104, Saarbrücken, Germany. DFKI GmbH. *This paper won the [INLG 2022 - Test of Time Award.](https://inlgmeeting.github.io/index.html)*
 - Craig Thomson, Ehud Reiter, Barkavi Sundararajan, 2023, [*Evaluating factual accuracy in complex data-to-text*](https://www.sciencedirect.com/science/article/pii/S0885230823000013)), Computer Speech & Language, Volume 80.
+- Craig Thomson, Clement Rebuffel, Ehud Reiter, Laure Soulier, Somayajulu Sripada, and Patrick Gallinari. 2023. [Enhancing factualness and controllability of Data-to-Text Generation via data Views and constraints.](https://preview.aclanthology.org/inlg-23-ingestion/2023.inlg-1.16/) In Proceedings of the 16th International Natural Language Generation Conference, pages 221–236, Prague, Czechia. Association for Computational Linguistics
 - Craig Thomson, Ehud Reiter, and Somayajulu Sripada. 2020. [SportSett:Basketball - A robust and maintainable data-set for Natural Language Generation](https://aclanthology.org/2020.intellang-1.4). In *Proceedings of the Workshop on Intelligent Information Processing and Natural Language Generation*, pages 32–40, Santiago de Compostela, Spain. Association for Computational Linguistics.
+- Ashish Upadhyay and Stewart Massie. 2022. [Content Type Profiling of Data-to-Text Generation Datasets](https://aclanthology.org/2022.coling-1.507). In *Proceedings of the 29th International Conference on Computational Linguistics*, pages 5770–5782, Gyeongju, Republic of Korea. International Committee on Computational Linguistics.
 - Sam Wiseman, Stuart Shieber, and Alexander Rush. 2017. [Challenges in Data-to-Document Generation](https://aclanthology.org/D17-1239). In *Proceedings of the 2017 Conference on Empirical Methods in Natural Language Processing*, pages 2253–2263, Copenhagen, Denmark. Association for Computational Linguistics.

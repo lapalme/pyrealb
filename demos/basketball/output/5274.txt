@@ -1,0 +1,151 @@
+***  5274:2019-02-01: Miami Heat receives Oklahoma City Thunder  [102-118]
+
+                    |                                       Miami Heat (24-26)
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/-
+Q1                  |               60|   10|   21|    1|    6|    3|    7|    2|   11|    6|    3|    1|    5|     |   24|
+Q2                  |               60|   11|   23|    4|   10|    3|    4|    2|    6|    7|    1|    0|    4|     |   29|
+Q3                  |               60|    9|   25|    3|   11|    0|    0|    6|   19|    7|    1|    0|    5|     |   21|
+Q4                  |               60|   11|   23|    3|    9|    3|    3|    1|   11|    8|    2|    1|    3|     |   28|
+H1                  |              120|   21|   44|    5|   16|    6|   11|    4|   17|   13|    4|    1|    9|     |   53|
+H2                  |              120|   20|   48|    6|   20|    3|    3|    7|   30|   15|    3|    1|    8|     |   49|
+game                |              240|   41|   92|   11|   36|    9|   14|   11|   47|   28|    7|    2|   17|   17|  102|
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/-
+Kelly Olynyk        |False|     |   30|    8|   12|    4|    6|    1|    1|    0|    7|    2|    0|    1|    3|    1|   21|   -5
+Josh Richardson     |True |     |   33|    7|   18|    2|    8|    2|    2|    2|    4|    3|    2|    0|    1|    4|   18|  -12
+Hassan Whiteside    |True |doubl|   19|    6|   10|    0|    0|    0|    3|    5|   16|    1|    1|    1|    5|    3|   12|  -17
+Justise Winslow     |True |     |   31|    4|   11|    2|    5|    0|    0|    1|    2|    5|    0|    0|    0|    4|   10|  -23
+Bam Adebayo         |False|     |   24|    4|    5|    0|    0|    2|    3|    2|    9|    2|    0|    0|    0|    2|   10|    0
+James Johnson       |True |     |   20|    3|    7|    1|    3|    1|    1|    0|    3|    4|    0|    0|    2|    0|    8|  -10
+Dwyane Wade         |False|     |   22|    2|    8|    0|    3|    3|    4|    1|    1|    6|    3|    0|    3|    2|    7|   -7
+Tyler Johnson       |True |     |   21|    3|    7|    0|    3|    0|    0|    0|    1|    3|    0|    0|    1|    0|    6|  -11
+Dion Waiters        |False|     |   26|    2|   10|    1|    5|    0|    0|    0|    4|    2|    1|    0|    1|    1|    5|   -5
+Wayne Ellington     |False|     |    4|    1|    1|    1|    1|    0|    0|    0|    0|    0|    0|    0|    0|    0|    3|    5
+Rodney McGruder     |False|     |    4|    1|    3|    0|    2|    0|    0|    0|    0|    0|    0|    0|    1|    0|    2|    5
+Udonis Haslem       |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+                    |                                 Oklahoma City Thunder (33-18)
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/-
+Q1                  |               60|   13|   25|    3|    4|    2|    3|    4|   13|   10|    1|    1|    4|     |   31|
+Q2                  |               60|   15|   23|    6|    9|    5|    5|    3|   13|    7|    2|    2|    4|     |   41|
+Q3                  |               60|    8|   24|    3|    8|    3|    5|    4|   12|    4|    4|    1|    1|     |   22|
+Q4                  |               60|    8|   19|    4|    9|    4|    6|    2|   12|    2|    3|    0|    6|     |   24|
+H1                  |              120|   28|   48|    9|   13|    7|    8|    7|   26|   17|    3|    3|    8|     |   72|
+H2                  |              120|   16|   43|    7|   17|    7|   11|    6|   24|    6|    7|    1|    7|     |   46|
+game                |              240|   44|   91|   16|   30|   14|   19|   13|   50|   23|   10|    4|   15|   20|  118|
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/-
+Paul George         |True |     |   35|   14|   23|   10|   16|    5|    6|    0|    7|    5|    2|    0|    2|    2|   43|   28
+Dennis Schröder     |False|     |   29|   11|   13|    4|    6|    2|    2|    0|    2|    0|    0|    0|    1|    1|   28|   15
+Russell Westbrook   |True |tripl|   31|    6|   10|    0|    1|    2|    5|    1|   12|   14|    1|    1|    4|    0|   14|   11
+Steven Adams        |True |     |   27|    6|   15|    0|    0|    1|    1|    5|    7|    2|    3|    0|    3|    3|   13|   19
+Jerami Grant        |True |     |   29|    3|   10|    1|    2|    1|    1|    4|    7|    1|    1|    0|    1|    2|    8|   22
+Patrick Patterson   |False|     |   16|    2|    4|    1|    2|    0|    0|    0|    2|    0|    0|    0|    1|    1|    5|    0
+Nerlens Noel        |False|     |   20|    2|    6|    0|    0|    0|    0|    1|    7|    0|    0|    3|    1|    3|    4|   -3
+Abdel Nader         |False|     |   14|    0|    5|    0|    2|    2|    2|    1|    5|    1|    0|    0|    1|    4|    2|  -13
+Hamidou Diallo      |False|     |    2|    0|    2|    0|    0|    1|    2|    1|    1|    0|    2|    0|    1|    0|    1|   -6
+Terrance Ferguson   |True |     |   22|    0|    1|    0|    0|    0|    0|    0|    0|    0|    1|    0|    0|    3|    0|   15
+Álex Abrines        |False|     |    9|    0|    2|    0|    1|    0|    0|    0|    0|    0|    0|    0|    0|    1|    0|   -8
+Raymond Felton      |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+*** English jsRealB
+The Thunder  (33-18) dominated the Heat  (24-26) 118-102 on Friday in Miami at the
+American Airlines Arena extending their winning streak to seven games.
+
+The Heat outscored the Thunder 49-46 in the second half but the winner held for the win.
+During the second quarter, the Thunder got better goals percentage 65% to 48%. In the
+first half, the Thunder obtained better three-pointers percentage 69% to 31%.
+
+Paul George who started this game led the way, posting 43 points with 14 goals and
+10-of-16 from beyond the arc. Kelly Olynyk who was in the starting line-up led the way off
+the bench scoring 21 points a personal record for the season in 30 minutes with 8-of-12 FG
+and 4-of-6 from beyond the arc.
+
+The Thunder showed 48 percent from the field and 14-19 attempts at the charity stripe.
+Dennis Schröder who started this game had 28 points with eleven goals and four three-
+pointers.  Russell Westbrook finished with 14 points with 14 assists and performed a
+triple-double.  Steven Adams finished with 13 points.  Jerami Grant posted eight points
+with seven rebounds grabbed.
+
+The Heat showed 44 percent from the field and 9-14 free throws and committed 17 turnovers.
+Josh Richardson who started this game contributed an efficient 18 points.  Justise Winslow
+ended up with ten points  (4-11 FG, 2-5 3Pt, 0-0 FT) and five assists.
+
+Next Sunday, the Thunder will travel to play the Boston Celtics. For their next game, the
+Heat will return to action the Indiana Pacers on Saturday.
+-------------------------
+*** French jsRealB
+Le Thunder  (33-18) a surpassé le Heat  (24-26) 118-102 au stade American Airlines Arena à
+Miami vendredi leur permettant de remporter leur septième victoire de suite.
+
+Le Heat a dominé le Thunder  (49-46) dans la deuxième demie mais n'a pas pu compléter leur
+retour. Durant le deuxième quart, le Thunder a obtenu les meilleurs tirs en pourcentage,
+une différence de 17%. Durant la première demie, le Thunder a réussi les meilleurs lancers
+à 3 points en pourcentage, 69% par rapport à 31%.
+
+Paul George qui figurait dans l'alignement de départ a mené, comptant 43 points. Kelly
+Olynyk qui débutait la partie a mené son équipe marquant 21 points son meilleur score
+jusqu'ici en 30 minutes avec 8-sur-12 L et 4-sur-6 depuis la ligne de trois points.
+
+Le Thunder a compté 48 pour cent de tirs réussis et 14 lancers francs sur 19.  Dennis
+Schröder qui était un partant a terminé avec 28 points avec 11-sur-13 L et quatre lancers
+à trois points.  Russell Westbrook a fini avec 14 points  (6-10 L, 0-1 L3, 2-5 LF) tout en
+ajoutant 14 passes décisives et a terminé avec un triple-double.  Steven Adams a
+enregistré 13 points.  Jerami Grant a eu huit points.
+
+Le Heat a compté 44 pour cent de tirs réussis et 9 lancers francs sur 14 et ont subi 17
+pertes de ballon.  Josh Richardson qui débutait la partie a enregistré 18 points avec sept
+tirs réussis.  Justise Winslow a eu dix points avec 2-sur-5 depuis la ligne de trois
+points et cinq passes décisives.
+
+Ensuite le Thunder voyagera à Boston pour affronter les Celtics dimanche. Pour leur
+prochain affrontement, le Heat sera à domicile contre les Pacers d'Indiana samedi.
+-------------------------
+*** English FStrings
+The Oklahoma City Thunder (33-18) defeated the Miami Heat (24-26) 118-102 on Friday at the
+American Airlines Arena in Miami  giving them their 7th straight victory.
+
+The Heat outscored the Thunder (49-46) in the second half, but the Oklahoma City held on
+for the win. In the first half, Thunder obtained a good three-pointers percentage 69% to
+31%. Over the first half, Thunder obtained a good free throws percentage 88% to 55%. In
+the game, Thunder obtained a good three-pointers percentage 53% to 31%. In the first half,
+Thunder dominated Heat for points 72 to 53. Over the second quarter, Thunder obtained a
+good goals percentage 65% to 48%. During the second quarter, Thunder dominated Heat for
+points 41 to 29. Over the second half, Thunder obtained a good three-pointers percentage
+41% to 30%. In the first half, Thunder dominated Heat for rebounds 26 to 17.
+
+Paul George was a starter and had efficient performance scoring 43 points in 35 minutes,
+14-for-23 and 10 three-pointers. Kelly Olynyk had efficient performance scoring 21 points
+in 30 minutes, 8-for-12 and 4 three-pointers.
+
+The Thunder show 48 percent from the field and 14-of-19 free throws. Dennis Schröder was a
+starter and finished with 28 points in 29 minutes, 11 goals and 4 three-pointers.  Russell
+Westbrook scored 14 points in 31 minutes, 14 assists and performed a triple-double.
+Steven Adams had 13 points in 27 minutes and 6-for-15.  Jerami Grant recorded 8 points in
+29 minutes and grabbing 7 rebounds.
+
+The Heat show 44 percent from the field and 9-of-14 free throws and committed 17
+turnovers. Josh Richardson posted 18 points in 33 minutes and 7 goals.  Justise Winslow
+contributed an efficient 10 points in 31 minutes (4-11 FG, 2-5 3Pt, 0-0 FT) while adding 5
+assists.
+
+Next Sunday, the Thunder will host the Boston Celtics. The Heat' next game will be at home
+against the Pacers next Saturday.
+-------------------------
+*** Reference summary
+The Oklahoma City Thunder defeated the host Miami Heat, 118-102, at American Airlines
+Arena on Friday. While this wasn't a wire-to-wire win for Oklahoma City, they won this
+game in dominating fashion. In fact, a 31-24 first quarter really set the tone, with a
+41-29 second quarter sealing the victory. The Thunder actually led by at least 15 points
+for the entirety of the second half. Three-point shooting was the key difference, with
+Oklahoma City hitting 16-of-30 and Miami connecting on 11-of-36. The Thunder also
+dominated in transition, winning the fastbreak differential, 23-8. The Thunder (33-18)
+were led by Paul George, as he tallied 43 points, seven rebounds, five assists and two
+steals. Russell Westbrook collected 14 points, 12 rebounds and 14 assists. Steven Adams
+accrued 13 points, seven rebounds, two assists and three steals. Dennis Schroder was huge
+off the bench, as he provided 28 points on 11-of-13 from the field. The Heat (24-26) were
+led by Kelly Olynyk, as he provided 21 points, seven rebounds and two assists off the
+bench. Josh Richardson led the starters with 18 points, four rebounds, three assists and
+two steals. Hassan Whiteside amassed 12 points and 16 rebounds. Justise Winslow finished
+with 10 points, two rebounds and five assists. Oklahoma City returns to action on Sunday,
+as they travel to face the Boston Celtics. As for Miami, they play host to the struggling
+Indiana Pacers on Saturday for their next outing.
+====================================================================================================
