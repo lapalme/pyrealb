@@ -23,9 +23,6 @@ class French(Realizer, LexicalChoices):
     def set_language(self):
         loadFr()
 
-    def t(self):
-        return self.tense
-
     # quelques expressions toutes faites qui reviennent souvent
     def conjunction(self, *elems) -> CP:
         return CP(C("et"), *elems)

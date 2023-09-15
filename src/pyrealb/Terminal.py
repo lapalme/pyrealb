@@ -239,7 +239,7 @@ class Terminal(Constituent):
                 f = self.getProp("f")
                 if f is not None and f!=False:
                     if self.tab=="a1":
-                        comp=A("more " if f=="co" else "most ")
+                        comp=Adv("more" if f=="co" else "most")
                         comp.realization = comp.lemma
                         return [comp,self]
                     else:

@@ -18,9 +18,6 @@ class English(Realizer,LexicalChoices):
     def set_language(self):
         loadEn()
 
-    def t(self) -> str:
-        return self.tense
-
     # frequent recurring expressions
     def conjunction(self,*elems) -> CP:
         return CP(C("and"),*elems)
@@ -259,8 +256,10 @@ class English(Realizer,LexicalChoices):
             lambda: VP(V("lead"), NP(D("the"), N("way")).a(","), V("post").t("pr")),
             lambda: VP(V("lead"),
                        NP(D("the"), N("way"),
-                          PP(P("off"), NP(D("the"), N("bench"))), V("score").t("pr"))),
-            lambda: VP(V("have"), NP(D("a"), A("efficient"), N("performance")), V("score").t("pr"))
+                          V("score").t("pr"))),
+            lambda: VP(V("have"),
+                       NP(D("a"), A("efficient"), N("performance")),
+                       V("score").t("pr"))
         )
 
     def player_VP(self) -> VP:
@@ -271,7 +270,7 @@ class English(Realizer,LexicalChoices):
             lambda: VP(V("record")),
             lambda: VP(V("post")),
             lambda: VP(V("add")),
-            lambda: VP(V("contribute"), AP(D("a"), A("efficient"))),
+            lambda: VP(V("contribute")),
             lambda: VP(V("have"))
         )
 
