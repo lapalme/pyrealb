@@ -1,0 +1,136 @@
+***  3965:2018-02-07: Memphis Grizzlies receives Utah Jazz  [88-92]
+
+                    |                                   Memphis Grizzlies (18-36)                                   
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|    7|   24|    2|    9|    0|    0|    3|   10|    4|    3|    1|    5|     |   16|     
+Q2                  |               60|    8|   18|    1|    2|    6|    7|    1|   10|    5|    4|    3|    6|     |   23|     
+Q3                  |               60|   10|   23|    1|    5|    3|    5|    3|   10|    5|    2|    1|    0|     |   24|     
+Q4                  |               60|    9|   16|    4|    7|    3|    4|    2|    6|    4|    3|    0|    4|     |   25|     
+H1                  |              120|   15|   42|    3|   11|    6|    7|    4|   20|    9|    7|    4|   11|     |   39|     
+H2                  |              120|   19|   39|    5|   12|    6|    9|    5|   16|    9|    5|    1|    4|     |   49|     
+game                |              240|   34|   81|    8|   23|   12|   16|    9|   36|   18|   12|    5|   15|   26|   88|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Andrew Harrison     |True |     |   35|    9|   15|    2|    5|    3|    3|    0|    1|    4|    2|    2|    2|    6|   23|  -10
+Marc Gasol          |True |     |   36|    7|   20|    2|    6|    4|    7|    0|    6|    5|    1|    3|    2|    2|   20|   -3
+Dillon Brooks       |True |     |   31|    4|   13|    1|    3|    2|    2|    2|    6|    1|    3|    0|    0|    3|   11|    7
+JaMychal Green      |True |     |   30|    4|    7|    1|    2|    2|    2|    4|    7|    1|    1|    0|    0|    3|   11|    7
+Mario Chalmers      |False|     |   22|    3|    8|    1|    3|    0|    0|    0|    2|    4|    0|    0|    5|    4|    7|   -3
+Jarell Martin       |True |     |   30|    3|    7|    0|    1|    0|    0|    1|    5|    0|    1|    0|    0|    5|    6|  -12
+James Ennis         |False|     |   24|    2|    6|    1|    2|    1|    2|    0|    4|    0|    2|    0|    1|    1|    6|    1
+Ivan Rabb           |False|     |   11|    2|    3|    0|    0|    0|    0|    1|    3|    1|    1|    0|    1|    0|    4|    0
+Wayne Selden        |False|     |   17|    0|    2|    0|    1|    0|    0|    1|    2|    2|    1|    0|    4|    2|    0|   -2
+Brandan Wright      |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Chandler Parsons    |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Ben McLemore        |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Deyonta Davis       |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+                    |                                       Utah Jazz (26-28)                                       
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|    7|   18|    1|    5|    6|    6|    2|   13|    3|    3|    2|    7|     |   21|     
+Q2                  |               60|    8|   20|    2|    7|    5|    6|    1|   10|    3|    1|    1|    4|     |   23|     
+Q3                  |               60|    9|   18|    3|    7|    3|    4|    2|   12|    5|    0|    1|    4|     |   24|     
+Q4                  |               60|    5|   13|    0|    3|   14|   17|    4|    8|    3|    2|    0|    4|     |   24|     
+H1                  |              120|   15|   38|    3|   12|   11|   12|    3|   23|    6|    4|    3|   11|     |   44|     
+H2                  |              120|   14|   31|    3|   10|   17|   21|    6|   20|    8|    2|    1|    8|     |   48|     
+game                |              240|   29|   69|    6|   22|   28|   33|    9|   43|   14|    6|    4|   19|   16|   92|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Ricky Rubio         |True |     |   28|    8|   16|    2|    4|   11|   14|    1|    8|    3|    3|    0|    4|    2|   29|   -3
+Rodney Hood         |False|     |   23|    5|   12|    0|    5|    8|    8|    0|    1|    2|    0|    0|    1|    1|   18|    3
+Donovan Mitchell    |True |     |   31|    4|   12|    1|    3|    0|    0|    2|    3|    1|    0|    1|    3|    3|    9|   -4
+Rudy Gobert         |True |     |   37|    1|    5|    0|    0|    6|    8|    3|   12|    2|    0|    2|    4|    5|    8|   -2
+Raul Neto           |False|     |   17|    3|    3|    1|    1|    1|    1|    1|    3|    1|    0|    0|    4|    1|    8|    6
+Joe Ingles          |True |     |   28|    3|    7|    1|    4|    0|    0|    0|    2|    4|    1|    0|    1|    1|    7|   -1
+Joe Johnson         |False|     |   23|    3|    8|    1|    3|    0|    0|    0|    1|    1|    0|    0|    0|    0|    7|   -1
+Royce O'Neale       |False|     |   15|    1|    2|    0|    1|    2|    2|    0|    4|    0|    0|    0|    1|    0|    4|    8
+Derrick Favors      |True |     |   32|    1|    4|    0|    1|    0|    0|    2|    8|    0|    2|    1|    1|    2|    2|    9
+Jonas Jerebko       |False|     |    2|    0|    0|    0|    0|    0|    0|    0|    1|    0|    0|    0|    0|    1|    0|    0
+Erik McCree         |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Alec Burks          |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+*** English jsRealB
+The Jazz  (26-28) took down the Grizzlies  (18-36) 92-88 in Memphis on Wednesday at the
+FedExForum giving them their seventh straight win.
+
+The Grizzlies outscored the Jazz 49-48 in the second half but could not complete their
+come-back. During the fourth quarter, the Grizzlies got better goals percentage, 56% to
+38%. In the second half, the Jazz got better free throws percentage, 81% to 67%. The Jazz
+dominated the Grizzlies for free throws 28 to 12 during the game.
+
+Ricky Rubio who was in the starting line-up led the way, posting 29 points with eight
+goals and eight rebounds. Andrew Harrison who was a starter scored a game high with 23
+points a season high in 35 minutes.
+
+The Jazz showed 42 percent from the field and 28-33 attempts at the charity stripe and
+committed 19 turnovers.  Raul Neto had eight points with three rebounds grabbed.
+
+The Grizzlies showed 41 percent from the field and 12-16 free throws.  Marc Gasol who was
+a starter finished with 20 points.
+
+For their next game, the Jazz will receive the Charlotte Hornets on Friday. Up next the
+Grizzlies will travel to Oklahoma City to take on the Thunder on Sunday.
+-------------------------
+*** French jsRealB
+Le Jazz  (26-28) a défait les Grizzlies  (18-36) 92-88 mercredi au stade FedExForum à
+Memphis leur permettant d'allonger à 7 leur série de victoires.
+
+Les Grizzlies ont dominé le Jazz  (49-48) dans la deuxième demie mais le gagnant a bon
+tenu pour la victoire. Pendant le quatrième quart, les Grizzlies ont réussi les meilleurs
+lancers en pourcentage, une différence de 18%. Durant la deuxième demie, le Jazz a obtenu
+les meilleurs lancers francs en pourcentage, une différence de 14%. Le Jazz a dominé les
+Grizzlies pour les lancers francs 28 à 12 durant la partie.
+
+Ricky Rubio qui était un partant a fini avec 29 points avec huit tirs réussis et huit
+rebonds récupérés. Andrew Harrison qui était un partant a mené, comptant 23 points son
+meilleur score pour la saison en 35 minutes.
+
+Le Jazz a compté 42 pour cent de tirs réussis et 28 lancers francs sur 33 et ont subi 19
+pertes de ballon.  Raul Neto a terminé avec huit points.
+
+Les Grizzlies ont compté 41 pour cent de tirs réussis et 12 lancers francs sur 16.  Marc
+Gasol qui débutait la partie a enregistré 20 points avec deux lancers à trois points.
+
+À venir pour le Jazz, un match à domicile contre Charlotte. Ensuite les Grizzlies
+voyageront à Oklahoma City pour affronter le Thunder dimanche.
+-------------------------
+*** English FStrings
+The Utah Jazz (26-28) topped the Memphis Grizzlies (18-36) 92-88 on Wednesday at the
+FedExForum in Memphis  giving them their 7th straight victory.
+
+The Grizzlies outscored the Jazz (49-48) in the second half, but the Utah held on for the
+win. In the fourth quarter, Grizzlies got a good goals percentage 56% to 38%. In the game,
+Jazz dominated Grizzlies for free throws 28 to 12. In the second half, Jazz got a good
+free throws percentage 81% to 67%.
+
+Ricky Rubio was a starter and had efficient performance scoring 29 points in 28 minutes
+(8-16 FG, 2-4 3Pt, 11-14 FT). Andrew Harrison finished with 23 points in 35 minutes (9-15
+FG, 2-5 3Pt, 3-3 FT).
+
+The Jazz show 42 percent from the field and 28-of-33 free throws and committed 19
+turnovers. Raul Neto added 8 points and grabbing 3 rebounds.
+
+The Grizzlies show 41 percent from the field and 12-of-16 free throws. Marc Gasol scored
+20 points in 36 minutes and 2-for-6 from beyond the arc.
+
+For their next game, the Jazz will play at home against the Charlotte Hornets on Friday.
+Up next, the Grizzlies travel to Oklahoma City to take on the Thunder on Sunday.
+-------------------------
+*** Reference summary
+The Utah Jazz defeated the Memphis Grizzlies, 92-88, at FedEx Forum on Wednesday evening.
+Both teams started out slow. The Jazz took an eight point lead mid way though the first
+and hung on to lead 21-16 heading into the second. The Grizzlies battled back in the
+second and tied it up at 28 with six minutes left in the quarter, but the Jazz pulled away
+and settled on a 44-39 lead by halftime. The Jazz and Grizzlies played to a tie though the
+third, so that the Jazz took a five-point lead into the fourth. The Jazz expanded their
+lead to 11, with 7:30 left in the fourth and did not look back from there, en route to
+their seventh straight win. Ricky Rubio led the way for the Jazz with 29 points on 8-of-16
+shooting, eight rebounds, three assists and three steals, in 28 minutes of action. Rodney
+Hood followed up with 18 points on 5-of-12 shooting, while Rudy Gobert tallied eight
+points, 12 rebounds, two assists and two blocks. The Jazz shot 42 percent from the field,
+including 6-of-22 from long range. Meanwhile, Andrew Harrison was the high-point man for
+the Grizzlies, with 23 points on 9-of-15 shooting, in 35 minutes. Marc Gasol followed up
+with 20 points on 7-of-20 shooting, six rebounds, five assists, three blocks and one
+steal, in 36 minutes. Dillon Brooks and JaMychal Green chipped in 11 points each. The
+Grizzlies shot 42 percent from the field, including 8-of-23 from long range. The Grizzlies
+(18-36) will look to end a five game losing streak, as they take on the Thunder in OKC on
+Sunday. The Jazz (26-28) play host to the Hornets on Friday.
+====================================================================================================

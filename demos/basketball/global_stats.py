@@ -4,6 +4,19 @@ import json
 from Games import Games
 from Score import Score
 
+####################################################################################
+# Computation of global statistics across the "train" corpus to be used
+# for "inter-event" facts according to the nomenclature of
+# Upadhyay and Massie, Content Type Profiling of Data-to-text Genetation Datasets,
+#       COLING 2022
+#
+# These statistics are used to decide if a particular performance for a team or a player
+# is "high enough" to be interesting to mention it in a given game.
+#
+# when used as "main", this script creates "train-aggregate.json"
+# otherwise it loads it into "aggregate" that is queried by functions.
+#
+
 nb_quantiles = 5
 
 def show_aggregate_scores(title: str, scores, keys: [str]) -> str:

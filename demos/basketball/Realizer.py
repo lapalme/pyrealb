@@ -1,5 +1,5 @@
 from pyrealb import *
-from stats import is_high
+from global_stats import is_high
 from random import sample
 from seasons_stats import is_season_high_player
 from BasketballSummarizer import BasketballSummarizer
@@ -48,10 +48,10 @@ class Realizer(BasketballSummarizer,LexicalChoices):
             out.append(self.always_lead(winner))
         if overtime:
             out.append(self.in_overtime(winner))
-        return "".join(S(s.t(self.t())).realize() for s in out)
+        return "".join(S(s.t(self.tense)).realize() for s in out)
 
     def show_team_facts(self,winner,loser,interesting) -> str:
-        return "".join(self.show_team_fact(winner, loser, fact).t(self.t()).realize()
+        return "".join(self.show_team_fact(winner, loser, fact).t(self.tense).realize()
                        for fact in get_most_interesting(interesting))
 
     def show_team_perf(self, team) -> str:
@@ -101,7 +101,7 @@ class Realizer(BasketballSummarizer,LexicalChoices):
         vp_st = None
         if show_starter:
             vp_st = self.starter_player()
-        vp = vp_func().t(self.t())
+        vp = vp_func().t(self.tense)
         np_pts = self.nb(player.scores.points(), "point")
         if is_season_high_player(player, "PTS", player.scores.points()):
             np_pts.add(self.season_high())

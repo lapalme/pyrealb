@@ -1,0 +1,152 @@
+***  2505:2016-11-05: Milwaukee Bucks receives Sacramento Kings  [117-91]
+
+                    |                                     Milwaukee Bucks (4-2)                                     
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|   12|   22|    5|   11|    5|    6|    4|   14|   10|    2|    5|    3|     |   34|     
+Q2                  |               60|   10|   20|    2|    6|    5|    6|    5|   14|    7|    3|    3|    4|     |   27|     
+Q3                  |               60|    8|   18|    4|    7|    9|    9|    3|   13|    5|    6|    2|    5|     |   29|     
+Q4                  |               60|   11|   22|    3|    9|    2|    4|    5|   12|    6|    1|    0|    3|     |   27|     
+H1                  |              120|   22|   42|    7|   17|   10|   12|    9|   28|   17|    5|    8|    7|     |   61|     
+H2                  |              120|   19|   40|    7|   16|   11|   13|    8|   25|   11|    7|    2|    8|     |   56|     
+game                |              240|   41|   82|   14|   33|   21|   25|   17|   53|   28|   12|   10|   15|   22|  117|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Mirza Teletović     |False|     |   20|    7|    9|    7|    9|    1|    2|    0|    0|    1|    0|    1|    0|    1|   22|   18
+Jabari Parker       |True |     |   25|    6|   14|    0|    2|    7|    7|    3|    6|    2|    3|    1|    0|    1|   19|   18
+Giannis Antetokounmp|True |     |   25|    5|    9|    0|    1|    7|    8|    3|    8|    8|    4|    1|    4|    3|   17|   25
+Rashad Vaughn       |False|     |   24|    5|    9|    4|    8|    0|    0|    0|    3|    2|    0|    2|    1|    2|   14|   13
+Matthew Dellavedova |True |     |   21|    4|    7|    2|    3|    0|    0|    1|    5|    4|    2|    0|    2|    0|   10|   23
+Michael Beasley     |False|     |   16|    5|   10|    0|    1|    0|    0|    1|    4|    0|    1|    0|    0|    0|   10|   -7
+Miles Plumlee       |True |     |   14|    2|    2|    0|    0|    2|    2|    1|    3|    0|    0|    3|    0|    3|    6|   14
+Greg Monroe         |False|     |   13|    2|    4|    0|    0|    2|    2|    0|    3|    2|    1|    1|    1|    3|    6|   16
+John Henson         |False|     |   15|    2|    3|    0|    0|    0|    1|    4|    4|    2|    0|    1|    2|    4|    4|   -4
+Tony Snell          |True |     |   23|    1|    6|    1|    5|    0|    0|    1|    6|    1|    1|    0|    2|    2|    3|   13
+Malcolm Brogdon     |False|     |   26|    1|    6|    0|    2|    1|    1|    1|    5|    6|    0|    0|    3|    1|    3|    3
+Thon Maker          |False|     |    8|    1|    2|    0|    1|    1|    2|    2|    6|    0|    0|    0|    0|    2|    3|   -2
+Steve Novak         |False|     |    3|    0|    1|    0|    1|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+                    |                                     Sacramento Kings (2-5)                                    
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|   11|   26|    2|    5|    0|    0|    4|    9|    9|    1|    1|    3|     |   24|     
+Q2                  |               60|    6|   16|    2|    6|   10|   12|    0|    5|    6|    2|    0|    3|     |   24|     
+Q3                  |               60|    6|   24|    1|    7|    2|    3|    7|   14|    5|    3|    1|    6|     |   15|     
+Q4                  |               60|   10|   18|    5|   10|    3|    4|    2|    8|    7|    2|    1|    2|     |   28|     
+H1                  |              120|   17|   42|    4|   11|   10|   12|    4|   14|   15|    3|    1|    6|     |   48|     
+H2                  |              120|   16|   42|    6|   17|    5|    7|    9|   22|   12|    5|    2|    8|     |   43|     
+game                |              240|   33|   84|   10|   28|   15|   19|   13|   36|   27|    8|    3|   14|   19|   91|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Garrett Temple      |False|     |   27|    7|   10|    5|    6|    0|    0|    0|    3|    4|    3|    0|    1|    1|   19|  -16
+DeMarcus Cousins    |True |     |   27|    5|   12|    0|    2|    5|    6|    0|    4|    0|    1|    3|    2|    3|   15|  -25
+Jordan Farmar       |False|     |   24|    3|   10|    3|    8|    0|    0|    1|    2|    7|    2|    0|    2|    0|    9|    1
+Skal Labissière     |False|     |   15|    3|    5|    0|    0|    2|    3|    3|    3|    0|    0|    0|    0|    0|    8|    5
+Arron Afflalo       |True |     |   22|    2|   10|    1|    3|    2|    2|    1|    2|    0|    0|    0|    0|    3|    7|  -16
+Omri Casspi         |True |     |   23|    3|    8|    0|    3|    0|    0|    3|    6|    2|    0|    0|    3|    1|    6|  -18
+Willie Cauley-Stein |False|     |   17|    2|    2|    0|    0|    2|    2|    0|    3|    1|    1|    0|    1|    3|    6|   -7
+Matt Barnes         |False|     |   14|    2|    7|    0|    1|    2|    2|    0|    2|    2|    0|    0|    0|    0|    6|  -16
+Ben McLemore        |False|     |   22|    2|    8|    0|    2|    1|    2|    0|    1|    4|    1|    0|    1|    1|    5|   -5
+Kosta Koufos        |True |     |   13|    2|    4|    0|    0|    0|    0|    4|    7|    1|    0|    0|    1|    2|    4|  -10
+Malachi Richardson  |False|     |    5|    1|    3|    1|    3|    0|    0|    0|    0|    0|    0|    0|    0|    0|    3|   -4
+Georgios Papagiannis|False|     |    5|    1|    1|    0|    0|    0|    0|    0|    1|    0|    0|    0|    1|    3|    2|   -4
+Ty Lawson           |True |     |   19|    0|    4|    0|    0|    1|    2|    1|    2|    6|    0|    0|    2|    2|    1|  -15
+
+*** English jsRealB
+The Bucks  (4-2) dominated the Kings  (2-5) 117-91 at the BMO Harris Bradley Center on
+Saturday in Milwaukee en route to their third straight win.
+
+This was a dominating win for the Bucks, as it came in wire-to-wire fashion. The Bucks
+overcame the Kings for points by 13 during the first half. During the third quarter, the
+Bucks obtained better goals percentage, 44% to 25%. In the second half, the Bucks obtained
+better free throws percentage, a difference of 14%. The Bucks dominated the Kings for
+rebounds by 17 over the game.
+
+Mirza Teletović who started this game scored a game high with 22 points with seven goals
+and seven three-pointers. Garrett Temple who started this game had an efficient
+performance scoring 19 points  (7-10 FG, 5-6 3Pt, 0-0 FT) and four assists.
+
+The Bucks showed 50 percent from the field and 21-25 attempts at the charity stripe.
+Giannis Antetokounmpo finished with 17 points  (5-9 FG, 0-1 3Pt, 7-8 FT) and eight
+assists.  Rashad Vaughn posted 14 points in 24 minutes with five goals, 4-of-8 from beyond
+the arc and two assists.  Matthew Dellavedova contributed ten points with five rebounds
+grabbed.  Tony Snell contributed three points.  Malcolm Brogdon recorded three points.
+Thon Maker finished with three points.
+
+The Kings showed 39 percent from the field and 15-19 free throws.  Jordan Farmar scored
+nine points in 24 minutes with three three-pointers and seven assists.  Ben McLemore had
+five points with four assists.
+
+Up next the Bucks will travel to Dallas to take on the Mavericks on Sunday. Next Sunday,
+the Kings will travel to play the Toronto Raptors.
+-------------------------
+*** French jsRealB
+Les Bucks  (4-2) ont dominé les Kings  (2-5) 117-91 à Milwaukee au stade BMO Harris
+Bradley Center samedi leur permettant d'allonger à 3 leur série de victoires.
+
+Les Bucks ont mené pendant les quatre quarts. Les Bucks ont vaincu les Kings pour les
+points par 13 pendant la première demie. Durant le troisième quart, les Bucks ont réussi
+les meilleurs tirs en pourcentage, 44% en comparaison avec 25%. Pendant la deuxième demie,
+les Bucks ont réussi les meilleurs lancers francs en pourcentage, 85% en comparaison avec
+71%. Les Bucks ont dominé les Kings pour les rebonds 53 à 36 pendant la partie.
+
+Mirza Teletović qui figurait dans l'alignement de départ a mené, comptant 22 points avec
+sept tirs réussis et 7-sur-9 depuis la ligne de trois points. Garrett Temple qui était un
+partant a mené son équipe marquant 19 points avec sept tirs réussis, 5-sur-6 depuis la
+ligne de trois points et quatre passes décisives.
+
+Les Bucks ont compté 50 pour cent de tirs réussis et 21 lancers francs sur 25.  Giannis
+Antetokounmpo a contribué un efficace 17 points avec huit passes décisives.  Rashad Vaughn
+a terminé avec 14 points en 24 minutes  (5-9 L, 4-8 L3, 0-0 LF) et deux passes décisives.
+Matthew Dellavedova a ajouté dix points avec cinq rebonds récupérés.  Tony Snell a terminé
+avec trois points avec six rebonds récupérés.  Malcolm Brogdon a eu trois points avec cinq
+rebonds.  Thon Maker a contribué un efficace trois points.
+
+Les Kings ont compté 39 pour cent de tirs réussis et 15 lancers francs sur 19.  Jordan
+Farmar a marqué neuf points en 24 minutes  (3-10 L, 3-8 L3, 0-0 LF) tout en ajoutant sept
+passes décisives.  Ben McLemore a terminé avec cinq points avec quatre passes décisives.
+
+Dimanche prochain, les Bucks seront sur la route contre les Mavericks de Dallas. Dimanche
+prochain, les Kings accueilleront les Raptors de Toronto.
+-------------------------
+*** English FStrings
+The Milwaukee Bucks (4-2) overcame the Sacramento Kings (2-5) 117-91 on Saturday at the
+BMO Harris Bradley Center in Milwaukee  giving them their 3th straight victory.
+
+The Bucks lead in all four quarters. In the third quarter, Bucks got a good goals
+percentage 44% to 25%. In the game, Bucks overcame Kings for rebounds 53 to 36. In the
+third quarter, Bucks overcame Kings for points 29 to 15. In the first half, Bucks overcame
+Kings for rebounds 28 to 14. In the second half, Bucks obtained a good free throws
+percentage 85% to 71%. In the first quarter, Bucks got a good goals percentage 55% to 42%.
+During the first half, Bucks overcame Kings for points 61 to 48. In the second half, Bucks
+dominated Kings for points 56 to 43. During the second quarter, Bucks obtained a good
+goals percentage 50% to 38%. Over the first half, Bucks got a good goals percentage 52% to
+40%. During the game, Bucks got a good goals percentage 50% to 39%. In the first quarter,
+Bucks overcame Kings for points 34 to 24.
+
+Mirza Teletović finished with 22 points, 7-for-9 and 7 three-pointers. Garrett Temple was
+in the starting line-up and lead the way with 19 points in 27 minutes, 7 goals, 5-for-6
+from beyond the arc and 4 assists.
+
+The Bucks show 50 percent from the field and 21-of-25 free throws. Giannis Antetokounmpo
+finished with 17 points in 25 minutes and 8 assists.  Rashad Vaughn recorded 14 points in
+24 minutes, 5 goals, 4-for-8 from beyond the arc and 2 assists.  Matthew Dellavedova added
+10 points in 21 minutes and 5 rebounds.  Tony Snell ended up with 3 points in 23 minutes
+(1-6 FG, 1-5 3Pt, 0-0 FT).  Malcolm Brogdon ended up with 3 points in 26 minutes (1-6 FG,
+0-2 3Pt, 1-1 FT) and 6 assists.  Thon Maker posted 3 points (1-2 FG, 0-1 3Pt, 1-2 FT).
+
+The Kings show 39 percent from the field and 15-of-19 free throws. Jordan Farmar ended up
+with 9 points in 24 minutes, 3 three-pointers and 7 assists.  Ben McLemore scored 5 points
+in 22 minutes and 4 assists.
+
+Next Sunday, the Bucks will host the Dallas Mavericks. Up next, the Kings travel to
+Toronto to take on the Raptors on Sunday.
+-------------------------
+*** Reference summary
+Milwaukee has now won four of their last five games, while scoring at least 110 points in
+all of those wins. Giannis Antetokounmpo continues to develop as a point guard, as he is
+averaging about 22 points, nine rebounds and eight assists a game after this blowout win.
+Sacramento's "others" continue to struggle, as this is now the seventh-straight game in
+which no other starter aside from Cousins or Gay has scored more than 11 points. Milwaukee
+dominated in nearly every facet, as they outshot Sacramento from the field, three-point
+range and the free-throw line. In addition to that, they also won the rebounding and
+assisting margins, while also dominating the steals and blocks categories. The benches
+were used heavily in this lopsided game, as they combined for 120 points between the two
+teams.
+====================================================================================================

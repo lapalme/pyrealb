@@ -1,0 +1,161 @@
+***  5402:2019-02-27: Sacramento Kings receives Milwaukee Bucks  [140-141]
+
+                    |                                    Sacramento Kings (31-30)                                   
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|   13|   26|    3|    7|    4|    6|    2|   12|    8|    1|    1|    1|     |   33|     
+Q2                  |               60|   12|   29|    2|    7|    3|    4|    5|   13|    7|    1|    1|    2|     |   29|     
+Q3                  |               60|    9|   29|    2|   10|    9|   13|    6|   14|    5|    1|    2|    1|     |   29|     
+Q4                  |               60|   14|   22|    3|    5|    4|    4|    1|   13|    8|    3|    2|    3|     |   35|     
+OT                  |               25|    5|   12|    2|    4|    2|    3|    1|    6|    2|    0|    0|    1|     |   14|     
+H1                  |              120|   25|   55|    5|   14|    7|   10|    7|   25|   15|    2|    2|    3|     |   62|     
+H2                  |              120|   23|   51|    5|   15|   13|   17|    7|   27|   13|    4|    4|    4|     |   64|     
+game                |              265|   53|  118|   12|   33|   22|   30|   15|   58|   30|    6|    6|    8|   19|  140|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Buddy Hield         |True |     |   40|   10|   29|    3|   11|    9|    9|    3|    6|    3|    3|    0|    1|    3|   32|    3
+Bogdan Bogdanović   |True |     |   43|   10|   22|    5|    8|    3|    4|    1|    8|    8|    2|    1|    1|    3|   28|    9
+Harry Giles         |False|     |   17|    9|   13|    0|    0|    0|    2|    0|    7|    2|    0|    1|    2|    2|   18|   -5
+De'Aaron Fox        |True |     |   37|    6|   13|    0|    2|    5|    5|    0|    6|    9|    0|    1|    1|    1|   17|    0
+Harrison Barnes     |True |doubl|   40|    6|   11|    3|    6|    0|    0|    4|   14|    0|    1|    1|    2|    3|   15|    6
+Willie Cauley-Stein |True |     |   32|    4|   10|    0|    0|    2|    5|    2|    9|    1|    0|    1|    1|    2|   10|    6
+Marvin Bagley       |False|     |   18|    3|    9|    0|    2|    3|    4|    5|    7|    1|    0|    0|    0|    0|    9|  -18
+Yogi Ferrell        |False|     |   15|    4|    8|    1|    2|    0|    0|    0|    1|    3|    0|    0|    0|    2|    9|   -1
+Corey Brewer        |False|     |   19|    1|    3|    0|    2|    0|    1|    0|    0|    3|    0|    1|    0|    3|    2|   -5
+Frank Mason         |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Kosta Koufos        |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Nemanja Bjelica     |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Alec Burks          |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+                    |                                    Milwaukee Bucks (47-14)                                    
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|   12|   27|    6|   15|    4|    5|    3|   15|   10|    0|    2|    2|     |   34|     
+Q2                  |               60|   17|   26|    4|    8|    1|    2|    2|   14|   10|    2|    3|    2|     |   39|     
+Q3                  |               60|   12|   27|    2|    8|    5|    8|    5|   17|    7|    0|    5|    4|     |   31|     
+Q4                  |               60|    9|   23|    2|    9|    2|    2|    1|    7|    6|    1|    2|    3|     |   22|     
+OT                  |               25|    4|    9|    3|    5|    4|    4|    0|    4|    3|    0|    2|    0|     |   15|     
+H1                  |              120|   29|   53|   10|   23|    5|    7|    5|   29|   20|    2|    5|    4|     |   73|     
+H2                  |              120|   21|   50|    4|   17|    7|   10|    6|   24|   13|    1|    7|    7|     |   53|     
+game                |              265|   54|  112|   17|   45|   16|   21|   11|   57|   36|    3|   14|   11|   18|  141|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Eric Bledsoe        |True |tripl|   35|   11|   20|    4|    7|    0|    0|    4|   12|   13|    1|    0|    4|    0|   26|    1
+Malcolm Brogdon     |True |     |   31|    9|   11|    4|    6|    3|    3|    1|    5|    2|    0|    0|    0|    2|   25|  -16
+Khris Middleton     |True |     |   37|    8|   20|    1|    6|    4|    7|    0|    6|    7|    2|    0|    4|    4|   21|    6
+Nikola Mirotić      |False|     |   26|    7|   14|    5|    8|    2|    2|    1|    8|    3|    0|    2|    0|    1|   21|   18
+Giannis Antetokounmp|True |     |   24|    7|   12|    0|    3|    3|    5|    1|    7|    2|    0|    2|    1|    0|   17|  -24
+Pat Connaughton     |False|     |   24|    4|    9|    1|    5|    0|    0|    1|    5|    4|    0|    2|    1|    3|    9|   10
+Ersan İlyasova      |False|     |   14|    2|    5|    0|    1|    4|    4|    3|    6|    1|    0|    1|    0|    1|    8|   -2
+Brook Lopez         |True |     |   36|    3|   15|    1|    6|    0|    0|    0|    5|    3|    0|    6|    0|    3|    7|    3
+Tony Snell          |False|     |   20|    3|    5|    1|    2|    0|    0|    0|    1|    1|    0|    0|    0|    3|    7|   -2
+D.J. Wilson         |False|     |    6|    0|    0|    0|    0|    0|    0|    0|    1|    0|    0|    0|    0|    0|    0|    7
+Isaiah Canaan       |False|     |    6|    0|    1|    0|    1|    0|    0|    0|    1|    0|    0|    1|    1|    1|    0|    4
+Christian Wood      |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Bonzie Colson       |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+*** English jsRealB
+The Bucks  (47-14) , leader in their conference, overcame the Kings  (31-30) in overtime
+141-140 at the Golden 1 Center in Sacramento on Wednesday en route to their sixth straight
+victory.
+
+The Kings outscored the Bucks 64-53 in the second half but the winner held for the win.
+The Bucks needed overtime to win the game. The Bucks dominated the Kings for points by 11
+in the first half. During the fourth quarter, the Kings got better goals percentage, 64%
+to 39%.
+
+Eric Bledsoe who was a starter had an efficient performance scoring 26 points with eleven
+goals, 4-of-7 from beyond the arc, twelve rebounds grabbed, 13 assists and performed a
+triple-double. Buddy Hield who started this game had an efficient performance scoring 32
+points in 40 minutes with ten goals and six rebounds.
+
+The Bucks showed 48 percent from the field and 16-21 free throws.  Malcolm Brogdon who
+started this game recorded 25 points a season high.  Khris Middleton scored 21 points with
+seven assists.  Nikola Mirotić had 21 points with 7-for-14 FG, 5-of-8 from beyond the arc
+and three assists.  Pat Connaughton contributed nine points in 24 minutes  (4-9 FG, 1-5
+3Pt, 0-0 FT) and four assists.
+
+The Kings showed 44 percent from the field and 22-30 free throws.  Harrison Barnes posted
+15 points in 40 minutes with three three-pointers, 14 rebounds and performed a double-
+double.  Willie Cauley-Stein ended up with ten points in 32 minutes.
+
+Up next the Bucks will travel to Los Angeles to take on the Lakers on Friday. The Kings'
+next game will be at home against the Los Angeles Clippers on Friday.
+-------------------------
+*** French jsRealB
+Les Bucks  (47-14) , meneurs dans leur conférence, ont défait les Kings  (31-30) en
+période supplémentaire 141-140 à Sacramento mercredi au stade Golden 1 Center leur
+permettant de remporter leur sixième victoire de suite.
+
+Les Kings ont dominé les Bucks  (64-53) dans la deuxième demie mais le gagnant a bon tenu
+pour la victoire. Les Bucks ont dû jouer la prolongation pour gagner la partie. Les Bucks
+ont dominé les Kings pour les points 73 à 62 pendant la première demie. Pendant le
+quatrième quart, les Kings ont obtenu les meilleurs tirs en pourcentage, un avantage de
+25%.
+
+Eric Bledsoe qui était un partant a obtenu le meilleur pointage du match avec 26 points
+avec 11-sur-20 L, quatre tirs à trois points, douze rebonds récupérés, 13 passes décisives
+et a terminé avec un triple-double. Buddy Hield qui débutait la partie a obtenu le
+meilleur pointage du match avec 32 points en 40 minutes.
+
+Les Bucks ont compté 48 pour cent de tirs réussis et 16 lancers francs sur 21.  Malcolm
+Brogdon qui était un partant a ajouté 25 points son meilleur score pour la saison.  Khris
+Middleton a fini avec 21 points  (8-20 L, 1-6 L3, 4-7 LF) et sept passes décisives.
+Nikola Mirotić a enregistré 21 points  (7-14 L, 5-8 L3, 2-2 LF) tout en ajoutant trois
+passes décisives.  Pat Connaughton a terminé avec neuf points en 24 minutes avec quatre
+tirs réussis, cinq rebonds récupérés et quatre passes décisives.
+
+Les Kings ont compté 44 pour cent de tirs réussis et 22 lancers francs sur 30.  Harrison
+Barnes a terminé avec 15 points en 40 minutes a terminé avec un double-double.  Willie
+Cauley-Stein a eu dix points en 32 minutes.
+
+Vendredi prochain, les Bucks accueilleront les Lakers de Los Angeles. Pour leur prochain
+match, les Kings accueilleront les Clippers de Los Angeles vendredi.
+-------------------------
+*** English FStrings
+The Milwaukee Bucks (47-14), leader in their conference, topped the Sacramento Kings
+(31-30) in overtime 141-140 on Wednesday at the Golden 1 Center in Sacramento  giving them
+their 6th straight victory.
+
+The Kings outscored the Bucks (64-53) in the second half, but they could not complete
+their comeback.The Bucks needed overtime to win the game. Over the fourth quarter, Kings
+got a good goals percentage 64% to 39%. Over the second quarter, Bucks got a good goals
+percentage 65% to 41%. Over the third quarter, Bucks obtained a good goals percentage 44%
+to 31%. During the fourth quarter, Kings dominated Bucks for points 35 to 22. During the
+first half, Bucks dominated Kings for points 73 to 62. Over the second half, Kings
+overcame Bucks for points 64 to 53. Over the second quarter, Bucks dominated Kings for
+points 39 to 29.
+
+Eric Bledsoe was a starter and lead the way with 26 points in 35 minutes (11-20 FG, 4-7
+3Pt, 0-0 FT) while adding 13 assists and performed a triple-double. Buddy Hield started
+this game and had efficient performance scoring 32 points in 40 minutes, 10 goals and 6
+rebounds.
+
+The Bucks show 48 percent from the field and 16-of-21 free throws. Malcolm Brogdon was a
+starter and scored 25 points in 31 minutes, 9-for-11, 4-for-6 from beyond the arc and
+grabbing 5 rebounds.  Khris Middleton recorded 21 points in 37 minutes (8-20 FG, 1-6 3Pt,
+4-7 FT) while adding 7 assists.  Nikola Mirotić finished with 21 points in 26 minutes, 7
+goals, 5 three-pointers and 3 assists.  Pat Connaughton recorded 9 points in 24 minutes
+(4-9 FG, 1-5 3Pt, 0-0 FT).
+
+The Kings show 44 percent from the field and 22-of-30 free throws. Harrison Barnes scored
+15 points in 40 minutes (6-11 FG, 3-6 3Pt, 0-0 FT) and performed a double-double.  Willie
+Cauley-Stein recorded 10 points in 32 minutes (4-10 FG, 0-0 3Pt, 2-5 FT).
+
+Next Friday, the Bucks will be on the road against the Los Angeles Lakers. For their next
+game, the Kings will receive the Los Angeles Clippers on Friday.
+-------------------------
+*** Reference summary
+The Milwaukee Bucks took down the Sacramento Kings, 141-140, at Golden 1 Center on
+Wednesday evening. The Bucks (47-14) were operating at limited capacity on Wednesday, as
+star forward Giannis Antetokounmpo logged only 24 minutes in his first game back from a
+minor knee injury. Still, Milwaukee was able to pick up its 12 win in its last 13 games,
+relying largely on a strong night from Eric Bledsoe. Bledsoe led his team with 26 points
+and notched a triple-double, grabbing 12 boards and dishing out 13 assists. His play was
+also crucial in the clutch. After holding a double-digit lead, Sacramento (31-30) finished
+the fourth quarter on a quick run and took their first lead since the second quarter to go
+up 126-124. Bledsoe, though, was able to tie the game with a layup off the glass before
+locking down Sacramento's De'Aaron Fox on the final possession. Milwaukee also saw a gem
+from Malcolm Brogdon, who tallied 25 points in the win. Despite playing limited minutes,
+Antetokounmpo made a splash, recording 17 points, seven rebounds, and two blocks. The
+Kings, meanwhile, saw 32 points from star shooting guard Buddy Hield. Bogdan Bogdanovic
+added another 28 points, which he coupled with eight rebounds and eight assists. Fox was
+also a big contributor, finishing with 17 points and nine assists. On Friday, Sacramento
+will host the Los Angeles Clippers while the Bucks will visit the Lakers in LA.
+====================================================================================================

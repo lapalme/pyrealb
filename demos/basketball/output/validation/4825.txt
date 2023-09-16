@@ -1,0 +1,159 @@
+***  4825:2018-02-14: Portland Trail Blazers receives Golden State Warriors  [123-117]
+
+                    |                                 Portland Trail Blazers (32-26)                                
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|   15|   27|    5|   11|    5|    6|    5|   17|    5|    4|    0|    6|     |   40|     
+Q2                  |               60|   10|   22|    2|    7|    1|    1|    3|   13|    5|    0|    0|    4|     |   23|     
+Q3                  |               60|   11|   21|    3|    9|    4|    4|    2|    8|    4|    3|    0|    3|     |   29|     
+Q4                  |               60|    9|   23|    2|    6|   11|   13|    3|   11|    6|    2|    0|    0|     |   31|     
+H1                  |              120|   25|   49|    7|   18|    6|    7|    8|   30|   10|    4|    0|   10|     |   63|     
+H2                  |              120|   20|   44|    5|   15|   15|   17|    5|   19|   10|    5|    0|    3|     |   60|     
+game                |              240|   45|   93|   12|   33|   21|   24|   13|   49|   20|    9|    0|   13|   18|  123|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Damian Lillard      |True |     |   39|   14|   25|    4|   11|   12|   12|    0|    3|    8|    2|    0|    4|    3|   44|   17
+CJ McCollum         |True |     |   40|   12|   26|    3|    8|    2|    2|    1|    5|    2|    0|    0|    2|    3|   29|    7
+Jusuf Nurkić        |True |doubl|   30|    7|   14|    0|    0|    3|    6|    5|   13|    3|    1|    0|    0|    4|   17|    5
+Al-Farouq Aminu     |True |     |   36|    3|    4|    1|    2|    2|    2|    3|   11|    2|    3|    0|    2|    2|    9|    8
+Shabazz Napier      |False|     |   19|    3|   10|    2|    8|    0|    0|    1|    2|    0|    0|    0|    0|    1|    8|   -5
+Evan Turner         |False|     |   18|    2|    5|    0|    0|    2|    2|    0|    6|    1|    1|    0|    2|    1|    6|   -6
+Pat Connaughton     |False|     |    9|    2|    2|    0|    0|    0|    0|    0|    1|    0|    0|    0|    0|    0|    4|    2
+Maurice Harkless    |True |     |   26|    1|    5|    1|    3|    0|    0|    1|    3|    3|    1|    0|    2|    3|    3|    2
+Zach Collins        |False|     |    6|    1|    1|    1|    1|    0|    0|    0|    1|    1|    0|    0|    1|    1|    3|    2
+Ed Davis            |False|     |   12|    0|    1|    0|    0|    0|    0|    2|    4|    0|    1|    0|    0|    0|    0|   -2
+Caleb Swanigan      |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Meyers Leonard      |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Jake Layman         |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+                    |                                 Golden State Warriors (44-14)                                 
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|   11|   25|    1|    8|    4|    5|    2|    9|    6|    4|    1|    6|     |   27|     
+Q2                  |               60|   10|   24|    2|    7|    2|    2|    3|   10|    4|    2|    1|    1|     |   24|     
+Q3                  |               60|   12|   20|    6|   11|    6|    6|    1|    8|    8|    2|    1|    5|     |   36|     
+Q4                  |               60|   10|   21|    4|   11|    6|    6|    2|   14|    6|    0|    4|    4|     |   30|     
+H1                  |              120|   21|   49|    3|   15|    6|    7|    5|   19|   10|    6|    2|    7|     |   51|     
+H2                  |              120|   22|   41|   10|   22|   12|   12|    3|   22|   14|    2|    5|    9|     |   66|     
+game                |              240|   43|   90|   13|   37|   18|   19|    8|   41|   24|    8|    7|   16|   24|  117|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Kevin Durant        |True |     |   37|   17|   27|    6|   14|   10|   10|    0|    7|    6|    0|    2|    4|    1|   50|   -6
+Klay Thompson       |True |     |   38|    6|   15|    3|    7|    2|    2|    1|    4|    2|    0|    0|    1|    2|   17|   -2
+Stephen Curry       |True |     |   34|    6|   17|    3|   10|    2|    2|    2|    4|    6|    3|    0|    7|    4|   17|   -7
+Draymond Green      |True |doubl|   38|    6|   13|    1|    3|    3|    3|    3|   12|    7|    2|    4|    0|    5|   16|    4
+Shaun Livingston    |False|     |   16|    3|    5|    0|    0|    0|    0|    1|    2|    1|    0|    0|    2|    2|    6|   -4
+David West          |False|     |   13|    3|    5|    0|    0|    0|    0|    1|    5|    1|    0|    1|    0|    3|    6|    1
+JaVale McGee        |False|     |    5|    2|    2|    0|    0|    0|    0|    0|    1|    0|    1|    0|    0|    1|    4|   -7
+Zaza Pachulia       |True |     |    5|    0|    1|    0|    0|    1|    2|    0|    1|    0|    1|    0|    1|    1|    1|  -10
+Andre Iguodala      |False|     |   28|    0|    0|    0|    0|    0|    0|    0|    3|    1|    0|    0|    0|    4|    0|    9
+Nick Young          |False|     |   15|    0|    3|    0|    3|    0|    0|    0|    2|    0|    1|    0|    1|    0|    0|   -3
+Kevon Looney        |False|     |    2|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|   -1
+Omri Casspi         |False|     |    2|    0|    2|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    1|    0|   -4
+
+*** English jsRealB
+The Trail Blazers  (32-26) knocked off the Warriors  (44-14) 123-117 at the Moda Center in
+Portland on Wednesday.
+
+The Warriors outscored the Trail Blazers 66-60 in the second half but the winner held for
+the win. The Trail Blazers dominated the Warriors for points 40 to 27 over the first
+quarter. The Trail Blazers overcame the Warriors for rebounds by 11 in the first half.
+During the fourth quarter, the Warriors obtained better free throws percentage, a
+difference of 15%. Over the second half, the Warriors obtained better three-pointers
+percentage, 45% to 33%.
+
+Damian Lillard who started this game finished with 44 points in 39 minutes. Kevin Durant
+who was a starter had an efficient performance scoring 50 points a personal record for the
+season.
+
+The Trail Blazers showed 48 percent from the field and 21-24 free throws.  CJ McCollum who
+was in the starting line-up added 29 points in 40 minutes with twelve goals and five
+rebounds grabbed.  Jusuf Nurkić ended up with 17 points in 30 minutes with 7-of-14 FG, 13
+rebounds grabbed, three assists and performed a double-double.  Al-Farouq Aminu recorded
+nine points in 36 minutes with eleven rebounds.  Maurice Harkless finished with three
+points with three assists.
+
+The Warriors showed 47 percent from the field and 18-19 attempts at the charity stripe.
+Draymond Green finished with 16 points in 38 minutes performed a double-double.
+
+Next Friday, the Trail Blazers will travel to play the Utah Jazz. For their next game, the
+Warriors will receive the Los Angeles Clippers on Thursday.
+-------------------------
+*** French jsRealB
+Les Trail Blazers  (32-26) ont battu les Warriors  (44-14) 123-117 à Portland au stade
+Moda Center mercredi.
+
+Les Warriors a dominé les Trail Blazers  (66-60) dans la deuxième demie mais n'a pas pu
+compléter leur retour. Les Trail Blazers ont vaincu les Warriors pour les points 40 à 27
+pendant le premier quart. Les Trail Blazers ont dominé les Warriors pour les rebonds 30 à
+19 durant la première demie. Durant le quatrième quart, les Warriors ont réussi les
+meilleurs lancers francs en pourcentage, un avantage de 15%. Durant la deuxième demie, les
+Warriors ont obtenu les meilleurs lancers à 3 points en pourcentage, 45% en comparaison
+avec 33%.
+
+Damian Lillard qui était un partant a réalisé une performance excellente comptant 44
+points en 39 minutes. Kevin Durant qui débutait la partie a mené, comptant 50 points son
+meilleur score jusqu'ici.
+
+Les Trail Blazers ont compté 48 pour cent de tirs réussis et 21 lancers francs sur 24.  CJ
+McCollum qui figurait dans l'alignement de départ a ajouté 29 points en 40 minutes avec
+douze tirs réussis et cinq rebonds.  Jusuf Nurkić a marqué 17 points en 30 minutes  (7-14
+L, 0-0 L3, 3-6 LF) tout en ajoutant trois passes décisives et a terminé avec un double-
+double.  Al-Farouq Aminu a terminé avec neuf points en 36 minutes.  Maurice Harkless a
+terminé avec trois points  (1-5 L, 1-3 L3, 0-0 LF) tout en ajoutant trois passes
+décisives.
+
+Les Warriors ont compté 47 pour cent de tirs réussis et 18 lancers francs sur 19.
+Draymond Green a ajouté 16 points en 38 minutes a terminé avec un double-double.
+
+Ensuite les Trail Blazers voyageront à Utah pour affronter le Jazz vendredi. À venir pour
+les Warriors, un match à domicile contre Los Angeles.
+-------------------------
+*** English FStrings
+The Portland Trail Blazers (32-26) knocked off the Golden State Warriors (44-14) 123-117
+on Wednesday at the Moda Center in Portland .
+
+The Warriors outscored the Trail Blazers (66-60) in the second half, but they could not
+complete their comeback. During the fourth quarter, Warriors obtained a good free throws
+percentage 100% to 85%. During the first quarter, Trail Blazers overcame Warriors for
+points 40 to 27. Over the first quarter, Trail Blazers obtained a good goals percentage
+56% to 44%. During the first half, Trail Blazers dominated Warriors for points 63 to 51.
+Over the second half, Warriors obtained a good three-pointers percentage 45% to 33%. Over
+the second half, Warriors obtained a good free throws percentage 100% to 88%. During the
+first half, Trail Blazers overcame Warriors for rebounds 30 to 19. Over the first quarter,
+Trail Blazers dominated Warriors for rebounds 17 to 9.
+
+Damian Lillard scored a game high with 44 points in 39 minutes and 14 goals. Kevin Durant
+started this game and lead the way with 50 points in 37 minutes, 17 goals and 6-for-14
+from beyond the arc.
+
+The Trail Blazers show 48 percent from the field and 21-of-24 free throws. CJ McCollum
+ended up with 29 points in 40 minutes (12-26 FG, 3-8 3Pt, 2-2 FT).  Jusuf Nurkić scored 17
+points in 30 minutes, 7-for-14, 13 rebounds, 3 assists and performed a double-double.  Al-
+Farouq Aminu contributed an efficient 9 points in 36 minutes (3-4 FG, 1-2 3Pt, 2-2 FT).
+Maurice Harkless ended up with 3 points in 26 minutes and 3 assists.
+
+The Warriors show 47 percent from the field and 18-of-19 free throws. Draymond Green
+finished with 16 points in 38 minutes, 12 rebounds and performed a double-double.
+
+Up next, the Trail Blazers travel to Utah to take on the Jazz on Friday. For their next
+game, the Warriors will play at home against the Los Angeles Clippers on Thursday.
+-------------------------
+*** Reference summary
+The Portland Trail Blazers defeated the Golden State Warriors on Wednesday, 123-117,
+behind Damian Lillard's 44 points at Moda Center. What started as a runaway night for the
+Portland offense quickly turned into a shootout between two of the league's most potent
+scorers. Portland's Damian Lillard got going early in the night, helping his team to a
+40-point first quarter. Lillard kept his strong showing going, exchanging bigtime shots
+with Golden State forward Kevin Durant. Thanks to a 50-point night from Durant, Golden
+State clawed back to tie the game at 99-99 in the fourth quarter. The Warriors never took
+the lead, though, as C.J. McCollum quickly converted an and-one and Lillard continued his
+heroics to provide nine more points by the game's end. The Blazers (32-26) saw a combined
+73 points from their backcourt duo of Damian Lillard and C.J. McCollum. Lillard was the
+star of the show, going 14-of-25 from the field and 12-of-12 from the free-throw line en
+route to 44 points. Big man Jusuf Nurkic also provided a much-needed interior presence in
+the win. Nurkic finished with 17 points and 13 rebounds. Golden State (44-14) will enter
+the All-Star Break without the league's best record for the first time since 2014, as the
+team slipped behind Houston in the standings after Wednesday's loss. The loss was
+particularly tough to swallow due to Kevin Durant's huge performance. Durant set a new
+personal high for scoring in a Warriors uniform, dropping 50 points on 17-of-27 shooting
+and 10-of-10 from the free-throw line. While Durant excelled, fellow former MVP Steph
+Curry had a rare off night. Curry shot just 6-of-17 from the field and committed seven
+turnovers. Both teams will be off through the All-Star Break.
+====================================================================================================

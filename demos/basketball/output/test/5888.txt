@@ -1,0 +1,147 @@
+***  5888:2019-01-20: San Antonio Spurs receives Los Angeles Clippers  [95-103]
+
+                    |                                   San Antonio Spurs (27-21)                                   
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|   11|   20|    4|    7|    0|    4|    0|    7|    9|    3|    0|    4|     |   26|     
+Q2                  |               60|   10|   22|    2|    4|    5|    7|    1|   14|    5|    0|    4|    2|     |   27|     
+Q3                  |               60|    8|   19|    1|    5|    3|    4|    3|   14|    4|    1|    2|    6|     |   20|     
+Q4                  |               60|   10|   23|    1|    3|    1|    2|    6|   16|    3|    2|    2|    6|     |   22|     
+H1                  |              120|   21|   42|    6|   11|    5|   11|    1|   21|   14|    3|    4|    6|     |   53|     
+H2                  |              120|   18|   42|    2|    8|    4|    6|    9|   30|    7|    3|    4|   12|     |   42|     
+game                |              240|   39|   84|    8|   19|    9|   17|   10|   51|   21|    6|    8|   18|   25|   95|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+LaMarcus Aldridge   |True |doubl|   32|   13|   21|    1|    1|    3|    5|    6|   14|    2|    0|    2|    2|    0|   30|   -3
+Rudy Gay            |True |     |   28|    9|   12|    1|    1|    0|    0|    0|    8|    1|    0|    1|    2|    4|   19|    1
+Marco Belinelli     |False|     |   26|    4|    9|    2|    7|    2|    2|    0|    3|    3|    0|    0|    0|    2|   12|   -4
+Derrick White       |True |     |   34|    3|    8|    1|    2|    2|    4|    1|    5|    4|    2|    1|    4|    5|    9|   -3
+DeMar DeRozan       |True |     |   28|    4|   16|    0|    0|    0|    0|    0|    7|    3|    1|    1|    4|    3|    8|  -14
+Dāvis Bertāns       |False|     |   22|    2|    6|    2|    4|    0|    0|    0|    4|    1|    1|    1|    1|    3|    6|    2
+Patty Mills         |False|     |   18|    2|    5|    0|    0|    2|    2|    1|    3|    2|    1|    1|    2|    0|    6|    0
+Bryn Forbes         |True |     |   27|    1|    5|    1|    4|    0|    0|    0|    2|    2|    1|    0|    3|    4|    3|  -17
+Jakob Pöltl         |False|     |   12|    1|    2|    0|    0|    0|    4|    2|    4|    2|    0|    0|    0|    3|    2|   -6
+Dante Cunningham    |False|     |    5|    0|    0|    0|    0|    0|    0|    0|    0|    1|    0|    1|    0|    1|    0|    3
+Pau Gasol           |False|     |    2|    0|    0|    0|    0|    0|    0|    0|    1|    0|    0|    0|    0|    0|    0|    1
+Lonnie Walker       |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Quincy Pondexter    |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+                    |                                  Los Angeles Clippers (25-21)                                 
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|   15|   23|    4|    8|    4|    6|    1|   11|    8|    2|    0|    3|     |   38|     
+Q2                  |               60|    8|   21|    2|    4|    4|    9|    0|   10|    7|    1|    0|    2|     |   22|     
+Q3                  |               60|    7|   20|    3|    5|    3|    5|    1|   10|    6|    3|    1|    4|     |   20|     
+Q4                  |               60|    9|   21|    2|    4|    3|    4|    2|   10|    2|    5|    1|    2|     |   23|     
+H1                  |              120|   23|   44|    6|   12|    8|   15|    1|   21|   15|    3|    0|    5|     |   60|     
+H2                  |              120|   16|   41|    5|    9|    6|    9|    3|   20|    8|    8|    2|    6|     |   43|     
+game                |              240|   39|   85|   11|   21|   14|   24|    4|   41|   23|   11|    2|   11|   18|  103|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Tobias Harris       |True |     |   43|   12|   20|    2|    4|    1|    3|    1|    9|    9|    3|    1|    0|    1|   27|   18
+Patrick Beverley    |True |doubl|   41|    5|    9|    4|    7|    4|    6|    0|   12|    5|    4|    1|    1|    2|   18|   13
+Montrezl Harrell    |True |     |   28|    7|   13|    0|    0|    4|    4|    2|    4|    0|    1|    0|    1|    4|   18|    0
+Avery Bradley       |True |     |   41|    6|   15|    3|    6|    0|    0|    0|    5|    4|    1|    0|    2|    2|   15|   -2
+Johnathan Motley    |False|     |   18|    4|    6|    0|    0|    2|    5|    0|    4|    0|    1|    0|    4|    2|   10|    3
+Shai Gilgeous-Alexan|True |     |   37|    3|   15|    1|    2|    0|    0|    1|    4|    3|    0|    0|    3|    3|    7|   -4
+Sindarius Thornwell |False|     |    9|    1|    2|    1|    1|    1|    2|    0|    0|    0|    0|    0|    0|    2|    4|   13
+Marcin Gortat       |False|     |    6|    1|    2|    0|    0|    1|    2|    0|    2|    1|    0|    0|    0|    0|    3|   -2
+Tyrone Wallace      |False|     |    6|    0|    1|    0|    0|    1|    2|    0|    1|    0|    1|    0|    0|    1|    1|    8
+Jerome Robinson     |False|     |    6|    0|    2|    0|    1|    0|    0|    0|    0|    1|    0|    0|    0|    1|    0|   -7
+Boban Marjanović    |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Lou Williams        |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Mike Scott          |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+*** English jsRealB
+The Clippers  (25-21) knocked off the Spurs  (27-21) 103-95 in San Antonio at the AT&T
+Center on Sunday.
+
+This was a dominating win for the Clippers, as it came in wire-to-wire fashion. The
+Clippers overcame the Spurs for points by 12 over the first quarter. The Spurs overcame
+the Clippers for rebounds by 10 during the second half.
+
+Tobias Harris who was a starter scored a game high with 27 points in 43 minutes  (12-20
+FG, 2-4 3Pt, 1-3 FT) and nine assists. LaMarcus Aldridge who started this game had an
+efficient performance scoring 30 points performed a double-double.
+
+The Clippers showed 45 percent from the field and 14-24 attempts at the charity stripe.
+Patrick Beverley who started this game added 18 points in 41 minutes performed a double-
+double.  Montrezl Harrell added 18 points in 28 minutes with seven goals.  Avery Bradley
+contributed 15 points in 41 minutes with four assists.
+
+The Spurs showed 46 percent from the field and 9-17 attempts at the charity stripe and
+committed 18 turnovers.  Dāvis Bertāns contributed six points in 22 minutes with four
+rebounds grabbed.  Bryn Forbes finished with three points in 27 minutes with two rebounds.
+
+Next Tuesday, the Clippers will visit the Dallas Mavericks. Next Wednesday, the Spurs will
+be on the road against the Philadelphia 76ers.
+-------------------------
+*** French jsRealB
+Les Clippers  (25-21) ont défait les Spurs  (27-21) 103-95 à San Antonio dimanche au stade
+AT&T Center.
+
+Les Clippers ont mené pendant les quatre quarts. Les Clippers ont dominé les Spurs pour
+les points 38 à 26 pendant le premier quart. Les Spurs ont dominé les Clippers pour les
+rebonds par 10 durant la deuxième demie.
+
+Tobias Harris qui débutait la partie a fini avec 27 points en 43 minutes  (12-20 L, 2-4
+L3, 1-3 LF) et neuf passes décisives. LaMarcus Aldridge qui figurait dans l'alignement de
+départ a mené son équipe marquant 30 points avec 13-sur-21 L, 14 rebonds et a terminé avec
+un double-double.
+
+Les Clippers ont compté 45 pour cent de tirs réussis et 14 lancers francs sur 24.  Patrick
+Beverley qui figurait dans l'alignement de départ a terminé avec 18 points en 41 minutes
+avec quatre tirs à trois points, douze rebonds et a terminé avec un double-double.
+Montrezl Harrell a fini avec 18 points en 28 minutes avec sept tirs réussis.  Avery
+Bradley a enregistré 15 points en 41 minutes avec quatre passes décisives.
+
+Les Spurs ont compté 46 pour cent de tirs réussis et 9 lancers francs sur 17 et ont subi
+18 pertes de ballon.  Dāvis Bertāns a marqué six points en 22 minutes avec quatre rebonds
+récupérés.  Bryn Forbes a eu trois points en 27 minutes avec deux rebonds récupérés.
+
+Mardi prochain, les Clippers visiteront les Mavericks de Dallas. Ensuite les Spurs
+voyageront à Philadelphia pour affronter les 76ers mercredi.
+-------------------------
+*** English FStrings
+The Los Angeles Clippers (25-21) topped the San Antonio Spurs (27-21) 103-95 on Sunday at
+the AT&T Center in San Antonio .
+
+The Clippers lead in all four quarters. In the first quarter, Clippers overcame Spurs for
+points 38 to 26. In the second half, Spurs overcame Clippers for rebounds 30 to 20.
+
+Tobias Harris was a starter and lead the way off the bench scoring 27 points in 43 minutes
+(12-20 FG, 2-4 3Pt, 1-3 FT) and 9 assists. LaMarcus Aldridge was in the starting line-up
+and had efficient performance scoring 30 points in 32 minutes (13-21 FG, 1-1 3Pt, 3-5 FT)
+and performed a double-double.
+
+The Clippers show 45 percent from the field and 14-of-24 free throws. Patrick Beverley
+scored 18 points in 41 minutes, 4-for-7 from beyond the arc, 12 rebounds and performed a
+double-double.  Montrezl Harrell finished with 18 points in 28 minutes (7-13 FG, 0-0 3Pt,
+4-4 FT).  Avery Bradley contributed an efficient 15 points in 41 minutes (6-15 FG, 3-6
+3Pt, 0-0 FT).
+
+The Spurs show 46 percent from the field and 9-of-17 free throws and committed 18
+turnovers. Dāvis Bertāns finished with 6 points in 22 minutes and grabbing 4 rebounds.
+Bryn Forbes had 3 points in 27 minutes (1-5 FG, 1-4 3Pt, 0-0 FT).
+
+Up next, the Clippers travel to Dallas to take on the Mavericks on Tuesday. Up next, the
+Spurs travel to Philadelphia to take on the 76ers on Wednesday.
+-------------------------
+*** Reference summary
+The Los Angeles Clippers defeated the San Antonio Spurs, 103-95, at AT & T Center on
+Sunday evening. The Clippers (25-21) were looking to snap a five-game losing streak in a
+tough environment Sunday, so a fast start was certainly important. It was mission
+accomplished for Los Angeles after 12 minutes, as they built a 38-26 first-quarter lead.
+The Spurs (27-21) cut some into their deficit in the second quarter, but they were never
+able to catch up to the visitors the rest of the way. The Clippers enjoyed a strong effort
+from their starting five, which featured four double-digit scorers. That included Montrezl
+Harrell, who entered the first unit for the sidelined Danilo Gallinari (back) and posted
+18 points, four rebounds and one steal. Tobias Harris paced the Clippers with 27 points,
+adding nine rebounds, nine assists, three steals and one block. Patrick Beverley generated
+an 18-point, 12-rebound double-double that also included five assists, four steals and one
+block. Avery Bradley managed 15 points, five rebounds, four assists and one steal.
+Johnathan Motley furnished 10 points, four rebounds and one steal. LaMarcus Aldridge led
+the Spurs with 30 points and 14 rebounds, adding two assists and two blocks. Rudy Gay
+delivered 19 points, eight rebounds, one assist and one block. Marco Belinelli poured in
+12 points to lead the bench. Derrick White filled out the stat sheet with nine points,
+five rebounds, four assists, two steals and one block. DeMar DeRozan mustered only eight
+points on 4-for-16 shooting. The Clippers remain on the road and take on the Dallas
+Mavericks on Tuesday night, while the Spurs also travel to take on the Philadelphia 76ers
+on Wednesday night.
+====================================================================================================

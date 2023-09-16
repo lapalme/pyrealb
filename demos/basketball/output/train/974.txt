@@ -1,0 +1,175 @@
+***   974:2015-03-10: San Antonio Spurs receives Toronto Raptors  [117-107]
+
+                    |                                   San Antonio Spurs (40-23)                                   
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|   12|   29|    2|    3|    2|    2|    9|   16|    6|    4|    1|    3|     |   28|     
+Q2                  |               60|   11|   18|    4|    6|    7|    8|    1|   11|    9|    1|    2|    3|     |   33|     
+Q3                  |               60|   10|   21|    2|    5|    2|    2|    1|    6|    5|    2|    0|    2|     |   24|     
+Q4                  |               60|    8|   17|    3|    4|   13|   18|    2|   12|    4|    0|    0|    3|     |   32|     
+H1                  |              120|   23|   47|    6|    9|    9|   10|   10|   27|   15|    5|    3|    6|     |   61|     
+H2                  |              120|   18|   38|    5|    9|   15|   20|    3|   18|    9|    2|    0|    5|     |   56|     
+game                |              240|   41|   85|   11|   18|   24|   30|   13|   45|   24|    7|    3|   11|   17|  117|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Kawhi Leonard       |True |doubl|   38|   10|   19|    0|    0|    4|    4|    4|   11|    1|    5|    1|    1|    1|   24|   12
+Tony Parker         |True |     |   36|    9|   20|    1|    3|    4|    6|    0|    2|    9|    1|    0|    1|    2|   23|    7
+Danny Green         |True |     |   25|    5|    7|    5|    6|    4|    5|    1|    6|    2|    0|    1|    1|    1|   19|   18
+Tim Duncan          |True |doubl|   36|    5|   12|    0|    0|    2|    4|    3|   13|    2|    0|    1|    1|    2|   12|    1
+Marco Belinelli     |False|     |   20|    4|    4|    2|    2|    0|    0|    0|    1|    0|    0|    0|    1|    1|   10|   -1
+Matt Bonner         |False|     |    9|    2|    3|    2|    2|    2|    2|    0|    0|    0|    0|    0|    0|    1|    8|   -8
+Aron Baynes         |False|     |    5|    3|    3|    0|    0|    1|    1|    1|    1|    0|    0|    0|    0|    1|    7|    0
+Tiago Splitter      |True |     |   27|    1|    6|    0|    0|    4|    4|    2|    4|    1|    1|    0|    2|    4|    6|   29
+Patty Mills         |False|     |   11|    2|    6|    1|    4|    0|    0|    0|    3|    4|    0|    0|    1|    1|    5|    8
+Cory Joseph         |False|     |   10|    0|    3|    0|    1|    3|    4|    0|    2|    1|    0|    0|    0|    2|    3|   -9
+Boris Diaw          |False|     |   16|    0|    2|    0|    0|    0|    0|    2|    2|    4|    0|    0|    3|    1|    0|    3
+Reggie Williams     |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|   -5
+Jeff Ayres          |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|   -5
+
+                    |                                    Toronto Raptors (38-26)                                    
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|    8|   16|    0|    1|    1|    2|    1|    6|    2|    0|    2|    5|     |   17|     
+Q2                  |               60|    9|   26|    1|    5|    5|    6|    6|   11|    3|    3|    0|    1|     |   24|     
+Q3                  |               60|   13|   22|    1|    5|    3|    3|    3|   13|    9|    1|    1|    3|     |   30|     
+Q4                  |               60|   13|   33|    6|   15|    4|    7|    8|   16|    5|    2|    2|    0|     |   36|     
+H1                  |              120|   17|   42|    1|    6|    6|    8|    7|   17|    5|    3|    2|    6|     |   41|     
+H2                  |              120|   26|   55|    7|   20|    7|   10|   11|   29|   14|    3|    3|    3|     |   66|     
+game                |              240|   43|   97|    8|   26|   13|   18|   18|   46|   19|    6|    5|    9|   26|  107|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Kyle Lowry          |True |     |   42|   10|   19|    5|    9|    7|    7|    1|    4|    5|    2|    0|    1|    4|   32|   -3
+DeMar DeRozan       |True |     |   38|    8|   18|    0|    1|    5|    7|    0|    3|    4|    1|    0|    1|    5|   21|   -7
+Amir Johnson        |True |doubl|   32|    8|   14|    0|    0|    0|    2|    6|   14|    3|    0|    1|    1|    1|   16|    1
+Lou Williams        |False|     |   23|    5|   10|    1|    4|    0|    0|    0|    1|    1|    0|    0|    1|    3|   11|  -11
+Jonas Valančiūnas   |True |     |   21|    4|    6|    0|    0|    1|    2|    3|    6|    0|    0|    1|    2|    4|    9|  -19
+James Johnson       |False|     |    4|    3|    5|    0|    0|    0|    0|    1|    2|    0|    1|    0|    0|    1|    6|   -7
+Terrence Ross       |True |     |   24|    2|    9|    1|    6|    0|    0|    0|    2|    0|    1|    1|    2|    0|    5|    1
+Patrick Patterson   |False|     |   29|    2|   11|    0|    4|    0|    0|    5|   10|    3|    1|    2|    0|    3|    4|    0
+Greivis Vásquez     |False|     |   14|    1|    3|    1|    2|    0|    0|    0|    1|    3|    0|    0|    1|    3|    3|  -10
+Tyler Hansbrough    |False|     |    7|    0|    2|    0|    0|    0|    0|    2|    3|    0|    0|    0|    0|    2|    0|    5
+Landry Fields       |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Chuck Hayes         |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Greg Stiemsma       |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+*** English jsRealB
+The Spurs  (40-23) overcame the Raptors  (38-26) 117-107 in San Antonio at the AT&T Center
+on Tuesday extending their winning streak to six games.
+
+The Raptors outscored the Spurs 66-56 in the second half but could not complete their
+come-back. Over the second quarter, the Spurs obtained better goals percentage, a
+difference of 26%. The Spurs overcame the Raptors for points by 20 in the first half. The
+Raptors dominated the Spurs for rebounds 29 to 18 during the second half. Over the game,
+the Spurs obtained better three-pointers percentage, a difference of 30%.
+
+Kawhi Leonard who was a starter led the way scoring 24 points in 38 minutes with eleven
+rebounds and performed a double-double. Kyle Lowry who was in the starting line-up led the
+way, posting 32 points in 42 minutes.
+
+The Spurs showed 48 percent from the field and 24-30 attempts at the charity stripe.  Tony
+Parker who was in the starting line-up finished with 23 points in 36 minutes with 9-of-20
+FG and nine assists.  Danny Green scored 19 points with five three-pointers.  Tim Duncan
+scored twelve points in 36 minutes with 13 rebounds and performed a double-double.
+
+The Raptors showed 44 percent from the field and 13-18 free throws.  Amir Johnson finished
+with 16 points in 32 minutes performed a double-double.  Patrick Patterson contributed
+four points with ten rebounds grabbed and three assists.
+
+On deck for the Spurs will be a home match versus Cleveland. The Raptors' next game will
+be at home against the Miami Heat on Friday.
+-------------------------
+*** French jsRealB
+Les Spurs  (40-23) ont battu les Raptors  (38-26) 117-107 mardi au stade AT&T Center à San
+Antonio leur permettant d'allonger à 6 leur série de victoires.
+
+Les Raptors ont dominé les Spurs  (66-56) dans la deuxième demie mais le gagnant a bon
+tenu pour la victoire. Durant le deuxième quart, les Spurs ont obtenu les meilleurs
+lancers en pourcentage, un avantage de 26%. Les Spurs ont dominé les Raptors pour les
+points par 20 pendant la première demie. Les Raptors ont dominé les Spurs pour les rebonds
+29 à 18 pendant la deuxième demie. Pendant la partie, les Spurs ont réussi les meilleurs
+lancers à 3 points en pourcentage, 61% en comparaison avec 31%.
+
+Kawhi Leonard qui figurait dans l'alignement de départ a obtenu le meilleur pointage du
+match avec 24 points en 38 minutes avec onze rebonds et a terminé avec un double-double.
+Kyle Lowry qui débutait la partie a mené son équipe marquant 32 points en 42 minutes avec
+dix tirs réussis et 5-sur-9 depuis la ligne de trois points.
+
+Les Spurs ont compté 48 pour cent de tirs réussis et 24 lancers francs sur 30.  Tony
+Parker qui était un partant a marqué 23 points en 36 minutes avec 9-sur-20 L et neuf
+passes décisives.  Danny Green a fini avec 19 points.  Tim Duncan a eu douze points en 36
+minutes a terminé avec un double-double.
+
+Les Raptors ont compté 44 pour cent de tirs réussis et 13 lancers francs sur 18.  Amir
+Johnson a terminé avec 16 points en 32 minutes a terminé avec un double-double.  Patrick
+Patterson a enregistré quatre points  (2-11 L, 0-4 L3, 0-0 LF) et trois passes décisives.
+
+La prochaine partie des Spurs sera à domicile contre les Cavaliers de Cleveland jeudi.
+Pour leur prochain affrontement, les Raptors seront à domicile contre le Heat de Miami
+vendredi.
+-------------------------
+*** English FStrings
+The San Antonio Spurs (40-23) knocked off the Toronto Raptors (38-26) 117-107 on Tuesday
+at the AT&T Center in San Antonio  giving them their 6th straight victory.
+
+The Raptors outscored the Spurs (66-56) in the second half, but the San Antonio held on
+for the win. During the game, Spurs obtained a good three-pointers percentage 61% to 31%.
+Over the second quarter, Spurs obtained a good goals percentage 61% to 35%. Over the
+second half, Spurs obtained a good three-pointers percentage 56% to 35%. During the first
+half, Spurs dominated Raptors for points 61 to 41. During the first half, Spurs got a good
+free throws percentage 90% to 75%. During the first quarter, Spurs dominated Raptors for
+points 28 to 17. Over the third quarter, Raptors got a good goals percentage 59% to 48%.
+In the second half, Raptors overcame Spurs for rebounds 29 to 18. In the game, Spurs
+overcame Raptors for free throws 24 to 13. During the first half, Spurs dominated Raptors
+for rebounds 27 to 17. Over the second half, Raptors dominated Spurs for points 66 to 56.
+Over the second quarter, Spurs dominated Raptors for points 33 to 24. In the second half,
+Raptors dominated Spurs for goals 26 to 18.
+
+Kawhi Leonard was a starter and filled the stat sheet, posting 24 points in 38 minutes
+(10-19 FG, 0-0 3Pt, 4-4 FT) and performed a double-double. Kyle Lowry lead the way with 32
+points in 42 minutes, 10-for-19 and 5 three-pointers.
+
+The Spurs show 48 percent from the field and 24-of-30 free throws. Tony Parker added 23
+points in 36 minutes, 9 goals and 9 assists.  Danny Green ended up with 19 points in 25
+minutes (5-7 FG, 5-6 3Pt, 4-5 FT).  Tim Duncan contributed an efficient 12 points in 36
+minutes, grabbing 13 rebounds and performed a double-double.
+
+The Raptors show 44 percent from the field and 13-of-18 free throws. Amir Johnson scored
+16 points in 32 minutes (8-14 FG, 0-0 3Pt, 0-2 FT) and performed a double-double.  Patrick
+Patterson posted 4 points in 29 minutes, 10 rebounds and 3 assists.
+
+For their next game, the Spurs will play at home against the Cleveland Cavaliers on
+Thursday. For their next game, the Raptors will receive the Miami Heat on Friday.
+-------------------------
+*** Reference summary
+The San Antonio Spurs (40-39) defeated the Toronto Raptors (38-26) 117-107 on Tuesday at
+the AT & T Center in San Antonio. The Spurs got out to a quick start in this one, out-
+scoring the Raptors 28-17 in the first quarter, while gathering a 61-41 lead by half. The
+Raptors tried to make a run in the second half, but the Spurs built up a big enough lead
+early, that the Raptors weren't able to overcome it. The Spurs finished at 48 percent from
+the field and a ridiculous 61 percent from the three-point line, while the Raptors went 44
+percent from the floor and just 31 percent from deep. The Spurs also converted on 24-of-30
+attempts from the free throw line, while the Raptors made just 13-of-18, which also made a
+huge difference in the win. The Spurs were led by Kawhi Leonard, who posted 24 points
+(10-19 FG, 4-4 FT), 11 rebounds and five steals. He's been on fire of late, averaging 22
+points, 8 rebounds and three steals over his last five games. It's no coincidence the
+Spurs winning streak, that has now extended to six games, has coincided with the strong
+play from Leonard. He did see some help though, as Tony Parker went off for 23 points
+(9-20 FG, 1-3 3Pt, 4-6 FT) and nine assists in 36 minutes. After struggling through the
+month of February, Parker is clearly back on the right track, as he's averaging 25 points
+and 5 assists in four games since the start of March. Danny Green's shot was dialed in as
+well Wednesday. He went 5-for-6 from beyond the arc and 4-for-5 from the free throw line
+to score 19 points, while also adding six rebounds. He has been fantastic from the three-
+point line lately, shooting 50 percent or higher in five of his last six games. Marco
+Belinelli got hot off the bench and didn't miss a shot to score 10 points (4-4 FG, 2-2
+3Pt) in just 21 minutes. The Raptors received the bulk of their production from their
+backcourt duo of DeMar DeRozan and Kyle Lowry. Lowry went 10-for-19 from the field and
+5-for-9 from the three-point line to score 32 points, to go along with five assists and
+two steals. In three games since returning from injury, Lowry has looked rejuvenated and
+is averaging 24 points and five assists over that stretch. DeRozan, on the other hand,
+scored 21 points (8-18 FG, 0-1 3Pt, 5-7 FT) of his own, while adding four assists in 39
+minutes. Like Lowry, he's played extremely well of late, and is averaging 27 points and 4
+assists over the first five games of March. While most of the focus was on those two, Amir
+Johnson quitely posted a double-double, finishing with 16 points (8-14 FG, 0-2 FT) and 14
+rebounds. It was his first time reaching double-digit points in his last nine games, while
+the double-double was his first since the middle of January, so it was good to see the
+added production from the forward. Coming off the bench, Louis Williams chipped in with 11
+points (5-10 FG, 1-4 3Pt) as well. The Spurs' next game will be at home against the
+Cleveland Cavaliers on Thursday, while the Raptors will be at home against the Miami Heat
+on Friday.
+====================================================================================================

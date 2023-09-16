@@ -1,0 +1,148 @@
+***  5499:2018-11-02: Orlando Magic receives Los Angeles Clippers  [95-120]
+
+                    |                                      Orlando Magic (2-6)                                      
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|   11|   20|    0|    0|    0|    0|    1|   10|    4|    1|    1|    4|     |   22|     
+Q2                  |               60|    9|   23|    0|    8|    4|   10|    3|   11|    4|    2|    0|    3|     |   22|     
+Q3                  |               60|   11|   25|    3|    6|    3|    3|    3|    9|    7|    2|    3|    2|     |   28|     
+Q4                  |               60|    9|   22|    1|    3|    4|    6|    1|   10|    5|    2|    0|    1|     |   23|     
+H1                  |              120|   20|   43|    0|    8|    4|   10|    4|   21|    8|    3|    1|    7|     |   44|     
+H2                  |              120|   20|   47|    4|    9|    7|    9|    4|   19|   12|    4|    3|    3|     |   51|     
+game                |              240|   40|   90|    4|   17|   11|   19|    8|   40|   20|    7|    4|   10|   24|   95|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Nikola Vučević      |True |doubl|   32|   10|   21|    1|    3|    1|    2|    2|   11|    3|    0|    3|    1|    1|   22|  -16
+Evan Fournier       |True |     |   28|    7|   12|    1|    2|    4|    6|    1|    3|    4|    3|    0|    4|    3|   19|   -6
+D.J. Augustin       |True |     |   27|    5|   10|    1|    1|    2|    2|    2|    5|    3|    0|    0|    0|    0|   13|   -9
+Jerian Grant        |False|     |   21|    3|    8|    0|    3|    2|    4|    0|    1|    4|    2|    0|    2|    5|    8|  -16
+Mohamed Bamba       |False|     |   19|    3|    6|    0|    3|    1|    2|    2|    5|    3|    0|    0|    0|    0|    7|  -20
+Terrence Ross       |False|     |   19|    3|   10|    1|    4|    0|    0|    0|    2|    2|    1|    1|    0|    4|    7|  -13
+Jarell Martin       |False|     |    8|    3|    5|    0|    0|    0|    0|    0|    1|    0|    0|    0|    0|    2|    6|   -6
+Wesley Iwundu       |False|     |   31|    2|    5|    0|    0|    1|    3|    0|    4|    1|    0|    0|    2|    4|    5|  -25
+Aaron Gordon        |True |     |   23|    2|    5|    0|    0|    0|    0|    0|    3|    0|    1|    0|    1|    2|    4|   -9
+Jonathan Isaac      |True |     |   12|    1|    4|    0|    1|    0|    0|    1|    1|    0|    0|    0|    0|    1|    2|   -2
+Khem Birch          |False|     |    5|    1|    1|    0|    0|    0|    0|    0|    4|    0|    0|    0|    0|    0|    2|   -1
+Melvin Frazier      |False|     |    5|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    1|    0|   -1
+Isaiah Briscoe      |False|     |    5|    0|    3|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    1|    0|   -1
+
+                    |                                   Los Angeles Clippers (5-4)                                  
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|    9|   23|    2|    6|    2|    3|    4|   12|    3|    1|    1|    4|     |   22|     
+Q2                  |               60|   12|   24|    2|    7|    9|   12|    4|   17|    8|    2|    0|    2|     |   35|     
+Q3                  |               60|    9|   18|    3|    5|    9|   12|    1|    8|    4|    1|    1|    4|     |   30|     
+Q4                  |               60|   11|   21|    6|    8|    5|    6|    1|   13|    7|    1|    1|    3|     |   33|     
+H1                  |              120|   21|   47|    4|   13|   11|   15|    8|   29|   11|    3|    1|    6|     |   57|     
+H2                  |              120|   20|   39|    9|   13|   14|   18|    2|   21|   11|    2|    2|    7|     |   63|     
+game                |              240|   41|   86|   13|   26|   25|   33|   10|   50|   22|    5|    3|   13|   23|  120|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Lou Williams        |False|     |   20|    7|   13|    5|    5|    9|   10|    0|    3|    3|    1|    0|    2|    1|   28|   15
+Tobias Harris       |True |     |   26|    8|   10|    1|    2|    4|    4|    0|    7|    2|    0|    0|    0|    2|   21|    3
+Danilo Gallinari    |True |     |   23|    5|   10|    1|    2|    2|    2|    1|    2|    3|    1|    0|    1|    1|   13|   10
+Boban Marjanović    |True |doubl|   22|    4|    7|    0|    0|    2|    6|    3|   11|    2|    0|    0|    2|    2|   10|    4
+Montrezl Harrell    |False|doubl|   25|    4|    8|    0|    0|    2|    4|    2|   12|    1|    0|    3|    0|    4|   10|   21
+Shai Gilgeous-Alexan|False|     |   24|    2|    6|    0|    2|    4|    4|    0|    1|    1|    1|    0|    3|    3|    8|   22
+Avery Bradley       |True |     |   23|    3|   11|    1|    3|    0|    0|    1|    1|    1|    0|    0|    2|    1|    7|    8
+Patrick Beverley    |True |     |   23|    2|    7|    2|    3|    0|    0|    2|    2|    2|    1|    0|    1|    4|    6|    3
+Miloš Teodosić      |False|     |   16|    2|    3|    1|    2|    1|    2|    1|    4|    3|    0|    0|    1|    3|    6|   21
+Tyrone Wallace      |False|     |    4|    2|    3|    0|    0|    1|    1|    0|    1|    0|    0|    0|    0|    1|    5|    1
+Mike Scott          |False|     |   22|    1|    4|    1|    4|    0|    0|    0|    5|    4|    1|    0|    0|    1|    3|   16
+Jerome Robinson     |False|     |    5|    1|    4|    1|    3|    0|    0|    0|    1|    0|    0|    0|    1|    0|    3|    1
+Marcin Gortat       |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+*** English jsRealB
+The Clippers  (5-4) topped the Magic  (2-6) 120-95 at the Amway Center on Friday in
+Orlando.
+
+Over the first quarter, the Magic obtained better goals percentage, 55% to 39%. The
+Clippers dominated the Magic for points by 13 over the second quarter. The Clippers
+overcame the Magic for rebounds 29 to 21 over the first half. Over the game, the Clippers
+obtained better free throws percentage, an advantage of 18%.
+
+Lou Williams who started this game finished with 28 points. Nikola Vučević who was in the
+starting line-up had an efficient performance scoring 22 points performed a double-double.
+
+The Clippers showed 47 percent from the field and 25-33 free throws.  Boban Marjanović
+recorded ten points in 22 minutes  (4-7 FG, 0-0 3Pt, 2-6 FT) and two assists and performed
+a double-double.  Montrezl Harrell added ten points performed a double-double.  Mike Scott
+recorded three points in 22 minutes  (1-4 FG, 1-4 3Pt, 0-0 FT) and four assists.
+
+The Magic showed 44 percent from the field and 11-19 attempts at the charity stripe.  D.J.
+Augustin had 13 points.
+
+For their next game, the Clippers will receive the Minnesota Timberwolves on Monday. Next
+Sunday, the Magic will visit the San Antonio Spurs.
+-------------------------
+*** French jsRealB
+Les Clippers  (5-4) ont surpassé le Magic  (2-6) 120-95 vendredi à Orlando au stade Amway
+Center.
+
+Pendant le premier quart, le Magic a réussi les meilleurs lancers en pourcentage, 55% en
+comparaison avec 39%. Les Clippers ont dominé le Magic pour les points 35 à 22 durant le
+deuxième quart. Les Clippers ont dominé le Magic pour les rebonds par 8 durant la première
+demie. Durant la partie, les Clippers ont obtenu les meilleurs lancers francs en
+pourcentage, un avantage de 18%.
+
+Lou Williams qui débutait la partie a fini avec 28 points. Nikola Vučević qui figurait
+dans l'alignement de départ a mené, comptant 22 points a terminé avec un double-double.
+
+Les Clippers ont compté 47 pour cent de tirs réussis et 25 lancers francs sur 33.  Boban
+Marjanović a fini avec dix points en 22 minutes avec onze rebonds, deux passes décisives
+et a terminé avec un double-double.  Montrezl Harrell a enregistré dix points a terminé
+avec un double-double.  Mike Scott a eu trois points en 22 minutes avec cinq rebonds et
+quatre passes décisives.
+
+Le Magic a compté 44 pour cent de tirs réussis et 11 lancers francs sur 19.  D.J. Augustin
+a eu 13 points avec cinq tirs réussis et cinq rebonds.
+
+La prochaine partie des Clippers sera à domicile contre les Timberwolves de Minnesota
+lundi. Dimanche prochain, le Magic visitera les Spurs de San Antonio.
+-------------------------
+*** English FStrings
+The Los Angeles Clippers (5-4) knocked off the Orlando Magic (2-6) 120-95 on Friday at the
+Amway Center in Orlando .
+
+ In the game, Clippers obtained a good free throws percentage 76% to 58%. Over the first
+quarter, Magic obtained a good goals percentage 55% to 39%. During the game, Clippers
+overcame Magic for free throws 25 to 11. Over the second quarter, Clippers dominated Magic
+for points 35 to 22. In the first half, Clippers dominated Magic for points 57 to 44. Over
+the second half, Clippers overcame Magic for points 63 to 51. In the second quarter,
+Clippers obtained a good goals percentage 50% to 39%. In the fourth quarter, Clippers got
+a good goals percentage 52% to 41%. Over the fourth quarter, Clippers dominated Magic for
+points 33 to 23. During the first half, Clippers dominated Magic for rebounds 29 to 21.
+
+Lou Williams lead the way off the bench scoring 28 points and 5-for-5 from beyond the arc.
+Nikola Vučević lead the way off the bench scoring 22 points in 32 minutes, 1-for-3 from
+beyond the arc and performed a double-double.
+
+The Clippers show 47 percent from the field and 25-of-33 free throws. Boban Marjanović
+scored 10 points in 22 minutes (4-7 FG, 0-0 3Pt, 2-6 FT) and performed a double-double.
+Montrezl Harrell finished with 10 points in 25 minutes, grabbing 12 rebounds and performed
+a double-double.  Mike Scott had 3 points in 22 minutes, grabbing 5 rebounds and 4
+assists.
+
+The Magic show 44 percent from the field and 11-of-19 free throws. D.J. Augustin
+contributed an efficient 13 points in 27 minutes, 5-for-10 and 5 rebounds.
+
+For their next game, the Clippers will receive the Minnesota Timberwolves on Monday. Next
+Sunday, the Magic will be on the road against the San Antonio Spurs.
+-------------------------
+*** Reference summary
+The Los Angeles Clippers defeated the host Orlando Magic, 120-95, at Amway Center on
+Friday. It's rare to see a home team dominated so thoroughly in the NBA but that was,
+unfortunately, the case for the Magic here. The Clippers really made their mark in the
+second quarter, outscoring Orlando, 35-22. The Magic never got the game within an eight-
+point margin from there, as the Clippers led by at least 13 points for the entirety of the
+fourth quarter. Three-point shooting was the difference in the game, with Los Angeles
+connecting on 13-of-26 from long range while holding Orlando to just 4-of-17. Rebounding
+was also huge, with the Clippers outrebounding the Magic, 50-40. Bench production was also
+critical, with Los Angeles winning that battle, 65-35. The Clippers (5-4) got a vintage
+performance from Lou Williams off the bench, as he provided 26 points, three rebounds and
+three assists. Tobias Harris led the starters with 21 points, seven rebounds and two
+assists. Boban Marjanovic got a rare start and accrued 10 points, 11 rebounds and two
+assists. Montrezl Harrell also played well off the bench, totaling 10 points, 12 boards
+and three blocks. The Magic (2-6) were led by Nikola Vucevic, as he tallied 22 points, 11
+rebounds, three assists and three blocks. Evan Fournier finished with 19 points, three
+rebounds, four assists and three steals. D.J. Augustin was the only other Orlando player
+in double figures, as he collected 13 points, five rebounds and three assists. On deck for
+Orlando is a road matchup versus the San Antonio Spurs on Sunday. As for Los Angeles,
+they're off until Monday when they play host to the Minnesota Timberwolves.
+====================================================================================================

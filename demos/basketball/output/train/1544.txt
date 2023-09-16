@@ -1,0 +1,156 @@
+***  1544:2016-02-19: Atlanta Hawks receives Miami Heat  [111-115]
+
+                    |                                     Atlanta Hawks (31-25)                                     
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|    6|   20|    1|    8|    6|    6|    1|   15|    3|    2|    1|    6|     |   19|     
+Q2                  |               60|   12|   19|    3|    6|    6|    6|    2|    6|    9|    1|    1|    5|     |   33|     
+Q3                  |               60|   11|   24|    7|   12|    0|    0|    3|   11|    8|    3|    2|    5|     |   29|     
+Q4                  |               60|   12|   24|    5|   10|    1|    1|    2|   10|    7|    1|    0|    5|     |   30|     
+H1                  |              120|   18|   39|    4|   14|   12|   12|    3|   21|   12|    3|    2|   11|     |   52|     
+H2                  |              120|   23|   48|   12|   22|    1|    1|    5|   21|   15|    4|    2|   10|     |   59|     
+game                |              240|   41|   87|   16|   36|   13|   13|    8|   42|   27|    7|    4|   21|   23|  111|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Jeff Teague         |True |     |   29|    9|   14|    3|    7|    2|    2|    0|    2|    7|    1|    0|    2|    6|   23|   -3
+Kyle Korver         |True |     |   34|    7|   14|    4|    7|    0|    0|    0|    1|    2|    1|    1|    2|    4|   18|    4
+Dennis Schröder     |False|     |   21|    6|   10|    2|    3|    2|    2|    1|    3|    6|    1|    1|    5|    1|   16|    4
+Al Horford          |True |     |   38|    4|   11|    1|    3|    5|    5|    1|    5|    3|    1|    2|    1|    2|   14|   -3
+Mike Scott          |False|     |   24|    5|    9|    3|    5|    0|    0|    2|    6|    2|    0|    0|    2|    3|   13|    7
+Paul Millsap        |True |doubl|   27|    4|   13|    2|    5|    2|    2|    3|   13|    4|    0|    0|    3|    4|   12|    0
+Kent Bazemore       |True |     |   23|    3|    9|    1|    3|    0|    0|    0|    4|    1|    2|    0|    4|    1|    7|  -10
+Thabo Sefolosha     |False|     |   22|    2|    5|    0|    2|    0|    0|    0|    5|    2|    1|    0|    0|    0|    4|   -2
+Mike Muscala        |False|     |    6|    1|    1|    0|    0|    2|    2|    1|    1|    0|    0|    0|    2|    2|    4|   -8
+Tim Hardaway        |False|     |   11|    0|    1|    0|    1|    0|    0|    0|    2|    0|    0|    0|    0|    0|    0|   -9
+Lamar Patterson     |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Edy Tavares         |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+                    |                                       Miami Heat (30-24)                                      
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|    9|   25|    0|    3|    4|    8|    4|   16|    5|    1|    1|    2|     |   22|     
+Q2                  |               60|   12|   20|    2|    4|    4|    4|    1|    6|    9|    4|    0|    4|     |   30|     
+Q3                  |               60|   11|   21|    2|    5|    3|    5|    3|   13|    5|    4|    0|    7|     |   27|     
+Q4                  |               60|   12|   22|    4|    8|    8|   11|    2|   11|    8|    4|    0|    1|     |   36|     
+H1                  |              120|   21|   45|    2|    7|    8|   12|    5|   22|   14|    5|    1|    6|     |   52|     
+H2                  |              120|   23|   43|    6|   13|   11|   16|    5|   24|   13|    8|    0|    8|     |   63|     
+game                |              240|   44|   88|    8|   20|   19|   28|   10|   46|   27|   13|    1|   14|   12|  115|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Luol Deng           |True |doubl|   37|   11|   17|    1|    3|    7|   10|    2|   11|    0|    4|    0|    1|    1|   30|   16
+Josh McRoberts      |False|doubl|   29|    8|   13|    3|    5|    0|    0|    2|    6|   10|    0|    0|    1|    1|   19|    1
+Goran Dragić        |True |doubl|   33|    6|   14|    1|    4|    4|    5|    0|    5|   10|    4|    0|    4|    2|   17|    3
+Gerald Green        |True |     |   36|    6|   13|    1|    3|    1|    3|    1|    5|    2|    2|    1|    3|    2|   14|   -4
+Justise Winslow     |True |     |   37|    5|   13|    0|    3|    3|    4|    3|    9|    0|    2|    0|    2|    2|   13|    2
+Josh Richardson     |False|     |   19|    3|    4|    1|    1|    0|    0|    0|    1|    0|    1|    0|    0|    2|    7|    3
+Amar'e Stoudemire   |True |     |   18|    2|    6|    0|    0|    2|    4|    2|    6|    1|    0|    0|    1|    0|    6|    1
+Udonis Haslem       |False|     |   11|    2|    2|    0|    0|    2|    2|    0|    3|    1|    0|    0|    0|    1|    6|   -3
+Beno Udrih          |False|     |   14|    1|    6|    1|    1|    0|    0|    0|    0|    3|    0|    0|    2|    1|    3|    1
+Hassan Whiteside    |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Dwyane Wade         |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+*** English jsRealB
+The Heat  (30-24) overcame the Hawks  (31-25) 115-111 on Friday in Atlanta at the Philips
+Arena.
+
+Over the first half, the Hawks got better free throws percentage, an advantage of 33%. The
+Hawks dominated the Heat for fouls 23 to 12 during the game.
+
+Luol Deng who was a starter led the way, posting 30 points a season high in 37 minutes
+performed a double-double. Jeff Teague who was a starter scored a game high with 23
+points.
+
+The Heat showed 50 percent from the field and 19-28 attempts at the charity stripe.  Josh
+McRoberts who was a starter recorded 19 points a personal record for the season in 29
+minutes  (8-13 FG, 3-5 3Pt, 0-0 FT) and ten assists and performed a double-double.  Goran
+Dragić added 17 points  (6-14 FG, 1-4 3Pt, 4-5 FT) and ten assists and performed a double-
+double.  Gerald Green ended up with 14 points in 36 minutes.  Justise Winslow posted 13
+points a personal record for the season in 37 minutes with nine rebounds grabbed.
+
+The Hawks showed 47 percent from the field and 13-13 attempts at the charity stripe and
+committed 21 turnovers.  Kyle Korver who was in the starting line-up scored 18 points with
+7-of-14 FG.  Mike Scott posted 13 points in 24 minutes.  Paul Millsap posted twelve points
+with 13 rebounds grabbed and performed a double-double.
+
+The Heat' next game will be at home against the Washington Wizards on Saturday. The Hawks'
+next game will be at home against the Milwaukee Bucks on Saturday.
+-------------------------
+*** French jsRealB
+Le Heat  (30-24) a battu les Hawks  (31-25) 115-111 vendredi à Atlanta au stade Philips
+Arena.
+
+Durant la première demie, les Hawks ont obtenu les meilleurs lancers francs en
+pourcentage, 100% en comparaison avec 67%. Les Hawks ont dominé le Heat pour les fautes
+par 11 pendant la partie.
+
+Luol Deng qui était un partant a réalisé une performance excellente comptant 30 points son
+meilleur score pour la saison en 37 minutes a terminé avec un double-double. Jeff Teague
+qui était un partant a mené son équipe marquant 23 points.
+
+Le Heat a compté 50 pour cent de tirs réussis et 19 lancers francs sur 28.  Josh McRoberts
+qui débutait la partie a enregistré 19 points son meilleur score jusqu'ici en 29 minutes
+avec 8-sur-13 L, trois tirs à trois points, six rebonds récupérés, dix passes décisives et
+a terminé avec un double-double.  Goran Dragić a eu 17 points  (6-14 L, 1-4 L3, 4-5 LF) et
+dix passes décisives et a terminé avec un double-double.  Gerald Green a enregistré 14
+points en 36 minutes avec cinq rebonds.  Justise Winslow a fini avec 13 points son
+meilleur score jusqu'ici en 37 minutes.
+
+Les Hawks ont compté 47 pour cent de tirs réussis et 13 lancers francs sur 13 et ont subi
+21 pertes de ballon.  Kyle Korver qui débutait la partie a fini avec 18 points.  Mike
+Scott a ajouté 13 points en 24 minutes.  Paul Millsap a ajouté douze points a terminé avec
+un double-double.
+
+Pour leur prochain affrontement, le Heat accueillera les Wizards de Washington samedi. À
+venir pour les Hawks, un match à domicile contre Milwaukee.
+-------------------------
+*** English FStrings
+The Miami Heat (30-24) overcame the Atlanta Hawks (31-25) 115-111 on Friday at the Philips
+Arena in Atlanta .
+
+ Over the first half, Hawks obtained a good free throws percentage 100% to 67%. During the
+game, Hawks obtained a good free throws percentage 100% to 68%. Over the game, Hawks
+dominated Heat for fouls 23 to 12.
+
+Luol Deng was a starter and lead the way off the bench scoring 30 points in 37 minutes
+(11-17 FG, 1-3 3Pt, 7-10 FT) and performed a double-double. Jeff Teague was a starter and
+filled the stat sheet, posting 23 points in 29 minutes, 9 goals and 3-for-7 from beyond
+the arc.
+
+The Heat show 50 percent from the field and 19-of-28 free throws. Josh McRoberts was in
+the starting line-up and posted 19 points in 29 minutes (8-13 FG, 3-5 3Pt, 0-0 FT) while
+adding 10 assists and performed a double-double.  Goran Dragić added 17 points in 33
+minutes, 10 assists and performed a double-double.  Gerald Green scored 14 points in 36
+minutes and 5 rebounds.  Justise Winslow had 13 points in 37 minutes (5-13 FG, 0-3 3Pt,
+3-4 FT).
+
+The Hawks show 47 percent from the field and 13-of-13 free throws and committed 21
+turnovers. Kyle Korver was a starter and added 18 points in 34 minutes and 7 goals.  Mike
+Scott had 13 points in 24 minutes, 5-for-9, 3 three-pointers and grabbing 6 rebounds.
+Paul Millsap added 12 points in 27 minutes, grabbing 13 rebounds and performed a double-
+double.
+
+The Heat' next game will be at home against the Wizards next Saturday. For their next
+game, the Hawks will play at home against the Milwaukee Bucks on Saturday.
+-------------------------
+*** Reference summary
+The shorthanded Miami Heat (30-24) defeated the division-rival Atlanta Hawks (31-25),
+115-111, in the first game back from the All-Star break for both teams. Miami fans were
+dealt a shocking blow over All-Star weekend when it was revealed that veteran power
+forward Chris Bosh is suffering from blood clots in his lower leg. Bosh sat out the end of
+the 2014-15 season with blood clots which spread from his calf to his lungs. Guard Dwyane
+Wade, however, has assured fans that the forward's current situation is less severe than
+his previous ailments. Bosh has announced plans to take blood thinners in hopes of
+resuming play this season. Despite the star's absence, Miami was able to advance in the
+standings on Friday with a big win over Atlanta. Small forward Luol Deng stepped up with a
+season-high 30 points, also tallying 11 rebounds and stealing the ball four times. Bosh's
+fill-in, Josh McRoberts, also came up huge for the Heat, scoring 19 points and dishing out
+10 assists. Despite allowing the Hawks to score in triple-digits, Miami played pesky
+defense, forcing Atlanta to turn the ball over 21 times. Starting center Hassan Whiteside
+also missed the contest due to an NBA-issued one-game suspension for a flagrant foul on
+San Antonio's Boban Marjanovic. Whiteside has accepted the penalty, telling the media that
+he knows that "actions like that kill my career. "The Hawks, meanwhile, were a team
+surrounded by trade tumors before Thursday's deadline. Despite finishing first in the East
+in 2014-15, Friday's loss has dropped Atlanta to fifth in the East this season. Despite
+the underwhelming start, Atlanta opted not to make any major deadline moves. Point guard
+Jeff Teague, whose name was frequently brought up in trade tumors, led the team with 23
+points against the Heat. Veteran All-Star Al Horford was another point of discussion in
+trade talks; Horford posted 14 points, five rebounds, three assists, two blocks, and a
+steal on Friday. Both teams will host games on Saturday: the Hawks against the Bucks, and
+the Heat against the Wizards.
+====================================================================================================

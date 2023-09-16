@@ -1,0 +1,151 @@
+***   420:2014-12-03: Utah Jazz receives Toronto Raptors  [104-123]
+
+                    |                                        Utah Jazz (5-14)                                       
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|   10|   23|    1|    5|    3|    4|    1|    9|    6|    2|    0|    1|     |   24|     
+Q2                  |               60|   11|   20|    1|    6|    6|    7|    3|    7|    6|    1|    2|    3|     |   29|     
+Q3                  |               60|   13|   25|    3|    8|    0|    0|    5|    8|    4|    3|    0|    1|     |   29|     
+Q4                  |               60|    8|   19|    3|    9|    3|    4|    4|   11|    5|    1|    3|    3|     |   22|     
+H1                  |              120|   21|   43|    2|   11|    9|   11|    4|   16|   12|    3|    2|    4|     |   53|     
+H2                  |              120|   21|   44|    6|   17|    3|    4|    9|   19|    9|    4|    3|    4|     |   51|     
+game                |              240|   42|   87|    8|   28|   12|   15|   13|   35|   21|    7|    5|    8|   15|  104|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Enes Kanter         |True |     |   33|    9|   15|    0|    0|    1|    2|    4|    9|    1|    1|    1|    1|    2|   19|   -8
+Derrick Favors      |True |     |   32|    9|   13|    0|    0|    1|    1|    2|    6|    5|    1|    0|    1|    2|   19|   -3
+Gordon Hayward      |True |     |   41|    5|   15|    2|    5|    4|    4|    1|    4|    3|    1|    0|    1|    0|   16|  -13
+Trey Burke          |True |     |   33|    6|   15|    3|    8|    0|    0|    1|    3|    8|    1|    0|    1|    2|   15|  -11
+Joe Ingles          |False|     |   24|    5|   10|    1|    5|    1|    1|    0|    0|    1|    2|    0|    1|    2|   12|  -13
+Rodney Hood         |True |     |   26|    3|    8|    2|    7|    2|    2|    0|    2|    1|    1|    0|    0|    2|   10|   -9
+Rudy Gobert         |False|     |   12|    2|    2|    0|    0|    2|    2|    4|    7|    0|    0|    3|    0|    4|    6|   -9
+Trevor Booker       |False|     |   15|    2|    4|    0|    0|    1|    2|    1|    2|    0|    0|    0|    1|    0|    5|  -18
+Dante Exum          |False|     |   14|    1|    3|    0|    2|    0|    1|    0|    2|    1|    0|    1|    1|    0|    2|   -8
+Ian Clark           |False|     |    5|    0|    2|    0|    1|    0|    0|    0|    0|    1|    0|    0|    1|    1|    0|   -3
+Jeremy Evans        |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Toure' Murry        |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Steve Novak         |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+                    |                                     Toronto Raptors (15-4)                                    
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|   12|   22|    2|    4|    5|    7|    3|   12|    2|    1|    1|    2|     |   31|     
+Q2                  |               60|   16|   22|    6|    7|    0|    0|    1|    8|    6|    3|    0|    2|     |   38|     
+Q3                  |               60|    8|   16|    2|    5|   10|   11|    3|    9|    3|    1|    0|    4|     |   28|     
+Q4                  |               60|    9|   19|    2|    5|    6|    6|    1|    8|    4|    2|    2|    1|     |   26|     
+H1                  |              120|   28|   44|    8|   11|    5|    7|    4|   20|    8|    4|    1|    4|     |   69|     
+H2                  |              120|   17|   35|    4|   10|   16|   17|    4|   17|    7|    3|    2|    5|     |   54|     
+game                |              240|   45|   79|   12|   21|   21|   24|    8|   37|   15|    7|    3|    9|   16|  123|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Kyle Lowry          |True |     |   37|   13|   22|    4|    5|    9|    9|    2|    5|    4|    1|    0|    2|    1|   39|    8
+Greivis Vásquez     |True |     |   30|    7|   13|    3|    5|    0|    1|    0|    4|    5|    1|    0|    1|    0|   17|   19
+Lou Williams        |False|     |   25|    5|    9|    1|    2|    6|    6|    0|    5|    2|    2|    0|    2|    2|   17|   10
+Amir Johnson        |True |     |   25|    6|   10|    0|    2|    1|    2|    2|    5|    1|    2|    0|    2|    3|   13|    3
+Patrick Patterson   |False|     |   31|    5|    6|    3|    4|    0|    0|    0|    3|    0|    0|    0|    0|    3|   13|   29
+Terrence Ross       |True |     |   30|    4|    8|    1|    3|    2|    2|    3|    4|    0|    1|    0|    1|    1|   11|    5
+Jonas Valančiūnas   |True |     |   33|    4|    9|    0|    0|    1|    2|    0|    6|    1|    0|    1|    0|    2|    9|   -4
+James Johnson       |False|     |   19|    1|    2|    0|    0|    0|    0|    1|    3|    2|    0|    2|    1|    2|    2|   15
+Tyler Hansbrough    |False|     |    5|    0|    0|    0|    0|    2|    2|    0|    2|    0|    0|    0|    0|    2|    2|   10
+Greg Stiemsma       |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Bruno Caboclo       |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Landry Fields       |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Chuck Hayes         |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+*** English jsRealB
+The Raptors  (15-4) , leader in their conference, defeated the Jazz  (5-14) 123-104 at the
+EnergySolutions Arena in Salt Lake City on Wednesday.
+
+This was a dominating win for the Raptors, as it came in wire-to-wire fashion. In the
+second quarter, the Raptors obtained better goals percentage, 73% to 55%. The Raptors
+dominated the Jazz for points by 16 during the first half. During the game, the Raptors
+obtained better three-pointers percentage, an advantage of 28%.
+
+Kyle Lowry who was in the starting line-up led the way scoring 39 points a season high
+with 13-of-22 FG. Enes Kanter who was a starter finished with 19 points a personal record
+for the season in 33 minutes.
+
+The Raptors showed 56 percent from the field and 21-24 attempts at the charity stripe.
+Greivis Vásquez who was a starter scored 17 points with seven goals.  Lou Williams
+contributed 17 points with five rebounds.  Amir Johnson posted 13 points with 6-of-10 FG.
+Patrick Patterson had 13 points in 31 minutes.
+
+The Jazz showed 48 percent from the field and 12-15 attempts at the charity stripe.
+Derrick Favors who was a starter contributed 19 points  (9-13 FG, 0-0 3Pt, 1-1 FT) and
+five assists.  Trey Burke scored 15 points in 33 minutes with three three-pointers and
+eight assists.  Joe Ingles recorded twelve points a personal record for the season.
+
+On deck for the Raptors will be a home match versus Cleveland. The Jazz' next game will be
+at home against the Orlando Magic on Friday.
+-------------------------
+*** French jsRealB
+Les Raptors  (15-4) , meneurs dans leur conférence, ont dominé le Jazz  (5-14) 123-104
+mercredi au stade EnergySolutions Arena à Salt Lake City.
+
+Les Raptors ont mené pendant les quatre quarts. Durant le deuxième quart, les Raptors ont
+obtenu les meilleurs lancers en pourcentage, 73% en comparaison avec 55%. Les Raptors ont
+vaincu le Jazz pour les points 69 à 53 durant la première demie. Durant la partie, les
+Raptors ont obtenu les meilleurs tirs à 3 points en pourcentage, 57% par rapport à 29%.
+
+Kyle Lowry qui était un partant a obtenu le meilleur pointage du match avec 39 points son
+meilleur score jusqu'ici avec 13-sur-22 L. Enes Kanter qui figurait dans l'alignement de
+départ a mené, comptant 19 points son meilleur score pour la saison en 33 minutes avec
+9-sur-15 L.
+
+Les Raptors ont compté 56 pour cent de tirs réussis et 21 lancers francs sur 24.  Greivis
+Vásquez qui figurait dans l'alignement de départ a ajouté 17 points.  Lou Williams a eu 17
+points.  Amir Johnson a marqué 13 points.  Patrick Patterson a contribué un efficace 13
+points en 31 minutes.
+
+Le Jazz a compté 48 pour cent de tirs réussis et 12 lancers francs sur 15.  Derrick Favors
+qui débutait la partie a marqué 19 points avec neuf tirs réussis et cinq passes décisives.
+Trey Burke a marqué 15 points en 33 minutes  (6-15 L, 3-8 L3, 0-0 LF) tout en ajoutant
+huit passes décisives.  Joe Ingles a terminé avec douze points un record jusqu'ici avec
+5-sur-10 L.
+
+À venir pour les Raptors, un match à domicile contre Cleveland. À venir pour le Jazz, un
+match à domicile contre Orlando.
+-------------------------
+*** English FStrings
+The Toronto Raptors (15-4), leader in their conference, topped the Utah Jazz (5-14)
+123-104 on Wednesday at the EnergySolutions Arena in Salt Lake City .
+
+The Raptors lead in all four quarters. In the game, Raptors obtained a good three-pointers
+percentage 57% to 29%. In the second quarter, Raptors got a good goals percentage 73% to
+55%. During the first half, Raptors overcame Jazz for points 69 to 53. During the first
+half, Raptors obtained a good goals percentage 64% to 49%. During the first quarter,
+Raptors got a good goals percentage 55% to 43%. In the first half, Jazz got a good free
+throws percentage 82% to 71%. During the second quarter, Raptors overcame Jazz for points
+38 to 29.
+
+Kyle Lowry was a starter and had efficient performance scoring 39 points in 37 minutes and
+13-for-22. Enes Kanter was in the starting line-up and lead the way off the bench scoring
+19 points in 33 minutes (9-15 FG, 0-0 3Pt, 1-2 FT).
+
+The Raptors show 56 percent from the field and 21-of-24 free throws. Greivis Vásquez was
+in the starting line-up and posted 17 points in 30 minutes and 7-for-13.  Lou Williams
+contributed an efficient 17 points in 25 minutes (5-9 FG, 1-2 3Pt, 6-6 FT).  Amir Johnson
+added 13 points in 25 minutes (6-10 FG, 0-2 3Pt, 1-2 FT).  Patrick Patterson added 13
+points in 31 minutes (5-6 FG, 3-4 3Pt, 0-0 FT).
+
+The Jazz show 48 percent from the field and 12-of-15 free throws. Derrick Favors finished
+with 19 points in 32 minutes (9-13 FG, 0-0 3Pt, 1-1 FT) while adding 5 assists.  Trey
+Burke finished with 15 points in 33 minutes (6-15 FG, 3-8 3Pt, 0-0 FT) while adding 8
+assists.  Joe Ingles scored 12 points in 24 minutes (5-10 FG, 1-5 3Pt, 1-1 FT).
+
+For their next game, the Raptors will receive the Cleveland Cavaliers on Friday. The Jazz'
+next game will be at home against the Magic next Friday.
+-------------------------
+*** Reference summary
+The Toronto Raptors (15-4) went into Utah and took down the Jazz (5-14) 123-104 on
+Wednesday night at EnergySolutions Arena in Salt Lake City. The Raptors got the job done,
+even without the injured DeMar DeRozan. Led by another impressive performance from point
+guard Kyle Lowry, Toronto continued their incredibly impressive year. Lowry scored 39
+points (13-22 FG, 4-5 3Pt, 9-9 FT) to go with five rebounds, four assists and one steal in
+38 minutes. He had a monster game, but Lowry had a bit of help as well. In total, six
+players scored in double figures for the Raptors, including four starters, while Jonas
+Valanciunas had nine points. Toronto showed how well-rounded they are in this win, and
+that they're a team to be feared. The Jazz have taken some tough losses to this point, but
+they were just outplayed in the first half and couldn't manage to get back into it during
+the second half. They did see six players score in double figures, with Enes Kanter and
+Derrick Favors leading the way. Both Kanter and Favors had 19 points, and combined, they
+brought in 15 rebounds. The offense was spread out nicely, but after falling behind 69-53
+at halftime, it was too much to overcome. The Jazz will look to bounce back at home
+against the Orlando Magic on Friday night.
+====================================================================================================

@@ -1,0 +1,132 @@
+***   339:2014-12-14: Miami Heat receives Chicago Bulls  [75-93]
+
+                    |                                       Miami Heat (11-13)                                      
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|    6|   18|    1|    4|    5|    6|    3|   12|    3|    5|    1|    5|     |   18|     
+Q2                  |               60|    6|   22|    0|    6|    2|    2|    6|    9|    2|    5|    2|    3|     |   14|     
+Q3                  |               60|    7|   21|    0|    3|    2|    4|    4|   11|    2|    1|    0|    4|     |   16|     
+Q4                  |               60|    9|   19|    3|    9|    6|    6|    0|    8|    5|    2|    2|    1|     |   27|     
+H1                  |              120|   12|   40|    1|   10|    7|    8|    9|   21|    5|   10|    3|    8|     |   32|     
+H2                  |              120|   16|   40|    3|   12|    8|   10|    4|   19|    7|    3|    2|    5|     |   43|     
+game                |              240|   28|   80|    4|   22|   15|   18|   13|   40|   12|   13|    5|   13|   22|   75|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Luol Deng           |True |doubl|   33|    6|   14|    1|    3|    4|    4|    4|   10|    1|    1|    2|    1|    1|   17|   -8
+Dwyane Wade         |True |     |   27|    7|   18|    1|    2|    2|    2|    1|    6|    0|    0|    1|    6|    3|   17|  -22
+Mario Chalmers      |False|     |   28|    4|   12|    1|    6|    2|    4|    0|    4|    3|    4|    0|    2|    2|   11|   -9
+Norris Cole         |True |     |   39|    3|   10|    0|    2|    4|    4|    1|    5|    6|    3|    0|    0|    1|   10|    0
+Justin Hamilton     |True |     |   33|    5|   11|    0|    2|    0|    0|    1|    3|    1|    2|    0|    1|    4|   10|  -12
+Shawne Williams     |False|     |   28|    1|    4|    1|    3|    1|    2|    0|    3|    0|    1|    0|    1|    2|    4|  -11
+Danny Granger       |False|     |   19|    1|    6|    0|    3|    2|    2|    2|    3|    0|    2|    1|    1|    5|    4|   -9
+Chris Andersen      |False|     |   18|    1|    1|    0|    0|    0|    0|    2|    3|    1|    0|    1|    0|    2|    2|   -6
+Udonis Haslem       |True |     |    3|    0|    1|    0|    0|    0|    0|    1|    2|    0|    0|    0|    1|    2|    0|   -8
+James Ennis         |False|     |    7|    0|    3|    0|    1|    0|    0|    1|    1|    0|    0|    0|    0|    0|    0|   -5
+Chris Bosh          |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Josh McRoberts      |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+                    |                                      Chicago Bulls (15-8)                                     
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|    5|   16|    0|    3|    4|    6|    2|   11|    4|    1|    2|    6|     |   14|     
+Q2                  |               60|    9|   18|    3|    3|    4|    5|    4|   13|    2|    1|    3|    7|     |   25|     
+Q3                  |               60|   12|   20|    3|    5|    6|    6|    1|   10|   10|    1|    1|    2|     |   33|     
+Q4                  |               60|    7|   17|    3|    7|    4|    4|    1|   10|    5|    1|    2|    4|     |   21|     
+H1                  |              120|   14|   34|    3|    6|    8|   11|    6|   24|    6|    2|    5|   13|     |   39|     
+H2                  |              120|   19|   37|    6|   12|   10|   10|    2|   20|   15|    2|    3|    6|     |   54|     
+game                |              240|   33|   71|    9|   18|   18|   21|    8|   44|   21|    4|    8|   19|   18|   93|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Mike Dunleavy       |True |     |   29|    8|   11|    4|    5|    2|    2|    0|    4|    2|    0|    2|    1|    2|   22|    8
+Jimmy Butler        |True |     |   36|    4|   10|    0|    1|    9|   10|    1|    7|    5|    2|    1|    2|    2|   17|   24
+Taj Gibson          |True |     |   38|    5|    8|    0|    0|    5|    5|    5|    9|    1|    1|    1|    3|    1|   15|   12
+Derrick Rose        |True |     |   27|    6|   14|    1|    3|    1|    2|    0|    2|    3|    1|    0|    1|    3|   14|   15
+Pau Gasol           |True |     |   36|    4|   13|    0|    0|    1|    2|    1|    9|    3|    0|    2|    6|    0|    9|   22
+Aaron Brooks        |False|     |   16|    3|    6|    2|    3|    0|    0|    1|    2|    1|    0|    1|    3|    4|    8|   -8
+Nikola Mirotić      |False|     |   20|    2|    7|    1|    5|    0|    0|    0|    7|    1|    0|    1|    0|    2|    5|    3
+E'Twaun Moore       |False|     |    0|    1|    1|    1|    1|    0|    0|    0|    0|    0|    0|    0|    0|    0|    3|    3
+Kirk Hinrich        |False|     |   30|    0|    0|    0|    0|    0|    0|    0|    4|    4|    0|    0|    2|    4|    0|   10
+Tony Snell          |False|     |    2|    0|    1|    0|    0|    0|    0|    0|    0|    1|    0|    0|    0|    0|    0|    1
+Nazr Mohammed       |False|     |    1|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    1|    0|    0|   -1
+Cameron Bairstow    |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    1
+
+*** English jsRealB
+The Bulls  (15-8) dominated the Heat  (11-13) 93-75 on Sunday in Miami at the American
+Airlines Arena extending their winning streak to three games.
+
+The Bulls dominated the Heat for points by 11 over the second quarter. During the third
+quarter, the Bulls got better goals percentage, an advantage of 27%. Over the second half,
+the Bulls obtained better free throws percentage, an advantage of 20%.
+
+Mike Dunleavy who started this game led the way scoring 22 points. Luol Deng who was in
+the starting line-up scored a game high with 17 points with ten rebounds and performed a
+double-double.
+
+The Bulls showed 46 percent from the field and 18-21 free throws and committed 19
+turnovers.  Taj Gibson contributed 15 points in 38 minutes.
+
+The Heat showed 35 percent from the field and 15-18 attempts at the charity stripe.
+Norris Cole finished with ten points in 39 minutes with five rebounds grabbed and six
+assists.
+
+Up next the Bulls will travel to Atlanta to take on the Hawks on Monday. Next Tuesday, the
+Heat will visit the Brooklyn Nets.
+-------------------------
+*** French jsRealB
+Les Bulls  (15-8) ont dominé le Heat  (11-13) 93-75 à Miami dimanche au stade American
+Airlines Arena leur permettant d'allonger à 3 leur série de victoires.
+
+Les Bulls ont dominé le Heat pour les points par 11 pendant le deuxième quart. Pendant le
+troisième quart, les Bulls ont réussi les meilleurs tirs en pourcentage, 60% en
+comparaison avec 33%. Durant la deuxième demie, les Bulls ont réussi les meilleurs lancers
+francs en pourcentage, 100% par rapport à 80%.
+
+Mike Dunleavy qui était un partant a fini avec 22 points avec huit tirs réussis et quatre
+lancers à trois points. Luol Deng qui figurait dans l'alignement de départ a obtenu le
+meilleur pointage du match avec 17 points avec dix rebonds récupérés et a terminé avec un
+double-double.
+
+Les Bulls ont compté 46 pour cent de tirs réussis et 18 lancers francs sur 21 et ont subi
+19 pertes de ballon.  Taj Gibson a eu 15 points en 38 minutes.
+
+Le Heat a compté 35 pour cent de tirs réussis et 15 lancers francs sur 18.  Norris Cole a
+enregistré dix points en 39 minutes avec cinq rebonds et six passes décisives.
+
+Ensuite les Bulls voyageront à Atlanta pour affronter les Hawks lundi. Mardi prochain, le
+Heat accueillera les Nets de Brooklyn.
+-------------------------
+*** English FStrings
+The Chicago Bulls (15-8) topped the Miami Heat (11-13) 93-75 on Sunday at the American
+Airlines Arena in Miami  giving them their 3th straight victory.
+
+ During the third quarter, Bulls obtained a good goals percentage 60% to 33%. In the
+second quarter, Bulls got a good goals percentage 50% to 27%. During the second half,
+Bulls obtained a good free throws percentage 100% to 80%. During the third quarter, Bulls
+overcame Heat for points 33 to 16. In the first half, Heat got a good free throws
+percentage 88% to 73%. Over the second quarter, Bulls dominated Heat for points 25 to 14.
+Over the first half, Bulls got a good goals percentage 41% to 30%. During the second half,
+Bulls dominated Heat for points 54 to 43. During the second half, Bulls got a good goals
+percentage 51% to 40%. In the game, Bulls obtained a good goals percentage 46% to 35%.
+
+Mike Dunleavy lead the way with 22 points in 29 minutes, 8 goals and 4 three-pointers.
+Luol Deng finished with 17 points in 33 minutes (6-14 FG, 1-3 3Pt, 4-4 FT) and performed a
+double-double.
+
+The Bulls show 46 percent from the field and 18-of-21 free throws and committed 19
+turnovers. Taj Gibson ended up with 15 points in 38 minutes.
+
+The Heat show 35 percent from the field and 15-of-18 free throws. Norris Cole contributed
+an efficient 10 points in 39 minutes (3-10 FG, 0-2 3Pt, 4-4 FT) while adding 6 assists.
+
+Next Monday, the Bulls will host the Atlanta Hawks. Next Tuesday, the Heat will be on the
+road against the Brooklyn Nets.
+-------------------------
+*** Reference summary
+The Chicago Bulls (15-8) defeated the Miami Heat (11-13) 93-75 on Sunday. Chicago has won
+four of their last five games. Mike Dunleavy took a rare lead on offense Sunday, finishing
+with a game-high 22 points on an efficient 8-of-11 shooting from the field. Joakim Noah
+sat out a third straight game to rest his sprained ankle, giving Taj Gibson another spot
+start. Gibson finished with 15 points and nine rebounds in 38 minutes. The Bulls will
+continue their two-game road trip in Atlanta on Monday against the Hawks. Miami has lost
+six of their last eight games, and Sunday they were without both Chris Bosh (calf) and
+Josh McRoberts (knee), putting them behind the eight ball trying to fight for a win
+without their starting frontcourt. With Bosh out, the Heat struggled to get anything
+working on offense and shot a woeful 35 percent from the field and 18 percent from beyond
+the arc. Miami will go on the road Tuesday to face the Brooklyn Nets.
+====================================================================================================

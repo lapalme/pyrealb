@@ -1,0 +1,160 @@
+***  2241:2016-02-08: Phoenix Suns receives Oklahoma City Thunder  [106-122]
+
+                    |                                      Phoenix Suns (14-39)                                     
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|    5|   14|    0|    4|    9|   12|    2|    9|    3|    1|    0|    5|     |   19|     
+Q2                  |               60|   15|   21|    0|    1|    8|    9|    2|    9|   11|    3|    0|    0|     |   38|     
+Q3                  |               60|   10|   20|    1|    4|    7|    8|    3|   10|    6|    1|    3|    5|     |   28|     
+Q4                  |               60|    7|   18|    0|    2|    7|   10|    2|    8|    2|    4|    1|    7|     |   21|     
+H1                  |              120|   20|   35|    0|    5|   17|   21|    4|   18|   14|    4|    0|    5|     |   57|     
+H2                  |              120|   17|   38|    1|    6|   14|   18|    5|   18|    8|    5|    4|   12|     |   49|     
+game                |              240|   37|   73|    1|   11|   31|   39|    9|   36|   22|    9|    4|   17|   30|  106|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Markieff Morris     |True |     |   32|    7|   14|    0|    1|    9|   13|    2|    7|    3|    2|    1|    6|    3|   23|  -10
+Archie Goodwin      |True |     |   42|    6|   14|    0|    2|    8|   10|    1|    4|    7|    0|    0|    2|    4|   20|   -7
+Mirza Teletović     |False|     |   20|    6|   12|    1|    4|    4|    4|    0|    0|    1|    0|    0|    2|    2|   17|  -13
+P.J. Tucker         |True |     |   45|    7|   10|    0|    1|    2|    2|    3|    5|    2|    5|    0|    2|    6|   16|  -11
+Alex Len            |False|     |   22|    5|    7|    0|    0|    3|    4|    2|    8|    2|    2|    1|    0|    4|   13|   -9
+Tyson Chandler      |True |     |   25|    5|    6|    0|    0|    1|    2|    1|    7|    0|    0|    1|    1|    1|   11|   -7
+Devin Booker        |True |     |   28|    1|    8|    0|    3|    4|    4|    0|    3|    4|    0|    1|    3|    6|    6|  -10
+Sonny Weems         |False|     |   19|    0|    2|    0|    0|    0|    0|    0|    2|    3|    0|    0|    1|    4|    0|  -13
+Jordan McRae        |False|     |    2|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Orlando Johnson     |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Brandon Knight      |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Jon Leuer           |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Ronnie Price        |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+                    |                                 Oklahoma City Thunder (39-14)                                 
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|   13|   24|    2|    7|    0|    0|    3|   12|    7|    2|    1|    2|     |   28|     
+Q2                  |               60|    9|   16|    6|    9|    5|    6|    1|    2|    6|    0|    0|    4|     |   29|     
+Q3                  |               60|   11|   27|    3|    9|    7|   11|    7|   14|    5|    4|    0|    2|     |   32|     
+Q4                  |               60|    9|   18|    4|    8|   11|   13|    3|   10|    5|    2|    4|    6|     |   33|     
+H1                  |              120|   22|   40|    8|   16|    5|    6|    4|   14|   13|    2|    1|    6|     |   57|     
+H2                  |              120|   20|   45|    7|   17|   18|   24|   10|   24|   10|    6|    4|    8|     |   65|     
+game                |              240|   42|   85|   15|   33|   23|   30|   14|   38|   23|    8|    5|   14|   29|  122|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Kevin Durant        |True |     |   38|   11|   21|    5|    9|    5|    5|    2|    6|    3|    1|    2|    1|    2|   32|   20
+Russell Westbrook   |True |     |   36|    8|   19|    2|    5|   11|   12|    3|    8|    8|    2|    0|    6|    4|   29|    1
+Dion Waiters        |True |     |   40|    5|   11|    2|    6|    3|    5|    0|    1|    4|    3|    1|    2|    2|   15|   22
+Enes Kanter         |False|     |   24|    5|    9|    1|    2|    0|    0|    2|    6|    0|    0|    0|    2|    5|   11|   29
+Cameron Payne       |False|     |   21|    4|    7|    3|    4|    0|    0|    1|    4|    4|    0|    0|    1|    1|   11|    9
+Serge Ibaka         |True |     |   26|    4|    9|    0|    3|    0|    0|    1|    5|    0|    0|    2|    0|    5|    8|    4
+Kyle Singler        |False|     |   19|    2|    4|    1|    2|    2|    2|    3|    4|    2|    1|    0|    1|    3|    7|    8
+Steven Adams        |True |     |   24|    2|    3|    0|    0|    2|    6|    2|    4|    2|    1|    0|    0|    5|    6|   -9
+Anthony Morrow      |False|     |    3|    1|    2|    1|    2|    0|    0|    0|    0|    0|    0|    0|    0|    0|    3|   -4
+Nick Collison       |False|     |    3|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    1|    2|    0|   -2
+Steve Novak         |False|     |    1|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    2
+D.J. Augustin       |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Mitch McGary        |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+*** English jsRealB
+The Thunder  (39-14) defeated the Suns  (14-39) 122-106 in Phoenix at the Talking Stick
+Resort Arena on Monday.
+
+Over the first quarter, the Thunder obtained better goals percentage, 54% to 36%. During
+the third quarter, the Suns obtained better free throws percentage, an advantage of 24%.
+The Thunder overcame the Suns for points by 16 in the second half.
+
+Kevin Durant who started this game had an efficient performance scoring 32 points.
+Markieff Morris who was a starter had an efficient performance scoring 23 points.
+
+The Thunder showed 49 percent from the field and 23-30 attempts at the charity stripe.
+Enes Kanter had eleven points with one three-pointer.  Cameron Payne ended up with eleven
+points  (4-7 FG, 3-4 3Pt, 0-0 FT) while adding four assists.  Kyle Singler contributed
+seven points with two assists.
+
+The Suns showed 50 percent from the field and 31-39 attempts at the charity stripe.
+Archie Goodwin who was in the starting line-up had 20 points in 42 minutes with 6-of-14 FG
+and seven assists.  Mirza Teletović scored 17 points.  P.J. Tucker had 16 points in 45
+minutes with seven goals.
+
+The Thunder' next game will be at home against the New Orleans Pelicans on Thursday. On
+deck for the Suns will be a home match versus Golden State.
+-------------------------
+*** French jsRealB
+Le Thunder  (39-14) a surpassé les Suns  (14-39) 122-106 lundi à Phoenix au stade Talking
+Stick Resort Arena.
+
+Pendant le premier quart, le Thunder a réussi les meilleurs tirs en pourcentage, un
+avantage de 18%. Durant le troisième quart, les Suns ont obtenu les meilleurs lancers
+francs en pourcentage, 88% par rapport à 64%. Le Thunder a vaincu les Suns pour les points
+65 à 49 pendant la deuxième demie.
+
+Kevin Durant qui figurait dans l'alignement de départ a réalisé une performance excellente
+comptant 32 points. Markieff Morris qui était un partant a réalisé une performance
+excellente comptant 23 points.
+
+Le Thunder a compté 49 pour cent de tirs réussis et 23 lancers francs sur 30.  Enes Kanter
+a contribué un efficace onze points.  Cameron Payne a fini avec onze points  (4-7 L, 3-4
+L3, 0-0 LF) et quatre passes décisives.  Kyle Singler a terminé avec sept points avec deux
+passes décisives.
+
+Les Suns ont compté 50 pour cent de tirs réussis et 31 lancers francs sur 39.  Archie
+Goodwin qui était un partant a terminé avec 20 points en 42 minutes  (6-14 L, 0-2 L3, 8-10
+LF) et sept passes décisives.  Mirza Teletović a eu 17 points.  P.J. Tucker a marqué 16
+points en 45 minutes.
+
+Le prochain affrontement du Thunder sera à domicile contre les Pelicans de New Orleans
+jeudi. À venir pour les Suns, un match à domicile contre Golden State.
+-------------------------
+*** English FStrings
+The Oklahoma City Thunder (39-14) knocked off the Phoenix Suns (14-39) 122-106 on Monday
+at the Talking Stick Resort Arena in Phoenix .
+
+ During the third quarter, Suns obtained a good free throws percentage 88% to 64%. Over
+the first quarter, Thunder obtained a good goals percentage 54% to 36%. Over the second
+half, Thunder overcame Suns for points 65 to 49. In the second quarter, Suns obtained a
+good goals percentage 71% to 56%. In the fourth quarter, Thunder got a good free throws
+percentage 85% to 70%. During the fourth quarter, Thunder dominated Suns for points 33 to
+21. Over the fourth quarter, Thunder got a good goals percentage 50% to 39%. During the
+first quarter, Thunder dominated Suns for points 28 to 19. Over the second quarter, Suns
+overcame Thunder for points 38 to 29.
+
+Kevin Durant had efficient performance scoring 32 points in 38 minutes (11-21 FG, 5-9 3Pt,
+5-5 FT). Markieff Morris finished with 23 points in 32 minutes.
+
+The Thunder show 49 percent from the field and 23-of-30 free throws. Enes Kanter
+contributed an efficient 11 points in 24 minutes and 1-for-2 from beyond the arc.  Cameron
+Payne contributed an efficient 11 points in 21 minutes, 3-for-4 from beyond the arc,
+grabbing 4 rebounds and 4 assists.  Kyle Singler added 7 points and 2 assists.
+
+The Suns show 50 percent from the field and 31-of-39 free throws. Archie Goodwin scored 20
+points in 42 minutes, 6 goals and 7 assists.  Mirza Teletović added 17 points (6-12 FG,
+1-4 3Pt, 4-4 FT).  P.J. Tucker finished with 16 points in 45 minutes and 7-for-10.
+
+The Thunder' next game will be at home against the Pelicans next Thursday. The Suns' next
+game will be at home against the Warriors next Wednesday.
+-------------------------
+*** Reference summary
+The Oklahoma City Thunder (39-14) defeated the Phoenix Suns (14-39) 122-106 on Monday. The
+high-octane Thunder got a bit more than they likely bargained for from a game Suns squad,
+beginning in the second period. After Oklahoma City jumped out to a 28-19 lead after the
+first 12 minutes, Phoenix answered with a 38-point second quarter in which they outscored
+the Thunder by nine. Entering the fourth quarter, the visitors clung to a surprisingly
+thin 89-85 lead. After P.J. Tucker sank a four-footer with 5:43 remaining, Phoenix had
+closed to within three, 99-96. However, the Thunder scored seven of the next eight points,
+led by a pair of free throws apiece from Russell Westbrook and Kevin Durant. Although the
+Suns got as close as four points on one more occasion, Oklahoma City pulled away over the
+final 3:47 to seal the harder-than-expected win. Durant led the charge for the Thunder
+with 32 points-- a scoring haul that included five three-pointers-- and added six
+rebounds, three assists, a steal and two blocks. Westbrook came close to one of his
+trademark triple-doubles, managing 29 points, eight rebounds, eight assists and two
+steals. The one blemish on his otherwise stellar outing was the six turnovers he
+committed. Dion Waiters pitched in with 15 points, four assists, three steals and a block.
+Enes Kanter and Cameron Payne paced the reserves with a pair of 11-point efforts, with
+Kanter adding six rebounds and Payne registering four rebounds and four assists. Oklahoma
+City remains atop the Western Conference's Northwest Division. They're back home on
+Thursday for a showdown with Anthony Davis and the New Orleans Pelicans. Phoenix's attack
+was spearheaded by 23 points from a resurgent Markieff Morris. He also supplied seven
+rebounds, three assists, two steals and a block. However, like Westbrook, Morris was also
+guilty of handing the ball to the opposition on six occasions. Archie Goodwin continued
+his solid play as the starting point guard, managing 20 points, seven assists and four
+boards. Tucker amassed 16 points, five rebounds, two assists and five steals, while Tyson
+Chandler totaled 11 points, seven boards and a block. Mirza Teletovic paced the Phoenix
+reserves with 17 points, and also added an assist. Alex Len had a near double-double off
+the bench as well, registering 13 points, eight boards, two assists, two steals and a
+block. The Suns remain in fourth place in the Western Conference's Pacific Division.
+They're at home again Wednesday for another tussle with a high-powered offense, as the
+reigning champion Golden State Warriors come to town.
+====================================================================================================

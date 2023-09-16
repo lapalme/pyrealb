@@ -1,0 +1,151 @@
+***  5359:2019-02-23: Utah Jazz receives Dallas Mavericks  [125-109]
+
+                    |                                       Utah Jazz (33-26)                                       
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|   11|   23|    2|    8|    7|    7|    3|   15|   10|    1|    2|    3|     |   31|     
+Q2                  |               60|   10|   17|    2|    4|    8|   10|    1|   10|    6|    0|    0|    3|     |   30|     
+Q3                  |               60|    9|   27|    4|   16|    3|    4|    4|   17|    5|    0|    4|    0|     |   25|     
+Q4                  |               60|   11|   18|    6|   10|   11|   12|    0|   11|    7|    1|    3|    1|     |   39|     
+H1                  |              120|   21|   40|    4|   12|   15|   17|    4|   25|   16|    1|    2|    6|     |   61|     
+H2                  |              120|   20|   45|   10|   26|   14|   16|    4|   28|   12|    1|    7|    1|     |   64|     
+game                |              240|   41|   85|   14|   38|   29|   33|    8|   53|   28|    2|    9|    7|   21|  125|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Ricky Rubio         |True |     |   36|    8|   14|    1|    5|    8|   10|    0|    4|    5|    1|    0|    0|    4|   25|   16
+Donovan Mitchell    |True |     |   32|    8|   14|    2|    4|    7|    7|    0|    8|    6|    0|    1|    2|    4|   25|   11
+Jae Crowder         |False|     |   27|    8|   14|    4|    7|    2|    2|    2|    4|    1|    0|    1|    0|    1|   22|    6
+Joe Ingles          |True |     |   33|    6|   12|    5|    9|    1|    2|    1|    5|    6|    1|    0|    1|    3|   18|   12
+Rudy Gobert         |True |doubl|   32|    4|    8|    0|    0|    7|    8|    2|   12|    1|    0|    3|    2|    3|   15|   11
+Kyle Korver         |False|     |   14|    1|    7|    1|    6|    4|    4|    0|    4|    1|    0|    0|    1|    1|    7|    1
+Derrick Favors      |True |     |   24|    3|    8|    0|    2|    0|    0|    2|   11|    1|    0|    2|    1|    1|    6|    9
+Thabo Sefolosha     |False|     |   10|    2|    2|    1|    1|    0|    0|    1|    2|    1|    0|    0|    0|    1|    5|    6
+Royce O'Neale       |False|     |   18|    1|    3|    0|    2|    0|    0|    0|    3|    3|    0|    1|    0|    2|    2|    6
+Raul Neto           |False|     |    7|    0|    3|    0|    2|    0|    0|    0|    0|    3|    0|    1|    0|    1|    0|    2
+Ekpe Udoh           |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Grayson Allen       |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Georges Niang       |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+                    |                                    Dallas Mavericks (26-33)                                   
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|   10|   26|    3|    9|    2|    2|    3|   11|    5|    1|    0|    2|     |   25|     
+Q2                  |               60|   13|   22|    4|    8|    3|    3|    0|    6|    9|    1|    1|    0|     |   33|     
+Q3                  |               60|    8|   28|    1|    9|    3|    4|    4|   18|    4|    0|    2|    0|     |   20|     
+Q4                  |               60|   10|   21|    5|   10|    6|    9|    1|    7|    7|    0|    0|    1|     |   31|     
+H1                  |              120|   23|   48|    7|   17|    5|    5|    3|   17|   14|    2|    1|    2|     |   58|     
+H2                  |              120|   18|   49|    6|   19|    9|   13|    5|   25|   11|    0|    2|    1|     |   51|     
+game                |              240|   41|   97|   13|   36|   14|   18|    8|   42|   25|    2|    3|    3|   28|  109|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Tim Hardaway        |True |     |   27|    6|   13|    2|    5|    7|    7|    1|    5|    4|    0|    0|    0|    3|   21|  -17
+Trey Burke          |False|     |   23|    8|   15|    1|    3|    3|    4|    3|    7|    3|    0|    0|    0|    1|   20|  -13
+Dirk Nowitzki       |True |     |   25|    6|   14|    3|    9|    0|    0|    0|    2|    1|    1|    0|    0|    4|   15|   -2
+Jalen Brunson       |True |     |   24|    5|   14|    3|    5|    0|    0|    0|    5|    2|    0|    0|    1|    5|   13|   -3
+Justin Jackson      |False|     |   24|    5|    9|    2|    4|    1|    1|    1|    1|    1|    0|    0|    0|    2|   13|   -6
+Dwight Powell       |False|     |   29|    5|   13|    0|    4|    2|    2|    1|    6|    5|    0|    0|    1|    3|   12|   -7
+Dorian Finney-Smith |True |     |   29|    4|    6|    1|    1|    0|    2|    0|    6|    1|    0|    0|    0|    3|    9|  -14
+Ryan Broekhoff      |False|     |    6|    1|    1|    1|    1|    0|    0|    0|    1|    1|    0|    0|    0|    0|    3|   -3
+Courtney Lee        |False|     |   16|    1|    4|    0|    1|    0|    0|    0|    0|    3|    0|    0|    0|    3|    2|   -6
+Salah Mejri         |True |     |   18|    0|    5|    0|    1|    1|    2|    2|    5|    2|    1|    3|    1|    1|    1|   -9
+Devin Harris        |False|     |   15|    0|    3|    0|    2|    0|    0|    0|    4|    2|    0|    0|    0|    3|    0|    0
+
+*** English jsRealB
+The Jazz  (33-26) dominated the Mavericks  (26-33) 125-109 on Saturday in Salt Lake City
+at the Vivint Smart Home Arena.
+
+The Jazz led in all four quarters. The Jazz dominated the Mavericks for rebounds 25 to 17
+during the first half. Over the fourth quarter, the Jazz got better free throws
+percentage, a difference of 25%. The Jazz overcame the Mavericks for points 64 to 51 in
+the second half. The Jazz dominated the Mavericks for free throws by 15 over the game.
+
+Ricky Rubio who was in the starting line-up led the way, posting 25 points. Tim Hardaway
+who started this game led the way scoring 21 points with five rebounds and four assists.
+
+The Jazz showed 48 percent from the field and 29-33 free throws.  Jae Crowder scored 22
+points with 8-for-14 FG and four three-pointers.  Joe Ingles scored 18 points in 33
+minutes  (6-12 FG, 5-9 3Pt, 1-2 FT) and six assists.
+
+The Mavericks showed 42 percent from the field and 14-18 free throws.  Trey Burke who was
+in the starting line-up scored 20 points with eight goals and seven rebounds grabbed.
+Dirk Nowitzki recorded 15 points a season high.  Dwight Powell had twelve points in 29
+minutes  (5-13 FG, 0-4 3Pt, 2-2 FT) and five assists.  Dorian Finney-Smith scored nine
+points with 4-for-6 FG and six rebounds.
+
+The Jazz' next game will be at home against the Los Angeles Clippers on Wednesday. Next
+Monday, the Mavericks will visit the Los Angeles Clippers.
+-------------------------
+*** French jsRealB
+Le Jazz  (33-26) a surpassé les Mavericks  (26-33) 125-109 au stade Vivint Smart Home
+Arena à Salt Lake City samedi.
+
+Le Jazz a mené pendant les quatre quarts. Le Jazz a dominé les Mavericks pour les rebonds
+par 8 pendant la première demie. Pendant le quatrième quart, le Jazz a obtenu les
+meilleurs lancers francs en pourcentage, une différence de 25%. Le Jazz a vaincu les
+Mavericks pour les points par 13 durant la deuxième demie. Le Jazz a dominé les Mavericks
+pour les lancers francs 29 à 14 durant la partie.
+
+Ricky Rubio qui était un partant a mené son équipe marquant 25 points. Tim Hardaway qui
+était un partant a obtenu le meilleur pointage du match avec 21 points avec cinq rebonds
+récupérés et quatre passes décisives.
+
+Le Jazz a compté 48 pour cent de tirs réussis et 29 lancers francs sur 33.  Jae Crowder a
+marqué 22 points avec 8-sur-14 L et quatre tirs à trois points.  Joe Ingles a ajouté 18
+points en 33 minutes avec 6-sur-12 L, cinq tirs à trois points, cinq rebonds récupérés et
+six passes décisives.
+
+Les Mavericks ont compté 42 pour cent de tirs réussis et 14 lancers francs sur 18.  Trey
+Burke qui figurait dans l'alignement de départ a ajouté 20 points.  Dirk Nowitzki a
+enregistré 15 points un record jusqu'ici avec trois tirs à trois points.  Dwight Powell a
+terminé avec douze points en 29 minutes  (5-13 L, 0-4 L3, 2-2 LF) tout en ajoutant cinq
+passes décisives.  Dorian Finney-Smith a fini avec neuf points.
+
+À venir pour le Jazz, un match à domicile contre Los Angeles. Lundi prochain, les
+Mavericks accueilleront les Clippers de Los Angeles.
+-------------------------
+*** English FStrings
+The Utah Jazz (33-26) topped the Dallas Mavericks (26-33) 125-109 on Saturday at the
+Vivint Smart Home Arena in Salt Lake City .
+
+The Jazz lead in all four quarters. Over the fourth quarter, Jazz obtained a good free
+throws percentage 92% to 67%. Over the second half, Jazz obtained a good free throws
+percentage 88% to 69%. Over the game, Jazz dominated Mavericks for free throws 29 to 14.
+During the fourth quarter, Jazz got a good goals percentage 61% to 48%. During the second
+half, Jazz dominated Mavericks for points 64 to 51. During the first half, Mavericks
+obtained a good free throws percentage 100% to 88%. In the game, Jazz overcame Mavericks
+for rebounds 53 to 42. In the fourth quarter, Jazz dominated Mavericks for points 39 to
+31. During the first half, Jazz dominated Mavericks for rebounds 25 to 17.
+
+Ricky Rubio lead the way with 25 points in 36 minutes (8-14 FG, 1-5 3Pt, 8-10 FT) and 5
+assists. Tim Hardaway was a starter and filled the stat sheet, posting 21 points in 27
+minutes, grabbing 5 rebounds and 4 assists.
+
+The Jazz show 48 percent from the field and 29-of-33 free throws. Jae Crowder had 22
+points in 27 minutes (8-14 FG, 4-7 3Pt, 2-2 FT).  Joe Ingles posted 18 points in 33
+minutes (6-12 FG, 5-9 3Pt, 1-2 FT) and 6 assists.
+
+The Mavericks show 42 percent from the field and 14-of-18 free throws. Trey Burke started
+this game and finished with 20 points in 23 minutes, 8 goals and 7 rebounds.  Dirk
+Nowitzki had 15 points in 25 minutes and 3 three-pointers.  Dwight Powell finished with 12
+points in 29 minutes (5-13 FG, 0-4 3Pt, 2-2 FT) and 5 assists.  Dorian Finney-Smith ended
+up with 9 points in 29 minutes (4-6 FG, 1-1 3Pt, 0-2 FT).
+
+For their next game, the Jazz will receive the Los Angeles Clippers on Wednesday. Up next,
+the Mavericks travel to Los Angeles to take on the Clippers on Monday.
+-------------------------
+*** Reference summary
+The Utah Jazz defeated the visiting Dallas Mavericks, 125-109, at Vivint Smart Home Arena
+on Saturday. While this game remained competitive throughout, a late run by Utah helped
+them capture a lopsided victory. In fact, the Jazz went on a 21-7 run in the guts of the
+fourth quarter to take a 17-point lead with five minutes remaining. While it wasn't a
+wire-to-wire win, Utah held the lead for the final three quarters. Rebounding was key for
+the Jazz, as they outrebounded the Mavericks, 53-42. Free-throw shooting was also
+critical, with Utah connecting on 29-of-33 and Dallas hitting just 14-of-18. The Mavericks
+(26-33) had to play without Luka Doncic (ankle) yet again, as they were led by Tim
+Hardaway Jr., who tallied 21 points, five rebounds and four assists. Dirk Nowitzki got a
+rare start and totaled 15 points and two boards. Jalen Brunson accrued 13 points, five
+rebounds and two assists. Trey Burke led the bench with 20 points, seven rebounds and
+three assists. The Jazz (33-26) were led by Ricky Rubio, as he collected 25 points, four
+rebounds and five assists. Donovan Mitchell accumulated 25 points, eight rebounds and six
+assists. Joe Ingles totaled 18 points, five rebounds and six assists while Rudy Gobert
+finished with 15 points, 12 rebounds and three blocks. Jae Crowder led the bench with 22
+points and four boards. On deck for Dallas is a road matchup versus the Los Angeles
+Clippers on Monday. As for Utah, they're off until Wednesday, when they too play the
+Clippers.
+====================================================================================================

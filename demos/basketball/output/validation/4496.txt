@@ -1,0 +1,166 @@
+***  4496:2018-02-14: New Orleans Pelicans receives Los Angeles Lakers  [139-117]
+
+                    |                                  New Orleans Pelicans (31-26)                                 
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|   19|   28|    4|    7|    4|    5|    5|   14|   13|    4|    1|    3|     |   46|     
+Q2                  |               60|    9|   20|    4|    7|   11|   11|    3|    8|    5|    2|    0|    4|     |   33|     
+Q3                  |               60|   11|   27|    1|    8|    1|    2|    3|   15|    7|    3|    4|    2|     |   24|     
+Q4                  |               60|   14|   24|    5|   10|    3|    3|    1|   11|   11|    4|    2|    2|     |   36|     
+H1                  |              120|   28|   48|    8|   14|   15|   16|    8|   22|   18|    6|    1|    7|     |   79|     
+H2                  |              120|   25|   51|    6|   18|    4|    5|    4|   26|   18|    7|    6|    4|     |   60|     
+game                |              240|   53|   99|   14|   32|   19|   21|   12|   48|   35|   13|    7|   11|   20|  139|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Anthony Davis       |True |doubl|   33|   15|   18|    2|    2|   10|   11|    3|   15|    3|    3|    2|    1|    2|   42|   22
+Jrue Holiday        |True |doubl|   33|   10|   19|    2|    5|    2|    2|    1|    4|   11|    4|    0|    2|    1|   24|   22
+Darius Miller       |False|     |   31|    6|    8|    4|    6|    3|    3|    0|    4|    4|    0|    0|    0|    3|   19|   13
+Nikola Mirotić      |False|     |   29|    7|   17|    2|    8|    0|    0|    2|    7|    2|    2|    2|    2|    3|   16|   11
+E'Twaun Moore       |True |     |   31|    6|   13|    2|    4|    0|    0|    2|    3|    4|    3|    0|    3|    3|   14|   18
+Cheick Diallo       |False|     |   11|    3|    4|    0|    0|    3|    3|    1|    4|    0|    0|    1|    0|    1|    9|   -4
+Ian Clark           |False|     |   24|    2|    9|    1|    5|    0|    0|    0|    0|    2|    0|    0|    1|    3|    5|   -3
+Rajon Rondo         |True |     |    8|    2|    5|    0|    1|    0|    0|    0|    3|    5|    1|    0|    1|    2|    4|    9
+Emeka Okafor        |True |     |   20|    1|    4|    0|    0|    1|    2|    3|    8|    0|    0|    2|    1|    0|    3|   17
+DeAndre Liggins     |False|     |   14|    1|    2|    1|    1|    0|    0|    0|    0|    4|    0|    0|    0|    2|    3|    4
+Charles Cooke       |False|     |    2|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    1
+
+                    |                                   Los Angeles Lakers (23-33)                                  
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|   11|   21|    3|    5|    8|    9|    1|    5|    6|    2|    1|    5|     |   33|     
+Q2                  |               60|   14|   20|    3|    7|    2|    2|    1|    9|   10|    2|    0|    6|     |   33|     
+Q3                  |               60|   11|   26|    3|    6|    0|    0|    2|   13|    5|    1|    2|    4|     |   25|     
+Q4                  |               60|   10|   23|    1|    4|    5|    7|    3|   10|    5|    0|    0|    5|     |   26|     
+H1                  |              120|   25|   41|    6|   12|   10|   11|    2|   14|   16|    4|    1|   11|     |   66|     
+H2                  |              120|   21|   49|    4|   10|    5|    7|    5|   23|   10|    1|    2|    9|     |   51|     
+game                |              240|   46|   90|   10|   22|   15|   18|    7|   37|   26|    5|    3|   20|   21|  117|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Kyle Kuzma          |False|     |   26|   10|   20|    3|    8|    0|    0|    1|    5|    1|    1|    0|    2|    2|   23|  -14
+Brandon Ingram      |True |     |   30|    9|   17|    0|    1|    3|    4|    1|    2|    5|    1|    0|    5|    5|   21|   -5
+Julius Randle       |True |     |   31|    9|   13|    0|    0|    2|    2|    1|    5|    3|    0|    1|    4|    3|   20|  -24
+Josh Hart           |True |     |   31|    5|    6|    3|    3|    2|    3|    1|    6|    2|    2|    1|    2|    1|   15|  -22
+Corey Brewer        |False|     |   20|    2|    5|    0|    0|    5|    6|    0|    2|    4|    1|    0|    2|    1|    9|   -4
+Brook Lopez         |True |     |   18|    3|    9|    2|    4|    0|    0|    0|    3|    0|    0|    0|    1|    3|    8|   -3
+Kentavious Caldwell-|True |     |   32|    2|    6|    1|    2|    0|    0|    0|    8|    8|    0|    1|    1|    1|    5|  -18
+Gary Payton         |False|     |   16|    2|    4|    0|    1|    0|    0|    2|    2|    0|    0|    0|    0|    2|    4|  -16
+Ivica Zubac         |False|     |    5|    1|    2|    0|    0|    2|    2|    1|    2|    1|    0|    0|    1|    1|    4|   -2
+Channing Frye       |False|     |   11|    1|    1|    1|    1|    0|    0|    0|    0|    0|    0|    0|    0|    2|    3|    6
+Isaiah Thomas       |False|     |    4|    1|    1|    0|    0|    1|    1|    0|    1|    2|    0|    0|    2|    0|    3|   -2
+Thomas Bryant       |False|     |    5|    1|    2|    0|    1|    0|    0|    0|    1|    0|    0|    0|    0|    0|    2|   -4
+Tyler Ennis         |False|     |    4|    0|    4|    0|    1|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|   -2
+
+*** English jsRealB
+The Pelicans  (31-26) dominated the Lakers  (23-33) 139-117 in New Orleans at the Smoothie
+King Center on Wednesday extending their winning streak to three games.
+
+This was a dominating win for the Pelicans, as it came in wire-to-wire fashion. The
+Pelicans dominated the Lakers for points by 13 during the first quarter. During the second
+quarter, the Lakers got better goals percentage, an advantage of 25%. The Pelicans
+overcame the Lakers for rebounds 48 to 37 over the game.
+
+Anthony Davis who was a starter led the way, posting 42 points with 15-of-18 FG, 2-for-2
+from beyond the arc, 15 rebounds grabbed and performed a double-double. Kyle Kuzma who was
+in the starting line-up finished with 23 points.
+
+The Pelicans showed 53 percent from the field and 19-21 attempts at the charity stripe.
+Jrue Holiday who started this game finished with 24 points with ten goals, eleven assists
+and performed a double-double.  Nikola Mirotić recorded 16 points with seven goals.
+E'Twaun Moore recorded 14 points in 31 minutes with four assists.  DeAndre Liggins ended
+up with three points  (1-2 FG, 1-1 3Pt, 0-0 FT) and four assists.
+
+The Lakers showed 51 percent from the field and 15-18 attempts at the charity stripe and
+committed 20 turnovers.  Brandon Ingram who was a starter finished with 21 points with
+nine goals and five assists.  Julius Randle added 20 points.  Corey Brewer recorded nine
+points  (2-5 FG, 0-0 3Pt, 5-6 FT) while adding four assists.  Brook Lopez finished with
+eight points with two three-pointers.  Kentavious Caldwell-Pope posted five points  (2-6
+FG, 1-2 3Pt, 0-0 FT) while adding eight assists.
+
+On deck for the Pelicans will be a home match versus Miami. Next Thursday, the Lakers will
+travel to play the Minnesota Timberwolves.
+-------------------------
+*** French jsRealB
+Les Pelicans  (31-26) ont dominé les Lakers  (23-33) 139-117 à New Orleans mercredi au
+stade Smoothie King Center leur permettant d'allonger à 3 leur série de victoires.
+
+Les Pelicans ont mené pendant les quatre quarts. Les Pelicans ont dominé les Lakers pour
+les points 46 à 33 durant le premier quart. Durant le deuxième quart, les Lakers ont
+réussi les meilleurs tirs en pourcentage, un avantage de 25%. Les Pelicans ont vaincu les
+Lakers pour les rebonds par 11 pendant la partie.
+
+Anthony Davis qui débutait la partie a obtenu le meilleur pointage du match avec 42 points
+avec 15 tirs réussis, deux lancers à trois points, 15 rebonds et a terminé avec un double-
+double. Kyle Kuzma qui figurait dans l'alignement de départ a réalisé une performance
+excellente comptant 23 points.
+
+Les Pelicans ont compté 53 pour cent de tirs réussis et 19 lancers francs sur 21.  Jrue
+Holiday qui était un partant a fini avec 24 points avec dix tirs réussis, onze passes
+décisives et a terminé avec un double-double.  Nikola Mirotić a marqué 16 points.  E'Twaun
+Moore a fini avec 14 points en 31 minutes  (6-13 L, 2-4 L3, 0-0 LF) tout en ajoutant
+quatre passes décisives.  DeAndre Liggins a ajouté trois points  (1-2 L, 1-1 L3, 0-0 LF)
+et quatre passes décisives.
+
+Les Lakers ont compté 51 pour cent de tirs réussis et 15 lancers francs sur 18 et ont subi
+20 pertes de ballon.  Brandon Ingram qui figurait dans l'alignement de départ a contribué
+un efficace 21 points  (9-17 L, 0-1 L3, 3-4 LF) tout en ajoutant cinq passes décisives.
+Julius Randle a enregistré 20 points avec neuf tirs réussis.  Corey Brewer a eu neuf
+points  (2-5 L, 0-0 L3, 5-6 LF) tout en ajoutant quatre passes décisives.  Brook Lopez a
+enregistré huit points avec 2-sur-4 depuis la ligne de trois points.  Kentavious Caldwell-
+Pope a eu cinq points  (2-6 L, 1-2 L3, 0-0 LF) tout en ajoutant huit passes décisives.
+
+Le prochain affrontement des Pelicans sera à domicile contre le Heat de Miami vendredi.
+Ensuite les Lakers voyageront à Minnesota pour affronter les Timberwolves jeudi.
+-------------------------
+*** English FStrings
+The New Orleans Pelicans (31-26) topped the Los Angeles Lakers (23-33) 139-117 on
+Wednesday at the Smoothie King Center in New Orleans  giving them their 3th straight
+victory.
+
+The Pelicans lead in all four quarters. In the second quarter, Lakers obtained a good
+goals percentage 70% to 45%. Over the first quarter, Pelicans got a good goals percentage
+68% to 52%. Over the fourth quarter, Pelicans got a good goals percentage 58% to 43%.
+During the first quarter, Pelicans dominated Lakers for points 46 to 33. In the first
+half, Pelicans overcame Lakers for points 79 to 66. Over the game, Pelicans overcame
+Lakers for rebounds 48 to 37. Over the fourth quarter, Pelicans overcame Lakers for points
+36 to 26. In the second half, Pelicans dominated Lakers for points 60 to 51. In the first
+quarter, Pelicans overcame Lakers for goals 19 to 11. Over the first half, Pelicans
+overcame Lakers for rebounds 22 to 14.
+
+Anthony Davis filled the stat sheet, posting 42 points in 33 minutes, 15 goals, 2-for-2
+from beyond the arc, grabbing 15 rebounds and performed a double-double. Kyle Kuzma filled
+the stat sheet, posting 23 points in 26 minutes (10-20 FG, 3-8 3Pt, 0-0 FT).
+
+The Pelicans show 53 percent from the field and 19-of-21 free throws. Jrue Holiday posted
+24 points in 33 minutes (10-19 FG, 2-5 3Pt, 2-2 FT) and 11 assists and performed a double-
+double.  Nikola Mirotić posted 16 points in 29 minutes and 7-for-17.  E'Twaun Moore
+contributed an efficient 14 points in 31 minutes (6-13 FG, 2-4 3Pt, 0-0 FT).  DeAndre
+Liggins ended up with 3 points and 4 assists.
+
+The Lakers show 51 percent from the field and 15-of-18 free throws and committed 20
+turnovers. Brandon Ingram recorded 21 points in 30 minutes, 9 goals and 5 assists.  Julius
+Randle had 20 points in 31 minutes and 9-for-13.  Corey Brewer posted 9 points (2-5 FG,
+0-0 3Pt, 5-6 FT).  Brook Lopez posted 8 points (3-9 FG, 2-4 3Pt, 0-0 FT).  Kentavious
+Caldwell-Pope ended up with 5 points in 32 minutes (2-6 FG, 1-2 3Pt, 0-0 FT) while adding
+8 assists.
+
+The Pelicans' next game will be at home against the Heat next Friday. Next Thursday, the
+Lakers will be on the road against the Minnesota Timberwolves.
+-------------------------
+*** Reference summary
+The New Orleans Pelicans blew out the Los Angeles Lakers, 139-117, at Smoothie King Center
+on Wednesday. The game got out of hand quickly for Los Angeles (23-33), as the Pelicans
+(31-26) got off to a scorching hot start. New Orleans finished the fourth quarter with 46
+points, thanks largely to the massive offensive impact of superstar big man Anthony Davis.
+Davis, who will be representing New Orleans at the All-Star Game this weekend, scored 31
+points in the first half of the game alone. "The Brow "scored with brutal efficiency,
+going 15-of-18 from the field and finishing with a game-high 42 points. Things got
+controversial in the first half, as both teams saw their point guards ejected. After a
+tense exchange between the Pelicans' Rajon Rondo and the Lakers' Isaiah Thomas, both were
+removed from the game. A subsequent technical foul led to the ejection of Lakers head
+coach Luke Walton. The ejection marks the third time in Thomas's career in which he has
+been ejected within three games of joining a new team. Even discounting Davis's monstrous
+output, the Pelicans were impressive. The team shot over 53 percent from the field and
+knocked down 14 three-pointers. Jrue Holiday pitched in 24 points, while the Pelicans'
+bench combined to score 52. Los Angeles, meanwhile, had three 20-point scorers in what was
+a decent offensive night for the surging team. Brandon Ingram scored 21 points, while
+rookie forward Kyle Kuzma led the team with 23 off the bench. Defense was where the Lakers
+struggled, as the team had only five steals and could not manage to contain Davis's
+commanding offensive presence. The Lakers will visit Minnesota on Thursday, while New
+Orleans enters the All-Star Break.
+====================================================================================================

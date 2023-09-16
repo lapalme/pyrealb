@@ -1,5 +1,5 @@
 from random import choice, randint
-from stats import is_high
+from global_stats import is_high
 from BasketballSummarizer import BasketballSummarizer
 
 

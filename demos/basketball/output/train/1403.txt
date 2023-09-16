@@ -1,0 +1,150 @@
+***  1403:2015-11-25: Boston Celtics receives Philadelphia 76ers  [84-80]
+
+                    |                                      Boston Celtics (8-7)                                     
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|    9|   25|    4|    8|    4|    4|    4|   16|    7|    0|    1|    5|     |   26|     
+Q2                  |               60|    6|   20|    0|    4|    2|    4|    2|   14|    2|    1|    1|    4|     |   14|     
+Q3                  |               60|    7|   22|    2|   10|    1|    2|    2|   12|    2|    2|    2|    4|     |   17|     
+Q4                  |               60|    9|   24|    3|    7|    6|    8|    3|   12|    7|    4|    2|    3|     |   27|     
+H1                  |              120|   15|   45|    4|   12|    6|    8|    6|   30|    9|    1|    2|    9|     |   40|     
+H2                  |              120|   16|   46|    5|   17|    7|   10|    5|   24|    9|    6|    4|    7|     |   44|     
+game                |              240|   31|   91|    9|   29|   13|   18|   11|   54|   18|    7|    6|   16|   12|   84|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Isaiah Thomas       |True |     |   38|   11|   21|    4|    7|    4|    4|    0|    4|    6|    1|    0|    3|    1|   30|   17
+Evan Turner         |False|     |   35|    6|   18|    0|    3|    4|    4|    0|    9|    3|    0|    1|    3|    0|   16|    1
+Avery Bradley       |True |     |   36|    4|   15|    2|    7|    0|    0|    0|    1|    1|    2|    0|    1|    2|   10|   17
+Jared Sullinger     |True |     |   32|    4|   12|    1|    5|    0|    0|    3|   15|    3|    0|    1|    1|    3|    9|   11
+Jae Crowder         |True |     |   27|    3|   11|    2|    5|    0|    2|    3|    8|    2|    2|    1|    2|    0|    8|    0
+Amir Johnson        |True |     |   24|    3|    4|    0|    1|    0|    0|    2|    8|    2|    1|    1|    3|    2|    6|   10
+Kelly Olynyk        |False|     |   14|    0|    5|    0|    1|    3|    4|    2|    3|    1|    0|    1|    0|    0|    3|   -8
+Tyler Zeller        |False|     |    5|    0|    0|    0|    0|    2|    2|    0|    1|    0|    0|    1|    0|    2|    2|   -4
+R.J. Hunter         |False|     |    8|    0|    2|    0|    0|    0|    0|    0|    2|    0|    0|    0|    1|    1|    0|  -11
+Jonas Jerebko       |False|     |    7|    0|    1|    0|    0|    0|    0|    0|    1|    0|    0|    0|    0|    1|    0|   -9
+David Lee           |False|     |    4|    0|    1|    0|    0|    0|    2|    0|    1|    0|    1|    0|    0|    0|    0|   -4
+Terry Rozier        |False|     |    2|    0|    1|    0|    0|    0|    0|    1|    1|    0|    0|    0|    2|    0|    0|    0
+James Young         |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+                    |                                   Philadelphia 76ers (0-16)                                   
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|   10|   24|    1|    6|    3|    5|    2|   11|    3|    3|    7|    1|     |   24|     
+Q2                  |               60|    8|   21|    2|    6|    5|    7|    2|   14|    3|    4|    1|    3|     |   23|     
+Q3                  |               60|    7|   20|    1|    7|    0|    0|    2|   15|    3|    3|    3|    7|     |   15|     
+Q4                  |               60|    6|   18|    3|    8|    3|    3|    1|   10|    3|    1|    3|    7|     |   18|     
+H1                  |              120|   18|   45|    3|   12|    8|   12|    4|   25|    6|    7|    8|    4|     |   47|     
+H2                  |              120|   13|   38|    4|   15|    3|    3|    3|   25|    6|    4|    6|   14|     |   33|     
+game                |              240|   31|   83|    7|   27|   11|   15|    7|   50|   12|   11|   14|   18|   21|   80|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Jahlil Okafor       |True |     |   35|    7|   17|    0|    1|    5|    5|    0|    9|    1|    0|    4|    3|    4|   19|   -4
+Hollis Thompson     |False|     |   32|    6|   11|    3|    7|    0|    1|    0|    2|    0|    0|    1|    0|    2|   15|    4
+Isaiah Canaan       |True |     |   32|    3|    9|    2|    7|    4|    4|    0|    5|    2|    1|    2|    2|    2|   12|   -1
+Robert Covington    |True |doubl|   35|    4|   16|    2|    8|    1|    3|    3|   14|    0|    6|    2|    4|    5|   11|   -4
+T.J. McConnell      |True |     |   20|    3|    4|    0|    0|    0|    0|    1|    3|    1|    1|    1|    4|    1|    6|   -5
+Jerami Grant        |False|     |   21|    3|    7|    0|    2|    0|    0|    2|    5|    2|    1|    2|    2|    2|    6|    1
+Phil Pressey        |False|     |   17|    3|    8|    0|    1|    0|    0|    0|    3|    4|    2|    0|    2|    1|    6|    3
+Nerlens Noel        |True |     |   34|    1|    7|    0|    0|    1|    2|    1|    8|    2|    0|    1|    1|    3|    3|  -20
+JaKarr Sampson      |False|     |    9|    1|    4|    0|    1|    0|    0|    0|    1|    0|    0|    1|    0|    1|    2|    6
+Richaun Holmes      |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Carl Landry         |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Nik Stauskas        |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Christian Wood      |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+*** English jsRealB
+The Celtics  (8-7) knocked off the 76ers  (0-16) 84-80 at the TD Garden in Boston on
+Wednesday.
+
+The 76ers led in the first half but the Celtics managed to come back. The Celtics
+dominated the 76ers for points by 11 during the second half.
+
+Isaiah Thomas who was a starter led the way scoring 30 points a season high in 38 minutes
+with eleven goals. Jahlil Okafor who was in the starting line-up scored a game high with
+19 points in 35 minutes.
+
+The Celtics showed 34 percent from the field and 13-18 attempts at the charity stripe.
+Evan Turner who was in the starting line-up finished with 16 points in 35 minutes.  Jared
+Sullinger scored nine points in 32 minutes with 15 rebounds.  Jae Crowder ended up with
+eight points.
+
+The 76ers showed 37 percent from the field and 11-15 free throws.  Hollis Thompson who was
+in the starting line-up contributed 15 points with 6-of-11 FG.  Isaiah Canaan added twelve
+points in 32 minutes with five rebounds grabbed.  Robert Covington posted eleven points
+performed a double-double.
+
+For their next game, the Celtics will play host to the Washington Wizards on Friday. Up
+next the 76ers will travel to Houston to take on the Rockets on Friday.
+-------------------------
+*** French jsRealB
+Les Celtics  (8-7) ont défait les 76ers  (0-16) 84-80 à Boston au stade TD Garden
+mercredi.
+
+Les 76ers ont mené dans la première demie mais les Celtics sont parvenus à revenir. Les
+Celtics ont dominé les 76ers pour les points par 11 pendant la deuxième demie.
+
+Isaiah Thomas qui était un partant a fini avec 30 points un record jusqu'ici en 38
+minutes. Jahlil Okafor qui débutait la partie a réalisé une performance excellente
+comptant 19 points en 35 minutes.
+
+Les Celtics ont compté 34 pour cent de tirs réussis et 13 lancers francs sur 18.  Evan
+Turner qui figurait dans l'alignement de départ a eu 16 points en 35 minutes avec neuf
+rebonds.  Jared Sullinger a fini avec neuf points en 32 minutes avec 15 rebonds.  Jae
+Crowder a eu huit points.
+
+Les 76ers ont compté 37 pour cent de tirs réussis et 11 lancers francs sur 15.  Hollis
+Thompson qui débutait la partie a enregistré 15 points.  Isaiah Canaan a contribué un
+efficace douze points en 32 minutes.  Robert Covington a terminé avec onze points a
+terminé avec un double-double.
+
+Le prochain affrontement des Celtics sera à domicile contre les Wizards de Washington
+vendredi. Vendredi prochain, les 76ers seront sur la route contre les Rockets de Houston.
+-------------------------
+*** English FStrings
+The Boston Celtics (8-7) overcame the Philadelphia 76ers (0-16) 84-80 on Wednesday at the
+TD Garden in Boston .
+
+The 76ers lead in the first half, but the Celtics managed to come back. Over the second
+half, Celtics dominated 76ers for points 44 to 33. In the second quarter, 76ers overcame
+Celtics for points 23 to 14. Over the fourth quarter, Celtics overcame 76ers for points 27
+to 18.
+
+Isaiah Thomas started this game and finished with 30 points in 38 minutes (11-21 FG, 4-7
+3Pt, 4-4 FT) while adding 6 assists. Jahlil Okafor was in the starting line-up and lead
+the way off the bench scoring 19 points in 35 minutes (7-17 FG, 0-1 3Pt, 5-5 FT).
+
+The Celtics show 34 percent from the field and 13-of-18 free throws. Evan Turner ended up
+with 16 points in 35 minutes (6-18 FG, 0-3 3Pt, 4-4 FT).  Jared Sullinger posted 9 points
+in 32 minutes and 15 rebounds.  Jae Crowder posted 8 points in 27 minutes and 8 rebounds.
+
+The 76ers show 37 percent from the field and 11-of-15 free throws. Hollis Thompson scored
+15 points in 32 minutes and 6-for-11.  Isaiah Canaan contributed an efficient 12 points in
+32 minutes and grabbing 5 rebounds.  Robert Covington posted 11 points in 35 minutes,
+grabbing 14 rebounds and performed a double-double.
+
+For their next game, the Celtics will play at home against the Washington Wizards on
+Friday. Next Friday, the 76ers will visit the Houston Rockets.
+-------------------------
+*** Reference summary
+The Boston Celtics (8-7) defeated the Philadelphia 76ers (0-16) 84-80 on Wednesday in yet
+another late-game collapse for Philly. . The Sixers played very well in this game, but
+choked it away late to extend their horrible losing-streak. The Celtics ended the game on
+an 18-3 run over the last six minutes and that's the Sixers season in a nutshell. Both
+teams shot poorly in this game, as they both shot below 38 percent from the field. This
+definitely wasn't a pretty game by any means, but Boston fans will be happy that they
+weren't the ones to allow that first elusive win to the Sixers. The Sixers usually lose
+games early, but when it's close at the end, they don't know how to finish games either.
+It's a sad reality for a team in a deep hole, but losses like these still have to be
+looked at positively. They were ahead for the majority of the second half and it was still
+one of their best performances of the year, despite the loss. Jahlil Okafor once again led
+the team in scoring, as he tallied 19 points and 11 rebounds in the defeat. He is
+definitely a major bright spot in a dark tunnel and Philly fans can be somewhat hopeful
+for the future with his strong play this season. Philadelphia will look to crack this
+losing-streak when they take on the struggling Houston Rockets on Friday. The Celtics
+played poorly on Wednesday, but somehow escaped with a win. Only two Boston players scored
+more than 10 points in this game and they were lucky to grab a win in such a poor
+performance. Despite the struggles, Isaiah Thomas had a great game, totaling 30 points,
+six assists and four rebounds in the victory. Evan Turner also had a nice game off the
+bench, as he collected 16 points, nine rebounds and three assists. Jared Sullinger also
+snatched 15 boards, so it wasn't all bad for Boston. The gritty nature to go on a big run
+and pull out a win like this late can be a huge momentum booster for a young team. They'll
+host a Washington Wizards team on Friday, who are coming off one of the biggest chokes of
+the season as well, as they scored six points in the fourth quarter in Wednesday's loss to
+the Charlotte Hornets..
+====================================================================================================

@@ -13,8 +13,14 @@ def set_games(g):
     games = g
 
 
-# tools to get information about the previous games in the current season
 
+####################################################################################
+#   Computation for "inter-event" facts according to the nomenclature of
+#   Upadhyay and Massie, Content Type Profiling of Data-to-text Genetation Datasets,
+#         COLING 2022
+#
+#  Get information about previous games in the current season
+#
 def get_team_info(game: Game, team_name: str) -> Team:
     if game.home().name() == team_name:
         return game.home()

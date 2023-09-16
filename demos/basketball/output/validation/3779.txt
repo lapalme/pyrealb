@@ -1,0 +1,153 @@
+***  3779:2017-11-26: Chicago Bulls receives Miami Heat  [93-100]
+
+                    |                                      Chicago Bulls (3-15)                                     
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|    4|   24|    3|    9|    2|    2|    1|   18|    3|    4|    2|    3|     |   13|     
+Q2                  |               60|   12|   22|    3|    5|    2|    2|    1|    6|   10|    2|    0|    3|     |   29|     
+Q3                  |               60|    8|   24|    3|    9|    0|    0|    2|   14|    5|    2|    0|    3|     |   19|     
+Q4                  |               60|    9|   19|    5|   10|    9|   12|    2|    9|    7|    2|    0|    5|     |   32|     
+H1                  |              120|   16|   46|    6|   14|    4|    4|    2|   24|   13|    6|    2|    6|     |   42|     
+H2                  |              120|   17|   43|    8|   19|    9|   12|    4|   23|   12|    4|    0|    8|     |   51|     
+game                |              240|   33|   89|   14|   33|   13|   16|    7|   47|   25|   10|    2|   13|   18|   93|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Jerian Grant        |False|     |   30|    8|   16|    3|    4|    5|    6|    1|    1|    3|    2|    0|    4|    4|   24|   -9
+Justin Holiday      |True |     |   36|    5|   14|    3|    9|    2|    2|    0|    3|    1|    1|    1|    1|    4|   15|    0
+Denzel Valentine    |True |doubl|   39|    5|   12|    4|    6|    0|    0|    2|   13|    7|    1|    0|    1|    3|   14|  -14
+Lauri Markkanen     |True |doubl|   31|    4|   10|    3|    7|    0|    0|    0|   10|    1|    0|    1|    0|    1|   11|    2
+Bobby Portis        |False|     |   23|    4|    8|    1|    2|    2|    2|    1|    5|    4|    0|    0|    2|    2|   11|  -13
+Robin Lopez         |True |     |   27|    5|   12|    0|    0|    0|    0|    3|    7|    3|    1|    0|    2|    0|   10|    5
+Antonio Blakeney    |False|     |   14|    1|    7|    0|    4|    1|    2|    0|    2|    1|    1|    0|    0|    0|    3|    8
+Paul Zipser         |False|     |   13|    1|    4|    0|    1|    1|    2|    0|    2|    2|    1|    0|    0|    2|    3|   -8
+Kris Dunn           |True |     |   23|    0|    6|    0|    0|    2|    2|    0|    4|    3|    3|    0|    3|    2|    2|   -6
+Quincy Pondexter    |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Cristiano Felício   |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Kay Felder          |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+                    |                                       Miami Heat (10-9)                                       
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|    2|   19|    1|    7|    2|    2|    0|   17|    2|    2|    2|    5|     |    7|     
+Q2                  |               60|   13|   19|    6|   11|    6|    7|    1|    8|    7|    2|    2|    2|     |   38|     
+Q3                  |               60|    7|   19|    1|    7|    4|    5|    0|   11|    3|    2|    1|    2|     |   19|     
+Q4                  |               60|   12|   18|    5|    7|    7|    9|    0|    9|    7|    3|    0|    3|     |   36|     
+H1                  |              120|   15|   38|    7|   18|    8|    9|    1|   25|    9|    4|    4|    7|     |   45|     
+H2                  |              120|   19|   37|    6|   14|   11|   14|    0|   20|   10|    5|    1|    5|     |   55|     
+game                |              240|   34|   75|   13|   32|   19|   23|    1|   45|   19|    9|    5|   12|   14|  100|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Goran Dragić        |True |     |   33|    7|   11|    4|    7|    6|    7|    0|    2|    3|    0|    0|    3|    3|   24|    5
+Wayne Ellington     |False|     |   29|    5|    8|    5|    8|    4|    4|    0|    2|    2|    1|    0|    1|    1|   19|    3
+James Johnson       |False|     |   28|    7|    9|    0|    1|    1|    2|    0|    7|    6|    2|    2|    0|    0|   15|   11
+Hassan Whiteside    |True |     |   21|    5|   11|    0|    0|    1|    2|    1|    9|    0|    1|    0|    0|    1|   11|    2
+Tyler Johnson       |False|     |   30|    3|    8|    2|    4|    2|    2|    0|    5|    2|    2|    2|    0|    4|   10|    4
+Kelly Olynyk        |False|     |   26|    3|    8|    1|    3|    3|    4|    0|    5|    2|    1|    0|    3|    4|   10|    5
+Dion Waiters        |True |     |   26|    2|   10|    1|    6|    2|    2|    0|    5|    1|    0|    0|    2|    0|    7|   -2
+Justise Winslow     |True |     |   19|    2|    5|    0|    0|    0|    0|    0|    8|    2|    1|    0|    0|    0|    4|   -4
+Josh Richardson     |True |     |   24|    0|    5|    0|    3|    0|    0|    0|    2|    1|    1|    1|    3|    1|    0|   11
+Derrick Walton      |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Jordan Mickey       |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Udonis Haslem       |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Bam Adebayo         |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+*** English jsRealB
+The Heat  (10-9) overcame the Bulls  (3-15) 100-93 in Chicago at the United Center on
+Sunday extending their winning streak to three games.
+
+During the second quarter, the Heat obtained better goals percentage, an advantage of 13%.
+In the fourth quarter, the Heat got better three-pointers percentage, a difference of 21%.
+
+Goran Dragić who was a starter finished with 24 points. Jerian Grant who started this game
+had an efficient performance scoring 24 points a personal record for the season in 30
+minutes with eight goals and three three-pointers.
+
+The Heat showed 45 percent from the field and 19-23 free throws.  Wayne Ellington who was
+a starter scored 19 points.  James Johnson scored 15 points with 7-for-9 FG, seven
+rebounds and six assists.  Dion Waiters added seven points.
+
+The Bulls showed 37 percent from the field and 13-16 free throws.  Justin Holiday who was
+a starter scored 15 points in 36 minutes with five goals and 3-of-9 from beyond the arc.
+Denzel Valentine had 14 points in 39 minutes with 5-for-12 FG, four three-pointers, 13
+rebounds, seven assists and performed a double-double.  Bobby Portis added eleven points
+with four assists.  Robin Lopez had ten points  (5-12 FG, 0-0 3Pt, 0-0 FT) and three
+assists.
+
+Next Tuesday, the Heat will visit the Cleveland Cavaliers. For their next game, the Bulls
+will be at home against the Phoenix Suns on Tuesday.
+-------------------------
+*** French jsRealB
+Le Heat  (10-9) a défait les Bulls  (3-15) 100-93 à Chicago dimanche au stade United
+Center leur permettant d'allonger à 3 leur série de victoires.
+
+Durant le deuxième quart, le Heat a obtenu les meilleurs lancers en pourcentage, 68% par
+rapport à 55%. Pendant le quatrième quart, le Heat a réussi les meilleurs lancers à 3
+points en pourcentage, un avantage de 21%.
+
+Goran Dragić qui était un partant a fini avec 24 points. Jerian Grant qui figurait dans
+l'alignement de départ a fini avec 24 points un record jusqu'ici en 30 minutes avec
+8-sur-16 L et trois lancers à trois points.
+
+Le Heat a compté 45 pour cent de tirs réussis et 19 lancers francs sur 23.  Wayne
+Ellington qui figurait dans l'alignement de départ a ajouté 19 points avec 5-sur-8 depuis
+la ligne de trois points.  James Johnson a eu 15 points  (7-9 L, 0-1 L3, 1-2 LF) tout en
+ajoutant six passes décisives.  Dion Waiters a fini avec sept points.
+
+Les Bulls ont compté 37 pour cent de tirs réussis et 13 lancers francs sur 16.  Justin
+Holiday qui figurait dans l'alignement de départ a ajouté 15 points en 36 minutes avec
+5-sur-14 L et trois tirs à trois points.  Denzel Valentine a contribué un efficace 14
+points en 39 minutes  (5-12 L, 4-6 L3, 0-0 LF) tout en ajoutant sept passes décisives et a
+terminé avec un double-double.  Bobby Portis a contribué un efficace onze points  (4-8 L,
+1-2 L3, 2-2 LF) et quatre passes décisives.  Robin Lopez a fini avec dix points avec trois
+passes décisives.
+
+Mardi prochain, le Heat accueillera les Cavaliers de Cleveland. À venir pour les Bulls, un
+match à domicile contre Phoenix.
+-------------------------
+*** English FStrings
+The Miami Heat (10-9) overcame the Chicago Bulls (3-15) 100-93 on Sunday at the United
+Center in Chicago  giving them their 3th straight victory.
+
+ Over the fourth quarter, Heat obtained a good three-pointers percentage 71% to 50%. In
+the fourth quarter, Heat got a good goals percentage 67% to 47%. During the second
+quarter, Heat got a good goals percentage 68% to 55%. In the second half, Heat obtained a
+good goals percentage 51% to 40%. During the second quarter, Heat dominated Bulls for
+points 38 to 29.
+
+Goran Dragić started this game and lead the way off the bench scoring 24 points in 33
+minutes (7-11 FG, 4-7 3Pt, 6-7 FT). Jerian Grant had efficient performance scoring 24
+points in 30 minutes, 8-for-16 and 3-for-4 from beyond the arc.
+
+The Heat show 45 percent from the field and 19-of-23 free throws. Wayne Ellington started
+this game and finished with 19 points in 29 minutes and 5-for-8 from beyond the arc.
+James Johnson finished with 15 points in 28 minutes, 7-for-9, grabbing 7 rebounds and 6
+assists.  Dion Waiters contributed an efficient 7 points in 26 minutes and grabbing 5
+rebounds.
+
+The Bulls show 37 percent from the field and 13-of-16 free throws. Justin Holiday posted
+15 points in 36 minutes (5-14 FG, 3-9 3Pt, 2-2 FT).  Denzel Valentine posted 14 points in
+39 minutes (5-12 FG, 4-6 3Pt, 0-0 FT) while adding 7 assists and performed a double-
+double.  Bobby Portis posted 11 points in 23 minutes (4-8 FG, 1-2 3Pt, 2-2 FT).  Robin
+Lopez ended up with 10 points in 27 minutes (5-12 FG, 0-0 3Pt, 0-0 FT).
+
+Up next, the Heat travel to Cleveland to take on the Cavaliers on Tuesday. The Bulls' next
+game will be at home against the Suns next Tuesday.
+-------------------------
+*** Reference summary
+The Miami Heat defeated the host Chicago Bulls, 100-93, at United Center on Sunday
+afternoon. After a deplorable first quarter, the Bulls led 13-7, as both teams combined to
+go 6-of-43 from the field. Things picked up in the second, where they Heat went off for 38
+points in the quarter, to take a 45-42 lead into halftime. They maintained their lead,
+taking a 64-61 advantage into the fourth quarter. Miami took to a 16-5 run midway through
+the quarter, however, it was still a five-point game with under four minutes to go. In the
+end, some clutch shooting by Goran Dragic down the stretch ensured their third straight
+win. Goran Dragic led the way for the Heat, with 24 points, three assists and two
+rebounds, in 33 minutes. Wayne Ellington continued his hot play, with 19 points on 5-of-8
+shooting, in 29 minutes off the bench. James Johnson filled the stat sheet, as he poured
+in 15 points, seven rebounds, six assists, two steals and two blocks, in 28 minutes off
+the bench. The Heat shot 45 percent from the field in the contest, including 13-of-32 from
+long range. Meanwhile, Denzel Valentine was close to a triple double, as he finished with
+14 points, a career-high 13 rebounds and a career-high seven assists, in 39 minutes.
+Jerian Grant poured in 24 points on 8-of-16 shooting, in 30 minutes off the bench. Lauri
+Markkanen followed up with 11 points and 10 rebounds, while Robin Lopez chipped in 10
+points, seven rebounds and three assists, in 27 minutes. The Bulls shot 37 percent from
+the field, including 14-of-33 from long range. This marks the fifth straight loss for
+Chicago. The Bulls will look to get back on track as they play host to the Suns on
+Tuesday. The Heat take on the Cavaliers in Cleveland on Tuesday.
+====================================================================================================

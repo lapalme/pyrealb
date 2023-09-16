@@ -1,0 +1,155 @@
+***  5322:2019-03-03: Charlotte Hornets receives Portland Trail Blazers  [108-118]
+
+                    |                                   Charlotte Hornets (29-34)                                   
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|    8|   20|    4|    9|    5|    6|    0|    9|    6|    2|    1|    3|     |   25|     
+Q2                  |               60|   10|   20|    2|    7|    3|    3|    1|   12|    8|    1|    1|    5|     |   25|     
+Q3                  |               60|   10|   23|    4|    7|    6|    7|    2|    8|    6|    3|    2|    3|     |   30|     
+Q4                  |               60|    9|   20|    4|   10|    6|    7|    1|    6|    5|    1|    1|    1|     |   28|     
+H1                  |              120|   18|   40|    6|   16|    8|    9|    1|   21|   14|    3|    2|    8|     |   50|     
+H2                  |              120|   19|   43|    8|   17|   12|   14|    3|   14|   11|    4|    3|    4|     |   58|     
+game                |              240|   37|   83|   14|   33|   20|   23|    4|   35|   25|    7|    5|   12|   21|  108|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Jeremy Lamb         |False|     |   34|    9|   13|    4|    4|    1|    1|    0|    5|    2|    0|    0|    3|    3|   23|    1
+Kemba Walker        |True |doubl|   38|    5|   21|    2|    9|    6|    6|    0|    0|   12|    0|    0|    4|    1|   18|  -14
+Frank Kaminsky      |False|     |   27|    5|   10|    2|    6|    6|    7|    0|    7|    0|    0|    0|    2|    3|   18|   15
+Tony Parker         |False|     |   13|    5|    8|    1|    2|    3|    4|    0|    0|    5|    0|    0|    1|    1|   14|    2
+Miles Bridges       |True |     |   16|    4|    7|    2|    4|    0|    0|    1|    5|    0|    0|    0|    0|    2|   10|   -8
+Cody Zeller         |True |     |   21|    4|   10|    0|    0|    1|    2|    1|    3|    1|    2|    1|    0|    3|    9|  -25
+Nicolas Batum       |True |     |   41|    2|    7|    2|    5|    2|    2|    0|    4|    3|    3|    0|    0|    3|    8|  -12
+Marvin Williams     |True |     |   28|    2|    6|    1|    3|    1|    1|    1|    2|    1|    2|    3|    1|    2|    6|  -17
+Bismack Biyombo     |False|     |   16|    1|    1|    0|    0|    0|    0|    1|    9|    1|    0|    1|    1|    3|    2|    8
+Willy Hernangómez   |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Shelvin Mack        |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Malik Monk          |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Michael Kidd-Gilchri|False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+                    |                                 Portland Trail Blazers (39-24)                                
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|   13|   29|    4|   12|    2|    2|    6|   16|    9|    2|    1|    2|     |   32|     
+Q2                  |               60|    8|   22|    1|    5|    7|    8|    2|   10|    7|    3|    1|    1|     |   24|     
+Q3                  |               60|    9|   23|    3|    8|    4|    5|    3|   12|    6|    3|    1|    5|     |   25|     
+Q4                  |               60|   13|   22|    3|    7|    8|    8|    2|   10|    4|    1|    0|    3|     |   37|     
+H1                  |              120|   21|   51|    5|   17|    9|   10|    8|   26|   16|    5|    2|    3|     |   56|     
+H2                  |              120|   22|   45|    6|   15|   12|   13|    5|   22|   10|    4|    1|    8|     |   62|     
+game                |              240|   43|   96|   11|   32|   21|   23|   13|   48|   26|    9|    3|   11|   23|  118|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Rodney Hood         |False|     |   24|    9|   14|    3|    6|    6|    6|    0|    1|    2|    2|    0|    0|    1|   27|   -2
+Jusuf Nurkić        |True |doubl|   28|    8|   13|    0|    0|   10|   11|    3|   15|    6|    2|    1|    2|    4|   26|   21
+Damian Lillard      |True |     |   35|    9|   20|    4|   10|    1|    1|    1|    3|    2|    2|    0|    2|    4|   23|    5
+Al-Farouq Aminu     |True |     |   31|    6|    9|    1|    3|    1|    1|    2|    6|    4|    0|    0|    4|    3|   14|   18
+Seth Curry          |False|     |   12|    3|    5|    1|    2|    1|    2|    0|    1|    0|    0|    1|    0|    1|    8|    7
+CJ McCollum         |True |     |   34|    2|   13|    2|    4|    0|    0|    1|    2|    6|    0|    1|    3|    1|    6|   20
+Maurice Harkless    |True |     |   22|    3|    8|    0|    1|    0|    0|    2|    8|    3|    2|    0|    0|    2|    6|   10
+Enes Kanter         |False|     |   18|    2|    8|    0|    2|    2|    2|    3|    8|    2|    1|    0|    0|    1|    6|  -13
+Jake Layman         |False|     |   17|    1|    4|    0|    2|    0|    0|    1|    3|    1|    0|    0|    0|    3|    2|   -8
+Zach Collins        |False|     |   15|    0|    2|    0|    2|    0|    0|    0|    1|    0|    0|    0|    0|    3|    0|   -8
+Meyers Leonard      |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Skal Labissière     |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Anfernee Simons     |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+*** English jsRealB
+The Trail Blazers  (39-24) took down the Hornets  (29-34) 118-108 in Charlotte on Sunday
+at the Spectrum Center.
+
+This was a dominating win for the Trail Blazers, as it came in wire-to-wire fashion. Over
+the second quarter, the Hornets obtained better goals percentage, 50% to 36%. During the
+fourth quarter, the Trail Blazers obtained better free throws percentage, an advantage of
+14%. The Trail Blazers overcame the Hornets for rebounds 48 to 35 over the game.
+
+Rodney Hood who was in the starting line-up finished with 27 points a personal record for
+the season. Jeremy Lamb who was a starter led the way, posting 23 points in 34 minutes.
+
+The Trail Blazers showed 44 percent from the field and 21-23 free throws.  Jusuf Nurkić
+who was a starter finished with 26 points in 28 minutes  (8-13 FG, 0-0 3Pt, 10-11 FT)
+while adding six assists and performed a double-double.  Al-Farouq Aminu added 14 points
+(6-9 FG, 1-3 3Pt, 1-1 FT) and four assists.  CJ McCollum posted six points with six
+assists.  Maurice Harkless had six points  (3-8 FG, 0-1 3Pt, 0-0 FT) and three assists.
+Enes Kanter added six points with two assists.
+
+The Hornets showed 44 percent from the field and 20-23 free throws.  Kemba Walker who
+started this game ended up with 18 points  (5-21 FG, 2-9 3Pt, 6-6 FT) and twelve assists
+and performed a double-double.  Frank Kaminsky recorded 18 points with seven rebounds.
+
+Next Tuesday, the Trail Blazers will visit the Memphis Grizzlies. For their next game, the
+Hornets will receive the Miami Heat on Wednesday.
+-------------------------
+*** French jsRealB
+Les Trail Blazers  (39-24) ont battu les Hornets  (29-34) 118-108 à Charlotte dimanche au
+stade Spectrum Center.
+
+Les Trail Blazers ont mené pendant les quatre quarts. Pendant le deuxième quart, les
+Hornets ont réussi les meilleurs lancers en pourcentage, un avantage de 14%. Durant le
+quatrième quart, les Trail Blazers ont obtenu les meilleurs lancers francs en pourcentage,
+100% en comparaison avec 86%. Les Trail Blazers ont dominé les Hornets pour les rebonds 48
+à 35 durant la partie.
+
+Rodney Hood qui figurait dans l'alignement de départ a mené son équipe marquant 27 points
+un record jusqu'ici avec neuf tirs réussis. Jeremy Lamb qui figurait dans l'alignement de
+départ a fini avec 23 points en 34 minutes.
+
+Les Trail Blazers ont compté 44 pour cent de tirs réussis et 21 lancers francs sur 23.
+Jusuf Nurkić qui figurait dans l'alignement de départ a fini avec 26 points en 28 minutes
+(8-13 L, 0-0 L3, 10-11 LF) et six passes décisives et a terminé avec un double-double.
+Al-Farouq Aminu a ajouté 14 points avec six tirs réussis et quatre passes décisives.  CJ
+McCollum a terminé avec six points  (2-13 L, 2-4 L3, 0-0 LF) tout en ajoutant six passes
+décisives.  Maurice Harkless a fini avec six points avec huit rebonds et trois passes
+décisives.  Enes Kanter a fini avec six points  (2-8 L, 0-2 L3, 2-2 LF) et deux passes
+décisives.
+
+Les Hornets ont compté 44 pour cent de tirs réussis et 20 lancers francs sur 23.  Kemba
+Walker qui débutait la partie a eu 18 points avec douze passes décisives et a terminé avec
+un double-double.  Frank Kaminsky a terminé avec 18 points.
+
+Ensuite les Trail Blazers voyageront à Memphis pour affronter les Grizzlies mardi. Pour
+leur prochain affrontement, les Hornets seront à domicile contre le Heat de Miami
+mercredi.
+-------------------------
+*** English FStrings
+The Portland Trail Blazers (39-24) defeated the Charlotte Hornets (29-34) 118-108 on
+Sunday at the Spectrum Center in Charlotte .
+
+The Trail Blazers lead in all four quarters. Over the second quarter, Hornets got a good
+goals percentage 50% to 36%. During the fourth quarter, Trail Blazers obtained a good
+goals percentage 59% to 45%. In the fourth quarter, Trail Blazers obtained a good free
+throws percentage 100% to 86%. During the game, Trail Blazers overcame Hornets for
+rebounds 48 to 35. During the fourth quarter, Trail Blazers overcame Hornets for points 37
+to 28. Over the second half, Trail Blazers overcame Hornets for rebounds 22 to 14.
+
+Rodney Hood finished with 27 points in 24 minutes and 9 goals. Jeremy Lamb was in the
+starting line-up and lead the way with 23 points in 34 minutes (9-13 FG, 4-4 3Pt, 1-1 FT).
+
+The Trail Blazers show 44 percent from the field and 21-of-23 free throws. Jusuf Nurkić
+was a starter and contributed an efficient 26 points in 28 minutes, 8-for-13, 15 rebounds,
+6 assists and performed a double-double.  Al-Farouq Aminu contributed an efficient 14
+points in 31 minutes (6-9 FG, 1-3 3Pt, 1-1 FT).  CJ McCollum ended up with 6 points in 34
+minutes and 6 assists.  Maurice Harkless recorded 6 points in 22 minutes (3-8 FG, 0-1 3Pt,
+0-0 FT).  Enes Kanter contributed an efficient 6 points (2-8 FG, 0-2 3Pt, 2-2 FT).
+
+The Hornets show 44 percent from the field and 20-of-23 free throws. Kemba Walker was in
+the starting line-up and posted 18 points in 38 minutes, 12 assists and performed a
+double-double.  Frank Kaminsky posted 18 points in 27 minutes (5-10 FG, 2-6 3Pt, 6-7 FT).
+
+Up next, the Trail Blazers travel to Memphis to take on the Grizzlies on Tuesday. The
+Hornets' next game will be at home against the Heat next Wednesday.
+-------------------------
+*** Reference summary
+The Portland Trail Blazers defeated the Charlotte Hornets, 118-108, at Spectrum Center on
+Sunday. The Trail Blazers (39-24) and the Hornets (29-34) played a surprisingly tight
+encounter although judging how the game happened, the Blazers always looked on top of the
+game. Portland jumped to a 32-25 lead in the first quarter and they were set to cruise
+their way, but Charlotte responded and won both the second and third quarters, 25-24 and
+30-25, so the fourth quarter began with a one-point differential. But the Blazers stepped
+it up and closed things out with a strong 37-28 period that gave the Western Conference
+franchise their sixth win in their last seven games. Damian Lillard had a strong game for
+the Blazers and filled the stat sheet admirably, since he ended with 23 points, three
+rebounds, two assists and two steals. However, the best player was Jusuf Nurkic since he
+ended with 26 points, 15 rebounds, six assists and two steals. Al-Farouq Aminu had 14
+points with six rebounds and four dimes. Rodney Hood impressed and was the top scorer
+despite coming off the bench thanks to his 27 points. Kemba Walker delivered a double-
+double thanks to 18 points and 12 rebounds in this game, but it wasn't enough for the
+Hornets. Miles Bridges was the only other starter who scored in double digits since he had
+10 points, but most of the offense came through the bench. Jeremy Lamb led the way with 23
+points, while Frank Kaminsky had 18 points with seven boards. Tony Parker added 14 points
+with five assists.
+====================================================================================================

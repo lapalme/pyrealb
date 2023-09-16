@@ -1,0 +1,175 @@
+***  4013:2018-03-13: Atlanta Hawks receives Oklahoma City Thunder  [107-119]
+
+                    |                                     Atlanta Hawks (20-48)                                     
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|   11|   26|    3|   12|    3|    3|    5|   13|    9|    2|    1|    2|     |   28|     
+Q2                  |               60|   11|   19|    3|    5|   13|   15|    2|   12|    7|    2|    1|    2|     |   38|     
+Q3                  |               60|    8|   22|    4|    7|    2|    2|    2|    9|    4|    0|    1|    4|     |   22|     
+Q4                  |               60|    7|   20|    3|    7|    2|    4|    4|   13|    6|    1|    2|    7|     |   19|     
+H1                  |              120|   22|   45|    6|   17|   16|   18|    7|   25|   16|    4|    2|    4|     |   66|     
+H2                  |              120|   15|   42|    7|   14|    4|    6|    6|   22|   10|    1|    3|   11|     |   41|     
+game                |              240|   37|   87|   13|   31|   20|   24|   13|   47|   26|    5|    5|   15|   25|  107|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Taurean Waller-Princ|True |     |   33|    9|   20|    3|    8|    4|    4|    1|    8|    3|    1|    2|    2|    0|   25|  -16
+Dennis Schröder     |True |     |   33|    6|   16|    1|    3|    5|    8|    1|    2|    8|    0|    0|    1|    3|   18|  -25
+Damion Lee          |False|     |   17|    4|    8|    2|    4|    3|    4|    0|    4|    2|    1|    0|    1|    1|   13|    9
+Isaiah Taylor       |False|     |   20|    3|    9|    0|    2|    6|    6|    2|    3|    4|    1|    0|    3|    6|   12|    0
+John Collins        |True |     |   30|    5|   10|    0|    0|    0|    0|    3|    9|    2|    0|    1|    3|    6|   10|  -22
+Andrew White        |False|     |   20|    3|    4|    3|    4|    0|    0|    1|    5|    0|    0|    0|    1|    1|    9|    6
+Mike Muscala        |False|     |   23|    2|    6|    1|    2|    2|    2|    2|    6|    3|    0|    2|    1|    4|    7|    3
+Dewayne Dedmon      |True |     |   27|    2|    4|    1|    2|    0|    0|    1|    6|    1|    2|    0|    2|    0|    5|  -16
+Tyler Dorsey        |True |     |   18|    2|    7|    1|    5|    0|    0|    0|    1|    2|    0|    0|    1|    2|    5|  -10
+Tyler Cavanaugh     |False|     |   14|    1|    3|    1|    1|    0|    0|    2|    3|    1|    0|    0|    0|    2|    3|   11
+Miles Plumlee       |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Josh Magette        |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+DeAndre' Bembry     |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+                    |                                 Oklahoma City Thunder (41-29)                                 
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|   12|   23|    3|    9|    4|    7|    3|   12|    6|    2|    4|    2|     |   31|     
+Q2                  |               60|    9|   23|    3|    8|    2|    2|    2|    7|    5|    2|    2|    3|     |   23|     
+Q3                  |               60|   13|   25|    6|    9|    4|    5|    2|   10|   10|    2|    2|    1|     |   36|     
+Q4                  |               60|    8|   18|    4|    9|    9|   11|    2|    9|    6|    3|    3|    1|     |   29|     
+H1                  |              120|   21|   46|    6|   17|    6|    9|    5|   19|   11|    4|    6|    5|     |   54|     
+H2                  |              120|   21|   43|   10|   18|   13|   16|    4|   19|   16|    5|    5|    2|     |   65|     
+game                |              240|   42|   89|   16|   35|   19|   25|    9|   38|   27|    9|   11|    7|   21|  119|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Russell Westbrook   |True |tripl|   35|   12|   20|    0|    0|    8|   10|    4|   12|   12|    1|    1|    4|    3|   32|   20
+Carmelo Anthony     |True |     |   29|    7|   15|    6|   11|    1|    1|    0|    4|    0|    0|    3|    1|    1|   21|   31
+Jerami Grant        |False|     |   32|    8|   14|    2|    4|    2|    2|    1|    5|    1|    2|    2|    0|    3|   20|   16
+Paul George         |True |     |   25|    5|   12|    2|    5|    0|    1|    0|    4|    3|    1|    0|    1|    1|   12|   15
+Patrick Patterson   |False|     |   18|    3|    4|    2|    3|    4|    6|    1|    2|    0|    0|    1|    0|    4|   12|  -19
+Corey Brewer        |True |     |   32|    2|    6|    1|    2|    2|    2|    1|    2|    4|    3|    2|    0|    4|    7|   26
+Raymond Felton      |False|     |   20|    2|    9|    1|    6|    1|    1|    0|    2|    5|    1|    0|    0|    2|    6|    6
+Dakari Johnson      |True |     |    6|    1|    1|    0|    0|    1|    2|    1|    2|    0|    0|    0|    0|    1|    3|    5
+Álex Abrines        |False|     |   14|    1|    4|    1|    3|    0|    0|    0|    2|    1|    1|    1|    0|    0|    3|  -14
+Josh Huestis        |False|     |    5|    1|    1|    1|    1|    0|    0|    0|    0|    0|    0|    0|    0|    1|    3|    2
+Terrance Ferguson   |False|     |   16|    0|    2|    0|    0|    0|    0|    1|    3|    1|    0|    1|    0|    0|    0|  -17
+Nick Collison       |False|     |    2|    0|    1|    0|    0|    0|    0|    0|    0|    0|    0|    0|    1|    1|    0|   -7
+Daniel Hamilton     |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|   -4
+
+*** English jsRealB
+The Thunder  (41-29) overcame the Hawks  (20-48) 119-107 on Tuesday at the Philips Arena
+in Atlanta giving them their fourth straight victory.
+
+The Hawks led in the first half but the Thunder managed to come back. Over the second
+quarter, the Hawks got better goals percentage, an advantage of 19%. Over the first half,
+the Hawks obtained better free throws percentage, an advantage of 22%. The Thunder
+dominated the Hawks for points 65 to 41 in the second half.
+
+Russell Westbrook who was in the starting line-up led the way scoring 32 points performed
+a triple-double. Taurean Waller-Prince who was a starter had an efficient performance
+scoring 25 points in 33 minutes with nine goals, 3-of-8 from beyond the arc, eight
+rebounds and three assists.
+
+The Thunder showed 47 percent from the field and 19-25 attempts at the charity stripe.
+Carmelo Anthony who was in the starting line-up scored 21 points.  Jerami Grant had 20
+points a personal record for the season in 32 minutes with eight goals and 2-for-4 from
+beyond the arc.  Corey Brewer had seven points in 32 minutes  (2-6 FG, 1-2 3Pt, 2-2 FT)
+and four assists.
+
+The Hawks showed 42 percent from the field and 20-24 attempts at the charity stripe.
+Dennis Schröder who was a starter ended up with 18 points in 33 minutes  (6-16 FG, 1-3
+3Pt, 5-8 FT) while adding eight assists.  Mike Muscala scored seven points in 23 minutes
+(2-6 FG, 1-2 3Pt, 2-2 FT) and three assists.  Dewayne Dedmon ended up with five points in
+27 minutes with one three-pointer.
+
+The Thunder' next game will be at home against the Los Angeles Clippers on Friday. The
+Hawks' next game will be at home against the Charlotte Hornets on Thursday.
+-------------------------
+*** French jsRealB
+Le Thunder  (41-29) a défait les Hawks  (20-48) 119-107 au stade Philips Arena mardi à
+Atlanta leur permettant d'allonger à 4 leur série de victoires.
+
+Les Hawks ont mené dans la première demie mais le Thunder est parvenu à revenir. Pendant
+le deuxième quart, les Hawks ont réussi les meilleurs lancers en pourcentage, une
+différence de 19%. Durant la première demie, les Hawks ont réussi les meilleurs lancers
+francs en pourcentage, un avantage de 22%. Le Thunder a dominé les Hawks pour les points
+par 24 pendant la deuxième demie.
+
+Russell Westbrook qui était un partant a réalisé une performance excellente comptant 32
+points a terminé avec un triple-double. Taurean Waller-Prince qui débutait la partie a
+fini avec 25 points en 33 minutes  (9-20 L, 3-8 L3, 4-4 LF) tout en ajoutant trois passes
+décisives.
+
+Le Thunder a compté 47 pour cent de tirs réussis et 19 lancers francs sur 25.  Carmelo
+Anthony qui était un partant a enregistré 21 points avec six tirs à trois points.  Jerami
+Grant a contribué un efficace 20 points un record pour la saison en 32 minutes avec
+8-sur-14 L et 2-sur-4 depuis la ligne de trois points.  Corey Brewer a fini avec sept
+points en 32 minutes  (2-6 L, 1-2 L3, 2-2 LF) tout en ajoutant quatre passes décisives.
+
+Les Hawks ont compté 42 pour cent de tirs réussis et 20 lancers francs sur 24.  Dennis
+Schröder qui débutait la partie a ajouté 18 points en 33 minutes avec huit passes
+décisives.  Mike Muscala a enregistré sept points en 23 minutes  (2-6 L, 1-2 L3, 2-2 LF)
+tout en ajoutant trois passes décisives.  Dewayne Dedmon a fini avec cinq points en 27
+minutes.
+
+Pour leur prochain match, le Thunder accueillera les Clippers de Los Angeles vendredi. À
+venir pour les Hawks, un match à domicile contre Charlotte.
+-------------------------
+*** English FStrings
+The Oklahoma City Thunder (41-29) defeated the Atlanta Hawks (20-48) 119-107 on Tuesday at
+the Philips Arena in Atlanta  giving them their 4th straight victory.
+
+The Hawks lead in the first half, but the Thunder managed to come back. Over the second
+half, Thunder dominated Hawks for points 65 to 41. In the first half, Hawks obtained a
+good free throws percentage 89% to 67%. In the second quarter, Hawks got a good goals
+percentage 58% to 39%. During the third quarter, Thunder obtained a good goals percentage
+52% to 36%. During the second quarter, Hawks dominated Thunder for points 38 to 23. In the
+third quarter, Thunder dominated Hawks for points 36 to 22. During the second half,
+Thunder got a good goals percentage 49% to 36%. Over the first half, Hawks overcame
+Thunder for points 66 to 54. During the fourth quarter, Thunder dominated Hawks for points
+29 to 19.
+
+Russell Westbrook scored a game high with 32 points in 35 minutes and performed a triple-
+double. Taurean Waller-Prince had efficient performance scoring 25 points in 33 minutes,
+9-for-20, 3 three-pointers, grabbing 8 rebounds and 3 assists.
+
+The Thunder show 47 percent from the field and 19-of-25 free throws. Carmelo Anthony
+recorded 21 points in 29 minutes (7-15 FG, 6-11 3Pt, 1-1 FT).  Jerami Grant scored 20
+points in 32 minutes (8-14 FG, 2-4 3Pt, 2-2 FT).  Corey Brewer posted 7 points in 32
+minutes (2-6 FG, 1-2 3Pt, 2-2 FT).
+
+The Hawks show 42 percent from the field and 20-of-24 free throws. Dennis Schröder was a
+starter and finished with 18 points in 33 minutes and 8 assists.  Mike Muscala scored 7
+points in 23 minutes, grabbing 6 rebounds and 3 assists.  Dewayne Dedmon scored 5 points
+in 27 minutes (2-4 FG, 1-2 3Pt, 0-0 FT).
+
+The Thunder' next game will be at home against the Clippers next Friday. The Hawks' next
+game will be at home against the Hornets next Thursday.
+-------------------------
+*** Reference summary
+The Oklahoma City Thunder defeated the Atlanta Hawks, 119-107, at Philips Arena on Tuesday
+evening. The Thunder (41-29) came into the contest with a markedly better record and
+prospectus than the Hawks (20-48), but with a reputation for struggling against inferior
+opponents from time to time as well, especially on the road. Like clockwork, that
+deficiency seemed to rear its ugly head in the first half, as Atlanta forged an eye-
+opening 66-54 halftime advantage. That seemed to be a wake-up call for the visitors, which
+bounced back to not only erase the entirety of their 12-point deficit, but actually garner
+a slim two-point advantage heading into the final 12 minutes. However, OKC simply couldn't
+shake their feisty hosts for more than the first half of the fourth quarter, and the game
+stood knotted at 103-103 with 5:18 remaining following a Taurean Prince 25-foot three-
+pointer. That's when the Thunder finally exerted their will, rattling off a jaw-dropping
+160 run over the ensuing 4:24 that put the contest out of reach. They were able to prevail
+without some key personnel, ast starting center Steven Adams (hip) missed the contest and
+Paul George suffered an in-game groin injury. Russell Westbrook paced the Thunder with a
+32-point, 12-rebound, 12-assist triple-double-- the 100th of his career-- and also
+included one steal and one block. Carmelo Anthony followed with 21 points, four rebounds
+and three blocks. Jerian Grant managed 20 points, five boards, one assist, two steals and
+two blocks. George contributed 12 points, four rebounds, three assists and one steal in 26
+minutes before exiting. Patrick Patterson matched George's scoring total off the bench and
+complemented it with two rebounds and one block. Corey Brewer drew another start at
+shooting guard and mustered seven points, four assists, two rebounds, three steals and two
+blocks. Dakari Johnson drew the start for Adams but only managed three points and two
+boards. Prince led the way for the Hawks with 25 points, a total he supplemented with
+eight boards, three assists, two blocks and one steal. Dennis Schroder generated 18
+points, eight assists and two boards. Damion Lee paced the second unit with 13 points and
+also hauled in four rebounds, dished out two assists and recorded one steal. Isaiah Taylor
+was right behind him with 12 points, which he complemented with four assists, three
+rebounds and one steal. Andrew White III was productive off the bench with nine points and
+five rebounds across 20 minutes. Dewayne Dedmon (five points, six rebounds, one assist and
+two steals) and Tyler Dorsey (five points, two assists, one rebound) made modest
+contributions as starters. The Thunder head back home to engage in a Friday night showdown
+with the Clippers, while the Hawks remain home to tangle with the Charlotte Hornets on
+Thursday evening.
+====================================================================================================

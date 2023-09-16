@@ -227,7 +227,7 @@ class Constituent():
             self.addOptSource("tag",name)
             attrs={}
         else:
-            self.optSource+=f'.tag("{name}",{str(attrs)})' # specila case of addOptionSource
+            self.optSource+=f'.tag("{name}",{str(attrs)})' # special case of addOptionSource
         if "tag" not in self.props:self.props["tag"]=[]
         self.props["tag"].append([name,attrs])
         return self

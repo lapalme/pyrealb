@@ -1,10 +1,7 @@
 from Games import Games
-from Game import Game
 from Team import Team, period_names
-from Player import Player
 from random import sample
 from Score import Score
-
 import re
 
 games = None
@@ -14,22 +11,27 @@ def set_games(g):
     global games
     games = g
 
-# was useful for focusing on team performance sentences in reference summaries
-def filter_references(game):
-    # show reference sentences without any player name
-    player_names = set()
-    for t in [game.home(), game.visitors()]:
-        for n in t.player_names():
-            for w in re.split(r"\W", n):
-                if len(w) > 1:
-                    player_names.add(w)
-    player_names_re = re.compile(r"\b(" + "|".join(list(player_names)) + r")\b")
-    return [sent for sent in game.reference_sentences()[0].split("\n")
+####################################################################################
+#   Computation for "intra-event complex" facts according to the nomenclature of
+#   Upadhyay and Massie, Content Type Profiling of Data-to-text Genetation Datasets,
+#         COLING 2022
+# Compute some word statistics to try to show that the validation and training corpora
+# are different from the training in the number of words, but finally inconclusive
+# as there were some little differences, but not enough to be convincing
+# (although I did not compute the confidence intervals)
+def word_stats(game):
+    def filter_references(game):
+        # show reference sentences without any player name
+        player_names = set()
+        for t in [game.home(), game.visitors()]:
+            for n in t.player_names():
+                for w in re.split(r"\W", n):
+                    if len(w) > 1:
+                        player_names.add(w)
+        player_names_re = re.compile(r"\b(" + "|".join(list(player_names)) + r")\b")
+        return [sent for sent in game.reference_sentences()[0].split("\n")
                 if player_names_re.search(sent) is None]
 
-# compute some word statistics to try to show that the validation and training corpora
-# are different from the training in the number of words, but finally inconclusive
-def word_stats(game):
     sents = game.reference_sentences()[0].split("\n")
     words = [w for s in sents for w in re.split(r"\W",s) if len(w)>0]
     # print(words)
@@ -46,11 +48,22 @@ def word_starts_split(split):
         print(f"{gid:5}\t{game.date().strftime('%Y-%m-%d')}\t"
               f"{nb_sents:5}\t{nb_words}\t{nb_sentsF}\t{nb_words_F}")
 
+
+# Compute "interesting" statistics between scores of the winner and the loser
 def interesting_stats(winner_scores: dict[str,Score], loser_scores: dict[str,Score]) -> [tuple[str,str,int,int,int]]:
     fns = ["goals", "goals3", "free_throws", "rebounds", "assists", "steals","blocks",
            "turnovers","fouls","points"]
-    thresholds_def = 5
-    thresholds = {"assists":10,"steals":3,"blocks":3,"turnovers":6}
+
+    # Absolute and difference thresholds for scores considered interesting for a given quarter
+    # the thresholds apply to the scores of both teams and their differences
+    # these threshold are multiplied by 1.5 for a half and by 2 for a game
+    # Differences are also computed for ratios between "attempted" and "made"
+    # in percentage as an int between 0 and 100,
+    # for "goals", "goals3" and "free_throws"
+    # a fact is a 5-tuple (period,score_name,winner_val,loser_val,difference)
+    # the interesting facts are sorted in descending order by the absolute value of the difference
+    thresholds = {"assists":10,"steals":3,"blocks":3,"turnovers":6} # specific thresholds
+    thresholds_def = 5                                              # default threshold
 
     def ratio(sc, fn) -> int:
         denom = getattr(sc, fn + "_attempted")()
@@ -80,14 +93,16 @@ def interesting_stats(winner_scores: dict[str,Score], loser_scores: dict[str,Sco
                 interesting.append((period,fn+"%",win_ratio,loser_ratio,win_ratio-loser_ratio))
     return sorted(interesting,key=lambda vals:abs(vals[4]),reverse=True) # sort descending by last value of tuple
 
+# keep only the best interesting facts, at most 5:
+#   - keep the tuple with the best difference
+#   - remove other tuple of the same period and score to avoid repetition
+#   - loop until there are no more facts left
+# sort the selected facts "chronologically" by period (first element of the tupple)
 def get_most_interesting(interesting) -> [tuple[str,str,int,int,int]]:
-    # print("show_team_facts")
-    # print("\n".join(str(f) for f in interesting))
     out = []
     # find the most interesting facts
     most_interesting = []
-    nb_interesting = 0
-    while nb_interesting < 5 and len(interesting) > 0:
+    while len(most_interesting) < 4 and len(interesting) > 0:
         fact = interesting.pop(0)
         most_interesting.append(fact)
         # filter to avoid repeating info about the same aspect or period
@@ -110,11 +125,12 @@ if __name__ == "__main__":
     keys_sample = sample(games.keys(), k=1)
     for key in keys_sample:
         game = games[key]
-        # print(game.show_title())
-        # print(game.home().show(False))
-        # print(game.visitors().show(False))
-        # for interesting in interesting_stats(game.winner().period_scores, game.loser().period_scores):
-        #     print(interesting)
-        # filter_references(game)
-        print(word_stats(game))
-        print("=====")
+        print(game.show_title())
+        print(game.home().show(False))
+        print(game.visitors().show(False))
+        interesting = interesting_stats(game.winner().period_scores, game.loser().period_scores)
+        print("\n".join(map(str,interesting)))
+        print("---- most interesting ---")
+        print("\n".join(map(str,get_most_interesting(interesting))))
+        # print(word_stats(game))
+        # print("=====")

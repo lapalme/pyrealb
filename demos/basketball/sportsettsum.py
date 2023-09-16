@@ -1,11 +1,11 @@
 from datetime import datetime
 from random import sample
 from itertools import accumulate
-from stats import is_high, player_has_statistics
 from textwrap import wrap
 
 from Games import Games
 from Team import Team
+from global_stats import is_high, player_has_statistics
 from seasons_stats import winning_streak, losing_streak, set_games
 from game_stats import interesting_stats
 from FStrings import FStrings
@@ -40,19 +40,6 @@ def turning_points(winner, loser) -> (Team, Team, bool, bool, bool, bool):
     always_lead = all(winner_cum[i] > loser_cum[i] for i in range(0, 4))
     return (winner, loser, overtime, loser_lead_in_first_half,
             loser_lead_in_second_half, always_lead)
-
-
-# diff_threshold = 5  # threshold for an "interesting" difference in scores
-# def game_unfolding(winner, loser):
-#     diffs_q = [0]  # dummy 0 element
-#     for i in [1, 2, 3, 4]:
-#         q = "Q" + str(i)
-#         diffs_q.append(winner.get_points(q) - loser.get_points(q))
-#     diffs_h = [0]  # dummy 0 element
-#     for i in [1, 2]:
-#         h = "H" + str(i)
-#         # difference in % field goals, field goals 3 or in number of rebounds
-#         diffs_h.append(winner.get_points(h) - loser.get_points(h))
 
 
 def next_game(team) -> (datetime, Team, bool, Team):
@@ -104,7 +91,8 @@ def summarize(realizer, game) -> str:
     paras.append(
         realizer.show_player_perf(winner_players[0],
                                   realizer.best_player_VP,
-                                  winner_players[0].starter()) +
+                                  winner_players[0].starter())
+        +
         realizer.show_player_perf(loser_players[0],
                                   realizer.best_player_VP,
                                   loser_players[0].starter())
@@ -204,20 +192,20 @@ def make_sample(split, k=10):
 
 
 if __name__ == "__main__":
-    # for split in ["train", "validation", "test"]:
-    #     make_sample(split, k=10)
+    for split in ["train", "validation", "test"]:
+        make_sample(split, k=10)
 
     # for a single test...
-    split = "train"
-    games = Games(split)
-    set_games(games)
-    # keys_sample = sample(games.keys(), k=10)
-    # keys_sample = ["5274"] # test example of Thomson et. al. (INLG2023)
-    keys_sample = ["1"] # train example used in the document
-    print(f"Split: {split}")
-    for key in keys_sample:
-        print(show_summaries(games[key], [
-            English(),
-            French(),
-            FStrings(),
-        ], show_data=True, show_refs=True))
+    # split = "train"
+    # games = Games(split)
+    # set_games(games)
+    # # keys_sample = sample(games.keys(), k=10)
+    # # keys_sample = ["5274"] # test example of Thomson et. al. (INLG2023)
+    # keys_sample = ["1"] # train example used in the document
+    # print(f"Split: {split}")
+    # for key in keys_sample:
+    #     print(show_summaries(games[key], [
+    #         English(),
+    #         French(),
+    #         FStrings(),
+    #     ], show_data=True, show_refs=True))

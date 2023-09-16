@@ -1,0 +1,151 @@
+***  5921:2018-12-28: Phoenix Suns receives Oklahoma City Thunder  [102-118]
+
+                    |                                      Phoenix Suns (9-27)                                      
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|   11|   25|    3|    7|    4|    5|    3|    9|    7|    4|    1|    6|     |   29|     
+Q2                  |               60|   11|   24|    2|    6|    4|    4|    2|   12|    6|    3|    2|    4|     |   28|     
+Q3                  |               60|   11|   22|    3|    9|    2|    2|    1|    9|    6|    3|    3|    3|     |   27|     
+Q4                  |               60|    6|   19|    1|    7|    5|    5|    1|    4|    3|    2|    1|    4|     |   18|     
+H1                  |              120|   22|   49|    5|   13|    8|    9|    5|   21|   13|    7|    3|   10|     |   57|     
+H2                  |              120|   17|   41|    4|   16|    7|    7|    2|   13|    9|    5|    4|    7|     |   45|     
+game                |              240|   39|   90|    9|   29|   15|   16|    7|   34|   22|   12|    7|   17|   18|  102|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Devin Booker        |True |doubl|   32|    8|   22|    2|    5|    7|    8|    0|    7|   10|    3|    0|    2|    5|   25|   -6
+T.J. Warren         |True |     |   31|    8|   15|    3|    6|    0|    0|    0|    2|    0|    0|    0|    3|    3|   19|   -7
+Deandre Ayton       |True |     |   32|    8|   13|    0|    0|    0|    0|    4|    9|    1|    3|    0|    0|    0|   16|   -8
+Mikal Bridges       |True |     |   29|    5|   10|    3|    8|    0|    0|    0|    5|    2|    2|    2|    0|    2|   13|   -9
+Josh Jackson        |False|     |   30|    3|    9|    1|    3|    2|    2|    1|    4|    2|    0|    1|    4|    1|    9|  -11
+Jamal Crawford      |False|     |   18|    3|    7|    0|    1|    0|    0|    0|    0|    4|    1|    1|    3|    0|    6|  -13
+Richaun Holmes      |False|     |   15|    1|    1|    0|    0|    4|    4|    0|    3|    1|    1|    1|    0|    1|    6|   -8
+De'Anthony Melton   |True |     |   24|    1|    5|    0|    2|    2|    2|    2|    3|    2|    1|    1|    3|    2|    4|  -15
+Kelly Oubre         |False|     |   24|    2|    8|    0|    4|    0|    0|    0|    1|    0|    1|    1|    2|    4|    4|   -3
+Troy Daniels        |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Dragan Bender       |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Eric Moreland       |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Elie Okobo          |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+                    |                                 Oklahoma City Thunder (22-12)                                 
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|   16|   25|    2|    3|    2|    3|    2|   12|    8|    6|    1|    5|     |   36|     
+Q2                  |               60|    9|   25|    0|    7|    4|    6|    6|   14|    4|    2|    2|    5|     |   22|     
+Q3                  |               60|   11|   25|    1|    4|    0|    0|    2|   12|    3|    3|    0|    3|     |   23|     
+Q4                  |               60|   15|   20|    4|    6|    3|    4|    1|   11|    7|    1|    1|    3|     |   37|     
+H1                  |              120|   25|   50|    2|   10|    6|    9|    8|   26|   12|    8|    3|   10|     |   58|     
+H2                  |              120|   26|   45|    5|   10|    3|    4|    3|   23|   10|    4|    1|    6|     |   60|     
+game                |              240|   51|   95|    7|   20|    9|   13|   11|   49|   22|   12|    4|   16|   13|  118|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Russell Westbrook   |True |doubl|   39|   17|   29|    3|    7|    3|    6|    2|   12|    8|    0|    0|    6|    3|   40|    6
+Dennis Schröder     |True |     |   39|    8|   18|    2|    7|    2|    2|    1|    4|    6|    2|    0|    3|    1|   20|   25
+Abdel Nader         |False|     |   33|    7|   13|    2|    4|    2|    2|    1|    5|    0|    0|    0|    0|    2|   18|    6
+Jerami Grant        |True |     |   37|    6|   12|    0|    1|    0|    0|    2|    8|    1|    3|    2|    2|    1|   12|   12
+Steven Adams        |True |doubl|   35|    5|   10|    0|    0|    2|    3|    4|   13|    3|    3|    0|    1|    3|   12|    5
+Hamidou Diallo      |False|     |   13|    3|    5|    0|    0|    0|    0|    0|    1|    0|    0|    0|    1|    0|    6|   10
+Terrance Ferguson   |True |     |    6|    2|    2|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    1|    4|    3
+Raymond Felton      |False|     |   11|    2|    3|    0|    0|    0|    0|    0|    1|    2|    0|    0|    1|    1|    4|   -2
+Patrick Patterson   |False|     |   10|    1|    2|    0|    1|    0|    0|    1|    2|    0|    0|    1|    2|    0|    2|    4
+Nerlens Noel        |False|     |   12|    0|    1|    0|    0|    0|    0|    0|    3|    2|    4|    1|    0|    1|    0|   11
+Paul George         |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Timothé Luwawu-Cabar|False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+*** English jsRealB
+The Thunder  (22-12) defeated the Suns  (9-27) 118-102 on Friday in Phoenix at the Talking
+Stick Resort Arena.
+
+In the fourth quarter, the Thunder obtained better goals percentage, a difference of 43%.
+The Thunder dominated the Suns for points by 15 over the second half. During the game, the
+Suns obtained better free throws percentage, 94% to 69%.
+
+Russell Westbrook who started this game led the way scoring 40 points a personal record
+for the season in 39 minutes performed a double-double. Devin Booker who was in the
+starting line-up had an efficient performance scoring 25 points with seven rebounds
+grabbed, ten assists and performed a double-double.
+
+The Thunder showed 53 percent from the field and 9-13 attempts at the charity stripe.
+Dennis Schröder who was in the starting line-up recorded 20 points in 39 minutes with
+8-for-18 FG.  Jerami Grant posted twelve points in 37 minutes.  Steven Adams finished with
+twelve points in 35 minutes  (5-10 FG, 0-0 3Pt, 2-3 FT) while adding three assists and
+performed a double-double.
+
+The Suns showed 43 percent from the field and 15-16 free throws.  T.J. Warren who was in
+the starting line-up had 19 points with 3-for-6 from beyond the arc.
+
+Next Sunday, the Thunder will travel to play the Dallas Mavericks. For their next game,
+the Suns will return to action the Denver Nuggets on Saturday.
+-------------------------
+*** French jsRealB
+Le Thunder  (22-12) a surpassé les Suns  (9-27) 118-102 vendredi à Phoenix au stade
+Talking Stick Resort Arena.
+
+Pendant le quatrième quart, le Thunder a obtenu les meilleurs tirs en pourcentage, une
+différence de 43%. Le Thunder a dominé les Suns pour les points 60 à 45 pendant la
+deuxième demie. Durant la partie, les Suns ont réussi les meilleurs lancers francs en
+pourcentage, 94% en comparaison avec 69%.
+
+Russell Westbrook qui figurait dans l'alignement de départ a fini avec 40 points un record
+jusqu'ici en 39 minutes a terminé avec un double-double. Devin Booker qui débutait la
+partie a mené, comptant 25 points  (8-22 L, 2-5 L3, 7-8 LF) et dix passes décisives et a
+terminé avec un double-double.
+
+Le Thunder a compté 53 pour cent de tirs réussis et 9 lancers francs sur 13.  Dennis
+Schröder qui était un partant a marqué 20 points en 39 minutes.  Jerami Grant a contribué
+un efficace douze points en 37 minutes.  Steven Adams a terminé avec douze points en 35
+minutes  (5-10 L, 0-0 L3, 2-3 LF) tout en ajoutant trois passes décisives et a terminé
+avec un double-double.
+
+Les Suns ont compté 43 pour cent de tirs réussis et 15 lancers francs sur 16.  T.J. Warren
+qui figurait dans l'alignement de départ a eu 19 points.
+
+Dimanche prochain, le Thunder accueillera les Mavericks de Dallas. À venir pour les Suns,
+un match à domicile contre Denver.
+-------------------------
+*** English FStrings
+The Oklahoma City Thunder (22-12) overcame the Phoenix Suns (9-27) 118-102 on Friday at
+the Talking Stick Resort Arena in Phoenix .
+
+ Over the fourth quarter, Thunder obtained a good goals percentage 75% to 32%. During the
+game, Suns got a good free throws percentage 94% to 69%. In the first half, Suns obtained
+a good free throws percentage 89% to 67%. During the first quarter, Thunder got a good
+goals percentage 64% to 44%. During the fourth quarter, Thunder overcame Suns for points
+37 to 18. In the second half, Thunder got a good goals percentage 58% to 41%. During the
+second half, Thunder overcame Suns for points 60 to 45. During the game, Thunder overcame
+Suns for rebounds 49 to 34. During the game, Thunder overcame Suns for goals 51 to 39. In
+the game, Thunder obtained a good goals percentage 54% to 43%. Over the second half,
+Thunder overcame Suns for rebounds 23 to 13. In the second half, Thunder overcame Suns for
+goals 26 to 17.
+
+Russell Westbrook was a starter and had efficient performance scoring 40 points in 39
+minutes (17-29 FG, 3-7 3Pt, 3-6 FT) and 8 assists and performed a double-double. Devin
+Booker started this game and had efficient performance scoring 25 points in 32 minutes,
+grabbing 7 rebounds, 10 assists and performed a double-double.
+
+The Thunder show 53 percent from the field and 9-of-13 free throws. Dennis Schröder
+started this game and ended up with 20 points in 39 minutes and 8 goals.  Jerami Grant
+ended up with 12 points in 37 minutes, 6 goals and grabbing 8 rebounds.  Steven Adams
+contributed an efficient 12 points in 35 minutes (5-10 FG, 0-0 3Pt, 2-3 FT) and performed
+a double-double.
+
+The Suns show 43 percent from the field and 15-of-16 free throws. T.J. Warren started this
+game and had 19 points in 31 minutes and 3-for-6 from beyond the arc.
+
+Next Sunday, the Thunder will be on the road against the Dallas Mavericks. For their next
+game, the Suns will play at home against the Denver Nuggets on Saturday.
+-------------------------
+*** Reference summary
+The Oklahoma City Thunder defeated the host Phoenix Suns, 118-102, at Talking Stick Resort
+Arena on Friday evening. The Thunder got out to a great start on the road, as they built a
+36-29 lead through the first quarter. The Suns picked it up in the second, outscoring the
+visitors by six, to cut the deficit to one by halftime. The Suns built on their momentum
+in the third, as they outscored the Thunder by four, to take a three-point lead at the end
+of the third. However, the Thunder flipped the switch in the fourth, outscoring the Suns
+37-18 in the quarter to snap a two-game losing streak. Russell Westbrook led the Thunder
+with 40 points, 12 rebounds and eight assists, in 39 minutes of action. Dennis Schroder
+followed up with 20 points, six assists, four rebounds and two steals, while Steven Adams
+tallied 12 points, 13 rebounds, three assists and three steals. The Thunder shot 54
+percent from the field, including 7-of-20 from long range. Meanwhile, Devin Booker led the
+Suns with 25 points, 10 assists, seven rebounds and three steals, in 32 minutes. T.J.
+Warren followed up with 19 points and two rebounds, while Deandre Ayton finished with 16
+points, nine rebounds, three steals and one assist. The Suns shot 43 percent from the
+field, including 9-of-29 from long range. The Suns (9-27) will look to bounce back as they
+play host to the Nuggets on Saturday. The Thunder (22-12) take on the Mavericks in Dallas
+on Sunday.
+====================================================================================================

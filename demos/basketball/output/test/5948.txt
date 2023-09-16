@@ -1,0 +1,151 @@
+***  5948:2018-10-28: Oklahoma City Thunder receives Phoenix Suns  [117-110]
+
+                    |                                  Oklahoma City Thunder (1-4)                                  
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|   13|   26|    3|    7|    1|    2|    5|   15|    7|    5|    2|    4|     |   30|     
+Q2                  |               60|    9|   19|    2|    7|   12|   16|    2|    8|    5|    7|    1|    4|     |   32|     
+Q3                  |               60|   14|   22|    2|    5|    4|    6|    1|   12|    7|    4|    0|    4|     |   34|     
+Q4                  |               60|    7|   18|    0|    5|    7|   11|    1|    8|    3|    0|    0|    3|     |   21|     
+H1                  |              120|   22|   45|    5|   14|   13|   18|    7|   23|   12|   12|    3|    8|     |   62|     
+H2                  |              120|   21|   40|    2|   10|   11|   17|    2|   20|   10|    4|    0|    7|     |   55|     
+game                |              240|   43|   85|    7|   24|   24|   35|    9|   43|   22|   16|    3|   15|   24|  117|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Russell Westbrook   |True |     |   30|    8|   13|    0|    0|    7|   10|    1|    9|    7|    4|    0|    6|    3|   23|    8
+Paul George         |True |     |   30|    9|   15|    4|    8|    1|    2|    0|    4|    5|    3|    2|    2|    3|   23|   17
+Nerlens Noel        |True |doubl|   25|    9|   14|    0|    0|    2|    3|    6|   15|    2|    4|    1|    1|    3|   20|   19
+Patrick Patterson   |False|     |   29|    6|   10|    2|    5|    3|    4|    1|    4|    0|    0|    0|    0|    3|   17|   -8
+Jerami Grant        |True |     |   37|    4|    9|    1|    4|    5|    8|    1|    4|    1|    1|    0|    1|    3|   14|   14
+Dennis Schröder     |False|     |   26|    4|   10|    0|    1|    4|    6|    0|    4|    7|    0|    0|    2|    4|   12|   15
+Terrance Ferguson   |True |     |   27|    3|    6|    0|    2|    0|    0|    0|    2|    0|    2|    0|    3|    1|    6|   -8
+Álex Abrines        |False|     |   24|    0|    5|    0|    3|    2|    2|    0|    1|    0|    2|    0|    0|    2|    2|   -1
+Deonte Burton       |False|     |    4|    0|    2|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    1|    0|   -7
+Abdel Nader         |False|     |    1|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    1|    0|   -9
+Timothé Luwawu-Cabar|False|     |    1|    0|    1|    0|    1|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|   -5
+Raymond Felton      |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+                    |                                       Phoenix Suns (1-5)                                      
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|    7|   20|    1|    6|    5|    5|    3|   10|    4|    4|    2|    6|     |   20|     
+Q2                  |               60|    9|   18|    2|    4|    8|    8|    2|   12|    4|    1|    1|   11|     |   28|     
+Q3                  |               60|   10|   24|    1|    8|    7|    7|    2|    9|    5|    3|    0|    4|     |   28|     
+Q4                  |               60|   12|   24|    4|    9|    6|    7|    3|   13|    8|    2|    0|    1|     |   34|     
+H1                  |              120|   16|   38|    3|   10|   13|   13|    5|   22|    8|    5|    3|   17|     |   48|     
+H2                  |              120|   22|   48|    5|   17|   13|   14|    5|   22|   13|    5|    0|    5|     |   62|     
+game                |              240|   38|   86|    8|   27|   26|   27|   10|   44|   21|   10|    3|   22|   32|  110|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Elie Okobo          |False|     |   30|    5|    9|    3|    6|    5|    6|    2|    5|    7|    0|    0|    3|    5|   18|    2
+T.J. Warren         |False|     |   21|    8|   17|    2|    5|    0|    0|    3|    8|    0|    0|    1|    0|    2|   18|   -2
+Deandre Ayton       |True |doubl|   32|    8|   17|    0|    0|    0|    0|    2|   11|    3|    1|    0|    3|    4|   16|   -1
+Ryan Anderson       |True |     |   30|    4|   10|    1|    4|    6|    6|    2|    5|    0|    1|    0|    2|    1|   15|   -3
+Mikal Bridges       |False|     |   21|    3|    7|    1|    4|    2|    2|    0|    1|    0|    2|    0|    4|    5|    9|   16
+Josh Jackson        |True |     |   20|    4|   10|    0|    3|    0|    0|    0|    1|    0|    1|    1|    4|    6|    8|  -13
+Troy Daniels        |False|     |   16|    3|    5|    1|    3|    1|    1|    0|    1|    1|    2|    0|    0|    1|    8|    7
+Jamal Crawford      |False|     |   15|    1|    4|    0|    2|    5|    5|    0|    2|    1|    0|    0|    2|    2|    7|  -15
+Trevor Ariza        |True |     |   28|    1|    4|    0|    0|    3|    3|    0|    5|    3|    2|    0|    3|    2|    5|  -22
+Tyson Chandler      |False|     |   11|    1|    1|    0|    0|    2|    2|    0|    2|    2|    0|    1|    0|    1|    4|  -17
+Richaun Holmes      |False|     |    3|    0|    0|    0|    0|    2|    2|    1|    2|    2|    0|    0|    1|    2|    2|   11
+Isaiah Canaan       |True |     |    5|    0|    2|    0|    0|    0|    0|    0|    1|    2|    1|    0|    0|    1|    0|    2
+Dragan Bender       |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+*** English jsRealB
+The Thunder  (1-4) overcame the Suns  (1-5) 117-110 in Oklahoma City on Sunday at the
+Chesapeake Energy Arena.
+
+The Suns outscored the Thunder 62-55 in the second half but could not complete their come-
+back. In the first half, the Suns obtained better free throws percentage, 100% to 72%.
+Over the third quarter, the Thunder obtained better goals percentage, 64% to 42%. The Suns
+dominated the Thunder for points by 13 in the fourth quarter.
+
+Russell Westbrook who was in the starting line-up scored a game high with 23 points. Elie
+Okobo who was a starter finished with 18 points.
+
+The Thunder showed 50 percent from the field and 24-35 attempts at the charity stripe.
+Nerlens Noel posted 20 points performed a double-double.  Patrick Patterson recorded 17
+points with 6-for-10 FG.  Jerami Grant ended up with 14 points in 37 minutes.
+
+The Suns showed 44 percent from the field and 26-27 free throws and committed 22
+turnovers.  T.J. Warren who started this game had 18 points.
+
+On deck for the Thunder will be a home match versus Los Angeles. For their next game, the
+Suns will be at home against the San Antonio Spurs on Wednesday.
+-------------------------
+*** French jsRealB
+Le Thunder  (1-4) a défait les Suns  (1-5) 117-110 au stade Chesapeake Energy Arena
+dimanche à Oklahoma City.
+
+Les Suns ont dominé le Thunder  (62-55) dans la deuxième demie mais le gagnant a bon tenu
+pour la victoire. Durant la première demie, les Suns ont obtenu les meilleurs lancers
+francs en pourcentage, un avantage de 28%. Pendant le troisième quart, le Thunder a obtenu
+les meilleurs lancers en pourcentage, 64% en comparaison avec 42%. Les Suns ont dominé le
+Thunder pour les points par 13 durant le quatrième quart.
+
+Russell Westbrook qui débutait la partie a obtenu le meilleur pointage du match avec 23
+points. Elie Okobo qui débutait la partie a mené, comptant 18 points.
+
+Le Thunder a compté 50 pour cent de tirs réussis et 24 lancers francs sur 35.  Nerlens
+Noel a contribué un efficace 20 points avec neuf tirs réussis, 15 rebonds et a terminé
+avec un double-double.  Patrick Patterson a eu 17 points avec six tirs réussis.  Jerami
+Grant a terminé avec 14 points en 37 minutes.
+
+Les Suns ont compté 44 pour cent de tirs réussis et 26 lancers francs sur 27 et ont subi
+22 pertes de ballon.  T.J. Warren qui figurait dans l'alignement de départ a terminé avec
+18 points.
+
+Pour leur prochaine partie, le Thunder jouera à la maison contre les Clippers de Los
+Angeles mardi. À venir pour les Suns, un match à domicile contre San Antonio.
+-------------------------
+*** English FStrings
+The Oklahoma City Thunder (1-4) overcame the Phoenix Suns (1-5) 117-110 on Sunday at the
+Chesapeake Energy Arena in Oklahoma City .
+
+The Suns outscored the Thunder (62-55) in the second half, but the Oklahoma City held on
+for the win. During the first half, Suns obtained a good free throws percentage 100% to
+72%. In the second half, Suns obtained a good free throws percentage 93% to 65%. Over the
+game, Suns got a good free throws percentage 96% to 69%. In the second quarter, Suns got a
+good free throws percentage 100% to 75%. Over the third quarter, Thunder got a good goals
+percentage 64% to 42%. In the fourth quarter, Suns obtained a good free throws percentage
+86% to 64%. During the first quarter, Thunder obtained a good goals percentage 50% to 35%.
+During the first half, Thunder dominated Suns for points 62 to 48. Over the fourth
+quarter, Suns dominated Thunder for points 34 to 21. In the fourth quarter, Suns obtained
+a good goals percentage 50% to 39%. Over the first quarter, Thunder overcame Suns for
+points 30 to 20. Over the first half, Thunder overcame Suns for steals 12 to 5.
+
+Russell Westbrook was a starter and finished with 23 points in 30 minutes (8-13 FG, 0-0
+3Pt, 7-10 FT) and 7 assists. Elie Okobo scored a game high with 18 points in 30 minutes.
+
+The Thunder show 50 percent from the field and 24-of-35 free throws. Nerlens Noel recorded
+20 points in 25 minutes (9-14 FG, 0-0 3Pt, 2-3 FT) and performed a double-double.  Patrick
+Patterson finished with 17 points in 29 minutes and 6 goals.  Jerami Grant finished with
+14 points in 37 minutes (4-9 FG, 1-4 3Pt, 5-8 FT).
+
+The Suns show 44 percent from the field and 26-of-27 free throws and committed 22
+turnovers. T.J. Warren contributed an efficient 18 points in 21 minutes (8-17 FG, 2-5 3Pt,
+0-0 FT).
+
+For their next game, the Thunder will receive the Los Angeles Clippers on Tuesday. The
+Suns' next game will be at home against the Spurs next Wednesday.
+-------------------------
+*** Reference summary
+The Oklahoma City Thunder defeated the Phoenix Suns, 117-110, at Chesapake Energy Arena on
+Sunday evening. The Thunder (1-4) approached the contest with Steven Adams as a late
+scratch and Russell Westbrook uncertain to play due to shoulder soreness. However, the
+perennial All-Star did end up taking the court, posting 23 points, nine rebounds, seven
+assists and four steals. Oklahoma City enjoyed a prolific first half on offense, racking
+up 62 points by halftime and 96 through three quarters. The Suns (1-5) made some noise in
+the fourth quarter, but it was after the game was essentially decided. The Thunder drained
+51 percent of its shots and also goaded the visitors into 22 turnovers, both keys to
+victory. Elie Okobo and T.J. Warren co-led the Suns with matching 18-point tallies off the
+bench. Okobo added eight assists and five rebounds over 31 minutes, while Warren also
+supplied eight boards and one block. Deandre Ayton generated a 16-point, 11-rebound
+double-double that also included three assists and one steal. Ryan Anderson provided 15
+points and five rebounds. Josh Jackson drew a second straight start for Devin Booker
+(hamstring) and mustered eight points, one rebound, one steal and one block. Paul George
+matched Westbrook's scoring total and also registered five assists, four rebounds, three
+steals and two blocks. Nerlens Noel contributed a 20-point-15 rebound double-double in
+Adams' stead, complementing it with two assists, four steals and one block. Jerami Grant
+compiled 14 points, four rebounds, one assist and one steal. Patrick Patterson came off
+the bench to pour in 17 points, while Dennis Schroder produced 12 points, seven assists
+and four rebounds. The Suns head back home to face the San Antonio Spurs on Wednesday
+evening, while the Thunder remain home and tangle with the Los Angeles Clippers on Tuesday
+night.
+====================================================================================================

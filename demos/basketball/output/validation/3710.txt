@@ -1,0 +1,158 @@
+***  3710:2018-01-15: Philadelphia 76ers receives Toronto Raptors  [117-111]
+
+                    |                                   Philadelphia 76ers (20-20)                                  
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|   13|   21|    2|    4|    4|    6|    1|   10|    8|    0|    5|    2|     |   32|     
+Q2                  |               60|   11|   23|    1|    7|    4|    7|    2|   11|    5|    5|    1|    7|     |   27|     
+Q3                  |               60|   10|   18|    2|    9|   12|   13|    2|   14|    5|    0|    1|    5|     |   34|     
+Q4                  |               60|    6|   19|    1|    5|   11|   12|    5|   13|    4|    3|    2|    7|     |   24|     
+H1                  |              120|   24|   44|    3|   11|    8|   13|    3|   21|   13|    5|    6|    9|     |   59|     
+H2                  |              120|   16|   37|    3|   14|   23|   25|    7|   27|    9|    3|    3|   12|     |   58|     
+game                |              240|   40|   81|    6|   25|   31|   38|   10|   48|   22|    8|    9|   21|   28|  117|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Joel Embiid         |True |doubl|   34|   11|   21|    1|    5|   11|   14|    5|   11|    3|    0|    1|    7|    4|   34|   -2
+T.J. McConnell      |False|     |   32|    8|   13|    1|    3|    1|    2|    0|    6|    8|    3|    1|    2|    0|   18|    6
+J.J. Redick         |True |     |   27|    5|   10|    2|    6|    3|    3|    0|    5|    3|    1|    0|    1|    1|   15|    1
+Ben Simmons         |True |     |   27|    5|   10|    0|    0|    2|    4|    0|    1|    4|    2|    2|    6|    5|   12|    1
+Robert Covington    |True |     |   35|    3|   10|    1|    5|    4|    4|    1|    8|    2|    1|    0|    2|    3|   11|   14
+Dario Šarić         |True |     |   33|    3|   10|    1|    5|    4|    4|    1|    7|    1|    1|    1|    2|    5|   11|   13
+Trevor Booker       |False|     |   13|    2|    2|    0|    0|    3|    3|    0|    0|    0|    0|    3|    1|    6|    7|   -6
+Amir Johnson        |False|     |   13|    2|    3|    0|    0|    3|    4|    2|    8|    1|    0|    1|    0|    3|    7|    9
+Jerryd Bayless      |False|     |   18|    1|    2|    0|    1|    0|    0|    1|    2|    0|    0|    0|    0|    0|    2|   -5
+Timothé Luwawu-Cabar|False|     |    4|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    1|    0|   -1
+Richaun Holmes      |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Justin Anderson     |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+                    |                                    Toronto Raptors (29-13)                                    
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|   11|   25|    0|    5|    1|    2|    2|   10|    6|    0|    1|    2|     |   23|     
+Q2                  |               60|    6|   18|    0|    2|   14|   14|    1|   11|    4|    3|    0|    6|     |   26|     
+Q3                  |               60|    9|   27|    3|   13|    5|    7|    5|   10|    5|    3|    0|    2|     |   26|     
+Q4                  |               60|   12|   25|    6|   12|    6|    7|    4|   13|    5|    2|    0|    5|     |   36|     
+H1                  |              120|   17|   43|    0|    7|   15|   16|    3|   21|   10|    3|    1|    8|     |   49|     
+H2                  |              120|   21|   52|    9|   25|   11|   14|    9|   23|   10|    5|    0|    7|     |   62|     
+game                |              240|   38|   95|    9|   32|   26|   30|   12|   44|   20|    8|    1|   15|   31|  111|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+DeMar DeRozan       |True |     |   35|    8|   18|    0|    4|    8|    9|    0|    1|    5|    2|    0|    3|    4|   24|  -15
+Delon Wright        |False|     |   19|    7|   11|    5|    6|    1|    2|    2|    4|    1|    1|    0|    0|    3|   20|    9
+Kyle Lowry          |True |     |   37|    3|   16|    1|    5|    6|    6|    1|    7|    4|    3|    0|    4|    3|   13|   -5
+Pascal Siakam       |False|     |   29|    5|    8|    1|    3|    0|    1|    2|    6|    1|    1|    0|    1|    4|   11|    3
+Serge Ibaka         |True |     |   17|    5|   13|    0|    2|    0|    0|    1|    5|    2|    0|    0|    0|    2|   10|  -13
+C.J. Miles          |False|     |   21|    3|   10|    2|    9|    2|    2|    1|    2|    1|    0|    0|    3|    3|   10|    6
+Jonas Valančiūnas   |True |     |   13|    4|    5|    0|    0|    0|    0|    0|    5|    1|    0|    0|    2|    3|    8|  -14
+Fred VanVleet       |False|     |   15|    1|    8|    0|    2|    6|    6|    0|    2|    0|    0|    0|    1|    2|    8|    4
+Jakob Pöltl         |False|     |   26|    2|    4|    0|    0|    3|    4|    4|    8|    2|    0|    1|    1|    5|    7|    7
+OG Anunoby          |True |     |   18|    0|    2|    0|    1|    0|    0|    1|    4|    1|    1|    0|    0|    1|    0|  -14
+Lucas Nogueira      |False|     |    4|    0|    0|    0|    0|    0|    0|    0|    0|    2|    0|    0|    0|    1|    0|    2
+Norman Powell       |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+*** English jsRealB
+The 76ers  (20-20) knocked off the Raptors  (29-13) 117-111 at the Wells Fargo Center in
+Philadelphia on Monday.
+
+The Raptors outscored the 76ers 62-58 in the second half but the winner held for the win.
+Over the first half, the Raptors got better free throws percentage, 94% to 62%. In the
+third quarter, the 76ers got better goals percentage, an advantage of 23%. The Raptors
+overcame the 76ers for points by 12 in the fourth quarter. The 76ers dominated the Raptors
+for free throws by 12 during the second half.
+
+Joel Embiid who started this game led the way scoring 34 points in 34 minutes performed a
+double-double. DeMar DeRozan who was in the starting line-up led the way, posting 24
+points.
+
+The 76ers showed 49 percent from the field and 31-38 free throws and committed 21
+turnovers.  T.J. McConnell who was a starter had 18 points a personal record for the
+season in 32 minutes.  J.J. Redick contributed 15 points with five rebounds.
+
+The Raptors showed 40 percent from the field and 26-30 attempts at the charity stripe.
+Delon Wright who started this game finished with 20 points with 7-for-11 FG and 5-for-6
+from beyond the arc.  Kyle Lowry posted 13 points with seven rebounds.  Pascal Siakam
+ended up with eleven points in 29 minutes with five goals and one three-pointer.  Fred
+VanVleet recorded eight points.  Jakob Pöltl finished with seven points in 26 minutes
+(2-4 FG, 0-0 3Pt, 3-4 FT) while adding two assists.
+
+Up next the 76ers will travel to Boston to take on the Celtics on Thursday. The Raptors'
+next game will be at home against the Detroit Pistons on Wednesday.
+-------------------------
+*** French jsRealB
+Les 76ers  (20-20) ont battu les Raptors  (29-13) 117-111 à Philadelphia lundi au stade
+Wells Fargo Center.
+
+Les Raptors a dominé les 76ers  (62-58) dans la deuxième demie mais n'a pas pu compléter
+leur retour. Pendant la première demie, les Raptors ont obtenu les meilleurs lancers
+francs en pourcentage, 94% en comparaison avec 62%. Durant le troisième quart, les 76ers
+ont obtenu les meilleurs tirs en pourcentage, une différence de 23%. Les Raptors ont
+vaincu les 76ers pour les points par 12 durant le quatrième quart. Les 76ers ont vaincu
+les Raptors pour les lancers francs 23 à 11 pendant la deuxième demie.
+
+Joel Embiid qui débutait la partie a fini avec 34 points en 34 minutes avec onze tirs
+réussis, onze rebonds et a terminé avec un double-double. DeMar DeRozan qui débutait la
+partie a fini avec 24 points.
+
+Les 76ers ont compté 49 pour cent de tirs réussis et 31 lancers francs sur 38 et ont subi
+21 pertes de ballon.  T.J. McConnell qui débutait la partie a contribué un efficace 18
+points un record pour la saison en 32 minutes avec 8-sur-13 L et six rebonds récupérés.
+J.J. Redick a eu 15 points.
+
+Les Raptors ont compté 40 pour cent de tirs réussis et 26 lancers francs sur 30.  Delon
+Wright qui était un partant a ajouté 20 points avec 7-sur-11 L et cinq lancers à trois
+points.  Kyle Lowry a ajouté 13 points.  Pascal Siakam a fini avec onze points en 29
+minutes.  Fred VanVleet a ajouté huit points.  Jakob Pöltl a fini avec sept points en 26
+minutes avec huit rebonds récupérés et deux passes décisives.
+
+Jeudi prochain, les 76ers accueilleront les Celtics de Boston. À venir pour les Raptors,
+un match à domicile contre Detroit.
+-------------------------
+*** English FStrings
+The Philadelphia 76ers (20-20) topped the Toronto Raptors (29-13) 117-111 on Monday at the
+Wells Fargo Center in Philadelphia .
+
+The Raptors outscored the 76ers (62-58) in the second half, but the Philadelphia held on
+for the win. In the first half, Raptors got a good free throws percentage 94% to 62%. Over
+the third quarter, 76ers got a good goals percentage 56% to 33%. During the third quarter,
+76ers got a good free throws percentage 92% to 71%. Over the first quarter, 76ers got a
+good goals percentage 62% to 44%. During the fourth quarter, Raptors obtained a good goals
+percentage 48% to 32%. In the second quarter, 76ers got a good goals percentage 48% to
+33%. During the first half, 76ers got a good goals percentage 55% to 40%. During the
+second half, 76ers got a good free throws percentage 92% to 79%. In the fourth quarter,
+Raptors overcame 76ers for points 36 to 24. During the second half, 76ers dominated
+Raptors for free throws 23 to 11. In the first half, 76ers dominated Raptors for points 59
+to 49. During the first quarter, 76ers dominated Raptors for points 32 to 23. In the third
+quarter, 76ers overcame Raptors for points 34 to 26.
+
+Joel Embiid was a starter and finished with 34 points in 34 minutes, 11 goals, 11 rebounds
+and performed a double-double. DeMar DeRozan was a starter and filled the stat sheet,
+posting 24 points in 35 minutes.
+
+The 76ers show 49 percent from the field and 31-of-38 free throws and committed 21
+turnovers. T.J. McConnell added 18 points in 32 minutes (8-13 FG, 1-3 3Pt, 1-2 FT) and 8
+assists.  J.J. Redick added 15 points in 27 minutes and grabbing 5 rebounds.
+
+The Raptors show 40 percent from the field and 26-of-30 free throws. Delon Wright was in
+the starting line-up and recorded 20 points (7-11 FG, 5-6 3Pt, 1-2 FT).  Kyle Lowry had 13
+points in 37 minutes and 7 rebounds.  Pascal Siakam finished with 11 points in 29 minutes,
+5 goals and 1-for-3 from beyond the arc.  Fred VanVleet contributed an efficient 8 points.
+Jakob Pöltl ended up with 7 points in 26 minutes (2-4 FG, 0-0 3Pt, 3-4 FT).
+
+Next Thursday, the 76ers will host the Boston Celtics. The Raptors' next game will be at
+home against the Pistons next Wednesday.
+-------------------------
+*** Reference summary
+The Philadelphia 76ers defeated the Toronto Raptors, 117-111, at Wells Fargo Center on
+Monday afternoon. The Sixers (20-20) delivered one of the their best performances of the
+entire season, and they looked in absolute control of the game after the first quarter,
+and they never looked back. Philadelphia jumped to a 32-23 lead in the first quarter,
+extended it one more point at half time, and added eight more points to their cushion
+after three, putting the Sixers up 94-75 with only 12 minutes left. The game was decided
+by that stage and Toronto won the final 12 minutes by eight points, but it was just too
+late for them to had any reaction, and Philadelphia cruised their way to an easy win at
+home. Joel Embiid had an impressive performance on both ends of the court, as the talented
+big man contributed with 34 points, 11 rebounds, three assists, and one block. Ben Simmons
+had 12 points with four assists and two steals, and Robert Covington chipped in with 11
+points and eight boards. J.J. Redick had 15 points with five rebounds and three assists,
+and T.J. McConnell had 18 points, eight assists, and six boards off the bench. DeMar
+DeRozan led the offense for Toronto after scoring 24 points while 8-for-18 from the field.
+Kyle Lowry had 13 points with seven rebounds and four assists and three steals. Serge
+Ibaka had 10 points. Delon Wright had 20 points in 20 minutes off the bench, and Pascal
+Siakam had a strong performance of 11 points and six rebounds.
+====================================================================================================

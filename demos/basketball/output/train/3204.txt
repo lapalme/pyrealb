@@ -1,0 +1,135 @@
+***  3204:2016-11-14: Indiana Pacers receives Orlando Magic  [88-69]
+
+                    |                                      Indiana Pacers (5-6)                                     
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|    7|   19|    1|    7|    1|    1|    0|   10|    3|    1|    1|    2|     |   16|     
+Q2                  |               60|    9|   22|    3|    7|    4|    4|    2|   12|    6|    1|    4|    3|     |   25|     
+Q3                  |               60|   12|   25|    2|    6|    4|    4|    3|   13|    7|    3|    2|    1|     |   30|     
+Q4                  |               60|    7|   24|    2|    5|    1|    1|    2|   14|    6|    4|    2|    3|     |   17|     
+H1                  |              120|   16|   41|    4|   14|    5|    5|    2|   22|    9|    2|    5|    5|     |   41|     
+H2                  |              120|   19|   49|    4|   11|    5|    5|    5|   27|   13|    7|    4|    4|     |   47|     
+game                |              240|   35|   90|    8|   25|   10|   10|    7|   49|   22|    9|    9|    9|   14|   88|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+C.J. Miles          |False|     |   23|    5|   12|    4|    8|    2|    2|    0|    4|    1|    2|    2|    0|    0|   16|   17
+Monta Ellis         |True |     |   36|    6|   11|    0|    4|    1|    1|    0|    2|    2|    0|    1|    2|    3|   13|    8
+Paul George         |True |     |   34|    5|   16|    1|    5|    2|    2|    1|    6|    5|    2|    1|    2|    1|   13|   10
+Thaddeus Young      |True |     |   30|    5|    8|    1|    1|    0|    0|    0|    5|    1|    2|    1|    0|    1|   11|   11
+Jeff Teague         |True |     |   28|    4|    9|    1|    3|    2|    2|    0|    8|    5|    1|    3|    1|    3|   11|    1
+Myles Turner        |True |     |   23|    4|   11|    0|    0|    1|    1|    0|    7|    0|    0|    0|    2|    3|    9|    9
+Aaron Brooks        |False|     |   17|    2|    9|    1|    3|    2|    2|    0|    0|    4|    1|    0|    0|    1|    7|   15
+Kevin Séraphin      |False|     |   19|    3|    8|    0|    0|    0|    0|    5|   10|    3|    1|    1|    2|    1|    6|   14
+Lavoy Allen         |False|     |   15|    1|    2|    0|    0|    0|    0|    1|    3|    0|    0|    0|    0|    0|    2|    5
+Al Jefferson        |False|     |    5|    0|    0|    0|    0|    0|    0|    0|    1|    0|    0|    0|    0|    1|    0|   -4
+Glenn Robinson      |False|     |    2|    0|    1|    0|    1|    0|    0|    0|    1|    1|    0|    0|    0|    0|    0|    3
+Georges Niang       |False|     |    2|    0|    1|    0|    0|    0|    0|    0|    2|    0|    0|    0|    0|    0|    0|    3
+Joe Young           |False|     |    2|    0|    2|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    3
+
+                    |                                      Orlando Magic (4-7)                                      
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|    8|   23|    1|    6|    2|    2|    5|   17|    3|    0|    0|    2|     |   19|     
+Q2                  |               60|    8|   21|    1|    7|    1|    2|    0|   10|    5|    2|    2|    3|     |   18|     
+Q3                  |               60|    6|   20|    1|    3|    7|    9|    3|   12|    1|    0|    1|    4|     |   20|     
+Q4                  |               60|    5|   20|    2|    9|    0|    0|    1|   13|    3|    1|    2|    5|     |   12|     
+H1                  |              120|   16|   44|    2|   13|    3|    4|    5|   27|    8|    2|    2|    5|     |   37|     
+H2                  |              120|   11|   40|    3|   12|    7|    9|    4|   25|    4|    1|    3|    9|     |   32|     
+game                |              240|   27|   84|    5|   25|   10|   13|    9|   52|   12|    3|    5|   14|   17|   69|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Evan Fournier       |True |     |   32|    4|   15|    1|    4|    5|    5|    0|    2|    2|    1|    0|    1|    2|   14|   -8
+Elfrid Payton       |True |     |   29|    5|   11|    0|    1|    2|    2|    1|    7|    2|    2|    0|    3|    2|   12|   -7
+Aaron Gordon        |False|     |   22|    5|   11|    1|    4|    0|    0|    0|    3|    1|    0|    0|    0|    1|   11|    0
+Bismack Biyombo     |False|     |   21|    4|    4|    0|    0|    1|    2|    3|    9|    0|    0|    3|    3|    1|    9|   -4
+Serge Ibaka         |True |     |   28|    3|   13|    0|    4|    0|    0|    3|   13|    2|    0|    0|    2|    1|    6|   -2
+D.J. Augustin       |False|     |   16|    2|    5|    1|    3|    1|    2|    0|    0|    1|    0|    0|    1|    1|    6|  -15
+Jeff Green          |True |     |   22|    1|    4|    0|    3|    1|    2|    1|    2|    0|    0|    0|    0|    2|    3|  -17
+C.J. Watson         |False|     |   17|    1|    5|    1|    3|    0|    0|    0|    2|    1|    0|    0|    0|    2|    3|  -13
+Damjan Rudež        |False|     |   13|    1|    1|    1|    1|    0|    0|    0|    1|    1|    0|    0|    1|    1|    3|   -8
+Nikola Vučević      |True |     |   25|    1|   10|    0|    0|    0|    0|    0|   12|    1|    0|    1|    3|    4|    2|  -19
+Mario Hezonja       |False|     |    5|    0|    5|    0|    2|    0|    0|    1|    1|    1|    0|    0|    0|    0|    0|    2
+Arinze Onuaku       |False|     |    3|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    1|    0|    0|    0|   -2
+C.J. Wilcox         |False|     |    3|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|   -2
+
+*** English jsRealB
+The Pacers  (5-6) defeated the Magic  (4-7) 88-69 in Indianapolis on Monday at the Bankers
+Life Fieldhouse.
+
+During the third quarter, the Pacers obtained better goals percentage, 48% to 30%. The
+Pacers overcame the Magic for points 47 to 32 during the second half. Over the game, the
+Pacers obtained better free throws percentage, 100% to 77%.
+
+C.J. Miles who was in the starting line-up led the way, posting 16 points. Evan Fournier
+who started this game had an efficient performance scoring 14 points.
+
+The Pacers showed 38 percent from the field and 10-10 free throws.  Jeff Teague recorded
+eleven points.  Kevin Séraphin posted six points with ten rebounds grabbed and three
+assists.
+
+The Magic showed 32 percent from the field and 10-13 attempts at the charity stripe.
+Elfrid Payton who was in the starting line-up ended up with twelve points.  Serge Ibaka
+contributed six points.
+
+The Pacers' next game will be at home against the Cleveland Cavaliers on Wednesday. For
+their next game, the Magic will return to action the New Orleans Pelicans on Wednesday.
+-------------------------
+*** French jsRealB
+Les Pacers  (5-6) ont dominé le Magic  (4-7) 88-69 au stade Bankers Life Fieldhouse lundi
+à Indianapolis.
+
+Durant le troisième quart, les Pacers ont réussi les meilleurs tirs en pourcentage, une
+différence de 18%. Les Pacers ont vaincu le Magic pour les points 47 à 32 pendant la
+deuxième demie. Durant la partie, les Pacers ont réussi les meilleurs lancers francs en
+pourcentage, une différence de 23%.
+
+C.J. Miles qui débutait la partie a mené son équipe marquant 16 points. Evan Fournier qui
+débutait la partie a mené son équipe marquant 14 points.
+
+Les Pacers ont compté 38 pour cent de tirs réussis et 10 lancers francs sur 10.  Jeff
+Teague a contribué un efficace onze points avec huit rebonds.  Kevin Séraphin a ajouté six
+points avec dix rebonds récupérés et trois passes décisives.
+
+Le Magic a compté 32 pour cent de tirs réussis et 10 lancers francs sur 13.  Elfrid Payton
+qui figurait dans l'alignement de départ a enregistré douze points avec sept rebonds.
+Serge Ibaka a enregistré six points.
+
+La prochaine partie des Pacers sera à domicile contre les Cavaliers de Cleveland mercredi.
+Pour leur prochain affrontement, le Magic jouera à la maison contre les Pelicans de New
+Orleans mercredi.
+-------------------------
+*** English FStrings
+The Indiana Pacers (5-6) topped the Orlando Magic (4-7) 88-69 on Monday at the Bankers
+Life Fieldhouse in Indianapolis .
+
+ In the game, Pacers got a good free throws percentage 100% to 77%. In the second half,
+Pacers got a good free throws percentage 100% to 78%. During the third quarter, Pacers
+obtained a good goals percentage 48% to 30%. During the second half, Pacers overcame Magic
+for points 47 to 32. In the game, Pacers got a good three-pointers percentage 32% to 20%.
+During the second half, Pacers got a good goals percentage 39% to 28%. During the third
+quarter, Pacers dominated Magic for points 30 to 20. During the second half, Pacers
+dominated Magic for goals 19 to 11.
+
+C.J. Miles started this game and filled the stat sheet, posting 16 points in 23 minutes.
+Evan Fournier was a starter and lead the way off the bench scoring 14 points in 32 minutes
+(4-15 FG, 1-4 3Pt, 5-5 FT).
+
+The Pacers show 38 percent from the field and 10-of-10 free throws. Jeff Teague scored 11
+points in 28 minutes (4-9 FG, 1-3 3Pt, 2-2 FT) and 5 assists.  Kevin Séraphin posted 6
+points (3-8 FG, 0-0 3Pt, 0-0 FT).
+
+The Magic show 32 percent from the field and 10-of-13 free throws. Elfrid Payton was in
+the starting line-up and added 12 points in 29 minutes and grabbing 7 rebounds.  Serge
+Ibaka finished with 6 points in 28 minutes (3-13 FG, 0-4 3Pt, 0-0 FT).
+
+For their next game, the Pacers will be at home against the Cleveland Cavaliers on
+Wednesday. For their next game, the Magic will be at home against the New Orleans Pelicans
+on Wednesday.
+-------------------------
+*** Reference summary
+The Magic had trouble mustering offense on anything resembling a consistent basis Monday
+and saw Evan Fournier lead the team with just 14 points. Elfrid Payton was next with 12
+points, while Nikola Vucevic was just 1-of-10 from the field, but did contribute 12
+boards. Aaron Gordon was the only other player to reach double digits in the scoring
+column, posting 11 points off the bench. The Pacers posted their best defensive effort of
+the season, holding the Magic to a season-low 69 points, a 32 field-goal percentage, and a
+20 percent tally from three-point range. Paul George and Monta Ellis each posted 13-point
+efforts, while Thaddeus Young and Jeff Teague each supplied 11 points. C.J. Miles led the
+team with 16 points, which he accomplished off the bench over an efficient 23 minutes.
+====================================================================================================

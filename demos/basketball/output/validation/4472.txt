@@ -1,0 +1,168 @@
+***  4472:2017-10-30: New Orleans Pelicans receives Orlando Magic  [99-115]
+
+                    |                                   New Orleans Pelicans (3-4)                                  
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|   10|   22|    0|    4|    4|    4|    3|    9|    9|    2|    5|    7|     |   24|     
+Q2                  |               60|   15|   22|    4|    6|    6|    7|    1|   14|   10|    1|    0|    4|     |   40|     
+Q3                  |               60|    8|   20|    2|    7|    2|    4|    3|   10|    6|    4|    0|    4|     |   20|     
+Q4                  |               60|    6|   21|    1|   11|    2|    3|    3|   10|    5|    2|    0|    4|     |   15|     
+H1                  |              120|   25|   44|    4|   10|   10|   11|    4|   23|   19|    3|    5|   11|     |   64|     
+H2                  |              120|   14|   41|    3|   18|    4|    7|    6|   20|   11|    6|    0|    8|     |   35|     
+game                |              240|   39|   85|    7|   28|   14|   18|    9|   43|   30|    9|    5|   19|   22|   99|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Anthony Davis       |True |doubl|   41|   13|   20|    0|    2|   13|   15|    3|   10|    2|    0|    3|    2|    1|   39|   -5
+DeMarcus Cousins    |True |doubl|   38|    5|   14|    2|    7|    0|    1|    0|   12|    7|    3|    1|    6|    5|   12|   -8
+Jrue Holiday        |True |     |   34|    5|    9|    0|    1|    1|    2|    0|    4|    8|    3|    0|    6|    2|   11|   -4
+Tony Allen          |False|     |   16|    4|    6|    1|    2|    0|    0|    1|    2|    0|    0|    0|    0|    0|    9|   -4
+E'Twaun Moore       |True |     |   31|    4|   11|    0|    2|    0|    0|    0|    4|    3|    3|    0|    0|    2|    8|  -23
+Dante Cunningham    |True |     |   24|    3|    9|    2|    6|    0|    0|    3|    5|    1|    0|    1|    1|    4|    8|  -22
+Jameer Nelson       |False|     |   24|    2|    6|    1|    4|    0|    0|    0|    1|    6|    0|    0|    2|    4|    5|  -17
+Ian Clark           |False|     |   14|    2|    6|    1|    3|    0|    0|    0|    2|    3|    0|    0|    2|    2|    5|   13
+Cheick Diallo       |False|     |    8|    1|    3|    0|    0|    0|    0|    2|    3|    0|    0|    0|    0|    1|    2|  -10
+Josh Smith          |False|     |    2|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    1|    0|    0
+Darius Miller       |False|     |    1|    0|    1|    0|    1|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+                    |                                      Orlando Magic (5-2)                                      
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|   11|   22|    4|    6|    7|    8|    2|   11|    6|    3|    0|    4|     |   33|     
+Q2                  |               60|   10|   24|    4|   10|    3|    7|    1|    7|    4|    4|    0|    4|     |   27|     
+Q3                  |               60|   12|   19|    3|    7|    0|    0|    0|   10|   10|    1|    0|    5|     |   27|     
+Q4                  |               60|   10|   20|    5|   11|    3|    3|    2|   15|    7|    2|    1|    3|     |   28|     
+H1                  |              120|   21|   46|    8|   16|   10|   15|    3|   18|   10|    7|    0|    8|     |   60|     
+H2                  |              120|   22|   39|    8|   18|    3|    3|    2|   25|   17|    3|    1|    8|     |   55|     
+game                |              240|   43|   85|   16|   34|   13|   18|    6|   43|   27|   10|    1|   16|   19|  115|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Evan Fournier       |True |     |   34|    7|   12|    4|    7|    2|    2|    0|    3|    4|    1|    0|    5|    1|   20|   15
+Nikola Vučević      |True |     |   31|    9|   17|    1|    2|    1|    2|    0|    8|    3|    0|    0|    0|    2|   20|    5
+Jonathon Simmons    |False|     |   28|    7|   12|    1|    3|    5|    5|    1|    5|    4|    1|    0|    4|    2|   20|   13
+Marreese Speights   |False|     |   21|    6|   11|    6|   10|    0|    0|    0|    5|    3|    0|    0|    0|    3|   18|   19
+Aaron Gordon        |True |     |   18|    7|   13|    3|    5|    0|    1|    1|    7|    1|    2|    0|    4|    4|   17|    0
+Terrence Ross       |True |     |   30|    3|    7|    1|    3|    1|    2|    1|    4|    3|    2|    0|    1|    1|    8|   12
+D.J. Augustin       |True |     |   23|    1|    5|    0|    2|    4|    4|    0|    1|    4|    3|    0|    1|    0|    6|    4
+Jonathan Isaac      |False|     |   15|    2|    4|    0|    1|    0|    0|    2|    7|    1|    0|    1|    0|    4|    4|    8
+Mario Hezonja       |False|     |    6|    1|    1|    0|    0|    0|    0|    0|    0|    0|    0|    0|    1|    0|    2|   -4
+Shelvin Mack        |False|     |   19|    0|    3|    0|    1|    0|    0|    0|    2|    4|    1|    0|    0|    0|    0|    8
+Bismack Biyombo     |False|     |    8|    0|    0|    0|    0|    0|    2|    1|    1|    0|    0|    0|    0|    2|    0|   -4
+Arron Afflalo       |False|     |    1|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    2
+Khem Birch          |False|     |    1|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    2
+
+*** English jsRealB
+The Magic  (5-2) topped the Pelicans  (3-4) 115-99 on Monday in New Orleans at the
+Smoothie King Center.
+
+The Pelicans led in the first half but the Magic managed to come back. Over the second
+quarter, the Pelicans got better goals percentage, a difference of 26%. Over the first
+half, the Pelicans got better free throws percentage, a difference of 24%. The Magic
+overcame the Pelicans for points by 20 in the second half. In the game, the Magic obtained
+better three-pointers percentage, a difference of 22%.
+
+Evan Fournier who was a starter led the way, posting 20 points with four three-pointers.
+Anthony Davis who started this game led the way scoring 39 points in 41 minutes performed
+a double-double.
+
+The Magic showed 50 percent from the field and 13-18 attempts at the charity stripe.
+Nikola Vučević who was in the starting line-up contributed 20 points with 1-for-2 from
+beyond the arc.  Jonathon Simmons ended up with 20 points in 28 minutes with 7-for-12 FG,
+five rebounds grabbed and four assists.  Marreese Speights recorded 18 points in 21
+minutes  (6-11 FG, 6-10 3Pt, 0-0 FT) while adding three assists.  Aaron Gordon added 17
+points with seven goals and 3-of-5 from beyond the arc.  Terrence Ross contributed eight
+points  (3-7 FG, 1-3 3Pt, 1-2 FT) while adding three assists.
+
+The Pelicans showed 45 percent from the field and 14-18 attempts at the charity stripe and
+committed 19 turnovers.  DeMarcus Cousins who was a starter posted twelve points with
+seven assists and performed a double-double.  E'Twaun Moore recorded eight points in 31
+minutes.  Dante Cunningham recorded eight points.  Ian Clark contributed five points with
+three assists.
+
+Up next the Magic will travel to Memphis to take on the Grizzlies on Wednesday. On deck
+for the Pelicans will be a home match versus Minnesota.
+-------------------------
+*** French jsRealB
+Le Magic  (5-2) a dominé les Pelicans  (3-4) 115-99 lundi à New Orleans au stade Smoothie
+King Center.
+
+Les Pelicans ont mené dans la première demie mais le Magic est parvenu à revenir. Durant
+le deuxième quart, les Pelicans ont réussi les meilleurs lancers en pourcentage, 68% en
+comparaison avec 42%. Durant la première demie, les Pelicans ont réussi les meilleurs
+lancers francs en pourcentage, une différence de 24%. Le Magic a dominé les Pelicans pour
+les points par 20 durant la deuxième demie. Durant la partie, le Magic a réussi les
+meilleurs lancers à 3 points en pourcentage, une différence de 22%.
+
+Evan Fournier qui débutait la partie a obtenu le meilleur pointage du match avec 20
+points. Anthony Davis qui était un partant a obtenu le meilleur pointage du match avec 39
+points en 41 minutes a terminé avec un double-double.
+
+Le Magic a compté 50 pour cent de tirs réussis et 13 lancers francs sur 18.  Nikola
+Vučević qui figurait dans l'alignement de départ a contribué un efficace 20 points.
+Jonathon Simmons a fini avec 20 points en 28 minutes avec 7-sur-12 L, cinq rebonds et
+quatre passes décisives.  Marreese Speights a ajouté 18 points en 21 minutes avec 6-sur-11
+L, 6-sur-10 depuis la ligne de trois points et trois passes décisives.  Aaron Gordon a
+fini avec 17 points avec 7-sur-13 L et trois lancers à trois points.  Terrence Ross a fini
+avec huit points  (3-7 L, 1-3 L3, 1-2 LF) et trois passes décisives.
+
+Les Pelicans ont compté 45 pour cent de tirs réussis et 14 lancers francs sur 18 et ont
+subi 19 pertes de ballon.  DeMarcus Cousins qui figurait dans l'alignement de départ a
+contribué un efficace douze points  (5-14 L, 2-7 L3, 0-1 LF) et sept passes décisives et a
+terminé avec un double-double.  E'Twaun Moore a contribué un efficace huit points en 31
+minutes avec quatre rebonds.  Dante Cunningham a eu huit points.  Ian Clark a terminé avec
+cinq points  (2-6 L, 1-3 L3, 0-0 LF) tout en ajoutant trois passes décisives.
+
+Mercredi prochain, le Magic accueillera les Grizzlies de Memphis. Pour leur prochain
+affrontement, les Pelicans seront à domicile contre les Timberwolves de Minnesota
+mercredi.
+-------------------------
+*** English FStrings
+The Orlando Magic (5-2) overcame the New Orleans Pelicans (3-4) 115-99 on Monday at the
+Smoothie King Center in New Orleans .
+
+The Pelicans lead in the first half, but the Magic managed to come back. In the second
+quarter, Pelicans obtained a good goals percentage 68% to 42%. During the first half,
+Pelicans obtained a good free throws percentage 91% to 67%. During the third quarter,
+Magic obtained a good goals percentage 63% to 40%. During the second half, Magic obtained
+a good goals percentage 56% to 34%. In the game, Magic obtained a good three-pointers
+percentage 47% to 25%. Over the fourth quarter, Magic obtained a good goals percentage 50%
+to 29%. In the second half, Magic dominated Pelicans for points 55 to 35. In the second
+quarter, Pelicans dominated Magic for points 40 to 27. During the fourth quarter, Magic
+overcame Pelicans for points 28 to 15. Over the first half, Pelicans got a good goals
+percentage 57% to 46%. Over the first quarter, Magic overcame Pelicans for points 33 to
+24. In the second half, Magic overcame Pelicans for goals 22 to 14.
+
+Evan Fournier had efficient performance scoring 20 points in 34 minutes (7-12 FG, 4-7 3Pt,
+2-2 FT). Anthony Davis was a starter and filled the stat sheet, posting 39 points in 41
+minutes (13-20 FG, 0-2 3Pt, 13-15 FT) and performed a double-double.
+
+The Magic show 50 percent from the field and 13-of-18 free throws. Nikola Vučević ended up
+with 20 points in 31 minutes (9-17 FG, 1-2 3Pt, 1-2 FT).  Jonathon Simmons posted 20
+points in 28 minutes (7-12 FG, 1-3 3Pt, 5-5 FT).  Marreese Speights contributed an
+efficient 18 points in 21 minutes, 6-for-11, 6 three-pointers and 3 assists.  Aaron Gordon
+scored 17 points, 7 goals and 3-for-5 from beyond the arc.  Terrence Ross recorded 8
+points in 30 minutes and 3 assists.
+
+The Pelicans show 45 percent from the field and 14-of-18 free throws and committed 19
+turnovers. DeMarcus Cousins ended up with 12 points in 38 minutes, 7 assists and performed
+a double-double.  E'Twaun Moore posted 8 points in 31 minutes (4-11 FG, 0-2 3Pt, 0-0 FT).
+Dante Cunningham scored 8 points in 24 minutes and 2-for-6 from beyond the arc.  Ian Clark
+scored 5 points and 3 assists.
+
+Next Wednesday, the Magic will host the Memphis Grizzlies. The Pelicans' next game will be
+at home against the Timberwolves next Wednesday.
+-------------------------
+*** Reference summary
+The Orlando Magic defeated the host New Orleans Pelicans, 115-99, at Smoothie King Center
+on Monday evening. The Magic (5-2) led for most of the first half, but the Pelicans (3-4)
+turned it up late and took a 64-60 lead going into halftime. The teams exchanged runs in
+the third quarter, though the Magic ended up emerging with an 88-84 lead heading into the
+final frame. The Magic dominated the fourth quarter, outscoring the Pelicans 28-15 to
+cruise to the win. The Magic continue to enjoy success thanks to a balanced attack. On
+Monday, five players scored in double digits, including three guys with 20 or more points.
+Nikola Vucevic was the scoring leader for Orlando, with 21 points on 9-of-17 shooting,
+along with eight rebounds and three assists in 27 minutes. Evan Fournier and Jonathan
+Simmons chipped in 20 points each, while Marreese Speights exploded for 18 points on
+6-of-11 shooting in 21 minutes off the bench. Meanwhile, Anthony Davis was in a world of
+his own as he totaled 39 points on 13-of-20 shooting, 10 rebounds and four blocks in 41
+minutes. DeMarcus Cousins was relatively quiet with only nine points to go along with 12
+rebounds, five assists, one block and one steal in 39 minutes. Jrue Holiday was the only
+player other than Davis to score in double digits, finishing with 11 points, seven assists
+and four rebounds in 36 minutes. The Pelicans will look to bounce back as they play host
+to the Timberwolves on Wednesday. The Magic take on the Grizzlies in Memphis on Wednesday.
+====================================================================================================

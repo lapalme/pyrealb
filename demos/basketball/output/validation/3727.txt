@@ -1,0 +1,156 @@
+***  3727:2018-03-28: Philadelphia 76ers receives New York Knicks  [118-101]
+
+                    |                                   Philadelphia 76ers (44-30)                                  
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|   16|   26|    4|    9|    1|    2|    4|   15|   12|    1|    2|    3|     |   37|     
+Q2                  |               60|   12|   25|    2|    9|    4|    8|    3|   12|   10|    3|    1|    5|     |   30|     
+Q3                  |               60|   10|   29|    1|    9|    5|    7|    4|   19|    6|    3|    0|    0|     |   26|     
+Q4                  |               60|    7|   18|    2|    4|    9|   10|    3|   12|    6|    2|    0|    4|     |   25|     
+H1                  |              120|   28|   51|    6|   18|    5|   10|    7|   27|   22|    4|    3|    8|     |   67|     
+H2                  |              120|   17|   47|    3|   13|   14|   17|    7|   31|   12|    5|    0|    4|     |   51|     
+game                |              240|   45|   98|    9|   31|   19|   27|   14|   58|   34|    9|    3|   12|   19|  118|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Dario Šarić         |True |doubl|   36|    9|   19|    2|    5|    6|    6|    4|   14|    5|    2|    0|    2|    1|   26|   13
+J.J. Redick         |True |     |   31|    8|   17|    3|   10|    2|    2|    0|    6|    5|    1|    0|    1|    1|   21|    9
+Robert Covington    |True |     |   33|    7|   16|    2|    8|    1|    1|    1|    4|    1|    3|    1|    1|    4|   17|   10
+Richaun Holmes      |False|     |   21|    6|   11|    0|    0|    3|    6|    3|    7|    1|    0|    0|    0|    3|   15|    6
+Marco Belinelli     |False|     |   24|    4|    7|    2|    3|    4|    4|    0|    2|    2|    1|    0|    1|    4|   14|    9
+Ben Simmons         |True |doubl|   34|    6|    7|    0|    0|    1|    4|    2|    8|   10|    0|    1|    4|    1|   13|    9
+Joel Embiid         |True |     |    8|    2|    6|    0|    1|    1|    2|    2|    3|    0|    0|    0|    1|    1|    5|    7
+Ersan İlyasova      |False|     |   25|    2|   10|    0|    4|    0|    0|    2|    8|    2|    1|    0|    2|    2|    4|    5
+Markelle Fultz      |False|     |   13|    1|    5|    0|    0|    1|    2|    0|    5|    7|    1|    1|    0|    2|    3|    8
+T.J. McConnell      |False|     |   10|    0|    0|    0|    0|    0|    0|    0|    1|    1|    0|    0|    0|    0|    0|    9
+Furkan Korkmaz      |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Demetrius Jackson   |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Jerryd Bayless      |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+                    |                                    New York Knicks (27-49)                                    
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|   11|   26|    3|    9|    3|    3|    2|    8|    6|    1|    1|    2|     |   28|     
+Q2                  |               60|   10|   19|    2|    2|   13|   18|    1|   13|    6|    2|    1|    6|     |   35|     
+Q3                  |               60|    7|   26|    2|    9|    1|    1|    4|   15|    5|    0|    2|    4|     |   17|     
+Q4                  |               60|    8|   23|    2|   11|    3|    4|    3|   10|    3|    1|    1|    4|     |   21|     
+H1                  |              120|   21|   45|    5|   11|   16|   21|    3|   21|   12|    3|    2|    8|     |   63|     
+H2                  |              120|   15|   49|    4|   20|    4|    5|    7|   25|    8|    1|    3|    8|     |   38|     
+game                |              240|   36|   94|    9|   31|   20|   26|   10|   46|   20|    4|    5|   16|   22|  101|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Michael Beasley     |True |     |   34|    9|   20|    1|    3|    3|    5|    0|    8|    3|    0|    2|    1|    0|   22|   -2
+Emmanuel Mudiay     |False|     |   24|    8|   15|    1|    2|    5|    6|    1|    4|    2|    1|    2|    3|    3|   22|   -1
+Trey Burke          |True |     |   27|    7|   15|    2|    5|    2|    2|    1|    2|    6|    1|    0|    3|    0|   18|  -18
+Enes Kanter         |True |doubl|   30|    5|   11|    0|    0|    7|    9|    3|   14|    1|    0|    1|    3|    5|   17|   -1
+Tim Hardaway        |True |     |   33|    3|   13|    2|    8|    1|    2|    2|    3|    2|    0|    0|    1|    3|    9|  -23
+Troy Williams       |False|     |   22|    1|    4|    1|    2|    2|    2|    2|    4|    2|    2|    0|    1|    4|    5|    0
+Lance Thomas        |True |     |   18|    1|    3|    1|    2|    0|    0|    0|    1|    1|    0|    0|    1|    3|    3|  -12
+Frank Ntilikina     |False|     |   24|    1|    6|    1|    3|    0|    0|    0|    6|    1|    0|    0|    3|    3|    3|   -4
+Luke Kornet         |False|     |   17|    1|    7|    0|    6|    0|    0|    0|    3|    1|    0|    0|    0|    1|    2|  -13
+Isaiah Hicks        |False|     |    4|    0|    0|    0|    0|    0|    0|    1|    1|    1|    0|    0|    0|    0|    0|  -11
+Jarrett Jack        |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Damyean Dotson      |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+*** English jsRealB
+The 76ers  (44-30) topped the Knicks  (27-49) 118-101 on Wednesday at the Wells Fargo
+Center in Philadelphia giving them their eighth straight victory.
+
+The 76ers led in all four quarters. During the first quarter, the 76ers got better goals
+percentage, a difference of 20%. During the first half, the Knicks got better free throws
+percentage, 76% to 50%. The 76ers overcame the Knicks for points 51 to 38 during the
+second half. The 76ers overcame the Knicks for rebounds by 12 in the game.
+
+Dario Šarić who was a starter led the way, posting 26 points in 36 minutes with 9-of-19
+FG, 14 rebounds grabbed, five assists and performed a double-double. Michael Beasley who
+started this game had an efficient performance scoring 22 points in 34 minutes  (9-20 FG,
+1-3 3Pt, 3-5 FT) while adding three assists.
+
+The 76ers showed 45 percent from the field and 19-27 free throws.  J.J. Redick who was a
+starter scored 21 points  (8-17 FG, 3-10 3Pt, 2-2 FT) while adding five assists.  Robert
+Covington had 17 points with 7-for-16 FG.  Richaun Holmes recorded 15 points a season
+high.
+
+The Knicks showed 38 percent from the field and 20-26 attempts at the charity stripe.
+Emmanuel Mudiay who was a starter contributed 22 points a season high.  Trey Burke scored
+18 points with six assists.  Enes Kanter scored 17 points in 30 minutes with 14 rebounds
+and performed a double-double.
+
+Next Friday, the 76ers will be on the road against the Atlanta Hawks. For their next game,
+the Knicks will host the Detroit Pistons on Saturday.
+-------------------------
+*** French jsRealB
+Les 76ers  (44-30) ont surpassé les Knicks  (27-49) 118-101 au stade Wells Fargo Center à
+Philadelphia mercredi leur permettant d'allonger à 8 leur série de victoires.
+
+Les 76ers ont mené pendant les quatre quarts. Pendant le premier quart, les 76ers ont
+réussi les meilleurs tirs en pourcentage, un avantage de 20%. Pendant la première demie,
+les Knicks ont obtenu les meilleurs lancers francs en pourcentage, 76% en comparaison avec
+50%. Les 76ers ont vaincu les Knicks pour les points par 13 durant la deuxième demie. Les
+76ers ont vaincu les Knicks pour les rebonds par 12 durant la partie.
+
+Dario Šarić qui était un partant a mené, comptant 26 points en 36 minutes avec 9-sur-19 L,
+14 rebonds, cinq passes décisives et a terminé avec un double-double. Michael Beasley qui
+était un partant a réalisé une performance excellente comptant 22 points en 34 minutes
+(9-20 L, 1-3 L3, 3-5 LF) et trois passes décisives.
+
+Les 76ers ont compté 45 pour cent de tirs réussis et 19 lancers francs sur 27.  J.J.
+Redick qui était un partant a fini avec 21 points avec huit tirs réussis, six rebonds et
+cinq passes décisives.  Robert Covington a ajouté 17 points.  Richaun Holmes a enregistré
+15 points son meilleur score jusqu'ici.
+
+Les Knicks ont compté 38 pour cent de tirs réussis et 20 lancers francs sur 26.  Emmanuel
+Mudiay qui figurait dans l'alignement de départ a eu 22 points son meilleur score pour la
+saison avec 8-sur-15 L.  Trey Burke a ajouté 18 points  (7-15 L, 2-5 L3, 2-2 LF) tout en
+ajoutant six passes décisives.  Enes Kanter a marqué 17 points en 30 minutes a terminé
+avec un double-double.
+
+Ensuite les 76ers voyageront à Atlanta pour affronter les Hawks vendredi. La prochaine
+partie des Knicks sera à domicile contre les Pistons de Detroit samedi.
+-------------------------
+*** English FStrings
+The Philadelphia 76ers (44-30) overcame the New York Knicks (27-49) 118-101 on Wednesday
+at the Wells Fargo Center in Philadelphia  giving them their 8th straight victory.
+
+The 76ers lead in all four quarters. During the first half, Knicks got a good free throws
+percentage 76% to 50%. In the first quarter, 76ers obtained a good goals percentage 62% to
+42%. In the second half, 76ers dominated Knicks for points 51 to 38. In the first half,
+Knicks obtained a good three-pointers percentage 45% to 33%. Over the game, 76ers
+dominated Knicks for rebounds 58 to 46. Over the first quarter, 76ers overcame Knicks for
+points 37 to 28. Over the third quarter, 76ers dominated Knicks for points 26 to 17.
+
+Dario Šarić was a starter and had efficient performance scoring 26 points in 36 minutes, 9
+goals, 14 rebounds, 5 assists and performed a double-double. Michael Beasley finished with
+22 points in 34 minutes (9-20 FG, 1-3 3Pt, 3-5 FT).
+
+The 76ers show 45 percent from the field and 19-of-27 free throws. J.J. Redick recorded 21
+points in 31 minutes (8-17 FG, 3-10 3Pt, 2-2 FT) and 5 assists.  Robert Covington had 17
+points in 33 minutes and 7-for-16.  Richaun Holmes finished with 15 points in 21 minutes
+and 6 goals.
+
+The Knicks show 38 percent from the field and 20-of-26 free throws. Emmanuel Mudiay was a
+starter and ended up with 22 points in 24 minutes and 8 goals.  Trey Burke had 18 points
+in 27 minutes and 6 assists.  Enes Kanter scored 17 points in 30 minutes, grabbing 14
+rebounds and performed a double-double.
+
+Up next, the 76ers travel to Atlanta to take on the Hawks on Friday. The Knicks' next game
+will be at home against the Pistons next Saturday.
+-------------------------
+*** Reference summary
+The Philadelphia 76ers defeated the visiting New York Knicks, 118-101, at Wells Fargo
+Center on Wednesday evening. The 76ers got out to a good start, with a 10-point lead
+midway through the first quarter, where they went on to outscore the Knicks, 37-28. The
+Sixers expanded their lead to 15 early in the second quarter, but the Knicks rallied back
+to tie it up at 56 with just under three minutes left in the half, before trailing 67-63
+at halftime. The Knicks came out strong in the third quarter and kept it close for the
+first few minutes, however the 76ers took over the remainder of the quarter with a 19-8
+run, to take a 93-80 lead into the fourth. The rest of the game belonged to Philly, as the
+76ers cruised to their eighth straight win. Joel Embiid (face) was forced to leave the
+game after a collision with Markelle Fultz, early in the second quarter. Dario Saric led
+the Sixers with 26 points, 14 rebounds, five assists and two steals, in 35 minutes. Ben
+Simmons finished with 13 points, 10 assists, eight rebounds and one blocks, while J.J.
+Redick tallied 21 points, six rebounds, five assists and one steal. The 76ers shot 46
+percent from the field, including 9-of-31 from long range. Meanwhile, Michael Beasley was
+big for the Knicks, with 22 points, eight rebounds, three assists and two blocks. Emmanuel
+Mudiay also finished with 22 points, and added four rebounds, two assists, two blocks and
+one steal. Enes Kanter tallied 17 points, 14 rebounds, one assist and one block, while
+Trey Burke finished with 18 points, six assists, two rebounds and one steal. The Knicks
+shot 38 percent from the field, including 9-of-31 from long range. The Knicks (27-49) will
+look to avoid a third straight loss, as they play host to the Pistons on Saturday. The
+76ers (44-30) take on the Hawks in Atlanta on Friday.
+====================================================================================================

@@ -1,0 +1,158 @@
+***  4967:2018-11-04: Milwaukee Bucks receives Sacramento Kings  [144-109]
+
+                    |                                     Milwaukee Bucks (8-1)                                     
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|   12|   26|    5|   17|   10|   10|    4|   13|    5|    1|    3|    2|     |   39|     
+Q2                  |               60|   12|   24|    6|   12|    3|    3|    4|   15|   10|    2|    2|    5|     |   33|     
+Q3                  |               60|   10|   23|    5|   14|   11|   12|    0|   14|    7|    1|    2|    1|     |   36|     
+Q4                  |               60|   12|   22|    6|   13|    6|    8|    2|   14|    8|    2|    0|    4|     |   36|     
+H1                  |              120|   24|   50|   11|   29|   13|   13|    8|   28|   15|    3|    5|    7|     |   72|     
+H2                  |              120|   22|   45|   11|   27|   17|   20|    2|   28|   15|    3|    2|    5|     |   72|     
+game                |              240|   46|   95|   22|   56|   30|   33|   10|   56|   30|    6|    7|   12|   20|  144|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Giannis Antetokounmp|True |tripl|   30|    8|   11|    1|    2|    9|   12|    3|   15|   11|    1|    1|    5|    3|   26|   39
+Eric Bledsoe        |True |     |   21|    6|   11|    1|    5|    4|    4|    0|    6|    1|    0|    1|    2|    2|   17|   11
+Ersan İlyasova      |False|     |   21|    4|    7|    3|    5|    4|    4|    0|    4|    2|    1|    0|    0|    3|   15|   10
+Malcolm Brogdon     |True |     |   27|    5|   11|    2|    5|    1|    1|    0|    4|    3|    0|    0|    0|    0|   13|   21
+Pat Connaughton     |False|     |   17|    5|    8|    3|    4|    0|    0|    3|    5|    0|    0|    1|    0|    0|   13|    7
+Khris Middleton     |True |     |   22|    3|   12|    3|    8|    3|    3|    0|    3|    3|    1|    0|    1|    0|   12|   11
+Tony Snell          |False|     |   18|    4|    5|    3|    3|    1|    1|    0|    2|    0|    0|    0|    1|    1|   12|   17
+John Henson         |False|     |   19|    4|    7|    2|    5|    0|    0|    1|    6|    1|    0|    0|    1|    2|   10|    3
+Brook Lopez         |True |     |   19|    2|    9|    2|    9|    2|    2|    0|    2|    0|    0|    4|    0|    3|    8|   17
+Sterling Brown      |False|     |    7|    2|    3|    0|    1|    4|    4|    1|    1|    1|    0|    0|    1|    2|    8|    7
+Donte DiVincenzo    |False|     |   16|    2|    5|    1|    4|    0|    0|    2|    3|    3|    2|    0|    0|    3|    5|   15
+Thon Maker          |False|     |    9|    1|    5|    1|    4|    0|    0|    0|    2|    0|    0|    0|    0|    0|    3|   10
+Matthew Dellavedova |False|     |    7|    0|    1|    0|    1|    2|    2|    0|    3|    5|    1|    0|    1|    1|    2|    7
+
+                    |                                     Sacramento Kings (6-4)                                    
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|   12|   25|    5|   11|    1|    2|    3|   11|    6|    0|    0|    3|     |   30|     
+Q2                  |               60|    9|   21|    1|    8|    1|    2|    1|    8|    4|    2|    2|    6|     |   20|     
+Q3                  |               60|   11|   27|    3|    8|    7|   14|    3|   17|    7|    1|    0|    2|     |   32|     
+Q4                  |               60|   10|   22|    5|    9|    2|    4|    1|    8|    7|    3|    2|    4|     |   27|     
+H1                  |              120|   21|   46|    6|   19|    2|    4|    4|   19|   10|    2|    2|    9|     |   50|     
+H2                  |              120|   21|   49|    8|   17|    9|   18|    4|   25|   14|    4|    2|    6|     |   59|     
+game                |              240|   42|   95|   14|   36|   11|   22|    8|   44|   24|    6|    4|   15|   26|  109|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Justin Jackson      |False|     |   24|    9|   12|    4|    7|    0|    0|    0|    0|    1|    0|    0|    1|    0|   22|   -8
+Buddy Hield         |True |     |   24|    8|   15|    2|    5|    1|    1|    2|    4|    1|    0|    0|    3|    2|   19|  -18
+De'Aaron Fox        |True |     |   25|    6|   14|    3|    5|    0|    0|    0|    6|    6|    0|    0|    2|    1|   15|  -18
+Marvin Bagley       |False|     |   20|    3|   10|    1|    3|    4|    9|    1|    6|    1|    0|    1|    1|    3|   11|   -7
+Troy Williams       |False|     |   15|    3|    5|    3|    3|    2|    2|    0|    3|    1|    1|    0|    0|    3|   11|   -5
+Willie Cauley-Stein |True |     |   18|    2|    3|    0|    0|    2|    6|    1|    4|    1|    1|    2|    3|    5|    6|  -19
+Frank Mason         |False|     |   22|    3|    8|    0|    5|    0|    2|    0|    2|    6|    1|    1|    1|    1|    6|  -17
+Iman Shumpert       |True |     |   24|    2|    8|    1|    5|    0|    0|    0|    7|    2|    0|    0|    1|    3|    5|  -34
+Nemanja Bjelica     |True |     |   21|    2|    8|    0|    1|    0|    0|    1|    4|    1|    0|    0|    1|    1|    4|  -22
+Harry Giles         |False|     |    9|    2|    6|    0|    0|    0|    0|    1|    2|    0|    1|    0|    1|    0|    4|  -10
+Kosta Koufos        |False|     |   15|    1|    2|    0|    0|    0|    0|    2|    5|    3|    1|    0|    0|    4|    2|    0
+Yogi Ferrell        |False|     |    9|    1|    3|    0|    1|    0|    0|    0|    1|    0|    0|    0|    0|    1|    2|  -10
+Skal Labissière     |False|     |    7|    0|    1|    0|    1|    2|    2|    0|    0|    1|    1|    0|    1|    2|    2|   -7
+
+*** English jsRealB
+The Bucks  (8-1) topped the Kings  (6-4) 144-109 at the Fiserv Forum in Milwaukee on
+Sunday.
+
+This was a dominating win for the Bucks, as it came in wire-to-wire fashion. During the
+first quarter, the Kings got better three-pointers percentage, 45% to 29%. The Bucks
+overcame the Kings for points 72 to 50 over the first half. In the third quarter, the
+Bucks got better free throws percentage, an advantage of 42%. The Bucks overcame the Kings
+for free throws 30 to 11 during the game.
+
+Giannis Antetokounmpo who was in the starting line-up had an efficient performance scoring
+26 points  (8-11 FG, 1-2 3Pt, 9-12 FT) while adding eleven assists and performed a triple-
+double. Justin Jackson who started this game led the way scoring 22 points a personal
+record for the season.
+
+The Bucks showed 48 percent from the field and 30-33 free throws.  Ersan İlyasova posted
+15 points.  Pat Connaughton had 13 points in 17 minutes.  John Henson had ten points.
+Brook Lopez contributed eight points.
+
+The Kings showed 44 percent from the field and 11-22 attempts at the charity stripe.
+Buddy Hield who started this game added 19 points.  Troy Williams posted eleven points
+with three three-pointers.  Iman Shumpert scored five points with seven rebounds grabbed.
+
+Up next the Bucks will travel to Portland to take on the Trail Blazers on Tuesday. The
+Kings' next game will be at home against the Toronto Raptors on Wednesday.
+-------------------------
+*** French jsRealB
+Les Bucks  (8-1) ont surpassé les Kings  (6-4) 144-109 au stade Fiserv Forum dimanche à
+Milwaukee.
+
+Les Bucks ont mené pendant les quatre quarts. Pendant le premier quart, les Kings ont
+obtenu les meilleurs tirs à 3 points en pourcentage, 45% en comparaison avec 29%. Les
+Bucks ont vaincu les Kings pour les points 72 à 50 durant la première demie. Pendant le
+troisième quart, les Bucks ont réussi les meilleurs lancers francs en pourcentage, un
+avantage de 42%. Les Bucks ont vaincu les Kings pour les lancers francs par 19 durant la
+partie.
+
+Giannis Antetokounmpo qui était un partant a réalisé une performance excellente comptant
+26 points avec 15 rebonds récupérés, onze passes décisives et a terminé avec un triple-
+double. Justin Jackson qui était un partant a fini avec 22 points un record jusqu'ici.
+
+Les Bucks ont compté 48 pour cent de tirs réussis et 30 lancers francs sur 33.  Ersan
+İlyasova a eu 15 points avec trois tirs à trois points.  Pat Connaughton a enregistré 13
+points en 17 minutes.  John Henson a fini avec dix points avec 2-sur-5 depuis la ligne de
+trois points.  Brook Lopez a terminé avec huit points avec deux lancers à trois points.
+
+Les Kings ont compté 44 pour cent de tirs réussis et 11 lancers francs sur 22.  Buddy
+Hield qui était un partant a eu 19 points avec huit tirs réussis.  Troy Williams a
+contribué un efficace onze points.  Iman Shumpert a enregistré cinq points.
+
+Ensuite les Bucks voyageront à Portland pour affronter les Trail Blazers mardi. Pour leur
+prochain affrontement, les Kings joueront à la maison contre les Raptors de Toronto
+mercredi.
+-------------------------
+*** English FStrings
+The Milwaukee Bucks (8-1) overcame the Sacramento Kings (6-4) 144-109 on Sunday at the
+Fiserv Forum in Milwaukee .
+
+The Bucks lead in all four quarters. Over the third quarter, Bucks got a good free throws
+percentage 92% to 50%. In the game, Bucks got a good free throws percentage 91% to 50%.
+Over the second half, Bucks got a good free throws percentage 85% to 50%. Over the first
+half, Bucks overcame Kings for points 72 to 50. During the game, Bucks dominated Kings for
+free throws 30 to 11. Over the first quarter, Kings obtained a good three-pointers
+percentage 45% to 29%. In the second quarter, Bucks overcame Kings for points 33 to 20. In
+the second half, Bucks dominated Kings for points 72 to 59. In the game, Bucks overcame
+Kings for rebounds 56 to 44. In the first quarter, Bucks overcame Kings for points 39 to
+30. During the fourth quarter, Bucks dominated Kings for points 36 to 27. Over the first
+half, Bucks dominated Kings for rebounds 28 to 19. During the second half, Bucks dominated
+Kings for free throws 17 to 9.
+
+Giannis Antetokounmpo filled the stat sheet, posting 26 points in 30 minutes, 15 rebounds,
+11 assists and performed a triple-double. Justin Jackson filled the stat sheet, posting 22
+points in 24 minutes.
+
+The Bucks show 48 percent from the field and 30-of-33 free throws. Ersan İlyasova scored
+15 points in 21 minutes and 3-for-5 from beyond the arc.  Pat Connaughton finished with 13
+points, 5-for-8, 3-for-4 from beyond the arc and 5 rebounds.  John Henson finished with 10
+points (4-7 FG, 2-5 3Pt, 0-0 FT).  Brook Lopez finished with 8 points (2-9 FG, 2-9 3Pt,
+2-2 FT).
+
+The Kings show 44 percent from the field and 11-of-22 free throws. Buddy Hield posted 19
+points in 24 minutes (8-15 FG, 2-5 3Pt, 1-1 FT).  Troy Williams ended up with 11 points
+and 3-for-3 from beyond the arc.  Iman Shumpert ended up with 5 points in 24 minutes (2-8
+FG, 1-5 3Pt, 0-0 FT).
+
+Up next, the Bucks travel to Portland to take on the Trail Blazers on Tuesday. For their
+next game, the Kings will receive the Toronto Raptors on Wednesday.
+-------------------------
+*** Reference summary
+The Milwaukee Bucks defeated the Sacramento Kings, 144-109, at Fiserv Forum on Sunday
+afternoon. A high-scoring affair in Milwaukee ended going towards the home team, as the
+Bucks (8-1) didn't have problems to dismantle the Kings (6-4) who entered this game as one
+of the most surprising teams in The Association during the young 2018-19 season. Milwaukee
+quickly jumped to a 39-30 lead in the first quarter, and they never let it go since they
+also won the remaining three quarters: 33-20, 36-32 and 36-27, respectively. The fact that
+the Bucks scored at least 30 points in every quarter certainly stands out, but they were
+effective on both ends of the court on their way to a huge 35-point win. Giannis
+Antetokounmpo led the way for the Bucks since he finished with a triple-double of 26
+points, 15 rebounds and 11 assists, but in the end eight different Bucks scored over 10
+points. Eric Bledsoe had 17 points with six rebounds, Malcolm Brogdon contributed with 13
+points, and Khris Middleton added 12 of this own. Four bench players topped the 10-point
+mark as well: Ersan Ilyasova (15 pts), Pat Connaughton (13 pts), Tony Snell (12 pts) and
+John Henson (10 pts, 6 rebs). The Kings enjoyed solid efforts from De'Aaron Fox, who had
+15 points, six rebounds and six assists, and Buddy Hield, who chipped in with 19 points in
+only 24 minutes of action. But most of the scoring contributions came from second-unit
+players who took advantage of the opportunity, such as Justin Jackson, who had 22 points,
+and rookie Marvin Bagley III, who finished with 11 points and six rebounds.
+====================================================================================================

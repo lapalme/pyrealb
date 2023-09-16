@@ -1,0 +1,160 @@
+***  5192:2019-01-28: Memphis Grizzlies receives Denver Nuggets  [92-95]
+
+                    |                                   Memphis Grizzlies (20-31)                                   
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|   12|   23|    5|   12|    1|    1|    3|   14|   10|    1|    1|    2|     |   30|     
+Q2                  |               60|   13|   19|    2|    5|    2|    3|    2|   10|    7|    1|    2|    5|     |   30|     
+Q3                  |               60|    5|   15|    1|    8|    6|    7|    1|   10|    4|    1|    3|    6|     |   17|     
+Q4                  |               60|    5|   21|    1|    7|    4|    8|    3|    8|    5|    2|    1|    6|     |   15|     
+H1                  |              120|   25|   42|    7|   17|    3|    4|    5|   24|   17|    2|    3|    7|     |   60|     
+H2                  |              120|   10|   36|    2|   15|   10|   15|    4|   18|    9|    3|    4|   12|     |   32|     
+game                |              240|   35|   78|    9|   32|   13|   19|    9|   42|   26|    5|    7|   19|   22|   92|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Marc Gasol          |True |     |   37|   11|   19|    2|    7|    4|    6|    1|    9|    3|    0|    2|    7|    1|   28|   -1
+Mike Conley         |True |doubl|   36|    8|   16|    3|    9|    4|    6|    0|    4|   11|    1|    0|    3|    0|   23|   -5
+Justin Holiday      |True |     |   40|    3|    9|    2|    6|    1|    1|    0|    2|    1|    0|    0|    1|    2|    9|   -4
+Kyle Anderson       |True |     |   29|    4|    8|    0|    0|    1|    2|    2|    5|    3|    1|    1|    4|    5|    9|    1
+Jaren Jackson       |True |     |   25|    4|   10|    0|    2|    0|    0|    3|    7|    0|    2|    3|    2|    6|    8|    9
+Joakim Noah         |False|     |   24|    3|    5|    0|    0|    1|    2|    2|    7|    2|    1|    1|    0|    3|    7|   -6
+Bruno Caboclo       |False|     |   23|    1|    6|    1|    6|    2|    2|    1|    5|    0|    0|    0|    0|    3|    5|   -5
+Shelvin Mack        |False|     |   18|    1|    4|    1|    2|    0|    0|    0|    3|    6|    0|    0|    2|    2|    3|    0
+Ivan Rabb           |False|     |    4|    0|    1|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|   -4
+Jevon Carter        |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Julian Washburn     |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+JaMychal Green      |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+                    |                                     Denver Nuggets (34-15)                                    
+        Game        |             MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Q1                  |               60|    7|   23|    2|   11|    0|    0|    3|    9|    3|    1|    1|    2|     |   16|     
+Q2                  |               60|   10|   21|    2|    8|    3|    3|    2|    6|    5|    3|    0|    4|     |   25|     
+Q3                  |               60|    7|   19|    0|    7|    5|    5|    1|    9|    3|    4|    1|    5|     |   19|     
+Q4                  |               60|   13|   21|    4|   10|    5|    6|    3|   13|    6|    2|    0|    4|     |   35|     
+H1                  |              120|   17|   44|    4|   19|    3|    3|    5|   15|    8|    4|    1|    6|     |   41|     
+H2                  |              120|   20|   40|    4|   17|   10|   11|    4|   22|    9|    6|    1|    9|     |   54|     
+game                |              240|   37|   84|    8|   36|   13|   14|    9|   37|   17|   10|    2|   15|   18|   95|     
+       PLAYER       |Strtr| DBL | MIN | FGM | FGA | FG3M| FG3A| FTM | FTA | OREB| TREB| AST | STL | BLK | TOV |  PF | PTS | +/- 
+Nikola Jokić        |True |     |   34|   10|   20|    1|    8|    3|    3|    1|    5|    3|    4|    0|    4|    3|   24|    5
+Will Barton         |True |     |   35|    9|   15|    2|    6|    0|    0|    2|    5|    2|    1|    0|    2|    1|   20|    9
+Malik Beasley       |False|     |   24|    7|   13|    3|    9|    1|    2|    0|    3|    3|    1|    0|    0|    1|   18|   14
+Gary Harris         |True |     |   31|    4|   11|    0|    4|    3|    3|    1|    4|    3|    0|    0|    2|    4|   11|    4
+Monte Morris        |False|     |   24|    4|    8|    1|    4|    0|    0|    0|    2|    1|    0|    0|    1|    0|    9|    5
+Torrey Craig        |True |     |   20|    2|    4|    1|    2|    0|    0|    2|    4|    2|    3|    1|    0|    2|    5|  -17
+Paul Millsap        |True |     |   29|    0|    5|    0|    1|    4|    4|    0|    5|    1|    1|    1|    2|    4|    4|    5
+Mason Plumlee       |False|     |   18|    1|    4|    0|    0|    2|    2|    3|    7|    2|    0|    0|    2|    3|    4|   -4
+Trey Lyles          |False|     |   13|    0|    4|    0|    2|    0|    0|    0|    1|    0|    0|    0|    2|    0|    0|   -2
+Juan Hernangómez    |False|     |    7|    0|    0|    0|    0|    0|    0|    0|    1|    0|    0|    0|    0|    0|    0|   -4
+Tyler Lydon         |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+Brandon Goodwin     |False|     |    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0|    0
+
+*** English jsRealB
+The Nuggets  (34-15) knocked off the Grizzlies  (20-31) 95-92 in Memphis at the FedExForum
+on Monday extending their winning streak to three games.
+
+The Grizzlies led in the first half but the Nuggets managed to come back. The Grizzlies
+overcame the Nuggets for rebounds 24 to 15 over the first half. Over the fourth quarter,
+the Nuggets obtained better goals percentage, 62% to 24%. The Nuggets dominated the
+Grizzlies for points by 22 in the second half. In the game, the Nuggets obtained better
+free throws percentage, an advantage of 25%.
+
+Nikola Jokić who started this game led the way, posting 24 points in 34 minutes. Marc
+Gasol who was a starter finished with 28 points with eleven goals and 2-for-7 from beyond
+the arc.
+
+The Nuggets showed 44 percent from the field and 13-14 attempts at the charity stripe.
+Will Barton who was a starter scored 20 points in 35 minutes.  Malik Beasley had 18 points
+in 24 minutes  (7-13 FG, 3-9 3Pt, 1-2 FT) and three assists.
+
+The Grizzlies showed 44 percent from the field and 13-19 attempts at the charity stripe
+and committed 19 turnovers.  Mike Conley who was a starter scored 23 points with eleven
+assists and performed a double-double.  Bruno Caboclo ended up with five points with five
+rebounds.  Shelvin Mack had three points with six assists.
+
+Next Wednesday, the Nuggets will be on the road against the New Orleans Pelicans. Next
+Wednesday, the Grizzlies will visit the Minnesota Timberwolves.
+-------------------------
+*** French jsRealB
+Les Nuggets  (34-15) ont défait les Grizzlies  (20-31) 95-92 à Memphis lundi au stade
+FedExForum leur permettant d'allonger à 3 leur série de victoires.
+
+Les Grizzlies ont mené dans la première demie mais les Nuggets sont parvenus à revenir.
+Les Grizzlies ont vaincu les Nuggets pour les rebonds 24 à 15 durant la première demie.
+Pendant le quatrième quart, les Nuggets ont réussi les meilleurs tirs en pourcentage, 62%
+par rapport à 24%. Les Nuggets ont dominé les Grizzlies pour les points par 22 durant la
+deuxième demie. Durant la partie, les Nuggets ont obtenu les meilleurs lancers francs en
+pourcentage, un avantage de 25%.
+
+Nikola Jokić qui figurait dans l'alignement de départ a mené, comptant 24 points en 34
+minutes. Marc Gasol qui était un partant a réalisé une performance excellente comptant 28
+points.
+
+Les Nuggets ont compté 44 pour cent de tirs réussis et 13 lancers francs sur 14.  Will
+Barton qui figurait dans l'alignement de départ a contribué un efficace 20 points en 35
+minutes.  Malik Beasley a fini avec 18 points en 24 minutes  (7-13 L, 3-9 L3, 1-2 LF) tout
+en ajoutant trois passes décisives.
+
+Les Grizzlies ont compté 44 pour cent de tirs réussis et 13 lancers francs sur 19 et ont
+subi 19 pertes de ballon.  Mike Conley qui débutait la partie a enregistré 23 points
+(8-16 L, 3-9 L3, 4-6 LF) et onze passes décisives et a terminé avec un double-double.
+Bruno Caboclo a contribué un efficace cinq points avec cinq rebonds.  Shelvin Mack a
+terminé avec trois points avec six passes décisives.
+
+Mercredi prochain, les Nuggets seront sur la route contre les Pelicans de New Orleans.
+Ensuite les Grizzlies voyageront à Minnesota pour affronter les Timberwolves mercredi.
+-------------------------
+*** English FStrings
+The Denver Nuggets (34-15) knocked off the Memphis Grizzlies (20-31) 95-92 on Monday at
+the FedExForum in Memphis  giving them their 3th straight victory.
+
+The Grizzlies lead in the first half, but the Nuggets managed to come back. During the
+fourth quarter, Nuggets obtained a good goals percentage 62% to 24%. Over the game,
+Nuggets got a good free throws percentage 93% to 68%. During the second half, Nuggets got
+a good free throws percentage 91% to 67%. During the first quarter, Grizzlies obtained a
+good goals percentage 52% to 30%. Over the second half, Nuggets dominated Grizzlies for
+points 54 to 32. During the second half, Nuggets got a good goals percentage 50% to 28%.
+Over the first half, Grizzlies got a good goals percentage 60% to 39%. In the second
+quarter, Grizzlies obtained a good goals percentage 68% to 48%. Over the fourth quarter,
+Nuggets overcame Grizzlies for points 35 to 15. Over the first half, Grizzlies dominated
+Nuggets for points 60 to 41. During the first quarter, Grizzlies dominated Nuggets for
+points 30 to 16. In the third quarter, Nuggets got a good free throws percentage 100% to
+86%. During the second half, Nuggets dominated Grizzlies for goals 20 to 10. In the first
+half, Grizzlies dominated Nuggets for rebounds 24 to 15. Over the first half, Grizzlies
+overcame Nuggets for goals 25 to 17.
+
+Nikola Jokić filled the stat sheet, posting 24 points in 34 minutes and 10 goals. Marc
+Gasol had efficient performance scoring 28 points in 37 minutes (11-19 FG, 2-7 3Pt, 4-6
+FT).
+
+The Nuggets show 44 percent from the field and 13-of-14 free throws. Will Barton ended up
+with 20 points in 35 minutes and 9 goals.  Malik Beasley contributed an efficient 18
+points in 24 minutes (7-13 FG, 3-9 3Pt, 1-2 FT).
+
+The Grizzlies show 44 percent from the field and 13-of-19 free throws and committed 19
+turnovers. Mike Conley contributed an efficient 23 points in 36 minutes, 11 assists and
+performed a double-double.  Bruno Caboclo scored 5 points in 23 minutes (1-6 FG, 1-6 3Pt,
+2-2 FT).  Shelvin Mack had 3 points and 6 assists.
+
+Up next, the Nuggets travel to New Orleans to take on the Pelicans on Wednesday. Up next,
+the Grizzlies travel to Minnesota to take on the Timberwolves on Wednesday.
+-------------------------
+*** Reference summary
+The Denver Nuggets defeated the Memphis Grizzlies, 95-92, at FedExForum on Monday. With
+Monday's contest being their third game in four days, the Nuggets (34-15) predictably came
+out flat in Memphis. As a result, it took the the home team opened on an 18-4 run and
+maintained that 14-point through the remainder of the first quarter. The Grizzlies (20-31)
+ended up taking a 19-point lead into halftime and still maintained a 17-point advantage as
+they entered the final period. And that's when everything went south, as the Nuggets
+decided to wake up and put together a huge fourth quarter. After a Justin Holiday three-
+pointer with just under 40 seconds left put the Grizzlies up one, All-Star Nikola Jokic
+countered with a 7-foot jumper with 29 seconds left that would end up being the game-
+winner and cap off a brilliant comeback effort. Jokic finished with a game-high 24 points
+in 35 minutes, while Will Barton, who was back in the starting lineup due to the absence
+of Jamal Murray (ankle), was close behind with 20 points on 9-of-15 shooting. The Nuggets'
+bench as a whole didn't provide much, but Malik Beasley did have a quality night off the
+bench with 18 points in 24 minutes. As for Memphis, only two players managed to score in
+double figures in the disappointing loss, and it happened to be the team's two veteran
+stars. Mark Gasol was dominant for most of Monday's game, scoring a game-high 28 points to
+go along with nine rebounds in 38 minutes. Mike Conley came through with a double-double
+of 23 points and 11 rebounds in 37 minutes, but unfortunately for the Grizzlies, the next
+highest scorers were Kyle Anderson and Holiday with just nine points. On top of all that,
+Memphis got just 15 points from its second unit Monday.
+====================================================================================================
