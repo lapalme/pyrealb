@@ -62,8 +62,8 @@ class Terminal(Constituent):
                 self.lemma=0
             elif isinstance(lemma,str):
                 lexInfo = getLemma(self.lemma)
-                if lexInfo is not None and "value" in lexInfo:
-                    self.lemma=self.value=lexInfo["value"]
+                if lexInfo is not None and "D" in lexInfo and "value" in lexInfo["D"]:
+                    self.lemma=self.value=lexInfo["D"]["value"]
                     self.nbDecimals=0
                     self.props["dOpt"] = {"nat":True}
                     self.addOptSource("nat",True)
