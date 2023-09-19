@@ -1,8 +1,8 @@
-# *pyRealB* - A Python Bilingual Text Realizer
+# *pyrealb* - A Python Bilingual Text Realizer
 
-*Version 2.3.7 - July 2023*
+*Version 2.3.8 - September 2023*
 
-*pyRealB* is a Python adaptation of the JavaScript [**jsRealB**](http://rali.iro.umontreal.ca/jsRealB) 
+*pyrealb* is a Python adaptation of the JavaScript [**jsRealB**](http://rali.iro.umontreal.ca/jsRealB) 
 text realizer with the same constituent and dependency syntax notation. 
 It facilitates its integration within Python applications by simply adding
 
@@ -13,6 +13,8 @@ It facilitates its integration within Python applications by simply adding
 ### Installing the distribution package from PyPI
 
     pip install pyrealb
+
+**Caution**: do not forget the `b` at the end of `pyrealb`. On _PyPI_, there is an unrelated package `pyreal` _for evaluating and deploying human readable machine learning explanations_.
 
 ### Upgrading the version 
 
@@ -50,7 +52,7 @@ It facilitates its integration within Python applications by simply adding
     * `Dependent.py` : subclass of *Constituent* for creating complex phrases using dependencies
     * `Terminal.py` : subclass of *Constituent* for creating a single unit (most often a single word)
     * `util.py`  : some useful functions
-    * `Warning.py` : function to generate warnings in case of erroneous specifications using *pyRealB* itself
+    * `Warning.py` : function to generate warnings in case of erroneous specifications using *pyrealb* itself
     * [`data`](./src/pyrealb/data):
         * `lexicon-en.json` : English lexicon (33,932 entries) in json format
         * `rule-en.js` : English conjugation and declension tables
@@ -58,7 +60,7 @@ It facilitates its integration within Python applications by simply adding
         * `rule-fr.js` : French conjugation and declension tables 
 
 _Nota bene_:
-1. In the following directories, the `__init__.py` file is used to set the appropriate search path for  *pyRealB* functions; this ensures that the current Python source files are used for execution. 
+1. In the following directories, the `__init__.py` file is used to set the appropriate search path for  *pyrealb* functions; this ensures that the current Python source files are used for execution. 
 2. Some directories include `markup.py` which should be loaded using `pip`. Unfortunately I never managed to make this "piped" version work, it does not import the name `oneliner`although it should. It works once the file is in the local directory.
 
 * [`docs`](./docs): in both English and French. 
@@ -70,17 +72,17 @@ _Nota bene_:
     * `user.js`  : Python helper script.
     
 * [`IDE`](./IDE) : Integrated Development Environment 
-    * `ide.py`: built on the Python *read-eval-print loop*, it imports *pyRealB* to get the realization of an expression, to consult the lexicon, the conjugation and declension tables. It is also possible to get a *lemmatization*: i.e. the *pyRealB* expression corresponding to a form.
+    * `ide.py`: built on the Python *read-eval-print loop*, it imports *pyrealb* to get the realization of an expression, to consult the lexicon, the conjugation and declension tables. It is also possible to get a *lemmatization*: i.e. the *pyrealb* expression corresponding to a form.
     * `README.html`: documentation and examples
 
-* [`tests`](./tests) : unit tests of special features of *pyRealB* in both French and English. Files have the pattern `*_{en|fr}.py`
+* [`tests`](./tests) : unit tests of special features of *pyrealb* in both French and English. Files have the pattern `*_{en|fr}.py`
     * `test.py`: simplistic function to check if a function returns the expected answer and display appropriate message
     * `testAll.html` : run this file to run all tests
 
 ## Demos
 
 * `99bottlesofbeer/99bottlesofbeer.py` : simple generation of a classic repetitive text in English.
-* `basketball/sportsettsum.py` : generation of French and English basketball summaries
+* `basketball/sportsettsum.py` : generation of French and English basketball summaries [paper describing the approach](demos/basketball/docs/SportSettSum.md)
 * `dev_example/dev_example.py`: examples of English and French expressions to be realized and checked against expected output,  
 useful for debugging when adding a new expression and enabling tracing
 * `evenementsDemo/evenements.py` : Description (in French) of a list of events, it creates HTML.
@@ -92,7 +94,7 @@ useful for debugging when adding a new expression and enabling tracing
 * `methodius/methodius.py` : generation of English sentences from a logical form expressed in XML.
 * `randomgen/randomgen.py`: Generation of random English sentences
 * `RDFpyrealb/WebGenerate.py` : Generation from RDF triples
-* `report/report.py` : Single sentence parameterized by language, tense and subject
+* `report/report.py` : Single sentence parameterized by language, tense and subject using two different program organization
 * `variantes/variantes.py`: French or English sentences realized with all possible sentence modifiers; some challenging examples are in `examples.py`.
 * `weather/Bulletin.py`: French and English weather bulletins generated from information in a *json-line* file. (`weather-data.jsonl`). It uses the packages in the `Realization` directory.
 
@@ -109,16 +111,18 @@ see [this tutorial](https://packaging.python.org/en/latest/tutorials/packaging-p
 
 These steps take for granted that the password for PyPI has already been given...
 
-1. update version number in `setup.cfg` (it should be the same as `python_version` in `src/pyrealb/utils.py` and at the beginning of this document)
-2. `cd` into the directory with the `pyproject.toml` file (the same as this `README.md`)
-3. Build the distribution package  
+1. Update version number in `setup.cfg` (it should be the same as `python_version` in `src/pyrealb/utils.py` and at 
+   the beginning of this document). 
+2. Run `docs/documentation.py` to update the version number in `docs/documentation.html`
+3.`cd` into the directory with the `pyproject.toml` file (the same as this `README.md`)
+4. Build the distribution package  
        `python3 -m build`
-4. Upload to PyPi the last version I.J.K
+5. Upload to PyPi the last version I.J.K
       `twine upload dist/*-I.J.K.*`
-5. Install new version from PyPI  
+6. Install new version from PyPI  
     `python3 -m pip install pyrealb --upgrade`
 
-### Useful trick for debugging with breaking point and tracing
+### Useful trick for debugging with breaking point and tracing in PyCharm
 1. add `pyrealb` expression to debug at the end of `demo/dev_example/dev_example.py`
 2. comment the line calling `testPreviousExamples()`
 3. debug `demo/dev_example/dev_example.py`

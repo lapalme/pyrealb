@@ -553,14 +553,14 @@ addTable(functionUse)
 h2_fr("Gestion des lexiques");h2_en("Lexicon Management")
 page.p("""
  <span class="jsr">pyrealb</span> 
-intègre déjà deux lexiques assez détaillés: français (plus de 52 500 entrées) et anglais (plus de 33 900 entrées) 
+intègre déjà deux lexiques assez détaillés: français (plus de 52 500 entrées) et anglais (plus de 34 200 entrées) 
 qu'il est possible de consulter et de modifier à l'aide des fonctions suivantes. Lorsque <code>lang</code> (<code>"en"</code> 
 ou <code>"fr"</code>) est spécifié, la fonction s'applique au lexique de cette langue, sinon au lexique courant, 
 celui du dernier appel à <code>loadEn()</code> ou <code>loadFr()</code>.
 """,lang="fr")
 page.p("""
 <span class="jsr">pyrealb</span> 
-provides already two comprehensive lexicons: French (more than 52 500 entries) and English (more than 33 900 entries) 
+provides already two comprehensive lexicons: French (more than 52 500 entries) and English (more than 34 200 entries) 
 that can be queried and modified with the following functions. When <code>lang</code> (<code>"en"</code> or 
 <code>"fr"</code>) is specified, the function is applied to the lexicon of this language, otherwise it applies to 
 the current lexicon, the one of the last call to <code>loadEn()</code> or <code>loadFr()</code>.
@@ -756,9 +756,9 @@ pyrealb" lang="en">Jupyter Notebook</a></li>
 </li>
 """)
 
-
-### créer le fichier de sortie
-outFileN=os.path.abspath(os.path.join(os.path.dirname(__file__),"documentation.html"))
-outFile=open(outFileN,"w",encoding="utf-8")
-print(page,file=outFile)
-print(outFileN, "written")
+if __name__ == "__main__":
+    ### créer le fichier de sortie
+    outFileN=os.path.abspath(os.path.join(os.path.dirname(__file__),"documentation.html"))
+    outFile=open(outFileN,"w",encoding="utf-8")
+    print(page,file=outFile)
+    print(outFileN, "written")

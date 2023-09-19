@@ -846,4 +846,3 @@ if __name__ == '__main__':
     # do not forget to load the appropriate language
     loadEn()
     loadFr()
-
