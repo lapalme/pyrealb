@@ -743,6 +743,8 @@ class Constituent():
         s=""
         for i in range(0,len(terminals)-1):
             terminal=terminals[i]
+            if terminal.realization.startswith(" "):    # remove redundant initial space
+                terminal.realization=terminal.realization[1:]
             if "lier" in terminal.props:
                 s+=terminal.realization+"-"
                 # check for adding -t- in French between a verb and a pronoun
@@ -758,7 +760,9 @@ class Constituent():
                 s+=terminal.realization
             elif len(terminal.realization)>0:
                 s+=terminal.realization+" "
-        s+=terminals[-1].realization
+        last = terminals[-1].realization
+        if last.startswith(" "): last = last[1:] # remove redundant initial space
+        s+=last
         # apply capitalization and final full stop unless .cap(False)
         if self.parentConst is None:
             if ((self.isOneOf(["S","root"])

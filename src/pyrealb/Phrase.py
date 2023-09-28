@@ -192,9 +192,15 @@ class Phrase(Constituent):
                                 # gender agreement between a French number and subject
                                 e.peng["g"] = self.peng["g"]
                             elif e.isOneOf(["D", "A"]):
-                                # link gender and number of the noun to the determiners and adjectives
-                                # in English possessive determiner should not depend on the noun but on the "owner"
-                                if self.isFr() or not (e.isA("D") and "own" in e.props):
+                                if self.isEn() and e.isA("D") and e.lemma=="no":
+                                    # check for "no" as determiner which should add plural in English
+                                    self.peng["n"] = "p"
+                                elif self.isFr() and e.isA("A") and e.lemma=="quelques":
+                                    # check for "quelques" as adjective which should add plural in French
+                                    self.peng["n"]="p"
+                                elif self.isFr() or not (e.isA("D") and "own" in e.props):
+                                    # link gender and number of the noun to the determiners and adjectives
+                                    # in English possessive determiner should not depend on the noun but on the "owner"
                                     e.peng = self.peng
                             elif e.isA("V") and e.isFr() and e.getProp("t") == "pp":
                                 e.peng = self.peng

@@ -161,18 +161,18 @@ def translate(en_exp):
         "with": "avec", "within": "dans", "without": "sans", "word": "mot",
     }
 
-    def setProps(newObj,oldObj):
+    def setProps(oldObj,newObj):
         newObj.props = oldObj.props
         newObj.optSource = oldObj.optSource
         return newObj
 
     def terminal_tr(terminal):
         lemma = en_fr[terminal.lemma] if terminal.lemma in en_fr else terminal.lemma
-        return setProps(terminal.__class__(lemma , "fr"), terminal)
+        return setProps(terminal,terminal.__class__(lemma , "fr"))
 
     def phrase_tr(phrase):
         children = list(map(lambda e : phrase_tr(e) if isinstance(e,Phrase) else terminal_tr(e),phrase.elements))
-        return setProps(phrase.__class__(*children), phrase)
+        return setProps(phrase,phrase.__class__(*children))
 
     return phrase_tr(en_exp)
 

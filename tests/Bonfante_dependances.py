@@ -486,8 +486,8 @@ def bonfante_en_ex():
                   fool_voters(D("a"), D("most"), "p", D("most"), "p", D("most")).a(","),
                   fool_voters(D("no"), D("all"), "p", AP(D("every"), A("single")), "s", D("all")))),
          "expected": "A politician can fool most voters on most issues most of the time, "
-                     "but no politician can fool all voters on every single issue all of the time. ",
-         "message": " Figure 4.21 p 116 / REM: utile une fonction pour factoriser le code"},
+                     "but no politicians can fool all voters on every single issue all of the time. ",
+         "message": " Figure 4.21 p 116 / REM: utilise une fonction pour factoriser le code"},
     ]
 
 if __name__ == '__main__':

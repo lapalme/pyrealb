@@ -839,10 +839,83 @@ def testPreviousExamples():
     # from pyrealb.Warning import test_warnings
     # test_warnings()
 
+def testDataToTextExamples():
+    print(S(NP(D("the"),N("cat"),A("small")),        # create a subject NP
+            VP(V("jump").t("ps"),        # create VP, setting past for the verb time
+               PP(P("on"),                           # create a PP with
+                  NP(D("the"),N("mat"),A("green")))) #  an object NP
+            ).realize())
+    # output: The small cat jumped on the green mat.
+
+    loadFr()                                         # set the language to French
+    print(S(NP(D("le"),N("chat"),A("petit")),        # create a subject NP
+            VP(V("sauter").t("ps"),        # create VP, setting past for the verb time
+               PP(P("sur"),                          # create a PP  with
+                  NP(D("le"),N("tapis"),A("vert")))) #  an object NP
+            ).realize())
+    # output: Le petit chat sauta sur le tapis vert.
+
+    loadEn()                                         # set the language to English
+    subj = NP(D("the"),N("cat"),A("small"))          # create an English NP
+    loadFr()                                         # set the language to French
+    verb = VP(V("sauter"),                    # create a French VP, present by default
+               PP(P("sur"),                          # create a PP with
+                  NP(D("le"), N("tapis"), A("vert"))))  # an object NP
+    print(S(subj.n("p"),                     # set the English subject to plural
+            verb).realize())
+    # output: The small cats sautent sur le tapis vert.
+
+    loadEn()
+    verb.add(PP(P("over"),NP(D("a"),N("fence")).n("p")))
+    print(S(subj.n("p"),  # set the English subject to plural
+            verb).realize())
+    #output: The small cats sautent sur le tapis vert over fences.
+
+    persons = ["mother","daughter","father"]
+    for i in range(0,len(persons)):
+        print(S(CP(C("and"),[NP(D("the"),N(p)) for p in persons[:i+1]]),
+                VP(V("be"),
+                   A("happy"))).realize())
+    # output:
+    # The mother is happy.
+    # The mother and the daughter are happy.
+    # The mother, the daughter and the father are happy.
+
+    loadFr();
+    personnes = ["mère","fille","père"]
+    for i in range(0, len(personnes)):
+        print(S(CP(C("et"), [NP(D("le"), N(p)) for p in personnes[:i + 1]]),
+                VP(V("être"),
+                   A("heureux"))).realize())
+    # output:
+    # La mère est heureuse.
+    # La mère et la fille sont heureuses.
+    # La mère, la fille et le père sont heureux.
+
+    from datetime import datetime
+    loadEn()
+    def report(event, persons, date, tense="p"):
+        meeting = PP(P("at"), NP(D("a"), N(event)))
+        return S(CP(C("and"), [NP(D("a"),N(person)) for person in persons]),
+                 NP(NO(len(persons)),N("person")).ba("("), # show number of person
+                 VP(V("be").t(tense),
+                    A("present"),
+                    meeting,
+                    DT(date).dOpt({"hour":False,"minute":False,"second":False})))
+
+    print(report("birthday",["mother","girl"],
+                 datetime(2023,5,30),"ps").realize())
+    print(report("assembly",["grandfather","father","boy"],
+                 datetime(2023, 12, 30),"f").realize())
+    # output:
+    # A mother and a girl (2 persons) were present at a birthday on Tuesday, May 30, 2023.
+    # A grandfather, a father and a boy (3 persons) will be present at an assembly on Saturday, December 30, 2023.
+
 
 if __name__ == '__main__':
     # testPreviousExamples()
+    testDataToTextExamples()
     # insert here a single example for debugging perhaps commenting the line above
     # do not forget to load the appropriate language
-    loadEn()
-    loadFr()
+    loadEn()                                         # set the language to English
+    loadFr()                                         # set the language to French
