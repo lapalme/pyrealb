@@ -50,15 +50,17 @@ if __name__ == "__main__":
     today = datetime.today()
     loadEn(); print(DT(today).dOpt(dateOptions).realize(),end="")
     loadFr();print("-",DT(today,"fr").dOpt(dateOptions).realize(),"\n")
+    english = English()
+    francais = Francais()
     for (i,day) in zip(range(1,len(participants)+1),
                        [today-timedelta(days=1),today,today+timedelta(days=1)]):
-        print(report("assembly",participants[:i], day,"en").realize())
-        print(report("réunion",participants[:i], day,"fr").realize())
-        print("--")
-        # # use Realizer subclasses on the reversed lists
-        # English().report(participants[::-1][:i],day)
-        # Francais().report(participants[::-1][:i], day)
-        # print("====")
+        # print(report("assembly",participants[:i], day,"en").realize())
+        # print(report("réunion",participants[:i], day,"fr").realize())
+        # print("--")
+        # use Realizer subclasses on the reversed lists
+        english.report("assembly",participants[:i],day)
+        francais.report("réunion",participants[:i], day)
+        print("====")
 
 
 '''  output:

@@ -1,5 +1,3 @@
-from typing import Dict
-
 from pyrealb import *
 from Realizer import Realizer
 from LexicalChoices import LexicalChoices
