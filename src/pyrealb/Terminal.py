@@ -62,12 +62,22 @@ class Terminal(Constituent):
                 self.lemma=0
             elif isinstance(lemma,str):
                 lexInfo = getLemma(self.lemma)
-                if lexInfo is not None and "D" in lexInfo and "value" in lexInfo["D"]:
-                    self.lemma=self.value=lexInfo["D"]["value"]
-                    self.nbDecimals=0
-                    self.props["dOpt"] = {"nat":True}
-                    self.addOptSource("nat",True)
-                    return
+                if lexInfo is not None and "value" in lexInfo:
+                    if "A" in lexInfo:
+                        # if it exists as an adjective it is considered as an ordinal number written in letters
+                        # is given its "value" as lemma
+                        self.lemma=self.value=lexInfo["value"]
+                        self.nbDecimals=0
+                        self.props["dOpt"] = {"ord":True}
+                        self.addOptSource("ord",True)
+                        return
+                    else:
+                        # a number written in letters is given its "value" as lemma
+                        self.lemma=self.value=lexInfo["value"]
+                        self.nbDecimals=0
+                        self.props["dOpt"] = {"nat":True}
+                        self.addOptSource("nat",True)
+                        return
                 # check if this looks like a legal number
                 else:
                     if not re.match(r"^[-+]?[0-9]+([., ][0-9]*)?([Ee][-+][0-9]+)?$",lemma):

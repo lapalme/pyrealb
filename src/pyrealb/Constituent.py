@@ -618,6 +618,10 @@ class Constituent():
                             moveTo(advIdx,len(advIdxes),auxIdx+2)
                         else:
                             # there is an auxiliary/modals followed by a verb, insert adverb after the auxiliary
+                            # except for "will" and "shall" when used as future auxiliary as indicated in the parentConst
+                            if e.lemma == "will" or e.lemma == "shall":
+                                if e.parentConst is not None and e.parentConst.getProp("t") == "f":
+                                    continue
                             moveTo(advIdx, len(advIdxes), auxIdx + 1)
                     elif e.isEn():
                         # in English insert after negation (in French, negation [ne  ... pas] is added after this step)
@@ -799,7 +803,8 @@ class Constituent():
         return self.toSource(-1) if Constituent.debug else self.realize()
 
     def clone(self):
-        return copy.deepcopy(self)
+        cln = copy.deepcopy(self)
+        return cln
     
     def toSource(self):
         return self.optSource

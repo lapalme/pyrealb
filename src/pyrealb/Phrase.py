@@ -917,7 +917,7 @@ class Phrase(Constituent):
                         vp = VP(V("have").t(t).pe(pe).n(n),Adv("not"),pro).typ({"contr":True})
                     else: # use jsRealB itself for realizing the tag by adding a new VP
                         vp = VP(V(aux).t(t).pe(pe).n(n),pro).typ({"neg":not neg,"contr":True})
-                    pro.peng = vp.peng  #  ensure that the head of the vp is the pronoun for pronominalize_en
+                    vp.peng = pro.peng  #  ensure that the head of the vp is the pronoun for pronominalize_en
                     self.addElement(vp)
             prefix = intPrefix[int_]
         else:
