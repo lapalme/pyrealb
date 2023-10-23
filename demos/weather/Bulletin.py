@@ -113,11 +113,11 @@ def weatherLexicon():
 
 compare=False
 if __name__ == '__main__':
-    # paperExample()
     weatherLexicon()
+    # paperExample()
     for line in open(os.path.abspath(os.path.join(os.path.dirname(__file__),"weather-data.jsonl")),"r",encoding="utf-8"):
         wInfo=WeatherInfo(json.loads(line))
-        # if wInfo.data["id"]!="fpto11-2019-01-26-1600-r1116d":continue
+        # if wInfo.data["id"]!="fpto12-2018-07-18-2000-r1209c":continue  # example used in the paper
         if compare:
             print(compare_with_orig(wInfo,"en"),"\n")
             print(compare_with_orig(wInfo,"fr"),"\n")

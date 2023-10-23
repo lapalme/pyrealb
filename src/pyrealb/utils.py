@@ -4,10 +4,6 @@
 ##   similar
 ## Guy Lapalme, December 2021
 
-# select a random element in a list useful to have some variety in the generated text
-#  if the first argument is a list, selection is done within the list
-#  otherwise the selection is among the arguments
-#   (if the selected element is a function, evaluate it with no parameter)
 import datetime
 import random
 import sys
@@ -17,16 +13,53 @@ from .Terminal import Terminal
 from .Phrase import Phrase
 from .Dependent import Dependent
 
+pyrealb_oneOf_dict = {}  # internal Map for keeping track of calls to specific oneOf call
+
+# Select a random element in a list useful to have some variety in the generated text
+# if the first argument is a list, selection is done within the list,
+# otherwise the selection is among the arguments
+# Implements the "mode:once" of RosaeNLG
+#    (https://rosaenlg.org/rosaenlg/4.3.0/mixins_ref/synonyms.html#_choose_randomly_but_try_not_to_repeat)
+# Select an alternative randomly, but tries not to repeat the same alternative.
+# When all alternatives have been triggered, it will reset, but will try not run the last triggered alternative
+# as the first new one, avoiding repetitions.
 def oneOf(*elems):
     if len(elems) == 1:
         if isinstance(elems[0], list):
-            e = random.choice(elems[0])
-        else:
-            e = elems[0]
+            elems = elems[0]
+    l = len(elems)
+    if l==1:
+        e = elems[0]
     else:
-        e = random.choice(elems)
+        elems_key = repr(elems)  # HACK: create key from the array
+        if elems_key in pyrealb_oneOf_dict :
+            past_indices = pyrealb_oneOf_dict[elems_key] # // a list of past indices
+            if len(past_indices)<l:
+                indices = [i for i in range(l) if i not in past_indices]
+            else: # reset the list but avoid last index
+                last_idx = past_indices[-1]
+                indices = [i for i in range(l) if i != last_idx]
+                past_indices.clear()
+            idx = random.choice(indices)
+            past_indices.append(idx)
+        else:  # first call
+            indices = list(range(l))
+            idx = random.choice(indices)
+            pyrealb_oneOf_dict[elems_key]=[idx] # initialise dict element
+        e = elems[idx]
     return e() if callable(e) else e
 
+# Mix elements of a list in a random order.
+# If the first argument is a list, mixing is done within the list,
+# otherwise the mix is among the arguments. The original list is not modified
+def mix(*elems):
+    if len(elems) == 1:
+        if isinstance(elems[0], list):
+            elems = elems[0].copy()
+    else:
+        elems = list(elems).copy()
+    random.shuffle(elems)
+    return [e() if callable(e) else e for e in elems]
 
 # Flag for quoting out of vocabulary tokens (not yet taken into account)
 # quoteOOV=False;

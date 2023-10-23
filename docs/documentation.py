@@ -627,33 +627,54 @@ Merge the entries of <code>newLexicon</code> with the specified lexicon. This ad
 the existing entries by the ones of the <span class="jsr">pyrealb</span> lexicon. Merging is done at the entry level, not at the category level.""",lang="en")
 
 h2_fr("Sélection de variantes");h2_en("Variant selection")
+page.h3("<code>oneOf(e<sub>1</sub>,e<sub>2</sub>,...)</code>")
 page.p("""
-La fonction <code>oneOf(e<sub>1</sub>,e<sub>2</sub>,...)</code> où <code>e<sub>i</sub></code> est est une valeur, 
-choisit un <code>e<sub>i</sub></code> au hasard. En <span class="jsr">pyrealb</span>, ces éléments sont souvent des 
-constructeurs correspondant à des structures de phrases différentes. Si <code>e<sub>1</sub></code> est une 
-liste alors la sélection est faite dans cette liste, en ignorant les autres paramètres.
+où <code>e<sub>i</sub></code> est est une valeur, choisit un <code>e<sub>i</sub></code> au hasard. En <span 
+class="jsr">pyrealb</span>, ces éléments sont souvent des constructeurs correspondant à des structures de 
+phrases 
+différentes. Si <code>e<sub>1</sub></code> est un tableau alors la sélection est faite dans ce tableau, en ignorant les autres paramètres.
 """,lang="fr")
 page.p("""
 Pour éviter que tous les éléments soient évalués avant la sélection, il suffit de <em>fonctionaliser</em> 
-l'expression en une fonction sans paramètre en la préfixant par <code>lambda:</code>. 
-Une fois l'élément choisi, <code>oneOf</code> vérifie si la valeur est une fonction et 
-si c'est le cas, il retourne le résultat de l'appel. Par exemple,
-<code>ofOne(lambda:N("amour"),lambda:N("amitié"))</code> permet de choisir entre les deux noms sans évaluer 
-les deux constructeurs. Dans ce cas, très simple, il aurait été aussi possible d'écrire 
-<code>N(oneOf("amour","amitié"))</code>.""",lang="fr")
+l'expression en une fonction sans paramètre en la préfixant par <code>lambda</code>. Une fois l'élément choisi, <code>oneOf</code> vérifie si la valeur est une fonction et si c'est le cas, il retourne le résultat de l'appel. Par exemple,
+<code>oneOf(lambda:N("amour"),lambda:N("amitié"))</code> permet de choisir entre les deux noms sans évaluer les deux 
+constructeurs. Dans ce cas, très simple, il aurait été aussi possible d'écrire <code>N(oneOf("amour","amitié"))</code>.
+""",lang="fr")
 page.p("""
-The function <code>oneOf(e<sub>1</sub>,e<sub>2</sub>,...)</code> where <code>e<sub>i</sub></code> is a value, 
-selects randomly a <code>e<sub>i</sub></code>. In <span class="jsr">pyrealb</span>, these elements are often constructors
-corresponding to different phrase structures. If <code>e<sub>1</sub></code> is a list, the selection is performed 
-within this list, ignoring other parameters.""",lang="en")
+<code>oneOf</code> implante le <a href="https://rosaenlg.org/rosaenlg/4.3.0/mixins_ref/synonyms.html#_choose_randomly_but_try_not_to_repeat" target="_blank">"mode:once" de RosaeNLG</a>: une alternative est choisie au hasard, mais en essayant de ne pas répéter la précédente. Lorsque toutes les alternatives ont été utilisées, le système recommence avec les alternatives initiales, mais en évitant la dernière utilisée afin de ne pas se répéter.
+""",lang="fr")
 page.p("""
-To avoid the evaluation of all elements before the selection, it is possible to <em>functionalize</em> a expression 
-into a function with no formal parameter by prefixing it with <code>lambda:</code>. Once the element is selected, 
-<code>oneOf</code> checks if the value is a function and, if it is so, it returns the value of the called function. 
-For exemple,
-<code>oneOf(lambda:V("love"),lambda:V("like"))</code> allows choosing between the two verbs without evaluating 
-both constructors. In this simplistic case, this could have also been written as <code>V(oneOf("love","like"))</code>.""",
-lang="en")
+where <code>e<sub>i</sub></code> is a value, selects randomly a <code>e<sub>i</sub></code>. In <span 
+class="jsr">pyrealb</span>, these elements are often constructors corresponding to different phrase structures. If <code>e<sub>1</sub></code> is an array, the selection is performed within this array, ignoring other parameters.
+""",lang="en")
+page.p("""
+To avoid the evaluation of all elements before the selection, it is possible to <em>functionalize</em> an expression 
+into a function with no formal parameter by prefixing it with <code>lambda</code>. 
+Once the element is selected, <code>oneOf</code> checks if the value is a function and, if it is so, it returns the value of the called function. For exemple,
+<code>oneOf(lambda:V("love"),lambda:V("like"))</code> allows choosing between the two verbs without evaluating both 
+constructors. In this simplistic case, this could have also been written as <code>V(oneOf("love","like"))</code>.
+""", lang="en")
+page.p("""
+<code>oneOf</code> implements the <a href="https://rosaenlg.org/rosaenlg/4.3.0/mixins_ref/synonyms.html#_choose_randomly_but_try_not_to_repeat"  target="_blank">"mode:once" of RosaeNLG</a>: it selects an alternative randomly, but tries not to repeat the same one. When all alternatives have been triggered, it resets but tries not run the last triggered alternative, avoiding repetitions.
+""",lang="en")
+
+page.h3("<code>mix(e<sub>1</sub>,e<sub>2</sub>,...)</code>")
+page.p("""
+<i>permute</i> ses paramètres, ce qui peut être utile pour varier l'ordre des éléments. Si <code>e<sub>1</sub></code> 
+est un tableau alors la sélection est faite dans ce tableau, en ignorant les autres paramètres. Comme pour 
+<code>oneOf(...)</code>, pour éviter que tous les éléments soient évalués avant la sélection, il suffit de 
+<em>fonctionaliser</em> l'expression en une fonction sans paramètre en la préfixant par <code>lambda</code>. Pour 
+chaque élément de la liste, <code>mix</code> vérifie si sa valeur est une fonction et si c'est le cas, il le remplace par le 
+résultat de l'appel.
+""",lang="fr")
+page.p("""
+<i>shuffles</i> its parameters, which can be useful to vary the order of elements. If <code>e<sub>1</sub></code> is 
+an array, the selection is performed within this array, ignoring other parameters. As for <code>oneOf(...)</code>, 
+to avoid the evaluation of all elements before the selection, it is possible to <em>functionalize</em> a expression 
+into a function with no formal parameter by prefixing it with <code>lambda</code>. 
+For each element of the mixed list, <code>mix</code> checks if the value is a function and, if it is so, it replaces 
+it by the value of the called function.
+""", lang="en")
 
 h2_fr("Traitement en JSON");h2_en("JSON processing")
 page.p("""

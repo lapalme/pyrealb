@@ -12,7 +12,7 @@ from pyrealb import NP
 class French(Realizer, LexicalChoices):
     def __init__(self, tense="pc"):
         self.tense = tense
-        self.name = "French jsRealB"
+        self.name = "pyrealb en Français"
         # language specifics
         loadFr()
         addToLexicon({"score": {"N": {"g": "m", "tab": "n3"}}})

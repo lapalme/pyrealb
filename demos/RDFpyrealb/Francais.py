@@ -533,7 +533,8 @@ class Francais(Realizer):
             lambda o: VP(V("être").t("pc"), NP(D("un"), N("membre"), _de(o))),
         ]),
         "mission": (22, True, [
-            lambda o: VP(V("être").t("pc"), D("un"), N("membre"), _de(N("équipe"), P("de"), o)),
+            lambda o: VP(V("être").t("pc"), D("un"), N("membre"),
+                         _de(NP(D("le"),N("équipe"), P("de"), o))),
             lambda o: VP(V("devenir").t("pc"), N("membre"), _de(o)),
         ]),
         "municipality": (30, False, "city"),

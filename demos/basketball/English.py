@@ -6,7 +6,7 @@ import json
 class English(Realizer,LexicalChoices):
     def __init__(self, tense="ps"):
         self.tense = tense
-        self.name = "English jsRealB"
+        self.name = "English pyrealb"
         # language specifics
         loadEn()
         addToLexicon({"assist": {"N": {"tab": "n1"}}})
