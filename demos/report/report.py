@@ -54,25 +54,34 @@ if __name__ == "__main__":
     francais = Francais()
     for (i,day) in zip(range(1,len(participants)+1),
                        [today-timedelta(days=1),today,today+timedelta(days=1)]):
-        # print(report("assembly",participants[:i], day,"en").realize())
-        # print(report("réunion",participants[:i], day,"fr").realize())
-        # print("--")
-        # use Realizer subclasses on the reversed lists
+        print(report("assembly",participants[:i], day,"en").realize())
+        print(report("réunion",participants[:i], day,"fr").realize())
+        print("--")
+        # use Realizer subclasses
         english.report("assembly",participants[:i],day)
         francais.report("réunion",participants[:i], day)
         print("====")
 
 
 '''  output:
-on Tuesday, September 26, 2023 at 5 p.m.- le mardi 26 septembre 2023 à 17 h 
+on Monday, October 23, 2023 at 2 p.m.- le lundi 23 octobre 2023 à 14 h 
 
-Alice (one person) was present at an assembly on Monday, September 25, 2023 at 5 p.m.
-Alice (une personne) fut présente à une réunion le lundi 25 septembre 2023 à 17 h. 
+Alice (one person) was present at an assembly on Sunday, October 22, 2023 at 2 p.m.
+Alice (une personne) fut présente à une réunion le dimanche 22 octobre 2023 à 14 h. 
 --
-Alice and Eve (two persons) are present at an assembly on Tuesday, September 26, 2023 at 5 p.m.
-Alice et Eve (deux personnes) sont présentes à une réunion le mardi 26 septembre 2023 à 17 h. 
+Alice (one person) attended the assembly on Sunday, October 22, 2023 at 2 p.m.
+Alice (un individu) fut présente à la réunion le dimanche 22 octobre 2023 à 14 h. 
+====
+Alice and Eve (two persons) are present at an assembly on Monday, October 23, 2023 at 2 p.m.
+Alice et Eve (deux personnes) sont présentes à une réunion le lundi 23 octobre 2023 à 14 h. 
 --
-Alice, Eve and Bob (three persons) will be present at an assembly on Wednesday, September 27, 2023 at 5 p.m.
-Alice, Eve et Bob (trois personnes) seront présents à une réunion le mercredi 27 septembre 2023 à 17 h. 
+Alice and Eve (two persons) attend the assembly on Monday, October 23, 2023 at 2 p.m.
+Alice et Eve (deux individus) sont présentes à la réunion le lundi 23 octobre 2023 à 14 h. 
+====
+Alice, Eve and Bob (three persons) will be present at an assembly on Tuesday, October 24, 2023 at 2 p.m.
+Alice, Eve et Bob (trois personnes) seront présents à une réunion le mardi 24 octobre 2023 à 14 h. 
 --
+Alice, Eve and Bob (three persons) will attend the assembly on Tuesday, October 24, 2023 at 2 p.m.
+Alice, Eve et Bob (trois individus) seront présents à la réunion le mardi 24 octobre 2023 à 14 h. 
+====
 '''
