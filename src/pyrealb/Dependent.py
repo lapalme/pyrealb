@@ -286,7 +286,7 @@ class Dependent(Constituent):
     # self must be done in the context of the parent, because some dependents might be changed
     def pronominalizeChildren(self):
         for d in self.dependents:
-            if "pro" in d.props and not d.terminal.isA("Pro"):  # it can happen that a Pro has property "pro" set within the same expression
+            if d.getProp("pro") and not d.terminal.isA("Pro"):  # it can happen that a Pro has property "pro" set within the same expression
                 if d.isFr():
                     d.pronominalize_fr()
                 else:
@@ -323,7 +323,7 @@ class Dependent(Constituent):
                 obj=self.dependents[objIdx]
                 if obj.terminal.isA("Pro"):
                     obj.terminal=obj.terminal.getTonicPro("nom")
-                elif obj.terminal.isA("N") and "pro" in obj.props:
+                elif obj.terminal.isA("N") and obj.getProp("pro"):
                     obj=obj.getTonicPro("nom")
                 # swap subject and object by changing their relation name !!!
                 # HACK: obj is the new subject

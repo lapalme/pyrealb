@@ -400,7 +400,7 @@ class Phrase(Constituent):
             pro.peng = np.peng
             for key, val in np.props.items():
                 pro.props[key] = val
-            if "pro" in pro.props:
+            if pro.getProp("pro"):
                 del pro.props["pro"]  # self property should not be copied into the Pro
             # in French a pronominalized NP as direct object is moved before the verb
             # if idxV>=0 and npParent.elements[idxV].getProp("t") not in ["ip","b"]: # except for imperative and infinitive
@@ -443,7 +443,7 @@ class Phrase(Constituent):
         return pro
 
     def pronominalize(self, e):
-        if "pro" in e.props and not e.isA(
+        if e.getProp("pro") and not e.isA(
                 "Pro"):  # it can happen that a Pro has property "pro" set within the same expression
             if e.isFr():
                 return e.pronominalize_fr()
@@ -459,8 +459,7 @@ class Phrase(Constituent):
         for e in self.elements:
             self.pronominalize(e)
 
-            # modify the sentence structure to create a passive sentence
-
+    # modify the sentence structure to create a passive sentence
     def passivate(self):
         # find the subject at the start of self.elements
         if self.isA("VP"):

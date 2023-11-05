@@ -429,8 +429,8 @@ class Terminal(Constituent):
             if hasattr(self,"neg2"):
                 aux.neg2=self.neg2 # save this flag to put on the auxiliary, 
                 del self.neg2      # delete it on this verb
-            if "lier" in self.props:
-                aux.lier()         # put this flag on the auxiliary
+            if self.getProp("lier") :
+                aux.setProp("lier", True)         # put this flag on the auxiliary
                 del self.props["lier"] # delete it from the verb
                 # HACK: check if the verb was lié to a nominative pronoun (e.g. subject inversion for a question)
                 myParent=self.parentConst

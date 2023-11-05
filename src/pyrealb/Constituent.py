@@ -441,7 +441,7 @@ class Constituent():
         if last==0:return # do not try to elide a single word
         i=0
         while i < last:
-            if i>0 and cList[i-1].getProp("lier") is not None: # ignore if the preceding word is "lié" to this one
+            if i>0 and cList[i-1].getProp("lier"): # ignore if the preceding word is "lié" to this one
                 i+=1
                 continue
             m1=sepWordREfr.match(cList[i].realization) if cList[i].realization is not None else None
@@ -495,7 +495,7 @@ class Constituent():
             c = cList[i]
             if c.isA("V") and hasattr(c, "neg2"):
                 if hasattr(c, "isMod") or hasattr(c, "isProg"):
-                    if (c.getProp("lier") is not None):
+                    if (c.getProp("lier")):
                         c.insertReal(cList, Q(c.neg2, "fr"), i + 2)
                     else:
                         c.insertReal(cList, Q(c.neg2, "fr"), i + 1)
@@ -565,10 +565,10 @@ class Constituent():
             else:
                 i += 1
         if verbPos is None: return
-        # add ending "pas" after the verb unless it is "lié" in which cas it goes after the next word
+        # add ending "pas" after the verb unless it is "lié" in which case it goes after the next word
         if neg2 is not None:
             vb = cList[verbPos]
-            vb.insertReal(cList, Q(neg2, "fr"), verbPos + (1 if "lier" not in vb.props else 2))
+            vb.insertReal(cList, Q(neg2, "fr"), verbPos + (2 if vb.getProp("lier") else 1))
         if len(pros) > 1:
             pros.sort(key=lambda pro: cliticTable[pro] if pro in cliticTable else 100)
         # insert pronouns before the verb
@@ -749,7 +749,7 @@ class Constituent():
             terminal=terminals[i]
             if terminal.realization.startswith(" "):    # remove redundant initial space
                 terminal.realization=terminal.realization[1:]
-            if "lier" in terminal.props:
+            if terminal.getProp("lier"):
                 s+=terminal.realization+"-"
                 # check for adding -t- in French between a verb and a pronoun
                 if self.isFr() and terminal.isA("V") and terminals[i+1].isA("Pro"):
@@ -860,6 +860,12 @@ def makeOptionMethod(option,validVals,allowedConsts,optionName=None):
         if len(allowedConsts)==0 or self.isOneOf(allowedConsts) or self.isOneOf(deprels):
             if validVals is not None and val not in validVals:
                 return self.warn("ignored value for option",option,val)
+            if validVals is None:
+                if val is None:
+                    val = True
+                elif val != True and val != False:
+                    self.warn("ignored value for option", option, val)
+                    val = False
             # start of the real work
             self.setProp(optionName,val)
             if prog is None:self.addOptSource(option,val)

@@ -249,7 +249,7 @@ def realPro_dep_en():
         root(V("love"),
              subj(N("John")),
              comp(N("Mary"))).ba("("),
-        "expected": " (John loves Mary) ",
+        "expected": "(John loves Mary) ",
         "message": "./Examples_from_User_Manual/18-(John-loves-Mary).dss"},
 
         {"expression": # 26

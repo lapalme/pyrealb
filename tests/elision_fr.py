@@ -120,13 +120,13 @@ def elision_fr():
               PP(P("à"),NP(D("le"),N("homme").en("*")),
                  PP(P("à"),NP(D("le"),N("porte")),
                     PP(P("de"),NP(D("ce"),A("ancien").pos("pre"),N("château"))))))),
-        "Il s'adressa à l' *homme* à la porte de cet ancien château. "],
+        "Il s'adressa à l'*homme* à la porte de cet ancien château. "],
         [S(Pro("ça"),
            VP(V("être").t("pp"),
               AP(Adv("très"),A("difficile"),
                  CP(C("et"),PP(P("de"),V("approcher").t("b")),
                             PP(P("de"),Pro("le"),V("approcher").t("b")).en("*"))))),
-         "Ça été très difficile d'approcher et  *de l'approcher* . "],
+         "Ça été très difficile d'approcher et *de l'approcher* . "],
         [S(NP(D("le"),N("hirondelle")),
            CP(C("mais"),
               VP(Pro("me*refl").pe(1),V("honorer")),
@@ -135,7 +135,7 @@ def elision_fr():
                  CP(C("et"),
                     PP(P("à"),D("le"),N("hôpital")).en("*"),
                     PP(P("à"),D("le"),N("hibou")))))),
-        "L'hirondelle m'honore mais m'amène  *à l'hôpital* et au hibou. "]
+        "L'hirondelle m'honore mais m'amène *à l'hôpital* et au hibou. "]
     ]
     
     tests=[{}]
