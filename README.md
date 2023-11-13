@@ -107,8 +107,7 @@ licensed under _CC-BY-SA-4.0_
 [Guy Lapalme](http://rali.iro.umontreal.ca/lapalme)
 
 ## Acknowledgement
-Thanks to Fabrizio Gotti for helping to organize the Python package. 
-Thanks to Ludan Stoeckle for interesting suggestions.
+Thanks to Fabrizio Gotti, François Lareau and Ludan Stoeckle for interesting suggestions.
 
 ## For the maintainer mainly
 ### Updating package version on PyPI 
