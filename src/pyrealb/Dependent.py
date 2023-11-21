@@ -204,6 +204,8 @@ class Dependent(Constituent):
                             for depI in dep.dependents:
                                 depI.peng=headTerm.peng
                                 depI.terminal.peng=headTerm.peng
+            elif deprel in ["*pre*","*post*"]:
+                pass
             else:
                 self.error("Strange dependent:"+deprel)
         return
@@ -457,7 +459,7 @@ class Dependent(Constituent):
             if subjIdx>=0:
                 self.dependents[subjIdx].pos("post")
 
-    def invertSubject(self):
+    def invertSubject(self,int_):
         # in French : use inversion rule which is quite "delicate"
         # rules from https:#francais.lingolia.com/fr/grammaire/la-phrase/la-phrase-interrogative
         # if subject is a pronoun, invert and add "-t-" or "-"
@@ -471,6 +473,9 @@ class Dependent(Constituent):
                     self.add(det(Q("est-ce que")),0)
                     return
                 pro = self.removeDependent(subjIdx).terminal  # remove subject
+            elif int_ in ["wod","wad"]:
+                self.add(det(Q("est-ce que")), 0)
+                return
             elif subject.isA("C"):
                 pro = Pro("moi", "fr").c("nom").g("m").n("p").pe(3)  # create a "standard" pronoun, to be patched by cpReal
                 subject.pronoun = pro  # add a flag to be processed by cpReal
@@ -488,7 +493,7 @@ class Dependent(Constituent):
         pp = None
         if int_ in ["yon", "how", "why", "muc"]:
             if self.isEn(): self.moveAuxToFront()
-            else: self.invertSubject()
+            else: self.invertSubject(int_)
             prefix = intPrefix[int_]
         # remove a part of the sentence
         elif int_ in ["wos", "was"]:  # remove subject
@@ -522,7 +527,7 @@ class Dependent(Constituent):
             if self.isEn():
                 self.moveAuxToFront()
             else:
-                self.invertSubject()
+                self.invertSubject(int_)
         elif int_ in ["woi", "wai", "whe", "whn"]:  # remove indirect object first comp or mod with a P as terminal
             prefix = intPrefix[int_]  # get default prefix
             for i in range(0, len(self.dependents)):
@@ -547,7 +552,7 @@ class Dependent(Constituent):
             if self.isEn():
                 self.moveAuxToFront()
             else:
-                self.invertSubject()
+                self.invertSubject(int_)
         elif int_=="tag":
             # according to Antidote: Syntax Guide - Question tag
             # Question tags are short questions added after affirmations to ask for verification
@@ -625,8 +630,8 @@ class Dependent(Constituent):
             self.addPre(Q(prefix), 0)
         if pp is not None:  # add "par" in front of some French passive interrogative
             self.addPre(pp, 0)
-        if int_ == "wad":  # replace "que" by "quoi" for French passive wad
-            self.dependents[1].terminal.lemma = "quoi"
+            if int_ == "wad":  # replace "que" by "quoi" for French passive wad
+                self.dependents[1].terminal.lemma = "quoi"
         self.a(sentenceTypeInt["punctuation"], True)
 
     def processTyp(self, types):

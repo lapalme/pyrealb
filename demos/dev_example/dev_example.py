@@ -584,7 +584,7 @@ def makeExamples():
                    det(D("le"))),
               comp(N("fromage"),
                    det(D("le")))).typ({"int": "wad", "pas": True}),
-         "Par quoi le fromage a-t-il été mangé? "],  # 16
+         "Par quoi est-ce que le fromage a été mangé? "],  # 16
         [root(V('manger'),
               comp(N('fromage'),
                    det(D('le'))),
