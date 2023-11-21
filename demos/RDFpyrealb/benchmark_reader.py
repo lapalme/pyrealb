@@ -134,7 +134,7 @@ class Benchmark:
     def __init__(self):
         self.entries = []
 
-    def benchmark_from_dataset(self, dataset, category, start, end, eid=None):
+    def benchmark_from_dataset(self, dataset, category='', start=1, end=7, eid=None):
         from collections import Counter
         counts = Counter()
         for i in range(len(dataset)):
@@ -148,7 +148,6 @@ class Benchmark:
                               for (text,lid,comment) in zip(data_lex["text"],data_lex["lid"],data_lex["comment"])]
                 for m_triples in data["modified_triple_sets"]["mtriple_set"]:
                     entry.fill_modifiedtriple_texts(m_triples)
-                print("\n".join(entry.list_triples()))
                 self.entries.append(entry)
         print(counts)
 

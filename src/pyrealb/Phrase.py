@@ -759,7 +759,7 @@ class Phrase(Constituent):
                     v = vpElems.pop(0)  # remove first V
                     self.addElement(v, 0)
 
-    def invertSubject(self):
+    def invertSubject(self,int_):
         # in French : use inversion rule which is quite "delicate"
         # rules from https:#francais.lingolia.com/fr/grammaire/la-phrase/la-phrase-interrogative
         # if subject is a pronoun, invert and add "-t-" or "-"
@@ -774,6 +774,9 @@ class Phrase(Constituent):
                     return
                 else:
                     pro = self.removeElement(subjIdx)  # remove subject pronoun
+            elif int_ in ["wod","wad"]: # special cases when inversion gives strange results
+                self.add(Q("est-ce que"),subjIdx)
+                return
             elif subj.isA("CP"):
                 pro = Pro("moi", "fr").c("nom").g("m").n("p").pe(
                     3)  # create a "standard" pronoun, to be patched by cpReal
@@ -796,7 +799,7 @@ class Phrase(Constituent):
             if self.isEn():
                 self.moveAuxToFront()
             else:
-                self.invertSubject()
+                self.invertSubject(int_)
             prefix = intPrefix[int_]
         # remove a part of the sentence
         elif int_ in ["wos", "was"]:  # remove subject (first NP,N, Pro or SP)
@@ -833,7 +836,7 @@ class Phrase(Constituent):
                 if self.isEn():
                     self.moveAuxToFront()
                 else:
-                    self.invertSubject()
+                    self.invertSubject(int_)
         elif int_ in ["woi", "wai", "whe", "whn"]:  # remove indirect object (first PP in the first VP)
             if self.isOneOf(["S", "SP", "VP"]):
                 idx, ppElems = self.getIdxCtx("VP", "PP")
@@ -858,7 +861,7 @@ class Phrase(Constituent):
                 if self.isEn():
                     self.moveAuxToFront()
                 else:
-                    self.invertSubject()
+                    self.invertSubject(int_)
         elif int_=="tag":
             # according to Antidote: Syntax Guide - Question tag
             # Question tags are short questions added after affirmations to ask for verification

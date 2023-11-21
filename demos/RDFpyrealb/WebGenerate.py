@@ -39,14 +39,16 @@ def process(realizer,categorie,start,end,eid=None,sortPred=False):
 
     realizer.nbDefaultRealizers = 0
     for entry in b.entries:
-        print("\n==== %s: %s.%s [%s predicates]"%(entry.size,entry.category,entry.id,
-                                                    "sorted" if sortPred else "unsorted"))
+        print("\n==== %s: %s.%s" % (entry.size, entry.category, entry.id))
+        print("\n".join(entry.list_triples()))
+        print("[%s predicates]"%("sorted" if sortPred else "unsorted"))
         print("\n".join(textwrap.wrap(realizeTriples(realizer,entry,sortPred),width=120)))
     print("Default realizer was used: %5d times" % realizer.nbDefaultRealizers)
 
 if __name__ == '__main__':
     from English import English
-    process(English(),'Astronaut',7,7,'Id36',True)
-    from Francais import Francais
-    process(Francais(),'Astronaut',7,7,'Id36',True)
+    # process(English(),'Astronaut',7,7,'Id36',True)
+    process(English(),'',7,7,None,True)
+    # from Francais import Francais
+    # process(Francais(),'Astronaut',7,7,'Id36',True)
 

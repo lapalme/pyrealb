@@ -99,7 +99,7 @@ useful for debugging when adding a new expression and enabling tracing
 * `variantes/variantes.py`: French or English sentences realized with all possible sentence modifiers; some challenging examples are in `examples.py`.
 * `weather/Bulletin.py`: French and English weather bulletins generated from information in a *json-line* file. (`weather-data.jsonl`). It uses the packages in the `Realization` directory.
 
-## Licences
+## Licenses
 `pyrealb` source code is licensed under _Apache-2.0_ and the linguistic resources in the `./data` directory is 
 licensed under _CC-BY-SA-4.0_
 

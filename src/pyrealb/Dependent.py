@@ -184,7 +184,7 @@ class Dependent(Constituent):
                     if hasattr(self,"peng"):
                         depTerm.peng=self.peng
                     for depI in dep.dependents:
-                        if hasattr(depI,"peng") and hasattr(self.peng,"peng"):
+                        if hasattr(depI,"peng") and hasattr(self,"peng"):
                             self.setPengRecursive(depI,depI.peng["pengNO"],self.peng)
             elif deprel=="root":
                 # self.error("An internal root was found")
