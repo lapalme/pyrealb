@@ -1,7 +1,7 @@
 from pyrealb import *
 
 def realize(jsrExpr,_lang,addS=True):
-    if addS and not isinstance(jsrExpr,S):
+    if addS and not jsrExpr.isA("S"):
         jsrExpr=S(jsrExpr)
     realization=jsrExpr.realize()
     return realization

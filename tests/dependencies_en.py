@@ -20,13 +20,13 @@ def dependencies_en():
         {"expression":
          root(V("hit").t("p"),
               subj(N("man"),det(D("a"))),
-              comp(N("ball"),det(D("a")))).typ({"pas":true}),
+              comp(N("ball"),det(D("a")))).typ({"pas":True}),
          "expected":"A ball is hit by a man. ",
          "message":"Passive sentence"},
          #   4
         {"expression":root(V("play").t("f"),
                            subj(N("cat"),det(D("a"))),
-                           comp(N("piano"))).typ({"neg":true}),
+                           comp(N("piano"))).typ({"neg":True}),
          "expected":"A cat will not play piano. ",
          "message":"Negative sentence"},
          #   5
@@ -39,7 +39,7 @@ def dependencies_en():
          #   6
         {"expression":root(V("drink"),
                            subj(N("boy"),det(D("a"))),
-                           comp(N("water"))).typ({"perf":true}),
+                           comp(N("water"))).typ({"perf":True}),
          "expected":"A boy has drunk water. ",
          "message":"Present perfect"},
          #   7
@@ -91,7 +91,7 @@ def dependencies_en():
                       det(D('a')),
                       mod(A('grey'))),
                  subj(N('cat').n("p"),
-                      det(D('the')))).typ({"pas":true}),
+                      det(D('the')))).typ({"pas":True}),
          "expected":"A grey mouse is eaten by the cats. ",
          "message":"Subject changes number in passive mode"},
          #   13
@@ -111,7 +111,7 @@ def dependencies_en():
                       det(D('a')),
                       mod(A('grey'))),
                  subj(N('cat'),
-                      det(D('the')))).typ({"int":"why","pas":true,"neg":true}),
+                      det(D('the')))).typ({"int":"why","pas":True,"neg":True}),
          "expected":"Why will a grey mouse not be eaten by the cat? ",
          "message":"Interrogative, passive and negative"},
          #   15
@@ -166,7 +166,7 @@ def dependencies_en():
             root(V('love'),
                  comp(N('woman'),
                       det(D('a'))).pro(),
-                 subj(Pro('me').g("m"))).typ({"int":"wos","pas":true}),
+                 subj(Pro('me').g("m"))).typ({"int":"wos","pas":True}),
          "expected":"Who is loved by him? ",
          "message":"Interrogative passive"
          },

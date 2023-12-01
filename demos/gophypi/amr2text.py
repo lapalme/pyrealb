@@ -48,7 +48,7 @@ def amr2text(amrString,trace=False):
     if syntR is str:
         return syntR
     else:
-        if not isinstance(syntR, (S,Q)):
+        if not syntR.isOneOf(["S","Q"]):
             syntR=S(syntR) # ensure that the complete output is a full sentence
         if trace:
             print("*** Syntactic Representation")

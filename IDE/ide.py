@@ -324,7 +324,7 @@ if __name__ == '__main__':
     show('_lm("checks")')
     show('_lx(".ling")')
     show('_lx(".ling","N")')
-    show('+NP(D("a"),N("cat").n("p")).cap(false)')
+    show('+NP(D("a"),N("cat").n("p")).cap(False)')
     show('_fr()')
     show('_lm("se")')
     show('_cn("v10")')

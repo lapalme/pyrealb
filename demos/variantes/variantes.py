@@ -51,18 +51,19 @@ def generate(examples,types,checkboxes):
             else:
                 print(str(eval(exp)))
         if showFlags:print("=== %d ==="%len(typs))
-            
-loadFr()
-generate(examplesFr,types["fr"],
-         # checkbox simulation: " " (unchecked), "*" (checked), "-":indeterminate
-         {"neg":" ","pas":"*","prog":" ","int":"-","mod":"*"})
 
-loadEn()
-addToLexicon({"John":{"N":{"g":"m","tab":"n4"}}})
-addToLexicon({"Jim": {"N":{"g":"m","tab":"n4"}}})
-addToLexicon({"Bill":{"N":{"g":"m","tab":"n4"}}})
-addToLexicon({"Mary":{"N":{"g":"f","tab":"n4"}}})
+if __name__ == "__main__":
+    loadFr()
+    generate(examplesFr,types["fr"],
+             # checkbox simulation: " " (unchecked), "*" (checked), "-":indeterminate
+             {"neg":" ","pas":"*","prog":" ","int":"-","mod":"*"})
 
-generate(examplesEn,types["en"],
-         # checkbox simulation: " " (unchecked), "*" (checked), "-":indeterminate
-         {"neg":"*","contr":" ","pas":"*","prog":"*","perf":"*","int":"*","mod":"-"})
+    loadEn()
+    addToLexicon({"John":{"N":{"g":"m","tab":"n4"}}})
+    addToLexicon({"Jim": {"N":{"g":"m","tab":"n4"}}})
+    addToLexicon({"Bill":{"N":{"g":"m","tab":"n4"}}})
+    addToLexicon({"Mary":{"N":{"g":"f","tab":"n4"}}})
+
+    generate(examplesEn,types["en"],
+             # checkbox simulation: " " (unchecked), "*" (checked), "-":indeterminate
+             {"neg":"*","contr":" ","pas":"*","prog":"*","perf":"*","int":"*","mod":"-"})

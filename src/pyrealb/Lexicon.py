@@ -3,12 +3,10 @@ import json,sys, os
 datadir=os.path.abspath(os.path.join(os.path.dirname(__file__),'data')) 
 
 class Lexicon(object):
-    '''
-    Keep information about English and French lexica and rules 
-    '''
+    """ Keep information about English and French lexica and rules  """
     
     def __init__(self):
-        ''' load English and French lexica and rules'''
+        """ load English and French lexica and rules"""
         
         self.lexicon={
             "en":json.load(open(os.path.join(datadir,"lexicon-en.json"),encoding="utf-8")),
@@ -21,9 +19,9 @@ class Lexicon(object):
         self.lang="en"
         
     def getLexicalInfo(self,lemma):
-        getLexicon=self.getLexicon()
-        if lemma in getLexicon:
-            return getLexicon[lemma]
+        the_lexicon=self.getLexicon()
+        if lemma in the_lexicon:
+            return the_lexicon[lemma]
         else:
             return None
     
@@ -47,7 +45,7 @@ def loadFr(trace=False):
     if trace: print("Règles et lexique français chargés",file=sys.stderr)
 
 def load(lang,trace=False):
-    from .Terminal import Q
+    from .utils import Q
     if lang=="en": loadEn(trace)
     elif lang=="fr": loadFr(trace)
     else:

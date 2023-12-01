@@ -1,17 +1,16 @@
-from pyrealb.Lexicon import *
-from pyrealb.Terminal import *
-from pyrealb.Phrase import *
-from pyrealb.Dependent import *
-from pyrealb.utils import *
-from pyrealb.Warning import *
+from .Lexicon import *
+from .utils import *
+from .Constituent import Constituent
+from .Terminal import Terminal
+from .Phrase import Phrase
+from .Dependent import Dependent
+
 
 __all__ = ['Constituent',
-     'A', 'Adv', 'C', 'D', 'DT', 'N', 'NO', 'P', 'Pro', 'Q', 'V', 'Terminal',           # from Terminal
-     'AP',  'AdvP',  'CP', 'NP', 'PP',  'VP', 'S', 'SP', 'Phrase',                      # from Phrase
-     'root', 'subj', 'det', 'mod', 'comp', 'compObj', 'compObl', 'coord', 'Dependent',  # from Dependent
+     'fromJSON', 'oneOf', 'mix', 'pyrealb_version', 'pyrealb_datecreated',              # from utils
+     'A', 'Adv', 'C', 'D', 'DT', 'N', 'NO', 'P', 'Pro', 'Q', 'V', 'Terminal',
+     'AP',  'AdvP',  'CP', 'NP', 'PP',  'VP', 'S', 'SP', 'Phrase',
+     'root', 'subj', 'det', 'mod', 'comp', 'coord', 'Dependent',
      'currentLanguage', 'addToLexicon', 'updateLexicon', 'getLexicon', 'getLemma',      # from Lexicon
-           'loadEn', 'loadFr', 'load',
-     'fromJSON', 'oneOf', 'mix', 'false', 'true', 'null', 'pyrealb_version',            # from utils
-     'pyrealb_datecreated',
-     'test_warnings'                                                                    # from Warning
+     'loadEn', 'loadFr', 'load',
  ]

@@ -31,7 +31,7 @@ class French(Realizer, LexicalChoices):
     def on_day(self, date) -> DT:
         return DT(date).dOpt({"nat": True, "hour": False, "minute": False, "second": False,
                               "month": False, "date": False, "year": False,
-                              "det": false})
+                              "det": False})
 
     def pts_3(self, n=None) -> NP:
         return NP(self.no(n) if n is not None else None,
@@ -119,7 +119,7 @@ class French(Realizer, LexicalChoices):
 
     def team_losing_streak_vp(self, team, streak_length) -> Phrase:
         np = NP(D("leur"),
-                NO(4).dOpt({"ord": true}),
+                NO(4).dOpt({"ord": True}),
                 N("défaite"), PP(P("de"), N("suite")))
         return S(P("pour"),self.team_np(team),
                  SP(Pro("ce"),

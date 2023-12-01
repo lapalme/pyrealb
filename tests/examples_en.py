@@ -15,9 +15,9 @@ def examples_en():
     [V("love"),"loves"],                             # 0
     [V("have").t("ps"),"had"],                       # 1
     [V("be").pe(3),"is"],                            # 2
-    [VP(V("love")).typ({"neg":true}),"does not love"], # 3
+    [VP(V("love")).typ({"neg":True}),"does not love"], # 3
     [VP(V("love")).typ({"int":"yon"}),"does love? "],  # 4
-    [VP(V("love")).typ({"prog":true}),"is loving"],    # 5
+    [VP(V("love")).typ({"prog":True}),"is loving"],    # 5
     [VP(V("love")).typ({"mod":"poss"}),"can love"],    # 6
     # examples from the "Architecture..." paper
     # Figure 1
@@ -35,12 +35,12 @@ def examples_en():
     [S(Pro("him").c("nom"),                          # 9
        VP(V("eat"),
           NP(D("a"),N("apple").n("p"))
-     )).typ({"neg":true}),"He does not eat apples. "],
+     )).typ({"neg":True}),"He does not eat apples. "],
     # Figure 5
     [S(Pro("him").c("nom").g("m"),                   #10
        VP(V("eat"),
           NP(D("a"),N("apple").n("p"))
-     )).typ({"neg":true,"pas":true}),
+     )).typ({"neg":True,"pas":True}),
      "Apples are not eaten by him. "],
     # Section 6.1
     [S(Pro("him").c("nom"),
@@ -85,9 +85,9 @@ def examples_en():
             NP(D("a"), N("apple").tag("a", {"href":"https:#en.wikipedia.org/wiki/Apple"})))),
        'He eats an <a href="https:#en.wikipedia.org/wiki/Apple">apple</a>. '],
       # Section 6.6
-      [NP(NO(1).dOpt({"nat":true}),N("plane")),     # 21
+      [NP(NO(1).dOpt({"nat":True}),N("plane")),     # 21
        "one plane"],   
-      [NP(NO(3).dOpt({"nat":true}),N("plane")),     # 22
+      [NP(NO(3).dOpt({"nat":True}),N("plane")),     # 22
        "three planes"],
       [SP(SP(D("the"),                            # 23
              A("large").f("su"),

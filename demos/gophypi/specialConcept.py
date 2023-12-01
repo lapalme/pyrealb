@@ -146,7 +146,7 @@ def haveDegree91(concept,roles,env,opts):
         concept=roles[":ARG2"].concept
         attribute=makeSyntR(roles[":ARG2"])
         # HACK: remove spurious pronouns created by starrole
-        if isinstance(attribute, AP) and len(attribute.elements)>1 and isinstance(attribute.elements[1],Pro):
+        if attribute.isA("AP") and len(attribute.elements)>1 and attribute.elements[1].isA("Pro"):
             del attribute.elements[1]
             if len(attribute.elements)==1:
                 attribute=attribute.elements[0]
@@ -173,7 +173,7 @@ def haveDegree91(concept,roles,env,opts):
                 quant=None
             comp="co"
         elif deg=="most":
-            if isinstance(attribute,A):
+            if attribute.isA("A"):
                 attribute=AP(D("the"),attribute.f("su"))
             else:
                 attribute=AP(attribute,D("the"),Adv("most"))
@@ -304,7 +304,7 @@ def haveRelRole91(concept,roles,env,opts):
     syntR_B=makeSyntR(roles[":ARG1"]) if ":ARG1" in roles else None
     if ":ARG2" in roles: 
         relation=makeSyntR(roles[":ARG2"])
-        if isinstance(syntR_B,Pro) and isinstance(relation,NP):
+        if syntR_B.isA("Pro") and relation.isA("NP"):
             relation.elements[0]=makePoss(syntR_B.lemma)
             return addRoles(concept, roles, [":ARG1",":ARG2"], 
                             LexSem("relation","NP",[":ARG0"],lambda arg0:S(arg0,VP(V("be"),relation))), env, opts)
@@ -409,7 +409,7 @@ def person(concept,roles,env,opts):
             starARG0_ARG2=starARG0.roles[":ARG2"]
             if starARG0_ARG2!=None:
                 nom=makeSyntR(starARG0_ARG2)
-                if isinstance(nom,(NP,N)):
+                if nom.isOneOf(["NP","N"]):
                     return addRoles(concept, roles, [":*:ARG0"], LexSem("person","NP",[],lambda:nom), env, opts)
         if re.match(r"have-(org|rel)-role-91",starARG0.get_concept()) and len(starARG0.roles)==3:
             ##### shortcut : https://www.isi.edu/~ulf/amr/lib/amr-dict.html#shortcuts
@@ -451,9 +451,9 @@ def quantity(concept,roles,env,opts):
         qty=makeSyntR(roles[":quant"])
         if ":unit" in roles:
             unit=makeSyntR(roles[":unit"])
-            if isinstance(unit,Pro): # get the referenced unit...
+            if unit.isA("Pro"): # get the referenced unit...
                 unit=makeSyntR(roles[":unit"].instance)
-            if isinstance(unit,NP) and qty!=None and isinstance(qty,NO):
+            if unit.isA("NP") and qty is not None and qty.isA("NO"):
                 unit.elements[0]=qty
                 qty=unit
             elif isinstance(unit,Phrase):

@@ -1,8 +1,8 @@
-'''
+"""
 Created on 4 mars 2021
 
 @author: lapalme
-'''
+"""
 
 import re,json
 # from jsRealBclass import N,A,Pro,D,Adv,V,C,P,DT,NO,Q,  NP,AP,AdvP,VP,CP,PP,S,SP,\
@@ -26,7 +26,7 @@ from pyrealb import *
 ##     
 class Env:
     def __init__(self,pairs=None):
-        self.pairs=pairs if pairs!=None else []
+        self.pairs=pairs if pairs is not None else []
     
     def __str__(self):
         return "[%s]"%(", ".join(["(%s,%s)"%pair for pair in self.pairs]))
@@ -56,7 +56,7 @@ class Env:
                 return        
     
     def put(self,arg,value):
-        if not isinstance(value,(N,A,Pro,D,Adv,V,C,P,DT,NO,Q,  NP,AP,AdvP,VP,CP,PP,S,SP)):
+        if not isinstance(value,Constituent):
             print("Env.put:%s : %s is not a Constituent"%(arg,value))
         self.pairs.append((arg,value))
         return self
@@ -98,7 +98,7 @@ class Env:
 
 class Options:
     def __init__(self,opts=None):
-        self.opts=opts if opts!=None else []
+        self.opts=opts if opts is not None else []
     
     def __str__(self):
         return "".join(['.%s(%s)'%(opt,json.dumps(value)) for opt,value in self.opts])
@@ -127,9 +127,9 @@ class Options:
         return syntR
 
 nounInfo = lambda lemma:LexSem(lemma,"N",[":D",":A"],lambda d,a:NP(optD(d),a,N(lemma)))
-adjInfo  = lambda lemma:LexSem(lemma,"A",[":ARG1"],lambda a1:A(lemma) if a1==None else AP(A(lemma),a1))
-pp       = lambda prep, arg: PP(P(prep),arg) if arg!=None else None
-optD     = lambda det : det if det!=None else D("the")
+adjInfo  = lambda lemma:LexSem(lemma,"A",[":ARG1"],lambda a1:A(lemma) if a1 is  None else AP(A(lemma),a1))
+pp       = lambda prep, arg: PP(P(prep),arg) if arg is not None else None
+optD     = lambda det : det if det is not None else D("the")
 
 class LexSem:
     def __init__(self,lemma,pos,args,lambda_):
@@ -149,22 +149,22 @@ class LexSem:
         return self
             
     def apply(self,env=None,opts=None):
-        if env==None:env=Env()
-        if opts==None:opts=Options()
+        if env is  None:env=Env()
+        if opts is  None:opts=Options()
         ## process args from dictInfo building the list of arguments or None
         argV=[env.get(arg) if arg in env else None for arg in self.args]
         syntR = self.lambda_(*argV)
-        if all([arg == None for arg in argV]) and len(env)==0:
+        if all([arg is None for arg in argV]) and len(env)==0:
             return opts.apply(syntR)
         if isinstance(syntR,Terminal):
-            if isinstance(syntR,A):
+            if syntR.isA("A"):
                 if ":ARG1" in env:
                     syntR=S(env.get(":ARG1"),VP(V("be"),syntR))
                 else:    
                     syntR=AP(syntR)
-            elif isinstance(syntR,(Pro,Q,NO)):syntR=SP(syntR)
-            elif isinstance(syntR,Adv):syntR=AdvP(syntR)
-            elif isinstance(syntR,P):  syntR=PP(syntR)
+            elif syntR.isOneOf(["Pro","Q","NO"]):syntR=SP(syntR)
+            elif syntR.isA("Adv"):syntR=AdvP(syntR)
+            elif syntR.isA("P"):  syntR=PP(syntR)
             else:
                 print("** apply: strange syntR:%s:%s"%(type(syntR),syntR))
                 syntR=SP(syntR)

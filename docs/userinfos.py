@@ -194,9 +194,9 @@ optionsSect= {"fr":"","en":"",
                            "en":["",'']},
            
            {"group":"","fr":"Verbe essentiellement réflexif indiqué dans le lexique.",
-                              "en":'Reflexive verb using <a href="#typeChange"><code>.typ({refl:true})</code></a>'},
+                              "en":'Reflexive verb using <a href="#typeChange"><code>.typ({refl:True})</code></a>'},
            {"pattern":'', "fr":["par défaut",'V("enfuir").t("pc")'],
-                          "en":['.typ({"refl":true})','VP(V("wash")).typ({"refl":True})']},
+                          "en":['.typ({"refl":True})','VP(V("wash")).typ({"refl":True})']},
 
 ]};
 

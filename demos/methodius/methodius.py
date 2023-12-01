@@ -197,22 +197,22 @@ def process(fileName,trace=False):
     for exhibitElement in tree.getroot().findall("exhibit"):
         process_exhibit(exhibitElement,fileName,trace)
 
+if __name__ == "__main__":
+    loadEn()
 
-loadEn()
-
-onlyExample = True
-if onlyExample:
-    # realize info from the file containing the example in the paper
-    process("example.xml",True)
-else:
-    # realize info from all files in the directory
-    import os
-    methodiusDir=os.path.expanduser("~/Downloads/methodius-corpus2016-05-20-1610/")
-    for i in range(1,501):
-        file=f'{methodiusDir}exhibit-chain{i}.xml'
-        print("*****:"+file)
-        process(file,False)
-        print()
+    onlyExample = True
+    if onlyExample:
+        # realize info from the file containing the example in the paper
+        process("example.xml",True)
+    else:
+        # realize info from all files in the directory
+        import os
+        methodiusDir=os.path.expanduser("~/Downloads/methodius-corpus2016-05-20-1610/")
+        for i in range(1,501):
+            file=f'{methodiusDir}exhibit-chain{i}.xml'
+            print("*****:"+file)
+            process(file,False)
+            print()
 
 """  Result on "example.xml"
 Exhibit: exhibit41 example.xml

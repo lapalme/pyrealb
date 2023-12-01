@@ -119,8 +119,6 @@ def enToutesLettres(s,lang):
 #     return s.replace(/ /g,"-");
 # }
 
-# écriture des nombres ordinaux   #GL
-
 # rules taken from https:#www.ego4u.com/en/cram-up/vocabulary/numbers/ordinal
 ordEnExceptions={"one":"first","two":"second","three":"third","five":"fifth",
                  "eight":"eighth","nine":"ninth","twelve":"twelfth"}

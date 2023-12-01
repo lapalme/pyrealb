@@ -117,7 +117,7 @@ def makeExamples():
          "La souris que les chats ont mangée est grise. "],
         [DT(),
          None],
-        [DT().nat(false),
+        [DT().nat(False),
          None],
         [DT().dOpt({"rtime": True}),
          None],
@@ -125,7 +125,7 @@ def makeExamples():
          "2"],
         [NO(1.847584).dOpt({"mprecision": 4}),
          "1,8476"],
-        [NO(1.847584).dOpt({"raw": false}),
+        [NO(1.847584).dOpt({"raw": False}),
          "1,85"],
         [NO(1.847584).dOpt({"raw": True}),
          "1.847584"],
@@ -829,17 +829,16 @@ def testPreviousExamples():
     checkAllEx("dependenciesEn", dependenciesEn)
     print("----")
     # cannot use checkAllEx because it does a clone() and the language is changed...
-    for c in [constituentEnFr, dependentEnFr]:
+    for c in [constituentEnFr,dependentEnFr]:
         realEnFr = c.realize()
         if realEnFr == "I say hello to <b>le monde</b>. ":
             print("bilingual: OK")
         else:
-            print("bilingual:KO", realEnFr)
+            print("bilingual: KO", realEnFr)
     print("----")
-    # from pyrealb.Warning import test_warnings
-    # test_warnings()
 
 def testDataToTextExamples():
+    loadEn()
     print(S(NP(D("the"),N("cat"),A("small")),        # create a subject NP
             VP(V("jump").t("ps"),        # create VP, setting past for the verb time
                PP(P("on"),                           # create a PP with
@@ -881,7 +880,7 @@ def testDataToTextExamples():
     # The mother and the daughter are happy.
     # The mother, the daughter and the father are happy.
 
-    loadFr();
+    loadFr()
     personnes = ["mère","fille","père"]
     for i in range(0, len(personnes)):
         print(S(CP(C("et"), [NP(D("le"), N(p)) for p in personnes[:i + 1]]),
@@ -911,11 +910,32 @@ def testDataToTextExamples():
     # A mother and a girl (2 persons) were present at a birthday on Tuesday, May 30, 2023.
     # A grandfather, a father and a boy (3 persons) will be present at an assembly on Saturday, December 30, 2023.
 
+# keys and number of arguments of the warning functions in ConstituentEn.py and ConstituentFr.py
+warnings_keys = [('bad parameter', 2), ('bad application', 3), ('bad position', 2), ('bad const for option', 3),
+                 ('ignored value for option', 2), ('unknown type', 2), ('no value for option', 2), ('not found', 2),
+                 ('bad ordinal', 1), ('bad roman', 1), ('bad number in word', 1), ('no French contraction', 0),
+                 ('morphology error', 1), ('not implemented', 1), ('not in lexicon', 2), ('no appropriate pronoun', 0),
+                 ('both tonic and clitic', 0), ('bad Constituent', 2), ('bad Dependent', 2),
+                 ('Dependent needs Terminal', 1), ('bad number of parameters', 2), ('Dependent without params', 0),
+                 ('bad lexicon table', 2), ('bad language', 1), ('ignored reflexive', 1),
+                 ('inconsistent dependents within a coord', 2), ('user-warning', 1)]
+
+def test_warnings():
+    args=["A","B","C","D","E","F"]
+    for (w,nbArgs) in warnings_keys:
+        print(w)
+        callArgs=[w]+args[:nbArgs] if w!="user-warning" else [w,Q("warning defined by the user")]
+        loadEn()
+        print(NP(D("a"),N("error")).warning(callArgs))
+        loadFr()
+        print(NP(D("un"),N("erreur")).warning(callArgs))
+        print("---")
 
 if __name__ == '__main__':
-    # testPreviousExamples()
+    testPreviousExamples()
     # testDataToTextExamples()
+    # test_warnings()
     # insert here a single example for debugging perhaps commenting the line above
     # do not forget to load the appropriate language
-    loadEn()                                         # set the language to English
-    loadFr()                                         # set the language to French
+    loadEn() # set the language to English
+    loadFr() # set the language to French

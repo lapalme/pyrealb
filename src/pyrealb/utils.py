@@ -9,9 +9,6 @@ import random
 import sys
 
 from .Lexicon import currentLanguage
-from .Terminal import Terminal
-from .Phrase import Phrase
-from .Dependent import Dependent
 
 pyrealb_oneOf_dict = {}  # internal Map for keeping track of calls to specific oneOf call
 
@@ -59,7 +56,7 @@ def mix(*elems):
     else:
         elems = list(elems).copy()
     random.shuffle(elems)
-    return [e() if callable(e) else e for e in elems]
+    return [(e() if callable(e) else e) for e in elems]
 
 # Flag for quoting out of vocabulary tokens (not yet taken into account)
 # quoteOOV=False;
@@ -67,8 +64,20 @@ def mix(*elems):
 #     global quoteOOV
 #     quoteOOV=qOOV
 
+# return a list of elements that are not None flattening embedded lists (used by Phrase and Dependent)
+def _getElems(es):
+    res = []
+    for e in es:
+        if e is not None:
+            if isinstance(e, (list,tuple)):res.extend([e0 for e0 in _getElems(e) if e0 is not None])
+            else:res.append(e)
+    return res
+
 # create expression from a JSON structure
 def fromJSON(json, lang=None):
+    from .Terminal import Terminal
+    from .Phrase import Phrase
+    from .Dependent import Dependent
     if isinstance(json, dict):
         if "lang" in json:
             if json["lang"] == "en":
@@ -102,11 +111,114 @@ def fromJSON(json, lang=None):
         print("fromJSON: object expected, but found " + type(json).__name__ + ":" + repr(json), file=sys.stderr)
 
 
-# useful variables for using expressions written originally for the javascript version
-false = False
-true = True
-null = None
-
-# version and date informations
-pyrealb_version = "2.3.8"
+# version and date information
+pyrealb_version = "3.0.0"
 pyrealb_datecreated = datetime.datetime.today()
+
+####################################################################################
+###  Factory functions for Terminals
+from .TerminalEn import TerminalEn
+from .TerminalFr import TerminalFr
+# call language dependent constructors
+def terminal(constType,lemma,lang=None):
+    if lang is None:lang=currentLanguage()
+    if lang == "en": return TerminalEn(constType, lemma)
+    return TerminalFr(constType, lemma)
+
+# terms = ["N","A","Pro","D","Adv","V","P","C","DT","NO","Q"]
+def N(lemma=None,lang=None):
+    return terminal("N",lemma,lang)
+
+def A(lemma=None,lang=None):
+    return terminal("A",lemma,lang)
+
+def Pro(lemma=None,lang=None):
+    return terminal("Pro",lemma,lang)
+
+def D(lemma=None,lang=None):
+    return terminal("D",lemma,lang)
+
+def Adv(lemma=None,lang=None):
+    return terminal("Adv",lemma,lang)
+
+def V(lemma=None,lang=None):
+    return terminal("V",lemma,lang)
+
+def P(lemma=None,lang=None):
+    return terminal("P",lemma,lang)
+
+def C(lemma=None,lang=None):
+    return terminal("C",lemma,lang)
+
+def DT(lemma=None,lang=None):
+    return terminal("DT",lemma,lang)
+
+def NO(lemma=None,lang=None):
+    return terminal("NO",lemma,lang)
+
+def Q(lemma=None,lang=None):
+    return terminal("Q",lemma,lang)
+
+### Factory function for Phrases
+
+from .PhraseEn import PhraseEn
+from .PhraseFr import PhraseFr
+
+##  functions to call language specific constructors
+def phrase(constType,elems,lang=None):
+    if lang is None:lang = currentLanguage()
+    if lang == "en":return PhraseEn(constType, elems)
+    return  PhraseFr(constType, elems)
+
+def NP(*elems,lang=None):
+    return phrase("NP",elems,lang)
+
+def AP(*elems,lang=None):
+    return phrase("AP",elems,lang)
+
+def AdvP(*elems,lang=None):
+    return phrase("AdvP",elems,lang)
+
+def VP(*elems,lang=None):
+    return phrase("VP",elems,lang)
+
+def PP(*elems,lang=None):
+    return phrase("PP",elems,lang)
+
+def CP(*elems,lang=None):
+    return phrase("CP",elems,lang)
+
+def S(*elems,lang=None):
+    return phrase("S",elems,lang)
+
+def SP(*elems,lang=None):
+    return phrase("SP",elems,lang)
+
+### Factory methods for Dependent
+
+from .DependentEn import DependentEn
+from .DependentFr import DependentFr
+
+## call language dependent constructors
+def dep(params,deprel,lang=None):
+    if lang is None: lang=currentLanguage()
+    if lang == "en": return DependentEn(params, deprel)
+    return DependentFr(params, deprel)
+
+def root(*params,lang=None):
+    return dep(params,"root",lang)
+
+def subj(*params,lang=None):
+    return dep(params,"subj",lang)
+
+def det(*params,lang=None):
+    return dep(params,"det",lang)
+
+def mod(*params,lang=None):
+    return dep(params,"mod",lang)
+
+def comp(*params,lang=None):
+    return dep(params,"comp",lang)
+
+def coord(*params,lang=None):
+    return dep(params,"coord",lang)

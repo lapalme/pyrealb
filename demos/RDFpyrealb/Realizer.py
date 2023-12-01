@@ -48,7 +48,7 @@ class Realizer:
     ##  format a litteral
     def q(self,term,lower=False):
         if lower:term=term.lower()
-        if isinstance(term,Q):term=term.lemma
+        if isinstance(term,Terminal):term=term.lemma
         m=re.fullmatch(r'"?(\d{4}-\d{2}-\d{2})"?',term)
         if m is not None:
             return DT(m.group(1)+"T00:00:00-06:00").dOpt(Realizer.dateOptions)
@@ -129,9 +129,9 @@ class Realizer:
         return False
 
     def addToLastObject(self, phrase, newObj):
-        if isinstance(phrase, (S, SP)):
+        if phrase.isOneOf(["S","SP"]):
             vp = phrase.elements[-1]
-            if isinstance(vp, VP):
+            if vp.isA("VP"):
                 vp.add(newObj, None, True)  # HACK: insert directly in the VP without keeping track of .add(...)
                 return
         print("addToLastObject: unrecognized structure")
@@ -151,12 +151,12 @@ class Realizer:
                 (prec, isHuman, pats) = self.getSentPatterns(p1)
                 pat = random.choice(pats)
                 grouped = pat(self.groupTerms(subPredObj[1], p1))
-                if isinstance(grouped, VP) and len(grouped.elements) > 2:
+                if grouped.isA("VP") and len(grouped.elements) > 2:
                     ## do not add "that is" when the group starts with V("be"),V("...")
                     elem0 = grouped.elements[0]
                     elem1 = grouped.elements[1]
-                    if isinstance(elem0, V) and elem0.lemma == self.v_be.lemma and \
-                            isinstance(elem1, V) and elem1.props["t"] == "pp":
+                    if elem0.isA("V") and elem0.lemma == self.v_be.lemma and \
+                            elem1.isA("V") and elem1.props["t"] == "pp":
                         del grouped.elements[0]
                         objects = SP(objects, grouped)
                         graph.delNode(objNodes[0].subj)

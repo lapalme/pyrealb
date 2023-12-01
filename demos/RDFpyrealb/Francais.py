@@ -163,7 +163,7 @@ class Francais(Realizer):
         ]),
         "associatedBand/associatedMusicalArtist": (50, True, [
             lambda o: VP(V("jouer"), _avec(o)),
-            lambda o: VP(V("produire"), _avec(o)).typ({"refl":true})
+            lambda o: VP(V("produire"), _avec(o)).typ({"refl":True})
         ]),
         "associatedRocket": (50, False, [  # $$$$ last
             lambda o: VP(V("être"), V("associer").t("pp"), _avec(D("le"), N("fusée"), o))

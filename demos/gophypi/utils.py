@@ -40,10 +40,10 @@ def errorSyntR(message):
 def ensurePhrase(syntR):
     if isinstance(syntR,Phrase):return syntR
     if isinstance(syntR,Terminal):
-        if isinstance(syntR,N):return NP(syntR)
-        if isinstance(syntR,A):return AP(syntR)
-        if isinstance(syntR,V):return VP(syntR)
-        if isinstance(syntR,Adv):return Adv(syntR)
+        if syntR.isA("N"):return NP(syntR)
+        if syntR.isA("A"):return AP(syntR)
+        if syntR.isA("V"):return VP(syntR)
+        if syntR.isA("Adv"):return Adv(syntR)
         return SP(syntR)
     print("ensurePhrase: type inattendu:%s"%type(syntR))
 
@@ -59,7 +59,7 @@ def hasNegPolarity(roles):
 def predicate(subject,attribute):
     if attribute==None:
         return S(subject,VP(V("be")))
-    if isinstance(subject, S):
+    if subject.isA("S"):
         syntR=subject.add(attribute)
     else:
         syntR=S(subject,VP(V("be"),attribute))
@@ -71,7 +71,7 @@ def predicate(subject,attribute):
 
 def relative(concept,syntR):
     pronoun=Pro("who") if concept in amrDico.gender else D("that")
-    if isinstance(syntR, S):
+    if syntR.isA("S"):
         return syntR.add(pronoun,0)
     return predicate(pronoun,syntR)
 
@@ -88,7 +88,7 @@ def setTraceSyntR(val):
 def traceSyntR(mess,semR):
     global traceSyntRflag
     if not traceSyntRflag:return
-    print("++%s: %s"%(mess,semR if isinstance(semR, str) else semR.shortStr()))
+    print("++%s: %s"%(mess,semR if semR.isA("str") else semR.shortStr()))
 
 
 def adverbFromAdjective(adjective):

@@ -28,7 +28,7 @@ class English(Realizer,LexicalChoices):
     def on_day(self, date) -> DT:
         return DT(date).dOpt({"nat": True, "hour": False, "minute": False, "second": False,
                               "month": False, "date": False, "year": False,
-                              "det": true})
+                              "det": True})
 
     def pts_3(self, n) -> NP:
         return self.nb(n, "three-pointer")

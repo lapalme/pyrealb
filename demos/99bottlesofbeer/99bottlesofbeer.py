@@ -7,7 +7,7 @@ def nbb(n): # (n  no more) bottle(s) of beer
     ob=PP(P("of"),N("beer"))
     if n==0:
         return NP("no more", b.n("p"), ob)
-    return NP(NO(n).nat(true), b, ob)
+    return NP(NO(n).nat(True), b, ob)
 
 def nbbW(n): # n bottles of beer on the wall
     return NP(nbb(n),PP(P("on"),D("the"),N("wall")))
@@ -16,7 +16,7 @@ def verse(n):
     print(S(CP(nbbW(n),nbb(n))))
     if n>0:
         print(S(CP(C("and"),
-                   VP(V("take").pe(2).t("ip"),NO(1).nat(true),P("down")),
+                   VP(V("take").pe(2).t("ip"),NO(1).nat(True),P("down")),
                    VP(V("pass").pe(2),Pro("I").g("n").pe(3),P("around")).a(","),
                    nbbW(n-1))))
     else:
@@ -27,7 +27,7 @@ def verse(n):
 
 if __name__ == '__main__':
     loadEn()
-    Constituent.debug = false
+    Constituent.debug = False
     for n in range(max,-1,-1):
         verse(n)
         print()

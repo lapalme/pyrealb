@@ -1,18 +1,12 @@
-from .Constituent import Constituent,_getElems
-from .Terminal import Terminal, N, A, Pro, D, Adv, V, P, C, DT, NO, Q
-from .Phrase import Phrase, prepositionsList
-from .Lexicon import getLexicon, getRules, currentLanguage
+from .Constituent import Constituent
+from .Terminal import Terminal
+from .Lexicon import getRules
+from .utils import _getElems
 
 class Dependent(Constituent):
-    def __init__(self, params, deprel, lang=None):
+    def __init__(self, params, deprel):
+        from .utils import Q,NO
         super().__init__(deprel)
-        if lang is None:
-            self.lang = currentLanguage()
-        elif lang in ["en", "fr"]:
-            self.lang = lang
-        else:
-            self.lang = currentLanguage()
-            self.warn("bad language", self.lang)
         self.terminal = Q("*terminal") # dummy terminal so that error messages can be issued
         if len(params)==0:
             self.warn("Dependent without params")
@@ -52,7 +46,7 @@ class Dependent(Constituent):
             # add it to the list of dependents
             if position is None:
                 self.dependents.append(dependent)
-            elif isinstance(position,int) and position <= len(self.dependents) and position>=0:
+            elif isinstance(position, int) and len(self.dependents) >= position >= 0:
                 self.dependents.insert(position,dependent)
             else:
                 self.warn("bad position", position, len(self.dependents))
@@ -87,7 +81,7 @@ class Dependent(Constituent):
 
     def add(self,dependent,position=None,prog=None):
         if not isinstance(dependent,Dependent):
-            return self.warn("bad Dependent","dernier" if self.isFr() else "last",type(dependent).__name__)
+            return self.warn("bad Dependent",self.word_last(),type(dependent).__name__)
         if prog is None : # real call .add
             self.optSource+=f'.add({dependent.toSource()}{"" if position is None else (","+str(position))})'
         else:
@@ -122,8 +116,7 @@ class Dependent(Constituent):
             Constituent.pengNO += 1
             self.peng={"pengNO":Constituent.pengNO}
             headTerm.peng = self.peng
-        for i in range(0,len(self.dependents)): # should use "for d in dependents:"
-            dep = self.dependents[i]              # but this "kills" the PyCharm debugger
+        for dep in self.dependents:
             depTerm=dep.terminal
             deprel=dep.constType
             if deprel=="subj":
@@ -132,12 +125,6 @@ class Dependent(Constituent):
             elif deprel=="det":
                 if depTerm.isA("D"):
                     if hasattr(self,"peng"):
-                    #     if hasattr(depTerm,"peng") and "pe" in depTerm.peng: # save person (for possessives)
-                    #         pe=depTerm.peng["pe"]
-                    #         depTerm.peng=self.peng
-                    #         depTerm.peng["pe"]=pe
-                    #     else: #some strange determiner construct do not have peng
-                    #         depTerm.peng=self.peng
                         depTerm.peng=self.peng
                 elif depTerm.isA("NO"):
                     depTerm.peng=headTerm.peng
@@ -148,44 +135,26 @@ class Dependent(Constituent):
                 if depTerm.isA("A") or (depTerm.isA("V") and depTerm.getProp("t")=="pp"):
                     if hasattr(self,"peng"):
                         depTerm.peng=self.peng
-                    # check for an attribute of a copula with an adjective or past participle
-                    if self.isFr() and headTerm.lemma in ["être", "paraître", "sembler", "devenir", "rester"]:
-                        iSubj=self.findIndex(lambda d0:d0.isA("subj") and d0.terminal.isOneOf(["N","Pro"]))
-                        if iSubj>=0:
-                            depTerm.peng=self.dependents[iSubj].peng
-                #         iAttr=self.findIndex(lambda d0:d0.isA("comp") and
-                #                                        (d0.terminal.isA("A") or (d0.terminal.isA("V") and d0.terminal.getProp("t")=="pp")))
-                #         if iAttr>=0:
-                #             self.dependents[iAttr].peng=depTerm.peng
+                    self.linkAttributes(depTerm,headTerm)
                 elif depTerm.isA("V"):
                     # set agreement between the subject of a subordinate or the object of a relative subordinate
                     iRel=dep.findIndex(lambda depI: depI.isOneOf(["subj", "comp", "mod"]) and
                                                     depI.terminal.isA("Pro") and
-                                                    depI.terminal.lemma in ["qui", "que", "who", "that"])
+                                                    depI.terminal.lemma in self.relative_pronouns())
                     if iRel>=0:
                         rel = dep.dependents[iRel].constType
                         if rel=="subj": # verb agrees with this subject
                             depTerm.peng=self.peng
-                        elif self.isFr(): # rel is comp or mod
-                            # in French past participle can agree with a cod appearing before... keep that info in case
-                            depTerm.cod=headTerm
-                            # HACK: check for a "temps composé" formed by "avoir" followed by a past participle
-                            if depTerm.lemma == "avoir":
-                                iVerb = dep.findIndex(lambda depI:depI.isA("comp") and
-                                                      depI.terminal.isA("V") and
-                                                      depI.terminal.getProp("t") == "pp")
-                                if iVerb >= 0:
-                                    dep.dependents[iVerb].terminal.cod = headTerm
-                    # check for past participle in French that should agree with the head
-                    if self.isFr() and depTerm.getProp("t")=="pp":
-                        depTerm.peng=self.peng
-                elif depTerm.isA("Pro") and depTerm.lemma in ["qui","que","who","that"]:
+                        self.link_pp_before(dep,headTerm)
+                    self.link_pp_with_head(depTerm)
+                elif depTerm.isA("Pro") and depTerm.lemma in self.relative_pronouns():
                     # a relative linked to depTerm in which the new peng should be propagated
                     if hasattr(self,"peng"):
                         depTerm.peng=self.peng
                     for depI in dep.dependents:
                         if hasattr(depI,"peng") and hasattr(self,"peng"):
                             self.setPengRecursive(depI,depI.peng["pengNO"],self.peng)
+                continue
             elif deprel=="root":
                 # self.error("An internal root was found")
                 pass
@@ -232,72 +201,15 @@ class Dependent(Constituent):
         if nb>1 and andCombination:n="p"
         return {"g":g,"n":n,"pe":pe}
 
-    # Dependency structure modification but that must be called in the context of the parentConst
-    # because the pronoun depends on the role of the N in the sentence
-    #         and its position can also change relatively to the verb
-    def pronominalize_fr(self):
-        mySelf = self
-        if self.isA("subj"):
-            if not self.terminal.isOneOf(["N", "Pro"]):
-                return self.warn("no appropriate pronoun")
-            pro = self.getTonicPro("nom")
-        elif self.isOneOf(["comp", "mod"]) and self.terminal.isA("P"):
-            prep = self.terminal.lemma
-            if len(self.dependents) == 1 and self.dependents[0].isOneOf(["comp", "mod"]):
-                if self.dependents[0].terminal.isA("N"):
-                    n = self.dependents[0].terminal
-                    if prep == "à":
-                        pro = n.getTonicPro("dat")
-                    elif prep == "de":
-                        pro = Pro("en", "fr").c("dat")
-                    elif prep in ["sur", "vers", "dans"]:
-                        pro = Pro("y", "fr").c("dat")
-                    else:  # change only the N keeping the P intact
-                        pro = self.getTonicPro("nom")
-                        mySelf = self.dependents[0]
-                else:
-                    return self.warn("no appropriate pronoun")
-        else:
-            pro = self.getTonicPro("acc")
-            if self.parentConst is not None and self.parentConst.terminal.isA("V"):  # consider that it is direct complement
-                self.parentConst.terminal.cod = self  # indicate that self is a COD
-        # replace the original with the pronoun
-        pro.parentConst = self
-        if hasattr(mySelf,"peng"):
-            pro.peng = mySelf.peng
-        mySelf.terminal = pro
-        mySelf.dependents = []
-        mySelf.dependentsSource = []
-
-    # Pronominalization in English only applies to a N (self is checked before the call)
-    #  and does not need reorganisation of the sentence
-    #  Does not currently deal with "Give the book to her." that {c|sh}ould be "Give her the book."
-    def pronominalize_en(self):
-        self.props["pe"] = 3  # ensure that pronominalization of a noun is 3rd person
-        if self.parentConst is None or self.isA("subj"):  # is it a subject
-            pro = self.getTonicPro("nom")
-        else:
-            pro = self.getTonicPro("acc")  # is direct complement
-        pro.peng = self.peng
-        pro.parentConst = self
-        self.terminal = pro
-        self.dependents = []
-        self.dependentsSource = []
-
     # check if any child should be pronominalized
     # self must be done in the context of the parent, because some dependents might be changed
     def pronominalizeChildren(self):
         for d in self.dependents:
             if d.getProp("pro") and not d.terminal.isA("Pro"):  # it can happen that a Pro has property "pro" set within the same expression
-                if d.isFr():
-                    d.pronominalize_fr()
-                else:
-                    if d.terminal.isA("N"):
-                        d.pronominalize_en()
-                    else:
-                        self.warn("no appropriate pronoun")
+                d.pronominalize()
 
     def passivate(self):
+        from .utils import Pro,P,comp
         subj=None # original subject and object, they are swapped below...
         obj=None
         # find the subject
@@ -309,14 +221,7 @@ class Dependent(Constituent):
                 #     subj.terminal = subj.terminal.getTonicPro()
                 subject = subj.terminal
                 if subject.isA("Pro"):
-                    if self.isEn() and subject.lemma=="I":
-                        subj.terminal = Pro("me").tn("").g(subject.getProp("g"))\
-                                         .n(subject.getProp("n")).pe(subject.getProp("pe"))
-                    elif self.isFr() and subject.lemma=="je":
-                        subj.terminal = Pro("moi").tn("").g(subject.getProp("g"))\
-                                         .n(subject.getProp("n")).pe(subject.getProp("pe"))
-                    else:
-                        subj.terminal=subject.getTonicPro()
+                    subject = self.passive_pronoun_subject(subject)
             else:
                 subj=None
             # find direct object (first N or Pro of a comp) from dependents
@@ -331,49 +236,27 @@ class Dependent(Constituent):
                 # HACK: obj is the new subject
                 obj.changeDeprel("subj")
                 # make the verb agrees with the new subject (in English only, French is dealt below)
-                if self.isEn():
+                if self.passive_should_link_subject():
                     self.terminal.peng=obj.peng
                 if subj is not None:   # the original subject is now the indirect object
                     subj.changeDeprel("mod")
                     self.removeDependent(subjIdx)
-                    if subj.terminal.isA("V"):  # the subject is a V
-                        prep = "de" if self.isFr() else "to"
-                    else:
-                        prep = "par" if self.isFr() else "by"
-                    self.addDependent(comp(P(prep,self.lang),subj))
+                    prep = self.passive_prep(subj.terminal.isA("V"))
+                    self.addDependent(comp(P(prep,self.lang()),subj))
             elif subj is not None: # no object, but with a subject
-                # create a dummy subject with a "il"/"it"
-                obj=Pro("lui" if self.isFr() else "it",self.lang).c("nom") #HACK: obj is the new subject
+                # create a dummy subject with "il"/"it"
+                obj=Pro(self.passive_dummy_subject(),self.lang()).c("nom") #HACK: obj is the new subject
                 # add new subject at the front of the sentence
                 subj.changeDeprel("mod")
                 self.removeDependent(subjIdx)
                 self.addPre(obj)
                 self.peng=obj.peng
                 # add original subject after the verb to serve as an object
-                if subj.terminal.isA("V"):  # the subject is a V
-                    prep = "de" if self.isFr() else "to"
-                else:
-                    prep = "par" if self.isFr() else "by"
-                self.addDependent(comp(P(prep,self.lang),subj))
-            if self.isFr():
-                # do self only for French because in English self is done by processTyp_en
-                # change verbe into an "être" auxiliary and make it agree with the newSubj
-                # force person to be 3rd (number and tense will come from the new subject)
-                verbe=self.terminal.lemma
-                self.terminal.setLemma("avoir" if verbe == "être" else "être")
-                if self.getProp("t")=="ip":
-                    self.t("s") # set subjonctive present tense for an imperative
-                pp = V(verbe,"fr").t("pp")
-                if obj is not None: # self can be undefined when a subject is Q or missing
-                    self.terminal.peng=obj.peng
-                    pp.peng=obj.peng
-                # insert the pp before the comp, so that it appears immediately after the verb
-                #  calling addPost(pp) would not put it at the right place
-                compIdx=self.findIndex(lambda d:d.isOneOf(["comp","mod"]))
-                if compIdx==-1: compIdx=0
-                self.addDependent(Dependent([pp],"*post*"),compIdx)
+                prep = self.passive_prep(subj.terminal.isA("V"))
+                self.addDependent(comp(P(prep,self.lang()),subj))
+            self.passive_agree_auxiliary(obj)
         else:
-            return self.warn("not found","V","contexte passif" if self.isFr() else "passive context")
+            return self.warn("not found","V",self.passive_context())
 
     def processV(self, types, key, action):
         if self.isA("coord"):
@@ -385,115 +268,34 @@ class Dependent(Constituent):
 
     # add special internal dependencies (used only during realization)
     def addPre(self, terminals, position=None):
+        from .utils import dep
         if isinstance(terminals, Terminal):
-            self.addDependent(Dependent([terminals], "*pre*"), position)
+            self.addDependent(dep([terminals], "*pre*"), position)
             return self
         for terminal in terminals:
-            self.addDependent(Dependent([terminal], "*pre*"), position)
+            self.addDependent(dep([terminal], "*pre*"), position)
         return self
 
     def addPost(self, terminals):
+        from .utils import dep
         if isinstance(terminals, Terminal):
-            self.addDependent(Dependent([terminals], "*post*"), 0)
+            self.addDependent(dep([terminals], "*post*"), 0)
             return self
         terminals.reverse()  # must add them in reverse order because of position 0
         for terminal in terminals:
-            self.addDependent(Dependent([terminal], "*post*"), 0)
+            self.addDependent(dep([terminal], "*post*"), 0)
         return self
 
-    def processTyp_fr(self, types):
-        def progF(deprel, v):
-            # insert "en train","de" (separate so that élision can be done...)
-            # HACK::but do it BEFORE the pronouns created by .pro()
-            origLemma = deprel.terminal.lemma
-            deprel.terminal.setLemma(
-                "être")  # change verb, but keep person, number and tense properties of the original...
-            deprel.addPost([Q("en train"), Q("de"), V(origLemma).t("b")])
-            deprel.terminal.isProg = v
-        self.processV(types, "prog", progF)
-
-        def modF(deprel, mod):
-            rules = getRules()
-            origLemma = deprel.terminal.lemma
-            for key in rules["verb_option"]["modalityVerb"]:
-                if key.startswith(mod):
-                    deprel.terminal.setLemma(rules["verb_option"]["modalityVerb"][key])
-                    break
-            deprel.terminal.isMod = True
-            newV = V(origLemma).t("b")
-            if hasattr(deprel.terminal, "isProg"):  # copy progressive from original verb...
-                newV.isProg = deprel.terminal.isProg
-                del deprel.terminal.isProg
-            deprel.addPost(newV)
-        self.processV(types, "mod", modF)
-
-        def negF(deprel, neg):
-            if neg is True: neg="pas"
-            deprel.terminal.neg2 = neg  # HACK: to be used when conjugating at the realization time
-        self.processV(types, "neg", negF)
-
-    def processTyp_en(self, types):
-        # replace current verb with the list new words
-        #  TODO: take into account the fact that there might be already a verb with modals...
-        if "contr" in types and types["contr"] is not False:
-            # necessary because we want the negation to be contracted within the VP before the S or SP
-            self.contraction = True
-        words = Phrase.affixHopping(self.terminal, self.getProp("t"), getRules()["compound"], types)
-        # the new root should be the last verb
-        last = words.pop()
-        if last.isA("Pro") and last.lemma == "myself":  # skip possible "myself" for reflexive verb
-            self.addPost(last)
-            last = words.pop()
-        self.terminal = last
-        self.addPre(words)
-
-    def moveAuxToFront(self):
-        auxIdx = self.findIndex(lambda d: d.isA("*pre*"))  # added by affixHopping
-        if auxIdx >= 0 and self.getProp("t") not in ["pp","pr"]: # do not move when tense is participle
-            aux = self.dependents[auxIdx].terminal
-            self.removeDependent(auxIdx)
-            self.addPre(aux, 0)  # put auxiliary before
-        elif self.terminal.lemma in ["be","have"]:
-            # no auxiliary, but check for have or be "alone" for which the subject should appear after the aux
-            subjIdx=self.findIndex(lambda d:d.isA("subj"))
-            if subjIdx>=0:
-                self.dependents[subjIdx].pos("post")
-
-    def invertSubject(self,int_):
-        # in French : use inversion rule which is quite "delicate"
-        # rules from https:#francais.lingolia.com/fr/grammaire/la-phrase/la-phrase-interrogative
-        # if subject is a pronoun, invert and add "-t-" or "-"
-        # except for first person singular ("je") which is most often non colloquial (e.g. aime-je or prends-je)
-        # if subject is a noun, the subject stays but add a new pronoun
-        subjIdx = self.findIndex(lambda d: d.isA("subj"))
-        if subjIdx >= 0:
-            subject = self.dependents[subjIdx].terminal
-            if subject.isA("Pro"):
-                if subject.getProp("pe")==1 and subject.getProp("n")=="s": # add est-ce que at the start
-                    self.add(det(Q("est-ce que")),0)
-                    return
-                pro = self.removeDependent(subjIdx).terminal  # remove subject
-            elif int_ in ["wod","wad"]:
-                self.add(det(Q("est-ce que")), 0)
-                return
-            elif subject.isA("C"):
-                pro = Pro("moi", "fr").c("nom").g("m").n("p").pe(3)  # create a "standard" pronoun, to be patched by cpReal
-                subject.pronoun = pro  # add a flag to be processed by cpReal
-            else:
-                pro = Pro("moi", "fr").g(subject.getProp("g")).n(subject.getProp("n")).pe(3).c("nom")  # create a pronoun
-            if self.terminal.isA("V"):
-                self.addPost(pro)
-                self.terminal.lier()
 
     def processTypInt(self,types):
+        from .utils import Q
         int_=types["int"]
         sentenceTypeInt = getRules()["sentence_type"]["int"]
         intPrefix = sentenceTypeInt["prefix"]
         prefix = None  # to be filled later
         pp = None
         if int_ in ["yon", "how", "why", "muc"]:
-            if self.isEn(): self.moveAuxToFront()
-            else: self.invertSubject(int_)
+            self.move_object(int_)
             prefix = intPrefix[int_]
         # remove a part of the sentence
         elif int_ in ["wos", "was"]:  # remove subject
@@ -513,21 +315,13 @@ class Dependent(Constituent):
                 if d.isA("comp") and d.terminal.isA("N"):
                     cmp=self.removeDependent(i)
                 i+=1
-            if self.isFr():  # check for passive subject starting with par
-                parIdx = self.findIndex(
-                    lambda d: d.isA("comp") and d.terminal.isA("P") and d.terminal.lemma == "par")
-                if parIdx >= 0:
-                    pp = self.dependents[parIdx].terminal
-                    self.removeDependent(parIdx)  # remove the passive subject
-            if self.isEn() and int_ == "wod" and cmp is not None and cmp.getProp("g") in ["m","f"]:
+            pp = self.check_passive_subject_with_par()
+            if self.passive_human_object(int_,cmp):
                 # human direct object
                 prefix = "whom"
             else:
                 prefix = intPrefix[int_]
-            if self.isEn():
-                self.moveAuxToFront()
-            else:
-                self.invertSubject(int_)
+            self.move_object(int_)
         elif int_ in ["woi", "wai", "whe", "whn"]:  # remove indirect object first comp or mod with a P as terminal
             prefix = intPrefix[int_]  # get default prefix
             for i in range(0, len(self.dependents)):
@@ -535,98 +329,25 @@ class Dependent(Constituent):
                 if d.isOneOf(["comp", "mod"]) and d.terminal.isA("P"):
                     # try to find a more appropriate prefix by looking at preposition in the structure
                     prep = d.terminal.lemma
-                    preps = prepositionsList[self.lang]
+                    preps = self.preposition_list()
                     remove = False
                     if int == "whe":
                         if preps["whe"].has(prep): remove = True
                     elif int == "whn":
                         if preps["whn"].has(prep): remove = True
                     elif preps["all"].has(prep):  # "woi" | "wai"
-                        # add the preposition in front of the prefix (should be in the table...)
-                        prefix = prep + " " + (("whom" if int == "woi" else "what") if self.isEn()
-                                               else ("qui" if int == "woi" else "quoi"))
+                        prefix = prep + " " + self.interrogative_pronoun_woi(int_)
                         remove = True
                     if remove:
                         self.removeDependent(i)
                         break
-            if self.isEn():
-                self.moveAuxToFront()
-            else:
-                self.invertSubject(int_)
+            self.move_object(int_)
         elif int_=="tag":
-            # according to Antidote: Syntax Guide - Question tag
-            # Question tags are short questions added after affirmations to ask for verification
-            if self.isFr(): # in French really simple, add "n'est-ce pas"
-                self.a(", n'est-ce pas")
-            else: # in English, sources: https://www.anglaisfacile.com/exercices/exercice-anglais-2/exercice-anglais-95625.php
-                # must find  the pronoun and conjugate the auxiliary
-                # look for the first verb or auxiliary (added by affixHopping)
-                vIdx = self.findIndex(lambda d:d.terminal.isA("V") and d.depPosition()=="pre")
-                currV = self.terminal if vIdx<0 else self.dependents[vIdx].terminal
-                if "mod" in types and types["mod"] != False:
-                    aux=getRules("en")["compound"][types["mod"]]["aux"]
-                else:
-                    if currV.lemma in ["have","be","can","will","shall","may","must"]:
-                        aux=currV.lemma
-                    else:
-                        aux="do"
-                neg = "neg" in types and types["neg"]==True
-                pe=currV.getProp("pe")
-                t = currV.getProp("t")
-                n = currV.getProp("n")
-                g = currV.getProp("g")
-                pro = Pro("I").pe(pe).n(n).g(g)  # default pronoun
-                subjIdx = self.findIndex(lambda d:d.isA("subj"))
-                # check for negative adverb
-                advIdx = self.findIndex(lambda d: d.isA("mod") and d.terminal.isA("Adv"))
-                if advIdx>=0 and self.dependents[advIdx].terminal.lemma in ["hardly","scarcely","never","seldom"]:
-                    neg=True
-                if subjIdx >=0 :
-                    subject=self.dependents[subjIdx].terminal
-                    if subject.isA("Pro"):
-                        if subject.getProp("pe")==1 and aux=="be" and t=="p" and not neg:
-                            pe=2 # I am => aren't I
-                        elif subject.lemma in ["this","that","nothing"]:
-                            pro=Pro("I").g("n") # it
-                        elif subject.lemma in ["somebody","anybody","nobody","everybody",
-                                            "someone","anyone","everyone"] :
-                            pro=Pro("I").n("p") # they
-                            if subject.lemma=="nobody":neg=True
-                        else:
-                            pro=subject.clone()
-                        pro=subj(pro).pos("post")
-                    elif subject.isA("N"):
-                        pro = self.dependents[subjIdx].clone().pro().pos("post")
-                        pro.g(subject.getProp("g")).n(subject.getProp("n")) # ensure proper number and gender
-                    else:
-                        # must wrap into comp("",...) to force pronominalization of children
-                        pro=subj(Pro("it").c("nom")).pos("post")
-                else:  #  no subject, but check if the verb is imperative
-                    if t == "ip":
-                        if aux == "do": aux = "will" # change aux when the aux is default
-                        pro = Pro("I").pe(2).n(n).g(g)
-                    else:
-                        pro = Pro("it").c("nom")
-                    pro = subj(pro).pos("post")
-                iDeps=len(self.dependents)-1
-                while iDeps>=0 and self.dependents[iDeps].depPosition()!="post":
-                    iDeps-=1
-                if iDeps<0: # add comma to the verb
-                    currV.a(",")
-                else: #add comma to the last current dependent
-                    self.dependents[iDeps].a(",")
-                # nice use-case of jsRealB using itself for realization
-                if aux=="have" and not neg:
-                    # special case because it should be realized as "have not" instead of "does not have"
-                    self.addDependent(comp(V("have").t(t).pe(pe).n(n),
-                                           mod(Adv("not")),pro).typ({"contr":True}))
-                else:
-                    self.addDependent(comp(V(aux).t(t).pe(pe).n(n),
-                                           pro).typ({"neg":not neg,"contr":True}))
+            self.tag_question(types)
             prefix=intPrefix[int_]
         else:
             self.warn("not implemented", "int:" + int_)
-        if self.isFr() or (int_ != "yon"):   # add the interrogative prefix
+        if self.should_add_interrogative_prefix(int_):
             self.addPre(Q(prefix), 0)
         if pp is not None:  # add "par" in front of some French passive interrogative
             self.addPre(pp, 0)
@@ -638,12 +359,7 @@ class Dependent(Constituent):
         # pp=None # flag for possible pp removal for French wod or wad
         if "pas" in types and types["pas"] is not False:
             self.passivate()
-        if self.isFr():
-            if "contr" in types and types["contr"] is not False:
-                self.warn("no French contraction")
-            self.processTyp_fr(types)
-        else:
-            self.processTyp_en(types)
+        self.processTyp_verb(types)
         if "int" in types and types["int"] is not False:
             self.processTypInt(types)
         if "exc" in types and types["exc"] is True:
@@ -695,7 +411,7 @@ class Dependent(Constituent):
         # CAUTION: gender and person might not be correct in the case of embedded coord
         selfCoord=self.terminal
         if selfCoord.isA("C"):
-            andC="et" if self.isFr() else "and"
+            andC = self.and_conj()
             gn=self.findGenderNumberPerson(selfCoord.lemma==andC)
             if gn["g"] is not None:
                 self.setProp("g",gn["g"])
@@ -720,11 +436,7 @@ class Dependent(Constituent):
             # subject and det are always pre except when specified
             pos="pre"
         elif self.isA("mod") and self.terminal.isA("A") and self.parentConst.terminal.isA("N"):
-            # check adjective position with respect to a noun
-            if self.isFr():
-                pos=self.terminal.props["pos"] if "pos" in self.terminal.props else "post"
-            else:
-                pos="pre" # all English adjectives are pre
+            pos = self.terminal.props["pos"] if "pos" in self.terminal.props else self.adj_def_pos()
         elif self.isA("coord") and len(self.dependents)>0:
             pos=self.dependents[0].depPosition() #take the position of the first element of the coordination
         return pos
@@ -780,7 +492,7 @@ class Dependent(Constituent):
             sep = ","
         # create source of children
         deps=[self.terminal.toSource(indent)]+[e.toSource(indent) for e in self.dependentsSource]
-        return f'{self.constType}({sep.join(deps)})' + super().toSource()
+        return f'{self.constType}({sep.join(deps)})' + super().toSource(indent)
 
     def toJSON(self):
         res = {"dependent": self.constType,
@@ -789,13 +501,13 @@ class Dependent(Constituent):
             res["dependents"]=[e.toJSON() for e in self.dependents]
         if len(self.props) > 0:  # do not output empty props
             res["props"] = self.props
-        if self.parentConst is None or self.lang != self.parentConst.lang:  # only indicate when language changes
-            res["lang"] = self.lang
+        if self.parentConst is None or self.lang() != self.parentConst.lang():  # only indicate when language changes
+            res["lang"] = self.lang()
         return res
 
     @classmethod
     def fromJSON(cls, constType, json, lang):
-        from .utils import fromJSON
+        from .utils import fromJSON, dep
         if "terminal" not in json:
             print("Dependent.fromJSON: no terminal found in Dependent:"+str(json))
         else:
@@ -805,16 +517,4 @@ class Dependent(Constituent):
                     args.extend([fromJSON(e, lang) for e in json["dependents"]])
                 else:
                     print("Dependent.fromJSON dependents should be a list:" + str(json["elements"]))
-            return Dependent(args, constType, lang).setJSONprops(json)
-
-#  create Dependent instances
-def root(*params): return Dependent(params,"root")
-def subj(*params): return Dependent(params,"subj")
-def det(*params): return Dependent(params,"det")
-def mod(*params): return Dependent(params,"mod")
-
-def comp(*params): return Dependent(params,"comp")
-def compObj(*params): return Dependent(params,"comp")
-def compObl(*params): return Dependent(params,"comp")
-
-def coord(*params): return Dependent(params,"coord")
+            return dep(args, constType, lang).setJSONprops(json)

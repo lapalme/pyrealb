@@ -48,7 +48,7 @@ def json_tests():
                                                      "lemma":"mat"}]}]}]}],
  "props":{"typ":{"neg":true}}}
 """,
-         "message": "pretty-print of JSON froom Phrase"},
+         "message": "pretty-print of JSON from Phrase"},
         {"expression": fromJSON(exp.toJSON()),
          "expected": "The cats did not sit on the mat. ",
          "message": "original sentence built using Phrase"},

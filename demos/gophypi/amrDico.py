@@ -49,13 +49,13 @@ def makePoss(s):
             return addOptions(D("my"),pronounOptions[s]) ## IT MUST return a Terminal not a LexSem 
         else:
             print("makePoss: unknown s:"+str(s))
-    elif isinstance(s,Pro):
+    elif s.isA("Pro"):
         s.terminal="D"
         s.lemma="my"
         return s
 
 ### Determiners
-determiners=set({"my","that","the","what","whatever","which","whichsoever","whose","a","this"})
+determiners= {"my", "that", "the", "what", "whatever", "which", "whichsoever", "whose", "a", "this"}
 
 ### Conjunctions
 def op16(conj):
@@ -99,12 +99,12 @@ delCat(adverbs,"this")
 def isAdverb(lemma):return lemma in adverbs
 def makeAdv(lemma):
     adv=adverbs[lemma]
-    if isinstance(adv,AdvP):
-        return LexSem(lemma,"Adv",[":op1"],lambda op1:copy.deepcopy(adv).add(accPron(op1)))
-    if isinstance(adv,Adv):
-        return LexSem(lemma,"Adv",[":op1"],lambda op1:AdvP(copy.deepcopy(adv),accPron(op1)))
     if isinstance(adv,str):
         return LexSem(lemma,"Adv",[":op1"],lambda op1:Adv(adv) if op1==None else AdvP(Adv(adv),accPron(op1)))
+    if adv.isA("AdvP"):
+        return LexSem(lemma,"Adv",[":op1"],lambda op1:copy.deepcopy(adv).add(accPron(op1)))
+    if adv.isA("Adv"):
+        return LexSem(lemma,"Adv",[":op1"],lambda op1:AdvP(copy.deepcopy(adv),accPron(op1)))
     print("### strange adverb:"+str(adv))
     return adverbs[lemma]
 
@@ -113,17 +113,17 @@ prepositions["up-to"]=PP(P("up"),P("to"))
 
 def accPron(op): # if op is pronoun make it accusative "i"=>"me"
     if isinstance(op,list):
-        if isinstance(op[0],Pro):op[0].lemma="me"
-    elif isinstance(op,Pro):
+        if op[0].isA("Pro"):op[0].lemma="me"
+    elif op.isA("Pro"):
         op.lemma="me"
     return op
     
 def isPreposition(lemma):return lemma in prepositions
 def makeP(lemma):
     prep=prepositions[lemma]
-    if isinstance(prep,PP):
+    if prep.isA("PP"):
         return LexSem(lemma,"P",[":op1"],lambda op1:copy.deepcopy(prep).add(accPron(op1)))
-    if isinstance(prep,P):
+    if prep.isA("P"):
         return LexSem(lemma,"P",[":op1"],lambda op1:PP(copy.deepcopy(prep),accPron(op1)))
     if isinstance(prep,str):
         return LexSem(lemma,"P",[":op1"],lambda op1:P(prep) if op1==None else PP(P(prep),accPron(op1)))
@@ -246,11 +246,11 @@ def makeA(lemma):
     adj=adjectives[lemma]
     if isinstance(adj,LexSem):
         return adj
-    if isinstance(adj,AP):
+    if adj.isA("AP"):
         return LexSem(lemma,"A",[":ARG1"],lambda arg1:copy.deepcopy(adj).add(arg1))
-    if isinstance(adj,A):
+    if adj.isA("A"):
         return LexSem(lemma,"A",[":ARG1"],lambda arg1:AP(copy.deepcopy(adj),arg1))
-    if isinstance(adj,str):
+    if isinstance(adj.str):
         return LexSem(lemma,"A",[":ARG1"],lambda arg1:A(adj) if arg1==None else AP(A(adj),arg1))
     print("### strange adjective:"+str(adj))
     return adj
@@ -263,7 +263,7 @@ def makeN(lemma):
     if isinstance(noun,str):
         return nounInfo(noun)
     if isinstance(noun,LexSem):
-        return noun;
+        return noun
     print("### strange noun:"+str(noun))
     return noun
 
@@ -424,13 +424,13 @@ nouns["value-interval"]=LexSem("value-interval","N",[":op1",":op2"],lambda op1,o
 
 # special parameters for which we must get a Constituent
 def getC(val):
-    if isinstance(val,(A,Adv,C,D,DT,N,NO,P,Pro,Q,V,AP,AdvP,CP,NP,PP,VP,S,SP)):
-        return val;
-    if isinstance(val,list):
+    if isinstance(val,Constituent):
+        return val
+    if isinstance(val.list):
         return getC(val[0])
     if val==None:
         return Q("")
-    if isinstance(val,str):
+    if isinstance(val.str):
         return Q(val)
     return val
 
@@ -438,12 +438,12 @@ def getC(val):
 ## special parameters from which we must get the Terminal 
 def getT(val):
     if isinstance(val,Terminal):
-        return val;
+        return val
     if isinstance(val,list):
         return getT(val[0])
     if isinstance(val,Phrase):
         return getT(val.elements[0])
-    if val==None:
+    if val is None:
         return Q("")
     if isinstance(val,str):
         return Q(val)

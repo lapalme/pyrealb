@@ -23,7 +23,7 @@ def dependencies_fr():
          "expected": "La souris que les chats ont mangée est grise. ",
          "message": "Phrase avec attribut, de plus le passé composé avec avoir est accordé correctement... "},
          #   2
-        {"expression": root(N('cadeau').n("p")).cap(false),
+        {"expression": root(N('cadeau').n("p")).cap(False),
          "expected": "cadeaux",
          "message": "Phrase sans capitale"},
          #   3
@@ -36,7 +36,7 @@ def dependencies_fr():
         {"expression":
              root(N('gens').n("p"),
                   det(D('le')),
-                  mod(A('vulgaire').pos("pre"))).cap(false),
+                  mod(A('vulgaire').pos("pre"))).cap(False),
          "expected": "les vulgaires gens",
          "message": "Adjectif pré-posé"},
          #   5
@@ -55,7 +55,7 @@ def dependencies_fr():
                        mod(P('à'),
                            mod(N('loi'),
                                det(D('le'))))),
-                  subj(Pro('je').pe(1).n("p"))).typ({"neg": true}),
+                  subj(Pro('je').pe(1).n("p"))).typ({"neg": True}),
          "expected": "Nous n'avons pas agi conformément à la loi. ",
          "message": "Phrase négative avec accord du verbe"},
          #   7
@@ -104,7 +104,7 @@ def dependencies_fr():
                   comp(N('gâteau'),
                        det(D('le'))),
                   subj(N('enfant').n("p"),
-                       det(D('le')))).typ({"pas": true}),
+                       det(D('le')))).typ({"pas": True}),
          "expected": "Le gâteau est mangé par les enfants. ",
          "message": "Passif avec élision"},
          #   12
@@ -131,7 +131,7 @@ def dependencies_fr():
                   comp(N('gâteau'),
                        det(D('le'))).pro(),
                   subj(N('enfant').n("p"),
-                       det(D('le')))).typ({"pas": true}),
+                       det(D('le')))).typ({"pas": True}),
          "expected": "Il est mangé par les enfants. ",
          "message": "Pronominalisation du complément au passif"},
          #   15
@@ -152,7 +152,7 @@ def dependencies_fr():
                        mod(Q('Wow!'))).tag('a', {"href": "http: #  wikipedia.org/cat", "target": "_blank"}),
                   subj(N('chat').g("f").n("p").tag("b").tag("i"),
                        det(D('le')),
-                       mod(Q('super')))).typ({"neg": true}),
+                       mod(Q('super')))).typ({"neg": True}),
          "expected": 'Les <i><b>chattes</b></i> super n\'ont pas dévoré <a href="http: #  wikipedia.org/cat" target="_blank">la souris grise Wow!</a>',
          "message": "Phrase avec tag HTML"},
          #   17
@@ -160,7 +160,7 @@ def dependencies_fr():
              root(V('être').t("p"),
                   comp(A('gris')),
                   subj(N('souris').n("p"),
-                       det(D('le')))).typ({"neg": true}),
+                       det(D('le')))).typ({"neg": True}),
          "expected": "Les souris ne sont pas grises. ",
          "message": "Accord avec être"},
          #   18
@@ -177,8 +177,8 @@ def dependencies_fr():
              root(V('évanouir').t("pc"),
                   comp(P('à'),
                        mod(DT("1979-05-21T12:00:00").dOpt(
-                           {"hour": false, "minute": false, "second": false}))),
-                  subj(N('John'))).typ({"neg": true}),
+                           {"hour": False, "minute": False, "second": False}))),
+                  subj(N('John'))).typ({"neg": True}),
          "expected": "John ne s'est pas évanoui au lundi 21 mai 1979. ",
          "message": "Phrase avec une date et un ajout au dictionnaire"},
          #   20
@@ -186,10 +186,10 @@ def dependencies_fr():
              root(V('évanouir').t("pc"),
                   comp(P('à'),
                        mod(DT("1979-05-21T12:00:00").dOpt(
-                           {"hour": false, "minute": false, "second": false}))),
+                           {"hour": False, "minute": False, "second": False}))),
                   coord(C('et'),
                         subj(N('John')),
-                        subj(N('Mary')))).typ({"neg": true}),
+                        subj(N('Mary')))).typ({"neg": True}),
          "expected": "John et Mary ne se sont pas évanouis au lundi 21 mai 1979. ",
          "message": "Phrase avec coordination ou et date."},
          #   21
@@ -244,7 +244,7 @@ def dependencies_fr():
                   det(D('le')),
                   mod(V('manger').t("pc"),
                       comp(Pro('que')).pos("pre"),
-                      subj(Pro('je')))).cap(false),
+                      subj(Pro('je')))).cap(False),
          "expected": "la <i>pomme</i> qu'il a mangée",
          "message": "NP avec relative"},
          #   28
@@ -260,7 +260,7 @@ def dependencies_fr():
                   comp(N('gâteau'),
                        det(D('le'))),
                   subj(N('enfant').n("p"),
-                       det(D('le')))).typ({"pas": true}),
+                       det(D('le')))).typ({"pas": True}),
          "expected": "Le gâteau est mangé par les enfants. ",
          "message": "Passive"},
          #   30
@@ -297,7 +297,7 @@ def dependencies_fr():
                                                       mod(N('coup'),
                                                           det(D('le')),
                                                           mod(A('premier'))))))))),
-                            subj(Pro('ce'))).typ({"neg": true}),
+                            subj(Pro('ce'))).typ({"neg": True}),
          "expected": "Ce n'est pas de l'exercice aisé à réussir du premier coup. ",
          "message": "Multiples élisions"},
          #   33
@@ -350,8 +350,8 @@ def dependencies_fr():
                   subj(N("souris"),
                        det(D("le"))),
                   comp(N("fromage"),
-                       det(D("le")))).typ({"int": "wad", "pas": true}),
-         "expected": "Par quoi le fromage a-t-il été mangé? ",
+                       det(D("le")))).typ({"int": "wad", "pas": True}),
+         "expected": "Par quoi est-ce que le fromage a été mangé? ",
          "message": "Question au passif avec verbe au passé composé"},
          #   38
         {"expression":
@@ -451,8 +451,8 @@ def dependencies_fr():
                                                  comp(N("garde"),
                                                       comp(P("pour"),
                                                            comp(N("enfant"),
-                                                                det(D("leur")))))))).typ({"neg": true})
-                                  ))))).typ({"refl": true}),
+                                                                det(D("leur")))))))).typ({"neg": True})
+                                  ))))).typ({"refl": True}),
         "expected":"Les places d'accueil s'adressent en priorité aux parents qui travaillent et n'ont pas de possibilité de garde pour leur enfant. ",
         "message": "Sujet d'une relative avec coordination de verbes"},
     #   39

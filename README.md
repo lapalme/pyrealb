@@ -1,6 +1,6 @@
 # *pyrealb* - A Python Bilingual Text Realizer
 
-*Version 2.3.8 - September 2023*
+*Version 3.0.0 - December 2023*
 
 *pyrealb* is a Python adaptation of the JavaScript [**jsRealB**](http://rali.iro.umontreal.ca/jsRealB) 
 text realizer with the same constituent and dependency syntax notation. 
@@ -9,6 +9,10 @@ It facilitates its integration within Python applications by simply adding
 	from pyrealb import *
 
 [Online documentation](http://www.iro.umontreal.ca/~lapalme/pyrealb/documentation.html?lang=en)
+
+Version 3.0.0 is a major code reorganization, but without any new feature, to clearly separate language dependent parts from the language independent ones. This organization is described  [here](docs/ClassOrganisation.md) .
+
+The use of pyrealb for [Bilingual Data-to-text generation is described in this document](https://arxiv.org/pdf/2311.14808.pdf).
 
 ### Installing the distribution package from PyPI
 
@@ -46,13 +50,17 @@ It facilitates its integration within Python applications by simply adding
 * [`src`](./src)
     * `__init__.py` : empty program that imports subpackages and exports relevant symbols. 
     * `Constituent.py`: *Constituent* is the top class for methods shared between *Phrase*s and *Terminal*s 
+    * `ConstituentEn.py`, `ConstituentFr.py` : English and French specific processing of `Constituent`
+    * `Dependent.py` : subclass of *Constituent* for creating complex phrases using dependencies
+    * `DependentEn.py`, `DependentFr.py` : English and French specific processing of `Dependent`
     * `Lexicon.py`: class to access lexicon entries and syntactic rules
     * `Number.py` : utility functions for dealing with number formatting
+    * `NonTerminalEn.py`, `NonTerminalFr.py` : language dependent processing common to `Phrase` and `Dependent`
     * `Phrase.py` : subclass of *Constituent* for creating complex phrases
-    * `Dependent.py` : subclass of *Constituent* for creating complex phrases using dependencies
+    * `PhraseEn.py`, `PhraseFr.py` : English and French specific processing of `Phrase` 
     * `Terminal.py` : subclass of *Constituent* for creating a single unit (most often a single word)
+    * `TerminalEn.py`, `TerminalFr.py` : English and French specific processing of `Terminal`
     * `util.py`  : some useful functions
-    * `Warning.py` : function to generate warnings in case of erroneous specifications using *pyrealb* itself
     * [`data`](./src/pyrealb/data):
         * `lexicon-en.json` : English lexicon (33,932 entries) in json format
         * `rule-en.js` : English conjugation and declension tables
@@ -119,7 +127,7 @@ These steps take for granted that the password for PyPI has already been given..
 1. Update version number in `setup.cfg` (it should be the same as `python_version` in `src/pyrealb/utils.py` and at 
    the beginning of this document). 
 2. Run `docs/documentation.py` to update the version number in `docs/documentation.html`
-3.`cd` into the directory with the `pyproject.toml` file (the same as this `README.md`)
+3. `cd` into the directory with the `pyproject.toml` file (the same as this `README.md`)
 4. Build the distribution package  
        `python3 -m build`
 5. Upload to PyPi the last version I.J.K

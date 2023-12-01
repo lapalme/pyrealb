@@ -28,7 +28,7 @@ def instance2SyntR(semR):
         refConcept=amrRef.get_concept()
 #         print("myRole:%s  refRole:%s refConcept:%s"%(myRole,refRole,refConcept))
         if isNoun(refConcept) or specialConcept.isSpecialConcept(refConcept):
-            if myRole==":ARG0" and refRole!=None:
+            if myRole==":ARG0" and refRole is not None:
                 pronoun=Pro("I")
             elif myRole==":ARG1": # is object the same as the subject?
                 parent=semR.get_parent()
@@ -68,11 +68,11 @@ def makeSyntR(semR,checkSpecial=True):
     #              to avoid infinite loop
     traceSyntR("makeSyntR",semR)
     concept=semR.concept
-    if concept==None: # l'instance réfère à un autre AMR
+    if concept is None: # l'instance réfère à un autre AMR
         return instance2SyntR(semR)
     if checkSpecial:
         sConcept=specialConcept.checkSpecialConcept(semR)
-        if sConcept!=None:
+        if sConcept is not None:
             traceSyntR("special concept", concept)
             return sConcept
     # evaluate each role to build the environment
@@ -84,7 +84,7 @@ def makeSyntR(semR,checkSpecial=True):
         # HACK for passive :  seem to be too aggressive.... so we keep it only for top-level AMR
         # generate a passive sentence if concept has an :ARG0 and the actual roles does not have :ARG0 but has :ARG1
         # %% do not passivate the special case of bear-02 because it is already passive
-        if concept!="bear-02" and semR.parent==None and \
+        if concept!="bear-02" and semR.parent is None and \
            ":ARG0" in verbs[concept].args and ":ARG0" not in semR.roles and ":ARG1" in semR.roles:
             opts.add("typ",{"pas":True})
     
@@ -93,25 +93,25 @@ def makeSyntR(semR,checkSpecial=True):
     ## patch the syntactic structures for frequent special cases
     if isVerb(concept):
         # HACK for changing nominative pronoun to accusative for :ARG1 when :ARG0 is also present
-        if ":ARG1" in env and ":ARG0" in env and isinstance(env[":ARG1"],Pro) and env[":ARG1"].lemma=="I":
+        if ":ARG1" in env and ":ARG0" in env and env[":ARG1"].isA("Pro") and env[":ARG1"].lemma=="I":
             env[":ARG1"].lemma="me"
     elif isAdjective(concept): # adjective with :ARG0 and :ARG1
         adj=dictInfo.lemma
         adjTerm=opts.apply(A(adj))
         if ":ARG0" in env and ":ARG1" in env:
-            if isinstance(env[":ARG0"],Pro) and env[":ARG0"].lemma=="me":
+            if env[":ARG0"].isA("Pro") and env[":ARG0"].lemma=="me":
                 env[":ARG0"].lemma="I"
-            if isinstance(env[":ARG1"],Pro) and env[":ARG1"].lemma=="I":
+            if env[":ARG1"].isA("Pro") and env[":ARG1"].lemma=="I":
                 env[":ARG0"].lemma="me"
             dictInfo=LexSem(adj,"S",[":ARG0",":ARG1"],lambda arg0,arg1:S(arg0,VP(V("be"),adjTerm,pp("for",arg1))))
         elif ":ARG1" in env and ":ARG2" in env:
-            if isinstance(env[":ARG1"],Pro) and env[":ARG1"].lemma=="me":
+            if env[":ARG1"].isA("Pro") and env[":ARG1"].lemma=="me":
                 env[":ARG1"].lemma="I"
-            if isinstance(env[":ARG2"],Pro) and env[":ARG2"].lemma=="I":
+            if env[":ARG2"].isA("Pro") and env[":ARG2"].lemma=="I":
                 env[":ARG2"].lemma="me"
             dictInfo=LexSem(adj,"S",[":ARG1",":ARG2"],lambda arg1,arg2:S(arg1,VP(V("be"),adjTerm,pp("for",arg2))))
         elif ":ARG1" in env:
-            if isinstance(env[":ARG1"],Pro) and env[":ARG1"].lemma=="me":
+            if env[":ARG1"].isA("Pro") and env[":ARG1"].lemma=="me":
                 env[":ARG1"].lemma="I"
             dictInfo=LexSem(adj,"S",[":ARG1"],lambda arg1:S(arg1,VP(V("be"),adjTerm)))
         syntR=dictInfo.apply(env,Options()) # options have been applied to the adjective
@@ -128,7 +128,7 @@ if __name__ == '__main__':
         syntR=makeSyntR(semR)
         print(syntR)
         print(syntR.show())
-        print(jsRealB(syntR.show(-1)))
+        print(syntR.realize())
         print("--------")
         no+=1
     

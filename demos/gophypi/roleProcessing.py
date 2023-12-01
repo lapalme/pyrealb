@@ -27,7 +27,7 @@ def makeSyntR(semR,checkSpecial=True):
 #  add Preposition but change possible pronoun to accusative
 def addPrep(prep,semR,env):
     syntR=makeSyntR(semR)
-    if isinstance(syntR,Pro) and syntR.lemma=="I":
+    if syntR.isA("Pro") and syntR.lemma=="I":
         syntR.lemma="me"
     env.push(PP(P(prep),syntR))
 
@@ -56,7 +56,7 @@ def causeRole(semR,env,opts):
         opts.add("typ",{"int":"why"})
     else:
         syntR=makeSyntR(semR)
-        if isinstance(syntR,(N,Q)):
+        if syntR.isOneOf(["N","Q"]):
             env.push(SP(C("because"),P("of"),syntR))
         else:
             env.push(SP(C("because"),syntR))
@@ -77,9 +77,9 @@ def comparedToRole(semR,env,opts):
 def concessionRole(semR,env,opts):
     traceSyntR("concessionRole",semR)
     syntR=makeSyntR(semR)
-    if isinstance(syntR,(S,SP)):
+    if syntR.isOneOf(["S","SP"]):
         env.push(SP(C("although"),syntR))
-    elif isinstance(syntR,(AdvP,Adv)):
+    elif syntR.isOneOf(["AdvP","Adv"]):
         env.push(syntR)
     else:
         addPrep("despite", semR, env)
@@ -222,13 +222,13 @@ def mannerRole(semR,env,opts):
         opts.add("typ",{"int":"how"})
     else:
         syntR=makeSyntR(semR)
-        if isinstance(syntR,Q):
+        if syntR.isA("Q"):
             env.push(syntR)
-        elif isinstance(syntR,A):
+        elif syntR.isA("A"):
             adv=Adv(adverbFromAdjective(syntR.lemma))
             adv.props=syntR.props
             env.push(adv)
-        elif isinstance(syntR,(S,V,VP)):
+        elif syntR.isOneOf(["S","V","VP"]):
             env.push(PP(P("by"),syntR.typ({"prog":True})))
         else:
             addPrep("with", semR, env)
@@ -289,7 +289,7 @@ def modRole(semR,env,opts):
         simpleModNoun(concept,neg)
         return
     syntR=makeSyntR(semR)
-    if isinstance(syntR,(N,NP)):
+    if syntR.isOneOf(["N","NP"]):
         env.push(PP(P("of"),syntR))
     else:
         rel=relative(concept,syntR)
@@ -335,7 +335,7 @@ def ordRole(semR,env,opts):
 def partOfRole(semR,env,opts):
     traceSyntR("partOfRole",semR)
     syntR=makeSyntR(semR)
-    if isinstance(syntR,Pro):
+    if syntR.isA("Pro"):
         poss=makePoss(syntR.lemma)
         poss.props=syntR.props
         env.put(":D",poss)
@@ -349,10 +349,10 @@ def pathRole(semR,env,opts):
         env.push(AdvP(Adv("past"),makeSyntR(semR.roles[":op1"])))
     else:
         syntR=makeSyntR(semR)
-        if isinstance(syntR,Pro):
+        if syntR.isA("Pro"):
             syntR.lemma="me"
         else:
-            if isinstance(syntR, (Adv,P,PP)):
+            if syntR.isOneOf(["Adv","P","PP"]):
                 env.push(syntR)
             else:
                 env.push(PP(P("via"),syntR))
@@ -387,9 +387,9 @@ def possRole(semR,env,opts):
         opts.add("a","?")
     else:
         syntR=makeSyntR(semR)
-        if isinstance(syntR,D):
+        if syntR.isA("D"):
             env.put(":D",syntR)
-        elif isinstance(syntR,Pro):
+        elif syntR.isA("Pro"):
             concept=semR.concept
             if concept is not None:
                 env.put(":D",makePoss(concept))
@@ -417,7 +417,7 @@ def purposeRole(semR,env,opts):
         # remove useless subject reference to a variable
         del roles[":ARG0"]
     syntR=makeSyntR(semR)
-    if isinstance(syntR,S) and isinstance(syntR.elements[0],VP):
+    if syntR.isA("S") and syntR.elements[0].isA("VP"):
         env.push(PP(P("for"),syntR.elements[0].t("pr")))
     else:
         env.push(PP(P("for"),syntR))
@@ -493,7 +493,7 @@ def quantRole(semR,env,opts):
         opts.add("a","?")
     else:
         syntR=makeSyntR(semR,False)
-        if isinstance(syntR,NO):
+        if syntR.isA("NO"):
             env.put(":D",syntR)
         else:
             env.unshift(PP(syntR,P("of")))
@@ -541,7 +541,7 @@ def timeRole(semR,env,opts):
             env.push(P("to"))
         elif isVerb(concept):
             env.push(SP(C("when"),syntR))
-        elif isinstance(syntR,A):
+        elif syntR.isA("A"):
             env.push(Adv(adverbFromAdjective(syntR.lemma)))
         else:
             env.push(syntR)
@@ -643,9 +643,9 @@ def processStarRole(role,parentConcept,semR,env):
     if semR.get_concept() not in specialConcept.conceptSwitch:
         semR.roles.delRole(role)
     syntR=makeSyntR(semR)
-    if isinstance(syntR,(A,AP)):
+    if syntR.isA(["A","AP"]):
         env.put(":A",syntR)
-    elif isinstance(syntR,(N,NP,Adv,AdvP)):
+    elif syntR.isOneOf(["N","NP","Adv","AdvP"]):
         env.push(syntR)
     else:
         env.push(SP(pro,syntR))
@@ -665,22 +665,22 @@ def processFrameOpRole(rolei,semRi,env,opts):
         if ":op2" in roles:env.push(SP(C("or"),makeSyntR(roles[":op2"])))
     else:
         syntRi=makeSyntR(semRi)
-        if isinstance(syntRi,S):
+        if syntRi.isA("S"):
             # infinitive when the sentence is a verb without subject
-            if isinstance(syntRi.elements[0],VP):
+            if syntRi.elements[0].isA("VP"):
                 syntRi.elements[0].t("b")
                 env.put(rolei,PP(P("to"),syntRi))
             elif semRi.parent is not None and semRi.parent.concept not in ["or","and"]:
                 env.put(rolei,syntRi.add(Pro("that"),0))
             else:
                 env.put(rolei,syntRi)
-        elif isinstance(syntRi,Pro) and syntRi.lemma=="I":
+        elif syntRi.isA("Pro") and syntRi.lemma=="I":
             if (rolei==":ARG1" and ":ARG0" in env) or re.match(":ARG[2-9]",rolei):
                 syntRi.setLemma("me")
                 env.put(rolei,syntRi)
             else:
                 env.put(rolei,syntRi)
-        elif isinstance(syntRi,str):
+        elif syntRi.isA("str"):
             env.put(rolei,Q(syntRi))
         else:
             env.put(rolei,syntRi)
