@@ -148,7 +148,7 @@ class Terminal(Constituent):
                                 self.stem=self.lemma if ending=="" else self.lemma[:-len(ending)]
                             else:
                                 self.tab=None 
-                                if not self.isOneOf(["Adv","C","P"]):
+                                if not self.isA("Adv","C","P"):
                                     self.warn("bad lexicon table",lemma,ending)
                         else:
                             # if isinstance(info,list) and len(info)==1:info=info[0]
@@ -167,7 +167,7 @@ class Terminal(Constituent):
     def getIndex(self,constTypes):
         if isinstance(constTypes, str):
             return 0 if self.isA(constTypes) else -1
-        return 0 if self.isOneOf(constTypes) else -1
+        return 0 if self.isA(constTypes) else -1
     
     def getConst(self,constTypes):
         return self if self.getIndex(constTypes)==0 else None 
@@ -200,15 +200,15 @@ class Terminal(Constituent):
         declension=rules["declension"][self.tab]["declension"]
         stem=self.stem
         res=None 
-        if self.isOneOf(["A","Adv"]):
+        if self.isA("A","Adv"):
             return self.decline_adj_adv(rules,declension,stem)
         elif len(declension)==1: # no declension
             self.realization = self.stem+declension[0]["val"]
         else: # for N,D,Pro
             g=self.getProp("g")
-            if self.isOneOf(["D","N"]) and g is None:g="m"
+            if self.isA("D","N") and g is None:g="m"
             n=self.getProp("n")
-            if self.isOneOf(["D","N"]) and n is None:n="s"
+            if self.isA("D","N") and n is None:n="s"
             pe=3
             if setPerson:
                 p=self.getProp("pe")
@@ -293,7 +293,7 @@ class Terminal(Constituent):
         pc=self.parentConst
         while pc is not None:
             # look for the first enclosing S, SP or Dependent with a terminal V
-            if pc.isOneOf(["VP","SP","S"]) or (pc.isOneOf(deprels) and pc.terminal.isA("V")):
+            if pc.isA("VP","SP","S") or (pc.isA(deprels) and pc.terminal.isA("V")):
                 if "typ" in pc.props:
                     typs=pc.props["typ"]
                     if "refl" in typs and typs["refl"]==True:
@@ -401,7 +401,7 @@ class Terminal(Constituent):
 
 
     def real(self):
-        if self.isOneOf(["N","A"]):
+        if self.isA("N","A"):
             if hasattr(self, "tab") and self.tab  is not None:
                 return self.doFormat(self.decline(False))
         elif self.isA("Adv"):
@@ -409,10 +409,10 @@ class Terminal(Constituent):
                 return self.doFormat(self.decline(False))
             elif self.realization is None:
                 self.realization=self.lemma
-        elif self.isOneOf(["C","P","Q"]):
+        elif self.isA("C","P","Q"):
             if self.realization is None:
                 self.realization=self.lemma
-        elif self.isOneOf(["D","Pro"]):
+        elif self.isA("D","Pro"):
             if hasattr(self, "tab") and self.tab is not None:
                 return self.doFormat(self.decline(True))
         elif self.isA("V"):
@@ -464,7 +464,7 @@ class Terminal(Constituent):
         from .utils import dep,det
         # HACK: self.parentConst in changed during transformation to refer to the parent dependennt...
         isTopLevel = self.parentConst is None  # we save it to use it at the end
-        if self.isOneOf(["D", "NO"]):
+        if self.isA("D", "NO"):
             deprel=det(self)
         else:
             deprel= dep([self], "root" if depName is None else depName)

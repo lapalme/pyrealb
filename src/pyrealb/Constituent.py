@@ -30,12 +30,13 @@ class Constituent:
     def error(self,mess):
         raise Exception ("Internal error: this should never have happened,sorry!\n"+self.me()+"::"+mess)
     
-    def isA(self,aType):
-        return self.constType==aType
-    
-    def isOneOf(self,types):
+    def isA(self,*types):
+        if len(types)==1:
+            if isinstance(types[0],str):
+                return self.constType==types[0]
+            return self.constType in types[0]
         return self.constType in types
-    
+
     # get/set the value of a property by first checking the special shared properties
     def getProp(self,propName):
         if propName in self.props:
@@ -63,7 +64,7 @@ class Constituent:
     tauxNO=0 # useful for debugging: identifier of taux struct to check proper sharing in the debugger
    
     def initProps(self):
-        if self.isOneOf(["N","A","D","V","NO","Pro","Q","DT"]):
+        if self.isA("N","A","D","V","NO","Pro","Q","DT"):
             Constituent.pengNO+=1
             props = self.defaultProps()
             self.peng={"pe":props["pe"],
@@ -211,7 +212,7 @@ class Constituent:
     # number option
     def nat(self,isNat=True):
         self.addOptSource("nat",isNat)
-        if self.isOneOf(["DT","NO"]):
+        if self.isA("DT","NO"):
             if "dOpt" not in self.props:self.props["dOpt"]={}
             if isNat is None:
                 self.props["dOpt"]["nat"]=True
@@ -238,7 +239,7 @@ class Constituent:
         self.addOptSource("typ",types)
         if not isinstance(types, dict):
             self.warn("ignored value for option",".typ",type(types).__name__+":"+str(types))
-        elif not self.isOneOf(["S", "SP", "VP", *deprels]):
+        elif not self.isA("S", "SP", "VP", *deprels):
             self.warn("bad application", f'.typ("{str(types)}")', ["S", "SP", "VP"], self.constType)
         else: # validate types and keep only the valid ones
             for key,val in types.copy().items():
@@ -300,7 +301,7 @@ class Constituent:
     
         # start of processing
         removeEmpty(cList)
-        if self.isA("VP") or (self.isOneOf(deprels) and self.terminal.isA("V")):
+        if self.isA("VP") or (self.isA(deprels) and self.terminal.isA("V")):
             self.doPronounPlacement(cList)
         self.doElision(cList)
 
@@ -345,7 +346,7 @@ class Constituent:
         s+=last
         # apply capitalization and final full stop unless .cap(False)
         if self.parentConst is None:
-            if ((self.isOneOf(["S","root"])
+            if ((self.isA("S","root")
                  or (self.isA("coord") and len(self.dependents)>0 and self.dependents[0].isA("root")))
                 and len(s)>0): ## this is a top-level S
                 if "cap" not in self.props or self.getProp("cap"):
@@ -417,21 +418,21 @@ def makeOptionMethod(option,validVals,allowedConsts,optionName=None):
         if val is None:
             if validVals is not None and "" not in validVals:
                 return self.warn("no value for option",option,validVals)
-        if self.isOneOf("CP") and option not in ["cap","lier","pos"]:
+        if self.isA("CP") and option not in ["cap","lier","pos"]:
             # propagate an option through the children of a CP except for "cap", "lier" and "pos"
             if prog is None:self.addOptSource(optionName,val)
             for e in self.elements:
-                if len(allowedConsts)==0 or e.isOneOf(allowedConsts):
+                if len(allowedConsts)==0 or e.isA(allowedConsts):
                     getattr(e,option)(val,True)  # do not add this option in the source
             return self
         if self.isA("coord") and option not in ["cap","lier","pos"]:
             # propagate an option through the head of the children of a coord except for "cap", "lier" and "pos"
             if prog is None: self.addOptSource(optionName, val)
             for e in self.dependents:
-                if len(allowedConsts) == 0 or e.terminal.isOneOf(allowedConsts):
+                if len(allowedConsts) == 0 or e.terminal.isA(allowedConsts):
                     getattr(e.terminal, option)(val, True)  # do not add this option in the source
             return self
-        if len(allowedConsts)==0 or self.isOneOf(allowedConsts) or self.isOneOf(deprels):
+        if len(allowedConsts)==0 or self.isA(allowedConsts) or self.isA(deprels):
             if validVals is not None and val not in validVals:
                 return self.warn("ignored value for option", option, val)
             # start of the real work

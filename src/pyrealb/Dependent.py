@@ -138,7 +138,7 @@ class Dependent(Constituent):
                     self.linkAttributes(depTerm,headTerm)
                 elif depTerm.isA("V"):
                     # set agreement between the subject of a subordinate or the object of a relative subordinate
-                    iRel=dep.findIndex(lambda depI: depI.isOneOf(["subj", "comp", "mod"]) and
+                    iRel=dep.findIndex(lambda depI: depI.isA("subj", "comp", "mod") and
                                                     depI.terminal.isA("Pro") and
                                                     depI.terminal.lemma in self.relative_pronouns())
                     if iRel>=0:
@@ -165,7 +165,7 @@ class Dependent(Constituent):
                         headTerm.peng=dep.peng
                     elif firstDep.isA("det"):
                         dep.peng=headTerm.peng
-                    elif firstDep.isOneOf(["mod","comp"]) and firstDep.terminal.isOneOf(["V","A"]):
+                    elif firstDep.isA("mod","comp") and firstDep.terminal.isA("V","A"):
                         # consider this as a coordination of verb sharing a subject (the current root)
                         #            or as a coordination of adjectives
                         if hasattr(headTerm,"peng"):
@@ -190,7 +190,7 @@ class Dependent(Constituent):
         nb=0
         for i in range(0,len(self.dependents)):
             e=self.dependents[i].terminal
-            if e.isOneOf(["NP","N","Pro","Q","NO"]):
+            if e.isA("NP","N","Pro","Q","NO"):
                 nb += 1
                 propG=e.getProp("g")
                 if g is None and propG is not None: g=propG
@@ -225,7 +225,7 @@ class Dependent(Constituent):
             else:
                 subj=None
             # find direct object (first N or Pro of a comp) from dependents
-            objIdx=self.findIndex(lambda d: d.isA("comp") and d.terminal.isOneOf(["N","Pro"]))
+            objIdx=self.findIndex(lambda d: d.isA("comp") and d.terminal.isA("N","Pro"))
             if objIdx>=0:
                 obj=self.dependents[objIdx]
                 if obj.terminal.isA("Pro"):
@@ -326,7 +326,7 @@ class Dependent(Constituent):
             prefix = intPrefix[int_]  # get default prefix
             for i in range(0, len(self.dependents)):
                 d = self.dependents[i]
-                if d.isOneOf(["comp", "mod"]) and d.terminal.isA("P"):
+                if d.isA("comp", "mod") and d.terminal.isA("P"):
                     # try to find a more appropriate prefix by looking at preposition in the structure
                     prep = d.terminal.lemma
                     preps = self.preposition_list()
@@ -432,7 +432,7 @@ class Dependent(Constituent):
     def depPosition(self):
         if "pos" in self.props: return self.props["pos"]
         pos="post" # default is post
-        if self.isOneOf(["subj","det","*pre*"]):
+        if self.isA("subj","det","*pre*"):
             # subject and det are always pre except when specified
             pos="pre"
         elif self.isA("mod") and self.terminal.isA("A") and self.parentConst.terminal.isA("N"):

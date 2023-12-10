@@ -57,7 +57,7 @@ class Phrase(Constituent):
         from .utils import Q
         def allAorN(elems, start, end):
             if start > end: (end, start) = (start, end)
-            return all(el.isOneOf(["A", "N"]) for el in elems[start:end + 1])
+            return all(el.isA("A", "N") for el in elems[start:end + 1])
 
         if isinstance(constituent,list):
             if len(constituent)==0: return self
@@ -126,11 +126,11 @@ class Phrase(Constituent):
                                 self.peng["n"] = e.grammaticalNumber()
                                 # gender agreement between a French number and subject
                                 e.peng["g"] = self.peng["g"]
-                            elif e.isOneOf(["D","A","V"]):
+                            elif e.isA("D","A","V"):
                                 self.link_DAV_properties(e)
                             elif e.isA("CP"): # check for a coordination of adjectives and numbers
                                 for el in e.elements:
-                                    if el.isOneOf(["A","NO"]):
+                                    if el.isA("A","NO"):
                                         el.peng=self.peng
                 # set agreement between the subject of a subordinate or the object of a subordinate
                 pro = self.getFromPath([["S", "SP"], "Pro"])
@@ -142,7 +142,7 @@ class Phrase(Constituent):
             headIndex = self.getHeadIndex("VP")  # head is the first internal V
             self.peng = self.elements[headIndex].peng
             self.taux = self.elements[headIndex].taux
-        elif self.isOneOf(["AdvP", "PP", "AP"]):
+        elif self.isA("AdvP", "PP", "AP"):
             headIndex = self.getHeadIndex(self.constType)
             if hasattr(self.elements[headIndex], "peng"):
                 self.peng = self.elements[headIndex].peng
@@ -154,7 +154,7 @@ class Phrase(Constituent):
                 "pengNO": Constituent.pengNO
             }
             # the information will be computed at realization time (see Phrase.prototype.cpReal)
-        elif self.isOneOf(["S", "SP"]):
+        elif self.isA("S", "SP"):
             vpv = self.getFromPath([["", "VP"], "V"])
             if vpv is not None:
                 self.taux = vpv.taux  # share tense and auxiliary of the verb
@@ -170,7 +170,7 @@ class Phrase(Constituent):
                         #        so we try to find another...
                         jSubj = -1
                         for i in range(iSubj + 1, len(self.elements)):
-                            if self.elements[i].isOneOf(["NP", "N", "CP", "Pro"]):
+                            if self.elements[i].isA("NP", "N", "CP", "Pro"):
                                 jSubj = i
                                 break
                         if jSubj >= 0:
@@ -222,7 +222,7 @@ class Phrase(Constituent):
     def getIndex(self, constTypes,start=0):
         if isinstance(constTypes, str): constTypes = [constTypes]
         for i in range(start, len(self.elements)):
-            if self.elements[i].isOneOf(constTypes):
+            if self.elements[i].isA(constTypes):
                 return i
         return -1
 
@@ -244,7 +244,7 @@ class Phrase(Constituent):
         pe = 3
         nb = 0
         for e in self.elements:
-            if e.isOneOf(["NP", "N", "Pro", "Q","NO"]):
+            if e.isA("NP", "N", "Pro", "Q","NO"):
                 nb += 1
                 propG = e.getProp("g")
                 if g is None and propG is not None: g = propG
@@ -276,7 +276,7 @@ class Phrase(Constituent):
         else:
             vp = self.getConst("VP")
             if vp is not None:
-                if len(self.elements) > 0 and self.elements[0].isOneOf(["N", "NP", "Pro","S"]):
+                if len(self.elements) > 0 and self.elements[0].isA("N", "NP", "Pro","S"):
                     subject = self.removeElement(0)
                     if subject.isA("Pro"):
                         subject = self.passive_pronoun_subject(subject)
@@ -355,7 +355,7 @@ class Phrase(Constituent):
         if self.isA(cst1):
             idx = self.getIndex(cst2)
             if idx >= 0: return (idx, self.elements)
-        elif self.isOneOf(["S", "SP"]):
+        elif self.isA("S", "SP"):
             cst = self.getConst(cst1)
             if cst is not None: return cst.getIdxCtx(cst1, cst2)
         return (None, None)
@@ -372,7 +372,7 @@ class Phrase(Constituent):
             prefix = intPrefix[int_]
         # remove a part of the sentence
         elif int_ in ["wos", "was"]:  # remove subject (first NP,N, Pro or SP)
-            if self.isOneOf(["S", "SP", "VP"]):
+            if self.isA("S", "SP", "VP"):
                 subjIdx = self.getIndex(["NP", "N", "Pro", "SP"])
                 if subjIdx is not None:
                     vbIdx = self.getIndex(["VP", "V"])
@@ -385,7 +385,7 @@ class Phrase(Constituent):
             prefix = intPrefix[int_]
         elif int_ in ["wod", "wad"]:  # remove direct object (first NP,N,Pro or SP in the first VP)
             cmp=None
-            if self.isOneOf(["S", "SP", "VP"]):
+            if self.isA("S", "SP", "VP"):
                 idx, obj = self.getIdxCtx("VP", ["NP", "N", "Pro", "SP"])
                 if idx is not None:
                     cmp=obj[0].parentConst.removeElement(idx)
@@ -397,7 +397,7 @@ class Phrase(Constituent):
                     prefix = intPrefix[int_]
                 self.move_object(int_)
         elif int_ in ["woi", "wai", "whe", "whn"]:  # remove indirect object (first PP in the first VP)
-            if self.isOneOf(["S", "SP", "VP"]):
+            if self.isA("S", "SP", "VP"):
                 idx, ppElems = self.getIdxCtx("VP", "PP")
                 prefix = intPrefix[int_]  # get default prefix
                 if idx is not None:
@@ -417,7 +417,7 @@ class Phrase(Constituent):
         elif int_=="tag":
             # according to Antidote: Syntax Guide - Question tag
             # Question tags are short questions added after affirmations to ask for verification
-            if self.isOneOf(["S", "SP", "VP"]):
+            if self.isA("S", "SP", "VP"):
                 self.tag_question(types)
             prefix = intPrefix[int_]
         else:
@@ -571,7 +571,7 @@ class Phrase(Constituent):
                 elif dep.isA("mod") and (not dep.isEn() or not dep.terminal.isA("A")):
                     dep.pos("pre")
             else:
-                if dep.isOneOf(["subj", "det"]):
+                if dep.isA("subj", "det"):
                     dep.pos("post")
             return dep
 

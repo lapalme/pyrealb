@@ -934,7 +934,7 @@ def test_warnings():
 if __name__ == '__main__':
     testPreviousExamples()
     # testDataToTextExamples()
-    # test_warnings()
+    test_warnings()
     # insert here a single example for debugging perhaps commenting the line above
     # do not forget to load the appropriate language
     loadEn() # set the language to English

@@ -129,7 +129,7 @@ class Realizer:
         return False
 
     def addToLastObject(self, phrase, newObj):
-        if phrase.isOneOf(["S","SP"]):
+        if phrase.isA("S","SP"):
             vp = phrase.elements[-1]
             if vp.isA("VP"):
                 vp.add(newObj, None, True)  # HACK: insert directly in the VP without keeping track of .add(...)

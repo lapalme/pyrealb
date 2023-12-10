@@ -9,7 +9,7 @@ class PhraseFr(ConstituentFr,NonTerminalFr,Phrase):
         if e.isA("A") and e.lemma == "quelques":
             self.peng = "p"
             return
-        if e.isOneOf(["A", "D"]):
+        if e.isA("A", "D"):
             # link gender and number of the noun to the determiners and adjectives
             e.peng = self.peng
             return

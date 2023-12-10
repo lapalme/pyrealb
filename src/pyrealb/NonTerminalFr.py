@@ -226,7 +226,7 @@ class NonTerminalFr:
                         i += 1
                 else:
                     i += 1
-            elif c.isOneOf(["P", "C", "Adv"]) and verbPos is not None:
+            elif c.isA("P", "C", "Adv") and verbPos is not None:
                 # HACK: stop when seeing a preposition or a conjunction
                 #          or a "strange" pronoun that might start a phrase
                 #       whose structure has been flattened at this stage

@@ -56,7 +56,7 @@ def causeRole(semR,env,opts):
         opts.add("typ",{"int":"why"})
     else:
         syntR=makeSyntR(semR)
-        if syntR.isOneOf(["N","Q"]):
+        if syntR.isA("N","Q"):
             env.push(SP(C("because"),P("of"),syntR))
         else:
             env.push(SP(C("because"),syntR))
@@ -77,9 +77,9 @@ def comparedToRole(semR,env,opts):
 def concessionRole(semR,env,opts):
     traceSyntR("concessionRole",semR)
     syntR=makeSyntR(semR)
-    if syntR.isOneOf(["S","SP"]):
+    if syntR.isA("S","SP"):
         env.push(SP(C("although"),syntR))
-    elif syntR.isOneOf(["AdvP","Adv"]):
+    elif syntR.isA("AdvP","Adv"):
         env.push(syntR)
     else:
         addPrep("despite", semR, env)
@@ -228,7 +228,7 @@ def mannerRole(semR,env,opts):
             adv=Adv(adverbFromAdjective(syntR.lemma))
             adv.props=syntR.props
             env.push(adv)
-        elif syntR.isOneOf(["S","V","VP"]):
+        elif syntR.isA("S","V","VP"):
             env.push(PP(P("by"),syntR.typ({"prog":True})))
         else:
             addPrep("with", semR, env)
@@ -289,7 +289,7 @@ def modRole(semR,env,opts):
         simpleModNoun(concept,neg)
         return
     syntR=makeSyntR(semR)
-    if syntR.isOneOf(["N","NP"]):
+    if syntR.isA("N","NP"):
         env.push(PP(P("of"),syntR))
     else:
         rel=relative(concept,syntR)
@@ -352,7 +352,7 @@ def pathRole(semR,env,opts):
         if syntR.isA("Pro"):
             syntR.lemma="me"
         else:
-            if syntR.isOneOf(["Adv","P","PP"]):
+            if syntR.isA("Adv","P","PP"):
                 env.push(syntR)
             else:
                 env.push(PP(P("via"),syntR))
@@ -645,7 +645,7 @@ def processStarRole(role,parentConcept,semR,env):
     syntR=makeSyntR(semR)
     if syntR.isA(["A","AP"]):
         env.put(":A",syntR)
-    elif syntR.isOneOf(["N","NP","Adv","AdvP"]):
+    elif syntR.isA("N","NP","Adv","AdvP"):
         env.push(syntR)
     else:
         env.push(SP(pro,syntR))

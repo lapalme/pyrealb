@@ -162,7 +162,7 @@ class LexSem:
                     syntR=S(env.get(":ARG1"),VP(V("be"),syntR))
                 else:    
                     syntR=AP(syntR)
-            elif syntR.isOneOf(["Pro","Q","NO"]):syntR=SP(syntR)
+            elif syntR.isA("Pro","Q","NO"):syntR=SP(syntR)
             elif syntR.isA("Adv"):syntR=AdvP(syntR)
             elif syntR.isA("P"):  syntR=PP(syntR)
             else:

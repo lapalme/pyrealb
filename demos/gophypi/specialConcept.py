@@ -409,7 +409,7 @@ def person(concept,roles,env,opts):
             starARG0_ARG2=starARG0.roles[":ARG2"]
             if starARG0_ARG2!=None:
                 nom=makeSyntR(starARG0_ARG2)
-                if nom.isOneOf(["NP","N"]):
+                if nom.isA("NP","N"):
                     return addRoles(concept, roles, [":*:ARG0"], LexSem("person","NP",[],lambda:nom), env, opts)
         if re.match(r"have-(org|rel)-role-91",starARG0.get_concept()) and len(starARG0.roles)==3:
             ##### shortcut : https://www.isi.edu/~ulf/amr/lib/amr-dict.html#shortcuts

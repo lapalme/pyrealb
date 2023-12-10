@@ -7,7 +7,7 @@ class DependentFr(ConstituentFr,NonTerminalFr,Dependent):
     def linkAttributes(self, depTerm, headTerm):
         # check for an attribute of a copula with an adjective or past participle
         if headTerm.lemma in ["être", "paraître", "sembler", "devenir", "rester"]:
-            iSubj = self.findIndex(lambda d0: d0.isA("subj") and d0.terminal.isOneOf(["N", "Pro"]))
+            iSubj = self.findIndex(lambda d0: d0.isA("subj") and d0.terminal.isA("N", "Pro"))
             if iSubj >= 0:
                 depTerm.peng = self.dependents[iSubj].peng
 
@@ -48,7 +48,7 @@ class DependentFr(ConstituentFr,NonTerminalFr,Dependent):
             pp.peng = obj.peng
         # insert the pp before the comp, so that it appears immediately after the verb
         #  calling addPost(pp) would not put it at the right place
-        compIdx = self.findIndex(lambda d: d.isOneOf(["comp", "mod"]))
+        compIdx = self.findIndex(lambda d: d.isA("comp", "mod"))
         if compIdx == -1: compIdx = 0
         self.addDependent(dep([pp], "*post*"), compIdx)
 
@@ -69,12 +69,12 @@ class DependentFr(ConstituentFr,NonTerminalFr,Dependent):
         from .utils import Pro
         mySelf = self
         if self.isA("subj"):
-            if not self.terminal.isOneOf(["N", "Pro"]):
+            if not self.terminal.isA("N", "Pro"):
                 return self.warn("no appropriate pronoun")
             pro = self.getTonicPro("nom")
-        elif self.isOneOf(["comp", "mod"]) and self.terminal.isA("P"):
+        elif self.isA("comp", "mod") and self.terminal.isA("P"):
             prep = self.terminal.lemma
-            if len(self.dependents) == 1 and self.dependents[0].isOneOf(["comp", "mod"]):
+            if len(self.dependents) == 1 and self.dependents[0].isA("comp", "mod"):
                 if self.dependents[0].terminal.isA("N"):
                     n = self.dependents[0].terminal
                     if prep == "à":

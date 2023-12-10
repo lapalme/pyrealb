@@ -88,7 +88,7 @@ class PhraseEn(ConstituentEn,NonTerminalEn,Phrase):
 
     def move_object(self,int_):
         # in English move the auxiliary to the front
-        if self.isOneOf(["S", "SP"]):
+        if self.isA("S", "SP"):
             (idx, vpElems) = self.getIdxCtx("VP", "V")
             if idx is not None and self.getProp("t") not in ["pp", "pr", "b-to"]:
                 # do not move when tense is participle or infinitive
