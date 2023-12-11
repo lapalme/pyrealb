@@ -10,7 +10,8 @@ It facilitates its integration within Python applications by simply adding
 
 [Online documentation](http://www.iro.umontreal.ca/~lapalme/pyrealb/documentation.html?lang=en)
 
-Version 3.0.0 is a major code reorganization, but without any new feature, to clearly separate language dependent parts from the language independent ones. This organization is described  [here](docs/ClassOrganisation.md) .
+Version 3.0.0 is a major code reorganization, but without any new feature, to clearly separate language dependent 
+parts from the language independent ones. This organization is described  [here](docs/README.md) .
 
 The use of pyrealb for [Bilingual Data-to-text generation is described in this document](https://arxiv.org/pdf/2311.14808.pdf).
 
@@ -47,21 +48,23 @@ The use of pyrealb for [Bilingual Data-to-text generation is described in this d
 
 ## Directories
 
-* [`src`](./src)
-    * `__init__.py` : empty program that imports subpackages and exports relevant symbols. 
+* [`src`](./src/pyrealb)
+    * `__init__.py` : import classes and functions and export relevant symbols. 
     * `Constituent.py`: *Constituent* is the top class for methods shared between *Phrase*s and *Terminal*s 
     * `ConstituentEn.py`, `ConstituentFr.py` : English and French specific processing of `Constituent`
     * `Dependent.py` : subclass of *Constituent* for creating complex phrases using dependencies
     * `DependentEn.py`, `DependentFr.py` : English and French specific processing of `Dependent`
     * `Lexicon.py`: class to access lexicon entries and syntactic rules
-    * `Number.py` : utility functions for dealing with number formatting
+    * `LICENSE.txt`: Apache 2.0 License
     * `NonTerminalEn.py`, `NonTerminalFr.py` : language dependent processing common to `Phrase` and `Dependent`
+    * `Number.py` : utility functions for dealing with number formatting
     * `Phrase.py` : subclass of *Constituent* for creating complex phrases
     * `PhraseEn.py`, `PhraseFr.py` : English and French specific processing of `Phrase` 
     * `Terminal.py` : subclass of *Constituent* for creating a single unit (most often a single word)
     * `TerminalEn.py`, `TerminalFr.py` : English and French specific processing of `Terminal`
-    * `util.py`  : some useful functions
-    * [`data`](./src/pyrealb/data):
+    * `utils.py`  : some useful functions
+    * [`./src/pyrealb/data`](./src/pyrealb/data):
+        * `LICENSE.txt` : Creative Common license
         * `lexicon-en.json` : English lexicon (33,932 entries) in json format
         * `rule-en.js` : English conjugation and declension tables
         * `lexicon-fr.json` : French lexicon (52,547 entries) in json format
@@ -69,7 +72,8 @@ The use of pyrealb for [Bilingual Data-to-text generation is described in this d
 
 _Nota bene_:
 1. In the following directories, the `__init__.py` file is used to set the appropriate search path for  *pyrealb* functions; this ensures that the current Python source files are used for execution. 
-2. Some directories include `markup.py` which should be loaded using `pip`. Unfortunately I never managed to make this "piped" version work, it does not import the name `oneliner`although it should. It works once the file is in the local directory.
+2. Some directories include `markup.py` which should be loaded using `pip`. Unfortunately I never managed to make 
+   this "piped" version work, it does not import the name `oneliner`although it should. It works only if the file is in the local directory.
 
 * [`docs`](./docs): in both English and French. 
     * `documentation.html` : generated documentation (used for consultation) **DO NOT EDIT directly**  [Online version](http://www.iro.umontreal.ca/~lapalme/pyrealb/documentation.html?lang=en)
@@ -94,11 +98,11 @@ _Nota bene_:
 * `Bilinguo/bilinguo.py` : generation of translation drill exercises
 * `dev_example/dev_example.py`: examples of English and French expressions to be realized and checked against expected output,  
 useful for debugging when adding a new expression and enabling tracing
-* `evenementsDemo/evenements.py` : Description (in French) of a list of events, it creates HTML.
+* `evenements/evenements.py` : Description (in French) of a list of events, it creates HTML.
 * `flight_infos/README.md` : development of a RASA NLG server giving information about flights, aircrafts, etc...
 * `gophypi/amr2text.py` : generate a literal reading of an AMR (Abstract Meaning Representation);
                           [paper describing the approach](gophypi/Doc/GoPhiPy.pdf) 
-* `inflectionDemo/inflection.py` : French or English conjugation and declension of a form.
+* `inflection/inflection.py` : French or English conjugation and declension of a form.
 * `kilometresapied/kilometresapied.py` : simple generation of a classic repetitive text in French.
 * `methodius/methodius.py` : generation of English sentences from a logical form expressed in XML.
 * `randomgen/randomgen.py`: Generation of random English sentences
@@ -108,8 +112,8 @@ useful for debugging when adding a new expression and enabling tracing
 * `weather/Bulletin.py`: French and English weather bulletins generated from information in a *json-line* file. (`weather-data.jsonl`). It uses the packages in the `Realization` directory.
 
 ## Licenses
-`pyrealb` source code is licensed under _Apache-2.0_ and the linguistic resources in the `./data` directory is 
-licensed under _CC-BY-SA-4.0_
+* _pyrealb_ source code is licensed under _Apache-2.0_ 
+* linguistic resources in the `./data` directory is licensed under _CC-BY-SA-4.0_
 
 ## Contact
 [Guy Lapalme](http://rali.iro.umontreal.ca/lapalme)
