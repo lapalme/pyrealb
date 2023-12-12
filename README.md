@@ -48,7 +48,7 @@ The use of pyrealb for [Bilingual Data-to-text generation is described in this d
 
 ## Directories
 
-* [`src`](./src/pyrealb)
+* [`src/pyrealb`](./src/pyrealb)
     * `__init__.py` : import classes and functions and export relevant symbols. 
     * `Constituent.py`: *Constituent* is the top class for methods shared between *Phrase*s and *Terminal*s 
     * `ConstituentEn.py`, `ConstituentFr.py` : English and French specific processing of `Constituent`
@@ -63,12 +63,12 @@ The use of pyrealb for [Bilingual Data-to-text generation is described in this d
     * `Terminal.py` : subclass of *Constituent* for creating a single unit (most often a single word)
     * `TerminalEn.py`, `TerminalFr.py` : English and French specific processing of `Terminal`
     * `utils.py`  : some useful functions
-    * [`./src/pyrealb/data`](./src/pyrealb/data):
-        * `LICENSE.txt` : Creative Common license
-        * `lexicon-en.json` : English lexicon (33,932 entries) in json format
-        * `rule-en.js` : English conjugation and declension tables
-        * `lexicon-fr.json` : French lexicon (52,547 entries) in json format
-        * `rule-fr.js` : French conjugation and declension tables 
+* [`./src/pyrealb/data`](./src/pyrealb/data):
+    * `LICENSE.txt` : Creative Common license
+    * `lexicon-en.json` : English lexicon (33,932 entries) in json format
+    * `rule-en.js` : English conjugation and declension tables
+    * `lexicon-fr.json` : French lexicon (52,547 entries) in json format
+    * `rule-fr.js` : French conjugation and declension tables 
 
 _Nota bene_:
 1. In the following directories, the `__init__.py` file is used to set the appropriate search path for  *pyrealb* functions; this ensures that the current Python source files are used for execution. 
@@ -113,7 +113,7 @@ useful for debugging when adding a new expression and enabling tracing
 
 ## Licenses
 * _pyrealb_ source code is licensed under _Apache-2.0_ 
-* linguistic resources in the `./data` directory is licensed under _CC-BY-SA-4.0_
+* linguistic resources in the `./data` directory are licensed under _CC-BY-SA-4.0_
 
 ## Contact
 [Guy Lapalme](http://rali.iro.umontreal.ca/lapalme)
