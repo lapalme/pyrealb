@@ -216,8 +216,9 @@ class NonTerminalFr:
                                      Pro("moi", "fr").c("refl").pe(c.getProp("pe")).n(c.getProp("n")).g(c.getProp("g")))
                 i += 1
             elif c.isA("Pro") and verbPos is not None:
-                if c.getProp("pos") is None or (c.parentConst is not None and c.parentConst.getProp("pos") is None):
-                    # do not try to change position of a constituent with specified pos
+                if (not c.realization.endswith("'")
+                        and (c.getProp("pos") is None or (c.parentConst is not None and c.parentConst.getProp("pos") is None))):
+                    # do not try to change position of a constituent with specified pos or with an elided realization
                     if c.getProp("c") in ["refl", "acc", "dat"] or c.lemma == "y" or c.lemma == "en":
                         pros.append(cList.pop(i))
                     elif c.lemma in ["qui", "que", "quoi", "dont", "où"]:  # do not cross boundary of a relative

@@ -137,7 +137,7 @@ class ConstituentFr:
             # du futur de l'indicatif se termine par une autre lettre que d ou t et qu'il est suivi
             # des pronoms sujets il, elle ou on. Dans ce cas, on ajoute un ‑t‑ entre le verbe
             # et le pronom sujet inversé.
-            if re.search(r"[^dt]$", terminals[i].realization) and re.match(r"[ieo]", terminals[i + 1].realization):
+            if re.search(r"[^dt]$", terminals[i].realization) and terminals[i + 1].realization in ["il","elle","on"]:
                 return "t-"
         return ""
 
