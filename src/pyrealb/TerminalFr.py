@@ -130,11 +130,9 @@ class TerminalFr(ConstituentFr,Terminal):
                         proIndex = myParent.findIndex(lambda d: d.terminal.isA("Pro"))
                         if proIndex >= 0:
                             thePro = myParent.removeDependent(proIndex).terminal  # remove Pro from Parent
-                            thePro2 = Pro(thePro.lemma)  # as the original Pro is already realized in the
-                            # output list, we must hack
-                            thePro2.props = thePro.props  # and we cannot use clone because of environ
-                            thePro2.peng = thePro.peng
-                            thePro2.realization = thePro2.realize()  # insert its realization after the auxiliary
+                            # as the original Pro is already realized in the output list, we must hack
+                            thePro2=thePro.clone()
+                            thePro2.realize()
                             # and before the verb
                             thePro.realization = ""  # set original Pro realization to nothing
                             return [aux, thePro2, self]
