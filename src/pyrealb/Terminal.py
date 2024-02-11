@@ -447,8 +447,9 @@ class Terminal(Constituent):
         res={"terminal":self.constType,"lemma":self.lemma}
         if self.parentConst is None or self.lang()!=self.parentConst.lang(): # only indicate when language changes
             res["lang"]=self.lang()
-        if len(self.props): # do not output empty props
-            res["props"]=self.props
+        # if len(self.props): # do not output empty props
+        #     res["props"]=self.props
+        res=self.addJSONprops(res)
         return res
     
     @classmethod

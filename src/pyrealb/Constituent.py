@@ -384,7 +384,13 @@ class Constituent:
     
     def toSource(self,_indent):
         return self.optSource
-    
+
+    def addJSONprops(self,res):
+        props = self.props
+        if len(props) == 0 : return res
+        res["props"] = {("ow" if prop=="own" else prop):self.props[prop] for prop in props}
+        return res
+
     def setJSONprops(self,json):
         if "props" in json:
             for opt,val in json["props"].items():
@@ -400,7 +406,9 @@ class Constituent:
                 elif opt not in ["pat","h"]: # do not copy the pat or h properties of a verb
                     print("Constituent.fromJSON: illegal prop:"+opt,file=sys.stderr)
         return self                    
-    
+
+
+
     def warn(self, *args):
         # print("WARNING:",self.me(),args,file=sys.stderr)
         print(self.warning(args), file=sys.stderr)

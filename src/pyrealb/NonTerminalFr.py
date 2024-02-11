@@ -168,7 +168,7 @@ class NonTerminalFr:
             c = cList[i]
             if c.isA("V") and hasattr(c, "neg2"):
                 if hasattr(c, "isMod") or hasattr(c, "isProg"):
-                    if (c.getProp("lier")):
+                    if c.getProp("lier"):
                         c.insertReal(cList, Q(c.neg2, "fr"), i + 2)
                     else:
                         c.insertReal(cList, Q(c.neg2, "fr"), i + 1)
@@ -192,6 +192,8 @@ class NonTerminalFr:
                         if hasattr(c, "isProg"): prog = c
                         i += 1
                         continue
+                    if c.getProp("lier") and not hasattr(c,"neg2"): #// do not change anything when a verb is lié
+                        return
                     verbPos = i
                     # find the appropriate clitic table to use
                     t = c.getProp("t")

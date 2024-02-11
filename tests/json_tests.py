@@ -83,7 +83,7 @@ def json_tests():
  "props":{"typ":{"neg":true}},
  "lang":"en"}
 """,
-         "message": "pretty-print of JSON froom Phrase"},
+         "message": "pretty-print of JSON from Phrase"},
         {"expression": fromJSON(dep.toJSON()),
          "expected": "The cats will not sit on the mat. ",
          "message": "original sentence built using Phrase"},
