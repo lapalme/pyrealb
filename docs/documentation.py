@@ -750,6 +750,9 @@ errors and awkwardnesses that were corrected in the original.
 ### *** Informations complémentaires ***
 h2_fr("Informations complémentaires","plusDinfo");h2_en("More information","moreInfo")
 page.ul("""
+<li><a href="https://arxiv.org/pdf/2311.14808.pdf" lang="fr">Utilisation de pyrealb pour la génération bilingue 
+(document en anglais)</a><a href="https://arxiv.org/pdf/2311.14808.pdf" lang="en">Use of pyrealb Data-to-Text Bilingual
+ Generation</a></li>
 <li><a href="https://arxiv.org/pdf/2012.15425.pdf" lang="fr">Document décrivant l'organisation de <code>jsRealB</code>
 (section 6.7 spécifique à <span class='jsr'>pyrealb</span>)</a><a href="https://arxiv.org/pdf/2012.15425.pdf" lang="en"
 >Document describing the organization of the <code>jsRealB</code> (section 6.7 deals with <span class='jsr'>pyrealb</span></a></li>
