@@ -182,9 +182,9 @@ page=markup.page()
 page.init(title="pyrealb - Documentation",
           css="style.css",
           lang="",
-          metainfo={"name":"viewport", 
+          charset="UTF-8",
+          metainfo={"name":"viewport",
                     "content":"width=device-width, initial-scale=1.0",
-                    "charset":"UTF-8",
                     "date":str(datetime.datetime.now())},
           script=["https://code.jquery.com/jquery-latest.min.js","user.js"],
           footer=f"""Contact: <a href="mailto:lapalme@iro.umontreal.ca">Guy Lapalme</a> 
@@ -779,7 +779,7 @@ pyrealb" lang="en">Jupyter Notebook</a></li>
 
 if __name__ == "__main__":
     ### créer le fichier de sortie
-    outFileN=os.path.abspath(os.path.join(os.path.dirname(__file__),"documentation.html"))
+    outFileN=os.path.abspath(os.path.join(os.path.dirname(__file__), "documentation.html"))
     outFile=open(outFileN,"w",encoding="utf-8")
     print(page,file=outFile)
     print(outFileN, "written")
