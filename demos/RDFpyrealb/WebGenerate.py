@@ -15,23 +15,29 @@ def realizeTriples(realizer,entry,sortPred):
     print(graph.show())
     return realizer.realize(graph,False)
 
-from datasets import load_dataset
+def load_benchmark_from_files(path_to_corpus,categorie,start,end):
+    b = Benchmark()
+    ## using files from the data directory
+    files = select_files(path_to_corpus,categorie,(start,end+1))
+    b.fill_benchmark(files)
+    return b
+
+## using HuggingFace dataset
+#      https://huggingface.co/datasets/web_nlg
+# you can use any of the following config names as a second argument:
+configs = ["release_v1", "release_v2", "release_v2.1", "release_v2.1_constrained",
+           "release_v2_constrained", "release_v3.0_en", "release_v3.0_ru", "webnlg_challenge_2017"]
+splits = ["train", "dev", "test"]
+def load_benchmark_from_dataset(config, split,categorie,start,end,eid):
+    from datasets import load_dataset
+    b = Benchmark()
+    dataset = load_dataset("web_nlg", config, split=split)
+    b.benchmark_from_dataset(dataset, categorie, start, end, eid)
+    return b
 
 
 def process(realizer,categorie,start,end,eid=None,sortPred=False):
-    b = Benchmark()
-    ## using files from the data directory
-    # files = select_files(path_to_corpus,categorie,(start,end+1))
-    # b.fill_benchmark(files)
-
-    ## using HuggingFace dataset
-    #      https://huggingface.co/datasets/web_nlg
-    # you can use any of the following config names as a second argument:
-    configs = ["release_v1", "release_v2", "release_v2.1", "release_v2.1_constrained",
-               "release_v2_constrained", "release_v3.0_en", "release_v3.0_ru", "webnlg_challenge_2017"]
-    splits = ["train", "dev", "test"]
-    dataset = load_dataset("web_nlg", "release_v3.0_en", split="train")
-    b.benchmark_from_dataset(dataset, categorie, start, end, eid)
+    b = load_benchmark_from_dataset("release_v3.0_en","train",categorie,start,end,eid)
     print("Number of entries:", b.entry_count())
     # (subjects,objects) = b.subjects_objects()
     # print("subjects",subjects)
@@ -46,9 +52,17 @@ def process(realizer,categorie,start,end,eid=None,sortPred=False):
     print("Default realizer was used: %5d times" % realizer.nbDefaultRealizers)
 
 if __name__ == '__main__':
+    # import English, Francais
+    # en = set(English.English.sentencePatterns.keys())
+    # fr = set(Francais.Francais.sentencePatterns.keys())
+    # print(sorted(fr.difference(en)))
+    # print(sorted(en.difference(fr)))
+
     from English import English
     # process(English(),'Astronaut',7,7,'Id36',True)
-    process(English(),'',7,7,None,True)
-    # from Francais import Francais
-    # process(Francais(),'Astronaut',7,7,'Id36',True)
+    process(English(),'',1,7,None,True)
+
+    from Francais import Francais
+    # process(Francais(),'University',3,3,'Id49',True)
+    # process(Francais(),'',1,7,None,True)
 

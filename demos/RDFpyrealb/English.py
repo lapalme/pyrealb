@@ -60,6 +60,11 @@ class English(Realizer):
         "activeYearsStartYear": (30, True, [
             lambda o: VP(V("start").t("ps"), NP(D("my").g("m"), N("career"), _in(o))),
         ]),
+        "addedToTheNationalRegisterOfHistoricPlaces": (20, False, [
+            lambda o: VP(V("be").t("ps"),V("add").t("pp"),
+                         _to(NP(D("the"),A("national"),N("registry"),_of(NP(A("historic"),N("place")).n("p")))),
+                         _in(o))
+        ]),
         "address": (20, False, "location"),
         "affiliation": (20, False, [
             lambda o: VP(V("be"), V("affiliate").t("pp"), oneOf(_with(o), _to(o))),
@@ -197,7 +202,10 @@ class English(Realizer):
         "commander": (21, True, [
             lambda o: VP(V("be"), V("command").t("pp"), _by(o)),
         ]),
-        "compete in": (50, True, [
+        "comparable": (20, False,[
+            lambda o: VP(V("be"),A("comparable"),_to(o))
+        ]),
+        "competeIn": (50, True, [
             lambda o: VP(V("compete"), _in(o)),
             lambda o: VP(V("be"), N("part"), _of(o)),
         ]),
@@ -265,6 +273,10 @@ class English(Realizer):
             lambda o: VP(V("have"), NP(D("a"), N("diameter"), _of(o))),
             lambda o: VP(V("be"), o, _in(N("diameter"))),
         ]),
+        "director": (25, False, [
+            lambda o: VP(V("be").t("ps"), V("manage").t("pp"), _by(o)),
+            lambda o: VP(V("have"),o, _as(N("director"))),
+        ]),
         # "discover":(20,False,"discovery"),
         # "discoverer":(20,False,"discovery"),
         "discoverer": (20, False, [
@@ -288,6 +300,10 @@ class English(Realizer):
         "elevationAboveTheSeaLevel": (48, False, [
             lambda o: VP(V("be"), oneOf(V("locate").t("pp"), A("situated")),
                          NP(NO(o.lemma), N("metre"), _above(N("sea"), N("level"))))
+        ]),
+        "elevationAboveTheSeaLevelInFeet": (48, False, [
+            lambda o: VP(V("be"), oneOf(V("locate").t("pp"), A("situated")),
+                         NP(NO(o.lemma), N("foot"), _above(N("sea"), N("level"))))
         ]),
         "elevationAboveTheSeaLevelInMetres": (48, False, "elevationAboveTheSeaLevel"),
         "engine": (50, False, [
@@ -314,6 +330,9 @@ class English(Realizer):
         "finalFlight": (75, False, [
             lambda o: VP(V("make").t("ps"), D("my"), oneOf(D("last"), A("final")), N("flight"), _on(o)),
         ]),
+        "floorArea": (50, False, [
+            lambda o: VP(V("have"), NP(o,_as(N("floor"),N("area"))))
+        ]),
         "floorCount": (50, False, [
             lambda o: VP(V("have"), NP(NO(o.lemma), N("floor"))),
         ]),
@@ -327,6 +346,7 @@ class English(Realizer):
             lambda o: VP(V("start").t("ps"), _with(o)),
             lambda o: VP(V("play").t("ps"), Adv("formerly"), _with(o)),
         ]),
+        "foundedBy": (2, False, "founder"),
         "founder": (2, False, [
             lambda o: VP(V("be").t("ps"), V(oneOf("create", "found")).t("pp"), _by(o)),
         ]),
@@ -349,6 +369,9 @@ class English(Realizer):
             lambda o: VP(V("play"), _in(o)),
         ]),
         ## "has to its (.*)": voir genSentComp
+        "headquarter": (25, False, [
+            lambda o: VP(V("have"),NP(D("my"),N("headquarters"), _in(o))),
+        ]),
         "height": (50, True, [
             lambda o: VP(V("have"), NP(D("a"), N("height"), _of(o), Q("m"))),
             lambda o: VP(V("be"), o, Q("m"), A("tall"))
@@ -356,6 +379,7 @@ class English(Realizer):
         "higher": (55, False, [
             lambda o: VP(V("be"), A("high").f("su"), _of(o)),
         ]),
+        "icaoLocationIdentifier": (50, False, "locationIdentifier"),
         "inaugurationDate": (10, False, [
             lambda o: VP(V("be").t("ps"), V("inaugurate").t("pp"), _on(o)),
         ]),
@@ -404,6 +428,10 @@ class English(Realizer):
         "largestCity": (32, False, [
             lambda o: VP(V("have"), o, Adv("as"), D("my").g("n"), A("large").f("su"), N("city")),
         ]),
+        "latinName": (20,False, [
+            lambda o: NP(o,VP(V("be").t("pr"),NP(D("my"),N("name"),A("Latin")))).b(","),
+            lambda o: VP(V("have").t("pr"),o,_as(NP(N("name"),A("Latin"))))
+        ]),
         "launchSite": (30, False, [
             lambda o: VP(V("be").t("ps"), V("launch").t("pp"), _from(o)),
         ]),
@@ -421,6 +449,9 @@ class English(Realizer):
         ]),
         "league": (50, True, [
             lambda o: VP(V(oneOf("be", "play", "compete")), _in(NP(D("the"), o, N("league")))),
+        ]),
+        "legislature": (25, False,[
+            lambda o : VP(V("have"), o, _as(N("legislature")))
         ]),
         "length": (30, False, [
             lambda o: VP(V("have"), NP(D("a"), N("length"), _of(o))),
@@ -484,6 +515,9 @@ class English(Realizer):
                 else NP(D("a"), N("citizen"), P("of"), o),
             lambda o: VP(V("live"), _in(o)),
         ]),
+        "nativeName": (1,False,[
+            lambda o : AP(Adv("originally"),oneOf(V("name").t("pp"),None),o).b(",")
+        ]),
         "netIncome": (21, False, [
             lambda o: VP(V("earn").t("ps"), NP(NO(o.lemma), N("dollar"))),
             lambda o: VP(V("have").t("ps"), NP(D("a"), N("revenue"), _of(NP(NO(o.lemma), N("dollar"))))),
@@ -507,6 +541,7 @@ class English(Realizer):
         "officialLanguage": (40, False, [
             lambda o: VP(V("have"), o, _as(NP(A("official"), N("language")))),
         ]),
+        "operatingIncome": (21, False, "netIncome"),
         "operatingOrganisation": (50, False, "operator"),
         "operator": (51, True, [
             lambda o: VP(V("be"), V("operate").t("pp"), _by(o)),
@@ -539,6 +574,9 @@ class English(Realizer):
         ]),
         "precededBy": (50, False, [
             lambda o: VP(V("be"), V("precede").t("pp"), _by(o)),
+        ]),
+        "predecessor": (20, True, [
+            lambda o: VP(V("succeed").t("ps"),o)
         ]),
         "president": (20, True, [
             lambda o: VP(V("be"), V("preside").t("pp"), _by(o)),
@@ -615,6 +653,9 @@ class English(Realizer):
         "shipDisplacement": (50, False, [
             lambda o: VP(V("have"), NP(D("a"), N("ship"), N("displacement"), _of(o))),
         ]),
+        "significantBuilding": (30, True, [
+            lambda o: VP(V("design").t("pc"), o.a(','), NP(D("a"), N("building"), A("significant")))
+        ]),
         "spokenIn": (50, False, [
             lambda o: VP(V("be"), V("speak").t("pp"), _in(o)),
         ]),
@@ -631,6 +672,9 @@ class English(Realizer):
         "stylisticOrigin": (50, False, [
             lambda o: VP(V("originate"), _from(o)),
             lambda o: VP(V("be"), V("derive").t("pp"), _from(o)),
+        ]),
+        "subsidiary": (10, False, [
+            lambda o: VP(V("have"),o,_as(N("subsidiary")))
         ]),
         "successor": (60, True, [
             lambda o: VP(V("be").t("ps"), V("succeed").t("pp"), _by(o)),
@@ -673,6 +717,9 @@ class English(Realizer):
             lambda o: VP(V("have"), NP(D("a"), N("wheelbase"), _of(o)))
         ]),
         "writer": (40, True, "author"),
+        "yearOfConstruction": (1, False, [
+            lambda o: VP(V("be").t("ps"),V("build").t("pp"), _in(o)),
+        ]),
         "youthclub": (30, True, [
             lambda o: VP(V("belong"), _to(NP(D("the"), N("youth"), N("club"), o)))
         ]),

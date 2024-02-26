@@ -137,6 +137,7 @@ class Benchmark:
     def benchmark_from_dataset(self, dataset, category='', start=1, end=7, eid=None):
         from collections import Counter
         counts = Counter()
+        cat_counts = Counter()
         for i in range(len(dataset)):
             data = dataset[i]
             if (category == '' or category==data['category']) and start <= data["size"] <= end\
@@ -144,12 +145,14 @@ class Benchmark:
                 entry = Entry(data['category'],data['size'],data["eid"],data['shape'],data["shape_type"])
                 data_lex = data["lex"]
                 counts[data['size']]+=1
+                cat_counts[(data['category'],data["size"])]+=1
                 entry.lexs = [Lexicalisation(text, lid, comment, "en")
                               for (text,lid,comment) in zip(data_lex["text"],data_lex["lid"],data_lex["comment"])]
                 for m_triples in data["modified_triple_sets"]["mtriple_set"]:
                     entry.fill_modifiedtriple_texts(m_triples)
                 self.entries.append(entry)
         print(counts)
+        print([k,counts[k]] for k in sorted(cat_counts))
 
     def total_lexcount(self):
         count = [entry.count_lexs() for entry in self.entries]

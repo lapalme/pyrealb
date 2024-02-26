@@ -53,11 +53,11 @@ def pp_place(lemma):
 
 def place(o):
     if not isinstance(o,tuple):
-        if isinstance(o,Q):
+        if o.isA("Q"):
             return pp_place(o.lemma) if o.lemma in countries else _a(o)
         return o
     o0 = o[0]
-    if not isinstance(o0,Q): return o
+    if not o0.isA("Q"): return o
     res = pp_place(o0.lemma) if o0.lemma in countries else _a(o0)
     if len(o)==1:
         return res
@@ -70,7 +70,7 @@ def habite(o):
         (prep,g,n,name,inhabitant) = countries[o.lemma]
         if random.choice([True,False]):
             v = oneOf("habiter","vivre")
-            VP(V(v),pp_place(o.lemma))
+            return VP(V(v),pp_place(o.lemma))
         else:
             return VP(V("être"),NP(D("un"),N(inhabitant)))
     else:
@@ -120,6 +120,11 @@ class Francais(Realizer):
         "activeYearsStartDate": (30, True, "activeYearsStartYear"),
         "activeYearsStartYear": (30, True, [
             lambda o: VP(V("débuter").t("ps"), NP(D("mon").g("m"), N("carrière"), _en(o))),
+        ]),
+        "addedToTheNationalRegisterOfHistoricPlaces": (20, False, [
+            lambda o: VP(V("être").t("pc"),V("ajouter").t("pp"),
+                         _a(NP(D("le"),N("registre"),_de(NP(D("le"),NP(N("site").n("p"),A("historique")))))),
+                         _en(o))
         ]),
         "address": (20, False, "location"),
         "affiliation": (20, False, [
@@ -257,8 +262,10 @@ class Francais(Realizer):
         "commander": (21, True, [
             lambda o: VP(V("être"), V("commander").t("pp"), _par(o)),
         ]),
-        "compete in": (50, True, [
-            lambda o: VP(V("compétionner"), _dans(o)),
+        "comparable": (20, False,[
+            lambda o: VP(V("être"),A("comparable"),_a(o))
+        ]),
+        "competeIn": (50, True, [
             lambda o: VP(V("faire"), N("partie"), _de(o)),
         ]),
         "completionDate": (60, False, [
@@ -279,7 +286,7 @@ class Francais(Realizer):
             lambda o: VP(V("être"), NP(D("un"), o)),
         ]),
         "creator": (50, False, [
-            lambda o: VP(V("être").t("pc"), V("créer").t("pp"), _par(o)),
+            lambda o: VP(V("être").t("pc"), V(oneOf("créer","fonder")).t("pp"), _par(o)),
         ]),
         "crewMembers": (50, False, [
             lambda o: VP(V("avoir"), o, _comme(N("membre").n("p"), PP(P("de"), N("équipage")))),
@@ -320,7 +327,7 @@ class Francais(Realizer):
         ]),
         "designer": (25, False, [
             lambda o: VP(V("être").t("pc"), V("concevoir").t("pp"), _par(o)),
-            lambda o: _par(D("mon").g("n"), N("concepteur"), o),
+            lambda o: _par(D("mon"), N("concepteur"), o),
         ]),
         "diameter": (40, False, [
             lambda o: VP(V("avoir"), NP(D("un"), N("diamètre"), _de(o))),
@@ -328,6 +335,10 @@ class Francais(Realizer):
         ]),
         # "discover":(20,False,"discovery"),
         # "discoverer":(20,False,"discovery"),
+        "director": (25, False, [
+            lambda o: VP(V("être").t("pc"), A("dirigé"), _par(o)),
+            lambda o: VP(V("avoir"),o, _comme(N("directeur"))),
+        ]),
         "discoverer": (20, False, [
             lambda o: VP(V("être").t("pc"), V("découvrir").t("pp"), _par(o))
         ]),
@@ -368,8 +379,8 @@ class Francais(Realizer):
             lambda o: (VP(V("avoir"), NP(D("un"), N("vitesse"), _de(N("échappement")), _de(o))))
         ]),
         "established": (20, False, [
-            lambda o: VP(V("être").t("pc"), V("établir").t("pp"), _dans(o)),
-            lambda o: VP(V("être").t("pc"), V("créer").t("pp"), _dans(o)),
+            lambda o: VP(V("être").t("pc"), V("établir").t("pp"), _en(o)),
+            lambda o: VP(V("être").t("pc"), V("créer").t("pp"), _en(o)),
         ]),
         "ethnicGroup": (50, False, [
             lambda o: VP(V("avoir"), NP(D("un"), N("groupe"), A("ethnique"), _de(o))),
@@ -380,6 +391,9 @@ class Francais(Realizer):
         ]),
         "finalFlight": (75, False, [
             lambda o: VP(V("effectuer").t("pc"), D("mon"), oneOf(A("dernier"), A("final")), N("vol"), _sur(o)),
+        ]),
+        "floorArea": (50, False, [
+            lambda o: VP(V("avoir"), NP(o,_comme(N("superficie"),_de(N("plancher")))))
         ]),
         "floorCount": (50, False, [
             lambda o: VP(V("compter"), NP(NO(o.lemma), N("étage"))),
@@ -394,6 +408,7 @@ class Francais(Realizer):
             lambda o: VP(V("débuter").t("pc"), _avec(o)),
             lambda o: VP(V("jouer").t("pc"), Adv("précédemment"), _avec(o)),
         ]),
+        "foundedBy": (2, False, "founder"),
         "founder": (2, False, [
             lambda o: VP(V("être").t("pc"), V(oneOf("créer", "fonder")).t("pp"), _par(o)),
         ]),
@@ -416,6 +431,9 @@ class Francais(Realizer):
             lambda o: VP(V("jouer"), _dans(o)),
         ]),
         ## "has to its (.*)": voir genSentComp
+        "headquarter": (25, False, [
+            lambda o: VP(V("avoir"),NP(D("mon"),N("siège"), _a(o))),
+        ]),
         "height": (50, True, [
             lambda o: VP(V("avoir"), NP(D("un"), N("hauteur"), _de(o), Q("m"))),
             lambda o: VP(V("mesurer"), o, Q("m"))
@@ -423,6 +441,7 @@ class Francais(Realizer):
         "higher": (55, False, [
             lambda o: VP(V("être"), A("grand").f("su"), _de(o)),
         ]),
+        "icaoLocationIdentifier": (50, False, "locationIdentifier"),
         "inaugurationDate": (10, False, [
             lambda o: VP(V("être").t("pc"), V("inaugurer").t("pp"), _en(o)),
         ]),
@@ -471,6 +490,10 @@ class Francais(Realizer):
         "largestCity": (32, False, [
             lambda o: VP(V("avoir"), o, Adv("comme"), NP(D("mon").g("n"), A("grand").f("su"), N("ville"))),
         ]),
+        "latinName": (20,False, [
+            lambda o: NP(o,PP(P("de"),NP(D("mon"),N("nom"),A("latin")))).b(","),
+            lambda o: VP(V("avoir").t("pr"),o,_comme(NP(N("nom"),A("latin"))))
+        ]),
         "launchSite": (30, False, [
             lambda o: VP(V("être").t("pc"), V("lancer").t("pp"), _de(o)),
         ]),
@@ -487,6 +510,9 @@ class Francais(Realizer):
         ]),
         "league": (50, True, [
             lambda o: VP(V(oneOf("être", "jouer", "compétitionner")), _dans(NP(D("le"), N("ligue"), o))),
+        ]),
+        "legislature": (25, False,[
+            lambda o : VP(V("avoir"), o, _comme(N("législature")))
         ]),
         "length": (30, False, [
             lambda o: VP(V("avoir"), NP(D("un"), N("longueur"), _de(o))),
@@ -544,6 +570,9 @@ class Francais(Realizer):
         "nationality": (1, True, [
             lambda o : habite(o)
         ]),
+        "nativeName": (1,False,[
+            lambda o : AP(Adv("originalement"),oneOf(V("nommer").t("pp"),None),o).b(",")
+        ]),
         "netIncome": (21, False, [
             lambda o: VP(V("gagner").t("pc"), NP(NO(o.lemma), N("dollar"))),
             lambda o: VP(V("avoir").t("pc"), NP(D("un"), N("revenu"), _de(NP(NO(o.lemma), N("dollar"))))),
@@ -567,6 +596,7 @@ class Francais(Realizer):
         "officialLanguage": (40, False, [
             lambda o: VP(V("avoir"), o, _comme(NP( N("langue"),A("officiel")))),
         ]),
+        "operatingIncome": (21,False,"netIncome"),
         "operatingOrganisation": (50, False, "operator"),
         "operator": (51, True, [
             lambda o: VP(V("être"), V("opérer").t("pp"), _par(o)),
@@ -599,6 +629,9 @@ class Francais(Realizer):
         ]),
         "precededBy": (50, False, [
             lambda o: VP(V("être"), V("précéder").t("pp"), _par(o)),
+        ]),
+        "predecessor": (20, True, [
+            lambda o: VP(V("succéder").t("pc"),_a(o))
         ]),
         "president": (20, True, [
             lambda o: VP(V("être"), V("présider").t("pp"), _par(o)),
@@ -677,6 +710,9 @@ class Francais(Realizer):
         "shipDisplacement": (50, False, [
             lambda o: VP(V("avoir"), NP(D("un"), N("tirant"), _de(N("eau"), P("de"), o))),
         ]),
+        "significantBuilding": (30, True,[
+            lambda o: VP(V("dessiner").t("pc"),o.a(','),NP(D("un"),N("édifice"),A("remarquable")))
+        ]),
         "spokenIn": (50, False, [
             lambda o: VP(V("être"), V("parler").t("pp"), place(o)),
         ]),
@@ -697,6 +733,9 @@ class Francais(Realizer):
         "stylisticOrigin": (50, False, [
             lambda o: VP(V("provenir"), _de(o)),
             lambda o: VP(V("être"), V("dériver").t("pp"), _de(o)),
+        ]),
+        "subsidiary": (10, False, [
+            lambda o: VP(V("avoir"),_comme(N("filiale"),o))
         ]),
         "successor": (60, True, [
             lambda o: VP(V("être").t("pc"), V("succéder").t("pp"), _par(o)),
@@ -740,6 +779,9 @@ class Francais(Realizer):
             lambda o: VP(V("avoir"), NP(D("un"), N("empattement"), _de(o)))
         ]),
         "writer": (40, True, "author"),
+        "yearOfConstruction": (1, False, [
+            lambda o: VP(V("être").t("pc"),V("construire").t("pp"), _en(o)),
+        ]),
         "youthclub": (30, True, [
             lambda o: VP(V("appartenir"), _a(NP(D("le"), N("club"), N("jeunesse"), o)))
         ]),
@@ -749,10 +791,31 @@ class Francais(Realizer):
         return Pro("qui")
 
     def direction(self,dir):
-        return (50, False, [lambda o: VP(V("avoir"), o, _a(D("le").g("f"), Q(dir)))])
+        fr_dir = {"north":"nord","northeast":"nord-est","east":"est","southeast":"sud-est",
+                  "south":"sud","southwest":"sud-ouest","west":"ouest","northwest":"nord-ouest"}
+        if dir in fr_dir:
+            dir = fr_dir[dir]
+        else:
+            print("@@@ French default direction",dir)
+        return (50, False, [lambda o: VP(V("avoir"), o, _a(D("le"), Q(dir)))])
 
     def number_of(self,entities):
-        return (50, False, [lambda o: VP(V("avoir"), NP(NO(o.lemma), entities))])
+        entities_lemma = entities.lemma
+        fr_entities = {"students":"étudiants",
+                       "undergraduate students":"étudiants du premier cycle",
+                       "postgraduate students":"étudiants aux cycles supérieurs",
+                       "employees":"employés",
+                       "locations":"sites",
+                       "members":"membres",
+                       "pages":"pages",
+                       "rooms":"chambres",
+                       "votes attained":"votes enregistrés"
+                       }
+        if entities_lemma in fr_entities:
+            entities_lemma=fr_entities[entities_lemma]
+        else:
+            print("@@@ French default number_of",entities_lemma)
+        return (50, False, [lambda o: VP(V("avoir"), NP(NO(o.lemma), Q(entities_lemma)))])
 
     def runway(self,no, type):
         precedence = 30 + int(no[0])
