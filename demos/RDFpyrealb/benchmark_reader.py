@@ -58,26 +58,29 @@ class Entry:
         self.dbpedialinks = []
         self.links = []
 
-    # def fill_originaltriple(self, xml_t):
-    #     otripleset = Tripleset()
-    #     self.originaltripleset.append(otripleset)   # multiple originaltriplesets for one entry
-    #     otripleset.fill_tripleset(xml_t)
+    def fill_originaltriple(self, xml_t):
+        otripleset = Tripleset()
+        self.originaltripleset.append(otripleset)   # multiple originaltriplesets for one entry
+        otripleset.fill_tripleset(xml_t)
+
+    def fill_modifiedtriple(self, xml_t):
+        self.modifiedtripleset.fill_tripleset(xml_t)
+
+    def create_lex(self, xml_lex):
+        try:
+            comment = xml_lex.attrib['comment']
+        except KeyError:
+            comment = ''
+        try:
+            lang = xml_lex.attrib['lang']
+        except KeyError:
+            lang = ''
+        lid = xml_lex.attrib['lid']
+        lex = Lexicalisation(xml_lex.text, lid, comment, lang)
+        self.lexs.append(lex)
 
     def fill_modifiedtriple_texts(self, texts):
         self.modifiedtripleset.fill_tripleset_text(texts)
-
-    # def create_lex(self, xml_lex):
-    #     try:
-    #         comment = xml_lex.attrib['comment']
-    #     except KeyError:
-    #         comment = ''
-    #     try:
-    #         lang = xml_lex.attrib['lang']
-    #     except KeyError:
-    #         lang = ''
-    #     lid = xml_lex.attrib['lid']
-    #     lex = Lexicalisation(xml_lex.text, lid, comment, lang)
-    #     self.lexs.append(lex)
 
     def create_dbpedialinks(self, xml_dbpedialinks):
         for xml_dblink in xml_dbpedialinks:
@@ -152,7 +155,41 @@ class Benchmark:
                     entry.fill_modifiedtriple_texts(m_triples)
                 self.entries.append(entry)
         print(counts)
-        print([k,counts[k]] for k in sorted(cat_counts))
+        print([f"{k[0]}-{k[1]}:{cat_counts[k]}" for k in sorted(cat_counts)])
+
+    def fill_benchmark(self, fileslist):
+        """
+        Parse xml files and fill Benchmark with Entry instances.
+        :param fileslist: [(path_to_file, filename.xml), (), ... ()]
+        :return:
+        """
+        for file in fileslist:
+            import sys
+            import xml.etree.ElementTree as Et
+            myfile = file[0] + '/' + file[1]
+            sys.stderr.write("Loading: "+myfile+"\n")
+            tree = Et.parse(myfile)
+            root = tree.getroot()
+            for xml_entry in root.iter('entry'):
+                entry_id = xml_entry.attrib['eid']
+                category = xml_entry.attrib['category']
+                size = xml_entry.attrib['size']
+                shape = xml_entry.attrib['shape'] if 'shape' in xml_entry.attrib else ""
+                shape_type = xml_entry.attrib['shape_type'] if 'shape_type' in xml_entry.attrib else ""
+
+                entry = Entry(category, size, entry_id, shape, shape_type)
+                for child in xml_entry:
+                    if child.tag == 'originaltripleset':
+                        entry.fill_originaltriple(child)
+                    elif child.tag == 'modifiedtripleset':
+                        entry.fill_modifiedtriple(child)
+                    elif child.tag == 'lex':
+                        entry.create_lex(child)
+                    elif child.tag == 'dbpedialinks':
+                        entry.create_dbpedialinks(child)
+                    elif child.tag == 'links':
+                        entry.create_links(child)
+                self.entries.append(entry)
 
     def total_lexcount(self):
         count = [entry.count_lexs() for entry in self.entries]
@@ -205,14 +242,17 @@ class Benchmark:
                     if lex.id == lex_id:
                         return lex.lex
 
-    def subjects_objects(self):
-        subjects = set()
-        objects = set()
+    def subjects_predicates_objects(self):
+        from collections import Counter
+        subjects = Counter()
+        predicates = Counter()
+        objects = Counter()
         for entry in self.entries:
             for triple in entry.modifiedtripleset.triples:
-                subjects.add(triple.s)
-                objects.add(triple.o)
-        return subjects, objects
+                subjects[triple.s]+=1
+                predicates[triple.p]+=1
+                objects[triple.o]+=1
+        return subjects.most_common(), predicates.most_common(),objects.most_common()
 
     def verbalisations(self):
         """Get all lexicalisations."""

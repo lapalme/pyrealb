@@ -246,7 +246,7 @@ page.div("""
     <li><code>S</code>, <code>SP</code>: accord avec le <em>sujet</em>, soit le premier <code>NP</code>, <code>N</code>, 
         <code>Pro</code> ou <code>CP</code>. Si le <code>Pro</code> est un pronom relatif, le <em>sujet</em> de la subordonnée est utilisé. Des tests spécifiques permettent d'accorder le verbe <code>être/be</code> ainsi que pour tenir compte des sujets coordonnés.</li>
 </ul>
-<p>Des options (section suivante) spécifiant le genre et le nombre l'emportent sur ces accords automatiques.</p>
+<p>Des options (section suivante) appliquées à une instance de <code>Terminal</code> (e.g. <code>N</code>, <code>V</code>, ...) spécifiant le genre et le nombre l'emportent sur ces accords automatiques.</p>
 """,lang="fr")
 
 page.div("""
@@ -258,7 +258,7 @@ page.div("""
     <li><code>S</code>, <code>SP</code>: agrees with the <em>subject</em>, taken as the first <code>NP</code>, <code>N</code>, 
         <code>Pro</code> or <code>CP</code>. If the <code>Pro</code> is a relative pronoun, the <em>subject</em> of the subordinate is taken. Specific tests take into account the verbs <code>être/be</code> and the coordinate subjects.</li>
 </ul>
-<p>Options (next section) can override these automatic agreements.</p>
+<p>Options (next section) applied to an instance of <code>Terminal</code> (e.g. <code>N</code>, <code>V</code>, ...) override these automatic agreements.</p>
 """,lang="en")
 
 addTable(dependentsSect)

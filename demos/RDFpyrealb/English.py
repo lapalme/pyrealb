@@ -20,12 +20,11 @@ def _with(*o)  : return _pp("with",o)
 
 def number(n,o): return VP(V("have"),NP(D("the"),Q(n),N("number"),o))
 
-## used in "nationality" realizer to deal with special frequent cases
-countries = {"United_States": "American", "Canada": "Canadian", "France": "French", "Mexico": "Mexican"}
 
 class English(Realizer):
     def __init__(self):
         loadEn()
+        self.lang = "en"
         self.v_be = V("be")
         self.conj_and = C("and")
         self.pro_I = lambda: Pro("I") # as it will be modified create a new instance at each call
@@ -33,6 +32,8 @@ class English(Realizer):
         self.undef_det = D("a")
         super().__init__()
 
+    ## used in "nationality" realizer to deal with special frequent cases
+    countries = {"United_States": "American", "Canada": "Canadian", "France": "French", "Mexico": "Mexican"}
 
     def realize(self,graph,show):
         loadEn()
@@ -47,7 +48,7 @@ class English(Realizer):
             lambda o: VP(V("be"), V("abbreviate").t("pp"), _by(o)),
         ]),
         "academicStaffSize": (50, False, [
-            lambda o: VP(V("have"), D("a"), oneOf(A("academic"), Q("")), N("staff"), _of(NO(o.lemma)))
+            lambda o: VP(V("have"), D("a"), oneOf(A("academic"), Q("")), N("staff"), _of(Q(o.lemma)))
         ]),
         "academicDiscipline": (50, False, [
             lambda o: VP(V("be"), NP(N("part"), _of(NP(D("the"), A("academic"), N("discipline"), _of(o))))),
@@ -285,6 +286,9 @@ class English(Realizer):
         "dishVariation": (50, False, [
             lambda o: VP(V("be"), NP(D("a"), N("variation"), _of(o))),
         ]),
+        "district": (30, False, [
+            lambda o : VP(V("be"),_in(NP(D("the"),o,N("district"))))
+        ]),
         "division": (40, False, [
             lambda o: VP(V("have"), NP(D("a"), o, N("division")))
         ]),
@@ -507,13 +511,16 @@ class English(Realizer):
             lambda o: VP(V("be"), D("a"), A("musical"), N("fusion"), _of(o)),
         ]),
         "nationality": (1, True, [
-            lambda o: VP(V("be"), NP(D("a"), N(countries[o.lemma])))
-                if isinstance(o, Terminal) and o.lemma in countries
+            lambda o: VP(V("be"), NP(D("a"), N(English.countries[o.lemma])))
+                if isinstance(o, Terminal) and o.lemma in English.countries
                 else VP(V("be"), NP(D("a"), N("citizen"), P("of"), o)),
-            lambda o: NP(D("a"), N(countries[o.lemma]))
-                if isinstance(o, Terminal) and o.lemma in countries
+            lambda o: NP(D("a"), N(English.countries[o.lemma]))
+                if isinstance(o, Terminal) and o.lemma in English.countries
                 else NP(D("a"), N("citizen"), P("of"), o),
             lambda o: VP(V("live"), _in(o)),
+        ]),
+        "NationalRegisterOfHistoricPlacesReferenceNumber":(10,False,[
+            lambda o: number("National Register Of Historic Places Reference",o)
         ]),
         "nativeName": (1,False,[
             lambda o : AP(Adv("originally"),oneOf(V("name").t("pp"),None),o).b(",")
@@ -614,6 +621,9 @@ class English(Realizer):
         "residence": (50, True, [
             lambda o: VP(V(oneOf("live", "reside")), _in(o)),
         ]),
+        "revenue" : (40, False,[
+            lambda o: VP(V("have"),NP(D("a"),N("revenue"),A("annual"),_of(NP(NO(o),N("dollar")))))
+        ]),
         "river": (50, False, [
             lambda o: VP(V("have"), NP(D("a"), N("river"), o)),
         ]),
@@ -654,7 +664,7 @@ class English(Realizer):
             lambda o: VP(V("have"), NP(D("a"), N("ship"), N("displacement"), _of(o))),
         ]),
         "significantBuilding": (30, True, [
-            lambda o: VP(V("design").t("pc"), o.a(','), NP(D("a"), N("building"), A("significant")))
+            lambda o: VP(V("design").t("ps"), o.a(','), NP(D("a"), N("building"), A("significant")))
         ]),
         "spokenIn": (50, False, [
             lambda o: VP(V("be"), V("speak").t("pp"), _in(o)),
@@ -742,7 +752,7 @@ class English(Realizer):
             unit = type[6:]
             return (precedence, False,
                     [lambda o: VP(V("have"), NP(D("a"), Q(no), N("runway"),
-                                                _of(NO(o.lemma), N("metre" if unit == "Metre" else "foot"))))])
+                                                _of(NP(NO(o.lemma), N("metre" if unit == "Metre" else "foot")))))])
         if type == "SurfaceType":
             return (precedence, False,
                     [lambda o: VP(V("have"), NP(D("my"), Q(no), N("runway")), _in(o))])

@@ -115,6 +115,12 @@ class Phrase(Constituent):
             # the head is the first internal N, number with a possible NO
             # find first NP or N
             headIndex = self.getHeadIndex("NP")
+            # if the first N has a poss flag, try to find the next "non possessive" N
+            if self.elements[headIndex].isA("N") and self.elements[headIndex].getProp("poss"):
+                for i in range(headIndex+1,len(self.elements)):
+                    if self.elements[i].isA("N") and self.elements[i].getProp("poss") is None:
+                        headIndex = i
+                        break
             if hasattr(self.elements[headIndex],"peng"):
                 # must check because getHeadIndex returns the first element when it does not find anything appropriate
                 self.peng = self.elements[headIndex].peng
@@ -579,6 +585,12 @@ class Phrase(Constituent):
         def makeDep(me,phName):
             termName=phName[:-1] # remove P at the end of the phrase name
             idx=me.getHeadIndex(phName)
+            # if the first N has a poss flag, try to find the next "non possessive" N
+            if phName=="NP" and me.elements[idx].isA("N") and me.elements[idx].getProp("poss"):
+                for i in range(idx+1,len(me.elements)):
+                    if me.elements[i].isA("N") and me.elements[i].getProp("poss") is None:
+                        idx = i
+                        break
             if (me.elements[idx].isA(termName)):
                 deprel = dep([me.elements[idx]],depName)
                 for i,e in enumerate(me.elements):

@@ -54,7 +54,7 @@ class Constituent:
             self.peng[propName]=val
         if propName in ["t","aux"] and hasattr(self,"taux") and self.taux is not None:
             self.taux[propName]=val
-        # this is important for to ensure that locol options override global values
+        # this is important for to ensure that local options override global values
         # but it must not be done at initialization for peng and taux in Terminal.setLemma
         if propName not in ["pe","n","g","t","aux"] or not inSetLemma:
             self.props[propName]=val
@@ -305,6 +305,9 @@ class Constituent:
             self.doPronounPlacement(cList)
         self.doElision(cList)
 
+        if self.getProp("poss"):
+            cList[-1].realization += "'" if cList[-1].realization.endswith("s") else "'s"
+
         if self.getProp("cap"):
             cList[0].realization=cList[0].realization.capitalize()
  
@@ -463,7 +466,7 @@ def makeOptionMethod(option,validVals,allowedConsts,optionName=None):
 # shared properties 
 #   pe,n and g : can be applied to components of NP and Sentences
 setattr(Constituent,"pe",makeOptionMethod("pe",[1,2,3,'1','2','3'],["D","Pro","N","NP","A","AP","V","VP","S","SP","CP"]))
-setattr(Constituent,"n",makeOptionMethod("n",["s","p","x"],["D","Pro","N","NP","A","AP","V","VP","S","SP","CP"]))
+setattr(Constituent,"n",makeOptionMethod("n",["s","p","x"],["D","Pro","N","NO","NP","A","AP","V","VP","S","SP","CP"]))
 setattr(Constituent,"g",makeOptionMethod("g",["m","f","n","x"],["D","Pro","N","NP","A","AP","V","VP","S","SP","CP"]))
 #  t, aux : can be applied to VP and sentence
 setattr(Constituent,"t",makeOptionMethod("t",["p", "i", "f", "ps", "c", "s", "si", "ip", "pr", "pp", "b","b-to", # simple tenses
@@ -478,6 +481,7 @@ setattr(Constituent,"pos",makeOptionMethod("pos",["post","pre"],["A","Adv",*depr
 setattr(Constituent,"pro",makeOptionMethod("pro",None,["NP","PP"]))
 # English only
 setattr(Constituent,"ow",makeOptionMethod("ow",["s","p","x"],["D","Pro"],"own"))
+setattr(Constituent,"poss",makeOptionMethod("poss",None,["N","Q"]))
 
 # Formatting options
 setattr(Constituent,"cap",makeOptionMethod("cap",None,[]))

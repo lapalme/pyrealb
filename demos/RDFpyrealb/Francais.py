@@ -1,6 +1,6 @@
 from pyrealb import *
 from Realizer import Realizer,_pp
-import random
+import random, re
 
 ## use star to allow more than two parameters to _pp
 def _a(*o): return _pp("à", o)
@@ -20,45 +20,23 @@ def _vers(*o): return _pp("vers", o)
 
 def number(n, o): return VP(V("avoir"), NP(D("le"), N("numéro"), Q(n), o))
 
-## used in "nationality" realizer to deal with special frequent cases
-# countries = {"United_States": "Americain", "Canada": "Canadien", "France": "Français", "Mexico": "Mexicain"}
-
-# countries to translate in French
-#    english : (preposition, gender, number, franch name, inhabitant)
-countries = {
-    'Brazil' : ("à","m","s","Brésil","Brésilien"),
-    'Brussels' : ("à","m","s","Bruxelles","Bruxellois"),
-    'California' : ("en","f","s","Californie","Californien"),
-    "Canada"  : ("à","m","s", "Canada", "Canadien"),
-    'Denmark' : ("à", "m","s", "Danemark", "Danois"),
-    'England' : ("en", "f", "s", "Angleterre", "Anglais"),
-    "France"  : ("en", "f", "s", "France", "Français"),
-    'India'   : ("à", "f","p", "Indes", "Indien"),
-    "Mexico"  : ("à", "m","s", "Mexique", "Mexicain"),
-    'Philippines' : ("à", "f","p","Philippines","Philippin"),
-    'Romania' : ("en", "f","s", "Roumanie","Roumain"),
-    'Spain' :  ("en", "f", "s", "Espagne", "Espagnol"),
-    'Switzerland' : ("en", "f", "s", '"Suisse', "Suisse"),
-    'Turkey' : ("en", "f", "s", "Turquie", "Turc"),
-    "United States": ("à", "m", "p", "États-Unis", "Américain")
-}
 
 def pp_place(lemma):
-    (prep, g, n, name, inhabitant) = countries[lemma]
+    (prep, g, n, name, inhabitant) = Francais.countries[lemma]
     if prep=="à":
         return PP(P("à"),NP(D("le"),N(name)))
     else:
-        PP(P("en"), N(name))
+        return PP(P("en"), N(name))
 
 
 def place(o):
     if not isinstance(o,tuple):
         if o.isA("Q"):
-            return pp_place(o.lemma) if o.lemma in countries else _a(o)
+            return pp_place(o.lemma) if o.lemma in Francais.countries else _a(o)
         return o
     o0 = o[0]
     if not o0.isA("Q"): return o
-    res = pp_place(o0.lemma) if o0.lemma in countries else _a(o0)
+    res = pp_place(o0.lemma) if o0.lemma in Francais.countries else _a(o0)
     if len(o)==1:
         return res
     else: # HACK : make tuple of rest of arguments
@@ -66,8 +44,8 @@ def place(o):
 
 def habite(o):
     if not isinstance(o,Terminal):return o
-    if o.lemma in countries:
-        (prep,g,n,name,inhabitant) = countries[o.lemma]
+    if o.lemma in Francais.countries:
+        (prep,g,n,name,inhabitant) = Francais.countries[o.lemma]
         if random.choice([True,False]):
             v = oneOf("habiter","vivre")
             return VP(V(v),pp_place(o.lemma))
@@ -80,11 +58,14 @@ def habite(o):
 class Francais(Realizer):
     def __init__(self):
         loadFr()
+        self.lang="fr"
         addToLexicon("catégoriser",{"V":{"aux":"av", "tab":"v36", "pat":["tdir"]}})
         addToLexicon("compétitionner",{"V":{"aux":"av", "tab":"v36", "pat":["intr"]}})
+        addToLexicon({"Bruxellois": {"N": {"g": "x","tab": "n27"}}})
+        addToLexicon({"Philippin": {"N": {"g": "x","tab": "n28"}}})
         # ensure that all countries are in the French lexicnn
-        for country in countries:
-            (_,g,n,name,_) = countries[country]
+        for country in Francais.countries:
+            (_,g,n,name,_) = Francais.countries[country]
             addToLexicon(name,{"N":{"g":g,"n":n,"tab":"nI"}})
         self.v_be = V("être")
         self.conj_and = C("et")
@@ -92,7 +73,26 @@ class Francais(Realizer):
         self.def_det = D("le")
         self.undef_det = D("un")
         super().__init__()
-    
+
+    # countries to translate in French
+    #    english : (preposition, gender, number, franch name, inhabitant)
+    countries = {
+        'Brazil': ("à", "m", "s", "Brésil", "Brésilien"),
+        'Brussels': ("à", "m", "s", "Bruxelles", "Bruxellois"),
+        'California': ("en", "f", "s", "Californie", "Californien"),
+        "Canada": ("à", "m", "s", "Canada", "Canadien"),
+        'Denmark': ("à", "m", "s", "Danemark", "Danois"),
+        'England': ("en", "f", "s", "Angleterre", "Anglais"),
+        "France": ("en", "f", "s", "France", "Français"),
+        'India': ("à", "f", "p", "Indes", "Indien"),
+        "Mexico": ("à", "m", "s", "Mexique", "Mexicain"),
+        'Philippines': ("à", "f", "p", "Philippines", "Philippin"),
+        'Romania': ("en", "f", "s", "Roumanie", "Roumain"),
+        'Spain': ("en", "f", "s", "Espagne", "Espagnol"),
+        'Switzerland': ("en", "f", "s", '"Suisse', "Suisse"),
+        'Turkey': ("en", "f", "s", "Turquie", "Turc"),
+        "United States": ("à", "m", "p", "États-Unis", "Américain")
+    }
 
     def realize(self,graph,show):
         loadFr()
@@ -108,18 +108,18 @@ class Francais(Realizer):
         ]),
         "academicStaffSize": (50, False, [
             lambda o: VP(V("avoir"), D("un"), N("personnel"), oneOf(A("académique"), Q("")),
-                         _de(NP(NO(o.lemma),N("personne"))))
+                         _de(NP(NO(re.sub("[^0-9]","",o.lemma)),N("personne"))))
         ]),
         "academicDiscipline": (50, False, [
             lambda o: VP(V("faire"), NP(N("partie"), _de(NP(D("le"), A("académique"), N("discipline"), _de(o))))),
         ]),
         "activeYearsEndDate": (70, True, "activeYearsEndYear"),
         "activeYearsEndYear": (70, True, [
-            lambda o: VP(V("terminer").t("ps"), NP(D("mon").g("m"), N("carrière"), _en(o))),
+            lambda o: VP(V("terminer").t("ps"), NP(D("mon"), N("carrière"), _en(o))),
         ]),
         "activeYearsStartDate": (30, True, "activeYearsStartYear"),
         "activeYearsStartYear": (30, True, [
-            lambda o: VP(V("débuter").t("ps"), NP(D("mon").g("m"), N("carrière"), _en(o))),
+            lambda o: VP(V("débuter").t("ps"), NP(D("mon"), N("carrière"), _en(o))),
         ]),
         "addedToTheNationalRegisterOfHistoricPlaces": (20, False, [
             lambda o: VP(V("être").t("pc"),V("ajouter").t("pp"),
@@ -188,7 +188,7 @@ class Francais(Realizer):
             lambda o: PP(P("avec"), NP(D("un"), N("formation"), _de(o))),
         ]),
         "backupPilot": (23, False, [
-            lambda o: VP(V("avoir"), o, _comme(oneOf(D("mon").g("n"), Q("")), N("pilote"), PP(P("de"), N("réserve")))),
+            lambda o: VP(V("avoir"), o, _comme(oneOf(D("mon"), Q("")), N("pilote"), PP(P("de"), N("réserve")))),
             lambda o: VP(V("compter").t("pc"), o,C("comme"),N("pilote"), PP(P("de"),N("réserve"))),
         ]),
         "battle": (50, True, [
@@ -345,6 +345,9 @@ class Francais(Realizer):
         "dishVariation": (50, False, [
             lambda o: VP(V("être"), NP(D("un"), N("variation"), _de(o))),
         ]),
+        "district": (30, False, [
+            lambda o : VP(V("être"),_dans(NP(D("le"),N("district"),_de(o))))
+        ]),
         "division": (40, False, [
             lambda o: VP(V("avoir"), NP(D("un"), o, _comme(N("division"))))
         ]),
@@ -488,7 +491,7 @@ class Francais(Realizer):
             lambda o: VP(V("parler"), o),
         ]),
         "largestCity": (32, False, [
-            lambda o: VP(V("avoir"), o, Adv("comme"), NP(D("mon").g("n"), A("grand").f("su"), N("ville"))),
+            lambda o: VP(V("avoir"), o, Adv("comme"), NP(D("mon"), A("grand").f("su"), N("ville"))),
         ]),
         "latinName": (20,False, [
             lambda o: NP(o,PP(P("de"),NP(D("mon"),N("nom"),A("latin")))).b(","),
@@ -540,7 +543,7 @@ class Francais(Realizer):
             lambda o: VP(V("avoir"), o, Adv("comme"), N("gérant")),
         ]),
         "manufacturer": (40, False, [
-            lambda o: VP(V("être"), V("manufacturer").t("pp"), _par(o)),
+            lambda o: VP(V("être"), V("fabriquer").t("pp"), _par(o)),
         ]),
         "mass": (50, False, [
             lambda o: VP(V("avoir"), NP(D("un"), N("masse"), _de(o))),
@@ -548,11 +551,10 @@ class Francais(Realizer):
         ]),
         "material": (50, False, [
             lambda o: VP(V("être"), V("faire").t("pp"), _de(o)),
-            lambda o: VP(V("être"), V("construire").t("pp"), _hors_de(P("de"), o)),
+            lambda o: VP(V("être"), V("construire").t("pp"), _en(o)),
         ]),
         "mediaType": (40, False, [
-            lambda o: VP(V("être"), A("disponible"), _en(o)),
-            lambda o: VP(V("paraître").t("pc"), _en(o)),
+            lambda o: VP(V("être"), oneOf(A("disponible"),V("paraître").t("pp")), _en(o)),
         ]),
         "militaryBranch": (30, True, [
             lambda o: VP(V("servir").t("pc"), _dans(o)),
@@ -569,6 +571,9 @@ class Francais(Realizer):
         ]),
         "nationality": (1, True, [
             lambda o : habite(o)
+        ]),
+        "NationalRegisterOfHistoricPlacesReferenceNumber":(10,False,[
+            lambda o: number("du registre de sites historiques",o)
         ]),
         "nativeName": (1,False,[
             lambda o : AP(Adv("originalement"),oneOf(V("nommer").t("pp"),None),o).b(",")
@@ -669,6 +674,9 @@ class Francais(Realizer):
         "residence": (50, True, [
             lambda o: VP(V(oneOf("vivre", "résider")), place(o)),
         ]),
+        "revenue" : (40, False,[
+            lambda o: VP(V("avoir"),NP(D("un"),N("revenu"),A("annuel"),_de(NP(NO(o),N("dollar")))))
+        ]),
         "river": (50, False, [
             lambda o: VP(V("avoir"), NP(D("le"), N("rivière"), o)),
         ]),
@@ -764,7 +772,7 @@ class Francais(Realizer):
             lambda o: VP(V("servir").t("pc"), _dans(o))
         ]),
         "utcOffset": (20, False, [
-            lambda o: VP(V("avoir"), NP(D("un"), Q("UTC offset"), _de(o))),
+            lambda o: VP(V("avoir"), NP(D("un"), Q("décalage UTC"), _de(o))),
         ]),
         "wasGivenTheTechnicalCampusStatusBy": (25, False, [
             lambda o: VP(V("être").t("ps"), V("accorder").t("pp"),
@@ -828,7 +836,7 @@ class Francais(Realizer):
             unit = type[6:]
             return (precedence, False,
                     [lambda o: VP(V("avoir"), NP(D("mon"), N("piste"), runway_no,
-                                                _de(NO(o.lemma), N("mètre" if unit == "Metre" else "pied"))))])
+                                                _de(NP(NO(o.lemma), N("mètre" if unit == "Metre" else "pied")))))])
         if type == "SurfaceType":
             return (precedence, False,
                     [lambda o: VP(V("avoir"), NP(D("mon"), N("piste"), runway_no), _en(o))])

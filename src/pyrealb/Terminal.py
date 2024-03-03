@@ -160,6 +160,9 @@ class Terminal(Constituent):
         # overriden in TerminalEn and TerminalFr
         if not self.isA("NO"):
             return self.warn("bad application","grammaticalNumber","NO",self.constType)
+        n = self.getProp("")
+        if n is not None: # explicit number given to NO
+            return n
         if "dOpt" in self.props and "ord" in self.props["dOpt"] and self.props["dOpt"]["ord"]:
             return "s"
         return None

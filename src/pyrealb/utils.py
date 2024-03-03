@@ -112,7 +112,7 @@ def fromJSON(json, lang=None):
 
 
 # version and date information
-pyrealb_version = "3.0.0"
+pyrealb_version = "3.0.1"
 pyrealb_datecreated = datetime.datetime.today()
 
 ####################################################################################

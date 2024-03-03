@@ -29,6 +29,7 @@ class Realizer:
             ["deathDate", "deathPlace"],
             ["foundingDate", "foundationPlace"],
             ["numberOfStudents", "academicStaffSize", "numberOfPostgraduateStudents"],
+            ["addedToTheNationalRegisterOfHistoricPlaces","NationalRegisterOfHistoricPlacesReferenceNumber"],
             ["orbitalPeriod", "periapsis", "apoapsis"],
         ]
         ## add indirect realizers to this list
@@ -227,15 +228,17 @@ def printReal(pat, s, o):
 
 
 def showRealizations(realizer,p, s, o):
+    load(realizer.lang)
     (prec, isHuman, pats) = realizer.sentencePatterns[p]
-    print("%s [%d]" % (p, prec), end="")
+    if realizer.lang == "en":
+        print("%s [%d]" % (p, prec), end="")
     if isHuman:
-        print(" [human]", end="")
+        if realizer.lang == "en":print(" [human]", end="")
     if isinstance(pats, str):
-        print(" => " + pats)
+        if realizer.lang == "en":print(" => " + pats)
         (prec, _, pats) = realizer.sentencePatterns[pats]
     else:
-        print()
+        if realizer.lang == "en":print()
     for pat in pats:
         printReal(pat, s, o)
 
@@ -246,20 +249,29 @@ if __name__ == '__main__':
     o = lambda: Q("*O*")  # "       "   object
 
     from English import English
+    from Francais import Francais
     english = English()
+    francais = Francais()
     english.nbDefaultRealizers = 0
+    francais.nbDefaultRealizers = 0
+
     for p in sorted(english.sentencePatterns):
         showRealizations(english,p, s(), o())
+        showRealizations(francais,p, s(), o())
     print("\nNB patterns:%d" % len(english.sentencePatterns))
+    print("\nNB realizer:%d" % len(francais.sentencePatterns))
 
     print("** Special cases **")
-    printReal(english.getSentPatterns("numberOfEmployees")[2][0], s(), Q("1234"))
-    for country in english.countries:  # to exercise more possibilities
-        printReal(english.getSentPatterns("nationality")[2][0], s(), Q(country))
-    printReal(english.getSentPatterns("unknownPredicateOf")[2][0], s(), o())
-    printReal(english.getSentPatterns("is a kind of")[2][0], s(), o())
-    printReal(english.getSentPatterns("1stRunwaySurfaceType")[2][0], s(), o())
-    printReal(english.getSentPatterns("3rdRunwayLengthFeet")[2][0], s(), o())
-    printReal(english.getSentPatterns("5thRunwayNumber")[2][0], s(), o())
-    printReal(english.getSentPatterns("5th_runway_Number")[2][0], s(), o())
-    print("Default realizer was used: %5d times" % english.nbDefaultRealizers)
+    for realizer in [english,francais]:
+        load(realizer.lang)
+        printReal(realizer.getSentPatterns("numberOfEmployees")[2][0], s(), NO(1234))
+        for country in realizer.countries:  # to exercise more possibilities
+            printReal(realizer.getSentPatterns("nationality")[2][0], s(), Q(country))
+        printReal(realizer.getSentPatterns("unknownPredicateOf")[2][0], s(), o())
+        printReal(realizer.getSentPatterns("is a kind of")[2][0], s(), o())
+        printReal(realizer.getSentPatterns("1stRunwaySurfaceType")[2][0], s(), o())
+        printReal(realizer.getSentPatterns("3rdRunwayLengthFeet")[2][0], s(), NO(456))
+        printReal(realizer.getSentPatterns("5thRunwayNumber")[2][0], s(), NO(9))
+        printReal(realizer.getSentPatterns("5th_runway_Number")[2][0], s(), NO(8))
+        print("Default %s realizer was used: %5d times" % (realizer.lang,realizer.nbDefaultRealizers))
+        print("-----")

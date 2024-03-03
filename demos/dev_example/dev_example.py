@@ -441,6 +441,14 @@ def makeExamples():
            VP(V("eat"),
               NP(D("the"), N("cheese")))).typ({"pas": True}),
          "The cheese is eaten by them. "],
+        # English possessive examples taken from
+        #     https://learnenglish.britishcouncil.org/grammar/a1-a2-grammar/possessive-s
+        [S(NP(D("my").pe(1).ow("p"),
+              N("friend").poss(),
+              N("father").poss(),
+              N("car")).n("p"),
+           VP(V("be"),A("red"))),
+           "Our friend's father's cars are red. "],
     ]
 
     # dépendances en français
@@ -711,6 +719,15 @@ def makeExamples():
                    det(D('the'))),
               subj(Pro('him'))).typ({"pas": True}),
          "The cheese is eaten by him. "],
+        # English possessive examples taken from
+        #     https://learnenglish.britishcouncil.org/grammar/a1-a2-grammar/possessive-s
+        [root(V("be"),                                       # 17
+              subj(N("car"),
+                   det(D("my").pe(1).ow("p")),
+                   mod(N("friend").poss()).pos("pre"),
+                   mod(N("father").poss()).pos("pre")).n("p"),
+              mod(A("red"))),
+         "Our friend's father's cars are red. "],
     ]
 
     # bilingual examples
