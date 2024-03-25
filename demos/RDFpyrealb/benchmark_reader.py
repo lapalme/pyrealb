@@ -1,12 +1,14 @@
 # Extracted from the Benchmark_reader for the WebNLG Challenge 2020
 from os import listdir
-import random
+import random, re
 
 class Triple:
 
     def __init__(self, s, p, o):
         self.s = s
         self.o = o
+        # if p[0].isupper():
+        #     p = p[0].lower()+p[1:]
         self.p = p
 
     def flat_triple(self):
@@ -132,6 +134,17 @@ class Entry:
             triples.append(flat_triple)
         return triples
 
+    def has_property(self,tripleRE):
+        """
+        Check if one the triple has a property that matches a regex
+        :param tripleRE: regex to match a property
+        :return: True
+        """
+        for triple in self.modifiedtripleset.triples:
+            if re.match(tripleRE,triple.p,re.I) is not None:
+                return True
+        return False
+
 class Benchmark:
 
     def __init__(self):
@@ -154,8 +167,8 @@ class Benchmark:
                 for m_triples in data["modified_triple_sets"]["mtriple_set"]:
                     entry.fill_modifiedtriple_texts(m_triples)
                 self.entries.append(entry)
-        print(counts)
-        print([f"{k[0]}-{k[1]}:{cat_counts[k]}" for k in sorted(cat_counts)])
+        # print(counts)
+        # print([f"{k[0]}-{k[1]}:{cat_counts[k]}" for k in sorted(cat_counts)])
 
     def fill_benchmark(self, fileslist):
         """

@@ -1,6 +1,7 @@
 from pyrealb import *
 import re, random
 from rqDBPedia import isA, getGender
+from LexicalChoices import LexicalChoices
 
 ## taken from https://www.geeksforgeeks.org/python-split-camelcase-string-to-individual-strings/
 # $  camel_case_split:: str -> [str]
@@ -10,32 +11,42 @@ def camel_case_split(s):
 ## help functions to simplify somewhat the notation for prepositional phrases in templates
 ##   they are prefixed with _ to avoid nameclash with Python keywords and operators
 ## combine the tuple given by star arg with the first param
-def _pp(p, *o):
+def _pp(p, *o): # create a Prepositional phrase
     return PP(P(p), o)
 
-class Realizer:
+class Realizer(LexicalChoices):
     nbDefaultRealizers=0
     ## dOpt options to show only the date
     dateOptions={"hour":False,"minute":False,"second":False,"det":False,"day":False}
     ## names of predicates for which the object should be put in lower case
-    lowerCaseObject = {"bird", "bodyStyle", "course", "dishVariation", "engine", "genre", "industry", "ingredient",
-                       "instrument", "mainIngredient", "material", "mediaType", "occupation", "product", "service",
-                       "servingTemperature", "status", "type"}
+    lowerCaseObject = {"bird", "bodyStyle", "category", "class","course", "dishVariation", "engine", "genre",
+                       "industry","ingredient","instrument", "layout", "mainIngredient", "material",
+                       "mediaType", "occupation", "product", "servingTemperature", "status", "type"}
+    categoriesHuman = {"SportsTeam":False, "Astronaut":True, "Airport":False, "Athlete":True, "City":False,
+                       "MusicalWork":False, "Scientist":True, "Monument":False, "Artist":True, "Company":False,
+                       "University":False, "Politician":True, "WrittenWork":False, "Film":False,
+                       "Food":False, "CelestialBody":False, "ComicsCharacter":True,
+                       "MeanOfTransportation":False, "Building":False, "WikiData human":True}
 
     def __init__(self):
+        self.currentCategory = None # will be filled at each realization
         ## predicates that can be combined using only their complements
         self.predicateGroups = [
-            ["birthDate", "birthPlace"],
+            ["birthDate", "birthYear", "birthPlace"],
+            ["builder","buildingStartDate"],
             ["deathDate", "deathPlace"],
+            ["firstAired","lastAired"],
             ["foundingDate", "foundationPlace"],
             ["numberOfStudents", "academicStaffSize", "numberOfPostgraduateStudents"],
             ["addedToTheNationalRegisterOfHistoricPlaces","NationalRegisterOfHistoricPlacesReferenceNumber"],
             ["orbitalPeriod", "periapsis", "apoapsis"],
+            ["operator","operatingIncome","operatingOrganization"],
+            ["runwayLength","runwayName"]
         ]
         ## add indirect realizers to this list
         headRs = {}
-        for r in self.sentencePatterns:
-            (_, _, rr) = self.sentencePatterns[r]
+        for r in self.sentence_patterns:
+            (_, _, rr) = self.sentence_patterns[r]
             if isinstance(rr, str):
                 if rr in headRs:
                     headRs[rr].append(r)
@@ -44,23 +55,22 @@ class Realizer:
         for r in headRs:
             self.predicateGroups.append([r] + headRs[r])
 
-
-
     ##  format a litteral
     def q(self,term,lower=False):
         if lower:term=term.lower()
         if isinstance(term,Terminal):term=term.lemma
-        m=re.fullmatch(r'"?(\d{4}-\d{2}-\d{2})"?',term)
+        m=re.fullmatch(r'"?(\d{4}-\d{2}-\d{2})"?',term) # check for a date
         if m is not None:
             return DT(m.group(1)+"T00:00:00-06:00").dOpt(Realizer.dateOptions)
-        m=re.fullmatch(r'"(.*)"',term)
-        if m!=None:
+        m=re.fullmatch(r'"(.*)"',term) # remove outer quotes
+        if m is not None:
             return Q(m.group(1).replace("_"," "))
-        m=re.fullmatch(r'"(\d+(.\d+)?)"\s*\((.*?)\)',term)
-        if m!=None:
+        m=re.fullmatch(r'"(\d+(.\d+)?)"\s*\((.*?)\)',term) # number followed by "unit" in parentheses
+        if m is not None:
             return NP(NO(m.group(1)).dOpt({"mprecision": 0}),Q(m.group(3)))
-        ## HACK: patch a few things...
-        return Q(term.replace("_language","").replace("_"," ").replace('"','\\"'))
+        ## HACK: patch still a few things...
+        term = self.fix_language(term)
+        return Q(term.replace("_"," ").replace('"','\\"'))
 
 
     ##  combine many objects sharing a subject and predicate
@@ -75,25 +85,47 @@ class Realizer:
         if p.startswith("hasToIts "):return 30
         if p.startswith("numberOf"):return 21
         if "Runway" in p: return 30+int(p[0])
-        if p in self.sentencePatterns:
-            return self.sentencePatterns[p][0]
+        if p in self.sentence_patterns:
+            return self.sentence_patterns[p][0]
         return 50
+
+    def property_with_underscore(self,p):
+        m = re.fullmatch(r"(.*?)(\..*?)?( .*?)?_(.*?)",p)
+        if len(m[1]) > 0:
+            before = V(m[1])
+            if m[2] is not None:
+                before.t(m[2][1:])
+            if m[3] is not None:
+                before = [before,Q(m[3])]
+        else:
+            before = None
+        after  = Q(m[4]) if len(m[4])>0 else None
+        return (50, True, [lambda o : VP(before,o,after)])
+
 
     def getSentPatterns(self,p):
         # special cases...
+        # HACK for GEM2024 (only for English...)
+        if p in self.wikidata_properties:
+            p = self.wikidata_properties[p]
+            if '_' in p:
+                return self.property_with_underscore(p)
         if p.startswith("hasToIts"):
             return self.direction(p[8:].lower())
         m = re.fullmatch(r'numberOf(.*)', p)
-        if m != None:
+        if m is not None:
             entities = Q(" ".join(camel_case_split(m.group(1))))
             return self.number_of(entities)
         m = re.fullmatch(r"(\d\w\w)Runway(.*)", p)
-        if m != None:
+        if m is not None:
             return self.runway(m.group(1), m.group(2))
-        if p in self.sentencePatterns:
-            (prec, isHuman, pats) = self.sentencePatterns[p]
-            if isinstance(pats, str):
-                (prec, isHuman, pats) = self.sentencePatterns[pats]  # deal with indirection (does not check circularity!!)
+        m = re.fullmatch(r"(.*)Code",p)
+        if m is not None:
+            return self.code(m.group(1))
+        if p in self.sentence_patterns:
+            (prec, isHuman, pats) = self.sentence_patterns[p]
+            if isinstance(pats, str): # deal with a single level of indirection (does not check circularity!!)
+                (prec, isHuman, pats) = self.sentence_patterns[pats]
             return (prec, isHuman, pats)
         # if p in modifiedPredicates:  ## check for "old" predicates for the 2017 test set
         #     return getSentPatterns(modifiedPredicates[p])
@@ -112,12 +144,12 @@ class Realizer:
     ## check if p is a defined pattern
     def hasPattern(self,p):
         return p.startswith("hasToIts") or re.fullmatch(r'numberOf(.*)', p) is not None or \
-            re.fullmatch(r"(\d\w\w)Runway(.*)", p) or p in self.sentencePatterns
+            re.fullmatch(r"(\d\w\w)Runway(.*)", p) or p in self.sentence_patterns
 
 
     def isHuman(self,p):
-        if p in self.sentencePatterns: return self.sentencePatterns[p][1]
-        return None
+        if p in self.sentence_patterns: return self.sentence_patterns[p][1]
+        return False
 
     #############
     ##  start of the realization
@@ -130,7 +162,7 @@ class Realizer:
         return False
 
     def addToLastObject(self, phrase, newObj):
-        if phrase.isA("S","SP"):
+        if phrase.isA("S") or phrase.isA("SP"):
             vp = phrase.elements[-1]
             if vp.isA("VP"):
                 vp.add(newObj, None, True)  # HACK: insert directly in the VP without keeping track of .add(...)
@@ -174,13 +206,19 @@ class Realizer:
         pat = random.choice(pats)
         return pat(objects)
 
-    def getPro(self, subject, pred):
+    def getPro(self, subject, _pred):
         g = getGender(subject)
-        return self.pro_I().g("n" if g == None else "f" if g == "female" else "m")
+        if g is None:
+            if self.currentCategory in Realizer.categoriesHuman:
+                if Realizer.categoriesHuman[self.currentCategory]: g = "male" # masculine by default...
+            else:
+                print(f"@@@ unknown category: {self.currentCategory}")
+        return self.pro_I().g("n" if g is None else "f" if g == "female" else "m")
 
     #$ realize:: (Graph) -> str
     def realize(self,graph,show):
         res=[]
+        self.currentCategory = graph.category
         while len(graph.subjects)>0: ## watch out: graph.subjects might be changed within the loop
             node=graph.subjects.pop(0)
             predObj=node.predObj
@@ -229,14 +267,14 @@ def printReal(pat, s, o):
 
 def showRealizations(realizer,p, s, o):
     load(realizer.lang)
-    (prec, isHuman, pats) = realizer.sentencePatterns[p]
+    (prec, isHuman, pats) = realizer.sentence_patterns[p]
     if realizer.lang == "en":
         print("%s [%d]" % (p, prec), end="")
     if isHuman:
         if realizer.lang == "en":print(" [human]", end="")
     if isinstance(pats, str):
         if realizer.lang == "en":print(" => " + pats)
-        (prec, _, pats) = realizer.sentencePatterns[pats]
+        (prec, _, pats) = realizer.sentence_patterns[pats]
     else:
         if realizer.lang == "en":print()
     for pat in pats:
@@ -255,11 +293,11 @@ if __name__ == '__main__':
     english.nbDefaultRealizers = 0
     francais.nbDefaultRealizers = 0
 
-    for p in sorted(english.sentencePatterns):
+    for p in sorted(english.sentence_patterns):
         showRealizations(english,p, s(), o())
         showRealizations(francais,p, s(), o())
-    print("\nNB patterns:%d" % len(english.sentencePatterns))
-    print("\nNB realizer:%d" % len(francais.sentencePatterns))
+    print("\nNB en patterns:%d" % len(english.sentence_patterns))
+    print("NB fr patterns:%d\n" % len(francais.sentence_patterns))
 
     print("** Special cases **")
     for realizer in [english,francais]:

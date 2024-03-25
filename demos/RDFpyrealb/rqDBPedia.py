@@ -34,9 +34,10 @@ def isA(subject,category):
     sc=subject+"|"+category
     if sc in typeMemo:
         return typeMemo[sc]
+    # return False # HACK
     query="""ASK WHERE { <http://dbpedia.org/resource/%s> rdf:type <http://dbpedia.org/ontology/%s> }"""%(subject,category)
     results=sendQuery(query)
-    if results==None: 
+    if results is None:
         typeMemo[sc]=False
         return False
     theType=results["boolean"]
@@ -50,10 +51,11 @@ def getGender(subject):
     subject=cleanURI(subject)
     if subject in genderMemo: 
         return genderMemo[subject]
+    # return None  # HACK
     query="""SELECT ?gender
        WHERE { <http://dbpedia.org/resource/%s> <http://xmlns.com/foaf/0.1/gender> ?gender }"""%(subject)
     results=sendQuery(query)
-    if results==None:
+    if results is None:
         genderMemo[subject]=None
         return None
     bindings=results["results"]["bindings"]
@@ -62,8 +64,17 @@ def getGender(subject):
     print("*SPARQL* getGender(%s):%s"%(subject,gender))
     return gender
 
-import sys,json,os.path
 
-memoFileName=os.path.abspath(os.path.join(os.path.dirname(__file__), "data/dbPediaMemo.json"))
-[typeMemo,genderMemo]=json.load(open(memoFileName,"r",encoding="UTF-8"))
-sys.stderr.write(memoFileName+" read\n")
+## charger le json de mémorisation des informations tirées de DBpedia
+import sys,json,os.path
+# memoFileName=os.path.abspath(os.path.join(os.path.dirname(__file__), "data/dbPediaMemo-24.json"))
+
+def loadDBpediaMemo(memoFileName):
+    global typeMemo,genderMemo
+    if os.path.exists(memoFileName):
+        [typeMemo,genderMemo]=json.load(open(memoFileName,"r",encoding="UTF-8"))
+        sys.stderr.write("read: "+ memoFileName+"\n")
+
+def saveDBpediaMemo(memoFileName):
+    json.dump([typeMemo,genderMemo],open(memoFileName,"w",encoding="UTF-8"),ensure_ascii=False)
+    sys.stderr.write("wrote: "+ memoFileName + "\n")

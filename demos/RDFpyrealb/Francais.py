@@ -18,8 +18,11 @@ def _pour(*o): return _pp("pour", o)
 def _sur(*o): return _pp("sur", o)
 def _vers(*o): return _pp("vers", o)
 
-def number(n, o): return VP(V("avoir"), NP(D("le"), N("numéro"), Q(n), o))
+def _vpas(v): # create a simili passive verb
+    return [V("être"),V(v).t("pp")]
 
+def number(n, o):
+    return VP(V("avoir"), NP(D("le"), N("numéro"), Q(n), o))
 
 def pp_place(lemma):
     (prep, g, n, name, inhabitant) = Francais.countries[lemma]
@@ -43,12 +46,10 @@ def place(o):
         return tuple([res]+list(o[1:]))
 
 def habite(o):
-    if not isinstance(o,Terminal):return o
-    if o.lemma in Francais.countries:
+    if isinstance(o,Terminal) and o.lemma in Francais.countries:
         (prep,g,n,name,inhabitant) = Francais.countries[o.lemma]
         if random.choice([True,False]):
-            v = oneOf("habiter","vivre")
-            return VP(V(v),pp_place(o.lemma))
+            return VP(V(oneOf("habiter","vivre")),pp_place(o.lemma))
         else:
             return VP(V("être"),NP(D("un"),N(inhabitant)))
     else:
@@ -58,7 +59,7 @@ def habite(o):
 class Francais(Realizer):
     def __init__(self):
         loadFr()
-        self.lang="fr"
+        # self.lang="fr"
         addToLexicon("catégoriser",{"V":{"aux":"av", "tab":"v36", "pat":["tdir"]}})
         addToLexicon("compétitionner",{"V":{"aux":"av", "tab":"v36", "pat":["intr"]}})
         addToLexicon({"Bruxellois": {"N": {"g": "x","tab": "n27"}}})
@@ -67,11 +68,12 @@ class Francais(Realizer):
         for country in Francais.countries:
             (_,g,n,name,_) = Francais.countries[country]
             addToLexicon(name,{"N":{"g":g,"n":n,"tab":"nI"}})
-        self.v_be = V("être")
-        self.conj_and = C("et")
-        self.pro_I = lambda: Pro("je") # as it will be modified create a new instance at each call
-        self.def_det = D("le")
-        self.undef_det = D("un")
+        # these attributes are used in Realizer
+        # self.v_be = V("être")
+        # self.conj_and = C("et")
+        # self.pro_I = lambda: Pro("je") # as it will be modified create a new instance at each call
+        # self.def_det = D("le")
+        # self.undef_det = D("un")
         super().__init__()
 
     # countries to translate in French
@@ -84,12 +86,14 @@ class Francais(Realizer):
         'Denmark': ("à", "m", "s", "Danemark", "Danois"),
         'England': ("en", "f", "s", "Angleterre", "Anglais"),
         "France": ("en", "f", "s", "France", "Français"),
+        "Great Britain":("en","f","s","Grande-Bretagne","Anglais"),
         'India': ("à", "f", "p", "Indes", "Indien"),
+        'Italy': ("en", "f", "s", "Italie", "Italien"),
         "Mexico": ("à", "m", "s", "Mexique", "Mexicain"),
         'Philippines': ("à", "f", "p", "Philippines", "Philippin"),
         'Romania': ("en", "f", "s", "Roumanie", "Roumain"),
         'Spain': ("en", "f", "s", "Espagne", "Espagnol"),
-        'Switzerland': ("en", "f", "s", '"Suisse', "Suisse"),
+        'Switzerland': ("en", "f", "s", 'Suisse', "Suisse"),
         'Turkey': ("en", "f", "s", "Turquie", "Turc"),
         "United States": ("à", "m", "p", "États-Unis", "Américain")
     }
@@ -98,13 +102,31 @@ class Francais(Realizer):
         loadFr()
         return super().realize(graph,show)
 
+    @property
+    def lang(self): return "fr"
+
+    @property
+    def v_be(self): return V("être")
+
+    @property
+    def conj_and(self): return C("et")
+
+    @property
+    def pro_I(self): return lambda: Pro("je") # as it will be modified create a new instance at each call
+
+    @property
+    def def_det(self): return D("le")
+
+    @property
+    def undef_det(self): return D("un")
+
     #### switch for precedence, isHuman, vp pattern
     ## precedence between 0 and 100 used for sorting predicates before realization
     ## isHuman : boolean indicating if this predicate applies to a human (useful for pronominalzation)
     # $ realizers::{str :  (int, bool, [Constituent->Phrase] | str)
-    sentencePatterns = {
+    sentence_patterns = {
         "abbreviation": (50, False, [
-            lambda o: VP(V("être"), V("abréger").t("pp"), _en(o)),
+            lambda o: VP(_vpas("abréger"), _en(o)),
         ]),
         "academicStaffSize": (50, False, [
             lambda o: VP(V("avoir"), D("un"), N("personnel"), oneOf(A("académique"), Q("")),
@@ -128,9 +150,14 @@ class Francais(Realizer):
         ]),
         "address": (20, False, "location"),
         "affiliation": (20, False, [
-            lambda o: VP(V("être"), V("affilier").t("pp"), oneOf(_avec(o), _a(o))),
+            lambda o: VP(_vpas("affilier"), oneOf(_avec(o), _a(o))),
         ]),
         # "affiliations":(20,True,"affiliation"),
+        "aircraftFighter":(50,False,[
+            lambda o : VP(V(oneOf("avoir","utiliser")),o,
+                          _comme(oneOf(lambda:NP(N("avion"),P("de"),N("chasse")),
+                                       lambda:N("chasseur"))))
+        ]),
         "almaMater": (20, True, [
             lambda o: VP(V("obtenir").t("pc"), NP(D("mon"),N("diplôme")), _de(o)),
             lambda o: VP(V("terminer").t("pc"), NP(D("mon"), N("étude").n("p")), _a(o)),
@@ -160,18 +187,24 @@ class Francais(Realizer):
         "architecturalStyle": (40, False, [
             lambda o: VP(V("être"), _dans(NP(D("le"), N("style"), A("architectural"), o)))
         ]),
-        "areaCode": (60, False, [
-            lambda o: VP(V("avoir"), NP(D("le"), N("code"), A("régional"), o)),
+        # "areaCode": (60, False, [
+        #     lambda o: VP(V("avoir"), NP(D("le"), N("code"), A("régional"), o)),
+        # ]),
+        "artist": (40, False, [
+            lambda o: VP(V("être"),V(oneOf("jouer","exécuter")).t("pp"), _par(o)),
         ]),
         "assembly": (50, False, [
-            lambda o: VP(V("être"), V("assembler").t("pp"), _dans(o)),
+            lambda o: VP(_vpas("assembler"), _dans(o)),
         ]),
         "associatedBand/associatedMusicalArtist": (50, True, [
             lambda o: VP(V("jouer"), _avec(o)),
             lambda o: VP(V("produire"), _avec(o)).typ({"refl":True})
         ]),
         "associatedRocket": (50, False, [  # $$$$ last
-            lambda o: VP(V("être"), V("associer").t("pp"), _avec(D("le"), N("fusée"), o))
+            lambda o: VP(_vpas("associer"), _avec(D("le"), N("fusée"), o))
+        ]),
+        "attackAircraft": (50, False, [
+            lambda o: VP(V("utiliser"), NP(D("le"), o, _comme(NP(N("avion"),P("de"),N("attaque"))))),
         ]),
         "author": (40, True, [
             lambda o: VP(V("être").t("pc"), V("écrire").t("pp"), _par(o)),
@@ -215,33 +248,37 @@ class Francais(Realizer):
             lambda o: VP(V("être").t("pc"), V("diffuser").t("pp"), _par(o)),
         ]),
         "builder": (10, False, [
-            lambda o: VP(V("être"), V(oneOf("construire", "ériger")).t("pp"), _par(o))
+            lambda o: VP(_vpas(oneOf("construire", "ériger")), _par(o))
         ]),
         "buildingStartDate": (15, False, [
             lambda o: VP(V("ouvrir").t("pc"), _en(o)),
             lambda o: VP(V("être").t("pc"), V("débuter").t("pp"), _en(o)),
         ]),
         "campus": (21, False, [
-            lambda o: VP(V("être"), V("situer").t("pp"), place(o)),
+            lambda o: VP(_vpas("situer"), place(o)),
             lambda o: _dans(o),
         ]),
         "capital": (30, False, [
             lambda o: VP(V("avoir"), o, Adv("comme"), N("capitale")),
          ]),
         "category": (10, False, [
-            lambda o: VP(V("être"), V("catégoriser").t("pp"), _comme(o)),
+            lambda o: VP(_vpas("catégoriser"), _comme(o)),
             lambda o: VP(V("tomber"), P("dans"), NP(D("le"), N("catégorie"), _de(o))),
         ]),
         "chairman": (50, True, [
             lambda o: VP(V("avoir"), o, P("comme"), N("président")),
-            lambda o: VP(V("être"), V("présider").t("pp"), _par(o)),
+            lambda o: VP(_vpas("présider"), _par(o)),
         ]),
         "champions": (50, False, [
             lambda o: VP(Pro("où"), o, V("être").t("pc").n("p"), N("champion").n("p"))
         ]),
+        "cinematography": (30, True, [
+            lambda o: VP(V("avoir"),o,_comme(NP(N("directeur"),N("photo"))))
+        ]),
+        "citizenship": (40, True, "residence"),
         "city": (30, False, [
             lambda o: VP(V("être"), place(o)),
-            lambda o: VP(V("être"), V("situer").t("pp"), place(o)),
+            lambda o: VP(_vpas("situer"), place(o)),
         ]),
         "cityServed": (50, False, [
             lambda o: VP(V("servir"), o),
@@ -254,13 +291,13 @@ class Francais(Realizer):
             lambda o: VP(V("être"), NP(D("un"), N("joueur"), _pour(o))),
         ]),
         "coach": (50, True, [
-            lambda o: VP(V("être"), V(oneOf("gérer", "entraîner")).t("pp"), _par(o)),
+            lambda o: VP(_vpas(oneOf("gérer", "entraîner")), _par(o)),
         ]),
-        "codenCode": (50, False, [
-            lambda o: VP(V("avoir"), NP(D("le"), N("code"), Q("CODEN"), o))
-        ]),
+        # "codenCode": (50, False, [
+        #     lambda o: VP(V("avoir"), NP(D("le"), N("code"), Q("CODEN"), o))
+        # ]),
         "commander": (21, True, [
-            lambda o: VP(V("être"), V("commander").t("pp"), _par(o)),
+            lambda o: VP(_vpas("commander"), _par(o)),
         ]),
         "comparable": (20, False,[
             lambda o: VP(V("être"),A("comparable"),_a(o))
@@ -285,7 +322,7 @@ class Francais(Realizer):
         "course": (20, False, [
             lambda o: VP(V("être"), NP(D("un"), o)),
         ]),
-        "creator": (50, False, [
+        "creator": (20, False, [
             lambda o: VP(V("être").t("pc"), V(oneOf("créer","fonder")).t("pp"), _par(o)),
         ]),
         "crewMembers": (50, False, [
@@ -295,12 +332,15 @@ class Francais(Realizer):
             lambda o: VP(V("avoir"), o, _comme(oneOf(Q(""), A("national")), N("monnaie"))),
         ]),
         "currentclub": (50, True, "club"),
+        "currentTenants":(50,False,[
+            lambda o: VP(V("abriter"),Adv("présentement"),D("le"),o)
+        ]),
         "dateOfRetirement": (90, True, [
             lambda o: VP(V("prendre").t("pc"), NP(D("mon"),N("retraite")), _en(o)),
             lambda o: VP(V("partir").t("pc"), P("à"),NP(D("le"), N("retraite")), _en(o)),
         ]),
         "dean": (20, False, [
-            lambda o: VP(V("être"), V("diriger").t("pp"), _par(o)),
+            lambda o: VP(_vpas("diriger"), _par(o)),
         ]),
         "deathDate": (99, True, [
             lambda o: VP(V("mourir").t("pc"), D("le"),o),
@@ -314,10 +354,10 @@ class Francais(Realizer):
             lambda o: VP(Adv("d'abord"), V("jouer").t("pc"), _avec(o)),
         ]),
         "dedicatedTo": (10, False, [
-            lambda o: VP(V("être"), V("vouer").t("pp"), _a(o)),
+            lambda o: VP(_vpas("vouer"), _a(o)),
         ]),
         "demonym": (50, False, [
-            lambda o: VP(V("être"), V("habiter").t("pp"), _par(o)),
+            lambda o: VP(_vpas("habiter"), _par(o)),
         ]),
         "density": (50, False, [
             lambda o: VP(V("avoir"), NP(D("un"), N("densité"), _de(o)))
@@ -325,6 +365,7 @@ class Francais(Realizer):
         "derivative": (50, False, [
             lambda o: VP(V("dériver").t("pc"), _de(o))
         ]),
+        "designCompany":(25,False,"designer"),
         "designer": (25, False, [
             lambda o: VP(V("être").t("pc"), V("concevoir").t("pp"), _par(o)),
             lambda o: _par(D("mon"), N("concepteur"), o),
@@ -348,6 +389,9 @@ class Francais(Realizer):
         "district": (30, False, [
             lambda o : VP(V("être"),_dans(NP(D("le"),N("district"),_de(o))))
         ]),
+        "distributor": (60, False, [
+            lambda o: VP(V("être").t("ps"), V("distribuer").t("pp"), _par(o))
+        ]),
         "division": (40, False, [
             lambda o: VP(V("avoir"), NP(D("un"), o, _comme(N("division"))))
         ]),
@@ -357,6 +401,7 @@ class Francais(Realizer):
         "draftTeam": (20, True, [
             lambda o: VP(V("être").t("pc"), V("sélectionner").t("pp"), _par(o)),
         ]),
+        "editing": (42, False, "editor"),
         "editor": (42, False, [
             lambda o: VP(V("être").t("pc"), V("éditer").t("pp"), _par(o)),
         ]),
@@ -395,6 +440,12 @@ class Francais(Realizer):
         "finalFlight": (75, False, [
             lambda o: VP(V("effectuer").t("pc"), D("mon"), oneOf(A("dernier"), A("final")), N("vol"), _sur(o)),
         ]),
+        "firstAired" : (40,False,[
+            lambda o: VP(V("être").t("ps"),V("diffuser").t("pp"),
+                         PP(P("pour"),
+                            NP(D("le"),A("premier"),N("fois")),
+                            NP(D("le"),o)))
+        ]),
         "floorArea": (50, False, [
             lambda o: VP(V("avoir"), NP(o,_comme(N("superficie"),_de(N("plancher")))))
         ]),
@@ -402,7 +453,7 @@ class Francais(Realizer):
             lambda o: VP(V("compter"), NP(NO(o.lemma), N("étage"))),
         ]),
         "followedBy": (50, False, [
-            lambda o: VP(V("être"), V("suivre").t("pp"), _par(o)),
+            lambda o: VP(_vpas("suivre"), _par(o)),
         ]),
         "formerName": (2, False, [
             lambda o: VP(V("être").t("ps"), Adv("précédemment"), V("connaître").t("pp"), _comme(o)),
@@ -427,8 +478,14 @@ class Francais(Realizer):
         "genre": (50, True, [
             lambda o: VP(V(oneOf("jouer", "faire")), _de(D("le"),o)),
         ]),
+        "governmentType": (50,False,"governingBody"),
         "governingBody": (50, False, [
-            lambda o: VP(V("être"), V("gouverner").t("pp"), _par(o)),
+            lambda o: VP(_vpas("gouverner"), _par(o)),
+        ]),
+        "gross":(60, False,[
+            lambda o: VP(V("faire").t("pc"),
+                         NP(D("un"),N("recette").n("p"),A("brut"),
+                            _de(NP(NO(o.lemma),N("dollar")))))
         ]),
         "ground": (50, True, [
             lambda o: VP(V("jouer"), _dans(o)),
@@ -450,6 +507,9 @@ class Francais(Realizer):
         ]),
         "industry": (50, False, [
             lambda o: VP(V("être"), _dans(NP(D("le"), o))),
+        ]),
+        "influencedBy":(50, True, [
+            lambda o: VP(V("être").t("pc"),V("influencer").t("pp"),_par(o))
         ]),
         "ingredient": (25, False, [
             lambda o: VP(V("contenir"), o),
@@ -487,11 +547,21 @@ class Francais(Realizer):
             lambda o: number("ISSN", o),
         ]),
         "keyPerson": (40, True, "leader"),
+        "knownFor":(30, True,[
+            lambda o: VP(V("être"),V(oneOf("reconnaître","renommer")).t("pp"),
+                         _pour(NP(D("mon"),N("travail"),_en(o))))
+        ]),
         "language": (50, True, [
             lambda o: VP(V("parler"), o),
         ]),
         "largestCity": (32, False, [
             lambda o: VP(V("avoir"), o, Adv("comme"), NP(D("mon"), A("grand").f("su"), N("ville"))),
+        ]),
+        "lastAired" : (40,False,[
+            lambda o: VP(V("être").t("ps"),V("diffuser").t("pp"),
+                         PP(P("pour"),
+                            NP(D("le"),A("dernier"),N("fois")),
+                            NP(D("le"),o)))
         ]),
         "latinName": (20,False, [
             lambda o: NP(o,PP(P("de"),NP(D("mon"),N("nom"),A("latin")))).b(","),
@@ -500,16 +570,21 @@ class Francais(Realizer):
         "launchSite": (30, False, [
             lambda o: VP(V("être").t("pc"), V("lancer").t("pp"), _de(o)),
         ]),
+        "layout": (30,False,[
+            lambda o: VP(V("être"),V("équiper").t("pp"),
+                         PP(P("de"),o,
+                            _comme(NP(N("système"),P('de'),N("traction")))))
+        ]),
         "leader": (40, False, [
-            lambda o: VP(V("être"), V(oneOf("mener","diriger")).t("pp"), _par(o)),
+            lambda o: VP(_vpas(oneOf("mener","diriger")), _par(o)),
             lambda o: VP(V("avoir"), o, _comme(N(oneOf("chef","dirigeant")))),
         ]),
         "leaderParty": (42, False, [
             lambda o: VP(V("mener").t("pr"), NP(D("le"),N("parti"), o)),
         ]),
         "leaderTitle": (41, False, [
-            lambda o: VP(V("être"), V("mener").t("pp"), _par(o)),
-            lambda o: VP(V("être"), V("gouverner").t("pp"), _par(o)),
+            lambda o: VP(_vpas("mener"), _par(o)),
+            lambda o: VP(_vpas("gouverner"), _par(o)),
         ]),
         "league": (50, True, [
             lambda o: VP(V(oneOf("être", "jouer", "compétitionner")), _dans(NP(D("le"), N("ligue"), o))),
@@ -525,7 +600,7 @@ class Francais(Realizer):
             lambda o: number("LCCN", o),
         ]),
         "location": (30, False, [
-            lambda o: VP(V("être"), V("situer").t("pp"), place(o)),
+            lambda o: VP(_vpas("situer"), place(o)),
             lambda o: VP(Pro("me*refl"),V("situer").t("p"), place(o)),
         ]),
         "locationIdentifier": (50, False, [
@@ -539,19 +614,19 @@ class Francais(Realizer):
             lambda o: VP(V("contenir"), Adv("surtout"), o),
         ]),
         "manager": (20, False, [
-            lambda o: VP(V("être"), V("gérer").t("pp"), _par(o)),
+            lambda o: VP(_vpas("gérer"), _par(o)),
             lambda o: VP(V("avoir"), o, Adv("comme"), N("gérant")),
         ]),
         "manufacturer": (40, False, [
-            lambda o: VP(V("être"), V("fabriquer").t("pp"), _par(o)),
+            lambda o: VP(_vpas("fabriquer"), _par(o)),
         ]),
         "mass": (50, False, [
             lambda o: VP(V("avoir"), NP(D("un"), N("masse"), _de(o))),
             lambda o: VP(V("peser"), o)
         ]),
         "material": (50, False, [
-            lambda o: VP(V("être"), V("faire").t("pp"), _de(o)),
-            lambda o: VP(V("être"), V("construire").t("pp"), _en(o)),
+            lambda o: VP(_vpas("faire"), _de(o)),
+            lambda o: VP(_vpas("construire"), _en(o)),
         ]),
         "mediaType": (40, False, [
             lambda o: VP(V("être"), oneOf(A("disponible"),V("paraître").t("pp")), _en(o)),
@@ -566,8 +641,14 @@ class Francais(Realizer):
             lambda o: VP(V("devenir").t("pc"), N("membre"), _de(o)),
         ]),
         "municipality": (30, False, "city"),
+        "musicComposer": (30, False, [
+            lambda o: VP(V("être").t("pp"), V("composer").t("pp"), _par(o)),
+        ]),
         "musicFusionGenre": (50, False, [
             lambda o: VP(V("être"), NP(D("un"), N("fusion"), A("musical"), _de(o))),
+        ]),
+        "musicSubgenre": (30, False, [
+            lambda o: VP(V("avoir"),o,_comme(N("sous-genre")))
         ]),
         "nationality": (1, True, [
             lambda o : habite(o)
@@ -604,7 +685,7 @@ class Francais(Realizer):
         "operatingIncome": (21,False,"netIncome"),
         "operatingOrganisation": (50, False, "operator"),
         "operator": (51, True, [
-            lambda o: VP(V("être"), V("opérer").t("pp"), _par(o)),
+            lambda o: VP(_vpas("opérer"), _par(o)),
         ]),
         "orbitalPeriod": (30, False, [
             lambda o: VP(V("avoir"), NP(D("un"), N("période"), A("orbital"), _de(o)))
@@ -616,7 +697,7 @@ class Francais(Realizer):
             lambda o: VP(V("venir"), _de(o))
         ]),
         "owner": (30, False, [
-            lambda o: VP(V("être"), V("détenir").t("pp"), _par(o))
+            lambda o: VP(_vpas("détenir"), _par(o))
         ]),
         "parentCompany": (30, False, "owner"),
         "party": (40, True, [
@@ -629,18 +710,24 @@ class Francais(Realizer):
         "populationDensity": (40, False, [
             lambda o: VP(V("avoir"), NP(D("un"), N("densité"),PP(P("de"), N("population"), _de(o)))),
         ]),
+        "position": (40, False, [
+            lambda o: VP(V(oneOf("jouer", "compétitionner")), _comme(o)),
+        ]),
         "powerType": (50, False, [
-            lambda o: VP(V("être"), V("actionner").t("pp"), _par(NP(D("un"), N("moteur"), o)))
+            lambda o: VP(_vpas("actionner"), _par(NP(D("un"), N("moteur"), o)))
         ]),
         "precededBy": (50, False, [
-            lambda o: VP(V("être"), V("précéder").t("pp"), _par(o)),
+            lambda o: VP(_vpas("précéder"), _par(o)),
         ]),
         "predecessor": (20, True, [
             lambda o: VP(V("succéder").t("pc"),_a(o))
         ]),
         "president": (20, True, [
-            lambda o: VP(V("être"), V("présider").t("pp"), _par(o)),
+            lambda o: VP(_vpas("présider"), _par(o)),
             lambda o: VP(V("avoir"), o, Adv("comme"), N("président")),
+        ]),
+        "producer": (50, False, [
+            lambda o: VP(V("être"),V("produire").t("pp"), _par(o))
         ]),
         "product": (50, False, [
             lambda o: VP(V("offrir"), NP(D("un"),N("produit")).n("p"),  Adv("comme"), o),
@@ -650,11 +737,14 @@ class Francais(Realizer):
         "productionStartYear": (30, False, [
             lambda o: VP(V("débuter").t("pc"),NP(D("mon"),N("production"), _en(o))),
         ]),
-        "position": (40, False, [
-            lambda o: VP(V(oneOf("jouer", "compétitionner")), _comme(o)),
+        "professionalField": (40, False, [
+            lambda o: VP(V("travailler"), _en(o)),
         ]),
         "publisher": (45, False, [
-            lambda o: VP(V("être"), V("publier").t("pp"), _par(o))
+            lambda o: VP(_vpas("publier"), _par(o))
+        ]),
+        "recordedIn": (20, False, [
+            lambda o: VP(_vpas("enregistrer"), _a(o))
         ]),
         "recordLabel": (45, True, [
             lambda o: VP(V("enregistrer"), _pour(o)),
@@ -668,20 +758,30 @@ class Francais(Realizer):
             lambda o: VP(V("être"), NP(D("un"), N("moyen"), A("alternatif"),
                                        _de(N("transport"), _pour(o)))),
         ]),
-        "representative": (50, False, [
-            lambda o: VP(V("être"), V("représenter").t("pp"), _par(o)),
+        "releaseDate": (40, False, [
+            lambda o: VP(V("être").t("ps"), V("lancer").t("pp"), NP(D("le"),o))
         ]),
-        "residence": (50, True, [
+        "religion": (50,False, [
+            lambda o: VP(V("avoir"),o,_comme(NP(D("un"),N("religion")))),
+            lambda o: VP(V("avoir"),_comme(N("religion")),o)
+        ]),
+        "representative": (50, False, [
+            lambda o: VP(_vpas("représenter"), _par(o)),
+        ]),
+        "residence": (40, True, [
             lambda o: VP(V(oneOf("vivre", "résider")), place(o)),
         ]),
         "revenue" : (40, False,[
-            lambda o: VP(V("avoir"),NP(D("un"),N("revenu"),A("annuel"),_de(NP(NO(o),N("dollar")))))
+            lambda o: VP(V("avoir"),NP(D("un"),N("revenu"),A("annuel"),_de(NP(NO(o.lemma),N("dollar")))))
         ]),
         "river": (50, False, [
             lambda o: VP(V("avoir"), NP(D("le"), N("rivière"), o)),
         ]),
         "rotationPeriod": (50, True, [
             lambda o: VP(V("avoir"), NP(D("un"), N("période"), _de(N("rotation"), P("de"), o)))
+        ]),
+        "runtime": (50, False, [
+            lambda o: VP(V("durer"), NP(NO(o.lemma),N("minute")))
         ]),
         "runwayLength": (50, False, [
             lambda o: VP(V("avoir"), NP(D("un"), NP(N("piste"), PP(P("de"), N("atterrissage"),
@@ -721,15 +821,18 @@ class Francais(Realizer):
         "significantBuilding": (30, True,[
             lambda o: VP(V("dessiner").t("pc"),o.a(','),NP(D("un"),N("édifice"),A("remarquable")))
         ]),
+        "site": (20, False, [
+            lambda o: VP(V("être"),V("situer").t("pp"),_a(o))
+        ]),
         "spokenIn": (50, False, [
-            lambda o: VP(V("être"), V("parler").t("pp"), place(o)),
+            lambda o: VP(_vpas("parler"), place(o)),
         ]),
         "spouse": (30, True, [
-            lambda o: VP(V("être"), V("marier").t("pp"), _a(o)),
+            lambda o: VP(_vpas("marier"), _a(o)),
             lambda o: VP(V("avoir"),o,_comme(N("conjoint")))
         ]),
         "starring": (35, False, [
-            lambda o: VP(V("mettre").t("pr"), o, PP(P("en"),N("vedette"))),
+            lambda o: VP(V("mettre"), o, PP(P("en"),N("vedette"))),
         ]),
         "state": (31, False, "city"),
         "status": (95, True, [
@@ -740,7 +843,7 @@ class Francais(Realizer):
         ]),
         "stylisticOrigin": (50, False, [
             lambda o: VP(V("provenir"), _de(o)),
-            lambda o: VP(V("être"), V("dériver").t("pp"), _de(o)),
+            lambda o: VP(_vpas("dériver"), _de(o)),
         ]),
         "subsidiary": (10, False, [
             lambda o: VP(V("avoir"),_comme(N("filiale"),o))
@@ -757,12 +860,18 @@ class Francais(Realizer):
         "timeInSpace": (24, True, [
             lambda o: VP(V("passer").t("pc"), o, _dans(D("le"), N("espace"))),
         ]),
+        "timeZone": (42, False, [
+            lambda o: VP(V("être"),_dans(NP(D("le"),N("fuseau"),A("horaire"),o)))
+        ]),
         "title": (95, True, "status"),
         "topSpeed": (50, False, [
             lambda o: VP(V("avoir"), NP(D("un"), N("vitesse"), P("de"), N("pointe"), _de(o)))
         ]),
         "transmission": (50, False, [
             lambda o: VP(V("avoir"), NP(D("un"), N("transmission"), o)),
+        ]),
+        "transportAircraft": (50, False, [
+            lambda o: VP(V("utiliser"), NP(D("le"), o, _comme(NP(N("avion"),P("de"),N("transport"))))),
         ]),
         "type": (10, False, [
             lambda o: VP(V("être"), NP(D("un"), o)),
@@ -783,7 +892,7 @@ class Francais(Realizer):
             lambda o: VP(V("avoir"), NP(D("un"), N("poids"), _de(o))),
             lambda o: VP(V("peser"), o)
         ]),
-        "wheelBase": (50, False, [
+        "wheelbase": (50, False, [
             lambda o: VP(V("avoir"), NP(D("un"), N("empattement"), _de(o)))
         ]),
         "writer": (40, True, "author"),
@@ -793,6 +902,11 @@ class Francais(Realizer):
         "youthclub": (30, True, [
             lambda o: VP(V("appartenir"), _a(NP(D("le"), N("club"), N("jeunesse"), o)))
         ]),
+    }
+
+    ## mapping of Wikidata property names to WebNLG property names
+    wikidata_properties = {
+        # à compléter
     }
 
     def rel_pro(self,_isHuman):
@@ -807,10 +921,20 @@ class Francais(Realizer):
             print("@@@ French default direction",dir)
         return (50, False, [lambda o: VP(V("avoir"), o, _a(D("le"), Q(dir)))])
 
+    def fix_language(self,term):
+        fr_langs = {"English":"anglais","French":"français","German":"allemand",
+                    "Chinese":"chinois","Russian":"russe","Greek":"grec",
+                    "Italian":"italien"}
+        if not term.endswith("_language"):
+            return term
+        term = term[:-9]
+        return fr_langs[term] if term in fr_langs else term
+
     def number_of(self,entities):
         entities_lemma = entities.lemma
         fr_entities = {"students":"étudiants",
                        "undergraduate students":"étudiants du premier cycle",
+                       "doctoral students":"étudiants au doctorat",
                        "postgraduate students":"étudiants aux cycles supérieurs",
                        "employees":"employés",
                        "locations":"sites",
@@ -842,4 +966,10 @@ class Francais(Realizer):
                     [lambda o: VP(V("avoir"), NP(D("mon"), N("piste"), runway_no), _en(o))])
         print("@@@ strange runway:%s,%s" % (no, type))
         return None
+
+    def code(self,type):
+        if type == "area": kind = A("régional")
+        elif type == "postal": kind = A("postal")
+        else: kind = Q(type)
+        return (60, False,[lambda o: VP(V("avoir"), NP(D("le"), N("code"),kind, o))])
 
