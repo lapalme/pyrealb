@@ -16,7 +16,7 @@ class PhraseEn(ConstituentEn,NonTerminalEn,Phrase):
             e.peng = self.peng
             return
 
-    def link_subj_obj_subordinate(self, pro, v):
+    def link_subj_obj_subordinate(self, pro, v, _subject):
         if pro.lemma in ["who", "which", "that"]:
             v.peng = self.peng
             self.linkAttributes(v, self.getFromPath([["VP"], ["CP"]]), self)
@@ -26,6 +26,9 @@ class PhraseEn(ConstituentEn,NonTerminalEn,Phrase):
 
     def check_coordinated_object(self):
         pass
+
+    def should_try_another_subject(self,lemma,_iSubj):
+            return lemma == "that"
 
     # Pronominalization in English only applies to a NP
     #  and does not need reorganisation of the sentence

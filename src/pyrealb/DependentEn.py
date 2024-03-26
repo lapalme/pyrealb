@@ -7,9 +7,6 @@ class DependentEn(ConstituentEn,NonTerminalEn,Dependent):
     def linkAttributes(self, depTerm, headTerm):
         pass
 
-    def relative_pronouns(self):
-        return ["who", "that"]
-
     def link_pp_before(self, dep, headTerm):
         pass
 

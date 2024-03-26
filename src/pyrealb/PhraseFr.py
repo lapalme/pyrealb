@@ -17,8 +17,8 @@ class PhraseFr(ConstituentFr,NonTerminalFr,Phrase):
             e.peng = self.peng
             return
 
-    def link_subj_obj_subordinate(self, pro, v):
-        if pro.lemma in ["qui","lequel"]:  # agrees with self NP
+    def link_subj_obj_subordinate(self, pro, v, subject):
+        if pro.lemma in ["qui","lequel"] and pro == subject:  # agrees with self NP
             v.peng = self.peng
             if pro.lemma == "lequel":pro.peng = self.peng
             self.linkAttributes(v, self.getFromPath([["VP"], ["CP"]]), self)
@@ -66,6 +66,11 @@ class PhraseFr(ConstituentFr,NonTerminalFr,Phrase):
                     except ValueError:
                         self.error("linkProperties    : verb not found")
 
+    def should_try_another_subject(self,lemma,iSubj):
+         # Check if a lemma is pronoun that should not be subject of a subordinate
+        return lemma in ["que","où","dont"] or \
+              (lemma == "qui" and iSubj>0 and self.elements[iSubj-1].isA("P"))
+
     def check_coordinated_object(self):
         #  in French, check for a coordinated object of a verb in an SP used as cod
         #  occurring before the verb
@@ -99,9 +104,11 @@ class PhraseFr(ConstituentFr,NonTerminalFr,Phrase):
                     pro = self.getTonicPro("nom")
                 elif npParent.isA("SP") and npParent.elements[0].isA("Pro"):  # is relative
                     pro = self.getTonicPro("nom")
-                else:
+                elif idxV>=0:
                     pro = self.getTonicPro("acc")  # is direct complement
                     npParent.elements[idxV].cod = self  # indicate that self is a direct object
+                else: # only replace the noun
+                    pro = self.getTonicPro("nom")
             elif self.isA("PP"):  # is indirect complement
                 np = self.getFromPath([["NP", "Pro"]])  # either a NP or Pro within the PP
                 prep = self.getFromPath(["P"])

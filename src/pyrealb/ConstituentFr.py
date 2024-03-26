@@ -27,7 +27,7 @@ class ConstituentFr:
         return "moi"
 
     def relative_pronouns(self):
-        return ["qui", "que", "dont", "où"]
+        return ["qui", "que", "dont", "où", "lequel", "auquel","duquel"],
 
     def validate_neg_option(self, val, types):
         if not isinstance(val, (str, bool)):  # also accept string as neg value in French

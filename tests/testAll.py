@@ -3,6 +3,7 @@ import dates_en, dates_fr
 import declension_en, declension_fr
 import dependencies_en, dependencies_fr
 import elision_en, elision_fr
+import interrogative_en
 import numbers_en, numbers_fr
 import pronouns_en, pronouns_fr
 import sentences_en, sentences_fr
@@ -40,6 +41,8 @@ if __name__ == '__main__':
     update(test("English elision","en",elision_en.elision_en,badOnly=badOnly))
     update(test("Élision en français","fr",elision_fr.elision_fr,badOnly=badOnly))
     
+    update(test("English interrogation","en",interrogative_en.interrogative_en,badOnly=badOnly))
+
     update(test("English numbers","en",numbers_en.numbers_en,badOnly=badOnly))
     update(test("Nombres en français","fr",numbers_fr.numbers_fr,badOnly=badOnly))
     

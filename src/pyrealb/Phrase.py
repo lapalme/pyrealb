@@ -138,12 +138,15 @@ class Phrase(Constituent):
                                 for el in e.elements:
                                     if el.isA("A","NO"):
                                         el.peng=self.peng
+                            elif e.isA("AP","AdvP"):
+                                for el in e.elements:
+                                    self.link_DAV_properties(el)
                 # set agreement between the subject of a subordinate or the object of a subordinate
                 pro = self.getFromPath([["S", "SP"], "Pro"])
                 if pro is not None:
                     v = pro.parentConst.getFromPath(["VP", "V"])
                     if v is not None:
-                        self.link_subj_obj_subordinate(pro,v)
+                        self.link_subj_obj_subordinate(pro,v,pro.parentConst.subject)
         elif self.isA("VP"):
             headIndex = self.getHeadIndex("VP")  # head is the first internal V
             self.peng = self.elements[headIndex].peng
@@ -168,10 +171,11 @@ class Phrase(Constituent):
                     return self
             iSubj = self.getIndex(["NP", "N", "CP", "Pro"])
             # determine subject
+            self.subject = None
             if iSubj >= 0:
                 subject = self.elements[iSubj]
                 if self.isA("SP") and subject.isA("Pro"):
-                    if subject.lemma in ["que", "où", "that"]:
+                    if self.should_try_another_subject(subject.lemma,iSubj):
                         # HACK: the first pronoun  should not be a subject...
                         #        so we try to find another...
                         jSubj = -1
@@ -181,10 +185,13 @@ class Phrase(Constituent):
                                 break
                         if jSubj >= 0:
                             subject = self.elements[jSubj]
+                            self.subject = subject
                         else:
                             # finally cls generates too many spurious messages
                             # cls.warning("no possible subject found")
                             return self
+                    else:
+                        self.subject = subject
                 self.peng = subject.peng
                 vpv = self.linkPengWithSubject("VP", "V", subject)
                 if vpv is not None:

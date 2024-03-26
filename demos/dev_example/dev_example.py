@@ -307,7 +307,19 @@ def makeExamples():
                     V("manger").t('pp'))))),
          "La pomme que j'ai mangée. "
          ],
-
+        [S(NP(D('le'),
+              N('fleur').n("p"),
+              SP(Pro('que'),
+                 NP(D('le'),
+                    N('garçon').n("p")),
+                 VP(V('offrir').t("pc"),
+                    PP(P('à'),
+                       NP(D('le'),
+                          N('fille'),
+                          A('jeune')).n("p")).pro(True)))),
+           VP(V('être'),
+              A('joli'))),
+         "Les fleurs que les garçons leur ont offertes sont jolies. "],
     ]
 
     #  exemples en anglais
@@ -949,10 +961,18 @@ def test_warnings():
         print("---")
 
 if __name__ == '__main__':
-    testPreviousExamples()
+    # testPreviousExamples()
     # testDataToTextExamples()
     # test_warnings()
     # insert here a single example for debugging perhaps commenting the line above
     # do not forget to load the appropriate language
     loadEn() # set the language to English
     loadFr() # set the language to French
+    test(S(NP(D("un"),
+                 N("poule")).n('p'),
+              VP(V("mordre").t('p'),
+                 NP(D("un"),
+                    N("enfant")),
+                 PP(P("dans"),
+                    NP(D("un"),
+                       N("maison")).pro(True)))))
