@@ -23,6 +23,9 @@ class ConstituentEn:
     def relative_pronouns(self):
         return ["that", "who", "which"]
 
+    def relative_pronouns_propagate(self):
+        return ["that", "who", "which"]
+
     def validate_neg_option(self, _val, _types):
         return False
 

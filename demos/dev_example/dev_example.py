@@ -968,11 +968,3 @@ if __name__ == '__main__':
     # do not forget to load the appropriate language
     loadEn() # set the language to English
     loadFr() # set the language to French
-    test(S(NP(D("un"),
-                 N("poule")).n('p'),
-              VP(V("mordre").t('p'),
-                 NP(D("un"),
-                    N("enfant")),
-                 PP(P("dans"),
-                    NP(D("un"),
-                       N("maison")).pro(True)))))

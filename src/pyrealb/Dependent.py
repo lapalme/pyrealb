@@ -147,7 +147,7 @@ class Dependent(Constituent):
                             depTerm.peng=self.peng
                         self.link_pp_before(dep,headTerm)
                     self.link_pp_with_head(depTerm)
-                elif depTerm.isA("Pro") and depTerm.lemma in self.relative_pronouns():
+                elif depTerm.isA("Pro") and depTerm.lemma in self.relative_pronouns_propagate():
                     # a relative linked to depTerm in which the new peng should be propagated
                     if hasattr(self,"peng"):
                         depTerm.peng=self.peng

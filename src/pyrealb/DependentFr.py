@@ -11,9 +11,6 @@ class DependentFr(ConstituentFr,NonTerminalFr,Dependent):
             if iSubj >= 0:
                 depTerm.peng = self.dependents[iSubj].peng
 
-    def relative_pronouns(self):
-        return ["qui", "que","lequel","auquel","duquel"]
-
     def link_pp_before(self, dep, headTerm):
         depTerm = dep.terminal
         # rel is comp or mod
