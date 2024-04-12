@@ -54,6 +54,9 @@ class TerminalFr(ConstituentFr,Terminal):
     def declension_word(self):
         return "déclinaison"
 
+    def noun_always_plural(self):
+        return ['n1','n15','n21','n22','n26']
+
     def check_gender_lexicon(self, g, n):
         if self.isA("N"):
             # check is French noun gender specified corresponds to the one given in the lexicon

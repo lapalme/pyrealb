@@ -467,7 +467,7 @@ def makeExamples():
     loadFr()
     addToLexicon("Mauritanie", {"N": {"g": "f", "tab": "n16"}})
     addToLexicon("Algérie", {"N": {"g": "f", "tab": "n16"}})
-    addToLexicon("Maroc", {"N": {"g": "m", "tab": "n1"}})
+    addToLexicon("Maroc", {"N": {"g": "m", "tab": "n35"}})
 
     dependancesFr = [
         [root(V("pleuvoir"),

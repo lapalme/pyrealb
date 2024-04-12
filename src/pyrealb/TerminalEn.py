@@ -6,6 +6,9 @@ class TerminalEn(ConstituentEn,Terminal):
     def thousands_separator(self):
         return ","
 
+    def noun_always_plural(self):
+        return ['n6']
+
     def grammaticalNumber(self):
         res = super().grammaticalNumber()
         if res is not None: return res
