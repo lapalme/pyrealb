@@ -25,6 +25,8 @@ def oneOf(*elems):
         if isinstance(elems[0], list):
             elems = elems[0]
     l = len(elems)
+    if l==0:
+        return None
     if l==1:
         e = elems[0]
     else:
