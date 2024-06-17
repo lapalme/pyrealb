@@ -20,6 +20,7 @@ pyrealb_oneOf_dict = {}  # internal Map for keeping track of calls to specific o
 # Select an alternative randomly, but tries not to repeat the same alternative.
 # When all alternatives have been triggered, it will reset, but will try not run the last triggered alternative
 # as the first new one, avoiding repetitions.
+# if the chosen element is "callable" (lambda:...) , then it is applied to ()
 def oneOf(*elems):
     if len(elems) == 1:
         if isinstance(elems[0], list):
@@ -48,9 +49,28 @@ def oneOf(*elems):
         e = elems[idx]
     return e() if callable(e) else e
 
+# Select a random element in a list
+# if the first argument is a list, selection is done within the list,
+# otherwise the selection is among the arguments
+# Similar to oneOf() but without taking into account previous choices
+# if the chosen element is "callable" (lambda:...) , then it is applied to ()
+def choice(*elems):
+    if len(elems) == 1:
+        if isinstance(elems[0], list):
+            elems = elems[0]
+    l = len(elems)
+    if l==0:
+        return None
+    if l==1:
+        e = elems[0]
+    else:
+        e = random.choice(elems)
+    return e() if callable(e) else e
+
 # Mix elements of a list in a random order.
 # If the first argument is a list, mixing is done within the list,
 # otherwise the mix is among the arguments. The original list is not modified
+# if the chosen element is "callable" (lambda:...) , then it is applied to ()
 def mix(*elems):
     if len(elems) == 1:
         if isinstance(elems[0], list):

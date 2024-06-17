@@ -448,15 +448,42 @@ addTable(numberAgreement)
 
 #### *** Programmation ***
 h2_fr("Programmation");h2_en("Programming")
-page.h3("<code>.add(<em>element</em>,<em>position</em>)</code>")
+page.h3("<code>.add(<em>constituent</em>,<em>position</em>)</code>")
 page.p("""
-Ajout d'un nouveau syntagme <code>element</code> comme enfant à un syntagme existant. Le paramètre entier 
+Ajout d'un nouveau <code>constituant</code> comme enfant à une <code>Phrase</code> ou <code>Dependent</code> 
+existant. Le paramètre entier 
 <code>position</code> est facultatif et spécifie la position (à partir de 0) dans le syntagme. Par défaut, 
 l'élément est ajouté à la fin.""",lang="fr")
-page.p("""Add a pyrealb phrase <code>element</code> as a child of an existing phrase. The second optional parameter 
+page.p("""Add a pyrealb <code>Phrase</code> or <code>Dependent</code> <code>element</code> as a child of 
+an existing <code>Phrase</code> or <code>Dependent</code>. The second optional parameter 
 <code>position</code> is an integer that specifies its position (counting from 0). By default, 
 the element is added as the last child.""",lang="en")
 addTable(addUse)
+
+page.h3("<code>.remove(<em>position</em>)</code>")
+page.p("""
+Suppression du constituant à la position spécifiée en comptant à partir de 0.
+""",lang="fr")
+page.p("""
+Remove the constituent at the given position starting from 0. 
+""",lang="en")
+
+page.h3("<code>.nbConstituents()</code>")
+page.p("""
+Retourne le nombre de constituents de la <code>Phrase</code> ou <code>Dependent</code> actuel.
+""",lang="fr")
+page.p("""
+Returns the number of constituents in the current <code>Phrase</code> or <code>Dependent</code>
+""",lang="en")
+
+page.h3("<code>.constituents()</code>")
+page.p("""
+Retourne la liste de constituents de la <code>Phrase</code> ou <code>Dependent</code> actuel.
+""",lang="fr")
+page.p("""
+Returns the number of constituents in the current <code>Phrase</code> or <code>Dependent</code>
+""",lang="en")
+
 
 page.h3("<code>.toSource(indent=-1)</code>")
 page.p("""
@@ -617,6 +644,14 @@ Retourner les informations du lexique correspondant à <code>lemma</code>.""",la
 page.p("""
 Return lexicon information to <code>lemma</code>. """,lang="en")
 
+page.h3("<code>getLanguage()</code>")
+page.p("Retourne le langage de réalisation courant.",lang="fr")
+page.p("Returns the current realization language",lang="en")
+
+page.h3("<code>getLexicon()</code>")
+page.p("Retourne le lexique courant.",lang="fr")
+page.p("Returns the current lexicon.",lang="en")
+
 page.h3("<code>updateLexicon(newLexicon[,lang])</code>")
 page.p("""
 Fusionner les entrées de <code>newLexicon</code> avec le lexique spécifié. Ceci ajoutera les nouvelles entrées et 
@@ -656,6 +691,16 @@ constructors. In this simplistic case, this could have also been written as <cod
 """, lang="en")
 page.p("""
 <code>oneOf</code> implements the <a href="https://rosaenlg.org/rosaenlg/4.3.0/mixins_ref/synonyms.html#_choose_randomly_but_try_not_to_repeat"  target="_blank">"mode:once" of RosaeNLG</a>: it selects an alternative randomly, but tries not to repeat the same one. When all alternatives have been triggered, it resets but tries not run the last triggered alternative, avoiding repetitions.
+""",lang="en")
+
+page.h3("<code>choice(e<sub>1</sub>,e<sub>2</sub>,...)</code>")
+page.p("""
+Version de la fonction <code>oneOf</code> qui choisit une alternative sans tenir compte des choix précédents. 
+C'est la méthode <i>classique</i> d'effectuer des choix aléatoires.
+""",lang="fr")
+page.p("""
+Version of <code>oneOf</code> that selects an alternative into account without taking previous choices. 
+This is the <i>classic</i> implementation for making random choices.
 """,lang="en")
 
 page.h3("<code>mix(e<sub>1</sub>,e<sub>2</sub>,...)</code>")

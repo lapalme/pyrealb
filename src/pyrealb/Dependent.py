@@ -41,6 +41,7 @@ class Dependent(Constituent):
             self.add(params[-1], None, True)
 
     def addDependent(self,dependent,position=None):
+        from .utils import NO
         if isinstance(dependent,Dependent):
             dependent.parentConst=self
             # add it to the list of dependents
@@ -79,6 +80,14 @@ class Dependent(Constituent):
             if test(d):return i
         return -1
 
+    # return number of constituents
+    def nbConstituents(self):
+        return len(self.dependents)
+
+    # return the list of constituents
+    def constituents(self):
+        return self.dependents
+
     def add(self,dependent,position=None,prog=None):
         if not isinstance(dependent,Dependent):
             return self.warn("bad Dependent",self.word_last(),type(dependent).__name__)
@@ -88,6 +97,18 @@ class Dependent(Constituent):
             self.dependentsSource.append(dependent)
         self.addDependent(dependent,position)
         self.linkProperties()
+        return self
+
+    def remove(self,position):
+        import re
+        elem = self.removeDependent(position)
+        if elem is not self: # removeDependent did not raise a warning
+            src = elem.toSource().replace("(","\\(").replace(")","\\)")
+            srcRE = r"\.add\("+src+r"(,\d+)?\)"
+            if re.search(srcRE, self.optSource) is not None:
+                self.optSource=re.sub(srcRE,"",self.optSource,1)
+            else:
+                self.dependentsSource.remove(position)
         return self
 
     def me(self):
@@ -449,7 +470,9 @@ class Dependent(Constituent):
             self.pronominalizeChildren()
             if "typ" in self.props:
                 self.processTyp(self.props["typ"])
-
+            # realize "coord"s before the rest because it can change gender and number of subject
+            # save their realization
+            coordReals = [d.coordReal() for d in self.dependents if d.isA("coord")]
             # move all "pre" dependents at the front
             # HACK: we must move these in place because realization might remove some of them
             nextPre = 0
@@ -467,7 +490,7 @@ class Dependent(Constituent):
             elif nextPre == 0:  # no pre
                 res = self.terminal.real()
                 for d in self.dependents:
-                    res.extend(d.coordReal() if d.isA("coord") else d.real())
+                    res.extend(coordReals.pop(0) if d.isA("coord") else d.real())
             else:
                 res = []
                 i=0

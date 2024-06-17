@@ -1,0 +1,60 @@
+cat, jump, sleep, in, basket
+dog+, climb, to, tree, -
+child, listen, to, frog, ?
+boy, swim, in, river, -?
+fisherman, be, at, sea
+girl, clap, my, foot+
+child, play, with, train
+wolf, knock, on, door
+woman+, go, to, hotel
+plane, fly, over, cloud+
+child, listen, to, bird
+ball, be, green
+fork, be, in, dining-room
+child, swim, in, pool
+butterfly, fly, over, field
+monkey, eat, banana
+cat, look, at, fish, -
+mother, read, to, girl, -?
+girl, play, in, sheet+
+kid+, play, with, ball
+girl, play, with, stone+
+man+, play, in, park, with, boar, -
+girl, ride, tricycle
+cat, sleep, behind, closet
+girl, read, in, library
+cat, sleep, under, couch
+fish, swim, in, bathtub
+horse, run, by, sea
+child, play, with, boat
+car+, collide, on, street
+cat, sleep, on, top, of, guitar
+dad, child, fish, with, reed, in, river
+guitar, be, on, cart
+boy, listen, to, cat
+money, be, in,  purse
+balloon, fly, mountain+
+man, be, on, bar
+girl, listen, to, music
+dolphin+, turtle, swim, in, sea
+girl, swim, in, pool
+nightingale, sing, on, branch
+bird, fly, in, sky
+mother, mash, with, mixer
+child+, go, to, school, by, bus
+girl, write, with, pencil, on, paper
+girl+, play, ball
+painter, paint, cloth
+dad, buy, at, supermarket
+child, look, at, white, star+, with, telescope
+wolf, lie, in, bed
+child+, bathe, in, bathtub, ?
+dog, play, in, park, with, child+
+child+, play, in, leaf+, of, tree+
+girl, drink, with, straw
+girl, play, in, water
+boy+, girl+, eat, donut, with, chocolate
+plane+, collide, in, sky
+bullfighter, look, at, bull
+blue, ball, be, on, beach
+blue_A, ball_N, be, on, beach

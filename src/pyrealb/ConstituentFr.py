@@ -261,7 +261,7 @@ class ConstituentFr:
                   SP(C("mais"), Q(found), V("être").t("pc"), V("trouver").t("pp"))),
             "user-warning": lambda mess:
                 # user specific message, either a String or a Constituent that will be realized
-                S(Q(mess.realize()) if isinstance(mess, Constituent) else Q(mess.toString()))
+                S(Q(mess.realize()) if isinstance(mess, Constituent) else Q(str(mess)))
         }
 
         args = list(args)

@@ -7,7 +7,7 @@ from .Dependent import Dependent
 
 
 __all__ = ['Constituent',
-     'fromJSON', 'oneOf', 'mix', 'pyrealb_version', 'pyrealb_datecreated',              # from utils
+     'fromJSON', 'oneOf', 'choice', 'mix', 'pyrealb_version', 'pyrealb_datecreated',              # from utils
      'A', 'Adv', 'C', 'D', 'DT', 'N', 'NO', 'P', 'Pro', 'Q', 'V', 'Terminal',
      'AP',  'AdvP',  'CP', 'NP', 'PP',  'VP', 'S', 'SP', 'Phrase',
      'root', 'subj', 'det', 'mod', 'comp', 'coord', 'Dependent',

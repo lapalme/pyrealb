@@ -320,6 +320,16 @@ def makeExamples():
            VP(V('être'),
               A('joli'))),
          "Les fleurs que les garçons leur ont offertes sont jolies. "],
+        [S(NP(D("le"),
+              CP(C("et"),
+                 N("dauphin").n('p'),
+                 N("tortue"))),
+           VP(V("nager"),
+              PP(P("dans"),
+                 NP(D("un"),
+                    N("mer"))))),
+         "Les dauphins et tortue nagent dans une mer. ",
+         "Conversion d'un NP avec coord de N non traitée"],
     ]
 
     #  exemples en anglais
@@ -968,3 +978,11 @@ if __name__ == '__main__':
     # do not forget to load the appropriate language
     loadEn() # set the language to English
     loadFr() # set the language to French
+    test(root(V("nager"),
+              det(D("le")),
+              coord(C("et"),
+                    subj(N("dauphin").n("p")),
+                    subj(N("tortue"))),
+              comp(P("dans"),
+                   comp(N("mer"),
+                        det(D("un"))))))

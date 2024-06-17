@@ -28,6 +28,14 @@ class Phrase(Constituent):
             # terminate the list with add which does other checks on the final list
             self.add(elements[-1], None, True)
 
+    # return number of constituents
+    def nbConstituents(self):
+        return len(self.elements)
+
+    # return the list of constituents
+    def constituents(self):
+        return self.elements
+
     # add a Constituent as a child of this Phrase
     def addElement(self, elem, position=None):
         from .utils import NO
@@ -51,6 +59,19 @@ class Phrase(Constituent):
             elem.parentConst = None
             return elem
         return self.warn("bad position", position, len(self.elements))
+
+    # remove a child at a given position and remove the corresponding position in sourceElements
+    def remove(self, position):
+        import re
+        elem = self.removeElement(position)
+        if elem is not self: # removeElement did not raise a warning
+            src = elem.toSource().replace("(","\\(").replace(")","\\)")
+            srcRE = r"\.add\("+src+r"(,\d+)?\)"
+            if re.search(srcRE, self.optSource) is not None:
+                self.optSource=re.sub(srcRE,"",self.optSource,1)
+            else:
+                self.elementsSource.pop(position)
+        return self
 
     # add a pyrealb constituent, set agreement links
     def add(self, constituent, position=None, prog=None):  # prog is True when called from within the constructor
@@ -135,6 +156,7 @@ class Phrase(Constituent):
                             elif e.isA("D","A","V"):
                                 self.link_DAV_properties(e)
                             elif e.isA("CP"): # check for a coordination of adjectives and numbers
+                                e.peng=self.peng
                                 for el in e.elements:
                                     if el.isA("A","NO"):
                                         el.peng=self.peng
@@ -149,8 +171,10 @@ class Phrase(Constituent):
                         self.link_subj_obj_subordinate(pro,v,pro.parentConst.subject)
         elif self.isA("VP"):
             headIndex = self.getHeadIndex("VP")  # head is the first internal V
-            self.peng = self.elements[headIndex].peng
-            self.taux = self.elements[headIndex].taux
+            head_elem = self.elements[headIndex]
+            self.peng = head_elem.peng
+            if hasattr(head_elem,"taux"):
+                self.taux = head_elem.taux
         elif self.isA("AdvP", "PP", "AP"):
             headIndex = self.getHeadIndex(self.constType)
             if hasattr(self.elements[headIndex], "peng"):
@@ -504,6 +528,9 @@ class Phrase(Constituent):
         return self.doFormat(res)
 
     def real(self):
+        if len(self.elements) == 0:
+            # should a warning be issued!!
+            return []
         res = []
         if self.isA("CP"):
             return self.cpReal()
@@ -511,9 +538,12 @@ class Phrase(Constituent):
             self.pronominalizeChildren()
             if "typ" in self.props:
                 self.processTyp(self.props["typ"])
+            # realize CPs before the rest because it can change gender and number of subject
+            # save their realization
+            cpReals = [e.cpReal() for e in self.elements if e.isA("CP")]
             for e in self.elements:
                 if e.isA("CP"):
-                    r = e.cpReal()
+                    r = cpReals.pop(0)
                 # TODO: is it worth the trouble ?
                 # elif e.isA("VP") and reorderVPcomplements:
                 #     r=e.vpReal()
@@ -605,7 +635,7 @@ class Phrase(Constituent):
                         new_dep=e.toDependent("comp" if phName=="VP" else "mod")
                         deprel.add(setPos(i,idx,new_dep),None,True)
             else :
-                return self.warn("user-warning",f"Phrase.toDependent:: {phName} without {termName} {me.toSource()}")
+                return self.warn("user-warning",f"Phrase.toDependent:: {phName} without {termName}: {me.toSource()}")
             return deprel
 
         if depName is None:depName="root"
