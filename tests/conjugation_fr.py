@@ -1967,11 +1967,11 @@ def conjugation_fr():
             "p3": "pleut",
             "pr": "pleuvant",
             "p6": "pleuvent",
-            "s1": "[[pleuvoir]]",
-            "s2": "[[pleuvoir]]",
+            # "s1": "[[pleuvoir]]",
+            # "s2": "[[pleuvoir]]",
             "s3": "pleuve",
-            "s4": "[[pleuvoir]]",
-            "s5": "[[pleuvoir]]",
+            # "s4": "[[pleuvoir]]",
+            # "s5": "[[pleuvoir]]",
             "s6": "pleuvent"
         },
         "pondre": {

@@ -180,10 +180,11 @@ class Dependent(Constituent):
                 # self.error("An internal root was found")
                 pass
             elif deprel=="coord":
-                if len(dep.dependents)>0:
-                    firstDep=dep.dependents[0]
+                depKinds = [d for d in dep.dependents if not d.isA("C")]
+                if len(depKinds)>0:
+                    firstDep=depKinds[0]
                     if firstDep.isA("subj"):
-                        headTerm.peng=dep.peng
+                        dep.peng = self.peng
                     elif firstDep.isA("det"):
                         dep.peng=headTerm.peng
                     elif firstDep.isA("mod","comp") and firstDep.terminal.isA("V","A"):
@@ -497,7 +498,7 @@ class Dependent(Constituent):
                 # cannot use "for i in range()" because dependents list might change during realization
                 while i<len(self.dependents):
                     d = self.dependents[i]
-                    res.extend(d.coordReal() if d.isA("coord") else d.real())
+                    res.extend(coordReals.pop(0) if d.isA("coord") else d.real())
                     if i == nextPre-1:
                         res.extend(self.terminal.real())
                     i += 1

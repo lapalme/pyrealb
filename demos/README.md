@@ -7,6 +7,7 @@
   useful for debugging when adding a new expression and enabling tracing
 - `evenementsDemo/evenements.py` : Description (in French) of a list of events, it creates HTML.
 - `flight_infos/README.md` : development of a RASA NLG server giving information about flights, aircrafts, etc...
+- `gen_from_words.py` : generation of English and French sentences  from a plain list of words, adding some structure.
 - `gophypi/amr2text.py` : generate a literal reading of an AMR (Abstract Meaning Representation); [paper describing the approach](https://github.com/lapalme/pyrealb/blob/main/gophypi/Doc/GoPhiPy.pdf)
 - `inflectionDemo/inflection.py` : French or English conjugation and declension of a form.
 - `kilometresapied/kilometresapied.py` : simple generation of a classic repetitive text in French.

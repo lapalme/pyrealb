@@ -100,6 +100,7 @@ _Nota bene_:
 useful for debugging when adding a new expression and enabling tracing
 * `evenements/evenements.py` : Description (in French) of a list of events, it creates HTML.
 * `flight_infos/README.md` : development of a RASA NLG server giving information about flights, aircrafts, etc...
+* `gen_from_words.py` : generation of English and French sentences  from a plain list of words, adding some structure.
 * `gophypi/amr2text.py` : generate a literal reading of an AMR (Abstract Meaning Representation);
                           [paper describing the approach](gophypi/Doc/GoPhiPy.pdf) 
 * `inflection/inflection.py` : French or English conjugation and declension of a form.

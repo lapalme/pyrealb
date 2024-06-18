@@ -978,11 +978,3 @@ if __name__ == '__main__':
     # do not forget to load the appropriate language
     loadEn() # set the language to English
     loadFr() # set the language to French
-    test(root(V("nager"),
-              det(D("le")),
-              coord(C("et"),
-                    subj(N("dauphin").n("p")),
-                    subj(N("tortue"))),
-              comp(P("dans"),
-                   comp(N("mer"),
-                        det(D("un"))))))
