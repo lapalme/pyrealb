@@ -4,7 +4,9 @@ from datetime import datetime
 
 from benchmark_reader import Benchmark, select_files
 from Graph import Graph
+from Realizer import showDefaultRealizers
 import os, textwrap
+from collections import Counter
 
 path_to_corpus = os.path.abspath(os.path.join(os.path.dirname(__file__),"data"))
 
@@ -37,7 +39,6 @@ def load_benchmark_from_dataset(config, split,categorie,start,end,eid):
     b.benchmark_from_dataset(dataset, categorie, start, end, eid)
     return b
 
-
 def process(realizer,categorie,start,end,eid=None,sortPred=False,matchProp=""):
     # b = load_benchmark_from_files(path_to_corpus,categorie,start,end)
     split = "test"
@@ -48,14 +49,27 @@ def process(realizer,categorie,start,end,eid=None,sortPred=False,matchProp=""):
     # print("*** Predicates\n",predicates)
     # print("*** Objects\n",objects)
 
-    realizer.nbDefaultRealizers = 0
+    realizer.defaultRealizers = Counter()
     print("[%s predicates]"%("sorted" if sortPred else "unsorted"))
     for entry in b.entries:
         if entry.has_property(matchProp) and (eid is None or entry.id == eid):
             print("\n==== %s: %s.%s" % (entry.size, entry.category, entry.id))
             print("\n".join(entry.list_triples()))
             print("\n".join(textwrap.wrap(realizeTriples(realizer,entry,sortPred),width=120)))
-    print("Default realizer was used: %5d times" % realizer.nbDefaultRealizers)
+    # print("Default realizer was used: %5d times" % realizer.nbDefaultRealizers)
+    showDefaultRealizers(realizer)
+
+def processFile(realizer,fileName, sortPred=False):
+    b = Benchmark()
+    b.fill_benchmark([fileName])
+    realizer.defaultRealizers = Counter()
+    print("[%s predicates]"%("sorted" if sortPred else "unsorted"))
+    for entry in b.entries:
+        print("\n==== %s: %s.%s" % (entry.size, entry.category, entry.id))
+        print("\n".join(entry.list_triples()))
+        print("\n".join(textwrap.wrap(realizeTriples(realizer,entry,sortPred),width=120)))
+    showDefaultRealizers(realizer)
+
 
 if __name__ == '__main__':
     # import English, Francais
@@ -78,9 +92,16 @@ if __name__ == '__main__':
     # process(English(),'Airport',1,1,'Id234',True)
     # process(English(),'Astronaut',7,7,'Id9',True)
     process(English(),'',1,7,None,True,matchProp=matchProp)
+    # realizer=English()
+    # processFile(realizer,(".","data/7triples/Astronaut.xml"))
+    # processFile(realizer,(".","data/Sample-Factual.xml"),True)
 
     from Francais import Francais
     # process(Francais(),'Airport',1,1,'Id234',True)
     # process(Francais(), 'Astronaut', 7, 7, 'Id9', True)
-    # process(Francais(),'',1,7,None,True,matchProp=matchProp)
+    process(Francais(),'',1,7,None,True,matchProp=matchProp)
+    # realizer=Francais()
+    # processFile(realizer,(".","data/Sample-Factual.xml"))
+    # processFile(realizer,(".","data/Sample-Factual.xml"),True)
+
 

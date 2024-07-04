@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<benchmark>
+    <entries>
+        <entry category="SportsTeam" eid="Id649" shape="(X (X) (X) (X (X)) (X (X) (X)))" shape_type="mixed" size="7">
+            <originaltripleset>
+                <otriple>Estádio_Municipal_Coaracy_da_Mata_Fonseca | location | Arapiraca</otriple>
+                <otriple>Agremiação_Sportiva_Arapiraquense | league | Campeonato_Brasileiro_Série_C</otriple>
+                <otriple>Campeonato_Brasileiro_Série_C | champions | Vila_Nova_Futebol_Clube</otriple>
+                <otriple>Campeonato_Brasileiro_Série_C | country | Brazil</otriple>
+                <otriple>Agremiação_Sportiva_Arapiraquense | capacity | "17000"^^xsd:nonNegativeInteger</otriple>
+                <otriple>Agremiação_Sportiva_Arapiraquense | ground | Estádio_Municipal_Coaracy_da_Mata_Fonseca</otriple>
+                <otriple>Agremiação_Sportiva_Arapiraquense | manager | Vica</otriple>
+            </originaltripleset>
+            <modifiedtripleset>
+                <mtriple>Estádio_Municipal_Coaracy_da_Mata_Fonseca | location | Arapiraca</mtriple>
+                <mtriple>Agremiação_Sportiva_Arapiraquense | league | Campeonato_Brasileiro_Série_C</mtriple>
+                <mtriple>Campeonato_Brasileiro_Série_C | champions | Vila_Nova_Futebol_Clube</mtriple>
+                <mtriple>Campeonato_Brasileiro_Série_C | country | Brazil</mtriple>
+                <mtriple>Agremiação_Sportiva_Arapiraquense | numberOfMembers | 17000</mtriple>
+                <mtriple>Agremiação_Sportiva_Arapiraquense | ground | Estádio_Municipal_Coaracy_da_Mata_Fonseca</mtriple>
+                <mtriple>Agremiação_Sportiva_Arapiraquense | manager | Vica</mtriple>
+            </modifiedtripleset>
+        </entry>
+    </entries>
+    <graph><![CDATA[
+Agremiação_Sportiva_Arapiraquense
+    manager Vica;
+    numberOfMembers 17000;
+    league Campeonato_Brasileiro_Série_C;
+    ground Estádio_Municipal_Coaracy_da_Mata_Fonseca.
+Campeonato_Brasileiro_Série_C
+   country Brazil;
+   champions Vila_Nova_Futebol_Clube.
+Estádio_Municipal_Coaracy_da_Mata_Fonseca
+    location Arapiraca.
+]]>
+    </graph>
+    <pyreal><![CDATA[
+S(CP(C("and"),
+     S(Q("Agremiação Sportiva Arapiraquense"),
+       VP(V("be"),
+          V("manage").t('pp'),
+          PP(P("by"),
+             Q("Vica")))),
+     S(Pro("I").g('n'),
+       VP(V("have"),
+          NP(NO("17000"),
+             Q("members")))),
+     S(Q(""),
+       VP(V("play"),
+          PP(P("in"),
+             NP(D("the"),
+                Q("Campeonato Brasileiro Série C"),
+                N("league")))))))
+S(CP(C("and"),
+     S(Pro("I").g('n'),
+       VP(V("play"),
+          PP(P("in"),
+             SP(Q("Estádio Municipal Coaracy da Mata Fonseca"),
+                VP(V("be"),
+                   V("locate").t('pp'),
+                   PP(P("inside"),
+                      Q("Arapiraca")))))))))
+S(CP(C("and"),
+     S(Q("Campeonato Brasileiro Série C"),
+       VP(V("be"),
+          PP(P("from"),
+             Q("Brazil")))),
+     S(Q(""),
+       VP(Pro("where"),
+          Q("Vila Nova Futebol Clube"),
+          V("be").t('ps').n('p'),
+          N("champion").n('p')))))        
+]]>
+    </pyreal>
+    <output>
+        Agremiação Sportiva Arapiraquense has Vica as manager, it has 17,000 members and plays in the Campeonato Brasileiro 
+        Série C league.  It plays in Estádio Municipal Coaracy da Mata Fonseca located inside Arapiraca.  Campeonato 
+        Brasileiro Série C is from Brazil and where Vila Nova Futebol Clube were champions.               
+    </output>
+</benchmark>

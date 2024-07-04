@@ -481,7 +481,7 @@ page.p("""
 Retourne la liste de constituents de la <code>Phrase</code> ou <code>Dependent</code> actuel.
 """,lang="fr")
 page.p("""
-Returns the number of constituents in the current <code>Phrase</code> or <code>Dependent</code>
+Returns the list of constituents in the current <code>Phrase</code> or <code>Dependent</code>
 """,lang="en")
 
 

@@ -1,5 +1,6 @@
 from pyrealb import *
 import re, random
+from collections import Counter
 from rqDBPedia import isA, getGender
 from LexicalChoices import LexicalChoices
 
@@ -15,7 +16,7 @@ def _pp(p, *o): # create a Prepositional phrase
     return PP(P(p), o)
 
 class Realizer(LexicalChoices):
-    nbDefaultRealizers=0
+    defaultRealizers = Counter()
     ## dOpt options to show only the date
     dateOptions={"hour":False,"minute":False,"second":False,"det":False,"day":False}
     ## names of predicates for which the object should be put in lower case
@@ -133,8 +134,8 @@ class Realizer(LexicalChoices):
 
 
     def getDefaultPattern(self,p):
-        print("@@@ Default realizer for: " + p)
-        self.nbDefaultRealizers += 1
+        # print("@@@ Default realizer for: " + p)
+        self.defaultRealizers[p] += 1
         if " " not in p and re.match(r'[A-Z]+[a-z]|[a-z]+[A-Z]', p):  # check for dromadaryCase or CamelCase
             p = " ".join(camel_case_split(p))
         # HACK: empty .en to indicate use of default template
@@ -280,6 +281,12 @@ def showRealizations(realizer,p, s, o):
     for pat in pats:
         printReal(pat, s, o)
 
+def showDefaultRealizers(realizer):
+    counters = realizer.defaultRealizers
+    print(f"Default {realizer.lang} realizer was used {counters.total()} times")
+    for (p,cnt) in counters.most_common():
+        print(f"{p:20} : {cnt:3}")
+    return counters.total()
 
 if __name__ == '__main__':
     ## unit test of all realizers with dummy subject and object
@@ -311,5 +318,5 @@ if __name__ == '__main__':
         printReal(realizer.getSentPatterns("3rdRunwayLengthFeet")[2][0], s(), NO(456))
         printReal(realizer.getSentPatterns("5thRunwayNumber")[2][0], s(), NO(9))
         printReal(realizer.getSentPatterns("5th_runway_Number")[2][0], s(), NO(8))
-        print("Default %s realizer was used: %5d times" % (realizer.lang,realizer.nbDefaultRealizers))
+        showDefaultRealizers(realizer)
         print("-----")
