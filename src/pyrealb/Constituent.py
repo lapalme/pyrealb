@@ -308,7 +308,7 @@ class Constituent:
         if self.getProp("poss"):
             cList[-1].realization += "'" if cList[-1].realization.endswith("s") else "'s"
 
-        if self.getProp("cap"):
+        if self.getProp("cap") == True:
             cList[0].realization=cList[0].realization.capitalize()
  
         if "tag" in self.props:
@@ -330,12 +330,28 @@ class Constituent:
                 wrapWith(ba["b"],ba["a"])
         
         return cList
-    
+    # Apply Title case to the realization of a Terminal
+    # according to https://apastyle.apa.org/style-grammar-guidelines/capitalization/title-case
+    # Only the current terminal is taken into account,
+    # so the "first word after a colon, em dash, or end punctuation" might not be capitalized as it should
+    def titleCase(self,t):
+        s = t.realization
+        m = self.sepWordRE().match(s)
+        word = m.group(2)
+        l = len(word)  # get length of realization
+        if l>=4 or not t.isA("C","P","D"):
+            # capitalize words of 4 letters or more or short
+            # non minor (conjunction,preposition,articles)
+            idx = len(m.group(1)) # get index of first letter
+            t.realization = s[0:idx] + s[idx].upper() + s[idx + 1:]
+
     def detokenize(self,terminals):
         if len(terminals)==0:return ""
         s=""
+        doTitleCase = self.isEn() and self.getProp("cap")=="tit"
         for i in range(0,len(terminals)-1):
             terminal=terminals[i]
+            if doTitleCase:self.titleCase(terminal)
             if terminal.realization.startswith(" "):    # remove redundant initial space
                 terminal.realization=terminal.realization[1:]
             if terminal.getProp("lier"):
@@ -344,6 +360,8 @@ class Constituent:
                 s+=terminal.realization
             elif len(terminal.realization)>0:
                 s+=terminal.realization+" "
+
+        if doTitleCase : self.titleCase(terminals[-1])
         last = terminals[-1].realization
         if last.startswith(" "): last = last[1:] # remove redundant initial space
         s+=last
@@ -352,7 +370,7 @@ class Constituent:
             if ((self.isA("S","root")
                  or (self.isA("coord") and len(self.dependents)>0 and self.dependents[0].isA("root")))
                 and len(s)>0): ## this is a top-level S
-                if "cap" not in self.props or self.getProp("cap"):
+                if "cap" not in self.props or self.getProp("cap") in [True,"tit"]:
                     m=self.sepWordRE().match(s)
                     idx=len(m.group(1)) # get index of first letter
                     if idx<len(s): # check if there was a letter
@@ -427,7 +445,7 @@ def makeOptionMethod(option,validVals,allowedConsts,optionName=None):
         nonlocal optionName
         if optionName is None: optionName = option
         if val is None:
-            if validVals is not None and "" not in validVals:
+            if "" not in validVals:
                 return self.warn("no value for option",option,validVals)
         if self.isA("CP") and option not in ["cap","lier","pos"]:
             # propagate an option through the children of a CP except for "cap", "lier" and "pos"
@@ -444,15 +462,14 @@ def makeOptionMethod(option,validVals,allowedConsts,optionName=None):
                     getattr(e.terminal, option)(val, True)  # do not add this option in the source
             return self
         if len(allowedConsts)==0 or self.isA(allowedConsts) or self.isA(deprels):
-            if validVals is not None and val not in validVals:
-                return self.warn("ignored value for option", option, val)
-            # start of the real work
-            if validVals is None:
-                if val is None:
-                    val = True
-                elif val != True and val != False:
-                    self.warn("ignored value for option", option, val)
-                    val = False
+            if val is None:
+                if "" not in validVals:
+                    return self.warn("ignored value for option", option, val)
+                val = True
+            elif val not in validVals:
+                self.warn("ignored value for option", option, val)
+                if False not in validVals:return self
+                val = False
             self.setProp(optionName,val)
             if prog is None:self.addOptSource(option,val)
             return self
@@ -478,14 +495,14 @@ setattr(Constituent,"tn",makeOptionMethod("tn",["","refl"],["Pro"]))
 setattr(Constituent,"c",makeOptionMethod("c",["nom","acc","dat","refl","gen"],["Pro"]))
 
 setattr(Constituent,"pos",makeOptionMethod("pos",["post","pre"],["A","Adv",*deprels]))
-setattr(Constituent,"pro",makeOptionMethod("pro",None,["NP","PP"]))
+setattr(Constituent,"pro",makeOptionMethod("pro",["",False,True],["NP","PP"]))
 # English only
 setattr(Constituent,"ow",makeOptionMethod("ow",["s","p","x"],["D","Pro"],"own"))
-setattr(Constituent,"poss",makeOptionMethod("poss",None,["N","Q"]))
+setattr(Constituent,"poss",makeOptionMethod("poss",["",False,True],["N","Q"]))
 
 # Formatting options
-setattr(Constituent,"cap",makeOptionMethod("cap",None,[]))
-setattr(Constituent,"lier",makeOptionMethod("lier",None,[]))
+setattr(Constituent,"cap",makeOptionMethod("cap",["",False,True,"tit"],[]))
+setattr(Constituent,"lier",makeOptionMethod("lier",["",False,True],[]))
 
 def makeOptionListMethod(option):
     def _method(self,val,prog=None):

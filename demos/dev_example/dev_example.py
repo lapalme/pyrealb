@@ -471,6 +471,23 @@ def makeExamples():
               N("car")).n("p"),
            VP(V("be"),A("red"))),
            "Our friend's father's cars are red. "],
+        # check title case
+        [S(VP(V('train').t("ip"),
+              NP(D('my').pe(2),
+                 N('mind'),
+                 PP(P('for'),
+                    NP(N('peak'),
+                       N('performance')).tag('a', {"href": "http://www.google.com"})))).a(":"),
+           NP(D('a'),
+              N('science').lier(True),
+              V('base').t("pp").tag("i"),
+              N('approach'),
+              PP(P('for'),
+                 VP(V('achieve').t("pr"),
+                    NP(D('my').pe(2).g("m"),
+                       N('goal').n("p")))))).cap("tit"),
+        'Train Your Mind for <a href="http://www.google.com">Peak Performance</a>: a Science-<i>Based</i> Approach for Achieving Your Goals. ',
+        'Bad Automatic placement of the colon']
     ]
 
     # dépendances en français
@@ -750,6 +767,21 @@ def makeExamples():
                    mod(N("father").poss()).pos("pre")).n("p"),
               mod(A("red"))),
          "Our friend's father's cars are red. "],
+         [root(V('train').t("ip"),                          # 18
+               comp(N('mind'),
+                    det(D('my').pe(2)),
+                    mod(P('for'),
+                        mod(N('peak'),
+                            mod(N('performance'))).tag('a',{"href":"http://www.google.com"}))).a(":"),
+               subj(N('science').lier(True),
+                    det(D('a')),
+                    mod(V('base').t("pp").tag("i")),
+                    mod(N('approach')),
+                    mod(P('for'),
+                        mod(V('achieve').t("pr"),
+                            comp(N('goal').n("p"),
+                                 det(D('my').pe(2).g("m")))))).pos("post")).cap("tit"),
+           'Train Your Mind for <a href="http://www.google.com">Peak Performance</a>: a Science-<i>Based</i> Approach for Achieving Your Goals. '],
     ]
 
     # bilingual examples
@@ -978,3 +1010,4 @@ if __name__ == '__main__':
     # do not forget to load the appropriate language
     loadEn() # set the language to English
     loadFr() # set the language to French
+    test(N("pomme").g("w"))

@@ -634,6 +634,7 @@ class Phrase(Constituent):
                     if i!=idx:
                         new_dep=e.toDependent("comp" if phName=="VP" else "mod")
                         deprel.add(setPos(i,idx,new_dep),None,True)
+                deprel.props=me.props
             else :
                 return self.warn("user-warning",f"Phrase.toDependent:: {phName} without {termName}: {me.toSource()}")
             return deprel
@@ -674,8 +675,8 @@ class Phrase(Constituent):
                     deprel.add(setPos(i,iVP,dep),None,True)
         else:
             return self.warn("user-warning",f"Phrase.toDependent:: {self.constType} not yet implemented")
-        deprel.props=self.props
-        deprel.optSource=removeAddOption(self.optSource)
+        deprel.props |= self.props
+        deprel.optSource+=removeAddOption(self.optSource)
         if self.parentConst is None and not self.isA("S"):
             deprel.cap(False)
         return deprel
