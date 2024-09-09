@@ -1010,4 +1010,3 @@ if __name__ == '__main__':
     # do not forget to load the appropriate language
     loadEn() # set the language to English
     loadFr() # set the language to French
-    test(N("pomme").g("w"))

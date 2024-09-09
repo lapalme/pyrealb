@@ -18,7 +18,7 @@ pyrealb_oneOf_dict = {}  # internal Map for keeping track of calls to specific o
 # Implements the "mode:once" of RosaeNLG
 #    (https://rosaenlg.org/rosaenlg/4.3.0/mixins_ref/synonyms.html#_choose_randomly_but_try_not_to_repeat)
 # Select an alternative randomly, but tries not to repeat the same alternative.
-# When all alternatives have been triggered, it will reset, but will try not run the last triggered alternative
+# When all alternatives have been triggered, it will reset, but will not run the last triggered alternative
 # as the first new one, avoiding repetitions.
 # if the chosen element is "callable" (lambda:...) , then it is applied to ()
 def oneOf(*elems):
@@ -32,20 +32,21 @@ def oneOf(*elems):
         e = elems[0]
     else:
         elems_key = repr(elems)  # HACK: create key from the array
-        if elems_key in pyrealb_oneOf_dict :
-            past_indices = pyrealb_oneOf_dict[elems_key] # // a list of past indices
-            if len(past_indices)<l:
-                indices = [i for i in range(l) if i not in past_indices]
-            else: # reset the list but avoid last index
-                last_idx = past_indices[-1]
-                indices = [i for i in range(l) if i != last_idx]
-                past_indices.clear()
-            idx = random.choice(indices)
-            past_indices.append(idx)
-        else:  # first call
-            indices = list(range(l))
-            idx = random.choice(indices)
-            pyrealb_oneOf_dict[elems_key]=[idx] # initialise dict element
+        if elems_key not in pyrealb_oneOf_dict :  # first call
+            indices = list(range(l))  # a list of indices to return
+            random.shuffle(indices)
+            idx = indices.pop()       # return last element as index
+            pyrealb_oneOf_dict[elems_key]=indices # initialise dict element
+        else:
+            indices = pyrealb_oneOf_dict[elems_key] # a list of past indices
+            idx = indices.pop()                     # return last element as index
+            if len(indices) == 0:
+                indices = list(range(l))  # a list of indices to return
+                random.shuffle(indices)
+                if indices[-1] ==idx:
+                    # swap first and last so that last will not be returned next time
+                    indices[0],indices[-1] = indices[-1],indices[0]
+                pyrealb_oneOf_dict[elems_key] = indices  # reset dict element
         e = elems[idx]
     return e() if callable(e) else e
 

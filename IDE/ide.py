@@ -7,9 +7,9 @@ from ppJson import ppJson
 __all__ = [ # from pyRealB
      'A','Adv','C', 'D', 'DT', 'N', 'NO','P', 'Pro', 'Q','V',            # from Terminal
      'AP',  'AdvP',  'CP', 'NP', 'PP',  'VP', 'S', 'SP',                 # from Phrase
-     'root', 'subj', 'det', 'mod', 'comp', 'compObj', 'compObl', 'coord',# from Dependent
+     'root', 'subj', 'det', 'mod', 'comp', 'coord',                      # from Dependent
      'currentLanguage', 'addToLexicon', 'getLemma', 'loadEn', 'loadFr',  # from Lexicon
-     'fromJSON', 'oneOf', 'false', 'true', 'null', 'pyrealb_version',    # from utils
+     'fromJSON', 'oneOf', 'pyrealb_version',                             # from utils
      'pyrealb_datecreated',
      # from this IDE
      "_en", "_fr", "_cn", "_ce", "_dn", "_de", "_lm", "_lx", "_help"]
@@ -26,95 +26,90 @@ def addLemma(lemmata,word,jsrExp):
     if trace:print(f"addLemma::{word}:{jsrExp}")
     if checkAmbiguities: 
         # check if jsRealB generates the same string...
-        genWord=str(eval(jsrExp))
+        genWord=jsrExp.realize()
         if genWord!=word:
-            print("%s => %s != %s"%(jsrExp,genWord,word))
+            # ignore differences for French "essentiellement réflexifs" verbs
+            if (lemmataLang == "en" or  not jsrExp.isA("V") or  not jsrExp.isReflexive() or
+                   (not genWord.endswith(word) and not genWord.startswith(word))):
+                print("%s => %s != %s"%(jsrExp,genWord,word))
     # add word
     if word in lemmata:
         lemmata[word].append(jsrExp)
     else:
         lemmata[word]=[jsrExp]
 
+def jsrExpInit(pos,lemma):
+    return fromJSON({"terminal": pos, "lemma": lemma, "lang": lemmataLang})
+
 # generate a list of jsRealB expressions (only Pro will have more than 1)
-#  from a given form (entry), for a given part-of-speech (pos)
+#  from a given form (lemma), for a given part-of-speech (pos)
 #  using information from the declension and lexicon information (declension, lexiconEntry)
 def genExp(declension,pos,entry,lexiconEntry):
     if trace:print(f"genExp(declension,{pos},{entry},{lexiconEntry}")
-    out = pos+'("'+entry+'")'
+    jsrExp = jsrExpInit(pos,entry)
     if pos=="N":
         g=lexiconEntry["g"] if "g" in lexiconEntry else None
         # gender are ignored in English
         if lemmataLang=="en" or declension["g"]==g:
-            return out+('.n("p")'if declension["n"]=="p" else "")
+            if declension["n"]=="p": jsrExp.n("p")
         elif g=="x":
-            return out+f'.g("{declension["g"]}")'+('.n("p")'if declension["n"]=="p" else "")
+            if declension["g"]=="f": jsrExp.g("f")
+            if declension["n"]=="p": jsrExp.n("p")
     elif pos=="Pro" or pos== "D":
         # gender
-        defGender="m" if lemmataLang=="fr" else "n"
+        defaultG="m" if lemmataLang=="fr" else "n"
         if "g" in declension:
             dg=declension["g"]
             if dg=="x" or dg=="n":
-                dg=defGender
+                dg=defaultG
         else:
-            dg=defGender
-        outG = f'.g("{dg}")' if dg!=defGender else ""
-        # number
-        outN =""
+            dg=defaultG
+        if dg!=defaultG: jsrExp.g(dg)
         if "n" in declension:
             dn = declension["n"]
             if dn=="x": 
                 dn="s"
-            outN = f'.n("{dn}")' if dn!="s" else ""
-        # person
-        outPe=""
+            if dn!="s": jsrExp.n(dn)
         if "pe" in declension:
             pe=declension["pe"]
-            outPe+=f'.pe({pe})' if pe!=3 or entry=="moi" else ""
-        # ow
-        outOw=""
+            if pe!=3 or entry=="moi": jsrExp.pe(pe)
         if "own" in declension:
-            outOw='.ow("'+declension["own"]+'")'
-        # combine all
+            jsrExp.ow(declension["own"])
         if "tn" in declension:
-            out+=outG + outN + outPe + outOw +f'.tn("{declension["tn"]}")'
+            jsrExp.tn(declension["tn"])
         elif "c" in declension:
-            out+=outG + outN + outPe + outOw+f'.c("{declension["c"]}")'
-        else:
-            out+=outG + outN + outPe + outOw
-        return out
-    elif pos=="A": 
+            jsrExp.c(declension["c"])
+    elif pos=="A":
         if lemmataLang=="fr":
             g=declension["g"]
-            if "g" in declension or declension["g"]=="x":
-                n=declension["n"]
+            if "g" not in declension or declension["g"]=="x":
+                g=declension["g"]
+            if g != "m":jsrExp.g(g)
             if "n" in declension:
                 n=declension["n"]
             else: 
                 n="s"
-            return out + ("" if g=="m" else f'.g("{g}")')+("" if n=="s" else f'.n("{n}")')
+            if n!="s": jsrExp.n(n)
         else: # comparatif en anglais
             if "f" in declension:
-                return out+f'.f("{declension["f"]}")'
-            else:
-                return out
+                jsrExp.f(declension["f"])
     elif pos=="Adv":
-        if lemmataLang=="fr":
-            return out
-        else:
-            return out+(f'.f("{declension["f"]}")' if "f" in declension else "")
+        if lemmataLang=="en":
+            if "f" in declension:
+                jsrExp.f(declension["f"])
     else:
         print("***POS not implemented:%s",pos,file=sys.stderr)
-    return None
+    return jsrExp
 
-def expandConjugation(lexicon,lemmata,rules,entry,tab):
-    if trace:print(f"expandConjugation::{entry}:{tab}")
+def expandConjugation(lexicon,lemmata,rules,lemma,tab):
+    if trace:print(f"expandConjugation::{lemma}:{tab}")
     if tab not in rules["conjugation"]:return
     conjug=rules["conjugation"][tab]
     ending=conjug["ending"]
-    endRadical=len(entry)-len(ending)
-    radical=entry[:endRadical]
-    if entry[endRadical:]!=ending:
-        print("strange ending:",entry,":",ending,file=sys.stderr)
+    endRadical=len(lemma)-len(ending)
+    radical=lemma[:endRadical]
+    if lemma[endRadical:]!=ending:
+        print("strange ending:",lemma,":",ending,file=sys.stderr)
         return
     for t in conjug["t"]:
         persons=conjug["t"][t]
@@ -125,15 +120,18 @@ def expandConjugation(lexicon,lemmata,rules,entry,tab):
                 word=radical+persons[pe]
                 pe3=pe%3+1
                 n="p" if pe>=3 else "s"
-                jsrExp= f'V("{entry}")'+\
-                          ("" if t=="p" else f'.t("{t}")')+\
-                          ("" if pe3==3  else f'.pe("{pe3}")')+\
-                          ("" if n=="s" else f'.n("{n}")')
+                jsrExp= jsrExpInit("V",lemma)
+                if t != "p": jsrExp.t(t)
+                if pe3 != 3: jsrExp.pe(pe3)
+                if n != "s": jsrExp.n(n)
                 addLemma(lemmata,word,jsrExp)
         elif isinstance(persons,str):
-            addLemma(lemmata,radical+persons,f'V("{entry}")'+("" if t=="p" else f'.t("{t}")'))
+            word = radical+persons
+            jsrExp=jsrExpInit("V",lemma)
+            if t != "p": jsrExp.t(t)
+            addLemma(lemmata,word,jsrExp)
         else:
-            print("***Strange persons:",entry,persons,file=sys.stderr)
+            print("***Strange persons:",lemma,persons,file=sys.stderr)
 
 def expandDeclension(lexicon,lemmata,rules,entry,pos,tab):
     if trace:print(f"expandDeclension::{entry}:{tab}")
@@ -142,7 +140,7 @@ def expandDeclension(lexicon,lemmata,rules,entry,pos,tab):
     if tab in rulesDecl:
         declension=rulesDecl[tab]
     elif tab in rules["regular"]:
-        addLemma(lemmata,entry,pos+'("'+entry+'")')
+        addLemma(lemmata,entry,jsrExpInit(pos,entry))
         return
     if declension is None or "ending" not in declension: return
     ending=declension["ending"]
@@ -152,11 +150,15 @@ def expandDeclension(lexicon,lemmata,rules,entry,pos,tab):
         print("strange ending:",entry,":",ending,file=sys.stderr)
         return
     decl=declension["declension"]
+    seenVals = []
     for  l  in range(0,len(decl)):
-        jsrExp=genExp(decl[l],pos,entry,lexicon[entry][pos])
-        if jsrExp is not None:
-            word=radical+decl[l]["val"]
-            addLemma(lemmata,word,jsrExp)
+        dec = decl[l]
+        if dec["val"] not in seenVals: # avoid identical values in the same table
+            seenVals.append(dec["val"])
+            jsrExp=genExp(decl[l],pos,entry,lexicon[entry][pos])
+            if jsrExp is not None:
+                word=radical+decl[l]["val"]
+                addLemma(lemmata,word,jsrExp)
 
 def buildLemmata(lang,lexicon,rules):
     global lemmataLang
@@ -166,7 +168,7 @@ def buildLemmata(lang,lexicon,rules):
     lemmata={} 
     for entry,entryInfos in lexicon.items():
         for pos in entryInfos.keys():
-            if pos=="basic":continue 
+            if pos=="basic" or pos=="value":continue
             if pos=="Pc": continue; # ignore punctuation
             if pos=="V": # conjugation
                 expandConjugation(lexicon,lemmata,rules,entry,
@@ -181,7 +183,7 @@ def removeAccent(s):
 
 def lemmatize(query,lemmata):
     if query in lemmata: # check for verbatim
-        return "\n".join(lemmata[query])
+        return "\n".join(map(lambda e:e.toSource(),lemmata[query]))
     # try to match with a regular expression
     queryRE=re.compile(query)
     res =[(key,val) for key,val in lemmata.items() 
@@ -192,7 +194,7 @@ def lemmatize(query,lemmata):
     else:
         # sort without accent to get more usual dictionary order
         res.sort(key=lambda k:removeAccent(k[0]))
-        return "\n".join(key+" : "+"; ".join(val) for key,val in res)
+        return "\n".join(key+" : "+"; ".join(map(lambda e:e.toSource(),val)) for key,val in res)
 
 def getLexiconInfo(word,lexicon):
     if word in lexicon:
@@ -274,7 +276,7 @@ def _lx(word,terminal=None):
     if terminal is not None:
         res=[(key,val) for key,val in res if terminal in val]
     displayResults(word,res,
-                   "no lexicon entry found" if lang=="en" else "pas d'entrée dans le lexique")
+                   "no lexicon lemma found" if lang=="en" else "pas d'entrée dans le lexique")
 
 def _help():
     print('''pyrealb_ide: special commands (starting with _)
@@ -304,39 +306,39 @@ if __name__ == '__main__':
     def show(cmd):
         print("==>"+cmd)
         eval(cmd)
-    # print(lemmatize("love",lemmataEn))
-    # print(lemmatize(".*love",lemmataEn))
-    # print(lemmatize("suis",lemmataFr))
-    # print(lemmatize("suis.*",lemmataFr))
-    # print(getLexiconInfo("love",getLexicon("en")))
-    # print(getLexiconInfo(".*ling",getLexicon("en")))
-    print("** try IDE commands **")  
-    show("_en()")
-    show('_lm("him")')
-    show('+Pro("me")')
-    show('+Pro("me").tn("")')
-    show('+Pro("him")')
-    show('+Pro("him").tn("")')
-    show('_cn("v10")')
-    show('_cn("v.")')
-    show('_ce("y")')
-    show('_ce(".e")')
-    show('_lm("checks")')
-    show('_lx(".ling")')
-    show('_lx(".ling","N")')
-    show('+NP(D("a"),N("cat").n("p")).cap(False)')
-    show('_fr()')
-    show('_lm("se")')
-    show('_cn("v10")')
-    show('_cn("v.")')
-    show('_ce("oir")')
-    show('_ce(".re")')
-    show('_lm("amour")')
-    show('_lm(".*mour.")')
-    show('_lm("chat[^o]*")')
-    show('_lx(".*voir")')
-    show('_lx(".*voir","V")')
-    
+    print(lemmatize("love",lemmataEn))
+    print(lemmatize(".*love",lemmataEn))
+    print(lemmatize("suis",lemmataFr))
+    print(lemmatize("suis.*",lemmataFr))
+    print(getLexiconInfo("love",getLexicon("en")))
+    print(getLexiconInfo(".*ling",getLexicon("en")))
+    # print("** try IDE commands **")
+    # show("_en()")
+    # show('_lm("him")')
+    # show('+Pro("me")')
+    # show('+Pro("me").tn("")')
+    # show('+Pro("him")')
+    # show('+Pro("him").tn("")')
+    # show('_cn("v10")')
+    # show('_cn("v.")')
+    # show('_ce("y")')
+    # show('_ce(".e")')
+    # show('_lm("checks")')
+    # show('_lx(".ling")')
+    # show('_lx(".ling","N")')
+    # show('+NP(D("a"),N("cat").n("p")).cap(False)')
+    # show('_fr()')
+    # show('_lm("se")')
+    # show('_cn("v10")')
+    # show('_cn("v.")')
+    # show('_ce("oir")')
+    # show('_ce(".re")')
+    # show('_lm("amour")')
+    # show('_lm(".*mour.")')
+    # show('_lm("chat[^o]*")')
+    # show('_lx(".*voir")')
+    # show('_lx(".*voir","V")')
+
     
     
     
