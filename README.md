@@ -1,6 +1,6 @@
 # *pyrealb* - A Python Bilingual Text Realizer
 
-*Version 3.0.0 - December 2023*
+*Version 3.1 - September 2024*
 
 *pyrealb* is a Python adaptation of the JavaScript [**jsRealB**](http://rali.iro.umontreal.ca/jsRealB) 
 text realizer with the same constituent and dependency syntax notation. 
@@ -10,7 +10,7 @@ It facilitates its integration within Python applications by simply adding
 
 [Online documentation](http://www.iro.umontreal.ca/~lapalme/pyrealb/documentation.html?lang=en)
 
-Version 3.0.0 is a major code reorganization, but without any new feature, to clearly separate language dependent 
+Version 3.0.0 was a major code reorganization, but without any new feature, to clearly separate language dependent 
 parts from the language independent ones. This organization is described  [here](docs/README.md) .
 
 The use of pyrealb for [Bilingual Data-to-text generation is described in this document](https://arxiv.org/pdf/2311.14808.pdf).
@@ -28,8 +28,9 @@ The use of pyrealb for [Bilingual Data-to-text generation is described in this d
 ### Building and installing the package from the sources
 
 1. `cd` into this directory (with `pyproject.toml` file) 
-2. Build the distribution package `python3 -m build`
-3. Install with `python3 -m pip install .`
+2. If appropriate, change value of `version` in `setup.cfg` to match the value of `pyrealb_version` in `utils.py`
+3. Build the distribution package `python3 -m build`
+4. Install with `python3 -m pip install .`
 
 ## First realization tests at the Python 3 prompt
 
