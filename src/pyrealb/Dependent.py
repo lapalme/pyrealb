@@ -334,7 +334,7 @@ class Dependent(Constituent):
             i=0
             while i<len(self.dependents) and cmp is None:
                 d = self.dependents[i]
-                if d.isA("comp") and d.terminal.isA("N"):
+                if d.isA("comp") and d.terminal.isA("N","Pro"):
                     cmp=self.removeDependent(i)
                 i+=1
             pp = self.check_passive_subject_with_par()

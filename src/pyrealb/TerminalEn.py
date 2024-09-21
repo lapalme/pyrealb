@@ -59,11 +59,18 @@ class TerminalEn(ConstituentEn,Terminal):
     def check_gender_lexicon(self, g, n):
         return None
 
+    def check_majestic(self,keyVals):
+        if self.isA("D") and keyVals["pe"]<3:
+            if self.lemma == "my" and self.getProp("own")=="s":
+                self.setProp("own","p")
+                return True
+        return False
+
     def conjugate(self):
         from .utils import V, P, Q
         pe = self.getProp("pe")
         pe = 3 if pe is None else int(pe)
-        n = self.getProp("n")
+        n = self.getNumber()
         t = self.getProp("t")
         if self.tab is None:
             return [self.morphoError("conjugate_en:tab", {"pe": pe, "n": n, "t": t})]

@@ -482,7 +482,7 @@ def sentences_fr():
          "expected":"Pierres qui roulent n'amassent pas mousse. ",
          "message":"6. SP(qui)"},
         # 84
-        {"expression":S( NP( D("le"), N("dame").n("p"), SP( P("à"), Pro("qui"), Pro("je").pe("1").n("s"), VP( V("parler").t("pc")))), VP(V("être").t("pc"), A("joli"))),
+        {"expression":S( NP( D("le"), N("dame").n("p"), SP( P("à"), Pro("qui"), Pro("je").pe(1).n("s"), VP( V("parler").t("pc")))), VP(V("être").t("pc"), A("joli"))),
          "expected":"Les dames à qui j'ai parlé ont été jolies. ",
          "message":"7. SP(à qui)"},
 

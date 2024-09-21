@@ -33,7 +33,7 @@ proclitiqueOrdreImperatifPos = {  # page 15 du PDF
     "*verbe*": 1,
     "le": 2, "la": 2, "les": 2,
     "lui": 3, "leur": 3,
-    "me": 4, "te": 4, "nous": 2, "vous": 2,
+    "me": 4, "te": 4, "nous": 4, "vous": 4,
     "y": 5,
     "en": 6,
 }
@@ -247,8 +247,10 @@ class NonTerminalFr:
             vb.insertReal(cList, Q(neg2, "fr"), verbPos + (2 if vb.getProp("lier") else 1))
         if len(pros) > 1:
             pros.sort(key=lambda pro: cliticTable[pro] if pro in cliticTable else 100)
-        # insert pronouns before the verb
-        cList[verbPos:verbPos] = pros
+        # insert pronouns before the verb except for proclitiqueOrdreImperatifPos
+        prosPos = verbPos
+        if cliticTable["*verbe*"] == 1 : prosPos+=1
+        cList[prosPos:prosPos] = pros
 
     def tag_question(self, types):
         # in French really simple, add "n'est-ce pas"

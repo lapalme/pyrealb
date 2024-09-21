@@ -134,20 +134,31 @@ class DependentFr(ConstituentFr,NonTerminalFr,Dependent):
         self.processV(types, "neg", negF)
 
     def move_object(self,int_):
+        if not self.terminal.isA("V"):
+            return # cannot move if the head is not a verb...
         from .utils import Pro, Q
         from .utils import det
         # in French : use inversion rule which is quite "delicate"
         # rules from https:#francais.lingolia.com/fr/grammaire/la-phrase/la-phrase-interrogative
         # if subject is a pronoun, invert and add "-t-" or "-"
-        # except for first person singular ("je") which is most often non colloquial (e.g. aime-je or prends-je)
-        # if subject is a noun, the subject stays but add a new pronoun
+        # except for first person singular ("je") which is, in some cases, non colloquial (e.g. aime-je or
+        # prends-je)
+        # if subject is a noun or certain pronouns, the subject stays but add a pyrealb pronoun
+        proLikeNoun = ["aucun", "beaucoup", "ça", "ceci", "cela", "celui-ci", "celui-là", "quelqu'un", "tout"]
         subjIdx = self.findIndex(lambda d: d.isA("subj"))
         if subjIdx >= 0:
+            verb = self.terminal
             subject = self.dependents[subjIdx].terminal
-            if subject.isA("Pro"):
+            if subject.isA("Pro") and subject.lemma not in proLikeNoun:
                 if subject.getProp("pe") == 1 and subject.getProp("n") == "s":  # add est-ce que at the start
-                    self.add(det(Q("est-ce que")), 0)
-                    return
+                    # unless the verb is one of "ai, dis, dois, fais, puis, sais, suis, vais, veux, vois"
+                    # according to https://www.academie-francaise.fr/questions-de-langue#42_strong-em-inversion
+                    # -du-sujet-je-puis-je-em-strong
+                    if verb.getProp("t")=="p" and verb.getProp("pe")==1:
+                        if verb.lemma not in ["avoir","dire","devoir","faire","pouvoir","savoir","être","aller",
+                                               "vouloir","voir"]:
+                            self.add(det(Q("est-ce que")), 0)
+                            return
                 pro = self.removeDependent(subjIdx).terminal  # remove subject
             elif int_ in ["wod","wad"]:
                 self.add(det(Q("est-ce que")), 0)

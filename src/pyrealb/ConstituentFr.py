@@ -140,8 +140,12 @@ class ConstituentFr:
             # du futur de l'indicatif se termine par une autre lettre que d ou t et qu'il est suivi
             # des pronoms sujets il, elle ou on. Dans ce cas, on ajoute un ‑t‑ entre le verbe
             # et le pronom sujet inversé.
-            if re.search(r"[^dt]$", terminals[i].realization) and terminals[i + 1].realization in ["il","elle","on"]:
+            if (re.search(r"[^dt]$", terminals[i].realization) and
+                    # ignore final punctuation in the realization
+                    re.sub(r"(\w+).*",r"\1",terminals[i + 1].realization) in ["il","elle","on"]):
                 return "t-"
+            elif terminals[i].realization=="peux" and terminals[i+1].realization == "je":
+                terminals[i].realization="puis"; # HACK replace "peux-je" by "puis-je"
         return ""
 
     def warning(self, args):
@@ -182,10 +186,10 @@ class ConstituentFr:
             "no value for option": lambda option, validVals:
                 # aucune valeur pour l'option $option, elle devrait être une parmi $validVals.
                 S(NP(D("aucun"), N("valeur"),
-                     PP(P("pour"), D("le"), N("option"), Q("A"))).a(","),
+                     PP(P("pour"), D("le"), N("option"), Q(option))).a(","),
                   SP(Pro("elle"),
                      VP(V("être").t("c"), Pro("un").g("f"),
-                        PP(P("parmi"), Q("B")))).typ({"mod": "nece"})),
+                        PP(P("parmi"), Q(makeDisj(validVals))))).typ({"mod": "nece"})),
             "not found": lambda missing, context:
                 # aucun $missing trouvé dans $context.
                 S(AdvP(D("aucun"), Q(missing)), VP(V("trouver").t("pp"), PP(P("dans"), Q(context)))),

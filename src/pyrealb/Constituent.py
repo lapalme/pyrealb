@@ -48,7 +48,14 @@ class Constituent:
             if not hasattr(self,"taux") or self.taux is None: return None
             return self.taux[propName] if propName in self.taux else None 
         return None
-    
+
+    # Get the value of the "n" property taking into account possible local "majestic" override
+    def getNumber(self):
+        if hasattr(self,"peng") and self.peng["n"] == "s" and self.peng["pe"]<3:
+            if "maje" in self.peng and not self.peng["maje"]: return "s"
+            if self.isMajestic():return "p"
+        return self.getProp("n")
+
     def setProp(self,propName,val,inSetLemma=False):
         if propName in ["pe","n","g"] and hasattr(self,"peng") and self.peng is not None:
             self.peng[propName]=val
@@ -211,19 +218,27 @@ class Constituent:
 
     # number option
     def nat(self,isNat=True):
-        self.addOptSource("nat",isNat)
         if self.isA("DT","NO"):
             if "dOpt" not in self.props:self.props["dOpt"]={}
-            if isNat is None:
-                self.props["dOpt"]["nat"]=True
-            elif isinstance(isNat,bool):
+            if isinstance(isNat,bool):
                 self.props["dOpt"]["nat"]=isNat
-            else:
-                return self.warn("bad application",".nat","bool",isNat)
-        else:
-            return self.warn("bad application",".nat",["DT","NO"],self.constType)
-        return self
-    
+                self.addOptSource("nat", isNat)
+                return self
+            return self.warn("bad application",".nat","bool",isNat)
+        return self.warn("bad application",".nat",["DT","NO"],self.constType)
+
+    # Override the global "majestic" flog for this Pro or D
+    # HACK: this adds a flag to the peng structure so that agreements are correctly made
+    def maje(self, isMaje):
+        if self.isA("Pro","D"):
+            if isinstance(isMaje,bool):
+                self.setProp("maje",isMaje)
+                self.peng["maje"]=isMaje
+                self.addOptSource("maje",isMaje)
+                return self
+            return self.warn("bad application",".maje","boolean",isMaje)
+        return self.warn("bad application",".maje",["Pro","D"],self.constType)
+
     def typ(self,types):
         allowedTypes={
               "neg": [False,True],
@@ -233,10 +248,10 @@ class Constituent:
               "perf":[False,True],
               "refl":[False,True],
               "contr":[False,True],
+              "maje" :[False,True], # majestative (en français: politesse, modestie, majesté...)
               "mod": [False,"poss","perm","nece","obli","will"],
               "int": [False,"yon","wos","wod","woi","was","wad","wai","whe","why","whn","how","muc","tag"]
         }
-        self.addOptSource("typ",types)
         if not isinstance(types, dict):
             self.warn("ignored value for option",".typ",type(types).__name__+":"+str(types))
         elif not self.isA("S", "SP", "VP", *deprels):
@@ -251,7 +266,12 @@ class Constituent:
                     elif val not in allowedTypes[key]:
                         self.warn("ignored value for option",f'.typ("{key}")',val)
                         del types[key]
-            self.props["typ"]=types
+            self.addOptSource("typ", types)
+            if "typ" in self.props:
+                self.props["typ"].update(types)
+            else:
+                self.props["typ"] = types
+
         return self
 
 
@@ -355,7 +375,9 @@ class Constituent:
             if terminal.realization.startswith(" "):    # remove redundant initial space
                 terminal.realization=terminal.realization[1:]
             if terminal.getProp("lier"):
-                s+=terminal.realization+"-"+self.check_for_t(terminals,i)
+                # HACK: terminal.realization might be changed in French by check_for_t
+                liaison = "-"+self.check_for_t(terminals,i);
+                s+=terminal.realization+liaison;
             elif re.search(r"[- ']$",terminal.realization):
                 s+=terminal.realization
             elif len(terminal.realization)>0:

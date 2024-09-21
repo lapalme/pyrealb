@@ -63,11 +63,11 @@ def makeExamples():
         [S(NP(N("John")),
            VP(V("évanouir").aux("êt").t("pc")),
            PP(P("à"), DT("1979-05-21T10:05:00"))).typ({"neg": True}),
-         "John ne s'est pas évanoui au lundi 21 mai 1979 à 10 h 5 min 0 s. "],
+         "John ne s'est pas évanoui au lundi 21 mai 1979 à 10 h 5. "],
         [S(CP(C("et"), NP(N("John")), NP(N("Mary"))),
            VP(V("évanouir").t("pc")),
            PP(P("à"), DT("1979-05-21T10:05:00"))).typ({"neg": True}),
-         "John et Mary ne se sont pas évanouis au lundi 21 mai 1979 à 10 h 5 min 0 s. "],
+         "John et Mary ne se sont pas évanouis au lundi 21 mai 1979 à 10 h 5. "],
         [S(VP().add(V("aimer")).add(pomme)).add(gars, 0),
          "Les garçons aiment la pomme. "],
         [S(CP(C("et"), NP(D("le"), N("fruit"))).add(pomme).add(gars),
@@ -330,6 +330,25 @@ def makeExamples():
                     N("mer"))))),
          "Les dauphins et tortue nagent dans une mer. ",
          "Conversion d'un NP avec coord de N non traitée"],
+        [S(Pro("moi").pe(1).n('s').g('f').c('nom').maje(False),
+           VP(V("être"),
+              AP(A("content"),
+                 PP(P("de"),
+                    NP(D("mon").pe(1),
+                       N("décision")))))).typ({'neg': True}).typ({'maje': True}),
+         "Je ne suis pas contente de notre décision. "],
+        [S(Pro("moi").pe(1).n('s').g('f').c('nom'),
+           VP(V("être"),
+              AP(A("content"),
+                 PP(P("de"),
+                    NP(D("mon").pe(1),
+                       N("décision")))))).typ({'neg': True}).typ({'maje': True}),
+         "Nous ne sommes pas contente de notre décision. "],
+        [S(Pro("je").pe(1),
+           VP(V("pouvoir"),
+              V("faire").t('b'),
+              Pro("cela"))).typ({'int': 'wad'}),
+         "Que puis-je faire? "],
     ]
 
     #  exemples en anglais
@@ -487,7 +506,10 @@ def makeExamples():
                     NP(D('my').pe(2).g("m"),
                        N('goal').n("p")))))).cap("tit"),
         'Train Your Mind for <a href="http://www.google.com">Peak Performance</a>: a Science-<i>Based</i> Approach for Achieving Your Goals. ',
-        'Bad Automatic placement of the colon']
+        'Bad Automatic placement of the colon'],
+        [S(Pro("me").pe(1).c("nom").maje(False),
+           VP(V("love"), NP(D("my").pe(1).ow("s"), N("country")))).typ({"maje": True}),
+         "I love our country. "],
     ]
 
     # dépendances en français

@@ -3475,7 +3475,7 @@ def declension_fr():
         
     for pro,wordInfo in testsProDeclinaisonFr.items():
         for flags,expected in wordInfo.items():
-            exp=Pro(pro).g(flags[0]).n(flags[1]).pe(flags[2])
+            exp=Pro(pro).g(flags[0]).n(flags[1]).pe(int(flags[2]))
             tests.append(makeTestExpr(exp, expected))
         
     return tests

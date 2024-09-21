@@ -204,6 +204,7 @@ class PhraseFr(ConstituentFr,NonTerminalFr,Phrase):
                 vp.addElement(vp.removeElement(idxV),
                               i + 1)  # remove the modality verb and move it before the pronouns
             newV = V(origLemma).t("b")
+            newV.pe(v.getProp("pe")).n(v.getProp("n")) # copy also person and number used for pronoun of reflexive verb
             if hasattr(v, "isProg"):  # copy progressive from original verb...
                 newV.isProg = v.isProg
                 del v.isProg
@@ -222,17 +223,25 @@ class PhraseFr(ConstituentFr,NonTerminalFr,Phrase):
         # in French : use inversion rule which is quite "delicate"
         # rules from https:#francais.lingolia.com/fr/grammaire/la-phrase/la-phrase-interrogative
         # if subject is a pronoun, invert and add "-t-" or "-"
-        # except for first person singular ("je") which is most often non colloquial (e.g. aime-je or prends-je)
-        # if subject is a noun, the subject stays but add a pyrealb pronoun
+        # except for first person singular ("je") which is, in some cases, non colloquial (e.g. aime-je or
+        # prends-je)
+        # if subject is a noun or certain pronouns, the subject stays but add a pyrealb pronoun
+        proLikeNoun = ["aucun", "beaucoup", "ça", "ceci", "cela", "celui-ci", "celui-là", "quelqu'un", "tout"]
         subjIdx = self.getIndex(["NP", "N", "Pro", "SP", "CP"])
         if subjIdx >= 0:
             subj = self.elements[subjIdx]
-            if subj.isA("Pro"):
+            if subj.isA("Pro") and subj.lemma not in proLikeNoun:
                 if subj.getProp("pe") == 1 and subj.getProp("n") == "s":  # add "est-ce que" at the start
-                    self.add(Q("est-ce que"), subjIdx)
-                    return
-                else:
-                    pro = self.removeElement(subjIdx)  # remove subject pronoun
+                        # unless the verb is one of "ai, dis, dois, fais, puis, sais, suis, vais, veux, vois"
+                        # according to https://www.academie-francaise.fr/questions-de-langue#42_strong-em-inversion
+                        # -du-sujet-je-puis-je-em-strong
+                        v = self.getFromPath([["VP",""],["V"]]) # find the verb
+                        if v.getProp("t")=="p" and v.getProp("pe")==1:
+                            if v.lemma not in ["avoir","dire","devoir","faire","pouvoir","savoir","être","aller",
+                                               "vouloir","voir"]:
+                                self.add(Q("est-ce que"), subjIdx)
+                                return
+                pro = self.removeElement(subjIdx)  # remove subject pronoun
             elif int_ in ["wod", "wad"]:  # special cases when inversion gives strange results
                 self.add(Q("est-ce que"), subjIdx)
                 return

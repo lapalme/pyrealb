@@ -69,12 +69,23 @@ class TerminalFr(ConstituentFr,Terminal):
                     "genre différent de celui du lexique", {"g": g, "lexique": lexiconG})]
         return None
 
+    def check_majestic(self,keyVals):
+        if self.isA("D"):
+            if self.lemma == "mon" and keyVals["pe"]<3:
+                self.setLemma("notre")
+                return True
+            if self.lemma == "ton" or (self.lemma == "notre" and keyVals["pe"]==2 and keyVals["n"]=="s"):
+                self.setLemma("votre")
+                return True
+        return False
+
+
     def conjugate(self):
         from .utils import V, Pro
         pe = self.getProp("pe")
         pe = 3 if pe is None else int(pe)
         g = self.getProp("g")
-        n = self.getProp("n")
+        n = self.getNumber()
         t = self.getProp("t")
         if self.tab is None:
             return [self.morphoError("conjugate_fr:tab", {"pe": pe, "n": n, "t": t})]
@@ -105,7 +116,10 @@ class TerminalFr(ConstituentFr,Terminal):
             # change this verb to pp
             pp = V(self.lemma, "fr")
             pp.setProp("g", g)
-            pp.setProp("n", n)
+            if self.isMajestic():
+                pp.setProp("n",self.peng["n"])  # HACK: keep original number (ignoring maje)
+            else:
+                pp.setProp("n", n)
             pp.setProp("t", "pp")
             pp.realization = pp.realize()  # realize the pp using jsRealB without other options
             self.realization = pp.realization  # set verb realization to the pp realization
@@ -180,6 +194,7 @@ class TerminalFr(ConstituentFr,Terminal):
                         if g == "x" or g == "n": g = "m"  # neutre peut arriver si le sujet est en anglais
                         n = x.getProp("n")
                         if n == "x": n = "s"
+                        if (self.isMajestic()): n = self.getNumber();
                         if (g + n) == "mp" and self.realization.endswith("s"):
                             pass  # pas d'ajout de s au masculin pluriel si la réalisation termine en s
                         else:

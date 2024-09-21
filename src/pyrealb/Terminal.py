@@ -100,10 +100,10 @@ class Terminal(Constituent):
                 self.tab=None 
                 self.realization=f"[[{lemma}]]"
                 return self.warn("not in lexicon",self.lang(),None)
-                if quoteOOV: # not currently used
-                    self.lemma=str(lemma)
-                    self.realization=self.lemma
-                    self.constType="Q"
+                # if quoteOOV: # not currently used
+                #     self.lemma=str(lemma)
+                #     self.realization=self.lemma
+                #     self.constType="Q"
             else:
                 if terminalType not in lexInfo:
                     self.tab=None 
@@ -111,10 +111,10 @@ class Terminal(Constituent):
                     otherPOS=list(lexInfo.keys())
                     if "basic" in otherPOS:otherPOS.remove("basic")
                     return self.warn("not in lexicon",self.lang(),otherPOS)
-                    if quoteOOV: # not currently used
-                        self.lemma=str(lemma)
-                        self.realization=self.lemma
-                        self.constType="Q"
+                    # if quoteOOV: # not currently used
+                    #     self.lemma=str(lemma)
+                    #     self.realization=self.lemma
+                    #     self.constType="Q"
                 else:
                     lexInfo=lexInfo[terminalType]
                     rules=getRules(self.lang())
@@ -199,12 +199,21 @@ class Terminal(Constituent):
             self.morphoError(errorKind, keyVals)
             return None 
         return bestMatch[1]                 
-                                     
+
+    def isMajestic(self):
+        maje = self.getProp("maje") # check local value
+        if maje != None : return maje
+        pc = self.parentConst
+        while pc != None:   # check context
+            if "typ" in pc.props and "maje" in pc.props["typ"] and pc.props["typ"]["maje"]: return True
+            pc = pc.parentConst
+        return False
+
+
     def decline(self,setPerson):
         rules=getRules(self.lang())
         declension=rules["declension"][self.tab]["declension"]
         stem=self.stem
-        res=None 
         if self.isA("A","Adv"):
             return self.decline_adj_adv(rules,declension,stem)
         elif len(declension)==1: # no declension
@@ -212,13 +221,16 @@ class Terminal(Constituent):
         else: # for N,D,Pro
             g=self.getProp("g")
             if self.isA("D","N") and g is None:g="m"
-            n=self.getProp("n")
+            n=self.getNumber()
             if self.isA("D","N") and n is None:n="s"
             pe=3
             if setPerson:
                 p=self.getProp("pe")
                 pe=3 if p is None else int(p)
             keyVals={"pe":pe,"g":g,"n":n} if setPerson else {"g":g,"n":n}
+            if not self.isA("N") and self.isMajestic():
+                if self.check_majestic(keyVals):
+                    declension = rules["declension"][self.tab]["declension"]
             if "own" in self.props:
                 keyVals["own"]=self.props["own"]
             if self.isA("Pro"):
@@ -284,6 +296,7 @@ class Terminal(Constituent):
             else:
                 terms.insert(position,newTerminal)
         else:
+            from .utils import NO
             self.warn("bad Constituent",NO(position+1).dOpt({"ord":True}),type(newTerminal).__name__)
         return terms
     
@@ -400,7 +413,20 @@ class Terminal(Constituent):
             ## process date fields
             dateS = interpret("-".join(field for field in ["year", "month", "date", "day"] if dOpts[field]))
 
-        timeS=interpret(":".join(field for field in ["hour","minute","second"] if dOpts[field]))
+        timeFields = ":".join(field for field in ["hour","minute","second"] if dOpts[field])
+        if dOpts["nat"]:
+            h = dateObj.hour
+            m = dateObj.minute
+            s = dateObj.second
+            if timeFields == "hour:minute:second":
+                if m==0 and s==0:
+                    if h==0: timeFields = "0h"
+                    elif h==12: timeFields = "12h"
+                    else: timeFields = "hour"
+                elif s==0 : timeFields = "hour:minute"
+            elif timeFields == "hour:minute":
+                if m==0: timeFields = "hour"
+        timeS=interpret(timeFields)
         return " ".join(s for s in [dateS,timeS] if len(s)>0)
 
 
