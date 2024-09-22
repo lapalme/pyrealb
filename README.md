@@ -27,10 +27,9 @@ The use of pyrealb for [Bilingual Data-to-text generation is described in this d
 
 ### Building and installing the package from the sources
 
-1. `cd` into this directory (with `pyproject.toml` file) 
-2. If appropriate, change value of `version` in `setup.cfg` to match the value of `pyrealb_version` in `utils.py`
-3. Build the distribution package `python3 -m build`
-4. Install with `python3 -m pip install .`
+1. `cd` into this directory (with `pyproject.toml` file)
+2. Build the distribution package `python3 -m build`
+3. Install with `python3 -m pip install .`
 
 ## First realization tests at the Python 3 prompt
 
