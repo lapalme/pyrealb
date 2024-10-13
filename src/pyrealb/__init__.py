@@ -11,6 +11,6 @@ __all__ = ['Constituent',
      'A', 'Adv', 'C', 'D', 'DT', 'N', 'NO', 'P', 'Pro', 'Q', 'V', 'Terminal',
      'AP',  'AdvP',  'CP', 'NP', 'PP',  'VP', 'S', 'SP', 'Phrase',
      'root', 'subj', 'det', 'mod', 'comp', 'coord', 'Dependent',
-     'currentLanguage', 'addToLexicon', 'updateLexicon', 'getLexicon', 'getLemma',      # from Lexicon
+     'currentLanguage', 'addToLexicon', 'updateLexicon', 'getLexicon', 'getLemma', 'getRules',    # from Lexicon
      'loadEn', 'loadFr', 'load',
  ]

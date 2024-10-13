@@ -96,8 +96,8 @@ _Nota bene_:
 * `99bottlesofbeer/99bottlesofbeer.py` : simple generation of a classic repetitive text in English.
 * `basketball/sportsettsum.py` : generation of French and English basketball summaries [paper describing the approach](demos/basketball/docs/SportSettSum.md)
 * `Bilinguo/bilinguo.py` : generation of translation drill exercises
-* `dev_example/dev_example.py`: examples of English and French expressions to be realized and checked against expected output,  
-useful for debugging when adding a new expression and enabling tracing
+* `dev_example/dev_example.py`: examples of English and French expressions to be realized and checked against expected output,  useful for debugging when adding a new expression and enabling tracing.
+* `eliza/eliza-talk.py`: French version of Eliza. It illustrates some interesting features of pyrealb. See [this document](https://github.com/rali-udem/jsRealB/blob/master/demos/Eliza/Eliza_en_français.md) (in French) for an explanation and rationale. It is a Python translation of [this jsRealB demo](https://github.com/rali-udem/jsRealB/tree/master/demos/Eliza). 
 * `evenements/evenements.py` : Description (in French) of a list of events, it creates HTML.
 * `flight_infos/README.md` : development of a RASA NLG server giving information about flights, aircrafts, etc...
 * `gen_from_words.py` : generation of English and French sentences  from a plain list of words, adding some structure.
