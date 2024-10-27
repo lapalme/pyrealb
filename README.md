@@ -40,11 +40,13 @@ The use of pyrealb for [Bilingual Data-to-text generation is described in this d
 5. `print(root(V("say").t("ps"),subj(Pro("him").c("nom")),comp(N("goodbye"))).typ({"neg":True}))`
 6. this should print `He did not say goodbye.`
 
-## Use pyrealb in a _Jupyter notebook_ thru _Binder_
+## Use pyrealb in a _Jupyter notebook_
 
-1. in a browser, load one of these links:
-  * [English](https://mybinder.org/v2/gh/lapalme/pyrealb-jupyter/HEAD?labpath=pyrealb-en.ipynb). 
-  * [French](https://mybinder.org/v2/gh/lapalme/pyrealb-jupyter/HEAD?labpath=pyrealb-fr.ipynb). 
+- Thru *Binder*, load one of these links: [English](https://mybinder.org/v2/gh/lapalme/pyrealb-jupyter/HEAD?labpath=pyrealb-en.ipynb)  [French](https://mybinder.org/v2/gh/lapalme/pyrealb-jupyter/HEAD?labpath=pyrealb-fr.ipynb) 
+- From a terminal:
+  - if the Python notebook module is not already installed, do: `pip3 install notebook` and watch a lot of loading...
+  - `cd Notebooks`
+  - `python3 -m notebook`  this should open a browser window with links to the [English](pyrealb-en.ipynb) and [French](pyrealb-fr.ipynb) notebooks 
 
 ## Directories
 
@@ -84,10 +86,16 @@ _Nota bene_:
     * `user.js`  : Python helper script.
     
 * [`IDE`](./IDE) : Integrated Development Environment 
-    * `ide.py`: built on the Python *read-eval-print loop*, it imports *pyrealb* to get the realization of an expression, to consult the lexicon, the conjugation and declension tables. It is also possible to get a *lemmatization*: i.e. the *pyrealb* expression corresponding to a form.
+    
+    * `ide.py`: built on the Python *read-eval-print loop*, it imports *pyrealb* to get the realization of an expression, to consult the lexicon, the conjugation and declension tables. It is also possible to get a *lemmatization*: i.e. the *pyrealb* expression corresponding to a form. 
     * `README.html`: documentation and examples
-
+    
+    *Nota bene*: The [evaluation demo of *jsRealB*](http://rali.iro.umontreal.ca/JSrealB/current/demos/Evaluation/index.html) is more convenient than this IDE to develop *pyrealb* expressions as both programs share the same formalism. The *jsRealB* demo provides an editor and access to the lexicons and  rules.
+    
+* [Notebooks](./NoteBooks) : Jupyter notebooks (in English and French) with can be used as an executable introduction to *pyrealb*
+    
 * [`tests`](./tests) : unit tests of special features of *pyrealb* in both French and English. Files have the pattern `*_{en|fr}.py`
+    
     * `test.py`: simplistic function to check if a function returns the expected answer and display appropriate message
     * `testAll.html` : run this file to run all tests
 

@@ -940,12 +940,12 @@ def testDataToTextExamples():
     # output: The small cat jumped on the green mat.
 
     loadFr()                                         # set the language to French
-    print(S(NP(D("le"),N("chat"),A("petit")),        # create a subject NP
+    print(S(NP(D("le"),N("chat").n("p"),A("petit")),        # create a subject NP
             VP(V("sauter").t("ps"),        # create VP, setting past for the verb time
-               PP(P("sur"),                          # create a PP  with
+               PP(P("de"),                          # create a PP  with
                   NP(D("le"),N("tapis"),A("vert")))) #  an object NP
             ).realize())
-    # output: Le petit chat sauta sur le tapis vert.
+    # output: Le petit chat sauta du tapis vert.
 
     loadEn()                                         # set the language to English
     subj = NP(D("the"),N("cat"),A("small"))          # create an English NP
@@ -955,7 +955,7 @@ def testDataToTextExamples():
                   NP(D("le"), N("tapis"), A("vert"))))  # an object NP
     print(S(subj.n("p"),                     # set the English subject to plural
             verb).realize())
-    # output: The small cats sautent sur le tapis vert.
+    # output: The small cats sautent du tapis vert.
 
     loadEn()
     verb.add(PP(P("over"),NP(D("a"),N("fence")).n("p")))
@@ -1026,7 +1026,7 @@ def test_warnings():
 
 if __name__ == '__main__':
     # testPreviousExamples()
-    # testDataToTextExamples()
+    testDataToTextExamples()
     # test_warnings()
     # insert here a single example for debugging perhaps commenting the line above
     # do not forget to load the appropriate language

@@ -222,7 +222,7 @@ These functions can be called by the user to change global information for the r
 ## JSON-tools
 
 * `fromJSON(json,lang)` : create a jsRealB structure from a JSON object; if `lang` is not given, the current language is used;
-* `.toJSON()`, `.toJSON()` : create a JSON structure from a *jsRealB* structure ;
+* `.toJSON()`, `.toJSON()` : create a JSON structure from a *pyrealb* structure ;
 * `ppJSON(json)` : create an indented string showing the structure of a JSON structure (not specific to jsRealB, but useful for debugging);
 * `Phrase.fromJSON`, `Dependent.fromJSON`, `Terminal.fromJSON`, `setJSONprops` : internal functions used by `fromJSON()`;
 * `Phrase.prototype.toJSON`, `Terminal.prototype.toJSON`, `Terminal.prototype.toJSON` :internal functions used by `toJSON()`.
@@ -230,10 +230,13 @@ These functions can be called by the user to change global information for the r
 ## `jsRealB.js` / `utils.py`
 
 This is not a class, but a file that imports all functions and classes and
-exports them, so that this is the only file to import to access *jsRealB*.
-It also adds a utility functions and some useful constants..  All functions that create `Terminal`, `Phrase` and `Dependent` instances are also defined here, 
+exports them, so that this is the only file to import to access *pybealb*.
+It also adds a utility functions and some useful constants.  
+All functions that create `Terminal`, `Phrase` and `Dependent` instances are also defined here, 
 
 * `oneOf(elems)` : selects *randomly* an element from a list, but trying to avoid direct repetitions. If the selected element is a function, then call it without argument and return its value.
+* `choice(elems)` : selects randomly an element for a list, similar to `oneOf(..)` but does not take previous choices into account
 * `mix(elems)` : shuffle the elements, if any element is a function then return its value.
-* ` jsRealB_version` : the current version of jsRealB
+* `jsRealB_version` : the current version of jsRealB
+* `pyrealb_version` : the current version of *pyrealb*
 * `getSavedWarnings()`, `resetSavedWarnings()`, `setExceptionOnWarning()`: change the warning are dealt with.
