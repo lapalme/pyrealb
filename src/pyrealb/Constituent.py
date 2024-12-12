@@ -446,7 +446,7 @@ class Constituent:
                                 getattr(self,opt)(o)
                     else:
                         getattr(self, opt)(val)
-                elif opt not in ["pat","h","cnt"]: # do not copy properties from Terminal already in the lexicon
+                elif opt not in ["pat","h","cnt","niveau","ldv"]: # do not copy properties from Terminal already in the lexicon
                     print("Constituent.fromJSON: illegal prop:"+opt,file=sys.stderr)
         return self                    
 

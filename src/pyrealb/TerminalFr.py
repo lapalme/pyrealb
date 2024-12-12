@@ -183,7 +183,7 @@ class TerminalFr(ConstituentFr,Terminal):
                         self.lier()
                         self.insertReal(res, Pro("moi", "fr").tn("").pe(pe).n(n).g(g))
                     return res
-                elif t in ["b", "pr", "pp"]:
+                elif t in ["b", "pr", "pp"] and t in conjugation:
                     self.realization = self.stem + conjugation[t]
                     res = [self]
                     if t != "pp" and self.isReflexive() and self.parentConst is None:
@@ -195,15 +195,20 @@ class TerminalFr(ConstituentFr,Terminal):
                         n = x.getProp("n")
                         if n == "x": n = "s"
                         if (self.isMajestic()): n = self.getNumber();
-                        if (g + n) == "mp" and self.realization.endswith("s"):
-                            pass  # pas d'ajout de s au masculin pluriel si la réalisation termine en s
-                        else:
-                            if (g + n) != "ms" and self.realization.endswith(
-                                    "û"):  # changer "dû" en "du" sauf pour masc sing
-                                self.realization = self.realization[:-1] + "u" + \
-                                                   {"ms": "", "mp": "s", "fs": "e", "fp": "es"}[g + n]
+                        if (g+n) != "ms":
+                            pat = self.getProp("pat")
+                            if pat is not None and len(pat)==1 and pat[0]=="intr" and self.getProp("aux")=="av":
+                                # ne pas conjuguer un pp d'un verbe intransitif avec auxiliaire avoir
+                                return [self.morphoError("conjugate_fr", {"pe": pe, "n": n, "t": t})]
+                            if self.realization.endswith("s"):
+                                if self.realization.endswith("ous"):
+                                    self.realization = self.realization[:-3]+{"mp":"ous","fs":"oute","fp":"outes"}[g+m]
+                                else:
+                                    self.realization += {"mp":"","fs":"e","fp":"es"}[g+n]
                             else:
-                                self.realization += {"ms": "", "mp": "s", "fs": "e", "fp": "es"}[g + n]
+                                if self.realization.endswith("û"):
+                                    self.realization = self.realization[:-1]+"u"
+                                self.realization += {"mp":"s","fs":"e","fp":"es"}[g+n]
                     return res
                 else:
                     return [self.morphoError("conjugate_fr", {"pe": pe, "n": n, "t": t})]

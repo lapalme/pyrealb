@@ -1,6 +1,6 @@
 from keywordsFr import elizaInitials, elizaFinals, elizaQuits
 from eliza import choose, getTerminals, getKeyword, select, enKeys, getQuestion
-from lemmatize import tokenizeFr
+from tokenize import tokenizeFr
 
 user_gender = "m"
 eliza_gender = "f"
@@ -10,7 +10,7 @@ trace = False
 def ask(fn,groups):
     print(fn(groups, user_gender).typ({"maje":use_majestic}).realize())
 
-def talkWithElixa():
+def talkWithEliza():
     ask(choose(elizaInitials),[])
     while True:
         userInput = input()
@@ -29,4 +29,4 @@ def talkWithElixa():
                 print("****: pas de question trouvée:" + keyword)
 
 if __name__ == "__main__":
-    talkWithElixa()
+    talkWithEliza()

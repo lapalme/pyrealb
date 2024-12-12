@@ -8,7 +8,7 @@ import datetime
 import random
 import sys
 
-from .Lexicon import currentLanguage
+from .Lexicon import getLanguage
 
 pyrealb_oneOf_dict = {}  # internal Map for keeping track of calls to specific oneOf call
 
@@ -111,7 +111,7 @@ def fromJSON(json, lang=None):
                 print("FromJSON: lang should be 'en' or 'fr', not " + json["lang"] + " 'en' will be used",
                       file=sys.stderr)
                 lang = "en"
-        lang1 = lang if lang is not None else currentLanguage()
+        lang1 = lang if lang is not None else getLanguage()
         if "phrase" in json:
             constType = json["phrase"]
             if constType in ['NP', 'AP', 'AdvP', 'VP', 'PP', 'CP', 'S', 'SP']:
@@ -135,7 +135,7 @@ def fromJSON(json, lang=None):
 
 
 # version and date information
-pyrealb_version = "3.1"
+pyrealb_version = "3.2"
 pyrealb_datecreated = datetime.datetime.today()
 
 ####################################################################################
@@ -144,7 +144,7 @@ from .TerminalEn import TerminalEn
 from .TerminalFr import TerminalFr
 # call language dependent constructors
 def terminal(constType,lemma,lang=None):
-    if lang is None:lang=currentLanguage()
+    if lang is None:lang=getLanguage()
     if lang == "en": return TerminalEn(constType, lemma)
     return TerminalFr(constType, lemma)
 
@@ -189,7 +189,7 @@ from .PhraseFr import PhraseFr
 
 ##  functions to call language specific constructors
 def phrase(constType,elems,lang=None):
-    if lang is None:lang = currentLanguage()
+    if lang is None:lang = getLanguage()
     if lang == "en":return PhraseEn(constType, elems)
     return  PhraseFr(constType, elems)
 
@@ -224,7 +224,7 @@ from .DependentFr import DependentFr
 
 ## call language dependent constructors
 def dep(params,deprel,lang=None):
-    if lang is None: lang=currentLanguage()
+    if lang is None: lang=getLanguage()
     if lang == "en": return DependentEn(params, deprel)
     return DependentFr(params, deprel)
 

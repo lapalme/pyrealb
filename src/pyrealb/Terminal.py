@@ -109,7 +109,7 @@ class Terminal(Constituent):
                     self.tab=None 
                     self.realization=f"[[{lemma}]]"
                     otherPOS=list(lexInfo.keys())
-                    if "basic" in otherPOS:otherPOS.remove("basic")
+                    if "ldv" in otherPOS:otherPOS.remove("ldv")
                     return self.warn("not in lexicon",self.lang(),otherPOS)
                     # if quoteOOV: # not currently used
                     #     self.lemma=str(lemma)

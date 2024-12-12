@@ -1,13 +1,11 @@
-from pyrealb import *
-import re,sys
+from .utils import fromJSON
+from .Lexicon import getLexicon, getRules, getLanguage, getLemma, load
+import sys
 
 trace=False
-
 # only set this flag during development fo this IDE because it takes a while to execute
 # and is not needed unless the lexicons or the rules are changed
 checkAmbiguities=False
-
-lemmataLang="fr"
 
 def addLemma(lemmata,word,jsrExp):
     if trace:print(f"addLemma::{word}:{jsrExp}")
@@ -16,7 +14,7 @@ def addLemma(lemmata,word,jsrExp):
         genWord=jsrExp.realize()
         if genWord!=word:
             # ignore differences for French "essentiellement réflexifs" verbs
-            if (lemmataLang == "en" or  not jsrExp.isA("V") or  not jsrExp.isReflexive() or
+            if (getLanguage() == "en" or  not jsrExp.isA("V") or  not jsrExp.isReflexive() or
                    (not genWord.endswith(word) and not genWord.startswith(word))):
                 print("%s => %s != %s"%(jsrExp,genWord,word))
     # add word
@@ -26,14 +24,15 @@ def addLemma(lemmata,word,jsrExp):
         lemmata[word]=[jsrExp]
 
 def jsrExpInit(pos,lemma):
-    return fromJSON({"terminal": pos, "lemma": lemma, "lang": lemmataLang})
+    return fromJSON({"terminal": pos, "lemma": lemma, "lang": getLanguage()})
 
 # generate a list of jsRealB expressions (only Pro will have more than 1)
 #  from a given form (lemma), for a given part-of-speech (pos)
 #  using information from the declension and lexicon information (declension, lexiconEntry)
-def genExp(declension,pos,entry,lexiconEntry):
-    if trace:print(f"genExp(declension,{pos},{entry},{lexiconEntry}")
-    jsrExp = jsrExpInit(pos,entry)
+def genExp(declension, pos, lemma, lexiconEntry):
+    lemmataLang = getLanguage()
+    if trace:print(f"genExp(declension,{pos},{lemma},{lexiconEntry}")
+    jsrExp = jsrExpInit(pos, lemma)
     if pos=="N":
         g=lexiconEntry["g"] if "g" in lexiconEntry else None
         # gender are ignored in English
@@ -59,7 +58,7 @@ def genExp(declension,pos,entry,lexiconEntry):
             if dn!="s": jsrExp.n(dn)
         if "pe" in declension:
             pe=declension["pe"]
-            if pe!=3 or entry=="moi": jsrExp.pe(pe)
+            if pe!=3 or lemma== "moi": jsrExp.pe(pe)
         if "own" in declension:
             jsrExp.ow(declension["own"])
         if "tn" in declension:
@@ -88,7 +87,7 @@ def genExp(declension,pos,entry,lexiconEntry):
         print("***POS not implemented:%s",pos,file=sys.stderr)
     return jsrExp
 
-def expandConjugation(lexicon,lemmata,rules,lemma,tab):
+def expandConjugation(lemmata,rules,lemma,tab):
     if trace:print(f"expandConjugation::{lemma}:{tab}")
     if tab not in rules["conjugation"]:return
     conjug=rules["conjugation"][tab]
@@ -117,6 +116,13 @@ def expandConjugation(lexicon,lemmata,rules,lemma,tab):
             jsrExp=jsrExpInit("V",lemma)
             if t != "p": jsrExp.t(t)
             addLemma(lemmata,word,jsrExp)
+            if t == "pp" and getLanguage() == "fr" and word != "été":
+                # conjuguer les participes passés français
+                if word.endswith("û"): word = word[:-1]+"u"
+                addLemma(lemmata,word+"e",jsrExp.clone().g("f"))
+                addLemma(lemmata,word+("" if word.endswith("s") else "s"),
+                         jsrExp.clone().g("m").n("p"))
+                addLemma(lemmata,word+"es",jsrExp.clone().g("f").n("p"))
         else:
             print("***Strange persons:",lemma,persons,file=sys.stderr)
 
@@ -126,10 +132,9 @@ def expandDeclension(lexicon,lemmata,rules,entry,pos,tab):
     declension=None
     if tab in rulesDecl:
         declension=rulesDecl[tab]
-    elif tab in rules["regular"]:
+    elif tab in rules["regular"] or declension is None:
         addLemma(lemmata,entry,jsrExpInit(pos,entry))
         return
-    if declension is None or "ending" not in declension: return
     ending=declension["ending"]
     endRadical=len(entry)-len(ending)
     radical=entry[:endRadical]
@@ -147,58 +152,21 @@ def expandDeclension(lexicon,lemmata,rules,entry,pos,tab):
                 word=radical+decl[l]["val"]
                 addLemma(lemmata,word,jsrExp)
 
-def buildLemmata(lang,lexicon,rules):
-    global lemmataLang
-    lemmataLang=lang
+def buildLemmataMap(lang):
+    load(lang)
+    lexicon = getLexicon()
+    rules = getRules()
     if checkAmbiguities:
-        print("Checking realization ambiguities for %s lemmata ..."%("English" if lang=="en" else "French"))
+        print("Checking realization ambiguities for Enlish lemmata ..." if lang=="en" \
+                  else "Vérification de la table des lemmes en français")
     lemmata={}
     for entry,entryInfos in lexicon.items():
         for pos in entryInfos.keys():
-            if pos=="basic" or pos=="value":continue
+            if pos=="ldv" or pos=="niveau" or pos=="value":continue
             if pos=="Pc": continue; # ignore punctuation
             if pos=="V": # conjugation
-                expandConjugation(lexicon,lemmata,rules,entry,
+                expandConjugation(lemmata,rules,entry,
                                   entryInfos["V"]["tab"])
             else:       # declension
                 expandDeclension(lexicon,lemmata,rules,entry,pos,entryInfos[pos]["tab"])
     return lemmata
-
-def tokenizeFr(sentence):
-    elidableFRList = ["ce", "la", "le", "je", "me", "te", "se", "de", "ne", "que", "puisque", "lorsque", "jusque", "quoique"]
-    contractionFrTable = {
-        "au":"à+le","aux":"à+les","ç'a":"ça+a",
-        "du":"de+le","des":"de+les","d'autres":"de+autres",
-        "s'il":"si+il","s'ils":"si+ils"}
-
-    # split on non-French letter and apostrophe and remove empty tokens
-    words = [w for w in re.split(r"[^a-z'àâéèêëîïôöùüç]",sentence.lower()) if len(w)>0]
-    # expand elision and contraction
-    i=0
-    while i<len(words):
-        word = words[i]
-        if word not in lemmataFr:
-            # word does not exist try to expand elision or contraction
-            m = re.fullmatch(r"(.*?)'([haeiouyàâéèêëîïôöùüç].*)",word) # check for apostrophe followed by vowell or h
-            if m :
-                for elw in elidableFRList: # expand elision
-                    if elw.startswith(m.group(1)):
-                        words[i:i+1]=[elw,m.group(2)]
-                        i+=1
-                        break
-            else:
-                if word in contractionFrTable:
-                    words[i:i+1]=contractionFrTable[word].split("+")
-                    i+=1
-        i+=1
-    return words
-
-loadFr()
-lemmataFr = buildLemmata("fr",getLexicon("fr"),getRules("fr"))
-
-print("---lammataFr: OK")
-
-if __name__ == '__main__':
-    # add tests fo  lemmatization
-    tokens = tokenizeFr("J'ai mangé du pain aujourd'hui à l'hôpital, quoiqu'encore pas assez!")
-    print(tokens)

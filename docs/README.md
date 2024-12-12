@@ -46,7 +46,7 @@ Multiple inheritance is used to determine the appropriate methods according to t
 
   ```python
   def phrase(constType,elems,lang=None):
-      if lang is None:lang = currentLanguage()  # determine the language to use
+      if lang is None:lang = getLanguage()  # determine the language to use
       if lang == "en":return PhraseEn(constType, elems)
       return  PhraseFr(constType, elems)
   ```

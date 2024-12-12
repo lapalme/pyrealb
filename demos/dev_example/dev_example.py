@@ -845,7 +845,7 @@ def test(exp):
 
 
 def showDiffs(nomEx, nbDiffs, nbTests):
-    if currentLanguage() == "en":
+    if getLanguage() == "en":
         if nbDiffs == 0:
             print(f"{nomEx} :: *** no differences over {nbTests} tests")
         else:
@@ -874,7 +874,7 @@ def checkAllEx(nomEx, exemples):
 
 #  transform constituency examples into dependencies, realize them and compare with expected
 def checkAllExDep(nomEx, exemples):
-    lang = currentLanguage()
+    lang = getLanguage()
     nb = len(exemples)
     nbDiffs = 0
     nbTests = 0
@@ -1024,10 +1024,31 @@ def test_warnings():
         print(NP(D("un"),N("erreur")).warning(callArgs))
         print("---")
 
+def test_lemmataMaps():
+    def show_forms(lemmata,form):
+        exprs = lemmata[form]
+        if exprs is None:
+            print(form,":", "not found" if getLanguage()=="en" else "pas trouvé")
+        else:
+            print(form,":",", ".join(expr.toSource() for expr in exprs))
+    lemmataEn = buildLemmataMap("en")
+    print("---")
+    show_forms(lemmataEn,"love")
+    print([e.toSource() for e in lemmataEn["love"] if e.isA("N")])
+    print("---")
+    lemmataFr = buildLemmataMap("fr")
+    show_forms(lemmataFr, "porte")
+    show_forms(lemmataFr, "finies")
+    show_forms(lemmataFr, "suis")
+    show_forms(lemmataFr, "ménagère")
+    show_forms(lemmataFr, "crus")
+    print([e.toSource() for e in lemmataFr["crus"] if e.isA('N')])
+
 if __name__ == '__main__':
     # testPreviousExamples()
-    testDataToTextExamples()
+    # testDataToTextExamples()
     # test_warnings()
+    # test_lemmataMaps()
     # insert here a single example for debugging perhaps commenting the line above
     # do not forget to load the appropriate language
     loadEn() # set the language to English

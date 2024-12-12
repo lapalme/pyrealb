@@ -1,7 +1,7 @@
 from pyrealb import *
 import random
 
-from lemmatize import lemmataFr, tokenizeFr
+from tokenize import lemmataFr, tokenizeFr
 from keywordsFr import keywordsFr, elizaFinals, elizaQuits, elizaInitials
 
 Constituent.debug = True

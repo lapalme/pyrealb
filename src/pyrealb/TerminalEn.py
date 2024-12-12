@@ -74,13 +74,10 @@ class TerminalEn(ConstituentEn,Terminal):
         t = self.getProp("t")
         if self.tab is None:
             return [self.morphoError("conjugate_en:tab", {"pe": pe, "n": n, "t": t})]
-            # subjonctive present is like present except that it does not end in s at 3rd person
-        # subjonctive past is like simple past
-        t1 = "p" if t == "s" else ("ps" if t == "si" else t)
         conjugationTable = getRules(self.lang())["conjugation"][self.tab]
         res = [self]
-        if "t" in conjugationTable and t1 in conjugationTable["t"]:
-            conjugation = conjugationTable["t"][t1]
+        if "t" in conjugationTable and t in conjugationTable["t"]:
+            conjugation = conjugationTable["t"][t]
             if t in ["p", "ps", "s", "si"]:
                 if isinstance(conjugation, str):
                     self.realization = self.stem + conjugation
@@ -96,6 +93,13 @@ class TerminalEn(ConstituentEn,Terminal):
             elif t in ["b", "pp", "pr"]:
                 self.realization = self.stem + conjugation
                 return [self]
+        elif t == "s":
+            # subjonctive present is like plain verb form
+            self.realization = self.lemma
+        elif t == "si":
+            # subjonctive past is like simple past, except for "be" 1st and 3rd person => were
+            if self.lemma == "be" : self.realization = "were"
+            else: self.realization = self.stem + getRules(self.lang())["conjugation"][self.tab]["t"]["ps"]
         elif t == "f":
             self.realization = self.lemma
             self.insertReal(res, V("will"), 0)

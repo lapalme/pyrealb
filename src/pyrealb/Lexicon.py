@@ -33,7 +33,7 @@ class Lexicon(object):
         
 __lexicon = Lexicon()
 
-def currentLanguage():
+def getLanguage():
     return __lexicon.lang
 
 def loadEn(trace=False):

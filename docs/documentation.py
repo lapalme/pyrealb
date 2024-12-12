@@ -513,7 +513,7 @@ de mise au point Python, et change le comportement de <code>str(..)</code>
 pour qu'il retourne plutôt le source de l'expression (voir <code>.toSource()</code> plus haut) 
 ce qui, à l'usage, s'est avéré être très pratique. 
 La réalisation doit alors être obtenue en appelant <code>.realize()</code>.
-Pour obtenir ce comportement dans tous les cas, on peut utiliser cette affectation <code>Constituent.debug=true</code>.</dd>
+Pour obtenir ce comportement dans tous les cas, on peut utiliser cette affectation <code>Constituent.debug=True</code>.</dd>
 <dt><code>+</code> (opérateur préfixe unaire)</dt>
 <dd>L'opérateur unaire <code>+</code> peut être utilisé devant un <code>Constituent</code> 
 pour imprimer sa réalisation; cette abréviation est surtout utile lors de tests dans une boucle <i>real-eval-print</i>.<dd>
@@ -530,7 +530,7 @@ the constituents during debugging, a typical case of <i>Heisenbug</i>.
 In most cases <span class="jsr">pyrealb</span> detects its execution within a Python debugger and changes
 <code>str(..)</code> to return the source of the constituent (see <code>.toSource()</code> above). 
 Realization must then be obtained by calling <code>.realize()</code>.
-This behavior can be obtained in all cases with the following assignment <code>Constituent.debug=true</code>.</dd>
+This behavior can be obtained in all cases with the following assignment <code>Constituent.debug=True</code>.</dd>
 <dt><code>+</code> (unary prefix operator)</dt>
 <dd>The unary <code>+</code> operator can be used in front of a <code>Constituent</code> to print its realization, a useful abbreviation
 when testing within a <i>read-eval-print</i> loop.</dd>
@@ -660,6 +660,27 @@ mais non des catégories.""",lang="fr")
 page.p("""
 Merge the entries of <code>newLexicon</code> with the specified lexicon. This adds the <span class="jsr">pyrealb</span> entries and replaces 
 the existing entries by the ones of the <span class="jsr">pyrealb</span> lexicon. Merging is done at the entry level, not at the category level.""",lang="en")
+
+page.h3("<code>buildLemmataMap(lang)</code>")
+page.p("""Créer une table dans laquelle chaque clé est une des formes déclinées ou conjuguées 
+de tous les mots du lexique de la langue spécifiée. La valeur associée à une liste d'instances de 
+<code>Terminal</code> qui sont réalisées par la clé.
+""",lang="fr")
+page.p("""Cette table peut être utilisée pour de la génération <i>inverse</i>. Voici quelques appels suivis des résultats après &rAarr;
+<pre lang="fr"><code>    lemmataFr = buildLemmataMap("fr")
+    print(", ".join(e.toSource() for e in lemmataFr["finies"])) &rAarr; <i>A("fini").g('f').n('p'), V("finir").t('pp').g('f').n('p')</i>
+    print(", ".join(e.toSource() for e in lemmataFr["crus"] if e.isA("N"))) &rAarr; <i>N('cru').n("p")</i>
+</code></pre>
+""",lang="fr")
+page.p("""Build a dict in which each key is an inflected form of all the entries in the lexicon of the specified language. 
+The associated value is a list of <code>Terminal</code> instances that are realized by the key.
+""",lang="en")
+page.p("""This dict  can be used for <i>inverse</i> generation. Here are examples of calls with the result shown after &rAarr;
+<pre lang="en"><code>    lemmataEn = buildLemmataMap("en")
+    print(", ".join(e.toSource() for e in lemmataEn["love"])) &rAarr; <i>N('love'), V('love').t("b"), V('love').pe(1), V('love').pe(2), V('love').pe(1).n("p"), V('love').pe(2).n("p"), V('love').n("p")</i>
+    print(", ".join(e.toSource() for e in lemmataEn["love"] if e.isA("N"))) &rAarr; <i>N('love')</i>
+</code></pre>
+""",lang="en")
 
 h2_fr("Sélection de variantes");h2_en("Variant selection")
 page.h3("<code>oneOf(e<sub>1</sub>,e<sub>2</sub>,...)</code>")

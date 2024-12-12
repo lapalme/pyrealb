@@ -77,7 +77,7 @@ def make_groups(words)->([Terminal],[Terminal],[Terminal]):
                 term = D(word)
             else:
                 print(f"*** {messages['bad category'][lang]}:"+
-                      str([key for key in lemma.keys() if key!="basic"]))
+                      str([key for key in lemma.keys() if key not in ["ldv","niveau"]))
                 return None
             return term
 

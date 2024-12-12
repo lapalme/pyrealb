@@ -1,6 +1,6 @@
 from keywordsFr import elizaInitials, elizaFinals, elizaQuits
 from eliza import choose, getTerminals, getKeyword, select, enKeys, getQuestion,showTerminalLists, matchDecomp
-from lemmatize import tokenizeFr
+from tokenize import tokenizeFr
 
 user_gender = "m"
 eliza_gender = "f"
@@ -140,5 +140,4 @@ def run_testAll():
 
 if __name__ == "__main__":
     # runScript(userInputs)
-
     run_testAll()
