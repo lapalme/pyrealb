@@ -17,6 +17,9 @@ class PhraseFr(ConstituentFr,NonTerminalFr,Phrase):
             e.peng = self.peng
             return
 
+    def check_determiner_cnt(self, det, headNoun):
+        pass
+
     def link_subj_obj_subordinate(self, pro, v, subject):
         if pro.lemma in ["qui","lequel"] and pro == subject:  # agrees with self NP
             v.peng = self.peng

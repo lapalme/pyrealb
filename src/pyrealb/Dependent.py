@@ -147,6 +147,7 @@ class Dependent(Constituent):
                 if depTerm.isA("D"):
                     if hasattr(self,"peng"):
                         depTerm.peng=self.peng
+                    self.check_determiner_cnt(depTerm)
                 elif depTerm.isA("NO"):
                     depTerm.peng=headTerm.peng
                 elif depTerm.isA("P") and depTerm.lemma == "de":  # HACK: deal with specific case : det(P("de"),mod(D(...)))

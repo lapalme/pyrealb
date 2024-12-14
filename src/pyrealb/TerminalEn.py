@@ -1,6 +1,6 @@
 from .ConstituentEn import ConstituentEn
 from .Terminal import Terminal
-from .Lexicon import getLemma, getRules
+from .Lexicon import getLexicon, getLemma, getRules
 
 class TerminalEn(ConstituentEn,Terminal):
     def thousands_separator(self):
@@ -57,6 +57,12 @@ class TerminalEn(ConstituentEn,Terminal):
         return "declension"
 
     def check_gender_lexicon(self, g, n):
+        return None
+
+    def check_countable(self):
+        lexiconCnt = getLexicon(self.lang())[self.lemma]["N"]["cnt"]
+        if lexiconCnt == "no":
+            return [self.morphoError("An uncountable noun cannot be set to plural","")]
         return None
 
     def check_majestic(self,keyVals):

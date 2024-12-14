@@ -155,6 +155,8 @@ class Phrase(Constituent):
                                 e.peng["g"] = self.peng["g"]
                             elif e.isA("D","A","V"):
                                 self.link_DAV_properties(e)
+                                if e.isA("D"):
+                                    self.check_determiner_cnt(e,self.elements[headIndex])
                             elif e.isA("CP"): # check for a coordination of adjectives and numbers
                                 e.peng=self.peng
                                 for el in e.elements:

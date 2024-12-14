@@ -11,6 +11,9 @@ class DependentFr(ConstituentFr,NonTerminalFr,Dependent):
             if iSubj >= 0:
                 depTerm.peng = self.dependents[iSubj].peng
 
+    def check_determiner_cnt(self, det):
+        pass
+
     def link_pp_before(self, dep, headTerm):
         depTerm = dep.terminal
         # rel is comp or mod

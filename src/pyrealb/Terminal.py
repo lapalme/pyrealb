@@ -1,6 +1,6 @@
 from .Constituent import Constituent,deprels, quoteOOV
 from .Number import enToutesLettres, ordinal, roman
-from .Lexicon import getLemma,getRules
+from .Lexicon import getLemma, getRules
 
 import datetime, re
 
@@ -214,15 +214,15 @@ class Terminal(Constituent):
         rules=getRules(self.lang())
         declension=rules["declension"][self.tab]["declension"]
         stem=self.stem
+        g = self.getProp("g")
+        if self.isA("D", "N") and g is None: g = "m"
+        n = self.getNumber()
+        if self.isA("D", "N") and n is None: n = "s"
         if self.isA("A","Adv"):
             return self.decline_adj_adv(rules,declension,stem)
         elif len(declension)==1: # no declension
             self.realization = self.stem+declension[0]["val"]
         else: # for N,D,Pro
-            g=self.getProp("g")
-            if self.isA("D","N") and g is None:g="m"
-            n=self.getNumber()
-            if self.isA("D","N") and n is None:n="s"
             pe=3
             if setPerson:
                 p=self.getProp("pe")
@@ -267,9 +267,13 @@ class Terminal(Constituent):
             ending=self.bestMatch(self.declension_word(),declension,keyVals)
             if ending is None:
                 return [self.morphoError("decline [en]: N,D Pro", {"g": g, "n": n, "pe":pe})]
-            res = self.check_gender_lexicon(g,n)
-            if res is not None: return res
             self.realization = self.stem+ending
+        if self.isA("N"):
+            res = self.check_gender_lexicon(g, n)
+            if res is not None: return res
+            if n == "p":
+                rescnt = self.check_countable()
+                if rescnt is not None: return rescnt
         return [self]
 
     def removeNextConstInSentence(self):

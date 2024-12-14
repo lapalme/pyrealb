@@ -69,6 +69,9 @@ class TerminalFr(ConstituentFr,Terminal):
                     "genre différent de celui du lexique", {"g": g, "lexique": lexiconG})]
         return None
 
+    def check_countable(self):
+        pass
+
     def check_majestic(self,keyVals):
         if self.isA("D"):
             if self.lemma == "mon" and keyVals["pe"]<3:
