@@ -77,14 +77,13 @@ def make_groups(words)->([Terminal],[Terminal],[Terminal]):
                 term = D(word)
             else:
                 print(f"*** {messages['bad category'][lang]}:"+
-                      str([key for key in lemma.keys() if key not in ["ldv","niveau"]))
+                      str([key for key in lemma.keys() if key not in ["ldv","niveau"]]))
                 return None
             return term
 
     for word in words:
         l = subj if len(verb)==0 else obj # vérifier à quelle liste on ajoute
         plural = False
-        cat = None
         if word.endswith("+"):
             word=word[:-1]
             plural = True
@@ -140,7 +139,7 @@ def makeNPs(terminals:[Terminal])->Phrase:
     if len(phs) == 1:
         return phs[0]
     if all(ph.constType=="NP" for ph in phs):
-        return (CP(C(and_conj[lang]),phs))
+        return CP(C(and_conj[lang]),phs)
     return SP(phs)
 
 
