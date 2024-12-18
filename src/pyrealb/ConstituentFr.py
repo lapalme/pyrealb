@@ -230,11 +230,11 @@ class ConstituentFr:
                   Q("tn(..)"), VP(V("ignorer")).typ({"pas": True})),
             "bad Constituent": lambda rank, type:
                 # le $rank paramètre n'est pas Constituent.
-                S(NP(D("le"), N("paramètre"), Q(rank)),
+                S(NP(D("le"), Q(rank), N("paramètre")),
                   VP(V("être"), Q("Constituent"), Adv("mais"), Q(type))).typ({"neg": True}),
             "bad Dependent": lambda rank, type:
-                # le paramètre $rank n'est pas Dependent mais $type
-                S(NP(D("le"), N("paramètre"), Q(rank)),
+                # le $rank paramètre n'est pas Dependent mais $type
+                S(NP(D("le"), Q(rank), N("paramètre")),
                   VP(V("être"), Q("Dependent"), Adv("mais"), Q(type))).typ({"neg": True}),
             "Dependent needs Terminal": lambda type:
                 # le premier paramètre du Dependent n'est pas Terminal mais $type.
