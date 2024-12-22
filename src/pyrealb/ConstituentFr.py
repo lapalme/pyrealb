@@ -81,7 +81,6 @@ class ConstituentFr:
                 return True
             return False
 
-        contr = None
         last = len(cList) - 1
         if last == 0: return  # do not try to elide a single word
         i = 0
@@ -145,11 +144,11 @@ class ConstituentFr:
                     re.sub(r"(\w+).*",r"\1",terminals[i + 1].realization) in ["il","elle","on"]):
                 return "t-"
             elif terminals[i].realization=="peux" and terminals[i+1].realization == "je":
-                terminals[i].realization="puis"; # HACK replace "peux-je" by "puis-je"
+                terminals[i].realization="puis" # HACK replace "peux-je" by "puis-je"
         return ""
 
     def warning(self, args):
-        from .utils import N,A,Pro,D,Adv,V,P,C,DT,NO,Q, NP,AP,VP,AdvP,PP,CP,S,SP
+        from .utils import N,A,Pro,D,Adv,V,P,C,NO,Q, NP,VP,AdvP,PP,CP,S,SP
         # create a list of elements [a,b,c] => "a, b ou c"
         def makeDisj(elems):
             args = [C("ou")] + [Q(e) for e in elems]

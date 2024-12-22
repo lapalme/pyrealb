@@ -22,6 +22,8 @@ class Constituent:
     # hack taken from https://intellij-support.jetbrains.com/hc/en-us/community/posts/205819799/comments/206004059
     debug = sys.gettrace() is not None or "-d" in sys.argv # used in Constituent.__str__()
 
+    exceptionOnWarning = False
+
     #  unary plus to print the realization of a Constituent
     #  useful within a real-eval-print loop
     def __pos__(self):
@@ -454,7 +456,10 @@ class Constituent:
 
     def warn(self, *args):
         # print("WARNING:",self.me(),args,file=sys.stderr)
-        print(self.warning(args), file=sys.stderr)
+        mess = self.warning(args)
+        if Constituent.exceptionOnWarning:
+            raise Exception(mess)
+        print(mess, file=sys.stderr)
         return self
 
 
