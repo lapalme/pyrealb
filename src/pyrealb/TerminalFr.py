@@ -108,9 +108,9 @@ class TerminalFr(ConstituentFr,Terminal):
             else:  # auxiliary "avoir"
                 # check the gender and number of a cod appearing before the verb to do proper agreement
                 # of its part participle, except when the verb is "être" which will always agree
+                g = "m"
+                n = "s"
                 if self.lemma != "être":
-                    g = "m"
-                    n = "s"
                     if hasattr(self, "cod"):
                         g = self.cod.getProp("g")
                         n = self.cod.getProp("n")
@@ -186,32 +186,30 @@ class TerminalFr(ConstituentFr,Terminal):
                         self.lier()
                         self.insertReal(res, Pro("moi", "fr").tn("").pe(pe).n(n).g(g))
                     return res
-                elif t in ["b", "pr", "pp"] and t in conjugation:
+                elif t == "pp":
+                    x = self.cod if hasattr(self, "cod") else self
+                    g = x.getProp("g")
+                    if g == "x" or g == "n": g = "m"  # neutre peut arriver si le sujet est en anglais
+                    n = x.getProp("n")
+                    if n == "x": n = "s"
+                    if (self.isMajestic()): n = self.getNumber();
+                    idx = 0 if n=="s" else 2
+                    if g =="f": idx += 1
+                    termPP = conjugation[t][idx]
+                    if termPP is None:
+                        return [self.morphoError("conjugate_fr", {"pe": pe, "n": n, "t": t})]
+                    if idx > 0:
+                        pat = self.getProp("pat")
+                        if pat is not None and len(pat) == 1 and pat[0] == "intr" and self.getProp("aux") == "av":
+                            # ne pas conjuguer un pp d'un verbe intransitif avec auxiliaire avoir
+                            return [self.morphoError("conjugate_fr", {"pe": pe, "n": n, "t": t})]
+                    self.realization = self.stem+termPP
+                    return [self]
+                elif t in ["b", "pr"] and t in conjugation:
                     self.realization = self.stem + conjugation[t]
                     res = [self]
-                    if t != "pp" and self.isReflexive() and self.parentConst is None:
+                    if self.isReflexive() and self.parentConst is None:
                         self.insertReal(res, Pro("moi", "fr").c("refl").pe(pe).n(n).g(g), 0)
-                    if t == "pp" and self.realization != "été":  # HACK: frequent case of être that does not change
-                        x = self.cod if hasattr(self, "cod") else self
-                        g = x.getProp("g")
-                        if g == "x" or g == "n": g = "m"  # neutre peut arriver si le sujet est en anglais
-                        n = x.getProp("n")
-                        if n == "x": n = "s"
-                        if (self.isMajestic()): n = self.getNumber();
-                        if (g+n) != "ms":
-                            pat = self.getProp("pat")
-                            if pat is not None and len(pat)==1 and pat[0]=="intr" and self.getProp("aux")=="av":
-                                # ne pas conjuguer un pp d'un verbe intransitif avec auxiliaire avoir
-                                return [self.morphoError("conjugate_fr", {"pe": pe, "n": n, "t": t})]
-                            if self.realization.endswith("s"):
-                                if self.realization.endswith("ous"):
-                                    self.realization = self.realization[:-3]+{"mp":"ous","fs":"oute","fp":"outes"}[g+m]
-                                else:
-                                    self.realization += {"mp":"","fs":"e","fp":"es"}[g+n]
-                            else:
-                                if self.realization.endswith("û"):
-                                    self.realization = self.realization[:-1]+"u"
-                                self.realization += {"mp":"s","fs":"e","fp":"es"}[g+n]
                     return res
                 else:
                     return [self.morphoError("conjugate_fr", {"pe": pe, "n": n, "t": t})]
