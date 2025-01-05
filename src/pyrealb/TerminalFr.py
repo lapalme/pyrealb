@@ -19,7 +19,7 @@ class TerminalFr(ConstituentFr,Terminal):
         n = self.getProp("n")
         ending = self.bestMatch("déclinaison d'adjectif", declension, {"g": g, "n": n})
         if ending is None:
-            return [self.morphoError("decline [fr]: A", {"g": g, "n": n})]
+            return [self.morphoError("Pas de déclinaison acceptable pour: A", {"g": g, "n": n})]
         f = self.getProp("f")  # comparatif d'adjectif
         if f is not None and f != False:
             specialFRcomp = {"bon": "meilleur", "mauvais": "pire"}
@@ -95,6 +95,15 @@ class TerminalFr(ConstituentFr,Terminal):
         if t in ["pc", "pq", "cp", "pa", "fa", "spa", "spq", "bp"]:  # temps composés
             tempsAux = {"pc": "p", "pq": "i", "cp": "c", "pa": "ps", "fa": "f", "spa": "s", "spq": "si", "bp": "b"}[
                 t]
+            # check that the original verb can be conjugated at the tense and person of the auxliary
+            # useful for defective verb (e.g. pleuvoir) so that it is still defective at compound tenses
+            # so that both "je pleut" "j'ai plu" raise a warning
+            conjugationTable = getRules(self.lang())["conjugation"][self.tab]
+            if "t" not in conjugationTable:
+                return [self.morphoError("pas de conjugaison trouvée", {"pe": pe, "n": n, "t": t})]
+            elif conjugationTable["t"][tempsAux][pe - 1 + (3 if n == "p" else 0)] is None:
+                return [self.morphoError("conjugaison impossible à ces personnes et nombres",
+                                         {"pe": pe, "n": n,"t": t})]
             aux = V("avoir", "fr")
             aux.parentConst = self.parentConst
             aux.peng = self.peng
@@ -166,7 +175,8 @@ class TerminalFr(ConstituentFr,Terminal):
                 if t in ["p", "i", "f", "ps", "c", "s", "si"]:
                     term = conjugation[t][pe - 1 + (3 if n == "p" else 0)]
                     if term is None:
-                        return [self.morphoError("conjugate_fr", {"pe": pe, "n": n, "t": t})]
+                        return [self.morphoError("verbe défectif pour ces personnes et nombre",
+                                                 {"pe": pe, "n": n,"t": t})]
                     else:
                         self.realization = self.stem + term
                     res = [self]
@@ -175,10 +185,11 @@ class TerminalFr(ConstituentFr,Terminal):
                     return res
                 elif t == "ip":
                     if (n == "s" and pe != 2) or (n == "p" and pe == 3):
-                        return [self.morphoError("conjugate_fr", {"pe": pe, "n": n, "t": t})]
+                        return [self.morphoError("impératif non conjugable à ces personne et nombre",
+                                                 {"pe": pe, "n": n, "t": t})]
                     term = conjugation[t][pe - 1 + (3 if n == "p" else 0)]
                     if term is None:
-                        return [self.morphoError("conjugate_fr", {"pe": pe, "n": n, "t": t})]
+                        return [self.morphoError("impératif non existant", {"pe": pe, "n": n, "t": t})]
                     else:
                         self.realization = self.stem + term
                     res = [self]
@@ -197,12 +208,14 @@ class TerminalFr(ConstituentFr,Terminal):
                     if g =="f": idx += 1
                     termPP = conjugation[t][idx]
                     if termPP is None:
-                        return [self.morphoError("conjugate_fr", {"pe": pe, "n": n, "t": t})]
+                        return [self.morphoError("verbe défectif pour ces personne et nombre",
+                                                 {"pe": pe, "n": n, "t": t})]
                     if idx > 0:
                         pat = self.getProp("pat")
                         if pat is not None and len(pat) == 1 and pat[0] == "intr" and self.getProp("aux") == "av":
                             # ne pas conjuguer un pp d'un verbe intransitif avec auxiliaire avoir
-                            return [self.morphoError("conjugate_fr", {"pe": pe, "n": n, "t": t})]
+                            return [self.morphoError("pas de flexion pour un participe passé d'un verbe intransitif",
+                                                     {"pe": pe, "n": n, "t": t})]
                     self.realization = self.stem+termPP
                     return [self]
                 elif t in ["b", "pr"] and t in conjugation:
@@ -212,9 +225,9 @@ class TerminalFr(ConstituentFr,Terminal):
                         self.insertReal(res, Pro("moi", "fr").c("refl").pe(pe).n(n).g(g), 0)
                     return res
                 else:
-                    return [self.morphoError("conjugate_fr", {"pe": pe, "n": n, "t": t})]
+                    return [self.morphoError("temps de conjugaison non traité", {"pe": pe, "n": n, "t": t})]
             else:
-                return [self.morphoError("conjugate_fr", {"pe": pe, "n": n, "t": t})]
+                return [self.morphoError("pas de conjugaison trouvée", {"pe": pe, "n": n, "t": t})]
 
     def numberOne(self):
         if self.peng["g"] == "f":

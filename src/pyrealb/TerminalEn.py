@@ -39,7 +39,7 @@ class TerminalEn(ConstituentEn,Terminal):
                 # look in the adjective declension table
                 ending = self.bestMatch("adjective declension", declension, {"f": f})
                 if ending is None:
-                    return [self.morphoError("decline [en]: A", {"f": f})]
+                    return [self.morphoError("NO declension found for", {"f": f})]
                 self.realization = self.stem + ending
                 return [self]
         return [self]
@@ -79,7 +79,7 @@ class TerminalEn(ConstituentEn,Terminal):
         n = self.getNumber()
         t = self.getProp("t")
         if self.tab is None:
-            return [self.morphoError("conjugate_en:tab", {"pe": pe, "n": n, "t": t})]
+            return [self.morphoError("No conjugation table found", {"pe": pe, "n": n, "t": t})]
         conjugationTable = getRules(self.lang())["conjugation"][self.tab]
         res = [self]
         if "t" in conjugationTable and t in conjugationTable["t"]:
@@ -90,9 +90,9 @@ class TerminalEn(ConstituentEn,Terminal):
                     return [self]
                 term = conjugation[pe - 1 + (3 if n == "p" else 0)]
                 if term is None:
-                    return [self.morphoError("conjugate_en:tab", {"pe": pe, "n": n, "t": t})]
+                    return [self.morphoError("Cannot conjugate at these tense and person", {"pe": pe, "n": n, "t": t})]
                 else:
-                    # remove final s at subjonctive present by taking the form at the first person
+                    # remove final s at subjunctive present by taking the form at the first person
                     if t == "s" and pe == 3: term = conjugation[0]
                     self.realization = self.stem + term
                     return [self]
@@ -128,7 +128,7 @@ class TerminalEn(ConstituentEn,Terminal):
             if pe == 1 and n == "p":
                 self.insertReal(res, Q("let's"), 0)
         else:
-            return [self.morphoError("conjugate_en:tab", {"pe": pe, "n": n, "t": t})]
+            return [self.morphoError("Unrecognized tense", {"pe": pe, "n": n, "t": t})]
         return res
 
     def numberOne(self):

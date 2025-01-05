@@ -30,7 +30,13 @@ def printTable(table,nbHeadlines=0):
     for i in range(nbHeadlines,len(table)):
         print(fmt.format(*map(str,table[i]))) 
     print()   
- 
+
+def realize(exp):
+    try:
+        return exp().realize()
+    except Exception as error:
+        return "--"
+
 def declinerNom(mot,lang):
     table=[]
     if lang=="fr":
@@ -38,15 +44,15 @@ def declinerNom(mot,lang):
         g=getLemma(mot)["N"]["g"]
         if g in "mx":
             table.append(["Masculin",
-                          N(mot).g("m").n("s").realize(),
-                          N(mot).g("m").n("p").realize()])
+                          realize(lambda:N(mot).g("m").n("s")),
+                          realize(lambda:N(mot).g("m").n("p"))])
         if g in "fx":
             table.append(["Féminin",
-                          N(mot).g("f").n("s").realize(),
-                          N(mot).g("f").n("p").realize()])
+                          realize(lambda:N(mot).g("f").n("s")),
+                          realize(lambda:N(mot).g("f").n("p"))])
     else:
         table.append(["Singular","Plural"])
-        table.append([N(mot).n("s").realize(),N(mot).n("p").realize()])
+        table.append([realize(lambda:N(mot).n("s")),realize(lambda:N(mot).n("p"))])
     return table
 
 def declinerAdjectif(mot,lang):
@@ -54,14 +60,14 @@ def declinerAdjectif(mot,lang):
     if lang=="fr":
         table.append(["","Singulier","Pluriel"])
         table.append(["Masculin",
-                      A(mot).g("m").n("s").realize(),
-                      A(mot).g("m").n("p").realize()])
+                      realize(lambda:A(mot).g("m").n("s")),
+                      realize(lambda:A(mot).g("m").n("p"))])
         table.append(["Féminin",
-                      A(mot).g("f").n("s").realize(),
-                      A(mot).g("f").n("p").realize()])
+                      realize(lambda:A(mot).g("f").n("s")),
+                      realize(lambda:A(mot).g("f").n("p"))])
     else:
         table.append(["Comparative","Superlative"])
-        table.append([A(mot).f("co").realize(),A(mot).f("su").realize()])
+        table.append([realize(lambda:A(mot).f("co")),realize(lambda:A(mot).f("su"))])
     return table
         
 def decliner(mot,lang):
@@ -84,17 +90,24 @@ def decliner(mot,lang):
 
 def conjuguer(verbe,lang,typs):
     
-    def realize(t,pe,n):
-        if t=="ip":
-            if (n=="s" and pe in [1,3]) or (n=="p" and pe==3):
-                return ""
+    def realize(t,pe,n,g=None):
+        try:
+            if g is not None : # French past participle
+                return VP(V(verbe)).t("pp").n(n).g(g).typ(typs).realize()
+            if t=="ip":
+                if (n=="s" and pe in [1,3]) or (n=="p" and pe==3):
+                    return "--"
+                else:
+                    return VP(V(verbe).t(t).pe(pe).n(n)).typ(typs).realize()
             else:
-                return VP(V(verbe).t(t).pe(pe).n(n)).typ(typs).realize()
-        else:
-            sp=SP(Pro("moi" if lang=="fr" else "me").c("nom").pe(pe).n(n),VP(V(verbe).t(t))).typ(typs)
-            if t.startswith("s") and lang=="fr": # subjonctif
-                sp=SP(Q("que"),sp)
-            return sp.realize()
+                v = V(verbe).t(t)
+                if pe is None: return VP(v).typ(typs).realize()
+                sp=SP(Pro("moi" if lang=="fr" else "me").c("nom").pe(pe).n(n),VP(V(verbe).t(t))).typ(typs)
+                if t.startswith("s") and lang=="fr": # subjonctif
+                    sp=SP(Q("que"),sp)
+                return sp.realize()
+        except Exception as error:
+            return "--"
     
     if lang=="fr":
         loadFr()
@@ -122,7 +135,12 @@ def conjuguer(verbe,lang,typs):
     for tmp in temps:
         table=[[t[0] for t in tmp]]
         if tmp[0][0].startswith("Participe"):
-            table.append([VP(V(verbe).t(t[1])).typ(typs).realize() for t in tmp])
+            table.append([realize(t[1],None,"s" if t[1]!="pp" else None,"m" if t[1]!="pp" else None)
+                          for t in tmp])
+            if lang == "fr":
+                table.append(["",realize("pp",None,"s","f"),"",""])
+                table.append(["",realize("pp",None,"p","m"),"",""])
+                table.append(["",realize("pp",None,"p","f"),"",""])
         else:
             for n in "sp":
                 for pe in range(1,4):
@@ -132,11 +150,14 @@ def conjuguer(verbe,lang,typs):
         
 
 if __name__ == '__main__':
+    Constituent.exceptionOnWarning = True
+    conjuguer("être","fr",{"neg":False,"prog":False,"pas":False,"refl":False})
     conjuguer("aller","fr",{"neg":False,"prog":False,"pas":False,"refl":False})
-    conjuguer("aimer","fr",{"neg":False,"prog":True,"pas":True,"refl":True})
+    conjuguer("dissoudre","fr",{"neg":False,"prog":False,"pas":False,"refl":False})
     conjuguer("love","en",{"neg":False,"prog":True,"pas":True,"refl":False})
     conjuguer("say","en",{"neg":True,"prog":True,"pas":False,"perf":True,"refl":True})
     decliner("chat","fr")
     decliner("beau","fr")
-    decliner("love","en")
+    decliner("manager","en")
     decliner("good","en")
+    decliner("economics","en")

@@ -18,7 +18,7 @@ class PhraseEn(ConstituentEn,NonTerminalEn,Phrase):
 
     def check_determiner_cnt(self,det,headNoun):
         if det.lemma == "a" and headNoun.getProp("cnt")=="no":
-            det.morphoError("The indefinite determiner cannot be linked with an uncountable noun",headNoun.lemma)
+            det.morphoError("An indefinite determiner cannot be linked with an uncountable noun",headNoun.lemma)
 
 
     def link_subj_obj_subordinate(self, pro, v, _subject):

@@ -1025,16 +1025,16 @@ def test_warnings():
         print("---")
 
 def test_lemmataMaps():
-    def show_forms(lemmata,form):
+    def show_forms(lemmata,form,flt=lambda e:True):
         exprs = lemmata[form]
         if exprs is None:
             print(form,":", "not found" if getLanguage()=="en" else "pas trouvé")
         else:
-            print(form,":",", ".join(expr.toSource() for expr in exprs))
+            print(form,":",", ".join(expr.toSource() for expr in exprs if flt(expr)))
     lemmataEn = buildLemmataMap("en")
     print("---")
     show_forms(lemmataEn,"love")
-    print([e.toSource() for e in lemmataEn["love"] if e.isA("N")])
+    show_forms(lemmataEn,"love",lambda e:e.isA("N"))
     print("---")
     lemmataFr = buildLemmataMap("fr")
     show_forms(lemmataFr, "porte")
@@ -1042,7 +1042,7 @@ def test_lemmataMaps():
     show_forms(lemmataFr, "suis")
     show_forms(lemmataFr, "ménagère")
     show_forms(lemmataFr, "crus")
-    print([e.toSource() for e in lemmataFr["crus"] if e.isA('N')])
+    show_forms(lemmataFr,"crus",lambda e:e.isA('N'))
 
 if __name__ == '__main__':
     # testPreviousExamples()

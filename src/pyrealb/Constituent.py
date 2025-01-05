@@ -453,15 +453,16 @@ class Constituent:
         return self                    
 
 
-
     def warn(self, *args):
         # print("WARNING:",self.me(),args,file=sys.stderr)
         mess = self.warning(args)
         if Constituent.exceptionOnWarning:
-            raise Exception(mess)
+            raise PyrealbException(mess)
         print(mess, file=sys.stderr)
         return self
 
+class PyrealbException(Exception):
+    pass
 
     
 ## add Constituent methods for setting properties 

@@ -9,7 +9,7 @@ class DependentEn(ConstituentEn,NonTerminalEn,Dependent):
 
     def check_determiner_cnt(self,det):
         if det.lemma == "a" and self.terminal.getProp("cnt")=="no":
-            det.morphoError("The indefinite determiner cannot be linked with an uncountable noun", self.terminal.lemma)
+            det.morphoError("An indefinite determiner cannot be linked with an uncountable noun", self.terminal.lemma)
 
     def link_pp_before(self, dep, headTerm):
         pass

@@ -26,24 +26,28 @@ def addLemma(lemmata,word,jsrExp):
 def jsrExpInit(pos,lemma):
     return fromJSON({"terminal": pos, "lemma": lemma, "lang": getLanguage()})
 
-# generate a list of jsRealB expressions (only Pro will have more than 1)
+# generate a jsRealB expressions, None if no appropriate expression can be generated
 #  from a given form (lemma), for a given part-of-speech (pos)
 #  using information from the declension and lexicon information (declension, lexiconEntry)
-def genExp(declension, pos, lemma, lexiconEntry):
-    lemmataLang = getLanguage()
+def genExp(lang,declension, pos, lemma, lexiconEntry):
     if trace:print(f"genExp(declension,{pos},{lemma},{lexiconEntry}")
     jsrExp = jsrExpInit(pos, lemma)
     if pos=="N":
         g=lexiconEntry["g"] if "g" in lexiconEntry else None
         # gender are ignored in English
-        if lemmataLang=="en" or declension["g"]==g:
+        if lang == "en":
+            if declension["n"]=="p": # do not generate plural of uncountable nouns
+                if lexiconEntry["cnt"]=="no":
+                    return None
+                jsrExp.n("p")
+        elif declension["g"]==g:
             if declension["n"]=="p": jsrExp.n("p")
         elif g=="x":
             if declension["g"]=="f": jsrExp.g("f")
             if declension["n"]=="p": jsrExp.n("p")
     elif pos=="Pro" or pos== "D":
         # gender
-        defaultG="m" if lemmataLang=="fr" else "n"
+        defaultG="m" if lang=="fr" else "n"
         if "g" in declension:
             dg=declension["g"]
             if dg=="x" or dg=="n":
@@ -66,7 +70,7 @@ def genExp(declension, pos, lemma, lexiconEntry):
         elif "c" in declension:
             jsrExp.c(declension["c"])
     elif pos=="A":
-        if lemmataLang=="fr":
+        if lang=="fr":
             g=declension["g"]
             if "g" not in declension or declension["g"]=="x":
                 g=declension["g"]
@@ -80,14 +84,14 @@ def genExp(declension, pos, lemma, lexiconEntry):
             if "f" in declension:
                 jsrExp.f(declension["f"])
     elif pos=="Adv":
-        if lemmataLang=="en":
+        if lang=="en":
             if "f" in declension:
                 jsrExp.f(declension["f"])
     else:
         print("***POS not implemented:%s",pos,file=sys.stderr)
     return jsrExp
 
-def expandConjugation(lemmata,rules,lemma,tab):
+def expandConjugation(lang,lemmata,rules,lemma,tab):
     if trace:print(f"expandConjugation::{lemma}:{tab}")
     if tab not in rules["conjugation"]:return
     conjug=rules["conjugation"][tab]
@@ -100,17 +104,32 @@ def expandConjugation(lemmata,rules,lemma,tab):
     for t in conjug["t"]:
         persons=conjug["t"][t]
         if persons is None: continue
-        if isinstance(persons,list) and len(persons)==6:
-            for pe in range(0,6):
-                if persons[pe] is None: continue
-                word=radical+persons[pe]
-                pe3=pe%3+1
-                n="p" if pe>=3 else "s"
-                jsrExp= jsrExpInit("V",lemma)
-                if t != "p": jsrExp.t(t)
-                if pe3 != 3: jsrExp.pe(pe3)
-                if n != "s": jsrExp.n(n)
-                addLemma(lemmata,word,jsrExp)
+        if isinstance(persons,list):
+            if len(persons)==6:
+                for pe in range(0,6):
+                    if persons[pe] is None: continue
+                    word=radical+persons[pe]
+                    pe3=pe%3+1
+                    n="p" if pe>=3 else "s"
+                    jsrExp= jsrExpInit("V",lemma)
+                    if t != "p": jsrExp.t(t)
+                    if pe3 != 3: jsrExp.pe(pe3)
+                    if n != "s": jsrExp.n(n)
+                    addLemma(lemmata,word,jsrExp)
+            elif len(persons)== 4: # French past participle
+                v_infos = getLexicon("fr")[lemma]["V"]
+                if "pat" in v_infos and len(v_infos["pat"])==1 and v_infos["pat"][0]=="intr":
+                    # only singular masculine for pp of intransitive verb
+                    addLemma(lemmata,radical+persons[0],jsrExpInit("V",lemma).t("pp"))
+                else:
+                    for g in "mf":
+                        for n in "sp":
+                            idx = (0 if n=="s" else 2)+(0 if g=="m" else 1)
+                            if persons[idx] is None:continue
+                            jsrExp=jsrExpInit("V",lemma).t("pp")
+                            if g != "m": jsrExp.g(g)
+                            if n != "s": jsrExp.n(n)
+                            addLemma(lemmata,radical+persons[idx],jsrExp)
         elif isinstance(persons,str):
             word = radical+persons
             jsrExp=jsrExpInit("V",lemma)
@@ -126,7 +145,7 @@ def expandConjugation(lemmata,rules,lemma,tab):
         else:
             print("***Strange persons:",lemma,persons,file=sys.stderr)
 
-def expandDeclension(lexicon,lemmata,rules,entry,pos,tab):
+def expandDeclension(lang,lexicon,lemmata,rules,entry,pos,tab):
     if trace:print(f"expandDeclension::{entry}:{tab}")
     rulesDecl=rules["declension"]
     declension=None
@@ -147,7 +166,7 @@ def expandDeclension(lexicon,lemmata,rules,entry,pos,tab):
         dec = decl[l]
         if dec["val"] not in seenVals: # avoid identical values in the same table
             seenVals.append(dec["val"])
-            jsrExp=genExp(decl[l],pos,entry,lexicon[entry][pos])
+            jsrExp=genExp(lang,decl[l],pos,entry,lexicon[entry][pos])
             if jsrExp is not None:
                 word=radical+decl[l]["val"]
                 addLemma(lemmata,word,jsrExp)
@@ -157,7 +176,7 @@ def buildLemmataMap(lang):
     lexicon = getLexicon()
     rules = getRules()
     if checkAmbiguities:
-        print("Checking realization ambiguities for Enlish lemmata ..." if lang=="en" \
+        print("Checking realization ambiguities for English lemmata ..." if lang=="en" \
                   else "Vérification de la table des lemmes en français")
     lemmata={}
     for entry,entryInfos in lexicon.items():
@@ -165,8 +184,8 @@ def buildLemmataMap(lang):
             if pos=="ldv" or pos=="niveau" or pos=="value":continue
             if pos=="Pc": continue; # ignore punctuation
             if pos=="V": # conjugation
-                expandConjugation(lemmata,rules,entry,
+                expandConjugation(lang,lemmata,rules,entry,
                                   entryInfos["V"]["tab"])
             else:       # declension
-                expandDeclension(lexicon,lemmata,rules,entry,pos,entryInfos[pos]["tab"])
+                expandDeclension(lang,lexicon,lemmata,rules,entry,pos,entryInfos[pos]["tab"])
     return lemmata
