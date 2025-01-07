@@ -1049,7 +1049,8 @@ if __name__ == '__main__':
     # testDataToTextExamples()
     # test_warnings()
     # test_lemmataMaps()
-    # insert here a single example for debugging perhaps commenting the line above
+    # insert here examples for debugging perhaps commenting the line above
+    # a call of the forme "test(...example...)" displays the source and the realization
     # do not forget to load the appropriate language
     loadEn() # set the language to English
     loadFr() # set the language to French

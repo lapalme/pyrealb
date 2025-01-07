@@ -86,11 +86,11 @@ def makeVerb(verb_lemma):
 
 def keep(entry):
     if "V" in entry:
-        return entry["V"]["tab"] not in ["v1","v3"]
+        if entry["V"]["tab"] not in ["v1","v3"]:
         # if entry["V"]["tab"] not in regular_verbs_tab:
         # return "ldv" in entry or "ldv" in entry["V"]
             # but is not either an adjective or a noun
-            # return "A" not in entry and "N" not in entry
+            return "A" not in entry and "N" not in entry
     else:
         return False
 
@@ -102,7 +102,7 @@ counters_en = getTabCounters("en")
 if __name__ == "__main__":
     load("en")
     Constituent.exceptionOnWarning = True
-    fileName = "irregularVerbs"
+    fileName = "irregularVerbs-noNnoAdj"
     verbFile = open(f"{fileName}.txt", "w", encoding="utf-8")
     verbUDs = open(f"{fileName}.conllu", "w", encoding="utf-8")
     for verb_lemma in verbs:

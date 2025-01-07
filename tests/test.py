@@ -8,11 +8,12 @@ def test(title,lang,testsFn,kept=None,badOnly=False,showExpr=False):
         if kept is None or i in kept:
             if "expression" in s:
                 nbTests+=1
+                expression=s["expression"]
+                expected=s["expected"]
+                realized = None
                 try:
-                    expression=s["expression"]
                     if showExpr:
                         print(expression.toSource(0))
-                    expected=s["expected"]
                     message=s["message"]
                     realized=expression if isinstance(expression,str) else expression.realize()
                     if expected is None or realized==expected:
@@ -29,7 +30,7 @@ def test(title,lang,testsFn,kept=None,badOnly=False,showExpr=False):
                         print("---")
                 except Exception as e:
                     print("KO **** Exception: ",i,repr(e))
-                    print(expression.toSource(0))
+                    print(realized)
                     print(expected)
                     print("---")
 

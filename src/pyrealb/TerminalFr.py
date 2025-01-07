@@ -101,7 +101,7 @@ class TerminalFr(ConstituentFr,Terminal):
             conjugationTable = getRules(self.lang())["conjugation"][self.tab]
             if "t" not in conjugationTable:
                 return [self.morphoError("pas de conjugaison trouvée", {"pe": pe, "n": n, "t": t})]
-            elif conjugationTable["t"][tempsAux][pe - 1 + (3 if n == "p" else 0)] is None:
+            elif isinstance(conjugationTable["t"][tempsAux],list) and conjugationTable["t"][tempsAux][pe - 1 + (3 if n == "p" else 0)] is None:
                 return [self.morphoError("conjugaison impossible à ces personnes et nombres",
                                          {"pe": pe, "n": n,"t": t})]
             aux = V("avoir", "fr")
