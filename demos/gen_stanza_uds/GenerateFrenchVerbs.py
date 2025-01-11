@@ -5,6 +5,7 @@
 from pyrealb import *
 from opts_feats import opts2feats,tense2feats, getTabCounters
 import re
+from zipfile import ZipFile
 
 trace = True
 
@@ -100,7 +101,7 @@ def makeSentences(infos, verb_lemma, tense):
             # if verb_form.startswith("[["):continue
             verb_opts = {"t":tense, "pe":pe, "n":n}
             sent = S(pron,VP(verb)).realize()
-            if trace and pe==1 and n=="s": print(sent)
+            if trace and pe==1 and n=="s": print(sent,end=" ")
             tokens = tokenize(sent)
             uds.append(makeUDsent_TempsSimples(f"{sent_id}-{pe}{n}",sent,infos,
                                                tokens[0],pron_ton,opts2feats(pron_opts),
@@ -113,17 +114,16 @@ def makeSentences(infos, verb_lemma, tense):
             verb = V(verb_lemma).t("pr" if tense == "pr" else "pp")
             try:
                 verb_form = verb.realize()
+                verb_opts = {"t":"pr" if tense == "pr" else "pp"}
+                if tense == "pr":
+                    sent = S(pron,VP(V(aux_lemma),V(verb_lemma).t(tense))).realize()
+                else:
+                    sent = S(pron,VP(V(verb_lemma).t(tense))).realize()
             except Exception as error:
                 if trace: print("***", error)
                 continue
-            if verb_form.startswith("[["):continue;
-            verb_opts = {"t":"pr" if tense == "pr" else "pp"}
-            if tense == "pr":
-                sent = S(pron,VP(V(aux_lemma),V(verb_lemma).t(tense))).realize()
-            else:
-                sent = S(pron,VP(V(verb_lemma).t(tense))).realize()
             tokens = tokenize(sent)
-            if trace and pe == 1 and n == "s": print(sent)
+            if trace and pe == 1 and n == "s": print(sent,end=" ")
             makeUD = makeUDsent_ParticipePresent if tense == "pr" else makeUDsent_TempsComposes
             uds.append(makeUD(f"{sent_id}-{pe}{n}",sent,infos,
                               tokens[0], pron_ton, opts2feats(pron_opts),
@@ -153,7 +153,7 @@ def makeSentencesPP(infos, verb_lemma, tense):
             continue
         verb_opts = {"t":"pp","g":g,"n":n}
         sent = S(pron,VP(V(aux_lemma),V(verb_lemma).t(tense))).realize()
-        if trace and g == "f" and n == "p": print(sent)
+        if trace and g == "f" and n == "p": print(sent,end=" ")
         tokens=tokenize(sent)
         uds.append(makeUDsent_ParticipePasse(f"{sent_id}-{pe}{n}", sent, infos,
                                              tokens[0], pron_ton, opts2feats(pron_opts),
@@ -162,17 +162,19 @@ def makeSentencesPP(infos, verb_lemma, tense):
     return uds
 
 
+tenses = ["p","pc","f","i","ps","c","pr"]
 # generate for each "interesting" tenses
 def makeVerb(verb_lemma):
     entry = lexicon[verb_lemma]
     tab = entry['V']['tab']
     verbFile.write(f"{verb_lemma}\t{tab}\t{counters_fr[tab]}\n")
     infos = ", ".join(entry.keys())+f"\t{tab}\t{counters_fr[tab]}"
-    return [*makeSentences(infos, verb_lemma, "p"),
-            *makeSentences(infos, verb_lemma, "pc"),
-            *makeSentences(infos, verb_lemma, "pr"),
-            *makeSentencesPP(infos, verb_lemma, "pp")
-           ]
+    sents = []
+    for tense in tenses:
+        sents.extend(makeSentences(infos,verb_lemma,tense))
+    sents.extend(makeSentencesPP(infos, verb_lemma, "pp"))
+    return sents
+
 ###  verb selection
 stanzaVerbFile = "./french/verb.txt"
 stanzaVerbs = set(w.strip().lower() for w in open(stanzaVerbFile,"r").readlines())
@@ -183,7 +185,7 @@ nbMissing = 0
 
 def keep(entry):
     if "V" in entry:
-        return "niveau" in entry["V"] and entry["V"]["niveau"]<=2
+        return "niveau" in entry["V"] and entry["V"]["niveau"]<=6
     else:
         return False
 
@@ -195,10 +197,16 @@ if __name__ == "__main__":
     Constituent.exceptionOnWarning = True
     lexicon = getLexicon("fr")
     counters_fr = getTabCounters("fr")
-    fileName = "french1st2ndGrade"
+    fileName = "french1st_6thGrade"
     verbFile = open(f"{fileName}.txt","w",encoding="utf-8")
     verbUDs = open(f"{fileName}.conllu", "w", encoding="utf-8")
+    nb_sents = 0
     for verbe in verbes:
-        verbUDs.write("\n".join(makeVerb(verbe)) + "\n")
-        if trace: print("---")
-    print(f"{len(verbes)} verbes créés sur {fileName}.conllu")
+        uds = makeVerb(verbe)
+        nb_sents += len(uds)
+        verbUDs.write("\n".join(uds) + "\n")
+        if trace: print()
+    verbUDs.close()
+    # with ZipFile(f'{fileName}.conllu.zip', 'w') as myzip:
+    #     myzip.write(f'{fileName}.conllu')
+    print(f"{nb_sents} phrases pour {len(verbes)} verbes créés sur {fileName}.conllu")

@@ -3,6 +3,7 @@
 #    Guy Lapalme (lapalme@iro.umontreal.ca) January 2025
 from pyrealb import *
 from opts_feats import opts2feats, getTabCounters
+from zipfile import ZipFile
 
 # create a UD structures
 #  present and past
@@ -81,22 +82,19 @@ def makeVerb(verb_lemma):
             *makeSentences(f"{verb_lemma}-pr", infos, verb_lemma, "pr")]
 
 ####  verb selection
-# conjugation table numbers used for more than 20 verbs in the English lexicon
-# regular_verbs_tab = {"v1", "v3", "v2", "v4", "v9", "v12", "v14", "v7", "v11", "v5", "v13", "v10", "v6", "v16"}
-
 def keep(entry):
     if "V" in entry:
         if entry["V"]["tab"] not in ["v1","v3"]:
-        # if entry["V"]["tab"] not in regular_verbs_tab:
-        # return "ldv" in entry or "ldv" in entry["V"]
-            # but is not either an adjective or a noun
             return "A" not in entry and "N" not in entry
     else:
         return False
 
-# get the list of lemma for "irregular" verbs
+stop_verbs = {"instal","withhold","furnish","terrify"} # verbs to ignore
+add_verbs =["ache", "interfere", "revert", "shoo", "woo"] # verbs to add
+
 lexicon = getLexicon("en")
-verbs = [lemma for lemma,entry in lexicon.items() if "-" not in lemma and keep(entry)]
+verbs = [lemma for lemma,entry in lexicon.items()
+         if "-" not in lemma and lemma not in stop_verbs and keep(entry)]+add_verbs
 counters_en = getTabCounters("en")
 
 if __name__ == "__main__":
@@ -105,6 +103,12 @@ if __name__ == "__main__":
     fileName = "irregularVerbs-noNnoAdj"
     verbFile = open(f"{fileName}.txt", "w", encoding="utf-8")
     verbUDs = open(f"{fileName}.conllu", "w", encoding="utf-8")
+    nb_sents = 0
     for verb_lemma in verbs:
-        verbUDs.write("\n".join(makeVerb(verb_lemma)) + "\n")
-    print(f" {len(verbs)} verbs conjugated on {fileName}.conllu")
+        uds = makeVerb(verb_lemma)
+        nb_sents += len(uds)
+        verbUDs.write("\n".join(uds) + "\n")
+    verbUDs.close()
+    with ZipFile(f'{fileName}.conllu.zip', 'w') as myzip:
+        myzip.write(f'{fileName}.conllu')
+    print(f"{nb_sents} sentences for {len(verbs)} verbs conjugated on {fileName}.conllu")

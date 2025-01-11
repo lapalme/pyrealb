@@ -1,0 +1,4 @@
+badly	worse	worst
+far	farther	farthest
+little	less	least
+well	better	best
