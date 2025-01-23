@@ -41,17 +41,16 @@ This script realizes a list of the comparative and superlative forms of adjectiv
 
 ## Experiments in French
 
-A first experiment in French is done with the 22 verbs described above.
-
-The generated UDs correspond to sentences made of: 
+A first experiment in French is done with the 22 verbs described above. After a few interactions with John, we settled on the following setting French UDs with 407 verbs of *niveau*<=6:
 
 - a pronoun: *je*, *tu*, *il*, *nous*, *vous*, *ils*
 - a verb conjugated at: 
-  - *présent*
+  - *présent*, *futur*, *passé simple*, *conditionnel présent*.
   - *passé composé* with the appropriate auxiliary,
   - *participe présent* with the auxiliary être
   - participe passé with the auxiliary être but with pronouns: *il*, *elle*, *ils*, *elles*
+- when a conjugated verb form does not exist in the *verb.txt* file, then `missing` is added in the `misc` field.
 
-This generated 478 sentences and UDs for which 83 (17%) verbs were missing from the list sent by John.
+This created 18,646 sentences with the corresponding UDs. 12,172 `missing` forms were detected (65%).
 
 [Guy Lapalme](mailto:lapalme@iro.umontreal.ca)

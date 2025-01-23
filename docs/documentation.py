@@ -609,7 +609,7 @@ L'exemple précédent peut donc s'écrire: <code>addToLexicon({"pyrealb":{"N":{"
 <li>Si le lemme et la catégorie existent déjà dans le lexique, alors l'entrée pour cette catégorie est remplacée 
 par <code>newInfos</code>. </li>
 <li>Cette fonction retourne la nouvelle entrée modifié pour <code>lemma</code>.</li>
-<li><a href="lexiconFormat.html">Plus d'information (en anglais) sur le format des lexiques</a></li>
+<li><a href="Lexicon-Format-fr.md">Plus d'information sur le format des lexiques</a></li>
 <li>Pour déterminer les informations à ajouter, le plus simple est de copier les informations d'un mot du 
 lexique qui se conjugue ou se décline de la même façon. L'<i>IDE</i> de <span class="jsr">pyrealb</span> 
 permet de consulter les informations du lexique.</li>
@@ -629,7 +629,7 @@ written: <code>addToLexicon({"pyrealb":{"N":{"g":"m", "pe":3, "tab":"nI"})</code
 <li>If the lemma and category are already present in the lexicon, then the category of this entry is 
 replaced by <code>newInfos</code>.</li>
 <li>This function returns the modified lexicon entry for <code>lemma</code>.</li>
-<li><a href="lexiconFormat.html">More information about the lexicon format</a></li>
+<li><a href="Lexicon-Format-en.md">More information about the lexicon format</a></li>
 <li>In order to find the informations to add, the simplest way is to copy the lexicon information 
 for a similar word already in the lexicon. 
 The <i>IDE</i> provides access to the lexicon information.
@@ -840,8 +840,8 @@ title="Expérience avec pyrealb" lang="fr">Notebook Jupyter</a>
 pyrealb" lang="en">Jupyter Notebook</a></li>
 <li><a href="https://github.com/lapalme/pyrealb" lang="fr">Dépot GitHub pyrealb</a>
 <a href="https://github.com/lapalme/pyrealb" lang="en">pyreealb GitHub repository</a></li>
-<li><a href="lexiconFormat.html" lang="fr">Format des entrées de lexiques (en anglais)</a>
-<a href="lexiconFormat.html" lang="en">Format of the lexicon entries</a></li>
+<li><a href="Lexicon-Format-fr.md" lang="fr">Format des entrées du lexique</a>
+<a href="Lexicon-Format-en.md" lang="en">Format of the lexicon entries</a></li>
 <li>Publications:
     <ul>
         <li><a href="https://aclanthology.org/W15-4719/">Demo paper at ENLG-2015</a></li>

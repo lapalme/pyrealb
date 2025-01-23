@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="name" content="viewport" />
 <meta name="content" content="width=device-width, initial-scale=1.0" />
-<meta name="date" content="2025-01-11 12:57:01.603479" />
+<meta name="date" content="2025-01-23 13:46:01.153480" />
 <link href="style.css" rel="stylesheet" type="text/css" media="all" />
 <title>pyrealb - Documentation</title>
 <script src="https://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
@@ -53,7 +53,7 @@ les exemples ont été réalisés par <span class="jsr">pyrealb</span>  lors de 
 <tr><td class="description">Adverbe</td><td class="pattern">Adv(…)</td><td class="example-fr">Adv("bien")</td><td class="realisation">bien</td></tr>
 <tr><td class="description">Préposition</td><td class="pattern">P(…)</td><td class="example-fr">P("dans")</td><td class="realisation">dans</td></tr>
 <tr><td class="description">Conjonction</td><td class="pattern">C(…)</td><td class="example-fr">C("et")</td><td class="realisation">et</td></tr>
-<tr><td class="description">Date avec <a href='#dateFr'>options</a> facultatives</td><td class="pattern">DT(…)</td><td class="example-fr">DT()</td><td class="realisation">le samedi 11 janvier 2025 à 12 h 57 min 1 s</td></tr>
+<tr><td class="description">Date avec <a href='#dateFr'>options</a> facultatives</td><td class="pattern">DT(…)</td><td class="example-fr">DT()</td><td class="realisation">le jeudi 23 janvier 2025 à 13 h 46 min 1 s</td></tr>
 <tr><td class="description">Nombre avec <a href='#nombres'>options</a> facultatives</td><td class="pattern">NO(…)</td><td class="example-fr">NO(2)</td><td class="realisation">2</td></tr>
 <tr><td class="description">Texte brut</td><td class="pattern">"…"</td><td class="example-fr">"Wow"</td><td class="realisation">Wow</td></tr>
 <tr><td class="description">Texte brut auquel on peut ajouter des <a href='#optionsFr'>options</a></td><td class="pattern">Q(…)</td><td class="example-fr">Q("Bang !").tag("i")</td><td class="realisation"><i>Bang !</i></td></tr>
@@ -69,7 +69,7 @@ les exemples ont été réalisés par <span class="jsr">pyrealb</span>  lors de 
 <tr><td class="description">Adverb</td><td class="pattern">Adv(…)</td><td class="example-en">Adv("well")</td><td class="realisation">well</td></tr>
 <tr><td class="description">Preposition</td><td class="pattern">P(…)</td><td class="example-en">P("in")</td><td class="realisation">in</td></tr>
 <tr><td class="description">Conjunction</td><td class="pattern">C(…)</td><td class="example-en">C("and")</td><td class="realisation">and</td></tr>
-<tr><td class="description">Date possibly with <a href='#dateEn'>options</a></td><td class="pattern">DT(…)</td><td class="example-en">DT()</td><td class="realisation">on Saturday, January 11, 2025 at 0:57:01 p.m.</td></tr>
+<tr><td class="description">Date possibly with <a href='#dateEn'>options</a></td><td class="pattern">DT(…)</td><td class="example-en">DT()</td><td class="realisation">on Thursday, January 23, 2025 at 1:46:01 p.m.</td></tr>
 <tr><td class="description">Number possibly with <a href='#numbers'>options</a></td><td class="pattern">NO(…)</td><td class="example-en">NO(2)</td><td class="realisation">2</td></tr>
 <tr><td class="description">Raw text</td><td class="pattern">"…"</td><td class="example-en">"Wow"</td><td class="realisation">Wow</td></tr>
 <tr><td class="description">Raw text to which <a href='#optionsEn'>options</a> can be added</td><td class="pattern">Q(…)</td><td class="example-en">Q("Bang !").tag("i")</td><td class="realisation"><i>Bang !</i></td></tr>
@@ -1033,7 +1033,7 @@ corresponding to <code>YYYY-MM-DD hh:mm:ss</code>. When no parameter is given, <
 <h3 lang="fr">Création d'une date</h3>
 <table lang="fr">
 <tr><th>Nom</th><th>Représentation</th><th>Exemple</th><th>Réalisation</th></tr>
-<tr><td class="description">Date courante</td><td class="pattern">DT()</td><td class="example-fr">DT()</td><td class="realisation">le samedi 11 janvier 2025 à 12 h 57 min 1 s</td></tr>
+<tr><td class="description">Date courante</td><td class="pattern">DT()</td><td class="example-fr">DT()</td><td class="realisation">le jeudi 23 janvier 2025 à 13 h 46 min 1 s</td></tr>
 <tr><td class="description">Date passée</td><td class="pattern">DT("...")</td><td class="example-fr">DT("2014-11-21 21:00:00")</td><td class="realisation">le vendredi 21 novembre 2014 à 21 h</td></tr>
 <tr><td class="description">Date sans temps</td><td class="pattern">DT("...")</td><td class="example-fr">DT("2017-12-31")</td><td class="realisation">le dimanche 31 décembre 2017 à minuit</td></tr>
 <tr><td class="description">Date à partir de datetime</td><td class="pattern">DT(datetime)</td><td class="example-fr">DT(datetime.datetime(2014,12,31))</td><td class="realisation">le mercredi 31 décembre 2014 à minuit</td></tr>
@@ -1041,7 +1041,7 @@ corresponding to <code>YYYY-MM-DD hh:mm:ss</code>. When no parameter is given, <
 <h3 lang="en">Date creation</h3>
 <table lang="en">
 <tr><th>Name</th><th>Representation</th><th>Example</th><th>Realisation</th></tr>
-<tr><td class="description">Current date</td><td class="pattern">DT()</td><td class="example-en">DT()</td><td class="realisation">on Saturday, January 11, 2025 at 0:57:01 p.m.</td></tr>
+<tr><td class="description">Current date</td><td class="pattern">DT()</td><td class="example-en">DT()</td><td class="realisation">on Thursday, January 23, 2025 at 1:46:01 p.m.</td></tr>
 <tr><td class="description">Date in the past</td><td class="pattern">DT("...")</td><td class="example-en">DT("2014-11-21 21:00:00")</td><td class="realisation">on Friday, November 21, 2014 at 9 p.m.</td></tr>
 <tr><td class="description">Date without time </td><td class="pattern">DT("...")</td><td class="example-en">DT("2017-12-31")</td><td class="realisation">on Sunday, December 31, 2017 at midnight</td></tr>
 <tr><td class="description">Date from datetime</td><td class="pattern">DT(datetime)</td><td class="example-en">DT(datetime.datetime(2014,12,31))</td><td class="realisation">on Wednesday, December 31, 2014 at midnight</td></tr>
@@ -1049,15 +1049,15 @@ corresponding to <code>YYYY-MM-DD hh:mm:ss</code>. When no parameter is given, <
 <h3 lang="fr">Formatage d'une date (défaut <code>.nat()</code>)</h3>
 <table lang="fr">
 <tr><th>Nom</th><th>Représentation</th><th>Exemple</th><th>Réalisation</th></tr>
-<tr><td class="description">en lettres, par défaut</td><td class="pattern">.nat()</td><td class="example-fr">DT()</td><td class="realisation">le samedi 11 janvier 2025 à 12 h 57 min 1 s</td></tr>
-<tr><td class="description">en chiffres</td><td class="pattern">.nat(False)</td><td class="example-fr">DT().nat(False)</td><td class="realisation">samedi 11/1/2025 12:57:01</td></tr>
+<tr><td class="description">en lettres, par défaut</td><td class="pattern">.nat()</td><td class="example-fr">DT()</td><td class="realisation">le jeudi 23 janvier 2025 à 13 h 46 min 1 s</td></tr>
+<tr><td class="description">en chiffres</td><td class="pattern">.nat(False)</td><td class="example-fr">DT().nat(False)</td><td class="realisation">jeudi 23/1/2025 13:46:01</td></tr>
 <tr class="groupe"><td>Contrôle de l'affichage de chacun des éléments de la date</td><td colspan="3" class="pattern">.dOpt({"year": , "month": , "date": , "day": ,
  "hour": , "minute": , "second": , "nat":, "det":, "rtime":})</td></tr>
-<tr><td class="description">Heure seulement</td><td class="pattern">.dOpt(..)</td><td class="example-fr">DT().dOpt({"year": False, "month": False, "date": False, "day": False})</td><td class="realisation">à 12 h 57 min 1 s</td></tr>
+<tr><td class="description">Heure seulement</td><td class="pattern">.dOpt(..)</td><td class="example-fr">DT().dOpt({"year": False, "month": False, "date": False, "day": False})</td><td class="realisation">à 13 h 46 min 1 s</td></tr>
 <tr><td class="description">Affichage de l'heure et des minutes (en chiffres)</td><td class="pattern">{"nat":False}</td><td class="example-fr">DT().dOpt({"year": False, "month": False, "date": False,
- "day": False, "second": False, "nat":False})</td><td class="realisation">12:57</td></tr>
-<tr><td class="description">Non affichage du déterminant de la date</td><td class="pattern">{"det":False}</td><td class="example-fr">DT().dOpt({"det": False})</td><td class="realisation">samedi 11 janvier 2025 12 h 57 min 1 s</td></tr>
-<tr><td class="description">Date relative par rapport à aujourd'hui</td><td class="pattern">{"rtime":True}</td><td class="example-fr">DT().dOpt({"rtime": True})</td><td class="realisation">aujourd'hui à 12 h 57 min 1 s</td></tr>
+ "day": False, "second": False, "nat":False})</td><td class="realisation">13:46</td></tr>
+<tr><td class="description">Non affichage du déterminant de la date</td><td class="pattern">{"det":False}</td><td class="example-fr">DT().dOpt({"det": False})</td><td class="realisation">jeudi 23 janvier 2025 13 h 46 min 1 s</td></tr>
+<tr><td class="description">Date relative par rapport à aujourd'hui</td><td class="pattern">{"rtime":True}</td><td class="example-fr">DT().dOpt({"rtime": True})</td><td class="realisation">aujourd'hui à 13 h 46 min 1 s</td></tr>
 <tr><td class="description">Date relative après une autre</td><td class="pattern">{"rtime":".." or Date}</td><td class="example-fr">DT("2021-09-01").dOpt({"rtime": "2021-08-27",
 "hour":False,"minute":False,"second":False})</td><td class="realisation">mercredi prochain</td></tr>
 <tr><td class="description">Date relative avant une autre date</td><td class="pattern">{"rtime":".." or Date}</td><td class="example-fr">DT("2021-09-01").dOpt({"rtime":datetime.datetime(2021,9,10),
@@ -1066,15 +1066,15 @@ corresponding to <code>YYYY-MM-DD hh:mm:ss</code>. When no parameter is given, <
 <h3 lang="en">Date formatting (default <code>.nat()</code>)</h3>
 <table lang="en">
 <tr><th>Name</th><th>Representation</th><th>Example</th><th>Realisation</th></tr>
-<tr><td class="description">as words, by default</td><td class="pattern">.nat()</td><td class="example-en">DT()</td><td class="realisation">on Saturday, January 11, 2025 at 0:57:01 p.m.</td></tr>
-<tr><td class="description">as digits</td><td class="pattern">.nat(False)</td><td class="example-en">DT().nat(False)</td><td class="realisation">Saturday 1/11/2025 12:57:01 p.m.</td></tr>
+<tr><td class="description">as words, by default</td><td class="pattern">.nat()</td><td class="example-en">DT()</td><td class="realisation">on Thursday, January 23, 2025 at 1:46:01 p.m.</td></tr>
+<tr><td class="description">as digits</td><td class="pattern">.nat(False)</td><td class="example-en">DT().nat(False)</td><td class="realisation">Thursday 1/23/2025 13:46:01 p.m.</td></tr>
 <tr class="groupe"><td>Control over the display of date components</td><td colspan="3" class="pattern">.dOpt({"year": , "month": , "date": , "day": ,
  "hour": , "minute": , "second": , "nat":, "det":, "rtime":})</td></tr>
-<tr><td class="description">Time only</td><td class="pattern">.dOpt(..)</td><td class="example-en">DT().dOpt({"year": False, "month": False, "date": False, "day": False})</td><td class="realisation">at 0:57:01 p.m.</td></tr>
+<tr><td class="description">Time only</td><td class="pattern">.dOpt(..)</td><td class="example-en">DT().dOpt({"year": False, "month": False, "date": False, "day": False})</td><td class="realisation">at 1:46:01 p.m.</td></tr>
 <tr><td class="description">Display hour and minutes as digits</td><td class="pattern">{"nat":False}</td><td class="example-en">DT().dOpt({"year": False, "month": False, "date": False,
- "day": False, "second": False, "nat":False})</td><td class="realisation">0:57 p.m.</td></tr>
-<tr><td class="description">Do not display determiner</td><td class="pattern">{"det":False}</td><td class="example-en">DT().dOpt({"det": False})</td><td class="realisation">Saturday, January 11, 2025 0:57:01 p.m.</td></tr>
-<tr><td class="description">Relative date compared with today</td><td class="pattern">{"rtime":True}</td><td class="example-en">DT().dOpt({"rtime": True})</td><td class="realisation">today at 0:57:01 p.m.</td></tr>
+ "day": False, "second": False, "nat":False})</td><td class="realisation">1:46 p.m.</td></tr>
+<tr><td class="description">Do not display determiner</td><td class="pattern">{"det":False}</td><td class="example-en">DT().dOpt({"det": False})</td><td class="realisation">Thursday, January 23, 2025 1:46:01 p.m.</td></tr>
+<tr><td class="description">Relative date compared with today</td><td class="pattern">{"rtime":True}</td><td class="example-en">DT().dOpt({"rtime": True})</td><td class="realisation">today at 1:46:01 p.m.</td></tr>
 <tr><td class="description">Relative date after another one</td><td class="pattern">{"rtime":".." or Date}</td><td class="example-en">DT("2021-09-01").dOpt({"rtime": "2021-08-27",
  "hour":False,"minute":False,"second":False})</td><td class="realisation">Wednesday</td></tr>
 <tr><td class="description">Relative date before another one</td><td class="pattern">{"rtime":".." or Date}</td><td class="example-en">DT("2021-09-01").dOpt({"rtime":datetime.datetime(2021,9,10),
@@ -1317,7 +1317,7 @@ L'exemple précédent peut donc s'écrire: <code>addToLexicon({"pyrealb":{"N":{"
 <li>Si le lemme et la catégorie existent déjà dans le lexique, alors l'entrée pour cette catégorie est remplacée 
 par <code>newInfos</code>. </li>
 <li>Cette fonction retourne la nouvelle entrée modifié pour <code>lemma</code>.</li>
-<li><a href="lexiconFormat.html">Plus d'information (en anglais) sur le format des lexiques</a></li>
+<li><a href="Lexicon-Format-fr.md">Plus d'information sur le format des lexiques</a></li>
 <li>Pour déterminer les informations à ajouter, le plus simple est de copier les informations d'un mot du 
 lexique qui se conjugue ou se décline de la même façon. L'<i>IDE</i> de <span class="jsr">pyrealb</span> 
 permet de consulter les informations du lexique.</li>
@@ -1337,7 +1337,7 @@ written: <code>addToLexicon({"pyrealb":{"N":{"g":"m", "pe":3, "tab":"nI"})</code
 <li>If the lemma and category are already present in the lexicon, then the category of this entry is 
 replaced by <code>newInfos</code>.</li>
 <li>This function returns the modified lexicon entry for <code>lemma</code>.</li>
-<li><a href="lexiconFormat.html">More information about the lexicon format</a></li>
+<li><a href="Lexicon-Format-en.md">More information about the lexicon format</a></li>
 <li>In order to find the informations to add, the simplest way is to copy the lexicon information 
 for a similar word already in the lexicon. 
 The <i>IDE</i> provides access to the lexicon information.
@@ -1461,8 +1461,8 @@ It is also possible to obtain the JSON expression corresponding to a given <span
 <p lang="fr">Chaine de caractères indiquant le numéro de version de <span class='jsr'>pyrealb</span>, valeur actuelle: 3.2.1.</p>
 <p lang="en">String showing the version number of <span class='jsr'>pyrealb</span>, currently: 3.2.1.</p>
 <h3><code>pyrealb_datecreated</code></h3>
-<p lang="fr">Date de la création de la version courante de <span class='jsr'>pyrealb</span> valeur actuelle: 2025-01-11.</p>
-<p lang="en">Creation date of the current <span class='jsr'>pyrealb</span>, currently 2025-01-11.</p>
+<p lang="fr">Date de la création de la version courante de <span class='jsr'>pyrealb</span> valeur actuelle: 2025-01-23.</p>
+<p lang="en">Creation date of the current <span class='jsr'>pyrealb</span>, currently 2025-01-23.</p>
 <h3><code>Constituent.exceptionOnWarning</code></h3>
 <p lang="fr">Si cette variable booléenne est mise à <code>True</code>, une exception sera levée lors de l'émission d'un avertissement </p>
 <p lang="en">When this boolean variable is et to <code>True</code>, an exception is raised when a warning is emitted.</p>
@@ -1530,8 +1530,8 @@ title="Expérience avec pyrealb" lang="fr">Notebook Jupyter</a>
 pyrealb" lang="en">Jupyter Notebook</a></li>
 <li><a href="https://github.com/lapalme/pyrealb" lang="fr">Dépot GitHub pyrealb</a>
 <a href="https://github.com/lapalme/pyrealb" lang="en">pyreealb GitHub repository</a></li>
-<li><a href="lexiconFormat.html" lang="fr">Format des entrées de lexiques (en anglais)</a>
-<a href="lexiconFormat.html" lang="en">Format of the lexicon entries</a></li>
+<li><a href="Lexicon-Format-fr.md" lang="fr">Format des entrées du lexique</a>
+<a href="Lexicon-Format-en.md" lang="en">Format of the lexicon entries</a></li>
 <li>Publications:
     <ul>
         <li><a href="https://aclanthology.org/W15-4719/">Demo paper at ENLG-2015</a></li>
@@ -1541,7 +1541,7 @@ pyrealb" lang="en">Jupyter Notebook</a></li>
 </ul>
 Contact: <a href="mailto:lapalme@iro.umontreal.ca">Guy Lapalme</a> 
 <a href="http://rali.iro.umontreal.ca">RALI</a>, Université de Montréal, CANADA. 2023.<br/><hr/>
-2025-01-11  12:57:01
+2025-01-23  13:46:01
 
 </body>
 </html>

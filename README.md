@@ -1,6 +1,6 @@
 # *pyrealb* - A Python Bilingual Text Realizer
 
-*Version 3.2 - January 2025*
+*Version 3.2.1 - January 2025*
 
 *pyrealb* is a Python adaptation of the JavaScript [**jsRealB**](http://rali.iro.umontreal.ca/jsRealB) 
 text realizer with the same constituent and dependency syntax notation. 
@@ -15,17 +15,17 @@ parts from the language independent ones. This organization is described  [here]
 
 The use of pyrealb for [Bilingual Data-to-text generation is described in this document](https://arxiv.org/pdf/2311.14808.pdf).
 
-### Installing the distribution package from PyPI
+## Installing the distribution package from PyPI
 
     pip install pyrealb
 
 **Caution**: do not forget the `b` at the end of `pyrealb`. On _PyPI_, there is an unrelated package `pyreal` _for evaluating and deploying human readable machine learning explanations_.
 
-### Upgrading the version 
+## Upgrading the version 
 
     pip install pyrealb --upgrade
 
-### Building and installing the package from the sources
+## Building and installing the package from the sources
 
 1. `cd` into this directory (with `pyproject.toml` file)
 2. Build the distribution package `python3 -m build`
@@ -44,11 +44,11 @@ The use of pyrealb for [Bilingual Data-to-text generation is described in this d
 
 - Thru *Binder*, load one of these links: [English](https://mybinder.org/v2/gh/lapalme/pyrealb-jupyter/HEAD?labpath=pyrealb-en.ipynb)  [French](https://mybinder.org/v2/gh/lapalme/pyrealb-jupyter/HEAD?labpath=pyrealb-fr.ipynb) 
 - From a terminal:
-  - if the Python notebook module is not already installed, do: `pip3 install notebook` and watch a lot of loading...
+  - if the Python notebook module is not already installed, do: `pip3 install notebook` and watch a lot of loading...
   - `cd Notebooks`
   - `python3 -m notebook`  this should open a browser window with links to the [English](pyrealb-en.ipynb) and [French](pyrealb-fr.ipynb) notebooks 
 
-## Directories
+# Directories
 
 * [`src/pyrealb`](./src/pyrealb)
     * `__init__.py` : import classes and functions and export relevant symbols. 
@@ -65,7 +65,7 @@ The use of pyrealb for [Bilingual Data-to-text generation is described in this d
     * `Terminal.py` : subclass of *Constituent* for creating a single unit (most often a single word)
     * `TerminalEn.py`, `TerminalFr.py` : English and French specific processing of `Terminal`
     * `utils.py`  : some useful functions
-* [`./src/pyrealb/data`](./src/pyrealb/data):
+* [`./src/pyrealb/data`](./src/pyrealb/data): these resources are identical to the corresponding files in *jsRealB*
     * `LICENSE.txt` : Creative Common license
     * `lexicon-en.json` : English lexicon (33,932 entries) in json format
     * `rule-en.js` : English conjugation and declension tables
@@ -86,20 +86,20 @@ _Nota bene_:
     * `user.js`  : Python helper script.
     
 * [`IDE`](./IDE) : Integrated Development Environment 
-    
+  
     * `ide.py`: built on the Python *read-eval-print loop*, it imports *pyrealb* to get the realization of an expression, to consult the lexicon, the conjugation and declension tables. It is also possible to get a *lemmatization*: i.e. the *pyrealb* expression corresponding to a form. 
     * `README.html`: documentation and examples
     
     *Nota bene*: The [evaluation demo of *jsRealB*](http://rali.iro.umontreal.ca/JSrealB/current/demos/Evaluation/index.html) is more convenient than this IDE to develop *pyrealb* expressions as both programs share the same formalism. The *jsRealB* demo provides an editor and access to the lexicons and  rules.
     
 * [Notebooks](./NoteBooks) : Jupyter notebooks (in English and French) with can be used as an executable introduction to *pyrealb*
-    
+  
 * [`tests`](./tests) : unit tests of special features of *pyrealb* in both French and English. Files have the pattern `*_{en|fr}.py`
-    
+  
     * `test.py`: simplistic function to check if a function returns the expected answer and display appropriate message
     * `testAll.html` : run this file to run all tests
 
-## Demos
+# Demos
 
 * `99bottlesofbeer/99bottlesofbeer.py` : simple generation of a classic repetitive text in English.
 * `basketball/sportsettsum.py` : generation of French and English basketball summaries [paper describing the approach](demos/basketball/docs/SportSettSum.md)
@@ -120,18 +120,18 @@ _Nota bene_:
 * `variantes/variantes.py`: French or English sentences realized with all possible sentence modifiers; some challenging examples are in `examples.py`.
 * `weather/Bulletin.py`: French and English weather bulletins generated from information in a *json-line* file. (`weather-data.jsonl`). It uses the packages in the `Realization` directory.
 
-## Licenses
+# Licenses
 * _pyrealb_ source code is licensed under _Apache-2.0_ 
 * linguistic resources in the `./data` directory are licensed under _CC-BY-SA-4.0_
 
-## Contact
+# Contact
 [Guy Lapalme](http://rali.iro.umontreal.ca/lapalme)
 
-## Acknowledgement
+# Acknowledgement
 Thanks to Fabrizio Gotti, François Lareau and Ludan Stoeckle for interesting suggestions.
 
-## For the maintainer mainly
-### Updating package version on PyPI 
+# For the maintainer mainly
+## Updating package version on PyPI 
 
 see [this tutorial](https://packaging.python.org/en/latest/tutorials/packaging-projects/)
 
@@ -149,7 +149,7 @@ These steps take for granted that the password for PyPI has already been given..
 7. Install new version from PyPI  
     `python3 -m pip install pyrealb --upgrade`
 
-### Useful trick for debugging with breaking point and tracing in PyCharm
+## Useful trick for debugging with breaking point and tracing in PyCharm
 1. add `pyrealb` expression to debug at the end of `demo/dev_example/dev_example.py`
 2. comment the line calling `testPreviousExamples()`
 3. debug `demo/dev_example/dev_example.py`

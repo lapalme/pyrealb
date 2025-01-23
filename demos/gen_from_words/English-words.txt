@@ -10,7 +10,7 @@ woman+, go, to, hotel
 plane, fly, over, cloud+
 child, listen, to, bird
 ball, be, green
-fork, be, in, dining-room
+girl, be, in, living-room
 child, swim, in, pool
 butterfly, fly, over, field
 monkey, eat, banana

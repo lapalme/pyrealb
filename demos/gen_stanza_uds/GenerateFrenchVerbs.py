@@ -207,6 +207,6 @@ if __name__ == "__main__":
         verbUDs.write("\n".join(uds) + "\n")
         if trace: print()
     verbUDs.close()
-    # with ZipFile(f'{fileName}.conllu.zip', 'w') as myzip:
-    #     myzip.write(f'{fileName}.conllu')
+    with ZipFile(f'{fileName}.conllu.zip', 'w') as myzip:
+        myzip.write(f'{fileName}.conllu')
     print(f"{nb_sents} phrases pour {len(verbes)} verbes créés sur {fileName}.conllu")
