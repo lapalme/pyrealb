@@ -5,16 +5,6 @@ from pyrealb.lemmatize import buildLemmataMap
 import unicodedata,re, sys
 from ppJson import ppJson
 
-__all__ = [ # from pyRealB
-     'A','Adv','C', 'D', 'DT', 'N', 'NO','P', 'Pro', 'Q','V',            # from Terminal
-     'AP',  'AdvP',  'CP', 'NP', 'PP',  'VP', 'S', 'SP',                 # from Phrase
-     'root', 'subj', 'det', 'mod', 'comp', 'coord',                      # from Dependent
-     'getLanguage', 'addToLexicon', 'getLemma', 'loadEn', 'loadFr',      # from Lexicon
-     'fromJSON', 'oneOf', 'pyrealb_version',                             # from utils
-     'pyrealb_datecreated',
-     # from this IDE
-     "_en", "_fr", "_cn", "_ce", "_dn", "_de", "_lm", "_lx", "_help"]
-
 trace=False
 
 # only set this flag during development fo this IDE because it takes a while to execute
@@ -141,6 +131,7 @@ def _help():
 
 
 ## start of the program
+##  this program should be called with the -i command linge argument to accept other commands
 print(f"** pyRealB {pyrealb_version} Interactive Development Environment [_help() for info]")
 _en()
   

@@ -49,8 +49,10 @@ A first experiment in French is done with the 22 verbs described above. After a 
   - *passé composé* with the appropriate auxiliary,
   - *participe présent* with the auxiliary être
   - participe passé with the auxiliary être but with pronouns: *il*, *elle*, *ils*, *elles*
-- when a conjugated verb form does not exist in the *verb.txt* file, then `missing` is added in the `misc` field.
+- when a conjugated verb form does not exist in the *verb.txt* file, then `missing` is added in the `misc` field.
 
-This created 18,646 sentences with the corresponding UDs. 12,172 `missing` forms were detected (65%).
+This created 18,646 *sentences* with the corresponding UDs. 12,172 `missing` forms were detected (65%).
+
+Once these *sentences* were added to the French learning corpus of Stanza, John Bauer reported some improvement for previously unseen verb forms.
 
 [Guy Lapalme](mailto:lapalme@iro.umontreal.ca)
