@@ -1,31 +1,34 @@
+import os, sys
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..','src')))
+
 from pyrealb import *
-from test import test
-from ppJson import ppJson
 from io import StringIO
+from ppJson import ppJson
 
-def json_tests():
-    loadEn()
-    exp=S(NP(D("the"),N("cat").n("p")),
-                VP(V("sit").t("ps"),
-                   PP(P("on"),
-                      NP(D("the"),N("mat"))))).typ({"neg":True})
-    outExp=StringIO()
-    ppJson(outExp,exp.toJSON())
-    dep=root(V("sit").t("f"),
-                   subj(N("cat").n("p"),
-                        det(D("the"))),
-                   comp(P("on"),
-                        mod(N("mat"),
-                            det(D("the"))))).typ({"neg":True})
-    outDep=StringIO()
-    ppJson(outDep,dep.toJSON())
+load("en")
 
-    tests=[
-        {"expression": exp,
-         "expected": "The cats did not sit on the mat. ",
-         "message": "original sentence built using Phrase"},
-        {"expression": outExp.getvalue(),
-         "expected":
+exp = lambda:S(NP(D("the"), N("cat").n("p")),
+        VP(V("sit").t("ps"),
+           PP(P("on"),
+              NP(D("the"), N("mat"))))).typ({"neg": True})
+outExp = StringIO()
+ppJson(outExp, exp().toJSON())
+dep = lambda: root(V("sit").t("f"),
+           subj(N("cat").n("p"),
+                det(D("the"))),
+           comp(P("on"),
+                mod(N("mat"),
+                    det(D("the"))))).typ({"neg": True})
+outDep = StringIO()
+ppJson(outDep, dep().toJSON())
+
+
+def test_json_fns_1():
+    assert exp().realize() == "The cats did not sit on the mat. ", \
+        "original sentence built using Phrase"
+    
+def test_json_fns_2():
+    assert (outExp.getvalue() ==
 """{"phrase":"S",
  "lang":"en",
  "elements":[{"phrase":"NP",
@@ -50,18 +53,19 @@ def json_tests():
                                                      "lemma":"mat",
                                                      "props":{"cnt":"yes"}}]}]}]}],
  "props":{"typ":{"neg":true}}}
-""",
-         "message": "pretty-print of JSON from Phrase"},
-        {"expression": fromJSON(exp.toJSON()),
-         "expected": "The cats did not sit on the mat. ",
-         "message": "original sentence built using Phrase"},
+"""), "pretty-print of JSON from Phrase"
 
-        {"expression": dep,
-         "expected": "The cats will not sit on the mat. ",
-         "message": "original sentence built using Phrase"},
-        {"expression": outDep.getvalue(),
-         "expected":
- """{"dependent":"root",
+def test_json_fns_3():
+    assert (fromJSON(exp().toJSON()).realize() == "The cats did not sit on the mat. "), \
+        "original sentence rebuilt using json of Phrase"
+    
+def test_json_fns_4():
+    assert (dep().realize() == "The cats will not sit on the mat. "), \
+         "original sentence built using Dependent"
+
+def test_json_fns_5():
+    assert (outDep.getvalue() ==
+"""{"dependent":"root",
  "terminal":{"terminal":"V",
              "lemma":"sit",
              "props":{"t":"f"}},
@@ -88,14 +92,10 @@ def json_tests():
                                               "dependents":[]}]}]}],
  "props":{"typ":{"neg":true}},
  "lang":"en"}
-""",
-         "message": "pretty-print of JSON from Phrase"},
-        {"expression": fromJSON(dep.toJSON()),
-         "expected": "The cats will not sit on the mat. ",
-         "message": "original sentence built using Phrase"},
+"""
+), "pretty-print of JSON from Dependent"
+    
+def test_json_fns_6():
+    assert (fromJSON(dep().toJSON()).realize() == "The cats will not sit on the mat. "), \
+    "original sentence rebuilt using JSON version Dependent"
 
-    ]
-    return tests
-
-if __name__ == '__main__':
-    test("JSON-tests","en",json_tests)

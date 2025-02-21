@@ -83,6 +83,7 @@ class Terminal(Constituent):
                     except ValueError:
                         self.value=float(self.lemma)
                     self.nbDecimals=str(self.lemma)[::-1].find(".")
+                    if self.nbDecimals < 0: self.nbDecimals = 0
             else:
                 self.value=lemma
                 self.nbDecimals=str(lemma)[::-1].find(".")
@@ -162,9 +163,8 @@ class Terminal(Constituent):
         # overriden in TerminalEn and TerminalFr
         if not self.isA("NO"):
             return self.warn("bad application","grammaticalNumber","NO",self.constType)
-        n = self.getProp("")
-        if n is not None: # explicit number given to NO
-            return n
+        if "n" in self.props: # explicit number given to NO
+            return self.props["n"]
         if "dOpt" in self.props and "ord" in self.props["dOpt"] and self.props["dOpt"]["ord"]:
             return "s"
         return None
@@ -455,8 +455,8 @@ class Terminal(Constituent):
         elif self.isA("DT"):
             self.realization=self.dateFormat(self.date,self.getProp("dOpt"))
         elif self.isA("NO"):
+            self.setProp("n",self.grammaticalNumber())
             if "dOpt" in self.props:
-                self.setProp("n",self.grammaticalNumber())
                 opts=self.getProp("dOpt")
                 if "nat" in opts and opts["nat"]==True:
                     self.realization=self.numberToWord()

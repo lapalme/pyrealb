@@ -150,6 +150,7 @@ class Dependent(Constituent):
                     self.check_determiner_cnt(depTerm)
                 elif depTerm.isA("NO"):
                     depTerm.peng=headTerm.peng
+                    depTerm.peng["n"]=depTerm.grammaticalNumber()
                 elif depTerm.isA("P") and depTerm.lemma == "de":  # HACK: deal with specific case : det(P("de"),mod(D(...)))
                     if len(dep.dependents)==1 and dep.dependents[0].isA("mod") and dep.dependents[0].isA("D"):
                         dep.dependents[0].terminal.peng = self.peng
