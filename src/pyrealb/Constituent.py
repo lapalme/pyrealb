@@ -426,9 +426,33 @@ class Constituent:
     def clone(self):
         cln = copy.deepcopy(self)
         return cln
-    
-    def toSource(self,_indent):
+
+    def getPengTauxStr(self):
+        res=""
+        if hasattr(self, "peng"):
+            if "pengNO" in self.peng:
+                res += "#"+str(self.peng["pengNO"])
+            if hasattr(self, "taux") and "tauxNO" in self.taux:
+                res += "-"+str(self.taux["tauxNO"])
+        return res
+
+    # Compute indentation and a string to insert between each element of a list
+    # useful for producing nicely indented display of expressions
+    # returns a pair: updated indent with length constituent name,
+    #                 string of (updated) indent spaces preceded by a newline
+    def indentSep(self,indent,debug=False):
+        if indent>=0:
+            indent+=len(self.constType)+1
+            if debug:
+                indent += len(self.getPengTauxStr())
+            return indent, ",\n" + indent * " "
+        return indent, ","
+
+    def toSource(self,_indent=-1):
         return self.optSource
+
+    def toDebug(self,_indent=-1):
+        return str(self.props) if len(self.props)>0 else ""
 
     def addJSONprops(self,res):
         props = self.props

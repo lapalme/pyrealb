@@ -545,3 +545,24 @@ root(V("adresser"),
     ) == "Les places d'accueil s'adressent en priorité aux parents qui travaillent et n'ont pas de possibilité de garde pour leur enfant. ",\
     "Sujet d'une relative avec coordination de verbes"
 
+def test_dependencies_fr_45():
+    # exemple de https://www.lacheret.com/Xinha/UPLOAD/syntaxe-cours-4-2016.pdf (p 12)
+    assert(
+root(V("avoir"),
+     subj(N("jeune").n("p"),
+          det(D("un")),
+          coord(C("et"),
+                mod(A("masqué")),
+                mod(A("armé")))),
+     coord(C("et"),
+           comp(V("piller").t("pc"),
+                comp(N("magasin").n("p"),
+                     det(D("un")))),
+           comp(V("brûler").t("pp").n("s"),
+                coord(C("et"),
+                      comp(N("pneu").n("p"),
+                           det(D("un"))),
+                      comp(N("voiture").n("p"),
+                           det(D("un"))))))).realize()
+    ) == "Des jeunes masqués et armés ont ont pillé des magasins et brûlé des pneus et des voitures. ",\
+    "Multiples coordinations"

@@ -96,8 +96,10 @@ class Phrase(Constituent):
                              type(constituent).__name__ + ":" + str(constituent))
         if prog is None:
             self.optSource += f'.add({constituent.toSource()}{"" if position is None else ("," + str(position))})'
-        else:  # call from the constructor
+        elif position is None:
             self.elementsSource.append(constituent)
+        elif isinstance(position, int) and 0 <= position <= len(self.elementsSource):
+            self.elementsSource.insert(position,constituent)
         constituent.parentConst = self
         self.addElement(constituent, position)
         self.linkProperties()
@@ -559,13 +561,18 @@ class Phrase(Constituent):
     # recreate a jsRealB expression
     # if indent is >=0 create an indented pretty-print (call it with 0 at the root)
     def toSource(self, indent=-1):
-        if indent >= 0:
-            indent = indent + len(self.constType) + 1
-            sep = ",\n" + " " * indent
-        else:
-            sep = ","
+        newIndent,sep = self.indentSep(indent)
         # create source of children
-        return f'{self.constType}({sep.join(e.toSource(indent) for e in self.elementsSource)})' + super().toSource(indent)
+        res = self.constType
+        return res+f'({sep.join(e.toSource(newIndent) for e in self.elementsSource)})' \
+                   + super().toSource()
+
+    def toDebug(self,indent=-1):
+        newIndent,sep = self.indentSep(indent,True)
+        # create source of children
+        res = self.constType+self.getPengTauxStr()
+        return res+ f'({sep.join(e.toDebug(newIndent) for e in self.elementsSource)})' \
+                    + super().toDebug()
 
     def toJSON(self):
         res = {"phrase": self.constType}

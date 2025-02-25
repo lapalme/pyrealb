@@ -1,6 +1,6 @@
 # *pyrealb* - A Python Bilingual Text Realizer
 
-*Version 3.2.1 - January 2025*
+*Version 3.2.2 - February 2025*
 
 *pyrealb* is a Python adaptation of the JavaScript [**jsRealB**](http://rali.iro.umontreal.ca/jsRealB) 
 text realizer with the same constituent and dependency syntax notation. 

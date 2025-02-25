@@ -475,8 +475,12 @@ class Terminal(Constituent):
             self.error("Terminal.error:"+self.constType+"not implemented")
         return self.doFormat([self])
     
-    def toSource(self,_indent=0):
+    def toSource(self,_indent=-1):
         return f"{self.constType}(\"{self.lemma}\")"+super().toSource(_indent)
+
+    def toDebug(self,_indent=-1):
+        res = f"{self.constType}{self.getPengTauxStr()}(\"{self.lemma}\")"
+        return res+super().toDebug()
 
     def toJSON(self):
         res={"terminal":self.constType,"lemma":self.lemma}

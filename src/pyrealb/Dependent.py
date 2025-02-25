@@ -93,8 +93,10 @@ class Dependent(Constituent):
             return self.warn("bad Dependent",self.word_last(),type(dependent).__name__)
         if prog is None : # real call .add
             self.optSource+=f'.add({dependent.toSource()}{"" if position is None else (","+str(position))})'
-        else:
+        elif position is None:
             self.dependentsSource.append(dependent)
+        elif isinstance(position, int) and 0 <= position <= len(self.dependentsSource):
+            self.dependentsSource.insert(position, dependent)
         self.addDependent(dependent,position)
         self.linkProperties()
         return self
@@ -511,14 +513,18 @@ class Dependent(Constituent):
     # recreate a jsRealB expression
     # if indent is >=0 create an indented pretty-print (call it with 0 at the root)
     def toSource(self, indent=-1):
-        if indent >= 0:
-            indent = indent + len(self.constType) + 1
-            sep = ",\n" + " " * indent
-        else:
-            sep = ","
+        newIndent,sep = self.indentSep(indent)
         # create source of children
-        deps=[self.terminal.toSource(indent)]+[e.toSource(indent) for e in self.dependentsSource]
-        return f'{self.constType}({sep.join(deps)})' + super().toSource(indent)
+        deps=[e.toSource(newIndent) for e in [self.terminal]+self.dependentsSource]
+        return f'{self.constType}({sep.join(deps)})' + super().toSource()
+
+    def toDebug(self,indent=1):
+        newIndent, sep = self.indentSep(indent,True)
+        # create debug of children
+        depsDebug = [e.toDebug(newIndent) for e in [self.terminal]+self.dependentsSource]
+        res = self.constType+self.getPengTauxStr()
+        res += f"({sep.join(depsDebug)})"+super().toDebug()
+        return res
 
     def toJSON(self):
         res = {"dependent": self.constType,
