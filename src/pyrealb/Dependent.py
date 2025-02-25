@@ -521,7 +521,7 @@ class Dependent(Constituent):
     def toDebug(self,indent=1):
         newIndent, sep = self.indentSep(indent,True)
         # create debug of children
-        depsDebug = [e.toDebug(newIndent) for e in [self.terminal]+self.dependentsSource]
+        depsDebug = [e.toDebug(newIndent) for e in [self.terminal]+self.dependents]
         res = self.constType+self.getPengTauxStr()
         res += f"({sep.join(depsDebug)})"+super().toDebug()
         return res

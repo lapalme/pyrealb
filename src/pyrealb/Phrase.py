@@ -571,7 +571,7 @@ class Phrase(Constituent):
         newIndent,sep = self.indentSep(indent,True)
         # create source of children
         res = self.constType+self.getPengTauxStr()
-        return res+ f'({sep.join(e.toDebug(newIndent) for e in self.elementsSource)})' \
+        return res+ f'({sep.join(e.toDebug(newIndent) for e in self.elements)})' \
                     + super().toDebug()
 
     def toJSON(self):
