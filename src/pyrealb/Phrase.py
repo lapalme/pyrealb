@@ -184,13 +184,15 @@ class Phrase(Constituent):
             if hasattr(self.elements[headIndex], "peng"):
                 self.peng = self.elements[headIndex].peng
         elif self.isA("CP"):
-            # nothing to do, 
-            # but make sure that the propagated properties exist
-            Constituent.pengNO += 1
-            self.peng = {
-                "pengNO": Constituent.pengNO
-            }
-            # the information will be computed at realization time (see Phrase.prototype.cpReal)
+            if not hasattr(self,"peng"):
+                # do not change the "peng' if it exists in the case of dynamic add
+                # nothing to do,
+                # but make sure that the propagated properties exist
+                Constituent.pengNO += 1
+                self.peng = {
+                    "pengNO": Constituent.pengNO
+                }
+                # the information will be computed at realization time (see Phrase.prototype.cpReal)
         elif self.isA("S", "SP"):
             vpv = self.getFromPath([["", "VP"], "V"])
             if vpv is not None:
@@ -545,6 +547,7 @@ class Phrase(Constituent):
             # realize CPs before the rest because it can change gender and number of subject
             # save their realization
             cpReals = [e.cpReal() for e in self.elements if e.isA("CP")]
+            if self.getProp("n") is None: self.setProp("n", "s")
             for e in self.elements:
                 if e.isA("CP"):
                     r = cpReals.pop(0)

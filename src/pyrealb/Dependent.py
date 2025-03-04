@@ -478,6 +478,7 @@ class Dependent(Constituent):
             # realize "coord"s before the rest because it can change gender and number of subject
             # save their realization
             coordReals = [d.coordReal() for d in self.dependents if d.isA("coord")]
+            if self.getProp("n") is None: self.setProp("n","s")
             # move all "pre" dependents at the front
             # HACK: we must move these in place because realization might remove some of them
             nextPre = 0
