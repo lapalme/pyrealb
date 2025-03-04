@@ -1,4 +1,4 @@
-import os, sys
+import os, sys,datetime
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..','src')))
 
 from pyrealb import *
@@ -273,22 +273,22 @@ S(NP(D("le"),
 
 def test_exemples_fr_28():
     assert (
-DT("2025-02-18 10:38:28.887096").realize()   
+DT("2025-02-18 10:38:28.887096").realize()
     ) == 'le mardi 18 février 2025 à 10 h 38 min 28 s',\
     'Phrase complète:  None'
 
 
 def test_exemples_fr_29():
     assert (
-DT("2025-02-18 10:38:28.887132").nat(False).realize()   
+DT("2025-02-18 10:38:28.887132").nat(False).realize()
     ) == 'mardi 18/2/2025 10:38:28',\
     'Phrase complète:  None'
 
 
 def test_exemples_fr_30():
     assert (
-DT("2025-02-18 10:38:28.887146").dOpt({'rtime': True}).realize()   
-    ) == "aujourd'hui à 10 h 38 min 28 s",\
+DT(datetime.datetime.today()).dOpt({'rtime': True, 'hour': False, "minute": False, 'second':False}).realize()
+    ) == "aujourd'hui",\
     'Phrase complète:  None'
 
 
@@ -1002,8 +1002,8 @@ root(DT("2025-02-18 10:38:28.887132").nat(False)).cap(False).realize()
 
 def test_exemples_fr_101():
     assert (
-root(DT("2025-02-18 10:38:28.887146").dOpt({'rtime': True})).cap(False).realize()   
-    ) == "aujourd'hui à 10 h 38 min 28 s",\
+root(DT(datetime.datetime.today()).dOpt({'rtime': True, 'hour': False, "minute": False, 'second':False})).cap(False).realize()
+    ) == "aujourd'hui",\
     'Phrase complète:  None'
 
 

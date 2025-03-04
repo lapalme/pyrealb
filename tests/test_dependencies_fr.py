@@ -4,9 +4,9 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..',
 from pyrealb import *
 load("fr")
 
-pomme = comp(N("pomme"), det(D("le")));
-pommeS = subj(N("pomme"), det(D("le")));
-gars = subj(N("garçon").n("p"), det(D("le")));
+pomme = comp(N("pomme"), det(D("le")))
+pommeS = subj(N("pomme"), det(D("le")))
+gars = subj(N("garçon").n("p"), det(D("le")))
 addToLexicon({"John": {"N": {"g": "m", "tab": "n4"}}})
 addToLexicon({"Mary": {"N": {"g": "f", "tab": "n16"}}})
 
@@ -566,3 +566,83 @@ root(V("avoir"),
                            det(D("un"))))))).realize()
     ) == "Des jeunes masqués et armés ont ont pillé des magasins et brûlé des pneus et des voitures. ",\
     "Multiples coordinations"
+
+    # exemples tirés  de
+    # Conversion et améliorations de corpus du français annotés en Universal Dependencies
+    # B. Guillaume, M.-C. de Marneffe, and G. Perrier, {Revue TAL}, 60(2):71-95, 2019
+
+def test_dependencies_fr_46():
+    assert(
+  root(V('être'),
+       subj(N('poids'),
+            det(D('le'))),
+       comp(A('égal'),
+            mod(P('à'),
+                comp(N('poids'),
+                     det(D('le')),
+                     mod(P('de'),
+                         comp(N('fluide'),
+                              det(D('le')),
+                              mod(V('déplacer').t("pp")))))))).realize()
+          ) == "Le poids est égal au poids du fluide déplacé. ",\
+    "Figure 1 Guillaume et al."
+
+def test_dependencies_fr_47():
+    assert(
+  root(V("être"),
+       subj(N("problème"),
+            det(D("le")),
+            mod(A("seul")).pos("pre")),
+       comp(Pro("que"),
+            comp(V("avoir"),
+                 subj(Pro("lui").c("nom")),
+                 comp(N("pouvoir").n("p"),
+                      det(Q("de")),
+                      mod(A("super").pos("pre").lier()))
+                 ).typ({"neg": True}))).realize()
+          ) == "Le seul problème est qu'il n'a pas de super-pouvoirs. ",\
+    "Figure 2 Guillaume et al."
+
+def test_dependencies_fr_48():
+    assert(
+  root(V('créer').t("pa").aux("êt"),
+       subj(Pro('eux').c("nom")),
+       comp(N('temps'),
+            mod(P("en")).pos("pre"),
+            mod(A('même')).pos("pre"),
+            comp(C('que'),
+                 mod(N('tribun').n("p"),
+                     det(D("le")),
+                     mod(P('de'),
+                         mod(N('plèbe'),
+                             det(D('le')))))))).realize()
+    ) == "Ils furent créés en même temps que les tribuns de la plèbe. ",\
+    "Figure 3 Guillaume et al."
+
+def test_dependencies_fr_49():
+    assert(
+  root(Pro("elle").c("nom"),
+      coord(C("et"),
+           comp(V("fonctionner").t("pc")),
+           comp(V("continuer"),
+                comp(P("à"),
+                     mod(V("fonctionner").t("b"))))),
+      comp(P("sur"),
+           mod(N("base"),
+                det(D("le")),
+                mod(P("de"),
+                     mod(N("équilibre"),
+                          det(D("un"))))))).realize()
+    ) == "Elle a fonctionné et continue à fonctionner sur la base d'un équilibre. ",\
+    "Figure 8 Guillaume et al."
+
+def test_dependencies_fr_50():
+    assert(
+      root(V("voir"),
+           subj(Pro("moi").c("nom")),
+           comp(V("être"),
+                mod(C("que")).pos("pre"),
+                subj(Pro("toi").c("nom")),
+                mod(A("malade")))).realize()
+    ) == "Je vois que tu es malade. ",\
+    "Figure 10 Guillaume et al."
