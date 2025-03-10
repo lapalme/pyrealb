@@ -1,0 +1,443 @@
+<h1
+id="architecture-of-the-jsrealb-and-pyrealb-text-realizers">Architecture
+of the <em>jsRealB</em> and <em>pyrealb</em> Text Realizers</h1>
+<center>
+<a href="mailto:lapalme@iro.umontreal.ca">Guy Lapalme</a><br/>
+RALI-DIRO<br/> Université de Montréal<br/> December 2023
+</center>
+<p>This document describes the overall code organization of <a
+href="http://rali.iro.umontreal.ca/rali/?q=en/jsrealb-bilingual-text-realiser"><em>jsRealB</em></a>,
+a system written in <em>JavaScript</em> that can produce English or
+French sentences from a specification inspired by the <em>constituent
+syntax</em> formalism. It can be used either within a web page or as a
+<code>node.js</code> module.</p>
+<p>The text realizer is at the very end of a text generation pipeline.
+Important decisions about <em>What to say</em> have already been made.
+Sentence structure and most content word choices must also have been
+decided. But there is still interesting work to do: the realizer must
+take care of many language peculiarities such as conjugation, word
+order, elision, number and person agreements. These might seem to be
+small <em>details</em>, but users appreciate them and find it very
+annoying or disturbing when they are not properly dealt with. Our
+realizer allows creating many variations (e.g. negative, passive or
+interrogative) from a single affirmative sentence structure.</p>
+<p><em>jsRealB</em> has been developed by my students since 2013. The
+source code is now available on <a
+href="https://github.com/rali-udem/jsRealB">GitHub</a> with a tutorial
+and demo applications. in 2018, I decided to build on that experience
+and redesign the system from the ground up. I kept the same external
+interface using the existing tests and demos to develop the new version.
+Only the inner workings have been changed and simplified given my
+experience with the system over the last few years. <em>jsRealB</em> is
+currently at version 5.0.</p>
+<p>I then ported (by hand translation) <em>jsRealB</em> to python to
+create <a href="https://pypi.org/project/pyrealb/"><em>pyrealb</em></a>,
+now at version 3.0. As the <em>JavaScript</em> and <em>python</em>
+versions share the same code organization (most class and function names
+are similar) this document applies to both.</p>
+<p>Before going into the detailed code organization described in this
+document, I suggest that you first read the first sections of the <a
+href="http://rali.iro.umontreal.ca/JSrealB/current/Tutorial/tutorial.html"
+title="jsRealB tutorial">jsRealB tutorial</a> and then take a look at
+these two documents:</p>
+<ul>
+<li>The high-level <a
+href="https://arxiv.org/pdf/2012.15425.pdf">organization and use cases
+of <em>jsRealb</em> and <em>pyrealb</em></a><br />
+</li>
+<li>The use of this technology for <a
+href="https://arxiv.org/abs/2311.14808">Data-to–text bilingual
+generation</a>.</li>
+</ul>
+<p>This document takes for granted that the user has some knowledge of
+<em>python</em> and <em>JavaScript</em>.</p>
+<h2 id="classes-hierarchy">Classes hierarchy</h2>
+<p>The basic structure of <code>jsRealB</code> can be understood as a
+hierarchy of four classes highlighted with a larger border in the
+following diagram. <code>Terminal,</code> <code>Phrase</code> and
+<code>Dependent</code> are subclasses of <code>Constituent</code>. This
+diagram shows for each class, its name, its main local attributes and
+the most important methods. Arrows indicate subclass relationships.</p>
+<p>Parallel class hierarchies have be defined for English and French
+specific processing: <code>TerminalEn,</code> <code>PhraseEn</code> and
+<code>DependentEn</code> are subclasses of <code>ConstituentEn</code>;
+<code>TerminalFr,</code> <code>PhraseFr</code> and
+<code>DependentFr</code> are subclasses of <code>ConstituentFr</code>.
+Language specific processing common to <code>PhraseEn</code> and
+<code>DependentEn</code> is defined in <code>NonTerminalEn</code> and
+similarly for French.</p>
+<p><img src="classes-hierarchy.png" width="1000"/></p>
+<p>As can be expected, the same method names appear in the corresponding
+English and French specific classes. A few <em>do-nothing</em> methods
+are defined when a processing does not apply to a given language
+(e.g. some gender related processing in English). This diagram uses the
+python camel-case convention for class names, JavaScript relies on
+underscores for separating words in an identifier.</p>
+<p>Multiple inheritance is used to determine the appropriate methods
+according to the language (English or French) in which the instance was
+originally created. The user does not call the class constructors
+directly but functions that call an auxiliary function determines the
+language specific class depending on the current loaded language.</p>
+<ul>
+<li><p>In <em>python</em>, a class can be derived from more than one
+superclass so the above class diagram can be implemented directly. The
+creation of language specific instances are created as follows:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> NP(<span class="op">*</span>elems,lang<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> phrase(<span class="st">&quot;NP&quot;</span>,elems,lang)</span></code></pre></div>
+<p>using the following auxiliary function</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> phrase(constType,elems,lang<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> lang <span class="kw">is</span> <span class="va">None</span>:lang <span class="op">=</span> getLanguage()  <span class="co"># determine the language to use</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> lang <span class="op">==</span> <span class="st">&quot;en&quot;</span>:<span class="cf">return</span> PhraseEn(constType, elems)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span>  PhraseFr(constType, elems)</span></code></pre></div>
+<p>All other <code>Terminal</code>, <code>Phrase</code> and
+<code>Dependent</code> instances are created similarly.</p></li>
+<li><p>In <em>JavaScript</em>, a class can only derive from one
+superclass, but <a
+href="https://justinfagnani.com/2015/12/21/real-mixins-with-javascript-classes/">class
+expressions implementing the mixing of classes</a> can be used to create
+an <em>empty</em> class combining many classes with an expression such
+as the following:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Phrase_en <span class="kw">extends</span> <span class="fu">English_phrase</span>(<span class="fu">English_non_terminal</span>(Phrase)){}</span></code></pre></div>
+<p>The creation of language specific instances are created as
+follows:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">NP</span>(<span class="op">...</span>elements){<span class="cf">return</span> <span class="fu">phrase</span>(<span class="st">&quot;NP&quot;</span><span class="op">,</span>elements)}</span></code></pre></div>
+<p>using the following auxiliary function</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">phrase</span>(phraseType<span class="op">,</span>elements){</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">getLanguage</span>()<span class="op">==</span><span class="st">&quot;en&quot;</span> <span class="op">?</span> <span class="kw">new</span> <span class="fu">Phrase_en</span>(elements<span class="op">,</span>phraseType<span class="op">,</span><span class="st">&quot;en&quot;</span>) </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                               <span class="op">:</span> <span class="kw">new</span> <span class="fu">Phrase_fr</span>(elements<span class="op">,</span>phraseType<span class="op">,</span><span class="st">&quot;fr&quot;</span>)</span></code></pre></div></li>
+</ul>
+<p>All functions validate their input, in the case of errors, they
+generate a warning message on the console. Realization is not stopped,
+the resulting string is the original lemma enclosed in double square
+brackets.</p>
+<p>We now briefly describe the main methods of each class.</p>
+<h2 id="constituent"><code>Constituent</code></h2>
+<p>The constructor initializes the object properties
+<code>constType</code> with the parameter, <code>prop</code> to an empty
+object and <code>realization</code> to <code>null</code>. Most
+<code>Constituent</code> instances also have a link to an object called
+<code>peng</code> (person, number and gender) and verbs to an object
+called <code>taux</code> (tense, auxiliary). This object can be shared
+between constituents; when it is modified by an option, the new value is
+also available to others. This is used for carrying out the agreements
+between sentence component (e.g. the number of a subject can affect the
+verbe of the sentence).</p>
+<ul>
+<li><code>getProp(propName)</code> : find the current value of the
+property by first looking if the object has a value for this property;
+if it is not the case, look in the <code>peng</code> and
+<code>taux</code> objects if they exist otherwise return
+<code>undefined</code> or <code>None</code>.</li>
+<li><code>doFormat()</code> : during realization, deals with pronoun
+placement, elision, punctuation, capitalization and inserting HTML
+tags.</li>
+<li><code>deTokenize()</code> : add appropriate spacing between the
+realization of each token; if the current object is a <code>S</code> or
+a <code>root</code> at the top level, capitalize the first letter unless
+an option forbids it and add a full stop at the end.</li>
+<li><code>realize()</code> : call <code>real()</code> and then
+<code>deTokenize()</code> defined in the current <code>Phrase</code> or
+<code>Constituent</code>.</li>
+<li><code>warn()</code> : produce a string explaining an error in the
+specification using the current language. Note that <em>jsRealB</em> or
+pyrealb itself is used to realize a <em>localized</em> of the warning
+defined as expressions to be realized..</li>
+</ul>
+<h3 id="constituenten-constituentfr"><code>ConstituentEn</code> /
+<code>ConstituentFr</code></h3>
+<p>Most methods are single line functions that return language specific
+values for default properties, tonic forms of pronouns, etc. But the
+following functions are more complex:</p>
+<ul>
+<li><code>doElision()</code> : in English: decide if the indefinite
+determiner is written as <em>a</em> or <em>an</em>; in French, elide
+some words such as <em>le</em>, <em>je</em> or <em>que</em> that are
+contracted as <em>l’</em>,<em>j’</em> or <em>qu’</em> when it appears in
+front of a word starting with a vowel; take also into account the fact
+that for euphony, words like <em>ma</em> or <em>beau</em> will be
+changed to <em>mon</em> or <em>bel</em> before a word starting with a
+vowel.</li>
+<li><code>warning(args)</code>: define the list of English or French
+sentence patterns for warnings; <code>args</code> is an array of values,
+the first of which is a key for indexing the appropriate warning. The
+other values of <code>args</code> are used for customizing the
+warning.</li>
+</ul>
+<h2 id="terminal"><code>Terminal</code></h2>
+<p>The constructor saves the <code>lemma</code> and call
+<code>setLemma()</code>,</p>
+<ul>
+<li><p><code>setLemma(lemma,terminalType)</code> : according to the
+<code>terminalType</code> do one of these:</p>
+<ul>
+<li><code>DT</code> : initialize the date with the value of the lemma
+and set the default attributes for a date;</li>
+<li><code>NO</code>: initialize the date with the value of the lemma and
+set the default attributes for a number;</li>
+<li><code>N</code>, <code>A</code>, <code>Pro</code>, <code>D</code>:
+search the lexicon for the <code>lemma</code>; from this information set
+the object attributes <code>tab</code> and compute the <code>stem</code>
+to be used in the declension process; other information from the lexicon
+is saved in the objet <code>prop</code> attribute.</li>
+</ul></li>
+<li><p><code>grammaticalNumber()</code> : computes the grammatical
+number for a <code>NO</code> in both French and English;</p></li>
+<li><p><code>decline()</code> : using the <code>tab</code> number and
+<code>stem</code> property, find the string corresponding the gender and
+number of the object; comparative and superlative are dealt also
+according the the language;</p></li>
+<li><p><code>numberFormatter()</code> : realize a number a string of
+words or as an ordinal number;</p></li>
+<li><p><code>dateFormat()</code> : realize a date according to the
+language specific options and rules ;</p></li>
+<li><p><code>real()</code> : set the <code>realization</code> field for
+this terminal depending on its <code>constType</code>:</p>
+<ul>
+<li><code>N</code>, <code>A</code>, <code>D</code>, <code>Adv</code>,
+<code>Pro</code>: result of <code>decline()</code>;</li>
+<li><code>V</code> : result of <code>conjugate()</code>;</li>
+<li><code>DT</code>: result of <code>dateFormat()</code>;</li>
+<li><code>NO</code>: result of <code>numberToWord()</code>,
+<code>numberToOrdinal()</code>, <code>numberFormatter()</code> or the
+current value, depending on the options;</li>
+<li><code>C</code>, <code>P</code>, <code>Q</code> : return the
+lemma;</li>
+</ul>
+<p>Finally call <code>doFormat()</code> (defined in
+<code>Constituent</code>) with a singleton string containing this
+<code>Terminal</code>;</p></li>
+</ul>
+<h3 id="terminalen-terminalfr"><code>TerminalEn</code> /
+<code>TerminalFr</code></h3>
+<p>English or French specific processing; these functions are called by
+<code>Terminal</code> instances:</p>
+<ul>
+<li><code>decline_adj_adv()</code> : process adjective and adverb
+especially for comparative and superlative</li>
+<li><code>check_gender_lexicon()</code> : check if the specified gender
+is acceptable according to the lexicon</li>
+<li><code>conjugate()</code> : English or French verb conjugation</li>
+<li><code>numberOne()</code>: realize <em>un</em> or <em>une</em> in
+French according to the gender; in English return singular if value is
+the integer 1 otherwise plural.</li>
+</ul>
+<h3 id="phrase"><code>Phrase</code></h3>
+<p>Note that given the applicative order of execution of JavaScript,
+this constructor is only called once all its parameters have been
+created. The constructor first calls the <code>Constituent</code>
+prototype and then initializes its list of elements with the
+<code>elements</code> parameter: it copies all elements but the last and
+then calls <code>add(element[last])</code>.</p>
+<ul>
+<li><p><code>add(constituent, position)</code> : it adds the
+<code>constituent</code> to the list of elements to the given position
+(last if undefined);</p></li>
+<li><p><code>linkProperties()</code> : go through all
+<code>elements</code> and adjust agreement links depending on the type
+of the current element:</p>
+<ul>
+<li><code>NP</code> : check the following:
+<ul>
+<li>make the current <code>NP</code> agree with the first <code>N</code>
+taking into account a possible <code>NO</code> which can change the
+number; make elements <code>D</code>, <code>Pro</code> or <code>A</code>
+agree with this element;</li>
+<li>if there is an internal <code>SP</code> containing a
+<code>Pro</code>:
+<ul>
+<li>if the pronoun is <code>who</code> (or <code>qui</code> in French)
+make the verb in the <code>SP</code> agree with this element because it
+is subject;</li>
+<li>in French, check for pronoun <code>que</code> that might be a direct
+object occurring before the verb; this will be checked when conjugating
+because if it occurs as a past participle it must agree with this
+NP.</li>
+</ul></li>
+</ul></li>
+<li><code>AP</code> : agrees with the first internal
+<code>A</code>.</li>
+<li><code>VP</code> : agrees with the first internal
+<code>V</code>.</li>
+<li><code>S</code>,<code>SP</code> : agrees with the subject (i.e. first
+<code>NP</code>,<code>N</code>,<code>Pro</code> or <code>CP</code>) and
+check special cases
+<ul>
+<li>in French, an adjective following the verb <code>être</code> must
+agree with the subject;</li>
+<li>if there is coordination of verbs, then all verbs must agree with
+the single subject.</li>
+</ul></li>
+</ul></li>
+<li><p><code>pronominalizeChildren()</code> :</p></li>
+<li><p><code>passivate()</code> : find the subject and the object and
+invert them in the sentence, change the verb to passive (i.e. insert the
+verb <code>be</code> and put the original verb to past participle); call
+<code>passive_agree_auxiliary</code> to make the past participle agree
+with the new subject.</p></li>
+<li><p><code>processInt()</code> : transform a sentence into an
+interrogative form</p>
+<ul>
+<li><p>start with the appropriate interrogative pronoun;</p></li>
+<li><p>move the auxiliary in front of the verb;</p></li>
+<li><p>in some cases, remove the subject, the direct or indirect
+object.</p></li>
+</ul></li>
+<li><p><code>processTyp(types)</code> : perform structure modification
+of a <code>S</code>, <code>SP</code> or <code>VP</code> in the following
+order, when hte appropriate flag is set:</p>
+<ul>
+<li><em>passive</em>: call <code>passivate()</code>;</li>
+<li><em>progressive</em>, <em>modality</em>, <em>negation</em>,
+<em>perfect</em>: call language
+specific<code>processTyp_verb()</code></li>
+<li><em>interrogative</em> : call language specific
+<code>processInt()</code></li>
+<li><em>exclamative</em>: terminate the sentence with an exclamation
+mark.</li>
+</ul></li>
+<li><p><code>cpReal()</code> : generate terminals by realizing each
+element of the <code>CP</code> and inserting a comma between the first
+elements and the conjunction before the last;</p></li>
+<li><p><code>real()</code> : check if some elements must be
+pronominalized if so call language specific pronominalize(); call
+<code>processTyp()</code>; realize each element and combine their list
+of <code>Terminal</code>s into a single list; apply
+<code>doFormat()</code> on the resulting list.</p></li>
+</ul>
+<h3 id="phraseen-phrasefr"><code>PhraseEn</code> /
+<code>PhraseFr</code></h3>
+<ul>
+<li><code>linkAttributes</code>, <code>link_DAV_properties</code>,
+<code>link_subj_obj_subordinate</code>:</li>
+<li><code>pronominalize()</code> : this applies to a <code>NP</code> but
+it must be called by the <em>parent</em> constituent that sets the
+<code>parentConst</code> link
+<ul>
+<li><p>find the role of the <code>NP</code> (subject, direct or indirect
+object) within the parent constituent to determine the proper pronoun to
+use;</p></li>
+<li><p>create the pronoun, make it agree with the current NP and replace
+it in the sentence</p></li>
+</ul></li>
+<li><code>passive_agree_auxiliary()</code> :
+<ul>
+<li>French: change the verb into an <em>ëtre</em> auxiliary and make it
+agree with the new subject</li>
+<li>English: do nothing</li>
+</ul></li>
+<li><code>processTyp_verb()</code> : <em>progressive</em>,
+<em>modality</em>, <em>negation</em>, <em>perfect</em>:
+<ul>
+<li>French:
+<ul>
+<li><em>progressive</em>: change the verb to
+<code>être en train de</code> <em>verb</em>, where <code>être</code> is
+conjugated like the original verb which is then set to infinitive;</li>
+<li><em>modality</em> : add the appropriate modality verb in front of
+the verb which is set to infinitive;</li>
+<li><em>negation</em> : insert <code>ne</code> before the verb and set a
+conjugation flag that will used when conjugating the verb at realization
+time.</li>
+</ul></li>
+<li>English: these options are implemented with auxiliary and modality
+verbs using the “affix hopping” rules by building a list of auxiliaries
+and affixes; these lists are then processed to create a list of
+Terminals with the appropriate conjugation flags; this list then
+replaces the original verb;</li>
+</ul></li>
+<li><code>move_object()</code> : for interrogative
+<ul>
+<li>English: move the auxiliary to the front</li>
+<li>French: move the verb before the subject the inversion rule</li>
+</ul></li>
+<li><code>tag_question()</code> :
+<ul>
+<li>English : negate the verb of the affirmative sentence, pronominalize
+the subject and them to the end of the sentence</li>
+<li>French: add <em>n’est-ce pas</em> at the end of the sentence.</li>
+</ul></li>
+</ul>
+<h2 id="dependent"><code>Dependent</code></h2>
+<p>This is also a subclass of <code>Constituent</code>, its structures
+closely parallels that of <code>Phrase</code>, but its children are a
+single <code>Terminal</code> instance and list of <em>dependents</em>
+(instances of <code>Dependent</code>) instead of <em>elements</em> which
+are <code>Terminal</code> or <code>Phrase</code> instances.</p>
+<h2 id="nonterminalen-nonterminalfr"><code>NonTerminalEn</code> /
+<code>NonTerminalFr</code></h2>
+<p>These classes contains methods shared between <code>Phrase</code> and
+<code>Dependent</code> instances. In particular, this where is located
+the Affix Hopping algorithm for English verb conjugation in sentence
+modifications. There many single line methods for dealing with passive
+sentences in either French or English. The language specific positioning
+of adverbs is dealt in a method of this class. In French, the placement
+of clitic and pronouns is determined here, while there is nothing to do
+in this respect in English.</p>
+<h2 id="lexicon">Lexicon</h2>
+<p>These functions can be called by the user to change global
+information for the realizer. They are described in the <a
+href="../documentation/user.html#vocExtension">documentation</a>.</p>
+<ul>
+<li><code>loadEn(trace)</code> : set the current lexicon and rule table
+for realizing sentences in English;</li>
+<li><code>loadFr(trace)</code> : set the current lexicon and rule table
+for realizing sentences in French;</li>
+<li><code>addToLexicon(lemma, infos, lang)</code> : add a new lemma to
+the current lexicon by giving information for conjugation and
+lemmatization in the specified lexicon;</li>
+<li><code>updateLexicon(newLexicon,lang)</code> : add to the current
+lexicon, the entries of the specified lexicon;</li>
+<li><code>getLemma(lemma,lang)</code> : return the information for a
+given lemma from specified lexicon ;</li>
+<li><code>getLanguage()</code> : return the current realization
+language;</li>
+<li><code>getLexicon()</code> : return the current lexicon;</li>
+</ul>
+<h2 id="json-tools">JSON-tools</h2>
+<ul>
+<li><code>fromJSON(json,lang)</code> : create a jsRealB structure from a
+JSON object; if <code>lang</code> is not given, the current language is
+used;</li>
+<li><code>.toJSON()</code>, <code>.toJSON()</code> : create a JSON
+structure from a <em>pyrealb</em> structure ;</li>
+<li><code>ppJSON(json)</code> : create an indented string showing the
+structure of a JSON structure (not specific to jsRealB, but useful for
+debugging);</li>
+<li><code>Phrase.fromJSON</code>, <code>Dependent.fromJSON</code>,
+<code>Terminal.fromJSON</code>, <code>setJSONprops</code> : internal
+functions used by <code>fromJSON()</code>;</li>
+<li><code>Phrase.prototype.toJSON</code>,
+<code>Terminal.prototype.toJSON</code>,
+<code>Terminal.prototype.toJSON</code> :internal functions used by
+<code>toJSON()</code>.</li>
+</ul>
+<h2 id="jsrealb.js-utils.py"><code>jsRealB.js</code> /
+<code>utils.py</code></h2>
+<p>This is not a class, but a file that imports all functions and
+classes and exports them, so that this is the only file to import to
+access <em>pybealb</em>. It also adds a utility functions and some
+useful constants.<br />
+All functions that create <code>Terminal</code>, <code>Phrase</code> and
+<code>Dependent</code> instances are also defined here,</p>
+<ul>
+<li><code>oneOf(elems)</code> : selects <em>randomly</em> an element
+from a list, but trying to avoid direct repetitions. If the selected
+element is a function, then call it without argument and return its
+value.</li>
+<li><code>choice(elems)</code> : selects randomly an element for a list,
+similar to <code>oneOf(..)</code> but does not take previous choices
+into account</li>
+<li><code>mix(elems)</code> : shuffle the elements, if any element is a
+function then return its value.</li>
+<li><code>jsRealB_version</code> : the current version of jsRealB</li>
+<li><code>pyrealb_version</code> : the current version of
+<em>pyrealb</em></li>
+<li><code>getSavedWarnings()</code>, <code>resetSavedWarnings()</code>,
+<code>setExceptionOnWarning()</code>: change the warning are dealt
+with.</li>
+</ul>

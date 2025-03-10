@@ -1,0 +1,133 @@
+<h1 id="format-dun-lexique-jsrealb">Format d’un lexique
+<em>jsRealB</em></h1>
+<p>Les informations contenues dans les lexiques de <em>jsRealB</em> ont
+été converties à l’origine à partir d’un format interne inspiré de Lisp
+développé au RALI il y a de nombreuses années. Les lexiques JSON ont été
+créés à l’origine à l’aide d’un script Python, puis manuellement
+<em>patchés</em> et mis à jour au fil des années avec de nouveaux champs
+au fur et à mesure que d’autres informations devenaient disponibles.</p>
+<p>Les informations de déclinaison ou de conjugaison sont associées à
+des tables, définies dans les fichiers <code>rule-en.js</code> et
+<code>rule-fr.js</code>, qui couvrent la plupart des cas d’utilisation
+en anglais et en français.</p>
+<p>Nous donnons maintenant le schéma <a
+href="https://github.com/lapalme/json-rnc%20«%20GitHub%20-%20rali-udem/json-rnc%20:%20JSON%20validation%20with%20a%20RELAX-NG%20compact%20syntax%22">json-rnc</a>
+utilisé pour valider les entrées du lexique français. la <a
+href="./Lexicon-Format-en.html">structure du lexique anglais</a> est
+similaire, quoique certains champs diffèrent.</p>
+<p>Un lexique est un objet JSON unique dont les clés sont le lemme et la
+valeur est elle-même un autre objet de type <code>lexInfo</code> avec
+des informations sur les parties du discours autorisées pour ce lemme ;
+au moins un objet de partie du discours doit être défini. L’objet
+associé à chaque partie du discours énumère les valeurs autorisées pour
+les différents champs donnant des informations sur la déclinaison ou la
+conjugaison.</p>
+<h1 id="schéma-datalexicon-fr.jsonrnc">Schéma
+(<code>data/lexicon-fr.jsonrnc</code>)</h1>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="er">start</span> <span class="er">=</span> <span class="fu">{</span><span class="er">*</span><span class="fu">:</span><span class="er">lexInfo</span><span class="fu">}</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="er">lexInfo=</span><span class="fu">{</span><span class="er">N?</span><span class="fu">:</span>  <span class="fu">{</span><span class="er">tab</span><span class="fu">:</span><span class="er">/n(I|\d</span><span class="fu">{</span><span class="er">1</span><span class="fu">,</span><span class="er">3</span><span class="fu">}</span><span class="er">a?)/</span><span class="fu">,</span> <span class="er">g?</span><span class="fu">:</span><span class="er">gender</span><span class="fu">,</span> <span class="er">h?</span><span class="fu">:</span><span class="er">one</span><span class="fu">,</span> <span class="er">niveau?</span><span class="fu">:</span><span class="er">niv</span> <span class="fu">},</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>         <span class="er">A?</span><span class="fu">:</span>  <span class="fu">{</span><span class="er">tab</span><span class="fu">:</span><span class="er">/</span><span class="ot">[</span><span class="er">an</span><span class="ot">]</span><span class="er">(I|\d</span><span class="fu">{</span><span class="er">1</span><span class="fu">,</span><span class="er">3</span><span class="fu">}</span><span class="er">a?)/</span><span class="fu">,</span>  <span class="er">h?</span><span class="fu">:</span><span class="er">one</span><span class="fu">,</span> <span class="er">pos?</span><span class="fu">:</span><span class="er">/pre|post/</span><span class="fu">,</span><span class="er">niveau?</span><span class="fu">:</span><span class="er">niv</span><span class="fu">},</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>         <span class="er">Pro?</span><span class="fu">:{</span><span class="er">tab</span><span class="fu">:</span><span class="er">/pn\d</span><span class="fu">{</span><span class="er">1</span><span class="fu">,</span><span class="er">2</span><span class="fu">}</span><span class="er">(-</span><span class="ot">[</span><span class="dv">123</span><span class="ot">][</span><span class="er">sp</span><span class="ot">]</span><span class="er">?</span><span class="ot">[</span><span class="er">mfn</span><span class="ot">]</span><span class="er">?)?|n27|n28|n75|n76|d</span><span class="ot">[</span><span class="dv">1345</span><span class="ot">]</span><span class="er">|nI/</span><span class="fu">,</span> </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>               <span class="er">g?</span><span class="fu">:</span><span class="er">gender</span><span class="fu">,</span> <span class="er">n?</span><span class="fu">:</span><span class="er">num</span><span class="fu">,</span> <span class="er">pe?</span><span class="fu">:</span><span class="er">oneTwoThree</span><span class="fu">,</span><span class="er">niveau?</span><span class="fu">:</span><span class="er">niv</span><span class="fu">},</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>         <span class="er">V?</span><span class="fu">:</span>  <span class="fu">{</span><span class="er">tab</span><span class="fu">:</span><span class="er">/v\d</span><span class="fu">{</span><span class="er">1</span><span class="fu">,</span><span class="er">3</span><span class="fu">}</span><span class="er">/</span><span class="fu">,</span> <span class="er">aux?</span><span class="fu">:</span><span class="er">/av|êt|aê/</span><span class="fu">,</span> <span class="er">h?</span><span class="fu">:</span><span class="er">one</span><span class="fu">,</span> <span class="er">pat?</span><span class="fu">:</span><span class="ot">[</span><span class="er">/tdir|tind|intr|réfl|impe/</span><span class="ot">]</span><span class="fu">,</span><span class="er">niveau?</span><span class="fu">:</span><span class="er">niv</span><span class="fu">},</span> </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>         <span class="er">D?</span><span class="fu">:</span>  <span class="fu">{</span><span class="er">tab</span><span class="fu">:</span><span class="er">/d\d</span><span class="fu">{</span><span class="er">1</span><span class="fu">,</span><span class="er">2</span><span class="fu">}</span><span class="er">(-\d)?|n(I|</span><span class="dv">23</span><span class="er">|</span><span class="dv">25</span><span class="er">|</span><span class="dv">27</span><span class="er">|</span><span class="dv">28</span><span class="er">|</span><span class="dv">48</span><span class="er">|</span><span class="dv">75</span><span class="er">|</span><span class="dv">76</span><span class="er">)/</span><span class="fu">,</span> <span class="er">n?</span><span class="fu">:</span><span class="er">num</span><span class="fu">,</span> <span class="er">value?</span><span class="fu">:</span><span class="er">number</span><span class="fu">,</span><span class="er">niveau?</span><span class="fu">:</span><span class="er">niv</span><span class="fu">},</span>  </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>         <span class="er">Adv?</span><span class="fu">:{</span><span class="er">tab</span><span class="fu">:</span><span class="er">/av|b\d/</span><span class="fu">,</span><span class="er">h?</span><span class="fu">:</span><span class="er">one</span><span class="fu">,</span><span class="er">niveau?</span><span class="fu">:</span><span class="er">niv</span><span class="fu">},</span> </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>         <span class="er">P?</span><span class="fu">:</span>  <span class="fu">{</span><span class="er">tab</span><span class="fu">:</span><span class="er">/ppe?/</span><span class="fu">,</span><span class="er">h?</span><span class="fu">:</span><span class="er">one</span><span class="fu">,</span><span class="er">niveau?</span><span class="fu">:</span><span class="er">niv</span><span class="fu">},</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>         <span class="er">C?</span><span class="fu">:</span>  <span class="fu">{</span><span class="er">tab</span><span class="fu">:</span><span class="er">/cj|cje|cji/</span><span class="fu">,</span><span class="er">niveau?</span><span class="fu">:</span><span class="er">niv</span><span class="fu">},</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>         <span class="er">Q?</span><span class="fu">:</span>  <span class="fu">{</span><span class="er">tab</span><span class="fu">:</span><span class="er">/av/</span><span class="fu">},</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>         <span class="er">Pc?</span><span class="fu">:</span> <span class="fu">{</span><span class="er">tab</span><span class="fu">:</span><span class="ot">[</span><span class="er">/pc\d</span><span class="fu">{</span><span class="er">1</span><span class="fu">,</span><span class="er">2</span><span class="fu">}</span><span class="er">/</span><span class="ot">]</span><span class="fu">,</span> <span class="er">compl?</span><span class="fu">:</span><span class="er">string</span><span class="fu">},</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>         <span class="er">value?</span><span class="fu">:</span><span class="er">number</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span><span class="er">@(minProperties=1)</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="er">one</span>       <span class="er">=</span> <span class="er">number@(minimum=1,</span> <span class="er">maximum=1)</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="er">oneTwoThree</span>  <span class="er">=</span> <span class="er">number@(minimum=1,</span> <span class="er">maximum=3)</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="er">niv</span>  <span class="er">=</span> <span class="er">number@(minimum=1,maximum=6)</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="er">gender</span> <span class="er">=</span> <span class="er">/m|f|x/</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="er">num</span> <span class="er">=</span> <span class="er">/s|p/</span></span></code></pre></div>
+<ul>
+<li><p>Le <code>string</code> associé à <code>tab</code>doit être un
+numéro de table de déclinaison ou de conjugaison définie dans
+<code>rule-fr.js</code></p></li>
+<li><p>Le genre (<code>g</code>)et le nombre (<code>n</code>) peut
+seulement prendre quelques valeurs;</p></li>
+<li><p>Pour les déterminants et les adjectifs, <code>value</code> est la
+valeur numérique associée soit à un nombre cardinal, soit à un nombre
+ordinal.</p></li>
+<li><p>Pour les verbes : les arguments permis peuvent être spécifiés en
+utilisant une liste de modèles autorisés (<code>pat</code>) pour ce
+verbe :</p>
+<ul>
+<li><code>tdir</code> : transitif direct</li>
+<li><code>tind</code> : intransitif direct</li>
+<li><code>intr</code> : intransitif direct</li>
+<li><code>réfl</code> : réflexif</li>
+<li><code>impe</code> : impersonnel</li>
+</ul>
+<p>Lorsque le seul modèle est <code>réfl</code>, cela signifie que le
+verbe est <em>essentiellement réfléchi</em> et qu’il est donc toujours
+précédé d’un pronom réfléchi lorsqu’il est conjugué.</p></li>
+<li><p>Dans le cas de <code>h</code>, il s’agit de <em>h aspiré</em>,
+auquel cas il n’y a pas d’élision entre ce mot et celui qui le
+précède;</p></li>
+<li><p>Dans le cas de <code>punct</code>, <code>compl</code> est le
+signe de ponctuation complémentaire, par exemple la parenthèse ou le
+crochet fermant correspondant.</p></li>
+<li><p><code>niveau</code> est une indication d’un mot <em>commun</em>
+dans un lexique, soit au niveau d’une entrée, soit pour une partie de
+discours donnée. C’est un nombre entier entre 1 et 6, correspondant au
+niveau scolaire tel qu’indiqué par le champ <em>Année scolaire</em> de
+la [Liste orthographique du ministère de l’Éducation du Québec]
+(https://www.education.gouv.qc.ca/fileadmin/site_web/documents/education/jeunes/pfeq/Liste-orthographique-document-reference.pdf).
+Cette information peut être utile pour générer des phrases avec des mots
+de la vie courante.</p></li>
+</ul>
+<h1 id="interrogation-du-lexique-avec-jq">Interrogation du lexique avec
+<code>jq</code></h1>
+<p>La manière la plus pratique d’interroger le lexique est d’utiliser
+l’<a href="../IDE/">IDE</a> ou la démonstration <a
+href="../demos/Evaluation/index.html">Evaluation</a>.</p>
+<p>Il est aussi possible d’utiliser <a
+href="https://jqlang.github.io/jq/" title="jq">jq</a> pour interroger
+ces lexiques. Voici quelques exemples de requêtes:</p>
+<ul>
+<li>Chercher une entrée particulière, ici <code>amour</code></li>
+</ul>
+<p><code>jq 'to_entries[]|select(.key=="amour")' lexicon-fr.json</code></p>
+<ul>
+<li>Chercher les entrées corresponds à une expression régulière, ici les
+entrées débutant par <code>amour</code>, <code>-c</code> pour obtenir
+une sortie non indentée.</li>
+</ul>
+<p><code>jq -c 'to_entries[]|select(.key|test("^amour.*"))' lexicon-fr.json</code></p>
+<ul>
+<li>Chercher en combinant plusieurs critères: les entrées qui terminent
+par er et qui peuvent être un nom, un adjectif et un verbe;
+<code>-r</code> pour afficher les résultats sans les guillemets</li>
+</ul>
+<p><code>jq -r 'to_entries[]|select((.key|test("er$")) and (.value|has("N")) and (.value|has("V")) and (.value|has("A")))|.key' lexicon-fr.json</code></p>
+<h1 id="validation">Validation</h1>
+<h2 id="utiliser-le-validateur-jsonrnc">Utiliser le <a
+href="https://github.com/lapalme/json-rnc?tab=readme-ov-file#5-using-the-validator"><code>validateur jsonrnc</code></a></h2>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode swift"><code class="sourceCode swift"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">.../</span>ValidateJsonRnc<span class="op">.</span>py <span class="op">--</span>slurp lexicon<span class="op">-</span>en<span class="op">.</span>jsonrnc lexicon<span class="op">-</span>en<span class="op">.</span>json</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="op">.../</span>ValidateJsonRnc<span class="op">.</span>py <span class="op">--</span>slurp lexicon<span class="op">-</span>fr<span class="op">.</span>jsonrnc lexicon<span class="op">-</span>fr<span class="op">.</span>json</span></code></pre></div>
+<p>This also creates a standard <a href="https://json-schema.org">JSON
+Schema</a> which can be used in other contexts.</p>
+<h2 id="utiliser-le-validateur-json-de-visual-studio-code">Utiliser le
+validateur JSON de Visual Studio Code</h2>
+<p>Ceci est utile pour ajouter de nouvelles entrées au lexique. Ajouter
+ce qui suit au fichier de configuration <code>settings.json</code>. Ceci
+utilise le schéma JSON créé par le processus de validation
+précédent.</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="er">&quot;json.schemas&quot;:</span> <span class="ot">[</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">{</span><span class="dt">&quot;fileMatch&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;/Users/lapalme/Documents/GitHub/jsRealB/data/lexicon-en.json&quot;</span><span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>         <span class="dt">&quot;url&quot;</span><span class="fu">:</span> <span class="st">&quot;./data/lexicon-en.jsonrnc.json&quot;</span><span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>         <span class="fu">{</span><span class="dt">&quot;fileMatch&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;/Users/lapalme/Documents/GitHub/jsRealB/data/lexicon-fr.json&quot;</span><span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>         <span class="dt">&quot;url&quot;</span><span class="fu">:</span> <span class="st">&quot;./data/lexicon-fr.jsonrnc.json&quot;</span><span class="fu">}</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>   <span class="ot">]</span></span></code></pre></div>
+<p>Contact: <a href="mailto:lapalme@iro.umontreal.ca">Guy Lapalme</a> <a
+href="http://rali.iro.umontreal.ca">RALI</a>, Université de Montréal,
+2024.</p>

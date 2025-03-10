@@ -5,7 +5,7 @@ Les informations contenues dans les lexiques de *jsRealB* ont été converties �
 
 Les informations de déclinaison ou de conjugaison sont associées à des tables, définies dans les fichiers `rule-en.js` et `rule-fr.js`, qui couvrent la plupart des cas d'utilisation en anglais et en français.
 
-Nous donnons maintenant le schéma [json-rnc](https://github.com/lapalme/json-rnc « GitHub - rali-udem/json-rnc : JSON validation with a RELAX-NG compact syntax") utilisé pour valider les entrées du lexique français. la [structure du lexique anglais](./Lexicon-Format-en.md) est similaire, quoique certains champs diffèrent.
+Nous donnons maintenant le schéma [json-rnc](https://github.com/lapalme/json-rnc « GitHub - rali-udem/json-rnc : JSON validation with a RELAX-NG compact syntax") utilisé pour valider les entrées du lexique français. la [structure du lexique anglais](./Lexicon-Format-en.html) est similaire, quoique certains champs diffèrent.
 
 Un lexique est un objet JSON unique dont les clés sont le lemme et la valeur est elle-même un autre objet de type `lexInfo` avec des informations sur les parties du discours autorisées pour ce lemme ; au moins un objet de partie du discours doit être défini.  L'objet associé à chaque partie du discours énumère les valeurs autorisées pour les différents champs donnant des informations sur la déclinaison ou la conjugaison.
 
@@ -85,7 +85,7 @@ Il est aussi possible d'utiiser [jq](https://jqlang.github.io/jq/ "jq") pour int
 .../ValidateJsonRnc.py --slurp lexicon-fr.jsonrnc lexicon-fr.json
 ```
 
-This also creates a standard [JSON Schema](https://json-schema.org) which can be used in other contexts.
+This also creates a standard [JSON Schema](https://json-schema.org) which can be used in other contexts.
 
 ## Utiliser le validateur JSON de Visual Studio Code
 

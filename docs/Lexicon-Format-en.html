@@ -1,0 +1,117 @@
+<h1 id="format-of-a-jsrealb-lexicon">Format of a <em>jsRealB</em>
+lexicon</h1>
+<p>The information in the lexicons of <em>jsRealB</em> was originally
+converted from an internal Lisp inspired format developed at RALI many
+years ago. The JSON lexicons were originally created using a Python
+script and then manually <em>patched</em> and updated over the years
+with a few fields as new information became available.</p>
+<p>The declension or conjugation information is associated with tables,
+defined in the files <code>rule-en.js</code> and
+<code>rule-fr.js</code>, that cover most English and French use
+cases.</p>
+<p>We now give the <a href="https://github.com/lapalme/json-rnc"
+title="GitHub - rali-udem/json-rnc: JSON validation with a RELAX-NG compact syntax">json-rnc</a>
+schema used to validate the entries of the English lexicon. The <a
+href="./Lexicon-Format-fr.html">schema for the French lexicon</a>
+differs slightly in some field names and values, but its overall shape
+is similar.</p>
+<p>A lexicon is a single JSON object whose keys are the lemma and the
+value is itself another object of type <code>lexInfo</code> with
+information about allowed parts of speech for this lemma; at least one
+part of speech object must be defined. The object associated with each
+part of speech list allowed values for different fields giving
+declension or conjugation information.</p>
+<h1 id="schema-datalexicon-en.jsonrnc">Schema
+(<code>data/lexicon-en.jsonrnc</code>)</h1>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="er">start</span> <span class="er">=</span> <span class="fu">{</span><span class="er">*</span><span class="fu">:</span><span class="er">lexInfo</span><span class="fu">}</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="er">lexInfo=</span><span class="fu">{</span><span class="er">N?</span><span class="fu">:</span>  <span class="fu">{</span><span class="er">tab</span><span class="fu">:</span><span class="er">/n(I|\d</span><span class="fu">{</span><span class="er">1</span><span class="fu">,</span><span class="er">3</span><span class="fu">}</span><span class="er">a?)/</span><span class="fu">,</span> <span class="er">g?</span><span class="fu">:</span><span class="er">gender</span><span class="fu">,</span> <span class="er">hAn?</span><span class="fu">:</span><span class="er">one</span><span class="fu">,</span> <span class="er">cnt</span><span class="fu">:</span><span class="er">/yes|no|both/</span><span class="fu">,</span><span class="er">ldv?</span><span class="fu">:</span><span class="er">boolean</span> <span class="fu">},</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>         <span class="er">A?</span><span class="fu">:</span>  <span class="fu">{</span><span class="er">tab</span><span class="fu">:</span><span class="er">/</span><span class="ot">[</span><span class="er">a</span><span class="ot">]</span><span class="er">(I|\d</span><span class="fu">{</span><span class="er">1</span><span class="fu">,</span><span class="er">2</span><span class="fu">}</span><span class="er">)/</span><span class="fu">,</span> <span class="er">hAn?</span><span class="fu">:</span><span class="er">one</span><span class="fu">,</span> <span class="er">ldv?</span><span class="fu">:</span><span class="er">boolean</span><span class="fu">},</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>         <span class="er">Pro?</span><span class="fu">:{</span><span class="er">tab</span><span class="fu">:</span><span class="er">/pn\d</span><span class="fu">{</span><span class="er">1</span><span class="fu">,</span><span class="er">2</span><span class="fu">}</span><span class="er">(-\d</span><span class="ot">[</span><span class="er">sp</span><span class="ot">]</span><span class="er">?</span><span class="ot">[</span><span class="er">mfn</span><span class="ot">]</span><span class="er">?)?|d</span><span class="ot">[</span><span class="dv">35</span><span class="ot">]</span><span class="er">/</span><span class="fu">,</span><span class="er">ldv?</span><span class="fu">:</span><span class="er">boolean</span><span class="fu">},</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>         <span class="er">V?</span><span class="fu">:</span>  <span class="fu">{</span><span class="er">tab</span><span class="fu">:</span><span class="er">/v\d</span><span class="fu">{</span><span class="er">1</span><span class="fu">,</span><span class="er">3</span><span class="fu">}</span><span class="er">/</span><span class="fu">,</span><span class="er">ldv?</span><span class="fu">:</span><span class="er">boolean</span><span class="fu">},</span> </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>         <span class="er">D?</span><span class="fu">:</span>  <span class="fu">{</span><span class="er">tab</span><span class="fu">:</span><span class="er">/d\d</span><span class="fu">{</span><span class="er">1</span><span class="fu">,</span><span class="er">2</span><span class="fu">}</span><span class="er">/</span><span class="fu">,</span> <span class="er">n?</span><span class="fu">:</span><span class="er">num</span><span class="fu">,</span> <span class="er">value?</span><span class="fu">:</span><span class="er">number</span><span class="fu">,</span><span class="er">ldv?</span><span class="fu">:</span><span class="er">boolean</span><span class="fu">},</span>  </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>         <span class="er">Adv?</span><span class="fu">:{</span><span class="er">tab</span><span class="fu">:</span><span class="er">/b\d/</span><span class="fu">,</span><span class="er">ldv?</span><span class="fu">:</span><span class="er">boolean</span><span class="fu">},</span> </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>         <span class="er">P?</span><span class="fu">:</span>  <span class="fu">{</span><span class="er">tab</span><span class="fu">:</span><span class="er">/ppe?/</span><span class="fu">,</span><span class="er">ldv?</span><span class="fu">:</span><span class="er">boolean</span><span class="fu">},</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>         <span class="er">C?</span><span class="fu">:</span>  <span class="fu">{</span><span class="er">tab</span><span class="fu">:</span><span class="er">/cs|cc/</span><span class="fu">,</span><span class="er">ldv?</span><span class="fu">:</span><span class="er">boolean</span><span class="fu">},</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>         <span class="er">Q?</span><span class="fu">:</span>  <span class="fu">{</span><span class="er">tab</span><span class="fu">:</span><span class="er">/av/</span><span class="fu">},</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>         <span class="er">Pc?</span><span class="fu">:</span> <span class="fu">{</span><span class="er">tab</span><span class="fu">:</span><span class="ot">[</span><span class="er">/pc</span><span class="ot">[</span><span class="dv">145678</span><span class="ot">]</span><span class="er">/</span><span class="ot">]</span><span class="fu">,</span> <span class="er">compl?</span><span class="fu">:</span><span class="er">string</span><span class="fu">},</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>         <span class="er">ldv?</span><span class="fu">:</span><span class="er">boolean</span><span class="fu">,</span> </span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>         <span class="er">value?</span><span class="fu">:</span><span class="er">number</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span><span class="er">@(minProperties=1)</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="er">one</span>       <span class="er">=</span> <span class="er">number@(minimum=1,</span> <span class="er">maximum=1)</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="er">oneTwoThree</span>  <span class="er">=</span> <span class="er">number@(minimum=1,</span> <span class="er">maximum=3)</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="er">gender</span> <span class="er">=</span> <span class="er">/m|f|x/</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="er">num</span> <span class="er">=</span> <span class="er">/s|p/</span></span></code></pre></div>
+<ul>
+<li>The <code>string</code> associated with the <code>tab</code> key
+must be a declension or conjugation table number in
+<code>rule-en.js</code></li>
+<li>Gender (<code>g</code>) and number (<code>n</code>) can only take a
+limited set of values;</li>
+<li>For determiner and adjective, <code>value</code> is the numerical
+value associated either with a cardinal or an ordinal number
+respectively;</li>
+<li>When <code>hAn</code> is 1 for a noun or adjective, this word
+changes a preceding <em>a</em> to <em>an</em>;</li>
+<li>For noun, <code>cnt</code> indicates if a noun is countable:
+<code>yes</code>, <code>no</code> or <code>both</code>.</li>
+<li>In the case of <code>punct</code>, <code>compl</code> is the
+complementary punctuation sign, e.g. matching closing parenthesis or
+bracket.</li>
+<li>An indication of a <em>common</em> word in a lexicon either at a the
+level of an entry or for a given part-of-speech. The <code>ldv</code>
+attribute is set to <code>true</code> if the entry appears in the <a
+href="http://www2.cmp.uea.ac.uk/~jrk/conlang.dir/LongmanVocab.html"><em>Longman
+American Defining Vocabulary</em>.</a></li>
+</ul>
+<h1 id="query-lexicons-using-jq">Query lexicons using
+<code>jq</code></h1>
+<p>To query information from these lexicons, the easiest way is through
+the <a href="../IDE/">IDE</a> or the <a
+href="../demos/Evaluation/index.html">evaluation demo</a>.</p>
+<p>But it is also possible to use <a href="https://jqlang.github.io/jq/"
+title="jq">jq</a> to query these json lexicons. Here are a few examples
+of queries:</p>
+<ul>
+<li>Search a specific entry: here <code>love</code></li>
+</ul>
+<p><code>jq 'to_entries[]|select(.key=="love")' lexicon-en.json</code></p>
+<ul>
+<li>Search entries matching are regular expression: here entries
+starting with <code>love</code>, <code>-c</code> for a more compact
+output</li>
+</ul>
+<p><code>jq -c 'to_entries[]|select(.key|test("^love.*"))' lexicon-en.json</code></p>
+<ul>
+<li>Search for a combination of properties: entries ending with
+<code>er</code> that can be used either as a noun, a verb or an
+adjective, but show only the entry; <code>-r</code> to show the entries
+without surrounding quotes</li>
+</ul>
+<p><code>jq -r 'to_entries[]|select((.key|test("er$")) and (.value|has("N")) and (.value|has("V")) and (.value|has("A")))|.key' lexicon-en.json</code></p>
+<h1 id="validation">Validation</h1>
+<h2 id="using-the-jsonrnc-validator">Using the <a
+href="https://github.com/lapalme/json-rnc?tab=readme-ov-file#5-using-the-validator"><code>jsonrnc</code>
+validator</a></h2>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode swift"><code class="sourceCode swift"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">.../</span>ValidateJsonRnc<span class="op">.</span>py <span class="op">--</span>slurp lexicon<span class="op">-</span>en<span class="op">.</span>jsonrnc lexicon<span class="op">-</span>en<span class="op">.</span>json</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="op">.../</span>ValidateJsonRnc<span class="op">.</span>py <span class="op">--</span>slurp lexicon<span class="op">-</span>fr<span class="op">.</span>jsonrnc lexicon<span class="op">-</span>fr<span class="op">.</span>json</span></code></pre></div>
+<p>This also creates a standard <a href="https://json-schema.org">JSON
+Schema</a> which can be used in other contexts.</p>
+<h2 id="use-the-json-validator-in-visual-studio-code">Use the JSON
+validator in Visual Studio Code</h2>
+<p>This is useful for adding new lexicon entries . Add the following to
+the <code>settings.json</code> configuration file. This uses the JSON
+Schema created by the previous validation process.</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="er">&quot;json.schemas&quot;:</span> <span class="ot">[</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">{</span><span class="dt">&quot;fileMatch&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;/Users/lapalme/Documents/GitHub/jsRealB/data/lexicon-en.json&quot;</span><span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>         <span class="dt">&quot;url&quot;</span><span class="fu">:</span> <span class="st">&quot;./data/lexicon-en.jsonrnc.json&quot;</span><span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>         <span class="fu">{</span><span class="dt">&quot;fileMatch&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;/Users/lapalme/Documents/GitHub/jsRealB/data/lexicon-fr.json&quot;</span><span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>         <span class="dt">&quot;url&quot;</span><span class="fu">:</span> <span class="st">&quot;./data/lexicon-fr.jsonrnc.json&quot;</span><span class="fu">}</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>   <span class="ot">]</span></span></code></pre></div>
+<p>Contact: <a href="mailto:lapalme@iro.umontreal.ca">Guy Lapalme</a> <a
+href="http://rali.iro.umontreal.ca">RALI</a>, Université de Montréal,
+2024.</p>

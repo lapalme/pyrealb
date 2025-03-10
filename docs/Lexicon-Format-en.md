@@ -1,11 +1,11 @@
 Format of a *jsRealB* lexicon
 ===========================
 
-The information in the lexicons of *jsRealB* was originally converted from an internal Lisp inspired format developed at RALI many years ago. The JSON lexicons were originally created using a Python script and then manually _patched_  and updated over the years with a few fields as new information became available.
+The information in the lexicons of *jsRealB* was originally converted from an internal Lisp inspired format developed at RALI many years ago. The JSON lexicons were originally created using a Python script and then manually _patched_  and updated over the years with a few fields as new information became available.
 
 The declension or conjugation information is associated with tables, defined in the files `rule-en.js` and `rule-fr.js`, that cover most English and French use cases.
 
-We now give the [json-rnc](https://github.com/lapalme/json-rnc "GitHub - rali-udem/json-rnc: JSON validation with a RELAX-NG compact syntax")  schema used to validate the entries of the English lexicon. The [schema for the French lexicon](./Lexicon-Format-fr.md) differs slightly in some field names and values, but its overall shape is similar.
+We now give the [json-rnc](https://github.com/lapalme/json-rnc "GitHub - rali-udem/json-rnc: JSON validation with a RELAX-NG compact syntax")  schema used to validate the entries of the English lexicon. The [schema for the French lexicon](./Lexicon-Format-fr.html) differs slightly in some field names and values, but its overall shape is similar.
 
 A lexicon is a single JSON object whose keys are the lemma and the value is itself another object of type `lexInfo` with information about allowed parts of speech for this lemma; at least one part of speech object must be defined.  The object associated with each part of speech list allowed values for different fields giving declension or conjugation information.
 
@@ -71,7 +71,7 @@ But it is also possible to use [jq](https://jqlang.github.io/jq/ "jq") to query 
 .../ValidateJsonRnc.py --slurp lexicon-fr.jsonrnc lexicon-fr.json
 ```
 
-This also creates a standard [JSON Schema](https://json-schema.org) which can be used in other contexts.
+This also creates a standard [JSON Schema](https://json-schema.org) which can be used in other contexts.
 
 ## Use the JSON validator in Visual Studio Code
 

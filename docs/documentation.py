@@ -188,7 +188,7 @@ page.init(title="pyrealb - Documentation",
                     "date":str(datetime.datetime.now())},
           script=["https://code.jquery.com/jquery-latest.min.js","user.js"],
           footer=f"""Contact: <a href="mailto:lapalme@iro.umontreal.ca">Guy Lapalme</a> 
-<a href="http://rali.iro.umontreal.ca">RALI</a>, Université de Montréal, CANADA. 2023.<br/><hr/>
+<a href="http://rali.iro.umontreal.ca">RALI</a>, Université de Montréal, CANADA. 2025.<br/><hr/>
 {datetime.datetime.now().strftime("%Y-%m-%d  %H:%M:%S")}
 """
           )
@@ -310,7 +310,7 @@ page.div("""
 h2_fr("Déclinaisons et conjugaisons","optionsFr");h2_en("Declension and conjugation", "optionsEn")
 addTable(optionsSect)
 page.p("""Perfect and  continuous tenses for verbs can obtained by setting the 
-<a href="#sentType">sentence type</a> to <code>.typ({perf:true})</code> or <code>.typ({prog:true})</code> 
+<a href="#typeChange">sentence type</a> to <code>.typ({perf:true})</code> or <code>.typ({prog:true})</code> 
 """,lang="en")
 
 h2_fr("Pronoms");h2_en("Pronouns")
@@ -544,17 +544,19 @@ page.p("""
 This function returns the current realization language: <code>"fr"</code> for French and <code>"en"</code> 
 for English.""",lang="en")
 
-page.h3("<code>loadEn(trace), loadFr(trace)</code>")
+page.h3("<code>loadEn(trace), loadFr(trace), load(lang,trace)</code>")
 page.p("""
-Ces fonctions indiquent la langue à utiliser pour les prochaines réalisations. Il est important d'en 
-appeler au moins une avant de débuter la réalisation d'une phrase. Si le paramètre est <code>True</code> 
-(<code>False</code> par défaut), 
-un message apparaîtra sur la console à la fin du chargement du lexique et de règles du langage.
+Ces fonctions indiquent la langue à utiliser pour les prochaines réalisations. Il est important d'en appeler au mo«ins
+ une avant de débuter la réalisation d'une phrase; <code>lang</code> doit être <code>"en"</code> ou <code>"fr"</code>. 
+ Si le paramètre <code>trace</code> est <code>true</code>, (il est <code>false</code> par défaut) un message apparaîtra 
+ sur la console à la fin du chargement du lexique et de règles du langage.
 """,lang="fr")
 page.p("""
-These functions sets the current realization language; one of them should be called before starting 
-the realization process. If the parameter is set to <code>True</code> (<code>False</code> by default),
-a message is written on the console after the loading of the lexicon and language tables.""",lang="en")
+These functions sets the current realization language; one of them should be called before starting the realization 
+process;  <code>lang</code> must be <code>"en"</code> or <code>"fr"</code>. If the parameter <code>trace</code> 
+is <code>true</code>, (it is <code>false</code> by default), a message is written on the console after the loading 
+of the lexicon and language rules.
+""",lang="en")
 
 page.h3("<i>Copie</i> d'une expression",lang="fr")
 page.h3("Expression <i>copying</i>",lang="en")
@@ -576,6 +578,16 @@ for example once the appropriate language has been loaded. It is also possible t
 """,lang="en")
 addTable(functionUse)
 
+page.p("""
+<b><a href="./Hacking-pyrealb.html">Ce document (en anglais)</a> donne plus de détails sur la modification dynamique de 
+constituents en pyrealb.</b>
+""",lang="fr")
+
+page.p("""
+<b><a href="./Hacking-pyrealb.html">This document</a> gives more details on the dynamic constituent structure modification 
+ with pyrealb.</b>
+""",lang="en")
+
 #### *** Gestion des lexiques *** 
 h2_fr("Gestion des lexiques");h2_en("Lexicon Management")
 page.p("""
@@ -583,14 +595,16 @@ page.p("""
 intègre déjà deux lexiques assez détaillés: français (plus de 52 500 entrées) et anglais (plus de 34 200 entrées) 
 qu'il est possible de consulter et de modifier à l'aide des fonctions suivantes. Lorsque <code>lang</code> (<code>"en"</code> 
 ou <code>"fr"</code>) est spécifié, la fonction s'applique au lexique de cette langue, sinon au lexique courant, 
-celui du dernier appel à <code>loadEn()</code> ou <code>loadFr()</code>.
+celui du dernier appel à <code>loadEn()</code>, <code>loadFr()</code> ou <code>load()</code>.<br>
+<a href="Lexicon-Format-fr.html">Plus d'information sur le format du lexique français.</a>
 """,lang="fr")
 page.p("""
 <span class="jsr">pyrealb</span> 
 provides already two comprehensive lexicons: French (more than 52 500 entries) and English (more than 34 200 entries) 
 that can be queried and modified with the following functions. When <code>lang</code> (<code>"en"</code> or 
 <code>"fr"</code>) is specified, the function is applied to the lexicon of this language, otherwise it applies to 
-the current lexicon, the one of the last call to <code>loadEn()</code> or <code>loadFr()</code>.
+the current lexicon, the one of the last call to <code>loadEn()</code>, <code>loadFr()</code> or <code>load()</code>.<br>
+<a href="Lexicon-Format-en.html">More information about the English lexicon format.</a>
 """,lang="en")
 
 page.h3("<code>addToLexicon(lemma[,newInfos][,lang])</code>")
@@ -609,7 +623,6 @@ L'exemple précédent peut donc s'écrire: <code>addToLexicon({"pyrealb":{"N":{"
 <li>Si le lemme et la catégorie existent déjà dans le lexique, alors l'entrée pour cette catégorie est remplacée 
 par <code>newInfos</code>. </li>
 <li>Cette fonction retourne la nouvelle entrée modifié pour <code>lemma</code>.</li>
-<li><a href="Lexicon-Format-fr.md">Plus d'information sur le format des lexiques</a></li>
 <li>Pour déterminer les informations à ajouter, le plus simple est de copier les informations d'un mot du 
 lexique qui se conjugue ou se décline de la même façon. L'<i>IDE</i> de <span class="jsr">pyrealb</span> 
 permet de consulter les informations du lexique.</li>
@@ -629,7 +642,6 @@ written: <code>addToLexicon({"pyrealb":{"N":{"g":"m", "pe":3, "tab":"nI"})</code
 <li>If the lemma and category are already present in the lexicon, then the category of this entry is 
 replaced by <code>newInfos</code>.</li>
 <li>This function returns the modified lexicon entry for <code>lemma</code>.</li>
-<li><a href="Lexicon-Format-en.md">More information about the lexicon format</a></li>
 <li>In order to find the informations to add, the simplest way is to copy the lexicon information 
 for a similar word already in the lexicon. 
 The <i>IDE</i> provides access to the lexicon information.
@@ -745,15 +757,16 @@ it by the value of the called function.
 h2_fr("Traitement en JSON");h2_en("JSON processing")
 page.p("""
 Pour faciliter l'utilisation de <span class="jsr">pyrealb</span> en sortie d'un système externe. 
-Il est possible d'utiliser un format d'entrée JSON <a href="../data/jsRealB-jsonInput.html">
+Il est possible d'utiliser un format d'entrée JSON <a href="http://rali.iro.umontreal.ca/JSrealB/current/documentation/jsRealB-jsonInput.html">
 décrit dans ce document (en anglais)</a> où sont décrites deux API permettant 
-d'appeler un serveur <i>node.js</i> <code>jsRealB</code> <a href="jsRealBfromPython.html">depuis un autre programme Python</a> ou Prolog. 
-Il est également possible d"obtenir une expression JSON correspondant à une expression <span class="jsr">pyrealb</span>.""",
+d'appeler un serveur <i>node.js</i> <code>jsRealB</code> <a href="http://rali.iro.umontreal.ca/JSrealB/current/documentation/jsRealBfromPython.html">depuis un autre programme Python</a> ou Prolog. 
+Il est également possible d"obtenir une expression JSON correspondant à une expression <span class="jsr">pyrealb</span>.
+""",
 lang="fr")
 page.p("""
 To simplify the use of <span class="jsr">pyrealb</span> as output of an external system, a JSON input format has been defined. 
-<a href="../data/jsRealB-jsonInput.html">It is described in this document.</a> in which two APIs are described 
-for calling a <span class="jsr">pyrealb</span> <i>node.js</i> server <a href="jsRealBfromPython.html">from another Python</a> or Prolog. 
+<a href="http://rali.iro.umontreal.ca/JSrealB/current/documentation/jsRealB-jsonInput.html">It is described in this document.</a> in which two APIs are described 
+for calling a <span class="jsr">pyrealb</span> <i>node.js</i> server <a href="http://rali.iro.umontreal.ca/JSrealB/current/documentation/jsRealBfromPython.html">from another Python</a> or Prolog. 
 It is also possible to obtain the JSON expression corresponding to a given <span class="jsr">pyrealb</span> expression.""",
 lang="en")
 
@@ -820,11 +833,11 @@ errors and awkwardnesses that were corrected in the original.
 ### *** Informations complémentaires ***
 h2_fr("Informations complémentaires","plusDinfo");h2_en("More information","moreInfo")
 page.ul("""
-<li><a href="https://arxiv.org/pdf/2311.14808.pdf" lang="fr">Utilisation de pyrealb pour la génération bilingue 
-(document en anglais)</a><a href="https://arxiv.org/pdf/2311.14808.pdf" lang="en">Use of pyrealb Data-to-Text Bilingual
+<li><a href="https://arxiv.org/pdf/2311.14808" lang="fr">Utilisation de pyrealb pour la génération bilingue 
+(document en anglais)</a><a href="https://arxiv.org/pdf/2311.14808" lang="en">Use of pyrealb Data-to-Text Bilingual
  Generation</a></li>
-<li><a href="https://arxiv.org/pdf/2012.15425.pdf" lang="fr">Document décrivant l'organisation de <code>jsRealB</code>
-(section 6.7 spécifique à <span class='jsr'>pyrealb</span>)</a><a href="https://arxiv.org/pdf/2012.15425.pdf" lang="en"
+<li><a href="https://arxiv.org/pdf/2012.15425" lang="fr">Document décrivant l'organisation de <code>jsRealB</code>
+(section 6.7 spécifique à <span class='jsr'>pyrealb</span>)</a><a href="https://arxiv.org/pdf/2012.15425" lang="en"
 >Document describing the organization of the <code>jsRealB</code> (section 6.7 deals with <span class='jsr'>pyrealb</span></a></li>
 <li><a href="http://rali.iro.umontreal.ca/rali/?q=fr/jsrealb-realisateur-bilingue-de-texte" lang="fr">Historique 
 des versions de <code>jsRealB</code> et démonstrations</a><a 
@@ -840,8 +853,8 @@ title="Expérience avec pyrealb" lang="fr">Notebook Jupyter</a>
 pyrealb" lang="en">Jupyter Notebook</a></li>
 <li><a href="https://github.com/lapalme/pyrealb" lang="fr">Dépot GitHub pyrealb</a>
 <a href="https://github.com/lapalme/pyrealb" lang="en">pyreealb GitHub repository</a></li>
-<li><a href="Lexicon-Format-fr.md" lang="fr">Format des entrées du lexique</a>
-<a href="Lexicon-Format-en.md" lang="en">Format of the lexicon entries</a></li>
+<li><a href="Lexicon-Format-fr.html" lang="fr">Format des entrées du lexique</a>
+<a href="Lexicon-Format-en.html" lang="en">Format of the lexicon entries</a></li>
 <li>Publications:
     <ul>
         <li><a href="https://aclanthology.org/W15-4719/">Demo paper at ENLG-2015</a></li>
