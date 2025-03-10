@@ -11,7 +11,7 @@ It facilitates its integration within Python applications by simply adding
 [Online documentation](http://www.iro.umontreal.ca/~lapalme/pyrealb/documentation.html?lang=en)
 
 Version 3.0.0 was a major code reorganization, but without any new feature, to clearly separate language dependent 
-parts from the language independent ones. This organization is described  [here](docs/README.md) .
+parts from the language independent ones. This organization is described  [here](http://www.iro.umontreal.ca/~lapalme/pyrealb/Realizer-Architecture.html) .
 
 The use of pyrealb for [Bilingual Data-to-text generation is described in this document](https://arxiv.org/pdf/2311.14808.pdf).
 
@@ -56,6 +56,7 @@ The use of pyrealb for [Bilingual Data-to-text generation is described in this d
     * `ConstituentEn.py`, `ConstituentFr.py` : English and French specific processing of `Constituent`
     * `Dependent.py` : subclass of *Constituent* for creating complex phrases using dependencies
     * `DependentEn.py`, `DependentFr.py` : English and French specific processing of `Dependent`
+    * `lemmatize.py` : function for building the lemmata maps
     * `Lexicon.py`: class to access lexicon entries and syntactic rules
     * `LICENSE.txt`: Apache 2.0 License
     * `NonTerminalEn.py`, `NonTerminalFr.py` : language dependent processing common to `Phrase` and `Dependent`
@@ -71,33 +72,44 @@ The use of pyrealb for [Bilingual Data-to-text generation is described in this d
     * `rule-en.js` : English conjugation and declension tables
     * `lexicon-fr.json` : French lexicon (52,547 entries) in json format
     * `rule-fr.js` : French conjugation and declension tables 
+    * `lexicon-en.jsonrnc, lexicon-fr.jsonrnc` : json-rnc schemas for the lexicons 
+    * `lexicon-en.jsonrnc.json, lexicon-fr.jsonrnc.json` : standard JSON schemas corresponding to the json-rnc schemas for the lexicons; these files are created by the validation process.
 
-_Nota bene_:
-1. In the following directories, the `__init__.py` file is used to set the appropriate search path for  *pyrealb* functions; this ensures that the current Python source files are used for execution. 
-2. Some directories include `markup.py` which should be loaded using `pip`. Unfortunately I never managed to make 
-   this "piped" version work, it does not import the name `oneliner`although it should. It works only if the file is in the local directory.
+**_Nota bene_:**
 
-* [`docs`](./docs): in both English and French. 
-    * `documentation.html` : generated documentation (used for consultation) **DO NOT EDIT directly**  [Online version](http://www.iro.umontreal.ca/~lapalme/pyrealb/documentation.html?lang=en)
-    * `documentation.py`: Python program for generating `documentation.html` using `markup.py`  
-          once this is run `documentation.html` should be copied at `http://www.iro.umontreal.ca/~lapalme/pyrealb/documentation.html` which is used for consultation 
-    * `style.css`: style sheet for the documentation
-    * `userinfos.py`: definitions of variables containing the examples
-    * `user.js`  : Python helper script.
+1. In the following directories, the `__init__.py` file is used to set the appropriate search path for  *pyrealb* functions; this ensures that the current Python source files are used for execution and testing. 
+2. Some directories include `markup.py` which should be loaded using `pip`. Unfortunately I never managed to make this "piped" version work, it does not import the name `oneliner`although it should. It works only if the file is in the local directory.
+
+* [`docs`](./docs): The html and image files should be copied at `http://www.iro.umontreal.ca/~lapalme/pyrealb/` which is used for convenient web access.
+    
+    * English and French documentation
+        * `documentation.html` : generated documentation **DO NOT EDIT directly**  [Online version](http://www.iro.umontreal.ca/~lapalme/pyrealb/documentation.html?lang=en)
+        * `documentation.py`: Python program for generating `documentation.html` using `markup.py`
+        * `style.css`: style sheet for the documentation
+        * `userinfos.py`: definitions of variables containing the examples
+        * `user.js`  : Python helper script.
+    
+    * Supplements to the documentation for specific aspects. Edit a *Markdown* (`.md)` file and use the `Makefile` for generating the *html* version.
+        * `Hacking-pyrealb.md` : tricks of the trade for dynamic constituent structure modification 
+        * `Lexicon-Format-en.md, Lexicon-Format-fr.md` : language specific detailed documentation about lexicon entries.
+        * `Realizer-Architecture.md` : description of the class organisation of the *jsRealB*/*pyrealb* ecosystem
+        * `Makefile` : 
+            *  `make all` : update the documentation after changing `documentation.py` or any *Markdown* file
+            * `make export` : list the files that should be present on the web consultation directory
     
 * [`IDE`](./IDE) : Integrated Development Environment 
-  
+
     * `ide.py`: built on the Python *read-eval-print loop*, it imports *pyrealb* to get the realization of an expression, to consult the lexicon, the conjugation and declension tables. It is also possible to get a *lemmatization*: i.e. the *pyrealb* expression corresponding to a form. 
     * `README.html`: documentation and examples
-    
+
     *Nota bene*: The [evaluation demo of *jsRealB*](http://rali.iro.umontreal.ca/JSrealB/current/demos/Evaluation/index.html) is more convenient than this IDE to develop *pyrealb* expressions as both programs share the same formalism. The *jsRealB* demo provides an editor and access to the lexicons and  rules.
-    
+
 * [Notebooks](./NoteBooks) : Jupyter notebooks (in English and French) with can be used as an executable introduction to *pyrealb*
-  
-* [`tests`](./tests) : unit tests of special features of *pyrealb* in both French and English. Files have the pattern `*_{en|fr}.py`
-  
-    * `test.py`: simplistic function to check if a function returns the expected answer and display appropriate message
-    * `testAll.html` : run this file to run all tests
+
+* [`tests`](./tests) : unit tests of special features of *pyrealb* in both French and English. They are designed to launched with `pytest`. Files have the pattern `test_*_{en|fr}.py`. 
+
+    * `README.md`: more details on the organisation and use of the test files
+    * `test_all.sh` : run this file in a terminal to run all test files of the directory
 
 # Demos
 
@@ -109,6 +121,7 @@ _Nota bene_:
 * `evenements/evenements.py` : Description (in French) of a list of events, it creates HTML.
 * `flight_infos/README.md` : development of a RASA NLG server giving information about flights, aircrafts, etc...
 * `gen_from_words.py` : generation of English and French sentences  from a plain list of words, adding some structure.
+* `gen_stanza_uds/*.py` : various programs used for generating sentences for *helping* the Stanza lemmatizing learn new inflected forms in French but also in English.
 * `gophypi/amr2text.py` : generate a literal reading of an AMR (Abstract Meaning Representation);
                           [paper describing the approach](gophypi/Doc/GoPhiPy.pdf) 
 * `inflection/inflection.py` : French or English conjugation and declension of a form.
@@ -122,7 +135,7 @@ _Nota bene_:
 
 # Licenses
 * _pyrealb_ source code is licensed under _Apache-2.0_ 
-* linguistic resources in the `./data` directory are licensed under _CC-BY-SA-4.0_
+* Linguistic resources in the `./data` directory are licensed under _CC-BY-SA-4.0_
 
 # Contact
 [Guy Lapalme](http://rali.iro.umontreal.ca/lapalme)
@@ -137,8 +150,7 @@ see [this tutorial](https://packaging.python.org/en/latest/tutorials/packaging-p
 
 These steps take for granted that the password for PyPI has already been given...
 
-1. Update version number in `setup.cfg` (it should be the same as `python_version` in `src/pyrealb/utils.py` and at 
-   the beginning of this document). 
+1. Update version number in `setup.cfg` (it should be the same as `python_version` in `src/pyrealb/utils.py` and at the beginning of this document). 
 2. Run `docs/documentation.py` to update the version number in `docs/documentation.html`
 3. Commit pyrealb on GitHub
 4. `cd` into the directory with the `pyproject.toml` file (the same as this `README.md`)

@@ -12,5 +12,5 @@ docs = Lexicon-Format-en.html Lexicon-Format-fr.html Realizer-Architecture.html 
 .PHONY: all export
 all : ${docs}
 export:
-	echo ${docs} user.js style.css classes-hierarchy.jpg pyrealb-classes.jpg
+	@echo ${docs} user.js style.css classes-hierarchy.jpg pyrealb-classes.jpg
 
