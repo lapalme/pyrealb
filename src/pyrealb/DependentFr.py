@@ -99,7 +99,6 @@ class DependentFr(ConstituentFr,NonTerminalFr,Dependent):
             pro.peng = mySelf.peng
         mySelf.terminal = pro
         mySelf.dependents = []
-        mySelf.dependentsSource = []
 
     def processTyp_verb(self, types):
         from .utils import V, Q

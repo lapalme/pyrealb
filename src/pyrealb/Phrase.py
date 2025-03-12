@@ -645,7 +645,7 @@ class Phrase(Constituent):
                 for i,e in enumerate(me.elements):
                     if i!=idx:
                         new_dep=e.toDependent("comp" if phName=="VP" else "mod")
-                        deprel.add(setPos(i,idx,new_dep),None,True)
+                        deprel.add(setPos(i,idx,new_dep))
                 deprel.props=me.props
             else :
                 return self.warn("user-warning",f"Phrase.toDependent:: {phName} without {termName}: {me.toSource()}")
@@ -661,7 +661,7 @@ class Phrase(Constituent):
                 deprel=dep([self.elements[idxC]],"coord")
                 for i,e in enumerate(self.elements):
                     if i!=idxC:
-                        deprel.add(e.toDependent(depName),None,True)
+                        deprel.add(e.toDependent(depName))
             else:
                 return self.warn("Phrase.toDependent:: CP without C:"+self.toSource())
         elif self.constType in ["S","SP"]:
@@ -676,7 +676,7 @@ class Phrase(Constituent):
                 if self.isFr(): # check for possible relative pronoun "que" in French that could be an object
                     iPro=self.getIndex(["Pro"])
                     if iPro>=0 and self.elements[iPro].lemma=="que":
-                        deprel.add(self.elements[iPro].toDependent("comp").pos("pre"),0,True)
+                        deprel.add(self.elements[iPro].toDependent("comp").pos("pre"))
                     else:
                         iPro = -1
             iSubj=self.getIndex(["NP","N","CP","Pro"])
@@ -684,7 +684,7 @@ class Phrase(Constituent):
             for i,e in enumerate(self.elements):
                 if i!=iVP and i!=iPro:
                     dep=e.toDependent("subj" if i==iSubj else "mod")
-                    deprel.add(setPos(i,iVP,dep),None,True)
+                    deprel.add(setPos(i,iVP,dep))
         else:
             return self.warn("user-warning",f"Phrase.toDependent:: {self.constType} not yet implemented")
         deprel.props |= self.props

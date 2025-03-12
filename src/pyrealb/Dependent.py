@@ -26,19 +26,17 @@ class Dependent(Constituent):
         params = _getElems(params)  # flatten dependents and ignore None dependents
         # list of dependents to create the source of the parameters at the time of the call
         # self can be different from the dependents lists because of structure modifications
-        self.dependentsSource = []
         self.dependents = []
         # add all dependents except the last to the list of dependents
         for i in range(0, len(params) - 1):
             d = params[i]
             if isinstance(d, Dependent):
                 self.addDependent(d)
-                self.dependentsSource.append(d)
             else:
                 self.warn("bad Dependent", NO(i + 2).dOpt({"ord":True}), type(d).__name__+":"+str(d))
         if len(params) > 0:
             # terminate the list with add which does other checks on the final list
-            self.add(params[-1], None, True)
+            self.add(params[-1])
 
     def addDependent(self,dependent,position=None):
         from .utils import NO
@@ -88,30 +86,15 @@ class Dependent(Constituent):
     def constituents(self):
         return self.dependents
 
-    def add(self,dependent,position=None,prog=None):
+    def add(self,dependent,position=None):
         if not isinstance(dependent,Dependent):
             return self.warn("bad Dependent",self.word_last(),type(dependent).__name__)
-        if prog is None : # real call .add
-            self.optSource+=f'.add({dependent.toSource()}{"" if position is None else (","+str(position))})'
-        elif position is None:
-            self.dependentsSource.append(dependent)
-        elif isinstance(position, int) and 0 <= position <= len(self.dependentsSource):
-            self.dependentsSource.insert(position, dependent)
         self.addDependent(dependent,position)
         self.linkProperties()
         return self
 
     def remove(self,position):
-        import re
-        elem = self.removeDependent(position)
-        if elem is not self: # removeDependent did not raise a warning
-            src = elem.toSource().replace("(","\\(").replace(")","\\)")
-            srcRE = r"\.add\("+src+r"(,\d+)?\)"
-            if re.search(srcRE, self.optSource) is not None:
-                self.optSource=re.sub(srcRE,"",self.optSource,1)
-            else:
-                self.dependentsSource.remove(position)
-        return self
+        return self.removeDependent(position)
 
     def me(self):
         args=[self.terminal]
@@ -516,7 +499,7 @@ class Dependent(Constituent):
     def toSource(self, indent=-1):
         newIndent,sep = self.indentSep(indent)
         # create source of children
-        deps=[e.toSource(newIndent) for e in [self.terminal]+self.dependentsSource]
+        deps=[e.toSource(newIndent) for e in [self.terminal]+self.dependents]
         return f'{self.constType}({sep.join(deps)})' + super().toSource()
 
     def toDebug(self,indent=1):

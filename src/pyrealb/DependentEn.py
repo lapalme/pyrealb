@@ -38,7 +38,6 @@ class DependentEn(ConstituentEn,NonTerminalEn,Dependent):
         pro.parentConst = self
         self.terminal = pro
         self.dependents = []
-        self.dependentsSource = []
 
     def processTyp_verb(self, types):
         # replace current verb with the list new words

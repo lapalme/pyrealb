@@ -138,7 +138,7 @@ Before the final realization, an expression can be modified by adding or removin
 
 To account for this possibility, `pyrealb` allows adding a new `Constituent` to an existing `Phrase` or a new `Dependent` to another `Dependent` at a given position within its children.  It is also possible to remove a `Constituent`, although this is most often used internally during the realization process. 
 
-- `.add(constituent,position=None,prog=None)`:  has two interpretations according to the context:
+- `.add(constituent,position=None)`:  has two interpretations according to the context:
   
   - insert either a `Phrase` or a `Terminal` to the current `Phrase` at a certain position given by a non-negative 
     index when specified, at the end otherwise;
@@ -153,29 +153,9 @@ To account for this possibility, `pyrealb` allows adding a new `Constituent` to 
          ).add(Adv("now").a(","),0)
   ```
   
-  `s1.realize()` returns *Now, he eats red apples.* The adjective *red* is added at the end of the *NP* but, because adjectives in English are placed before the noun, it is realized before the noun. The adverb *now* followed by comma is inserted at the start of the sentence because the position is set to 0.
+  `s1.realize()` returns *Now, he eats red apples.* The adjective *red* is added at the end of the *NP* but, because adjectives in English are placed before the noun, it is realized before the noun. The adverb *now* followed by comma is inserted at the start of the sentence because the position is set to 0. 
   
-  This dynamic feature explains why most realization decisions are taken at the very last moment (i.e., when `.realize()` is called) and not while the structure is being built.
-  
-  The last parameter of `.add` indicates how the `.toSource()` will display the expression. When not specified, it keeps track of the calls to the `add` method. The following is the result of `s1.toSource()` which even reproduces the calls to `.add`:
-  
-  ```python
-  S(Pro("him").c("nom"),
-    VP(V("eat"),
-       NP(D("a"),
-          N("apple").n("p")).add(A("red")))).add(Adv("now").a(','),0)
-  ```
-  
-  Now given the following variation on the previous example, in which the last parameter to the `.add` function is set to `True`.
-  
-  ```python
-  s2 = S(Pro("him").c("nom"),
-         VP(V("eat"),
-            NP(D("a"),N("apple").n("p")).add(A("red"),None,True))
-         ).add(Adv("now").a(","),0,True)
-  ```
-  
-  Here is the result of the `s2.toSource()` call, which corresponds to the final structure. 
+  This can be seen by  the result of the `s1.toSource()` call, which corresponds to the modified structure. 
   
   
   ```python
@@ -187,15 +167,15 @@ To account for this possibility, `pyrealb` allows adding a new `Constituent` to 
           A("red"))))
   ```
   
-  *Notes*: Internally, `.add(...,None,True)` is used by `pyrealb`  to build incrementally the original expressions. 
+  This dynamic feature explains why most realization decisions are taken at the very last moment (i.e., when `.realize()` is called) and not while the structure is being built.
   
-  `.toDebug()` does not keep track of the calls to `.add()` and displays the current state of the internal structure.
+  *Notes*: Internally, `.add(...,None)` is used by `pyrealb`  to build incrementally the original expressions. 
   
 - `.remove(position)`: delete the `Constituent` at a given position within a `Phrase` or a `Dependent`
 
 ## An alternative to structure modifications
 
-Given the fact  that `pyrealb` expressions are Python objects,  they can be put in a list (or a tuple) and manipulated by standard Python functions. The list can then be used as a parameter for `pyrealb` creation functions which *flatten* their list or tuple arguments before building the structure.  Here is an example of incrementally building the `pyrealb` expression `s3` equivalent to our running example.
+Given the fact  that `pyrealb` expressions are Python objects,  they can be inserted in a list (or a tuple) and manipulated by standard Python functions. The list can then be used as a parameter for `pyrealb` creation functions which *flatten* their list or tuple arguments before building the structure.  Here is an example of incrementally building the `pyrealb` expression `s3` equivalent to our running example.
 
 ```python
 n = [D("a"),N("apple").n("p")]

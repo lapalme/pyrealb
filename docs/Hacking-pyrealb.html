@@ -225,7 +225,7 @@ position within its children. It is also possible to remove a
 <code>Constituent</code>, although this is most often used internally
 during the realization process.</p>
 <ul>
-<li><p><code>.add(constituent,position=None,prog=None)</code>: has two
+<li><p><code>.add(constituent,position=None)</code>: has two
 interpretations according to the context:</p>
 <ul>
 <li>insert either a <code>Phrase</code> or a <code>Terminal</code> to
@@ -246,42 +246,21 @@ The adjective <em>red</em> is added at the end of the <em>NP</em> but,
 because adjectives in English are placed before the noun, it is realized
 before the noun. The adverb <em>now</em> followed by comma is inserted
 at the start of the sentence because the position is set to 0.</p>
+<p>This can be seen by the result of the <code>s1.toSource()</code>
+call, which corresponds to the modified structure.</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>S(Adv(<span class="st">&quot;now&quot;</span>).a(<span class="st">&#39;,&#39;</span>),</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  Pro(<span class="st">&quot;him&quot;</span>).c(<span class="st">&quot;nom&quot;</span>),</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  VP(V(<span class="st">&quot;eat&quot;</span>),</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>     NP(D(<span class="st">&quot;a&quot;</span>),</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>        N(<span class="st">&quot;apple&quot;</span>).n(<span class="st">&quot;p&quot;</span>),</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>        A(<span class="st">&quot;red&quot;</span>))))</span></code></pre></div>
 <p>This dynamic feature explains why most realization decisions are
 taken at the very last moment (i.e., when <code>.realize()</code> is
 called) and not while the structure is being built.</p>
-<p>The last parameter of <code>.add</code> indicates how the
-<code>.toSource()</code> will display the expression. When not
-specified, it keeps track of the calls to the <code>add</code> method.
-The following is the result of <code>s1.toSource()</code> which even
-reproduces the calls to <code>.add</code>:</p>
-<div class="sourceCode" id="cb8"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>S(Pro(<span class="st">&quot;him&quot;</span>).c(<span class="st">&quot;nom&quot;</span>),</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  VP(V(<span class="st">&quot;eat&quot;</span>),</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>     NP(D(<span class="st">&quot;a&quot;</span>),</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>        N(<span class="st">&quot;apple&quot;</span>).n(<span class="st">&quot;p&quot;</span>)).add(A(<span class="st">&quot;red&quot;</span>)))).add(Adv(<span class="st">&quot;now&quot;</span>).a(<span class="st">&#39;,&#39;</span>),<span class="dv">0</span>)</span></code></pre></div>
-<p>Now given the following variation on the previous example, in which
-the last parameter to the <code>.add</code> function is set to
-<code>True</code>.</p>
-<div class="sourceCode" id="cb9"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>s2 <span class="op">=</span> S(Pro(<span class="st">&quot;him&quot;</span>).c(<span class="st">&quot;nom&quot;</span>),</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>       VP(V(<span class="st">&quot;eat&quot;</span>),</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>          NP(D(<span class="st">&quot;a&quot;</span>),N(<span class="st">&quot;apple&quot;</span>).n(<span class="st">&quot;p&quot;</span>)).add(A(<span class="st">&quot;red&quot;</span>),<span class="va">None</span>,<span class="va">True</span>))</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>       ).add(Adv(<span class="st">&quot;now&quot;</span>).a(<span class="st">&quot;,&quot;</span>),<span class="dv">0</span>,<span class="va">True</span>)</span></code></pre></div>
-<p>Here is the result of the <code>s2.toSource()</code> call, which
-corresponds to the final structure.</p>
-<div class="sourceCode" id="cb10"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>S(Adv(<span class="st">&quot;now&quot;</span>).a(<span class="st">&#39;,&#39;</span>),</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  Pro(<span class="st">&quot;him&quot;</span>).c(<span class="st">&quot;nom&quot;</span>),</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  VP(V(<span class="st">&quot;eat&quot;</span>),</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>     NP(D(<span class="st">&quot;a&quot;</span>),</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>        N(<span class="st">&quot;apple&quot;</span>).n(<span class="st">&quot;p&quot;</span>),</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>        A(<span class="st">&quot;red&quot;</span>))))</span></code></pre></div>
-<p><em>Notes</em>: Internally, <code>.add(...,None,True)</code> is used
-by <code>pyrealb</code> to build incrementally the original
-expressions.</p>
-<p><code>.toDebug()</code> does not keep track of the calls to
-<code>.add()</code> and displays the current state of the internal
-structure.</p></li>
+<p><em>Notes</em>: Internally, <code>.add(...,None)</code> is used by
+<code>pyrealb</code> to build incrementally the original
+expressions.</p></li>
 <li><p><code>.remove(position)</code>: delete the
 <code>Constituent</code> at a given position within a
 <code>Phrase</code> or a <code>Dependent</code></p></li>
@@ -289,19 +268,19 @@ structure.</p></li>
 <h2 id="an-alternative-to-structure-modifications">An alternative to
 structure modifications</h2>
 <p>Given the fact that <code>pyrealb</code> expressions are Python
-objects, they can be put in a list (or a tuple) and manipulated by
+objects, they can be inserted in a list (or a tuple) and manipulated by
 standard Python functions. The list can then be used as a parameter for
 <code>pyrealb</code> creation functions which <em>flatten</em> their
 list or tuple arguments before building the structure. Here is an
 example of incrementally building the <code>pyrealb</code> expression
 <code>s3</code> equivalent to our running example.</p>
-<div class="sourceCode" id="cb11"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> [D(<span class="st">&quot;a&quot;</span>),N(<span class="st">&quot;apple&quot;</span>).n(<span class="st">&quot;p&quot;</span>)]</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>n.append(A(<span class="st">&quot;red&quot;</span>))</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>vp <span class="op">=</span> (VP(V(<span class="st">&quot;eat&quot;</span>),NP(n)))</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>selems <span class="op">=</span> [Pro(<span class="st">&quot;him&quot;</span>).c(<span class="st">&quot;nom&quot;</span>),vp]</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>selems.insert(<span class="dv">0</span>,Adv(<span class="st">&quot;new&quot;</span>).a(<span class="st">&quot;,&quot;</span>))</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>s3 <span class="op">=</span> S(selems)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> [D(<span class="st">&quot;a&quot;</span>),N(<span class="st">&quot;apple&quot;</span>).n(<span class="st">&quot;p&quot;</span>)]</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>n.append(A(<span class="st">&quot;red&quot;</span>))</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>vp <span class="op">=</span> (VP(V(<span class="st">&quot;eat&quot;</span>),NP(n)))</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>selems <span class="op">=</span> [Pro(<span class="st">&quot;him&quot;</span>).c(<span class="st">&quot;nom&quot;</span>),vp]</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>selems.insert(<span class="dv">0</span>,Adv(<span class="st">&quot;new&quot;</span>).a(<span class="st">&quot;,&quot;</span>))</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>s3 <span class="op">=</span> S(selems)</span></code></pre></div>
 <h1 id="conclusion">Conclusion</h1>
 <p>This note has described how to dynamically modify existing
 <code>pyrealb</code> structures before their realization. This process
