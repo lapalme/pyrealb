@@ -214,28 +214,30 @@ call.</p></li>
 </ul>
 <h1 id="modifying-an-expression">Modifying an expression</h1>
 <p>Before the final realization, an expression can be modified by adding
-or removing parts of it. This useful in case that not all arguments to a
-phrase are known before starting to build it. For example, its subject
-and verb can be determined in one part of a program, but its complements
-only specified later.</p>
+or removing parts of it. This useful iwhen not all arguments to a phrase
+are known before starting to build it. For example, its subject and verb
+can be determined in one part of a program, but its complements only
+specified later. Many coordinated constituents are built
+incrementally.</p>
 <p>To account for this possibility, <code>pyrealb</code> allows adding a
 new <code>Constituent</code> to an existing <code>Phrase</code> or a new
 <code>Dependent</code> to another <code>Dependent</code> at a given
 position within its children. It is also possible to remove a
 <code>Constituent</code>, although this is most often used internally
 during the realization process.</p>
+<p>As these methods return the modified constituent, calls can be
+chained as in the following examples, although in practice such calls
+are seldom encountered because it would have been simpler to create the
+structure by the original functions. Most often adding or removing
+constituents is done incrementally in different places during the course
+of execution of the program.</p>
 <ul>
-<li><p><code>.add(constituent,position=None)</code>: has two
-interpretations according to the context:</p>
+<li><p>for a <code>Phrase</code>:</p>
 <ul>
-<li>insert either a <code>Phrase</code> or a <code>Terminal</code> to
-the current <code>Phrase</code> at a certain position given by a
-non-negative index when specified, at the end otherwise;</li>
-<li>insert a <code>Dependent</code> to the current
-<code>Dependent</code> at a certain position given by a non-negative
-index, when specified, at the end otherwise.</li>
-</ul>
-<p>For example</p>
+<li><p><code>.add(constituent,position=None)</code>: insert either a
+<code>Phrase</code> or a <code>Terminal</code> to the current
+<code>Phrase</code> at a certain position given by a non-negative index
+when specified, at the end otherwise.</p>
 <div class="sourceCode" id="cb7"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>s1 <span class="op">=</span> S(Pro(<span class="st">&quot;him&quot;</span>).c(<span class="st">&quot;nom&quot;</span>),</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>       VP(V(<span class="st">&quot;eat&quot;</span>),</span>
@@ -246,7 +248,7 @@ The adjective <em>red</em> is added at the end of the <em>NP</em> but,
 because adjectives in English are placed before the noun, it is realized
 before the noun. The adverb <em>now</em> followed by comma is inserted
 at the start of the sentence because the position is set to 0.</p>
-<p>This can be seen by the result of the <code>s1.toSource()</code>
+<p>This can be seen by the result of the <code>s1.toSource(0)</code>
 call, which corresponds to the modified structure.</p>
 <div class="sourceCode" id="cb8"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>S(Adv(<span class="st">&quot;now&quot;</span>).a(<span class="st">&#39;,&#39;</span>),</span>
@@ -254,33 +256,71 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a hr
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  VP(V(<span class="st">&quot;eat&quot;</span>),</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>     NP(D(<span class="st">&quot;a&quot;</span>),</span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>        N(<span class="st">&quot;apple&quot;</span>).n(<span class="st">&quot;p&quot;</span>),</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>        A(<span class="st">&quot;red&quot;</span>))))</span></code></pre></div>
-<p>This dynamic feature explains why most realization decisions are
-taken at the very last moment (i.e., when <code>.realize()</code> is
-called) and not while the structure is being built.</p>
-<p><em>Notes</em>: Internally, <code>.add(...,None)</code> is used by
-<code>pyrealb</code> to build incrementally the original
-expressions.</p></li>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>        A(<span class="st">&quot;red&quot;</span>))))</span></code></pre></div></li>
 <li><p><code>.remove(position)</code>: delete the
 <code>Constituent</code> at a given position within a
-<code>Phrase</code> or a <code>Dependent</code></p></li>
+<code>Phrase</code></p></li>
+</ul></li>
+<li><p>For a <code>Dependent</code>:</p>
+<ul>
+<li><p><code>.add(dependent,position=None)</code>: insert either
+<code>Dependent</code> to the current <code>Dependent</code> at a
+certain position given by a non-negative index when specified, at the
+end otherwise. A <code>Dependent</code> cannot be created empty, its
+head, a <code>Terminal</code>, must always be specified. The following
+<em>Python</em> expression split on many lines to make
+<code>.add()</code> calls standout.</p>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>r1 <span class="op">=</span> root(V(<span class="st">&quot;eat&quot;</span>))<span class="op">\</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>          .add(subj(Pro(<span class="st">&quot;him&quot;</span>).c(<span class="st">&quot;nom&quot;</span>)))<span class="op">\</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>          .add(comp(N(<span class="st">&quot;apple&quot;</span>).n(<span class="st">&quot;p&quot;</span>),</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>                    det(D(<span class="st">&quot;a&quot;</span>))))<span class="op">\</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>          .add(det(Adv(<span class="st">&quot;now&quot;</span>).a(<span class="st">&quot;,&quot;</span>)),<span class="dv">0</span>)</span></code></pre></div>
+<p><code>r1.realize()</code> returns <em>Now, he eats red apples.</em>
+The resulting structure shown by <code>r1.toSource(0)</code> is the
+following.</p>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>root(V(<span class="st">&quot;eat&quot;</span>),</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>     det(Adv(<span class="st">&quot;now&quot;</span>).a(<span class="st">&#39;,&#39;</span>)),</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>     subj(Pro(<span class="st">&quot;him&quot;</span>).c(<span class="st">&#39;nom&#39;</span>)),</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>     comp(N(<span class="st">&quot;apple&quot;</span>).n(<span class="st">&#39;p&#39;</span>),</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>          det(D(<span class="st">&quot;a&quot;</span>))))</span></code></pre></div>
+<p>We see that the last <code>Dependent</code> added is now the first
+dependency because its position was specified as 0. In order to be
+realized at the start of the sentence, a <code>det</code>
+<code>Dependent</code> was used; a <code>subj</code> would also have
+been possible. As dependency structures are less position dependent than
+constituency ones, the <code>position</code> argument is seldom needed
+for <code>Dependent</code>s. In this specific example, the realization
+would have been the same without specifying the position, because
+<code>det</code> or <code>subj</code> are always realized before the
+head.</p></li>
+<li><p><code>.remove(position)</code>: delete the <code>Dependent</code>
+at a given position within a <code>Dependent</code></p></li>
+</ul></li>
 </ul>
+<p>These dynamic modifications explain why, in <em>pyrealb</em>, most
+realization decisions are taken at the very last moment (i.e., when
+<code>.realize()</code> is called) and not while the structure is being
+built. Internally, <code>.add(...)</code> is used by
+<code>pyrealb</code> to build constituent expressions.</p>
 <h2 id="an-alternative-to-structure-modifications">An alternative to
 structure modifications</h2>
-<p>Given the fact that <code>pyrealb</code> expressions are Python
-objects, they can be inserted in a list (or a tuple) and manipulated by
-standard Python functions. The list can then be used as a parameter for
-<code>pyrealb</code> creation functions which <em>flatten</em> their
-list or tuple arguments before building the structure. Here is an
-example of incrementally building the <code>pyrealb</code> expression
-<code>s3</code> equivalent to our running example.</p>
-<div class="sourceCode" id="cb9"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> [D(<span class="st">&quot;a&quot;</span>),N(<span class="st">&quot;apple&quot;</span>).n(<span class="st">&quot;p&quot;</span>)]</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>n.append(A(<span class="st">&quot;red&quot;</span>))</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>vp <span class="op">=</span> (VP(V(<span class="st">&quot;eat&quot;</span>),NP(n)))</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>selems <span class="op">=</span> [Pro(<span class="st">&quot;him&quot;</span>).c(<span class="st">&quot;nom&quot;</span>),vp]</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>selems.insert(<span class="dv">0</span>,Adv(<span class="st">&quot;new&quot;</span>).a(<span class="st">&quot;,&quot;</span>))</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>s3 <span class="op">=</span> S(selems)</span></code></pre></div>
+<p>Given the fact that <code>pyrealb</code> expressions are
+<em>Python</em> objects, they can be inserted in a list (or a tuple) and
+manipulated by standard <em>Python</em> functions. The list can then be
+used as a parameter for <code>pyrealb</code> creation functions which
+<em>flatten</em> their list or tuple arguments before building the
+structure. Here is an example of incrementally building the
+<code>pyrealb</code> expression <code>s2</code> equivalent to
+<code>s1</code>.</p>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> [D(<span class="st">&quot;a&quot;</span>),N(<span class="st">&quot;apple&quot;</span>).n(<span class="st">&quot;p&quot;</span>)]</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>n.append(A(<span class="st">&quot;red&quot;</span>))</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>vp <span class="op">=</span> (VP(V(<span class="st">&quot;eat&quot;</span>),NP(n)))</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>selems <span class="op">=</span> [Pro(<span class="st">&quot;him&quot;</span>).c(<span class="st">&quot;nom&quot;</span>),vp]</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>selems.insert(<span class="dv">0</span>,Adv(<span class="st">&quot;new&quot;</span>).a(<span class="st">&quot;,&quot;</span>))</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>s2 <span class="op">=</span> S(selems)</span></code></pre></div>
 <h1 id="conclusion">Conclusion</h1>
 <p>This note has described how to dynamically modify existing
 <code>pyrealb</code> structures before their realization. This process

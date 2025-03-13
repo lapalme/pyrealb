@@ -26,7 +26,7 @@ class Phrase(Constituent):
                 self.warn("bad Constituent", i + 1, type(e).__name__)
         if len(elements) > 0:
             # terminate the list with add which does other checks on the final list
-            self.add(elements[-1], None, True)
+            self.add(elements[-1], None)
 
     # return number of constituents
     def nbConstituents(self):
@@ -74,7 +74,7 @@ class Phrase(Constituent):
         return self
 
     # add a pyrealb constituent, set agreement links
-    def add(self, constituent, position=None, prog=None):  # prog is True when called from within the constructor
+    def add(self, constituent, position=None):  # prog is True when called from within the constructor
         from .utils import Q
         def allAorN(elems, start, end):
             if start > end: (end, start) = (start, end)
@@ -86,20 +86,14 @@ class Phrase(Constituent):
                 constituent=constituent[0]
             else:
                 for c in constituent:
-                    self.add(c,position,prog)
+                    self.add(c,position)
                 return self
-        if prog is None and constituent is None: return self
+        if constituent is None: return self
         if isinstance(constituent, str):
             constituent = Q(constituent)
         elif not isinstance(constituent, Constituent):
             return self.warn("bad Constituent", self.word_last(),
                              type(constituent).__name__ + ":" + str(constituent))
-        if prog is None:
-            self.optSource += f'.add({constituent.toSource()}{"" if position is None else ("," + str(position))})'
-        elif position is None:
-            self.elementsSource.append(constituent)
-        elif isinstance(position, int) and 0 <= position <= len(self.elementsSource):
-            self.elementsSource.insert(position,constituent)
         constituent.parentConst = self
         self.addElement(constituent, position)
         self.linkProperties()
@@ -567,7 +561,7 @@ class Phrase(Constituent):
         newIndent,sep = self.indentSep(indent)
         # create source of children
         res = self.constType
-        return res+f'({sep.join(e.toSource(newIndent) for e in self.elementsSource)})' \
+        return res+f'({sep.join(e.toSource(newIndent) for e in self.elements)})' \
                    + super().toSource()
 
     def toDebug(self,indent=-1):

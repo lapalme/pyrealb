@@ -134,48 +134,70 @@ As with any Python object, the value of a field can be obtained with the dotted 
 
 #  Modifying an expression
 
-Before the final realization, an expression can be modified by adding or removing parts of it. This useful in case that not all arguments to a phrase are known before starting to build it. For example, its subject and verb can be determined in one part of a program, but its complements only specified later. 
+Before the final realization, an expression can be modified by adding or removing parts of it. This useful iwhen not all arguments to a phrase are known before starting to build it. For example, its subject and verb can be determined in one part of a program, but its complements only specified later. Many coordinated constituents are built incrementally.
 
-To account for this possibility, `pyrealb` allows adding a new `Constituent` to an existing `Phrase` or a new `Dependent` to another `Dependent` at a given position within its children.  It is also possible to remove a `Constituent`, although this is most often used internally during the realization process. 
+To account for this possibility, `pyrealb` allows adding a new `Constituent` to an existing `Phrase` or a new `Dependent` to another `Dependent` at a given position within its children.  It is also possible to remove a `Constituent`, although this is most often used internally during the realization process.  
 
-- `.add(constituent,position=None)`:  has two interpretations according to the context:
-  
-  - insert either a `Phrase` or a `Terminal` to the current `Phrase` at a certain position given by a non-negative 
-    index when specified, at the end otherwise;
-  - insert a `Dependent` to the current `Dependent` at a certain position given by a non-negative index, when specified, at the end otherwise.
-  
-  For example
-  
-  ```python
-  s1 = S(Pro("him").c("nom"),
-         VP(V("eat"),
-            NP(D("a"),N("apple").n("p")).add(A("red")))
-         ).add(Adv("now").a(","),0)
-  ```
-  
-  `s1.realize()` returns *Now, he eats red apples.* The adjective *red* is added at the end of the *NP* but, because adjectives in English are placed before the noun, it is realized before the noun. The adverb *now* followed by comma is inserted at the start of the sentence because the position is set to 0. 
-  
-  This can be seen by  the result of the `s1.toSource()` call, which corresponds to the modified structure. 
-  
-  
-  ```python
-  S(Adv("now").a(','),
-    Pro("him").c("nom"),
-    VP(V("eat"),
-       NP(D("a"),
-          N("apple").n("p"),
-          A("red"))))
-  ```
-  
-  This dynamic feature explains why most realization decisions are taken at the very last moment (i.e., when `.realize()` is called) and not while the structure is being built.
-  
-  *Notes*: Internally, `.add(...,None)` is used by `pyrealb`  to build incrementally the original expressions. 
-  
-- `.remove(position)`: delete the `Constituent` at a given position within a `Phrase` or a `Dependent`
+As these methods return the modified constituent, calls can be chained as in the following examples, although in practice such calls are seldom encountered because it would have been simpler to create the structure by the original functions. Most often adding or removing constituents is done incrementally in different places during the course of execution of the program.
+
+- for a `Phrase`:
+
+  - `.add(constituent,position=None)`:  insert either a `Phrase` or a `Terminal` to the current `Phrase` at a certain position given by a non-negative index when specified, at the end otherwise. 
+
+    ```python
+    s1 = S(Pro("him").c("nom"),
+           VP(V("eat"),
+              NP(D("a"),N("apple").n("p")).add(A("red")))
+           ).add(Adv("now").a(","),0)
+    ```
+
+    `s1.realize()` returns *Now, he eats red apples.* The adjective *red* is added at the end of the *NP* but, because adjectives in English are placed before the noun, it is realized before the noun. The adverb *now* followed by comma is inserted at the start of the sentence because the position is set to 0. 
+
+    This can be seen by  the result of the `s1.toSource(0)` call, which corresponds to the modified structure. 
+
+
+    ```python
+    S(Adv("now").a(','),
+      Pro("him").c("nom"),
+      VP(V("eat"),
+         NP(D("a"),
+            N("apple").n("p"),
+            A("red"))))
+    ```
+
+  - `.remove(position)`: delete the `Constituent` at a given position within a `Phrase`
+
+- For a `Dependent`:
+
+  - `.add(dependent,position=None)`:  insert either `Dependent` to the current `Dependent` at a certain position given by a non-negative index when specified, at the end otherwise. A `Dependent` cannot be created empty,  its head, a `Terminal`, must always be specified. The following *Python* expression split on many lines to make `.add()` calls standout.
+
+    ```python
+    r1 = root(V("eat"))\
+              .add(subj(Pro("him").c("nom")))\
+              .add(comp(N("apple").n("p"),
+                        det(D("a"))))\
+              .add(det(Adv("now").a(",")),0)
+    ```
+
+    `r1.realize()` returns *Now, he eats red apples.* The resulting structure shown by `r1.toSource(0)` is the following. 
+
+    ```python
+    root(V("eat"),
+         det(Adv("now").a(',')),
+         subj(Pro("him").c('nom')),
+         comp(N("apple").n('p'),
+              det(D("a"))))
+    ```
+
+    We see that the last `Dependent` added is now the first dependency because its position was specified as 0. In order to be realized at the start of the sentence, a `det` `Dependent` was used; a `subj` would also have been possible. As dependency structures are less position dependent than constituency  ones, the `position` argument is seldom needed for `Dependent`s.  In this specific example, the realization would have been the same without specifying the position, because `det` or `subj` are always realized before the head.
+
+  - `.remove(position)`: delete the `Dependent` at a given position within a `Dependent`
+
+These dynamic modifications explain why, in *pyrealb*,  most realization decisions are taken at the very last moment (i.e., when `.realize()` is called) and not while the structure is being built. Internally,  `.add(...)`  is used by `pyrealb` to build constituent expressions. 
 
 ## An alternative to structure modifications
 
-Given the fact  that `pyrealb` expressions are Python objects,  they can be inserted in a list (or a tuple) and manipulated by standard Python functions. The list can then be used as a parameter for `pyrealb` creation functions which *flatten* their list or tuple arguments before building the structure.  Here is an example of incrementally building the `pyrealb` expression `s3` equivalent to our running example.
+Given the fact  that `pyrealb` expressions are *Python* objects,  they can be inserted in a list (or a tuple) and manipulated by standard *Python* functions. The list can then be used as a parameter for `pyrealb` creation functions which *flatten* their list or tuple arguments before building the structure.  Here is an example of incrementally building the `pyrealb` expression `s2` equivalent to `s1`.
 
 ```python
 n = [D("a"),N("apple").n("p")]
@@ -183,7 +205,7 @@ n.append(A("red"))
 vp = (VP(V("eat"),NP(n)))
 selems = [Pro("him").c("nom"),vp]
 selems.insert(0,Adv("new").a(","))
-s3 = S(selems)
+s2 = S(selems)
 ```
 
 # Conclusion
