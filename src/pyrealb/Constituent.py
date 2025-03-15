@@ -53,7 +53,8 @@ class Constituent:
 
     # Get the value of the "n" property taking into account possible local "majestic" override
     def getNumber(self):
-        if hasattr(self,"peng") and self.peng["n"] == "s" and self.peng["pe"]<3:
+        if hasattr(self,"peng") and hasattr(self.peng,"n") and self.peng["n"] == "s" \
+                                and hasattr(self.peng,"pe") and self.peng["pe"]<3:
             if "maje" in self.peng and not self.peng["maje"]: return "s"
             if self.isMajestic():return "p"
         return self.getProp("n")

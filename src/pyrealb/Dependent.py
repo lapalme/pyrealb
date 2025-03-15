@@ -535,3 +535,53 @@ class Dependent(Constituent):
                 else:
                     print("Dependent.fromJSON dependents should be a list:" + str(json["elements"]))
             return dep(args, constType, lang).setJSONprops(json)
+
+    def getPos(self):
+        if self.getProp("pos") == "pre" or self.isA("subj", "det"): return 0
+        if self.isA("coord") and len(self.dependents) > 0 and self.dependents[0].isA("subj", "det"): return 0
+        return None
+
+    # heuristic transformation from Dependent to Constituent
+    def toConstituent(self):
+        from .utils import NP, VP, AP, AdvP, PP, CP, C, S, SP, Q
+
+        terminal2phrase = {"N": NP, "V": VP, "A": AP, "Adv": AdvP, "P": PP, "C": CP, "D": NP, "Pro": NP}
+
+        def build_phrase(elementsBefore, terminal, elementsAfter):
+            if terminal.isA("C") and terminal.lemma not in ["et","ou","and","or"]:
+                return SP(elementsBefore,C(terminal.lemma),elementsAfter)
+            if terminal.constType in terminal2phrase:
+                phrase = terminal2phrase[terminal.constType](elementsBefore, terminal, elementsAfter)
+            else:
+                phrase = SP(elementsBefore, Q(terminal.lemma), elementsAfter)
+            return phrase
+
+        if len(self.dependents) == 0:
+            result = self.terminal
+        else:
+            before = []
+            after = []
+            for d in self.dependents:
+                c = d.toConstituent()
+                if d.getPos() is None or self.isA("coord"):
+                    after.append(c)
+                else:
+                    before.append(c)
+            if self.isA("root"):
+                # check if any of the after list is a CP marked moveBefore and move it to the before list
+                i=0
+                while i<len(after):
+                    if after[i].isA("CP") and hasattr(after[i],"moveBefore"):
+                        before.append(after.pop(i))
+                    i+=1
+                if self.terminal.isA("V"):
+                    result = S(before, build_phrase([], self.terminal, after))
+                else:
+                    result = S(build_phrase(before, self.terminal, after))
+            else:
+                result = build_phrase(before, self.terminal, after)
+                if self.isA("coord") and len(self.dependents)>0 and self.dependents[0].isA("subj","det"):
+                    setattr(result,"moveBefore",True)
+            result.props = self.props
+        result.optSource = self.optSource
+        return result

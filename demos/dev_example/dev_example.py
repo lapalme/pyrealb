@@ -583,7 +583,7 @@ def makeExamples():
               mod(C("mais")).pos("pre"),
               subj(N("réalité"),
                    det(D("le"))),
-              comp(C("que"),
+              comp(Pro("que"),
                    comp(V("être"),
                         subj(N("Mauritanie"),
                              det(D("le"))),
@@ -795,7 +795,7 @@ def makeExamples():
                     mod(P('for'),
                         mod(N('peak'),
                             mod(N('performance'))).tag('a',{"href":"http://www.google.com"}))).a(":"),
-               subj(N('science').lier(True),
+               comp(N('science').lier(True),
                     det(D('a')),
                     mod(V('base').t("pp").tag("i")),
                     mod(N('approach')),
@@ -1044,11 +1044,30 @@ def test_lemmataMaps():
     show_forms(lemmataFr, "crus")
     show_forms(lemmataFr,"crus",lambda e:e.isA('N'))
 
+def testToConstituent(lang,deps):
+    load(lang)
+    for d in deps:
+        expr = d[0]
+        expected = d[1]
+        c = expr.toConstituent()
+        gen = c.realize()
+        if gen == expected:
+            print("OK",gen)
+        else:
+            print(expr.toSource(0))
+            print(c.toSource(0))
+            print("KO",expected)
+            print("  ",gen)
+
 if __name__ == '__main__':
     # testPreviousExamples()
     # testDataToTextExamples()
     # test_warnings()
     # test_lemmataMaps()
+    # makeExamples()
+    # testToConstituent("fr",dependancesFr)
+    # testToConstituent("en",dependenciesEn)
+
     # insert here examples for debugging perhaps commenting the line above
     # a call of the forme "test(...example...)" displays the source and the realization
     # do not forget to load the appropriate language
