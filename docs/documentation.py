@@ -263,8 +263,7 @@ page.div("""
 
 addTable(dependentsSect)
 page.div("""
-    <p>Le premier paramètre d'une dépendance est un terminal. Les autres paramètres doivent être d'autres 
-    dépendances.</p> 
+    <p>Le premier paramètre d'une dépendance est un terminal, il doit toujours être spécifié à la création de la dépendance. Les autres paramètres sont optionnels, mais ils doivent être d'autres dépendances..</p> 
 
     <p><code>coord</code> regroupe des <strong>dépendances de même type</strong> coordonnées par la conjonction 
     donnée comme terminal. Les dépendents seront séparés par une virgule sauf les deux derniers qui seront séparés 
@@ -286,7 +285,7 @@ page.div("""
 """,lang="fr")
 
 page.div("""
-    <p>The first parameter of a dependency is a terminal. The other parameters must be dependents.</p> 
+    <p>The first parameter of a dependency is a terminal that must be specified when the dependency is created. The other parameters are optional, but they must be dependents.</p> 
 
     <p><code>coord</code> combines <strong>dependencies of the same type</strong> coordinated by the conjunction given 
     as terminal. Dependencies will comma separated except for the last two that will be separated by the conjunction. 

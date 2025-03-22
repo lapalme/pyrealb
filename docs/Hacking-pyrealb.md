@@ -160,7 +160,7 @@ As with any *Python* object, the value of a field can be obtained with the dotte
 
 #  Modifying an expression
 
-Before the final realization, an expression can be modified by adding or removing parts of it. This useful iwhen not all arguments to a phrase are known before starting to build it. For example, its subject and verb can be determined in one part of a program, but its complements only specified later. Coordinated constituents are often built incrementally.
+Before the final realization, an expression can be modified by adding or removing parts of it. This useful when not all arguments to a phrase are known before starting to build it. For example, its subject and verb can be determined in one part of a program, but its complements only specified later. Coordinated constituents are often built incrementally.
 
 To account for this possibility, `pyrealb` allows adding a new `Constituent` to an existing `Phrase` or a new `Dependent` to another `Dependent` at a given position within its children.  It is also possible to remove a `Constituent`, although this is most often used internally during the realization process.  
 
@@ -224,7 +224,7 @@ These dynamic modifications explain why most realization decisions in *pyrealb* 
 
 ## An Alternative to Structure Modifications
 
-Since `pyrealb` expressions are Python objects, they can be included in a list or tuple and processed with standard Python functions. This list can then serve as an input for `pyrealb` factory functions, which flatten their list or tuple arguments before constructing the structure.  This example shows how to build the `pyrealb` expression ’s2’ equivalent to ’s1’ incrementally.
+Since `pyrealb` expressions are Python objects, they can be easily incorporated into lists or tuples. These structures can then be used as inputs for `pyrealb`’s factory functions, which first flatten the provided lists or tuples before building the underlying structure.  The following example demonstrates how to create the `pyrealb` expression ’s2’, which is functionally equivalent to ’s1’, step by step.
 
 ```python
 n = [D("a"),N("apple").n("p")]
@@ -237,5 +237,5 @@ s2 = S(selems)
 
 # Conclusion
 
-This note provides a detailed explanation of how to dynamically alter `pyrealb` structures before they are realized. The `pyrealb` documentation briefly mentions this process, but I thought it deserved a more detailed explanation, including a few techniques that I developed over the years.
+This document offered an in-depth guide on modifying `pyrealb` constructs prior to their realization. While the `pyrealb` manual briefly touches on this topic, I believe it could benefit from a more comprehensive and hands-on approach, with some strategies that I have refined over time.
 

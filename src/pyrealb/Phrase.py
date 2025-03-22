@@ -634,15 +634,12 @@ class Phrase(Constituent):
                     if me.elements[i].isA("N") and me.elements[i].getProp("poss") is None:
                         idx = i
                         break
-            if (me.elements[idx].isA(termName)):
-                deprel = dep([me.elements[idx]],depName)
-                for i,e in enumerate(me.elements):
-                    if i!=idx:
-                        new_dep=e.toDependent("comp" if phName=="VP" else "mod")
-                        deprel.add(setPos(i,idx,new_dep))
-                deprel.props=me.props
-            else :
-                return self.warn("user-warning",f"Phrase.toDependent:: {phName} without {termName}: {me.toSource()}")
+            deprel = dep([me.elements[idx]],depName)
+            for i,e in enumerate(me.elements):
+                if i!=idx:
+                    new_dep=e.toDependent("comp" if phName=="VP" else "mod")
+                    deprel.add(setPos(i,idx,new_dep))
+            deprel.props=me.props
             return deprel
 
         if depName is None:depName="root"
