@@ -1,6 +1,10 @@
 [build-system]
+# force version to avoid error : "InvalidDistribution: Metadata is missing required fields: Name, Version.'
+# trick taken from https://github.com/pypi/warehouse/issues/15611
 requires = [
-    "setuptools>=42",
+    "twine==6.0.1",
+    "setuptools==75.6.0",
     "wheel"
 ]
 build-backend = "setuptools.build_meta"
+
