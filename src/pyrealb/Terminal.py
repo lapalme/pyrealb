@@ -1,4 +1,4 @@
-from .Constituent import Constituent,deprels, quoteOOV
+from .Constituent import Constituent,deprels
 from .Number import enToutesLettres, ordinal, roman
 from .Lexicon import getLemma, getRules
 
@@ -100,22 +100,23 @@ class Terminal(Constituent):
             if lexInfo is None:
                 self.tab=None 
                 self.realization=f"[[{lemma}]]"
-                return self.warn("not in lexicon",self.lang(),None)
-                # if quoteOOV: # not currently used
-                #     self.lemma=str(lemma)
-                #     self.realization=self.lemma
-                #     self.constType="Q"
+                if Constituent.quoteOOV:
+                    self.lemma=lemma
+                    self.constType="Q"
+                else:
+                    return self.warn("not in lexicon",self.lang(),None)
             else:
                 if terminalType not in lexInfo:
                     self.tab=None 
                     self.realization=f"[[{lemma}]]"
                     otherPOS=list(lexInfo.keys())
                     if "ldv" in otherPOS:otherPOS.remove("ldv")
-                    return self.warn("not in lexicon",self.lang(),otherPOS)
-                    # if quoteOOV: # not currently used
-                    #     self.lemma=str(lemma)
-                    #     self.realization=self.lemma
-                    #     self.constType="Q"
+                    if "niveau" in otherPOS:otherPOS.remove("niveau")
+                    if Constituent.quoteOOV:
+                        self.lemma=lemma
+                        self.constType="Q"
+                    else:
+                        return self.warn("not in lexicon",self.lang(),otherPOS)
                 else:
                     lexInfo=lexInfo[terminalType]
                     rules=getRules(self.lang())

@@ -1,9 +1,11 @@
 import markup, unicodedata, re, datetime
 from markup import oneliner as e
+import os, sys
+# s'assurer d'utiliser la version courante de pyrealb...
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..','src')))
 
 from pyrealb import *
 from userinfos import *
-import os
 
 def removeAccent(s):
     return unicodedata.normalize('NFD',s.lower()).encode('ascii', 'ignore').decode("utf-8")
@@ -693,6 +695,21 @@ page.p("""This dict  can be used for <i>inverse</i> generation. Here are example
 </code></pre>
 """,lang="en")
 
+page.h3("<code>Constituent.QuoteOOV</code>")
+page.p("""
+Lorsque cette variable de classe est mise à <code>True</code>, les mots absents du lexique sont considérés 
+comme des chaînes verbatim, i.e. <code>Q(...)</code> au lieu de susciter un avertissement et d'être 
+affichés entre double crochets. Comme ceci empêche toute lemmatisation, accord ou transformation de 
+phrases, il faut utiliser cet indicateur avec parcimonie.
+""",lang="fr")
+page.p("""
+When this class variable is set to <code>True</code>, words that are not in the lexicon are considered as quoted 
+strings, i.e. <code>Q(...)</code> instead of raising an warning and be displayed between double square 
+brackets. As this prevents any lemmatization, agreement or sentence transformations, this flag should be 
+used sparingly.
+""",lang="en")
+
+
 h2_fr("Sélection de variantes");h2_en("Variant selection")
 page.h3("<code>oneOf(e<sub>1</sub>,e<sub>2</sub>,...)</code>")
 page.p("""
@@ -784,8 +801,8 @@ page.p(f"Creation date of the current <span class='jsr'>pyrealb</span>, currentl
        lang="en")
 
 page.h3("<code>Constituent.exceptionOnWarning</code>")
-page.p("Si cette variable booléenne est mise à <code>True</code>, une exception sera levée lors de l'émission d'un avertissement ",lang="fr")
-page.p("When this boolean variable is et to <code>True</code>, an exception is raised when a warning is emitted.",lang="en")
+page.p("Si cette variable de classe est mise à <code>True</code>, l'exception <code>PyrealbException</code> sera levée lors de l'émission d'un avertissement. L'appelant peut alors la traiter à son gré.",lang="fr")
+page.p("When this class variable is set to <code>True</code>, the <code>PyrealbException</code> exception is raised when a warning is emitted. The caller can décide how to deal with it.",lang="en")
 
 h2_fr("Relation avec <code>jsRealB</code>","relation_fr");h2_en("Relation with <code>jsRealB</code>","relation_en")
 page.p("""

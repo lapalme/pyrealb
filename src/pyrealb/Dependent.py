@@ -126,7 +126,7 @@ class Dependent(Constituent):
             depTerm=dep.terminal
             deprel=dep.constType
             if deprel=="subj":
-                if headTerm.isA("V"):
+                if headTerm.isA("V") and hasattr(dep,"peng"):
                     headTerm.peng=dep.peng
             elif deprel=="det":
                 if depTerm.isA("D"):
@@ -444,7 +444,8 @@ class Dependent(Constituent):
         if self.isA("subj","det","*pre*"):
             # subject and det are always pre except when specified
             pos="pre"
-        elif self.isA("mod") and self.terminal.isA("A") and self.parentConst.terminal.isA("N"):
+        elif (self.isA("mod") and self.terminal.isA("A") and
+              len(self.dependents)==0 and self.parentConst.terminal.isA("N")):
             pos = self.terminal.props["pos"] if "pos" in self.terminal.props else self.adj_def_pos()
         elif self.isA("coord") and len(self.dependents)>0:
             pos=self.dependents[0].depPosition() #take the position of the first element of the coordination

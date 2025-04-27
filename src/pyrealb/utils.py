@@ -81,12 +81,6 @@ def mix(*elems):
     random.shuffle(elems)
     return [(e() if callable(e) else e) for e in elems]
 
-# Flag for quoting out of vocabulary tokens (not yet taken into account)
-# quoteOOV=False;
-# def setQuoteOOV(qOOV):
-#     global quoteOOV
-#     quoteOOV=qOOV
-
 # return a list of elements that are not None flattening embedded lists (used by Phrase and Dependent)
 def _getElems(es):
     res = []
@@ -135,7 +129,7 @@ def fromJSON(json, lang=None):
 
 
 # version and date information
-pyrealb_version = "3.2.3"
+pyrealb_version = "3.2.4"
 pyrealb_datecreated = datetime.datetime.today()
 
 ####################################################################################

@@ -3,13 +3,13 @@ import re,datetime,sys
 
 from .Lexicon import getLexicon, getRules, load
 
-quoteOOV=False # TODO: make this settable globally
-
 optionListMethods = ('a', 'b', 'ba', 'en')
 
 deprels = ["root","subj","det","mod","comp","coord"] # list of implemented dependency relations
 
 class Constituent:
+    quoteOOV = False
+
     def __init__(self,constType):
         self.constType=constType
         # initialize other params
@@ -64,10 +64,11 @@ class Constituent:
             self.peng[propName]=val
         if propName in ["t","aux"] and hasattr(self,"taux") and self.taux is not None:
             self.taux[propName]=val
-        # this is important for to ensure that local options override global values
+        # this is important to ensure that local options override global values
         # but it must not be done at initialization for peng and taux in Terminal.setLemma
         if propName not in ["pe","n","g","t","aux"] or not inSetLemma:
             self.props[propName]=val
+        return self
 
     # should be in Terminal.prototype... but here for consistency with three previous definitions
     pengNO=0 # useful for debugging: identifier of peng struct to check proper sharing in the debugger
@@ -257,8 +258,11 @@ class Constituent:
         }
         if not isinstance(types, dict):
             self.warn("ignored value for option",".typ",type(types).__name__+":"+str(types))
-        elif not self.isA("S", "SP", "VP", *deprels):
-            self.warn("bad application", f'.typ("{str(types)}")', ["S", "SP", "VP"], self.constType)
+        elif not self.isA("S", "SP", "VP", "root","mod","comp"):
+            self.warn("bad application", f'.typ("{str(types)}")', ["S", "SP", "VP","root","mod","comp"], self.constType)
+        elif self.isA("root","mod","comp") and not self.terminal.isA("V"):
+            self.warn("bad application",f'.typ("{str(types)}")',[f"{self.constType}(V(..))"],
+                      f"{self.constType}({self.terminal.constType}(..))")
         else: # validate types and keep only the valid ones
             for key,val in types.copy().items():
                 if key not in allowedTypes:
@@ -527,7 +531,7 @@ def makeOptionMethod(option,validVals,allowedConsts,optionName=None):
             if prog is None:self.addOptSource(option,val)
             return self
         else:
-            if quoteOOV and self.isA("Q"):return self
+            if Constituent.quoteOOV and self.isA("Q"):return self
             return self.warn("bad const for option",option,self.constType,allowedConsts)
         
     return _method

@@ -1,3 +1,4 @@
+import re
 
 # tables des positions des clitiques en français, tirées de
 #    Choi-Jonin (I.) & Lagae (V.), 2016, « Les pronoms personnels clitiques », in Encyclopédie Grammaticale du Français,
@@ -101,8 +102,10 @@ class NonTerminalFr:
 
         relpron = self.relative_pronouns()
         # find the start of the current "sentence" in order not to move an adverb across the boundary of a relative
+        # or past an internal punctuation : comma, semicolon
         start = len(res) - 1
-        while start >= 0 and not (res[start].isA("Pro") and res[start].lemma in relpron):
+        while start >= 0 and not (res[start].isA("Pro") and res[start].lemma in relpron) \
+                and re.match(r".*[,;!?] ?$",res[start].realization) is None:
             start -= 1
         start += 1
         # find first consecutive adverbs (ignoring "not" or "ne")
@@ -119,7 +122,7 @@ class NonTerminalFr:
                 break
 
         def moveAfterAux(auxMods):
-            for auxIdx in range(0, advIdx - 1):
+            for auxIdx in range(start, advIdx - 1):
                 e = res[auxIdx]
                 if e.isA("V") and e.lemma in auxMods:
                     if res[auxIdx + 1].isA("V"):

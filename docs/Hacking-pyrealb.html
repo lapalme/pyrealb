@@ -243,7 +243,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a hr
 </ul>
 <h1 id="modifying-an-expression">Modifying an expression</h1>
 <p>Before the final realization, an expression can be modified by adding
-or removing parts of it. This useful iwhen not all arguments to a phrase
+or removing parts of it. This useful when not all arguments to a phrase
 are known before starting to build it. For example, its subject and verb
 can be determined in one part of a program, but its complements only
 specified later. Coordinated constituents are often built
@@ -335,12 +335,12 @@ construction. Under the hood, <code>.add(...)</code> is used by
 <h2 id="an-alternative-to-structure-modifications">An Alternative to
 Structure Modifications</h2>
 <p>Since <code>pyrealb</code> expressions are Python objects, they can
-be included in a list or tuple and processed with standard Python
-functions. This list can then serve as an input for <code>pyrealb</code>
-factory functions, which flatten their list or tuple arguments before
-constructing the structure. This example shows how to build the
-<code>pyrealb</code> expression ’s2’ equivalent to ’s1’
-incrementally.</p>
+be easily incorporated into lists or tuples. These structures can then
+be used as inputs for <code>pyrealb</code>’s factory functions, which
+first flatten the provided lists or tuples before building the
+underlying structure. The following example demonstrates how to create
+the <code>pyrealb</code> expression ’s2’, which is functionally
+equivalent to ’s1’, step by step.</p>
 <div class="sourceCode" id="cb13"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> [D(<span class="st">&quot;a&quot;</span>),N(<span class="st">&quot;apple&quot;</span>).n(<span class="st">&quot;p&quot;</span>)]</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>n.append(A(<span class="st">&quot;red&quot;</span>))</span>
@@ -349,8 +349,8 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a h
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>selems.insert(<span class="dv">0</span>,Adv(<span class="st">&quot;new&quot;</span>).a(<span class="st">&quot;,&quot;</span>))</span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>s2 <span class="op">=</span> S(selems)</span></code></pre></div>
 <h1 id="conclusion">Conclusion</h1>
-<p>This note provides a detailed explanation of how to dynamically alter
-<code>pyrealb</code> structures before they are realized. The
-<code>pyrealb</code> documentation briefly mentions this process, but I
-thought it deserved a more detailed explanation, including a few
-techniques that I developed over the years.</p>
+<p>This document offered an in-depth guide on modifying
+<code>pyrealb</code> constructs prior to their realization. While the
+<code>pyrealb</code> manual briefly touches on this topic, I believe it
+could benefit from a more comprehensive and hands-on approach, with some
+strategies that I have refined over time.</p>
