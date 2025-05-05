@@ -170,7 +170,7 @@ class Dependent(Constituent):
                 depKinds = [d for d in dep.dependents if not d.isA("C")]
                 if len(depKinds)>0:
                     firstDep=depKinds[0]
-                    if firstDep.isA("subj"):
+                    if firstDep.isA("subj") and hasattr(self,"peng"):
                         dep.peng = self.peng
                     elif firstDep.isA("det"):
                         dep.peng=headTerm.peng
@@ -459,38 +459,22 @@ class Dependent(Constituent):
             self.pronominalizeChildren()
             if "typ" in self.props:
                 self.processTyp(self.props["typ"])
+            if len(self.dependents) == 0:
+               return self.doFormat(self.terminal.real())
             # realize "coord"s before the rest because it can change gender and number of subject
             # save their realization
             coordReals = [d.coordReal() for d in self.dependents if d.isA("coord")]
             if self.getProp("n") is None: self.setProp("n","s")
-            # move all "pre" dependents at the front
-            # HACK: we must move these in place because realization might remove some of them
-            nextPre = 0
-            for i in range(0,len(self.dependents)):
-                d = self.dependents[i]
-                if d.depPosition()=="pre":
-                    if nextPre != i:
-                        save = self.dependents[i]
-                        del self.dependents[i]
-                        self.dependents[nextPre:nextPre] = [save]
-                    nextPre += 1
-            # realize dependents
-            if len(self.dependents) == 0:
-                res = self.terminal.real()
-            elif nextPre == 0:  # no pre
-                res = self.terminal.real()
-                for d in self.dependents:
+            # realize all pre
+            res = []
+            for d in self.dependents:
+                if d.depPosition() == "pre":
                     res.extend(coordReals.pop(0) if d.isA("coord") else d.real())
-            else:
-                res = []
-                i=0
-                # cannot use "for i in range()" because dependents list might change during realization
-                while i<len(self.dependents):
-                    d = self.dependents[i]
+            res.extend(self.terminal.real()) # realize all terminals
+            # realize all post
+            for d in self.dependents:
+                if d.depPosition() != "pre":
                     res.extend(coordReals.pop(0) if d.isA("coord") else d.real())
-                    if i == nextPre-1:
-                        res.extend(self.terminal.real())
-                    i += 1
             if self.terminal.isA("V"):
                 self.checkAdverbPos(res)
         return self.doFormat(res)

@@ -477,7 +477,7 @@ class Terminal(Constituent):
         return self.doFormat([self])
     
     def toSource(self,_indent=-1):
-        return f"{self.constType}(\"{self.lemma}\")"+super().toSource(_indent)
+        return self.constType+'("'+str(self.lemma).replace('"','\\"')+'")'+super().toSource(_indent)
 
     def toDebug(self,_indent=-1):
         res = f"{self.constType}{self.getPengTauxStr()}(\"{self.lemma}\")"
