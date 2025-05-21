@@ -1,0 +1,792 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+<meta name="author" content="Guy Lapalme">
+<meta name="description" content="combined use of the Stanza parser and pyrealb">
+
+
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color: #ffffff; --text-color: #333333; --select-text-bg-color: #B5D6FC; --select-text-font-color: auto; --monospace: "Lucida Console",Consolas,"Courier",monospace; --title-bar-height: 20px; }
+.mac-os-11 { --title-bar-height: 28px; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+h1, h2, h3, h4, h5 { white-space: pre-wrap; }
+body { margin: 0px; padding: 0px; height: auto; inset: 0px; font-size: 1rem; line-height: 1.428571; overflow-x: hidden; background: inherit; }
+iframe { margin: auto; }
+a.url { word-break: break-all; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { text-shadow: none; background: var(--select-text-bg-color); color: var(--select-text-font-color); }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; overflow-wrap: break-word; position: relative; white-space: normal; overflow-x: visible; padding-top: 36px; }
+#write.first-line-indent p { text-indent: 2em; }
+#write.first-line-indent li p, #write.first-line-indent p * { text-indent: 0px; }
+#write.first-line-indent li { margin-left: 2em; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+.typora-export .footnote-line, .typora-export li, .typora-export p { white-space: pre-wrap; }
+.typora-export .task-list-item input { pointer-events: none; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  #write { padding-left: 20px; padding-right: 20px; }
+}
+#write li > figure:last-child { margin-bottom: 0.5rem; }
+#write ol, #write ul { position: relative; }
+img { max-width: 100%; vertical-align: middle; image-orientation: from-image; }
+button, input, select, textarea { color: inherit; font-style: inherit; font-variant-caps: inherit; font-weight: inherit; font-width: inherit; font-size: inherit; line-height: inherit; font-family: inherit; font-size-adjust: inherit; font-kerning: inherit; font-variant-alternates: inherit; font-variant-ligatures: inherit; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-variant-position: inherit; font-variant-emoji: inherit; font-feature-settings: inherit; font-optical-sizing: inherit; font-variation-settings: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; position: relative; }
+#write svg h1, #write svg h2, #write svg h3, #write svg h4, #write svg h5, #write svg h6, #write svg p { position: static; }
+p { line-height: inherit; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid-page; break-inside: avoid; orphans: 4; }
+p { orphans: 4; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+.md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p { margin-top: 1rem; margin-bottom: 1rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-radius: 4px; cursor: pointer; }
+sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inherit; text-decoration: inherit; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
+figure > table { margin: 0px; }
+thead, tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
+table.md-table td { min-width: 32px; }
+.CodeMirror-gutters { border-right-width: 0px; border-right-style: none; border-right-color: currentcolor; background-color: inherit; }
+.CodeMirror-linenumber { -webkit-user-select: none; }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+#write pre { white-space: pre-wrap; }
+#write.fences-no-line-wrapping pre { white-space: pre; }
+#write pre.ty-contain-cm { white-space: normal; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
+.md-fences-adv-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+#write .md-fences.mock-cm { white-space: pre-wrap; }
+.md-fences.md-fences-with-lineno { padding-left: 0px; }
+#write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
+.md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
+.CodeMirror-line, twitterwidget { break-inside: avoid; }
+svg { break-inside: avoid; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
+.footnotes + .footnotes { margin-top: 0px; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: 0px 0px; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li blockquote { margin: 1rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child, li > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
+#write .footnote-line { white-space: pre-wrap; }
+@media print {
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; font-variant-ligatures: no-common-ligatures; }
+  #write { margin-top: 0px; border-color: transparent !important; padding-top: 0px !important; padding-bottom: 0px !important; }
+  .typora-export * { print-color-adjust: exact; }
+  .typora-export #write { break-after: avoid; }
+  .typora-export #write::after { height: 0px; }
+  .is-mac table { break-inside: avoid; }
+  #write > p:nth-child(1) { margin-top: 0px; }
+  .typora-export-show-outline .typora-export-sidebar { display: none; }
+  figure { overflow-x: visible; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p > .md-image:only-child:not(.md-img-error) img, p > img:only-child { display: block; margin: auto; }
+#write.first-line-indent p > .md-image:only-child:not(.md-img-error) img { left: -2em; position: relative; }
+p > .md-image:only-child { display: inline-block; width: 100%; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.md-math-block { width: 100%; }
+.md-math-block:not(:empty)::after { display: none; }
+.MathJax_ref { fill: currentcolor; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus, [contenteditable="false"]:active, [contenteditable="false"]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); border: medium; }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-content::after, .md-toc::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-item a { text-decoration: none; }
+.md-toc-inner:hover { text-decoration: underline; }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.reversefootnote { font-family: ui-monospace, sans-serif; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+code, pre, samp, tt { font-family: var(--monospace); }
+kbd { margin: 0px 0.1em; padding: 0.1em 0.6em; font-size: 0.8em; color: rgb(36, 39, 41); background: rgb(255, 255, 255); border: 1px solid rgb(173, 179, 185); border-radius: 3px; box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; white-space: nowrap; vertical-align: middle; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.6; font-family: var(--monospace); }
+code { text-align: left; vertical-align: initial; }
+a.md-print-anchor { white-space: pre !important; border-width: medium !important; border-style: none !important; border-color: currentcolor !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; background: 0px 0px !important; text-decoration: initial !important; text-shadow: initial !important; }
+.os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
+.md-diagram-panel > svg { max-width: 100%; }
+[lang="flow"] svg, [lang="mermaid"] svg { max-width: 100%; height: auto; }
+[lang="mermaid"] .node text { font-size: 1rem; }
+table tr th { border-bottom-width: 0px; border-bottom-style: none; border-bottom-color: currentcolor; }
+video { max-width: 100%; display: block; margin: 0px auto; }
+iframe { max-width: 100%; width: 100%; border: medium; }
+.highlight td, .highlight tr { border: 0px; }
+mark { background: rgb(255, 255, 0); color: rgb(0, 0, 0); }
+.md-html-inline .md-plain, .md-html-inline strong, mark .md-inline-math, mark strong { color: inherit; }
+.md-expand mark .md-meta { opacity: 0.3 !important; }
+mark .md-meta { color: rgb(0, 0, 0); }
+@media print {
+  .typora-export h1, .typora-export h2, .typora-export h3, .typora-export h4, .typora-export h5, .typora-export h6 { break-inside: avoid; }
+}
+.md-diagram-panel .messageText { stroke: none !important; }
+.md-diagram-panel .start-state { fill: var(--node-fill); }
+.md-diagram-panel .edgeLabel rect { opacity: 1 !important; }
+.md-fences.md-fences-math { font-size: 1em; }
+.md-fences-advanced:not(.md-focus) { padding: 0px; white-space: nowrap; border: 0px; }
+.md-fences-advanced:not(.md-focus) { background: inherit; }
+.mermaid-svg { margin: auto; }
+.typora-export-show-outline .typora-export-content { max-width: 1440px; margin: auto; display: flex; flex-direction: row; }
+.typora-export-sidebar { width: 300px; font-size: 0.8rem; margin-top: 80px; margin-right: 18px; }
+.typora-export-show-outline #write { --webkit-flex: 2; flex: 2 1 0%; }
+.typora-export-sidebar .outline-content { position: fixed; top: 0px; max-height: 100%; overflow: hidden auto; padding-bottom: 30px; padding-top: 60px; width: 300px; }
+@media screen and (max-width: 1024px) {
+  .typora-export-sidebar, .typora-export-sidebar .outline-content { width: 240px; }
+}
+@media screen and (max-width: 800px) {
+  .typora-export-sidebar { display: none; }
+}
+.outline-content li, .outline-content ul { margin-left: 0px; margin-right: 0px; padding-left: 0px; padding-right: 0px; list-style: none; overflow-wrap: anywhere; }
+.outline-content ul { margin-top: 0px; margin-bottom: 0px; }
+.outline-content strong { font-weight: 400; }
+.outline-expander { width: 1rem; height: 1.428571rem; position: relative; display: table-cell; vertical-align: middle; cursor: pointer; padding-left: 4px; }
+.outline-expander::before { content: ""; position: relative; font-family: Ionicons; display: inline-block; font-size: 8px; vertical-align: middle; }
+.outline-item { padding-top: 3px; padding-bottom: 3px; cursor: pointer; }
+.outline-expander:hover::before { content: ""; }
+.outline-h1 > .outline-item { padding-left: 0px; }
+.outline-h2 > .outline-item { padding-left: 1em; }
+.outline-h3 > .outline-item { padding-left: 2em; }
+.outline-h4 > .outline-item { padding-left: 3em; }
+.outline-h5 > .outline-item { padding-left: 4em; }
+.outline-h6 > .outline-item { padding-left: 5em; }
+.outline-label { cursor: pointer; display: table-cell; vertical-align: middle; text-decoration: none; color: inherit; }
+.outline-label:hover { text-decoration: underline; }
+.outline-item:hover { border-color: rgb(245, 245, 245); background-color: var(--item-hover-bg-color); }
+.outline-item:hover { margin-left: -28px; margin-right: -28px; border-left-width: 28px; border-left-style: solid; border-left-color: transparent; border-right-width: 28px; border-right-style: solid; border-right-color: transparent; }
+.outline-item-single .outline-expander::before, .outline-item-single .outline-expander:hover::before { display: none; }
+.outline-item-open > .outline-item > .outline-expander::before { content: ""; }
+.outline-children { display: none; }
+.info-panel-tab-wrapper { display: none; }
+.outline-item-open > .outline-children { display: block; }
+.typora-export .outline-item { padding-top: 1px; padding-bottom: 1px; }
+.typora-export .outline-item:hover { margin-right: -8px; border-right-width: 8px; border-right-style: solid; border-right-color: transparent; }
+.typora-export .outline-expander::before { content: "+"; font-family: inherit; top: -1px; }
+.typora-export .outline-expander:hover::before, .typora-export .outline-item-open > .outline-item > .outline-expander::before { content: "−"; }
+.typora-export-collapse-outline .outline-children { display: none; }
+.typora-export-collapse-outline .outline-item-open > .outline-children, .typora-export-no-collapse-outline .outline-children { display: block; }
+.typora-export-no-collapse-outline .outline-expander::before { content: "" !important; }
+.typora-export-show-outline .outline-item-active > .outline-item .outline-label { font-weight: 700; }
+.md-inline-math-container mjx-container { zoom: 0.95; }
+mjx-container { break-inside: avoid; }
+.md-alert.md-alert-note { border-left-color: rgb(9, 105, 218); }
+.md-alert.md-alert-important { border-left-color: rgb(130, 80, 223); }
+.md-alert.md-alert-warning { border-left-color: rgb(154, 103, 0); }
+.md-alert.md-alert-tip { border-left-color: rgb(31, 136, 61); }
+.md-alert.md-alert-caution { border-left-color: rgb(207, 34, 46); }
+.md-alert { padding: 0px 1em; margin-bottom: 16px; color: inherit; border-left-width: 0.25em; border-left-style: solid; border-left-color: rgb(0, 0, 0); }
+.md-alert-text-note { color: rgb(9, 105, 218); }
+.md-alert-text-important { color: rgb(130, 80, 223); }
+.md-alert-text-warning { color: rgb(154, 103, 0); }
+.md-alert-text-tip { color: rgb(31, 136, 61); }
+.md-alert-text-caution { color: rgb(207, 34, 46); }
+.md-alert-text { font-size: 0.9rem; font-weight: 700; }
+.md-alert-text svg { fill: currentcolor; position: relative; top: 0.125em; margin-right: 1ch; overflow: visible; }
+.md-alert-text-container::after { content: attr(data-text); text-transform: capitalize; pointer-events: none; margin-right: 1ch; }
+
+
+.CodeMirror { height: auto; }
+.CodeMirror.cm-s-inner { background: inherit; }
+.CodeMirror-scroll { overflow: auto hidden; z-index: 3; }
+.CodeMirror-gutter-filler, .CodeMirror-scrollbar-filler { background-color: rgb(255, 255, 255); }
+.CodeMirror-gutters { border-right-width: 1px; border-right-style: solid; border-right-color: rgb(221, 221, 221); background: inherit; white-space: nowrap; }
+.CodeMirror-linenumber { padding: 0px 3px 0px 5px; text-align: right; color: rgb(153, 153, 153); }
+.cm-s-inner .cm-keyword { color: rgb(119, 0, 136); }
+.cm-s-inner .cm-atom, .cm-s-inner.cm-atom { color: rgb(34, 17, 153); }
+.cm-s-inner .cm-number { color: rgb(17, 102, 68); }
+.cm-s-inner .cm-def { color: rgb(0, 0, 255); }
+.cm-s-inner .cm-variable { color: rgb(0, 0, 0); }
+.cm-s-inner .cm-variable-2 { color: rgb(0, 85, 170); }
+.cm-s-inner .cm-variable-3 { color: rgb(0, 136, 85); }
+.cm-s-inner .cm-string { color: rgb(170, 17, 17); }
+.cm-s-inner .cm-property { color: rgb(0, 0, 0); }
+.cm-s-inner .cm-operator { color: rgb(152, 26, 26); }
+.cm-s-inner .cm-comment, .cm-s-inner.cm-comment { color: rgb(170, 85, 0); }
+.cm-s-inner .cm-string-2 { color: rgb(255, 85, 0); }
+.cm-s-inner .cm-meta { color: rgb(85, 85, 85); }
+.cm-s-inner .cm-qualifier { color: rgb(85, 85, 85); }
+.cm-s-inner .cm-builtin { color: rgb(51, 0, 170); }
+.cm-s-inner .cm-bracket { color: rgb(153, 153, 119); }
+.cm-s-inner .cm-tag { color: rgb(17, 119, 0); }
+.cm-s-inner .cm-attribute { color: rgb(0, 0, 204); }
+.cm-s-inner .cm-header, .cm-s-inner.cm-header { color: rgb(0, 0, 255); }
+.cm-s-inner .cm-quote, .cm-s-inner.cm-quote { color: rgb(0, 153, 0); }
+.cm-s-inner .cm-hr, .cm-s-inner.cm-hr { color: rgb(153, 153, 153); }
+.cm-s-inner .cm-link, .cm-s-inner.cm-link { color: rgb(0, 0, 204); }
+.cm-negative { color: rgb(221, 68, 68); }
+.cm-positive { color: rgb(34, 153, 34); }
+.cm-header, .cm-strong { font-weight: 700; }
+.cm-del { text-decoration: line-through; }
+.cm-em { font-style: italic; }
+.cm-link { text-decoration: underline; }
+.cm-error { color: red; }
+.cm-invalidchar { color: red; }
+.cm-constant { color: rgb(38, 139, 210); }
+.cm-defined { color: rgb(181, 137, 0); }
+div.CodeMirror span.CodeMirror-matchingbracket { color: rgb(0, 255, 0); }
+div.CodeMirror span.CodeMirror-nonmatchingbracket { color: rgb(255, 34, 34); }
+.cm-s-inner .CodeMirror-activeline-background { background: inherit; }
+.CodeMirror { position: relative; overflow: hidden; }
+.CodeMirror-scroll { height: 100%; outline: 0px; position: relative; box-sizing: content-box; background: inherit; }
+.CodeMirror-sizer { position: relative; }
+.CodeMirror-gutter-filler, .CodeMirror-hscrollbar, .CodeMirror-scrollbar-filler, .CodeMirror-vscrollbar { position: absolute; z-index: 6; display: none; outline: 0px; }
+.CodeMirror-vscrollbar { right: 0px; top: 0px; overflow: hidden; }
+.CodeMirror-hscrollbar { bottom: 0px; left: 0px; overflow: auto hidden; }
+.CodeMirror-scrollbar-filler { right: 0px; bottom: 0px; }
+.CodeMirror-gutter-filler { left: 0px; bottom: 0px; }
+.CodeMirror-gutters { position: absolute; left: 0px; top: 0px; padding-bottom: 10px; z-index: 3; overflow-y: hidden; }
+.CodeMirror-gutter { white-space: normal; height: 100%; box-sizing: content-box; padding-bottom: 30px; margin-bottom: -32px; display: inline-block; }
+.CodeMirror-gutter-wrapper { position: absolute; z-index: 4; background: 0px 0px !important; border: medium !important; }
+.CodeMirror-gutter-background { position: absolute; top: 0px; bottom: 0px; z-index: 4; }
+.CodeMirror-gutter-elt { position: absolute; cursor: default; z-index: 4; }
+.CodeMirror-lines { cursor: text; }
+.CodeMirror pre { border-radius: 0px; border-width: 0px; background: 0px 0px; font-family: inherit; font-size: inherit; margin: 0px; white-space: pre; overflow-wrap: normal; color: inherit; z-index: 2; position: relative; overflow: visible; }
+.CodeMirror-wrap pre { overflow-wrap: break-word; white-space: pre-wrap; word-break: normal; }
+.CodeMirror-code pre { border-right-width: 30px; border-right-style: solid; border-right-color: transparent; width: fit-content; }
+.CodeMirror-wrap .CodeMirror-code pre { border-right-width: medium; border-right-style: none; border-right-color: currentcolor; width: auto; }
+.CodeMirror-linebackground { position: absolute; inset: 0px; z-index: 0; }
+.CodeMirror-linewidget { position: relative; z-index: 2; overflow: auto; }
+.CodeMirror-wrap .CodeMirror-scroll { overflow-x: hidden; }
+.CodeMirror-measure { position: absolute; width: 100%; height: 0px; overflow: hidden; visibility: hidden; }
+.CodeMirror-measure pre { position: static; }
+.CodeMirror div.CodeMirror-cursor { position: absolute; visibility: hidden; border-right-width: medium; border-right-style: none; border-right-color: currentcolor; width: 0px; }
+.CodeMirror div.CodeMirror-cursor { visibility: hidden; }
+.CodeMirror-focused div.CodeMirror-cursor { visibility: inherit; }
+.cm-searching { background: rgba(255, 255, 0, 0.4); }
+span.cm-underlined { text-decoration: underline; }
+span.cm-strikethrough { text-decoration: line-through; }
+.cm-tw-syntaxerror { color: rgb(255, 255, 255); background-color: rgb(153, 0, 0); }
+.cm-tw-deleted { text-decoration: line-through; }
+.cm-tw-header5 { font-weight: 700; }
+.cm-tw-listitem:first-child { padding-left: 10px; }
+.cm-tw-box { border-style: solid; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-color: inherit; border-top-width: 0px !important; }
+.cm-tw-underline { text-decoration: underline; }
+@media print {
+  .CodeMirror div.CodeMirror-cursor { visibility: hidden; }
+}
+
+
+:root {
+    --side-bar-bg-color: #fafafa;
+    --control-text-color: #777;
+}
+
+@include-when-export url(https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext);
+
+/* open-sans-regular - latin-ext_latin */
+  /* open-sans-italic - latin-ext_latin */
+    /* open-sans-700 - latin-ext_latin */
+    /* open-sans-700italic - latin-ext_latin */
+  html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    font-family: "Open Sans","Clear Sans", "Helvetica Neue", Helvetica, Arial, 'Segoe UI Emoji', sans-serif;
+    color: rgb(51, 51, 51);
+    line-height: 1.6;
+}
+
+#write {
+    max-width: 860px;
+  	margin: 0 auto;
+  	padding: 30px;
+    padding-bottom: 100px;
+}
+
+@media only screen and (min-width: 1400px) {
+	#write {
+		max-width: 1024px;
+	}
+}
+
+@media only screen and (min-width: 1800px) {
+	#write {
+		max-width: 1200px;
+	}
+}
+
+#write > ul:first-child,
+#write > ol:first-child{
+    margin-top: 30px;
+}
+
+a {
+    color: #4183C4;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    position: relative;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    line-height: 1.4;
+    cursor: text;
+}
+h1:hover a.anchor,
+h2:hover a.anchor,
+h3:hover a.anchor,
+h4:hover a.anchor,
+h5:hover a.anchor,
+h6:hover a.anchor {
+    text-decoration: none;
+}
+h1 tt,
+h1 code {
+    font-size: inherit;
+}
+h2 tt,
+h2 code {
+    font-size: inherit;
+}
+h3 tt,
+h3 code {
+    font-size: inherit;
+}
+h4 tt,
+h4 code {
+    font-size: inherit;
+}
+h5 tt,
+h5 code {
+    font-size: inherit;
+}
+h6 tt,
+h6 code {
+    font-size: inherit;
+}
+h1 {
+    font-size: 2.25em;
+    line-height: 1.2;
+    border-bottom: 1px solid #eee;
+}
+h2 {
+    font-size: 1.75em;
+    line-height: 1.225;
+    border-bottom: 1px solid #eee;
+}
+
+/*@media print {
+    .typora-export h1,
+    .typora-export h2 {
+        border-bottom: none;
+        padding-bottom: initial;
+    }
+
+    .typora-export h1::after,
+    .typora-export h2::after {
+        content: "";
+        display: block;
+        height: 100px;
+        margin-top: -96px;
+        border-top: 1px solid #eee;
+    }
+}*/
+
+h3 {
+    font-size: 1.5em;
+    line-height: 1.43;
+}
+h4 {
+    font-size: 1.25em;
+}
+h5 {
+    font-size: 1em;
+}
+h6 {
+   font-size: 1em;
+    color: #777;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table{
+    margin: 0.8em 0;
+}
+li>ol,
+li>ul {
+    margin: 0 0;
+}
+hr {
+    height: 2px;
+    padding: 0;
+    margin: 16px 0;
+    background-color: #e7e7e7;
+    border: 0 none;
+    overflow: hidden;
+    box-sizing: content-box;
+}
+
+li p.first {
+    display: inline-block;
+}
+ul,
+ol {
+    padding-left: 30px;
+}
+ul:first-child,
+ol:first-child {
+    margin-top: 0;
+}
+ul:last-child,
+ol:last-child {
+    margin-bottom: 0;
+}
+blockquote {
+    border-left: 4px solid #dfe2e5;
+    padding: 0 15px;
+    color: #777777;
+}
+blockquote blockquote {
+    padding-right: 0;
+}
+table {
+    padding: 0;
+    word-break: initial;
+}
+table tr {
+    border: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 0;
+}
+table tr:nth-child(2n),
+thead {
+    background-color: #f8f8f8;
+}
+table th {
+    font-weight: bold;
+    border: 1px solid #dfe2e5;
+    border-bottom: 0;
+    margin: 0;
+    padding: 6px 13px;
+}
+table td {
+    border: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 6px 13px;
+}
+table th:first-child,
+table td:first-child {
+    margin-top: 0;
+}
+table th:last-child,
+table td:last-child {
+    margin-bottom: 0;
+}
+
+.CodeMirror-lines {
+    padding-left: 4px;
+}
+
+.code-tooltip {
+    box-shadow: 0 1px 1px 0 rgba(0,28,36,.3);
+    border-top: 1px solid #eef2f2;
+}
+
+.md-fences,
+code,
+tt {
+    border: 1px solid #e7eaed;
+    background-color: #f8f8f8;
+    border-radius: 3px;
+    padding: 0;
+    padding: 2px 4px 0px 4px;
+    font-size: 0.9em;
+}
+
+code {
+    background-color: #f3f4f4;
+    padding: 0 2px 0 2px;
+}
+
+.md-fences {
+    margin-bottom: 15px;
+    margin-top: 15px;
+    padding-top: 8px;
+    padding-bottom: 6px;
+}
+
+
+.md-task-list-item > input {
+  margin-left: -1.3em;
+}
+
+@media print {
+    html {
+        font-size: 13px;
+    }
+    pre {
+        page-break-inside: avoid;
+        word-wrap: break-word;
+    }
+}
+
+.md-fences {
+	background-color: #f8f8f8;
+}
+#write pre.md-meta-block {
+	padding: 1rem;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #f7f7f7;
+    border: 0;
+    border-radius: 3px;
+    color: #777777;
+    margin-top: 0 !important;
+}
+
+.mathjax-block>.code-tooltip {
+	bottom: .375rem;
+}
+
+.md-mathjax-midline {
+    background: #fafafa;
+}
+
+#write>h3.md-focus:before{
+	left: -1.5625rem;
+	top: .375rem;
+}
+#write>h4.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+#write>h5.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+#write>h6.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+.md-image>.md-meta {
+    /*border: 1px solid #ddd;*/
+    border-radius: 3px;
+    padding: 2px 0px 0px 4px;
+    font-size: 0.9em;
+    color: inherit;
+}
+
+.md-tag {
+    color: #a7a7a7;
+    opacity: 1;
+}
+
+.md-toc { 
+    margin-top:20px;
+    padding-bottom:20px;
+}
+
+.sidebar-tabs {
+    border-bottom: none;
+}
+
+#typora-quick-open {
+    border: 1px solid #ddd;
+    background-color: #f8f8f8;
+}
+
+#typora-quick-open-item {
+    background-color: #FAFAFA;
+    border-color: #FEFEFE #e5e5e5 #e5e5e5 #eee;
+    border-style: solid;
+    border-width: 1px;
+}
+
+/** focus mode */
+.on-focus-mode blockquote {
+    border-left-color: rgba(85, 85, 85, 0.12);
+}
+
+header, .context-menu, .megamenu-content, footer{
+    font-family: "Segoe UI", "Arial", sans-serif;
+}
+
+.file-node-content:hover .file-node-icon,
+.file-node-content:hover .file-node-open-state{
+    visibility: visible;
+}
+
+.mac-seamless-mode #typora-sidebar {
+    background-color: #fafafa;
+    background-color: var(--side-bar-bg-color);
+}
+
+.mac-os #write{
+    caret-color: AccentColor;
+}
+
+.md-lang {
+    color: #b4654d;
+}
+
+/*.html-for-mac {
+    --item-hover-bg-color: #E6F0FE;
+}*/
+
+#md-notification .btn {
+    border: 0;
+}
+
+.dropdown-menu .divider {
+    border-color: #e5e5e5;
+    opacity: 0.4;
+}
+
+.ty-preferences .window-content {
+    background-color: #fafafa;
+}
+
+.ty-preferences .nav-group-item.active {
+    color: white;
+    background: #999;
+}
+
+.menu-item-container a.menu-style-btn {
+    background-color: #f5f8fa;
+    background-image: linear-gradient( 180deg , hsla(0, 0%, 100%, 0.8), hsla(0, 0%, 100%, 0)); 
+}
+
+
+/* added to get numbered headings: taken from https://gist.github.com/patik/89ee6092c72a9e39950445c01598517a */
+body { counter-reset: h1counter h2counter h3counter h4counter h5counter h6counter; }
+
+h1 { counter-reset: h2counter; break-inside: avoid;}
+h2 { counter-reset: h3counter; break-inside: avoid;}
+h3 { counter-reset: h4counter; break-inside: avoid;}
+h4 { counter-reset: h5counter; break-inside: avoid;}
+h5 { counter-reset: h6counter; break-inside: avoid;}
+h6 {}
+
+h1:before {
+    counter-increment: h1counter;
+    content: counter(h1counter) ".\0000a0\0000a0";
+}
+
+h2:before {
+    counter-increment: h2counter;
+    content: counter(h1counter) "." counter(h2counter) ".\0000a0\0000a0";
+}
+
+h3:before {
+    counter-increment: h3counter;
+    content: counter(h1counter) "." counter(h2counter) "." counter(h3counter) ".\0000a0\0000a0";
+}
+
+h4:before {
+    counter-increment: h4counter;
+    content: counter(h1counter) "." counter(h2counter) "." counter(h3counter) "." counter(h4counter) ".\0000a0\0000a0";
+}
+
+h5:before {
+    counter-increment: h5counter;
+    content: counter(h1counter) "." counter(h2counter) "." counter(h3counter) "." counter(h4counter) "." counter(h5counter) ".\0000a0\0000a0";
+}
+
+h6:before {
+    counter-increment: h6counter;
+    content: counter(h1counter) "." counter(h2counter) "." counter(h3counter) "." counter(h4counter) "." counter(h5counter) "." counter(h6counter) ".\0000a0\0000a0";
+}
+
+/* taken from: https://support.typora.io/Page-Breaks/ */
+@media print, (overflow-block: paged) or (overflow-block: optional-paged)
+{
+  /* Move top-level headings to a new page on the right-hand side: */
+  h1
+  {
+    page-break-before: right; /* CSS 2 */
+    break-before: recto;      /* CSS 3+, 
+      also works for languages written and paginated right-to-left */
+  }
+  /* Override the previous ruleset for the very first heading: */
+  h1:first-of-type,
+  section > h1:first-child
+  {
+    page-break-before: avoid; /* CSS 2 */
+    break-before: avoid;      /* CSS 3+ */
+  }
+  /* Force second-level headings to begin in a new column or
+     possiblyon a new page if it was in the last of multiple columns otherwise: */
+  h2
+  {
+    break-before: column;
+  }
+  /* Headings should not be the last paragraph on a page: */
+  h1, h2, h3, h4, h5, h6
+  {
+    page-break-after: avoid;
+  }
+  /* Consecutive headings with deepening level should not be split across pages: */
+  h1+h2, h2+h3, h3+h4, h4+h5, h5+h6
+  {
+    page-break-before: avoid;
+  }
+} @media print { @page {margin: 0 0 0 0;} body.typora-export {padding-left: 0; padding-right: 0;} #write {padding:0;}}
+</style><title>S+7 : an OULIPIAN word game</title>
+</head>
+<body class='typora-export typora-export-show-outline typora-export-no-collapse-outline'><div class='typora-export-content'>
+<div class="typora-export-sidebar"><div class="outline-content"><li class="outline-item-wrapper outline-h1"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#pyrealb-for-sentence-realization"><em>pyrealb</em> for sentence realization</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h1"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#sentence-transformation">Sentence transformation</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h1"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#transformation-implementation">Transformation Implementation</a></div><ul class="outline-children"><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#transformation-from-universal-dependencies-to-pyrealb-dependent">Transformation from Universal Dependencies to <em>pyrealb</em> Dependent </a></div><ul class="outline-children"><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#terminal-transformation">Terminal Transformation</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#dependent-transformation">Dependent transformation</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#coordination-translation">Coordination translation</a></div><ul class="outline-children"></ul></li></ul></li><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#limitations">Limitations</a></div><ul class="outline-children"></ul></li></ul></li><li class="outline-item-wrapper outline-h1"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#conclusion">Conclusion</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h1"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#running-the-system">Running the system</a></div><ul class="outline-children"></ul></li></div></div><div id='write'  class=''><center style="font-size:3em; font-family: 'Open Sans'; font-weight: bold">S+7 : an <i>OULIPIAN</i> word game</center>
+<center><a href="mailto:lapalme@iro.umontreal.ca">Guy Lapalme</a><br/>RALI-DIRO<br/>Université de Montréal<br/>April 2025</center><p><span>This demo is an implementation of the </span><a href='https://www.oulipo.net/fr/contraintes/s7'><em><span>S+7</span></em><span> word game</span></a><span> that was originally introduced by Jean Lescure, an OULIPO member, in 1961.</span></p><p><span>OULIPO (Ouvroir de littérature potentielle) is a group of French-speaking writers and mathematicians who create texts according to constraints such as avoiding a specific letter (l</span><a href='https://www.oulipo.net/fr/contraintes/lipogramme'><span>ipogram)</span></a><span>, or starting all words with the same letter (</span><a href='https://www.oulipo.net/fr/contraintes/tautogramme'><span>tautogram</span></a><span>). In English, this group would be WOPOLI (Workshop for Potential Literature).</span></p><p><span>In their initial proposal, they suggested a constraint called </span><em><span>S+7</span></em><span>, where each substantive (common noun) is replaced by the seventh common noun that follows it in a specific dictionary. This constraint can also be applied to other parts of speech, such as verbs (except for auxiliaries) and adjectives, which are replaced by the seventh word of the same lexical category in the lexicon.</span></p><p><span>In our implementation of this constraint, the input text is first parsed with </span><a href='https://stanfordnlp.github.io/stanza/'><span>Stanza</span></a><span> to create a dependency structure.  This structure is used as input for a program that creates an expression for realization using  </span><a href='https://pypi.org/project/pyrealb/'><span>pyrealb</span></a><span>, a Python package that allows for English and French sentence realization. This expression is modified according to the </span><em><span>S+7</span></em><span> rule for the final sentence realization by </span><em><span>pyrealb</span></em><span>. </span></p><p><span>We first recall what is  </span><em><span>pyrealb</span></em><span>, then we describe the transformation process and its implementation.</span></p><h1 id='pyrealb-for-sentence-realization'><em><span>pyrealb</span></em><span> for sentence realization</span></h1><p><em><span>pyrealb</span></em><span> is a sentence realizer that uses the following components for both English and French:</span></p><ul><li><p><span>a </span><em><span>lexicon</span></em><span>  (a </span><em><span>JSON</span></em><span> file) defining the word category, gender, number, declension and conjugation rule number and other features needed to produce the final token. To ease the management and manual searching of entries, the JSON file is alphabetically sorted. Lists of nouns, verbs, and adjectives are extracted, maintaining this order for finding the seventh next word of the same category.</span></p></li><li><p><em><span>morphological rules</span></em><span> (a </span><em><span>JSON</span></em><span> file) to determine the appropriate word forms, such as plurals and conjugations;</span></p></li><li><p><em><span>syntactic rules</span></em><span> (</span><em><span>Python</span></em><span> functions) to build sentence structures from terminals and to properly order words within a sentence, performing the most common agreements between constituents and carrying out other useful sentence organization tasks, such as managing coordination or applying sentence transformations. </span></p></li></ul><p><em><span>pyrealb</span></em><span> accepts either a </span><em><span>Constituent</span></em><span> or a </span><em><span>Dependent</span></em><span> notation for building sentences. In this demo, we use the </span><em><span>Dependent</span></em><span> notation because it is closer to the dependency format created by Stanza from the input text. The data structure is built by functions whose name recall symbols that are typically used by linguists for these concepts:</span></p><ul><li><p><code>Terminal</code><span>: </span><code>N</code><span> (noun), </span><code>V</code><span> (verb), </span><code>A</code><span> (adjective), </span><code>D</code><span> (determiner), </span><code>Pro</code><span> (pronoun), </span><code>Adv</code><span> (adverb), </span><code>P</code><span> (preposition), </span><code>C</code><span> (conjunction), </span><code>NO</code><span> (number), </span><code>DT</code><span> (date), </span><code>Q</code><span> (quoted/canned text). A terminal is created with a single parameter its lemma, most often a string, </span></p></li><li><p><code>Dependent</code><span> for combining its parameters, i.e., terminals and other </span><code>Dependent</code><span>s: </span><code>root</code><span> (root), </span><code>subj</code><span> (subject), </span><code>det</code><span> (determiner), </span><code>mod</code><span> (modification), </span><code>comp</code><span> (complement) and </span><code>coord</code><span> (coordination). Only a small subset of the conventional universal dependencies relation names is used for the realization process. A </span><code>Dependent</code><span> is created with its head as a first parameter, optionally followed by other dependents.</span></p></li></ul><p><span>To produce the text string corresponding to the structure of a </span><code>Terminal</code><span> or a </span><code>Dependent</code><span>, the </span><code>realize()</code><span> method of </span><code>Terminal</code><span>, but more often of a </span><code>Dependent</code><span>, must be called.  </span><em><span>pyrealb</span></em><span> keeps track of the current language set by either </span><code>loadEn()</code><span> or </span><code>loadFr()</code><span>. </span><code>Terminal</code><span>s and </span><code>Dependent</code><span>s are then associated with this language, ensuring that the appropriate morphological rules are applied at realization time. </span></p><p><span>Features are added to these structures using the dot notation to modify their properties. For </span><code>Terminals</code><span>, their person, number, gender can be specified. For </span><code>Dependent</code><span>s, the sentence may be negated , modified by a modal or set to a passive mode. </span></p><p><span>One challenge in dependency syntax is to specify word ordering.  </span><em><span>pyrealb</span></em><span> uses straightforward rules for ordering words: determiners and subjects are placed before the head, while modifiers and complements are placed after the head. When multiple dependents are specified, they are realized in the order of their appearance in the expression. It is possible to change this default ordering with the </span><code>.pos(...)</code><span> feature and the parameters </span><code>pre</code><span> (before) or </span><code>pos</code><span> (after).</span></p><p><span>The following is an example of a </span><em><span>pyrealb</span></em><span> expression with its realization as a sentence.</span></p><pre class="md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded" spellcheck="false" lang="python"><div class="CodeMirror cm-s-inner cm-s-null-scroll" lang="python"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 9.5px; left: 44px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: currentcolor;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 36px; margin-bottom: 0px; border-right-width: 0px; min-width: 655.09375px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: currentcolor;"><div class="CodeMirror-measure"><div class="CodeMirror-linenumber CodeMirror-gutter-elt"><div>12</div></div></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: -36px; width: 36px;"></div><div class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -36px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show" style="left: 0px; width: 27px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">loadEn</span>()</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -36px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 27px;">2</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">print</span>(</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -36px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 27px;">3</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">  <span class="cm-variable">root</span>(<span class="cm-variable">V</span>(<span class="cm-string">"jump"</span>).<span class="cm-property">t</span>(<span class="cm-string">"ps"</span>),          <span class="cm-comment"># verb to the simple past</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -36px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 27px;">4</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">       <span class="cm-variable">subj</span>(<span class="cm-variable">N</span>(<span class="cm-string">"cat"</span>).<span class="cm-property">n</span>(<span class="cm-string">"p"</span>),       <span class="cm-comment"># subject to plural</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -36px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 27px;">5</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">            <span class="cm-variable">det</span>(<span class="cm-variable">D</span>(<span class="cm-string">"a"</span>))),          <span class="cm-comment"># undefinite determiner</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -36px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 27px;">6</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">       <span class="cm-variable">comp</span>(<span class="cm-variable">P</span>(<span class="cm-string">"on"</span>),               <span class="cm-comment"># verb prepositional complement </span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -36px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 27px;">7</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">            <span class="cm-variable">mod</span>(<span class="cm-variable">N</span>(<span class="cm-string">"mat"</span>),          <span class="cm-comment"># modified by a noun</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -36px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 27px;">8</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">                <span class="cm-variable">det</span>(<span class="cm-variable">D</span>(<span class="cm-string">"the"</span>)),</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -36px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 27px;">9</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">                <span class="cm-variable">mod</span>(<span class="cm-variable">A</span>(<span class="cm-string">"good"</span>).<span class="cm-property">f</span>(<span class="cm-string">"su"</span>))))  <span class="cm-comment"># itself modified by an adjective</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -36px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show" style="left: 0px; width: 27px;">10</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">       ).<span class="cm-property">typ</span>({<span class="cm-string">"neg"</span>:<span class="cm-keyword">True</span>})         <span class="cm-comment"># the whole sentence is negated</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -36px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 27px;">11</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">)</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -36px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show" style="left: 0px; width: 27px;">12</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment">#  Cats did not jump on the best mat.</span></span></pre></div></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom-width: 0px; border-bottom-style: solid; border-bottom-color: transparent; top: 276px;"></div><div class="CodeMirror-gutters" style="height: 276px; left: 0px;"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 35px;"></div></div></div></div></pre><p><span>The adjective </span><em><span>good</span></em><span> (realized as </span><em><span>best</span></em><span>) appears before the head because adjectives in English are placed before the noun.</span></p><h1 id='sentence-transformation'><span>Sentence transformation</span></h1><p><span>Creating an </span><em><span>S+7</span></em><span> sentence from the previous expression is only a matter of changing the nouns </span><em><span>cat</span></em><span> and </span><em><span>mat</span></em><span> by </span><em><span>cataleptic</span></em><span> and </span><em><span>matchmaker</span></em><span> (they are the 7th following nouns after </span><em><span>cat</span></em><span> and </span><em><span>mat</span></em><span>), the verb </span><em><span>jump</span></em><span> by </span><em><span>keep</span></em><span> and adjective </span><em><span>good</span></em><span> by </span><em><span>grey-headed</span></em><span>.  This creates the following expression, shown with its realization.</span></p><pre class="md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded" spellcheck="false" lang="python"><div class="CodeMirror cm-s-inner cm-s-null-scroll" lang="python"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 9.5px; left: 36px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: currentcolor;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 28px; margin-bottom: 0px; border-right-width: 0px; min-width: 525.484375px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: currentcolor;"><div class="CodeMirror-measure"><div class="CodeMirror-linenumber CodeMirror-gutter-elt"><div>9</div></div></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: -28px; width: 28px;"></div><div class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -28px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show" style="left: 0px; width: 19px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">root</span>(<span class="cm-variable">V</span>(<span class="cm-string">"keep"</span>).<span class="cm-property">t</span>(<span class="cm-string">"ps"</span>),</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 19px;">2</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">     <span class="cm-variable">subj</span>(<span class="cm-variable">N</span>(<span class="cm-string">"cataleptic"</span>).<span class="cm-property">n</span>(<span class="cm-string">"p"</span>),</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 19px;">3</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">          <span class="cm-variable">det</span>(<span class="cm-variable">D</span>(<span class="cm-string">"a"</span>))),</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 19px;">4</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">     <span class="cm-variable">comp</span>(<span class="cm-variable">P</span>(<span class="cm-string">"on"</span>),</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 19px;">5</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">          <span class="cm-variable">mod</span>(<span class="cm-variable">N</span>(<span class="cm-string">"matchmaker"</span>),</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 19px;">6</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">              <span class="cm-variable">det</span>(<span class="cm-variable">D</span>(<span class="cm-string">"the"</span>)),</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 19px;">7</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">              <span class="cm-variable">mod</span>(<span class="cm-variable">A</span>(<span class="cm-string">"good-time"</span>).<span class="cm-property">f</span>(<span class="cm-string">"su"</span>))))</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 19px;">8</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">     ).<span class="cm-property">typ</span>({<span class="cm-string">"neg"</span>:<span class="cm-variable">true</span>})</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show" style="left: 0px; width: 19px;">9</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment"># Cataleptics did not keep on the most good-time matchmaker.</span></span></pre></div></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom-width: 0px; border-bottom-style: solid; border-bottom-color: transparent; top: 207px;"></div><div class="CodeMirror-gutters" style="height: 207px; left: 0px;"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 27px;"></div></div></div></div></pre><p><span>Notice that this constraint cannot be implemented by replacing strings alone. The original inflections in the source text, such as </span><em><span>good</span></em><span> and </span><em><span>gray-headed</span></em><span>, must be maintained in the target text. In English, this is relatively simple.  In French, inflection rules are more complex. Gender agreements must be propagated between nouns, adjectives and determiners. Here is an example of a French sentence with its S+7 transformation.</span></p><div style="border:thin solid black; text-align=center; padding:5px"><I>Un vieil homme a chanté sur la grande avenue.</I> &rarr; 
+  <i>Une vile homochromie a chapitré sur le grandissant aveugle.</i> 
+</div><p><em><span>homme</span></em><span>, of grammatical gender masculine, being changed to </span><em><span>homochromie</span></em><span>, a feminine noun, the determiner </span><em><span>un</span></em><span> and the adjective </span><em><span>vil</span></em><span>  must also be declined as feminine. </span></p><p><em><span>S+7</span></em><span> is usually applied to whole texts such as in the French fable </span><em><span>La cigale et la fourmi</span></em><span> de </span><em><span>Jean de La Fontaine</span></em><span>. The second line of the following table shows the first two verses that can be compared with </span><a href='https://www.oulipo.net/fr/contraintes/s7'><span>Raymond Queneau&#39;s version</span></a><span> : </span><em><span>La cimaise et la fraction</span></em><span>. The third line gives the </span><a href='https://www.babelmatrix.org/works/fr/La_Fontaine%2C_Jean_de-1621/La_Cigale_et_la_Fourmi/en/5027-The_grasshopper_and_the_ant'><span>English translation by Robert Stokes</span></a><span>. In this example, the fable has been slightly modified so that Stanza can better segment sentences and identify common nouns that </span><em><span>pyrealb</span></em><span> can recognize and transform. Our objective is to illustrate the transformation method, not to reproduce the original verbatim.</span></p><figure class='table-figure'><table><thead><tr><th style='text-align:center;' ><span>Original</span></th><th style='text-align:center;' ><span>S+7</span></th></tr></thead><tbody><tr><td style='text-align:center;' ><strong><span>La cigale et la fourmi.</span><br /></strong><span>La cigale avait chanté tout l&#39;été. </span><br/><span>Elle se trouva fort dépourvue </span><br/><span>quand la bise fut venue. </span><br /><span>Pas un seul petit morceau </span><br /><span>de mouche ou de vermisseau.</span></td><td style='text-align:center;' ><strong><span>La ciguë et le fourneau. </span><br /></strong><span>La ciguë avait chapitré toxicomaniaque l&#39;étendoir.</span><br /><span>Elle se tuberculina fort déprisé </span><br /><span>quand le bison eut verdoyé. </span><br /><span>Pas un sexuel pétrifiant mordillage </span><br /><span>de mouchoir ou de vernier.</span></td></tr><tr><td style='text-align:center;' ><strong><span>The grasshopper and the ant.</span><br /></strong><span>The grasshopper had sung</span><br /><span> all summer long, </span><br /><span>She found herself most destitute, </span><br /><span>when the north wind came. </span><br /><span>Not a morsel to her name </span><br /><span>of either fly or worm.</span></td><td style='text-align:center;' ><strong><span>The gratitude and the antechamber. </span><br /></strong><span>The gratitude had </span><br /><span>long sired all sumpter. </span><br /><span>She fitted herself most detergent, </span><br /><span>when the north windflower commented. </span><br /><span>Not a mortgagor to her nankeen </span><br /><span>of either flyleaf or worship.</span></td></tr></tbody></table></figure><p><span>In French, </span><em><span>tout</span></em><span> before </span><em><span>l&#39;été</span></em><span>, should have been tagged as a determiner, but Stanza tagged it as an adjective. This is why it was transformed. Most often, </span><em><span>tout</span></em><span> is an adjective, but not in this particular poetry piece.</span></p><h1 id='transformation-implementation'><span>Transformation Implementation</span></h1><p><span>To achieve the </span><em><span>S+7</span></em><span> transformation, we must not only identify the lemma associated with each input word, but also determine the grammatical relationships between them. We can then ensure that the correct grammatical agreements are performed in the output text.</span></p><p><span>To do this, we use the </span><a href='https://stanfordnlp.github.io/stanza/'><span>Stanza parser</span></a><span> to split the text into sentences and tokens, retrieve the lemmas, and determine the dependencies between them. Based on this information, we create a </span><em><span>pyrealb</span></em><span> expression corresponding to the original sentence. For each noun, verb and adjective, the lemma is changed to the corresponding seventh noun, verb or adjective in the </span><em><span>pyrealb</span></em><span> lexicon.  This expression is used to construct a sentence. </span></p><p><span>We now provide a more detailed explanation of this process, which is identical in French and English. To demonstrate  the change, we use the opening sentence of section 2: </span><em><span>Cats did not jump on the best mat.</span></em></p><p><span>Stanza returns a dependency parse whose graph  is shown in the following picture. </span></p><p><img src="/Users/lapalme/Dropbox/S+7/doc/example-UD.png" referrerpolicy="no-referrer"></p><p><span>The following gives the corresponding </span><em><span>conventional</span></em><span> </span><a href='https://universaldependencies.org/format.html'><span>CONLL-U format</span></a><span> picture, along with a comment recalling the original sentence.</span></p><pre class="md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded" spellcheck="false" lang=""><div class="CodeMirror cm-s-inner cm-s-null-scroll" lang=""><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 9.5px; left: 44px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: currentcolor;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 36px; margin-bottom: 0px; border-right-width: 0px; min-width: 698.5625px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: currentcolor;"><div class="CodeMirror-measure"><div class="CodeMirror-linenumber CodeMirror-gutter-elt"><div>10</div></div></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: -36px; width: 36px;"></div><div class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -36px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show" style="left: 0px; width: 27px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"># text = Cats did not jump on the best mat.</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -36px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 27px;">2</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">1⋅Cats⋅cat⋅NOUN⋅NNS⋅Number=Plur⋅4⋅nsubj⋅_⋅_</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -36px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 27px;">3</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">2⋅did⋅do⋅AUX⋅VBD⋅Mood=Ind|Number=Plur|Person=3|Tense=Past|VerbForm=Fin⋅4⋅aux⋅_⋅_</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -36px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 27px;">4</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">3⋅not⋅not⋅PART⋅RB⋅Polarity=Neg⋅4⋅advmod⋅_⋅_</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -36px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 27px;">5</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">4⋅jump⋅jump⋅VERB⋅VB⋅VerbForm=Inf⋅0⋅root⋅_⋅_</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -36px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 27px;">6</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">5⋅on⋅on⋅ADP⋅IN⋅_⋅8⋅case⋅_⋅_</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -36px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 27px;">7</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">6⋅the⋅the⋅DET⋅DT⋅Definite=Def|PronType=Art⋅8⋅det⋅_⋅_</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -36px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 27px;">8</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">7⋅best⋅good⋅ADJ⋅JJS⋅Degree=Sup⋅8⋅amod⋅_⋅_</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -36px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 27px;">9</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">8⋅mat⋅mat⋅NOUN⋅NN⋅Number=Sing⋅4⋅obl⋅_⋅_</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -36px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show" style="left: 0px; width: 27px;">10</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">9⋅.⋅.⋅PUNCT⋅.⋅_⋅4⋅punct⋅_⋅_</span></pre></div></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom-width: 0px; border-bottom-style: solid; border-bottom-color: transparent; top: 230px;"></div><div class="CodeMirror-gutters" style="height: 230px; left: 0px;"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 35px;"></div></div></div></div></pre><p><span>Each line corresponds to token with the following tab separated fields (each tab is displayed here as &quot;</span><code>⋅</code><span>&quot;):</span></p><ul><li><p><em><span>id</span></em><span> : position of the token, the first token being 1</span></p></li><li><p><em><span>text</span></em><span> : the token as it was encountered in the input  </span></p></li><li><p><em><span>lemma</span></em><span>: the lemma corresponding to the </span><em><span>text</span></em></p></li><li><p><em><span>upos</span></em><span>: part of speech of the token</span></p></li><li><p><span>an extended part of speech : unused in this application</span></p></li><li><p><em><span>feats</span></em><span>: list of morphological features such as gender, number, person, etc.</span></p></li><li><p><em><span>head</span></em><span> : head token of the current token: an </span><em><span>id</span></em><span> or 0 for the root.</span></p></li><li><p><em><span>deprel</span></em><span> : dependency relation between the head and this token</span></p></li><li><p><span>the last two fields are ignored in this application </span></p></li></ul><p><span>Stanza provides a Python API for retrieving the values of these fields.</span></p><p><span>We first build a </span><em><span>Universal Dependency</span></em><span> (UD) tree using the information in the head field data of each token. Each edge is labeled with the </span><em><span>corresponding deprel</span></em><span>. The tokens of our example, as shown in the previous image, can be represented as follows:</span></p><pre class="md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded" spellcheck="false" lang="python"><div class="CodeMirror cm-s-inner cm-s-null-scroll" lang="python"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 9.5px; left: 36px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: currentcolor;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 28px; margin-bottom: 0px; border-right-width: 0px; min-width: 957.695435px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: currentcolor;"><div class="CodeMirror-measure"><div class="CodeMirror-linenumber CodeMirror-gutter-elt"><div>9</div></div></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: -28px; width: 28px;"></div><div class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -28px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show" style="left: 0px; width: 19px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">  <span class="cm-variable">┌───</span> <span class="cm-variable">nsubj</span> <span class="cm-variable">→</span> <span class="cm-variable">Cats</span> : <span class="cm-variable">cat</span>:<span class="cm-variable">NOUN</span>:{<span class="cm-string">'Number'</span>: <span class="cm-string">'Plur'</span>}</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 19px;">2</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">  <span class="cm-variable">├───</span> <span class="cm-variable">aux</span> <span class="cm-variable">→</span> <span class="cm-variable">did</span> : <span class="cm-variable">do</span>:<span class="cm-variable">AUX</span>:{<span class="cm-string">'Mood'</span>: <span class="cm-string">'Ind'</span>, <span class="cm-string">'Number'</span>: <span class="cm-string">'Plur'</span>, <span class="cm-string">'Person'</span>: <span class="cm-string">'3'</span>, <span class="cm-string">'Tense'</span>: <span class="cm-string">'Past'</span>, <span class="cm-string">'VerbForm'</span>: <span class="cm-string">'Fin'</span>}</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 19px;">3</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">  <span class="cm-variable">├───</span> <span class="cm-variable">advmod</span> <span class="cm-variable">→</span> <span class="cm-keyword">not</span> : <span class="cm-keyword">not</span>:<span class="cm-variable">PART</span>:{<span class="cm-string">'Polarity'</span>: <span class="cm-string">'Neg'</span>}</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 19px;">4</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">──├─</span> <span class="cm-variable">root</span> <span class="cm-variable">→</span> <span class="cm-variable">jump</span> : <span class="cm-variable">jump</span>:<span class="cm-variable">VERB</span>:{<span class="cm-string">'VerbForm'</span>: <span class="cm-string">'Inf'</span>}</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 19px;">5</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">  <span class="cm-variable">│</span> <span class="cm-variable">┌───</span> <span class="cm-variable">case</span> <span class="cm-variable">→</span> <span class="cm-variable">on</span> : <span class="cm-variable">on</span>:<span class="cm-variable">ADP</span>:{}</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 19px;">6</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">  <span class="cm-variable">│</span> <span class="cm-variable">├───</span> <span class="cm-variable">det</span> <span class="cm-variable">→</span> <span class="cm-variable">the</span> : <span class="cm-variable">the</span>:<span class="cm-variable">DET</span>:{<span class="cm-string">'Definite'</span>: <span class="cm-string">'Def'</span>, <span class="cm-string">'PronType'</span>: <span class="cm-string">'Art'</span>}</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 19px;">7</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">  <span class="cm-variable">│</span> <span class="cm-variable">├───</span> <span class="cm-variable">amod</span> <span class="cm-variable">→</span> <span class="cm-variable">best</span> : <span class="cm-variable">good</span>:<span class="cm-variable">ADJ</span>:{<span class="cm-string">'Degree'</span>: <span class="cm-string">'Sup'</span>}</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 19px;">8</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">  <span class="cm-variable">├─└─</span> <span class="cm-variable">obl</span> <span class="cm-variable">→</span> <span class="cm-variable">mat</span> : <span class="cm-variable">mat</span>:<span class="cm-variable">NOUN</span>:{<span class="cm-string">'Number'</span>: <span class="cm-string">'Sing'</span>}</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show" style="left: 0px; width: 19px;">9</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">  <span class="cm-variable">└───</span> <span class="cm-variable">punct</span> <span class="cm-variable">→</span> . : .:<span class="cm-variable">PUNCT</span>:{}</span></pre></div></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom-width: 0px; border-bottom-style: solid; border-bottom-color: transparent; top: 207px;"></div><div class="CodeMirror-gutters" style="height: 207px; left: 0px;"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 27px;"></div></div></div></div></pre><p><span>To recover the original sentence, read the tokens (the word after the arrow) from top to bottom. In the case of a </span><a href='https://web.stanford.edu/~jurafsky/slp3/old_oct19/15.pdf'><span>projective tree</span></a><span>, this in-order traversal of the tree starting from the root recreates the words in the original order. This is not always the case, for example parsing  </span><em><span>JetBlue canceled our flight this morning which was already late.</span></em><span> , returns a non-projective UD tree that is realized as </span><em><span>JetBlue canceled our flight which was already late this morning.</span></em></p><p><span>The following </span><em><span>pyrealb</span></em><span> expression is built by traversing this dependency tree and applying the transformation described in the next section: </span></p><pre class="md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded" spellcheck="false" lang="swift"><div class="CodeMirror cm-s-inner cm-s-null-scroll" lang="swift"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 9.5px; left: 36px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: currentcolor;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 28px; margin-bottom: 0px; border-right-width: 0px; min-width: 439.0625px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: currentcolor;"><div class="CodeMirror-measure"><div class="CodeMirror-linenumber CodeMirror-gutter-elt"><div>7</div></div></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: -28px; width: 28px;"></div><div class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -28px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show" style="left: 0px; width: 19px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">root</span><span class="cm-punctuation">(</span><span class="cm-variable">V</span><span class="cm-punctuation">(</span><span class="cm-string">"jump"</span><span class="cm-punctuation">)</span><span class="cm-property">.t</span><span class="cm-punctuation">(</span><span class="cm-string">'ps'</span><span class="cm-punctuation">)</span><span class="cm-property">.pe</span><span class="cm-punctuation">(</span><span class="cm-number">3</span><span class="cm-punctuation">)</span><span class="cm-property">.n</span><span class="cm-punctuation">(</span><span class="cm-string">'p'</span><span class="cm-punctuation">),</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 19px;">2</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">     <span class="cm-variable">subj</span><span class="cm-punctuation">(</span><span class="cm-variable">N</span><span class="cm-punctuation">(</span><span class="cm-string">"cat"</span><span class="cm-punctuation">)</span><span class="cm-property">.n</span><span class="cm-punctuation">(</span><span class="cm-string">'p'</span><span class="cm-punctuation">)),</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 19px;">3</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">     <span class="cm-variable">comp</span><span class="cm-punctuation">(</span><span class="cm-variable">P</span><span class="cm-punctuation">(</span><span class="cm-string">"on"</span><span class="cm-punctuation">),</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 19px;">4</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">          <span class="cm-variable">comp</span><span class="cm-punctuation">(</span><span class="cm-variable">N</span><span class="cm-punctuation">(</span><span class="cm-string">"mat"</span><span class="cm-punctuation">)</span><span class="cm-property">.n</span><span class="cm-punctuation">(</span><span class="cm-string">'s'</span><span class="cm-punctuation">),</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 19px;">5</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">               <span class="cm-variable">det</span><span class="cm-punctuation">(</span><span class="cm-variable">D</span><span class="cm-punctuation">(</span><span class="cm-string">"the"</span><span class="cm-punctuation">)),</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 19px;">6</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">               <span class="cm-variable">mod</span><span class="cm-punctuation">(</span><span class="cm-variable">A</span><span class="cm-punctuation">(</span><span class="cm-string">"good"</span><span class="cm-punctuation">)</span><span class="cm-property">.f</span><span class="cm-punctuation">(</span><span class="cm-string">'su'</span><span class="cm-punctuation">))</span><span class="cm-property">.pos</span><span class="cm-punctuation">(</span><span class="cm-string">'pre'</span><span class="cm-punctuation">)))</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -28px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show" style="left: 0px; width: 19px;">7</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">    <span class="cm-punctuation">)</span><span class="cm-property">.typ</span><span class="cm-punctuation">({</span><span class="cm-string">'neg'</span><span class="cm-punctuation">:</span> <span class="cm-variable">True</span><span class="cm-punctuation">})</span></span></pre></div></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom-width: 0px; border-bottom-style: solid; border-bottom-color: transparent; top: 161px;"></div><div class="CodeMirror-gutters" style="height: 161px; left: 0px;"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 27px;"></div></div></div></div></pre><p><span>This  tree differs slightly from the tree shown in section 1:</span></p><ul><li><p><span>the plural indefinite determiner is not shown, as it could not be detected in the input.;</span></p></li><li><p><span>there are some spurious option calls corresponding to the systematic translation of UD features.</span></p></li></ul><p><span>For this state</span><em><span>ment,</span></em><span> the initial sentence is replicated exactly. However, this may not always be the case, especially for non-projective relationships or in cases of lemmatization or head errors. </span></p><p><span>Comparing the realization of the resulting expression with the original sentence can be used to verify the extraction of lemmas and features by Stanza, similar to </span><a href='https://aclanthology.org/2021.udw-1.9/'><span>how we validated Universal Dependencies annotations</span></a><span>. The advantage of this regeneration process is that it is easier to spot errors in a realized text than in a list of features or head links. </span></p><p><span>To obtain the </span><em><span>S+7</span></em><span> text, the </span><em><span>pyrealb</span></em><span> expression is navigated replacing each noun, adjective and verb with the seventh following word of the same category in the </span><em><span>pyrealb</span></em><span> lexicon.</span></p><h2 id='transformation-from-universal-dependencies-to-pyrealb-dependent'><span>Transformation from Universal Dependencies to </span><em><span>pyrealb</span></em><span> Dependent </span></h2><p><span>Since Stanza excels at parsing input with remarkable precision and pyre</span><em><span>alb con</span></em><span>sistently produces sentences, the challenge is to map a </span><em><span>UD</span></em><span> tree to a </span><em><span>pyrealb</span></em><span> expression. This transformation is </span><em><span>ba</span></em><span>sed on a Python adaptation of the methods used in </span><a href='http://rali.iro.umontreal.ca/JSrealB/current/demos/UDregenerator/UDregenerator-en.html'><span>our previous system</span></a><span>, which had been developed in JavaScript.</span></p><h3 id='terminal-transformation'><span>Terminal Transformation</span></h3><p><span>Each UD token occurs as a head of </span><em><span>pyrealb</span></em><span> </span><code>Dependent</code><span>. The first step is to map the UD </span><code>upos</code><span> field to the appropriate </span><em><span>pyrealb</span></em><span> </span><code>Terminal</code><span> e.g., </span><code>NOUN</code><span> to </span><code>N</code><span>, </span><code>ADJ</code><span> to </span><code>A</code><span>, </span><code>VERB</code><span> to </span><code>V</code><span>, etc. </span></p><p><span>Stanza identifies a lemma corresponding to the form found in the text. If the lemma is found in the </span><em><span>pyrealb</span></em><span> lexicon, it is used as is. However, if the Stanza lemma is not in the </span><em><span>pyrealb</span></em><span> lexicon but corresponds to an inflected form, we use the lemma of the inflected form in the </span><em><span>pyrealb</span></em><span> lexicon.  For example, in French </span><em><span>prêteuse</span></em><span>, tagged as an adjective by Stanza, must be mapped to the feminine singular of </span><em><span>the</span></em><span> adjective lemma pr</span><em><span>êteur</span></em><span>.</span></p><p><span>The mapping of pronouns is quite involved, since the lemmas chosen by Stanza are often different, but legitimate, from those used in </span><em><span>pyrealb</span></em><span>. If no appropriate lemma is found, a quoted terminal </span><code>Q(…)</code><span> will be returned, which will appear verbatim in the output.</span></p><p><span>A language-specific mapping must also be established between UD features, such as </span><code>Person=2</code><span> and </span><code>Number=Plur</code><span>, and the corresponding </span><em><span>pyrealb</span></em><span> options </span><code>.pe (2).n(“p”)</code><span>. In some cases, more than one feature must be combined into a single option, such as </span><code>VerbForm=Part</code><span> and </span><code>Tense=Past</code><span> into </span><code>.t(&quot;pp&quot;)</code><span>.</span></p><p><span>Occasionally, multiple tokens are required for a single option. Consider the case of the English future tense, denoted by the </span><code>.t(&quot;f&quot;)</code><span> method. It requires identifying the </span><em><span>will</span></em><span> auxiliary, which is subsequently eliminated from the Universal Dependencies (UD) syntax tree upon adding the relevant characteristic to the verb. In French, the </span><em><span>avoir</span></em><span> auxiliary needs to be deleted and merged with the verb’s data to get </span><em><span>temps composés</span></em><span> such as </span><em><span>passé composé</span></em><span> or </span><em><span>plus-que-parfait</span></em><span>.</span></p><p><span>In the case of </span><em><span>S+7</span></em><span>, it is crucial to note that the features </span><code>Gender</code><span> and </span><code>Number</code><span> of adjectives and determiners should not be mapped. Instead, their values will be derived from the gender and number of the newly introduced noun. This rule primarily applies to French, although in English, we must pay attention when switching between plural countable and uncountable nouns, as they may need to remain singular. </span></p><h3 id='dependent-transformation'><span>Dependent transformation</span></h3><p><span>To convert a node in a UD tree into a </span><code>Dependent</code><span>, the dependent type is determined using a predefined correspondence between core dependent relations, such as </span><em><span>nsubj</span></em><span> and </span><em><span>csubj</span></em><span>, which map to </span><code>subj</code><span>, or </span><em><span>obj</span></em><span>, </span><em><span>ccomp</span></em><span>, </span><em><span>iobj</span></em><span>, and </span><em><span>xcomp, which map</span></em><span> to </span><code>comp</code><span>, or nominal dependents </span><em><span>nmod</span></em><span> and </span><em><span>amod, which map</span></em><span> to </span><code>mod</code><span>, and so on.</span></p><p><span>Copulas, such as </span><em><span>The cat is black,</span></em><span> must be dealt with specially: in a UD tree, the attribute (</span><em><span>black</span></em><span>) is the root, but in </span><em><span>pyrealb</span></em><span>, the root must be the copula (</span><em><span>be</span></em><span>) so that the agreement between the subject and the copula is correct. Moreover, in French, attributes can agree with the subject of the copula. The UD tree is thus modified so that the original UD </span><em><span>ro</span></em><span>ot (the attribute) becomes the complement. The original subject is then removed from the original root and added to the left of the new root, the copula.</span></p><p><span>Then, there is a stage that is contingent on the chosen language, where it looks for particular structures to generate possible sentences.</span></p><ul><li><p><span>in English: we check for modals,  progressive, perfect tenses and interrogatives each of these possibly negated. </span></p></li><li><p><span>in French: we check for negation composed of two words (e.g. </span><em><span>ne</span></em><span> ... </span><em><span>pas</span></em><span> or </span><em><span>ne</span></em><span> ... </span><em><span>plus</span></em><span>), interrogative by verb and subject inversion, and remove </span><em><span>se</span></em><span> for strictly reflexive verbs because it will be realized automatically by </span><em><span>pyrealb</span></em><span>.</span></p></li></ul><p><span>After the head is changed, it becomes the head of the </span><code>Dependent</code><span>. The children of the UD node are then processed recursively and inserted into this </span><code>Dependent</code><span>.</span></p><h3 id='coordination-translation'><span>Coordination translation</span></h3><p><span>Addressing coordination involves performing tree manipulation operations due to the significant structural differences between coordination in a UD tree and the expected form in </span><em><span>pyrealb</span></em><span>. This transformation is language-independent.</span></p><p><span>In a UD tree, all coordinating conjunctions are connected to the initial conjunction in a </span><em><span>cluster, indi</span></em><span>cated by the </span><code>conj</code><span> relationship, as demonstrated in the diagram on the left. In this cas</span><em><span>e, rabbit</span></em><span> and </span><em><span>dog</span></em><span> are joined to </span><em><span>cat</span></em><span>. The final conjunct is connected to the preceding conjunction with a </span><code>cc</code><span> relation, here </span><em><span>and</span></em><span>.  </span></p><p><span>In </span><em><span>pyrealb</span></em><span>, as shown in the diagram on the right, the head of the </span><code>coord</code><span> Dependent is the conjunction </span><code>and</code><span>; each conjunct is a </span><code>Dependent</code><span> (here, a </span><code>subj</code><span>) that is added as a child of the </span><code>coord</code><span>. The commas in the original UD tree are also removed. They will be added during the </span><em><span>pyrealb</span></em><span> realization.</span></p><p><img src="/Users/lapalme/Dropbox/S+7/doc/coord-UD.png" style="zoom:45%;" /><img src="/Users/lapalme/Dropbox/S+7/doc/coord-pyrealb.png" style="zoom:45%;" /></p><pre class="md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded" spellcheck="false" lang="python"><div class="CodeMirror cm-s-inner cm-s-null-scroll" lang="python"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 9.5px; left: 44px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: currentcolor;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 36px; margin-bottom: 0px; border-right-width: 0px; min-width: 439.0625px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: currentcolor;"><div class="CodeMirror-measure"><div class="CodeMirror-linenumber CodeMirror-gutter-elt"><div>12</div></div></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: -36px; width: 36px;"></div><div class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -36px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show" style="left: 0px; width: 27px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">root</span>(<span class="cm-variable">V</span>(<span class="cm-string">"run"</span>).<span class="cm-property">t</span>(<span class="cm-string">'p'</span>),</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -36px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 27px;">2</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">     <span class="cm-variable">coord</span>(<span class="cm-variable">C</span>(<span class="cm-string">"and"</span>),</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -36px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 27px;">3</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">           <span class="cm-variable">subj</span>(<span class="cm-variable">N</span>(<span class="cm-string">"cat"</span>).<span class="cm-property">n</span>(<span class="cm-string">'s'</span>),</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -36px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 27px;">4</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">                <span class="cm-variable">det</span>(<span class="cm-variable">D</span>(<span class="cm-string">"the"</span>))),</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -36px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 27px;">5</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">           <span class="cm-variable">subj</span>(<span class="cm-variable">N</span>(<span class="cm-string">"rabbit"</span>).<span class="cm-property">n</span>(<span class="cm-string">'s'</span>),</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -36px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 27px;">6</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">                <span class="cm-variable">det</span>(<span class="cm-variable">D</span>(<span class="cm-string">"the"</span>))),</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -36px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 27px;">7</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">           <span class="cm-variable">subj</span>(<span class="cm-variable">N</span>(<span class="cm-string">"dog"</span>).<span class="cm-property">n</span>(<span class="cm-string">'s'</span>),</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -36px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 27px;">8</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">                <span class="cm-variable">det</span>(<span class="cm-variable">D</span>(<span class="cm-string">"the"</span>)))),</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -36px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 27px;">9</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">     <span class="cm-variable">comp</span>(<span class="cm-variable">N</span>(<span class="cm-string">"park"</span>).<span class="cm-property">n</span>(<span class="cm-string">'s'</span>),</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -36px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show" style="left: 0px; width: 27px;">10</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">          <span class="cm-variable">mod</span>(<span class="cm-variable">P</span>(<span class="cm-string">"in"</span>)).<span class="cm-property">pos</span>(<span class="cm-string">'pre'</span>),</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -36px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 27px;">11</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">          <span class="cm-variable">det</span>(<span class="cm-variable">D</span>(<span class="cm-string">"the"</span>))))</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -36px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show" style="left: 0px; width: 27px;">12</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment"># The cat, the rabbit and the dog run in the park.</span></span></pre></div></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom-width: 0px; border-bottom-style: solid; border-bottom-color: transparent; top: 276px;"></div><div class="CodeMirror-gutters" style="height: 276px; left: 0px;"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 35px;"></div></div></div></div></pre><p><span>The check for coordination is performed at the start. Each conjunct is transformed according the algorithms described above. The transformed conjuncts are then combined for the final realization.</span></p><h2 id='limitations'><span>Limitations</span></h2><p><span>The result of </span><em><span>S+7</span></em><span> is heavily influenced by the output of the Stanza parser, which is generally reliable but can </span>
+<span>have limitations or ambiguities that it is unable to resolve in some cases. In particular, French lemmatization or </span>
+<span>tagging is sometimes </span><em><span>surprising</span></em><span> (e.g. </span><em><span>paier</span></em><span> as lemma for </span><em><span>paierai</span></em><span>, </span><em><span>aimes</span></em><span> tagged as plural), although the </span>
+<span>maintainer of Stanza improved it after some of our suggestions, when we noticed systematic errors.</span></p><p><span>This program can also be used as a tool for recreating the original sentence from the information found in the parse results, ignoring the S+7 transformation. The differences between the original sentence and the generated one can be traced back to errors or limitations in the Stanza lemmatization or feature identification process.</span></p><p><span>Another drawback is the fact that the initial formatting of the source is lost. Stanza uses its own algorithms to split the text into sentences and then into tokens; it processes </span><em><span>plain text</span></em><span>, ignoring any formatting except for punctuation.  So a text is processed sentence by sentence, ignoring the paragraph structure. However, since Stanza provides the character positions of the start and end of each token, it would be possible to restore some of the original formatting by processing each paragraph separatly. We leave this as </span><em><span>a future project</span></em><span>.</span></p><h1 id='conclusion'><span>Conclusion</span></h1><p><span>This document explained how to implement the Oulipian </span><em><span>S+7</span></em><span> rule for French or English texts. Implementing this approach using string substitution might have seemed straightforward, but we demonstrated that it was more complex than it appeared.</span></p><p><span>To ensure grammatical accuracy, one must consider connections between words. We use Stanza’s syntactic data to parse the source text, converting it into a </span><em><span>pyrealb</span></em><span> expression. This expression can then be used to recreate the original sentence. To apply the </span><em><span>S+7</span></em><span> rule, the lemmas of this expression must be modified to create a new expression that produces a transformed sentence.</span></p><p><span>This exercise was beneficial for us, as it brought up a few problems in the </span><em><span>pyrealb</span></em><span> realization process, but it also highlighted some limitations in the Stanza lemmatization process. It also allowed us to revisit our original UD </span></p><p><span>As we had previously developed a method for dealing with  </span><a href='https://universaldependencies.org'><span>manual UD annotations</span></a><span>, we noticed that the annotations produced by Stanza seemed more systematic than those created by different human annotators, making them somewhat easier to manage.</span></p><h1 id='running-the-system'><span>Running the system</span></h1><ul><li><p><code>./s_plus_7.py en story.txt</code><span> </span></p><p><span>The content of the English file </span><em><span>story.txt</span></em><span>  is first split into sentences. Each sentence is displayed, followed by its </span><em><span>regeneration</span></em><span> for comparison with the original, Then each content word is </span><em><span>shifted</span></em><span> by 7 words..</span></p></li><li><p><code>./s_plus_7.py -n 0 --showParse --showDiff fr histoire.txt</code></p><p><span>The sentences of the French file </span><em><span>histoire.txt</span></em><span> are displayed with their parse (in CONLLU and as a tree). The sentence is regenerated and the differences between the regenerated sentence and the original are displayed. Because of the </span><code>-n 0</code><span>, no </span><em><span>shifted</span></em><span> content is displayed.</span></p><p><span> </span></p></li></ul></div></div>
+
+<script>(function(){var e=document.body.parentElement,t=[],n=null,i=document.body.classList.contains("typora-export-collapse-outline"),r=function(e,t,n){document.addEventListener(e,function(e){if(!e.defaultPrevented)for(var i=e.target;i&&i!=this;i=i.parentNode)if(i.matches(t)){!1===n.call(i,e)&&(e.preventDefault(),e.stopPropagation());break}},!1)};function o(){return e.scrollTop}r("click",".outline-expander",function(e){var t=this.closest(".outline-item-wrapper").classList;return t.contains("outline-item-open")?t.remove("outline-item-open"):t.add("outline-item-open"),d(),!1}),r("click",".outline-item",function(e){var t=this.querySelector(".outline-label");if(location.hash="#"+t.getAttribute("href"),i){var n=this.closest(".outline-item-wrapper").classList;n.contains("outline-item-open")||n.add("outline-item-open"),c(),n.add("outline-item-active")}});var a,s,l=function(){var e=o();n=null;for(var i=0;i<t.length&&t[i][1]-e<60;i++)n=t[i]},c=function(){document.querySelectorAll(".outline-item-active").forEach(e=>e.classList.remove("outline-item-active")),document.querySelectorAll(".outline-item-single.outline-item-open").forEach(e=>e.classList.remove("outline-item-open"))},d=function(){if(n){c();var e=document.querySelector('.outline-label[href="#'+(CSS.escape?CSS.escape(n[0]):n[0])+'"]');if(e)if(i){var t=e.closest(".outline-item-open>ul>.outline-item-wrapper");if(t)t.classList.add("outline-item-active");else{for(var r=(e=e.closest(".outline-item-wrapper")).parentElement.closest(".outline-item-wrapper");r;)r=(e=r).parentElement.closest(".outline-item-wrapper");e.classList.add("outline-item-active")}}else e.closest(".outline-item-wrapper").classList.add("outline-item-active")}};window.addEventListener("scroll",function(e){a&&clearTimeout(a),a=setTimeout(function(){l(),d()},300)});var u=function(){s=setTimeout(function(){!function(){t=[];var e=o();document.querySelector("#write").querySelectorAll("h1, h2, h3, h4, h5, h6").forEach(n=>{var i=n.getAttribute("id");t.push([i,e+n.getBoundingClientRect().y])})}(),l(),d()},300)};window.addEventListener("resize",function(e){s&&clearTimeout(s),u()}),u()})();</script><style>
+@media print {
+    html {
+        font-size: 14px;
+        margin:10px;
+    }
+}
+@media screen and (max-width: 1200px) { 
+  .typora-export-sidebar { display: none; }
+}
+</style></body>
+</html>

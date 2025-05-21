@@ -81,7 +81,7 @@ The use of pyrealb for [Bilingual Data-to-text generation is described in this d
 2. Some directories include `markup.py` which should be loaded using `pip`. Unfortunately I never managed to make this "piped" version work, it does not import the name `oneliner`although it should. It works only if the file is in the local directory.
 
 * [`docs`](./docs): The html and image files should be copied at `http://www.iro.umontreal.ca/~lapalme/pyrealb/` which is used for convenient web access.
-    
+  
     * English and French documentation
         * `documentation.html` : generated documentation **DO NOT EDIT directly**  [Online version](http://www.iro.umontreal.ca/~lapalme/pyrealb/documentation.html?lang=en)
         * `documentation.py`: Python program for generating `documentation.html` using `markup.py`
@@ -130,6 +130,7 @@ The use of pyrealb for [Bilingual Data-to-text generation is described in this d
 * `randomgen/randomgen.py`: Generation of random English sentences
 * `RDFpyrealb/WebGenerate.py` : Generation from RDF triples
 * `report/report.py` : Single sentence parameterized by language, tense and subject using two different program organization
+* `S+7/s_plus_7.py`: parse sentences and realize these sentences but with nouns, adjectives and verbs changed with the 7th following word in the *pyrealb* lexicon. See details in `S+7/doc/S+7.html` created by `S+7/doc/S+7.md`
 * `variantes/variantes.py`: French or English sentences realized with all possible sentence modifiers; some challenging examples are in `examples.py`.
 * `weather/Bulletin.py`: French and English weather bulletins generated from information in a *json-line* file. (`weather-data.jsonl`). It uses the packages in the `Realization` directory.
 

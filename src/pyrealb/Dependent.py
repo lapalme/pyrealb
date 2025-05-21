@@ -167,9 +167,8 @@ class Dependent(Constituent):
                 # self.error("An internal root was found")
                 pass
             elif deprel=="coord":
-                depKinds = [d for d in dep.dependents if not d.isA("C")]
-                if len(depKinds)>0:
-                    firstDep=depKinds[0]
+                if len(dep.dependents)>1:
+                    firstDep=dep.dependents[0]
                     if firstDep.isA("subj") and hasattr(self,"peng"):
                         dep.peng = self.peng
                     elif firstDep.isA("det"):
@@ -376,6 +375,13 @@ class Dependent(Constituent):
         return self
 
     def coordReal(self):
+        def equivalentDependent(firstDep,currentDep):
+            if firstDep == currentDep: return True
+            if currentDep == "coord": return True
+            if firstDep == "mod" and currentDep == "comp": return True
+            if firstDep == "comp" and currentDep == "mod": return True
+            return False
+
         res=[]
         # realize coordinated Dependents by adding ',' between all dependents except for the last
         # no check is done on the terminal, so
@@ -402,7 +408,7 @@ class Dependent(Constituent):
                     dj.props["a"]=[","]
             if dj.isA("coord"):
                 res.extend(dj.coordReal())
-            elif not dj.isA(deprel) and deprel != "coord":
+            elif not equivalentDependent(deprel,dj.constType):
                 self.warn("inconsistent dependents within a coord",deprel,dj.constType)
             else:
                 res.extend(dj.real())
@@ -412,7 +418,7 @@ class Dependent(Constituent):
         if lastD.isA("coord"):
             res.extend(lastD.coordReal())
             return self.doFormat(res)
-        elif not lastD.isA(deprel) and deprel != "coord":
+        elif not equivalentDependent(deprel,lastD.constType):
             self.warn("inconsistent dependents within a coord",deprel,self.dependents[last].constType)
         # insert last element
         res.extend(self.dependents[last].real())
