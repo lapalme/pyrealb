@@ -135,28 +135,28 @@ class UDNode:
                             constituent.aux("êt")
             elif selFeat == "Person":
                 pyrPe = check("Person", person)
-                if pyrPe: constituent.pe(pyrPe)
+                if pyrPe and constituent.getProp("pe") != pyrPe: constituent.pe(pyrPe)
             elif selFeat == "Person_psor":
                 pyrPe = check("Person_psor", person)
-                if pyrPe: constituent.pe(pyrPe)
+                if pyrPe and constituent.getProp("pe") != pyrPe: constituent.pe(pyrPe)
             elif selFeat == "Number":
                 pyrN = check("Number", number)
-                if pyrN: constituent.n(pyrN)
+                if pyrN and constituent.getProp("n") != pyrN: constituent.n(pyrN)
             elif selFeat == "Number_psor":
                 pyrN = check("Number_psor", number)
-                if pyrN: constituent.n(pyrN)
+                if pyrN and constituent.getProp("n") != pyrN: constituent.n(pyrN)
             elif selFeat == "Case":
                 pyrC = check("Case", case_)
-                if pyrC: constituent.c(pyrC)
+                if pyrC and constituent.getProp("c") != pyrC: constituent.c(pyrC)
             elif selFeat == "Definite":
                 self.selectFeature("Definite") # ignore
                 pass
             elif selFeat == "Gender":
                 pyrG = check("Gender", gender)
-                if pyrG: constituent.g(pyrG)
+                if pyrG and constituent.getProp("g") != pyrG: constituent.g(pyrG)
             elif selFeat == "Gender_psor":
                 pyrG = check("Gender_psor", gender)
-                if pyrG is not None: constituent.g(pyrG)
+                if pyrG and constituent.getProp("g") != pyrG: constituent.g(pyrG)
             elif selFeat == "Degree":
                 pyrDeg = check("Degree", degree)
                 if pyrDeg: constituent.f(pyrDeg)
@@ -299,6 +299,7 @@ class UDNode:
         if newAux.hasFeature("VerbForm","Inf"): # ensure verb is conjugated
             del newAux.feats["VerbForm"]
         dep1, idx1 = self.findDeprelUpos(["nsubj", "expl:subj"], None)
+        subj = None
         if dep1 is not None:
             subj = dep1.pop(idx1)
             newAux.left.append(subj)  # add as subject of the new auxiliary
@@ -320,15 +321,15 @@ class UDNode:
         # change this self to the complement of the new auxiliary unless self is root in that case this is a subject
         self.word.deprel = "nsubj" if self.deprel() == "root" else "xcomp"
         newAux.right.insert(0, self)
-        # push what was before the "old" auxiliary to the front of the new auxiliary
-        while len(self.left) > 0:
-            x = self.left.pop()
-            if x.id() < newAux.id():
-                newAux.left.insert(0, x)
+        # push what was before the "old" subject to the front of the new auxiliary
+        # only do this for a subject in front of the current node
+        if subj is not None and dep1 is self.left:
+            k= idx1 -1
+            while k>=0:
+                x = self.left.pop(k)
+                newAux.left.insert(0,x)
                 x.isLeftChild = True
-            else:
-                newAux.right.insert(0, x)
-                x.isLeftChild = False
+                k -= 1
         self.parent = newAux
         self.isLeftChild = False
         return newAux

@@ -141,7 +141,7 @@ class Dependent(Constituent):
                         dep.dependents[0].terminal.peng = self.peng
             elif deprel=="mod" or deprel=="comp":
                 if depTerm.isA("A") or (depTerm.isA("V") and depTerm.getProp("t")=="pp"):
-                    if hasattr(self,"peng"):
+                    if hasattr(self,"peng") and not self.isA("coord"):
                         depTerm.peng=self.peng
                     self.linkAttributes(depTerm,headTerm)
                 elif depTerm.isA("V"):
@@ -174,13 +174,15 @@ class Dependent(Constituent):
                     elif firstDep.isA("det"):
                         dep.peng=headTerm.peng
                     elif firstDep.isA("mod","comp") and firstDep.terminal.isA("V","A"):
-                        # consider this as a coordination of verb sharing a subject (the current root)
-                        #            or as a coordination of adjectives
-                        if hasattr(headTerm,"peng"):
-                            dep.peng = headTerm.peng
-                            for depI in dep.dependents:
-                                depI.peng=headTerm.peng
-                                depI.terminal.peng=headTerm.peng
+                        depCtypes = [d.terminal.constType for d in dep.dependents]
+                        if len(depCtypes)>1 and all(v == depCtypes[0] for v in depCtypes[1:]):
+                            # consider this as a coordination of verb sharing a subject (the current root)
+                            #            or as a coordination of adjectives
+                            if hasattr(headTerm,"peng"):
+                                dep.peng = headTerm.peng
+                                for depI in dep.dependents:
+                                    depI.peng=headTerm.peng
+                                    depI.terminal.peng=headTerm.peng
             elif deprel in ["*pre*","*post*"]:
                 pass
             else:
@@ -460,29 +462,28 @@ class Dependent(Constituent):
     def real(self):
         if self.isA("coord") and self.parentConst is None:
             # special case of coord at the root
-            res=self.coordReal()
-        else:
-            self.pronominalizeChildren()
-            if "typ" in self.props:
-                self.processTyp(self.props["typ"])
-            if len(self.dependents) == 0:
-               return self.doFormat(self.terminal.real())
-            # realize "coord"s before the rest because it can change gender and number of subject
-            # save their realization
-            coordReals = [d.coordReal() for d in self.dependents if d.isA("coord")]
-            if self.getProp("n") is None: self.setProp("n","s")
-            # realize all pre
-            res = []
-            for d in self.dependents:
-                if d.depPosition() == "pre":
-                    res.extend(coordReals.pop(0) if d.isA("coord") else d.real())
-            res.extend(self.terminal.real()) # realize all terminals
-            # realize all post
-            for d in self.dependents:
-                if d.depPosition() != "pre":
-                    res.extend(coordReals.pop(0) if d.isA("coord") else d.real())
-            if self.terminal.isA("V"):
-                self.checkAdverbPos(res)
+            return self.coordReal()
+        self.pronominalizeChildren()
+        if "typ" in self.props:
+            self.processTyp(self.props["typ"])
+        if len(self.dependents) == 0:
+           return self.doFormat(self.terminal.real())
+        # realize "coord"s before the rest because it can change gender and number of subject
+        # save their realization
+        coordReals = [d.coordReal() for d in self.dependents if d.isA("coord")]
+        if self.getProp("n") is None: self.setProp("n","s")
+        # realize all pre
+        res = []
+        for d in self.dependents:
+            if d.depPosition() == "pre":
+                res.extend(coordReals.pop(0) if d.isA("coord") else d.real())
+        res.extend(self.terminal.real()) # realize all terminals
+        # realize all post
+        for d in self.dependents:
+            if d.depPosition() != "pre":
+                res.extend(coordReals.pop(0) if d.isA("coord") else d.real())
+        if self.terminal.isA("V"):
+            self.checkAdverbPos(res)
         return self.doFormat(res)
 
     # recreate a jsRealB expression

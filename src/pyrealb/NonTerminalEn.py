@@ -181,3 +181,6 @@ class NonTerminalEn:
 
     def doPronounPlacement(self, cList):
         pass
+
+    def interrogative_pronoun_woi(self, int_):
+        return "whom" if int_ == "woi" else "what"

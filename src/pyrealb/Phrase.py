@@ -531,28 +531,27 @@ class Phrase(Constituent):
         if len(self.elements) == 0:
             # should a warning be issued!!
             return []
-        res = []
         if self.isA("CP"):
             return self.cpReal()
-        else:
-            self.pronominalizeChildren()
-            if "typ" in self.props:
-                self.processTyp(self.props["typ"])
-            # realize CPs before the rest because it can change gender and number of subject
-            # save their realization
-            cpReals = [e.cpReal() for e in self.elements if e.isA("CP")]
-            if self.getProp("n") is None: self.setProp("n", "s")
-            for e in self.elements:
-                if e.isA("CP"):
-                    r = cpReals.pop(0)
-                # TODO: is it worth the trouble ?
-                # elif e.isA("VP") and reorderVPcomplements:
-                #     r=e.vpReal()
-                else:
-                    r = e.real()
-                res.extend(r)
-            if self.isA("VP") and len(res) > 1:
-                self.checkAdverbPos(res)
+        res = []
+        self.pronominalizeChildren()
+        if "typ" in self.props:
+            self.processTyp(self.props["typ"])
+        # realize CPs before the rest because it can change gender and number of subject
+        # save their realization
+        cpReals = [e.cpReal() for e in self.elements if e.isA("CP")]
+        if self.getProp("n") is None: self.setProp("n", "s")
+        for e in self.elements:
+            if e.isA("CP"):
+                r = cpReals.pop(0)
+            # TODO: is it worth the trouble ?
+            # elif e.isA("VP") and reorderVPcomplements:
+            #     r=e.vpReal()
+            else:
+                r = e.real()
+            res.extend(r)
+        if self.isA("VP") and len(res) > 1:
+            self.checkAdverbPos(res)
         return self.doFormat(res)
 
     # recreate a jsRealB expression

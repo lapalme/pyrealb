@@ -371,15 +371,15 @@ root(A("âgé"),
 def test_bonfante_fr_ex_26():
     assert (
 root(V("arriver"),
-     subj(Pro("elle").c('nom')),
+     subj(Pro("elle").c("nom")),
      comp(P("à"),
           comp(Q("Paris"))),
-     coord(C("mais"),
-           mod(A("confiant")),
-           mod(V("connaître").t('b'),
-               mod(P("sans")).pos('pre'),
-               comp(N("ville"),
-                    det(D("le")))))).realize()   
+     mod(A("confiant").g("f")),
+     mod(C("mais"),
+         mod(V("connaître").t("b"),
+             mod(P("sans")).pos("pre"),
+             comp(N("ville"),
+                  det(D("le")))))).realize()
     ) == 'Elle arrive à Paris confiante mais sans connaître la ville. ',\
     ' Exercice 2.49 p 72'
 

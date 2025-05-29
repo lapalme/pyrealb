@@ -224,10 +224,16 @@ class NonTerminalFr:
                 if (not c.realization.endswith("'")
                         and (c.getProp("pos") is None or (c.parentConst is not None and c.parentConst.getProp("pos") is None))):
                     # do not try to change position of a constituent with specified pos or with an elided realization
-                    if c.getProp("c") in ["refl", "acc", "dat"] or c.lemma == "y" or c.lemma == "en":
-                        pros.append(cList.pop(i))
-                    elif c.lemma in ["qui", "que", "quoi", "dont", "où"]:  # do not cross boundary of a relative
-                        break
+                    doNotMove = c.realization.endswith("'") or c.getProp("pos") is not None
+                    if c.parentConst is not None and c.parentConst.isA("subj","comp","mod") \
+                            and c.parentConst.getProp("pos") is not None: doNotMove = True
+                    if not doNotMove:
+                        if c.getProp("c") in ["refl", "acc", "dat"] or c.lemma == "y" or c.lemma == "en":
+                            pros.append(cList.pop(i))
+                        elif c.lemma in ["qui", "que", "quoi", "dont", "où"]:  # do not cross boundary of a relative
+                            break
+                        else:
+                            i += 1
                     else:
                         i += 1
                 else:
@@ -258,3 +264,7 @@ class NonTerminalFr:
     def tag_question(self, types):
         # in French really simple, add "n'est-ce pas"
         return self.a(", n'est-ce pas")
+
+    def interrogative_pronoun_woi(self, int_):
+        return ("qui" if int_ == "woi" else "quoi")
+

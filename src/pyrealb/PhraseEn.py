@@ -124,9 +124,6 @@ class PhraseEn(ConstituentEn,NonTerminalEn,Phrase):
             )
 
 
-    def interrogative_pronoun_woi(self, int_):
-        return "whom" if int_ == "woi" else "what"
-
     def tag_question(self, types):
         from .utils import Pro, V, Adv
         from .utils import VP

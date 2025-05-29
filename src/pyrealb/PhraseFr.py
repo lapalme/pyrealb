@@ -286,7 +286,4 @@ class PhraseFr(ConstituentFr,NonTerminalFr,Phrase):
                     whn={"après", "avant", "depuis", "dès", "durant", "en", "pendant"}
                     )
 
-    def interrogative_pronoun_woi(self, int_):
-        return ("qui" if int_ == "woi" else "quoi")
-
 
