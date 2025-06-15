@@ -2,18 +2,16 @@ from pyrealb import *
 
 loadEn()
 addToLexicon({"fussy":{"A":{"tab":"a4"}}})
-# a simple sentence
-cat=NP(D("the"),N("cat"))
-mouse=NP(D("a"),A("grey"),N("mouse"))
-sent=S(cat,VP(V("eat"),mouse))
 
-# modifications are "permanent"
+# Illustration of the fact that modifications are "permanent"
 cat1=NP(D("the"),N("cat"))
 mouse1=NP(D("a"),A("grey"),N("mouse"))
 
-# modifications are "permanent"
-cat2=NP(D("the"),N("cat"))
-mouse2=NP(D("a"),A("grey"),N("mouse"))
+# a simple sentence but ensure creating a new object at each occurrence
+cat=lambda:NP(D("the"),N("cat"))
+mouse=lambda:NP(D("a"),A("grey"),N("mouse"))
+sent=S(cat(),VP(V("eat"),mouse()))
+
 
 # random NP
 def np():
@@ -35,23 +33,22 @@ def vp():
 
 def show(exp):
     print(exp.toSource())
-    print(str(exp))
+    print(exp.realize())
     print("---")
 
 if __name__ == '__main__':
-    show(S(cat,VP(V("eat"),mouse)))
-    show(S(cat,VP(V("eat"),mouse)).n("p").t("f"))
-    show(S(cat,VP(V("eat"),mouse)).typ({"pas":True}))
-    show(S(cat,VP(V("eat"),mouse)).typ({"neg":True}))
-    show(S(cat,VP(V("eat"),mouse)).typ({"int":"wos"}))
-    show(S(cat,VP(V("eat"),mouse)).typ({"int":"wos","pas":True,"neg":True}))
-
+    ## show what happens when modifications directly on objects
     show(S(cat1.n("p"),VP(V("eat"),mouse1.n("p").pro())))
-    show(S(cat1,VP(V("eat"),mouse1))); # bad...
-    # clone before modification
-
-    show(S(eval(cat.toSource()).n("p"),VP(V("eat"),eval(mouse.toSource()).n("p").pro())))
-    show(S(cat,VP(V("eat"),mouse)))
+    print('notice that the source is not: S(cat1,VP(V("eat"),mouse1)). It is the same as the previous.')
+    show(S(cat1,VP(V("eat"),mouse1))) # bad...
+    # instead create new object at each call
+    show(S(cat(),VP(V("eat"),mouse())))
+    show(S(cat(),VP(V("eat"),mouse())).n("p").t("f"))
+    show(S(cat(),VP(V("eat"),mouse())).typ({"pas":True}))
+    show(S(cat(),VP(V("eat"),mouse())).typ({"neg":True}))
+    show(S(cat(),VP(V("eat"),mouse())).typ({"int":"wos"}))
+    show(S(cat(),VP(V("eat"),mouse())).typ({"int":"wos","pas":True,"neg":True}))
+    # create many random sentences
     print("======")
     for i in range(0,10):
         show(S(np(),vp()))

@@ -20,7 +20,7 @@ S(Pro("I").pe(2),
         S(N("Bill"),
           VP(V("marry").t("ps"),
              NP(D("my").g("m").ow("s"),
-                Q("ex").lier("-"),N("wife")))))))
+                Q("ex").lier(),N("wife")))))))
 """},
 {"ref":"Huang","url":"http://www.people.fas.harvard.edu/~ctjhuang/lecture_notes/lecch6.html","no":"35b",
  "expr":f"""

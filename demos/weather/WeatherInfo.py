@@ -70,7 +70,7 @@ class WeatherInfo:
         
     ### show all info for a given period
     ###    times (ending with h) are shown in local time 
-    ignoredFields=set(["header","names-en","names-fr","regions","en","fr","id"])
+    ignoredFields= {"header", "names-en", "names-fr", "regions", "en", "fr", "id"}
     def show_data(self,period):
         def show_terms(terms):
             return ", ".join([str(term) for term in terms])
@@ -184,4 +184,4 @@ class WeatherInfo:
         return self.select_terms(period,self.data["wind"])
     
     def get_ref_bulletin(self,lang):
-        return self.data[lang]
+        return self.data[lang.code]
