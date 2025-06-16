@@ -9,13 +9,13 @@ keywords: text generation, weather bulletin, French, English
 <center><a href="mailto:lapalme@iro.umontreal.ca">Guy Lapalme</a><br/>RALI-DIRO<br/>Université de Montréal<br/>June 2025</center>
 
 
-This a _pure Python version_ of the [jsRealB Weather demo](https://github.com/rali-udem/jsRealB/tree/master/demos/Weather)
+This is a _pure Python version_ of the [jsRealB Weather demo](https://github.com/rali-udem/jsRealB/tree/master/demos/Weather)
 
 # Context of the application
 
-The input of the application is set of meteorological information (e.g., precipitations, temperature, wind, UV index, ...) provided by [Environment and Climate Change Canada](https://www.canada.ca/en/environment-climate-change.html "Environment and Climate Change Canada - Canada.ca") (ECCC). Unlike usual data-to-text applications, this information is machine generated: it is created by a numerical weather model which outputs data for ranges of hours after the time the bulletin is expected to be issued. ECCC emits three _regular_ bulletins each day (morning, midday and evening) for hundreds of regions of Canada. A bulletin gives the predictions for the current day or evening and the next day. These bulletins are generated in both English and French.
+The input for this application is a set of meteorological data, such as precipitation, temperature, wind, and the UV index, provided by [Environment and Climate Change Canada.](https://www.canada.ca/en/environment-climate-change.html "Environment and Climate Change Canada - Canada.ca") (ECCC). Unlike usual data-to-text applications, this information is machine generated: it is created by a numerical weather model, which outputs data for ranges of hours after the time the bulletin is expected to be issued. ECCC releases three _bull_etins daily (morning, midday, and evening) for hundreds of regions across Canada. Each bulletin provides forecasts for the current day or evening and the following day. These bulletins are generated in both English and French.
 
-For the purpose of this demo, we extracted a subset of the global information for regions of Ontario and Québec for 2018 and 2019 which is nevertheless illustrative of the natural language generation problems encountered in this context. We converted the Meteocode, an internal data format of ECCC, to [JSON](https://www.json.org/json-en.html "JSON") in which time indications are _shifted_, so that they appear in local time while, in the original, they were in UTC.
+For the purpose of this demo, we extracted a subset of global information for the regions of Ontario and Quebec for 2018 and 2019. This subset is nevertheless representative of the challenges faced when generating natural-language summaries. We converted the Meteocode, an internal data format of ECCC, to [JSON](https://www.json.org/json-en.html "JSON,") in which time indications are _shifted_, so that they appear in local time while, in the original, they were in UTC.
 
 For example, given this input in JSON:
 
@@ -37,7 +37,7 @@ For example, given this input in JSON:
 }
 ```
 
-here is the evening bulletin realized by **pyrealb** in English and French.
+Here is the evening bulletin realized by **pyrealb** in English and French.
 
     WEATHER BULLETIN: regular
     Forecasts issued by pyrealb on Wednesday, July 18, 2018 at 4 p.m. for today and tomorrow at 4 p.m.
@@ -78,15 +78,15 @@ here is the evening bulletin realized by **pyrealb** in English and French.
 
 This program does not reproduce verbatim the output of the system used by ECCC because we simplified it for didactic purposes. Our goal is to illustrate a use of the **pyrealb** realizer in an interesting context, in fact, [weather information is one of the most successful _real-life_ applications of Natural Language Generation (NLG)](https://ehudreiter.com/2017/05/09/weathergov/ "You Need to Understand your Corpora! The Weathergov Example – Ehud Reiter's Blog").
 
-This document outlines the organization of the system and should be read in conjunction with the [Python source code on the `pyrealb` GitHub](https://github.com/lapalme/pyrealb/tree/main/demos/weather). Only excerpts are shown here to emphasize the aspects of the text generation that are more challenging. We take for granted that the reader can understand Python code and is familiar with the constituent notation used as input for **pyrealb**.
+This document outlines the organization of the system and should be read in conjunction with the [Python source code on the `pyrealb` GitHub](https://github.com/lapalme/pyrealb/tree/main/demos/weather). Only excerpts are shown here to emphasize the aspects of the text generation that are more challenging. It is assumed that the reader is proficient in Python and has a basic understanding of the notation used as input for **pyrealb**.
 
 ## Separating information processing from linguistic realization
 
-One advantage of using **pyrealb** is to allow a clear separation between _What to say_ and _How to say it_ through the use of syntactic constructions that can be built incrementally by program and easily parameterized. The syntactic patterns are then realized and formatted into syntactically correct English and French taking care of subject-verb agreements, verb conjugation, noun declension and proper spacing between punctuation.
+One advantage of using **pyrealb** is to allow a clear separation between _What to say_ and _How to say it_ through the use of syntactic constructions that can be built incrementally by program and easily parameterized. The syntactic patterns are then transformed into grammatically correct English and French, ensuring proper subject-verb agreement, verb conjugation, noun declension and punctuation spacing.
 
 Internally, the notation used as input specification calls Python class constructors. The Python objects built by these calls can then be realized by **pyrealb**.
 
-For example, the following Python expression creates a data structure which is _realized_ using `.realize()` to produce `Flurries begin in the morning, amount 2 feet.`
+For example, the following Python expression creates a data structure that is _realized_ using `.realize()` to produce `Flurries begin in the morning, amount 2 feet.`
 
 ```python
 S(N("flurry").n("p"),                              # type of precipitation
@@ -97,9 +97,9 @@ S(N("flurry").n("p"),                              # type of precipitation
 
 The notation mimics the conventional constituent syntactic notation for syntactic trees for _phrases_ such as `S` for sentence, `VP` for Verb Phrase, etc. or _terminals_ such as `N` for Noun, `V` for verbs, etc. The dot notation is used for modifiers (`n` for number, `t` for tense). See [**pyrealb** documentation](https://github.com/lapalme/pyrealb/blob/main/docs/documentation.html) for more details.
 
-As can be seen in this example, each word is specified with its lemma, i.e. the basic form found in a dictionary. The realization process takes care of the grammatical _details_ which are nevertheless important for readers: plural forms, verb conjugation, agreement between the subject and the verb and between a number and the noun, proper punctuation between parts of a coordination, if present.
+As can be seen in this example, each word is specified with its lemma, i.e., the basic form found in a dictionary. The realization process takes care of the grammatical _details_ which are nevertheless important for readers: plural forms, verb conjugation, agreement between the subject and the verb and between a number and the noun, proper punctuation between parts of coordination, if present.
 
-It might be argued that the `pyrealb` notation is more verbose than the realized sentence, but this expression can be modularized into a function with parameters that can be called in different contexts to produce many grammatically correct variations. For example, the above example can be _abstracted_ into the following function:
+The `pyrealb` notation may seem verbose, but it allows you to create a function with parameters. This function can then be called in different contexts, producing many grammatical variations. For example, the above example can be _abstracted_ into the following function:
 
 ```python
 def pcpn(type,action,tense,moment,quantity=None,unit=None):
@@ -109,23 +109,23 @@ def pcpn(type,action,tense,moment,quantity=None,unit=None):
                  None if quantity==None else NP(N("amount"),NP(NO(quantity),unit)))))
 ```
 
-which can be called in various ways, as is shown in this table (the first line is equivalent to our example):
+which can be called in various ways, as shown in this table (the first line corresponds to our example):
 
 
 | pyrealb expression | Realized text |
 | :----------------------------------------------------------- | ----------------------------------------------- |
-| `pcpn(N("flurry").n("p"),"begin","p","morning",2,N("foot"))` | `Flurries begin in the morning, amount 2 feet.` |
-| `pcpn(N("rain"),"begin","p","evening",1,N("inch"))` | `Rain begins in the evening, amount 1 inch.`    |
-| `pcpn(N("snow"),"stop","pr","evening"),"en")`                | `Snow stopping in the evening.`                 |
-| `pcpn(NP(V("freeze").t("pr"),N("drizzle")),"start","f","morning")` | `Freezing drizzle will start in the morning.`   |
+| <code>pcpn(N("flurry").n("p"),<br/>&nbsp;&nbsp;&nbsp;&nbsp; "begin","p","morning",2,N("foot"))</code> | <code>Flurries begin in the morning,<br/>amount 2 feet.</code> |
+| <code>pcpn(N("rain"),<br/>&nbsp;&nbsp;&nbsp;&nbsp; "begin","p","evening",1,N("inch"))</code> | <code>Rain begins in the evening,<br/>amount 1 inch.</code>    |
+| <code>pcpn(N("snow"),<br/>&nbsp;&nbsp;&nbsp;&nbsp; "stop","pr","evening"),"en")</code>                | `Snow stopping in the evening.`                 |
+| <code>pcpn(NP(V("freeze").t("pr"),<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;N("drizzle")),"start","f","morning")</code> | <code>Freezing drizzle will start<br/>in the morning.</code>   |
 
 
-In a way, the **pyrealb** notation might be viewed as an *smart* formatting specification language that can  format strings and numbers, but that also takes care of grammatical features that are essential for producing publication quality texts. As we will show later, **pyrealb** can also realize French sentences when the appropriate French lemma are given. It can also deal with the proper wording of numbers and dates. Although not shown here, **pyrealb** can also produce HTML tags so that it can be embedded in web pages, the **pyrealb** demos shows many use cases of HTML formatting combined with graphics. It is even possible to realize bilingual sentences in which some parts are in English and others in French.
+In a way, the **pyrealb** notation might be viewed as an *smart* specification language that can  format strings and numbers, but that also takes care of grammatical features that are essential for producing publication quality texts. As we will show later, **pyrealb** can also realize French sentences when the appropriate French lemmas are given. It can also deal with the proper wording of numbers and dates. Although not shown here, **pyrealb** can also produce HTML tags so that it can be embedded in web pages, the **pyrealb** demos shows many use cases of HTML formatting combined with graphics. It is even possible to create bilingual sentences, with some parts in English and others in French.
 
 
 ## Weather data organization
 
-We now outline the JSON data organization for a given weather bulletin used as input for our demonstration program in terms of Python data structures (see the first code block above for an example):
+We now describe the JSON data organization for a given weather bulletin used as input for our demonstration program in terms of Python data structures (see the first code block above, for an example):
 
 *   administrative information:
     *   `header` : issue `datetime`, next-issue `datetime`
@@ -146,18 +146,17 @@ We now outline the JSON data organization for a given weather bulletin used as i
     *   `fr` : original bulletin in French to ease comparison of generated text with the issued forecast
     *   `id` : id of the original data, to ease debugging of the data conversion program.
 
-# Bilingual data organization
+# Bilingual data organization (`Realization.English.py, Realization.Francais.py`)
 
-In this type of application, it is necessary that the same information be conveyed in both languages. In order to achieve this goal, we clearly separate the linguistic part from the selection and organization of the data. Moreover, in order to help with a fully parallel linguistic expression between English and French, we organize language dependent information in two classes, `English` and `Francais`, for which attributes and methods build  **pyrealb** expressions that can be realized into equivalent formulations in both English and French.  Most text generation methods will be parameterized by an instance of one of these two classes, so that calling the attribute or the method will produce the linguistic expression in the chosen language. 
+In this type of application, it is necessary that the same information be conveyed in both languages. To accomplish this, we have separated the linguistic component from the selection and organization of data. Furthermore, to facilitate a fully parallel linguistic expression between English and French, we organize information into two classes, `English` and `Francais`. Attributes and methods build **pyreal**b expressions that can be realized into equivalent formulations in both English and French  Most text generation methods are parameterized with an instance of one of these two classes. Calling the attribute or method will produce the linguistic expression in the chosen language. 
 
-The following table illustrates the structure of these classes: lines 1 to 17 show the constructor which loads the appropriate language and then adds some specialized words to the corresponding pyrealb lexicon. Lines 9 to 15 show how to express periods of a day given the hour number, see the source code for the other attributes. Lines 19 to 35 define functions to generate a temperature trend and a period of the day, see the source code for the other methods. The source code of the `English` and `Francais` classes is *aligned*, each corresponding attribute and method starting at the same line number in both files.
+The following table illustrates the structure of these classes: lines 1 to 17 show the constructor, which loads the appropriate language then adds some specialized words to the corresponding pyrealb lexicon. Lines 9 to 15 show how to express periods of a day given the hour number, see the source code for the other attributes. Lines 19 to 35 define functions to generate a temperature trend and a period of the day. See the source code for the other methods. The source code of the `English` and `Francais` classes is *aligned*, with each corresponding attribute and method starting at the same line number in both files.
 
-As modifications to a data structure are permanent, it is important to create a new data structure at each use. The simplest way to achieve this is to create a function (e.g., a `lambda` in Python) that returns a new structure at each call such as in lines 10 to 14.
+As modifying a data structure leaves permanent changes, it is important to create a new data structure at each use. The simplest way to achieve this is to create a function (e.g., a `lambda` in Python) that returns a new structure at each call such as in lines 10 to 14.
 
 <table>
 <tr>
 <td style="width:400px;font-size:smaller">
-
 
 ```python
 class English:
@@ -199,7 +198,6 @@ class English:
 
 </td>
 <td style="width:400px;font-size:smaller">
-
 
 ```python
 class Francais:
@@ -245,7 +243,7 @@ class Francais:
 
 # Bulletin generation (`Bulletin.py`)
 
-As shown in the sample given above, a weather bulletin is composed of standardized block of information some of which are created using simple attributes  (`communication_header`,`forecast_regions` and `end_statement`), but others (`title_block` and `forecast_text`) use more complex constructions. All these functions return a string that can be split over many lines, if it is too long or `None` in which case it is ignored in the output.
+As shown in the sample given above, a weather bulletin comprises standardized blocks of information. Some of them use simple attributes (`communication_header`,`forecast_regions` and `end_statement`), while others (`title_block` and `forecast_text`) use more complex constructions. All these functions return a string that can span multiple lines if it exceeds a certain length, or `None` in which case the output ignores it.
 
 ```python
 def generate_bulletin(wInfo,lang):
@@ -310,7 +308,7 @@ issue_time_to_periods = {
 }
 ```
 
-For example, in an `evening` bulletin, for the `tomorrow` period only terms that have an ending time greater or equal than 30 and a starting time less than 42 are returned. If a given information is not found or if not values intersect the given range, `None` is returned.
+For example, in an `evening` bulletin, for the `tomorrow` period, only terms that have an ending time greater or equal than 30 and a starting time less than 42 are returned. If the information is not found or if the values do not intersect the given range, `None` is returned.
 
 For the `tomorrow` period of the above bulletin, these terms can be visualized as follows:
 
@@ -324,9 +322,9 @@ uv-index                  : [+12h,+14h):[7.7]
 wind                      : [+0h,+12h):[sw, speed, 10], [+12h,+20h):[sw, speed, 20]
 ```
 
-The semi-open time intervals are indicated by hour modulo 24 prefixed with + for the next day and ⧺ for the day after tomorrow. The first line give the period name, its time interval, its id and the issue time. Then are given the (non `None`) field names with the terms with time intervals that intersect the period interval. Each term is shown with its time interval followed by its lists of values, some of which can be terms themselves (e.g. `thunderstorm` in `precipitation-type`)
+Semi-open time intervals are indicated using hours modulo 24. The next day is indicated by a + sign, while the day after tomorrow uses ⧺. The first line gives the period name, its time interval, its id and the issue time. Subsequent lines provide the (non `None`) fields, along with their corresponding time intervals and values. Some of those values can also contain other terms, such as `thunderstorm` within `precipitation-type`.
 
-Access to the information in `WeatherInfo` is performed with functions such as the following which returns only relevant terms for the period:
+Access to the information in `WeatherInfo` is performed with functions such as the following, which return only relevant terms for the period:
 
 ```python
 def get_precipitation_probabilities(self,period):
@@ -356,7 +354,7 @@ Different ways of realizing sky conditions are given in the following language a
     }
 ```
 
-This attribute is used in the context of the following function which loops over the _sky cover terms_ and depending on the values of the sky covering at the start and end of the period to determine the appropriate expression to use. Some care is taken not to repeat the same expression for different terms. All **pyrealb** expressions are added to a list whose elements are realized and concatenated. If the name of the `period` is `today` or `tomorrow`, the first element of the tuple is chosen otherwise the second is used.
+This attribute is used in the context of the following function, which loops over the _sky cover terms_ and depending on the values of the sky covering at the start and end of the period to determine the appropriate expression to use. Some care is taken not to repeat the same expression for different terms. All **pyrealb** expressions are added to a list whose elements are realized and concatenated. If the name of the `period` is `today` or `tomorrow`, the first element of the tuple is chosen; otherwise the second is used.
 
 ```python
 def sky_condition(mc, period, lang):
@@ -455,12 +453,12 @@ def precipitation(wInfo, period, lang):
 
 ## Wind (`Realization.Wind.py`)
 
-Information about the wind speed and directions are realized such as the following:
+Information about the wind speed and directions is realized, such as the following:
 
     Wind west around noon. Becoming southwest in the evening.
     Vents de l'ouest vers midi. Devenant du sud-ouest dans la soirée.
 
-Wind direction realizations are given in a table in language class attribute. Here is the one in `English`.
+Wind direction realizations are given in a table of language class attributes. Here is the one in `English`.
 
 ```python
     self.pyrWindDirection = {
@@ -473,7 +471,7 @@ Wind direction realizations are given in a table in language class attribute. He
     }
 ```
 
-Wind terms are scanned to realize the ones with wind speed of more than 15 km/h. When a wind speed changes by more than 20 km/h or if it changes direction then an appropriate realization is emitted. If a gust is detected during the period, it is also expressed. The expression is built incrementally by starting with an empty `S()` to which an `NP` and possibly a `VP` or an indication of the time are added.
+Wind terms are scanned to identify those with speeds over 15 km/h. We emit an appropriate response when the wind speed increases by at least 20 km/h, decreases, or changes direction. If a gust is detected during the period, it is also expressed. The expression is built incrementally, beginning with an empty `S()` and adding a `NP` and, optionally, a `VP` or a time indicator.
 
 ```python
 def wind(wInfo,period,lang):
@@ -509,17 +507,17 @@ def wind(wInfo,period,lang):
 
 ## Temperature (`Realization.Temperature.py`)
 
-Temperatures can be described very simply such as:
+Temperatures can be described very simply, such as:
 
     High 28. Low 15.
     Maximum 28. Minimum 15.
 
-or with a trend when there is a significant difference in temperatures: negative change of at least 3°C during the daytime or a positive change of at least 3°C during nighttime:
+If there is a substantial difference in temperatures, such as a decrease of at least 3 °C during the day or an increase of at least 3 °C at night, a trend is present.
 
     Temperature rising to 28 by morning.
     Températures à la hausse pour atteindre 28 en matinée.
 
-This achieved with this
+This is achieved with this
 
 ```python
 def temperature(wInfo,period,lang):
@@ -560,7 +558,7 @@ def temperature(wInfo,period,lang):
     return " ".join(res)
 ```
 
-The value of a temperature is indicated using the conventions of ECCC, add a qualifier `plus` when it is less or equal to 5, and `minus` when it is below 0. Here the method defined in `English`.
+The worth of a temperature is denoted by the rules of the ECCC. Append a qualifier `plus` if it is at most 5, and `minus` if it is below zero. Here is the approach outlined in `English`.
 
 ```python
     def pyrTemp(self,val):
@@ -570,7 +568,7 @@ The value of a temperature is indicated using the conventions of ECCC, add a qua
         return NO(val)
 ```
 
-The first code block shows the the trend expression in both `English` and `Francais` and _abnormal_ situations are encoded using the following method for `English`:
+The first code block shows the trend expression in both `English` and `Francais` and _abnormal_ situations are encoded using the following method for `English`:
 
 ```python
     def pyrAbnormal(self,dn,kind):
@@ -587,12 +585,12 @@ The first code block shows the the trend expression in both `English` and `Franc
 
 ## UV index (`Realization.UV_index.py`)
 
-UV index information, a number which ranges from a low of zero to a high of 11+, is only given for bulletin during a day period in the following way:
+The UV index, which varies from zero to an elevated level, is provided in bulletins only during daylight hours in the following manner:
 
     UV index 8 or very high.
     Indice UV 8 ou très élevé.
 
-The language dependent information defined as attributes of the language classes.
+Information that is language-dependent is defined as attributes of language classes.
 
 ```python
         self.uv_index = Q("UV index")
@@ -604,7 +602,7 @@ The language dependent information defined as attributes of the language classes
                           (1000, lambda: A("extreme"))]
 ```
 
-Its realization is simple matter of outputting its rounded value and if it is greater than 0\. The English or French realization is obtained by searching a table [according to the guidelines of ECCC](https://www.canada.ca/en/environment-climate-change/services/weather-health/uv-index-sun-safety/about.html "About the UV index - Canada.ca"). This achieved with the following language independent code
+To produce the result, one must first round it, then determine if it is greater than zero\. The English or French version can be obtained by looking up the value in a table[, following the ECCC guidelines.](https://www.canada.ca/en/environment-climate-change/services/weather-health/uv-index-sun-safety/about.html "About the UV index - Canada.ca"). This was achieved with the following language independent code.
 
 ```python
 def uv_index(wInfo,period,lang):
@@ -622,8 +620,8 @@ def uv_index(wInfo,period,lang):
     return None
 ```
 
-## Conclusion
+# Conclusion
 
-This document has shown how to generate bilingual documents from a single source of information using **pyrealb** in conjunction with the data manipulation all in Python. Although the input data and the generated documents are simpler than what would be used in a real-life context, the essential organization of the system should stay the same as the framework is extensible.
+This document has demonstrated how to create bilingual documents from a single data source using **pyrealb** and data manipulation in Python. Although the input data and generated documents are simplified for illustrative purposes, the underlying system structure is scalable and can be adapted to more complex scenarios.
 
 [Guy Lapalme](mailto:lapalme@iro.umontreal.ca)
