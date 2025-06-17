@@ -37,7 +37,7 @@ def evaluate(s):
 ## create a table from the information in userinfos.py and add it to the page 
 def addTable(infos):
     for lang in ["fr","en"]:
-        loadEn() if lang=="en" else loadFr()
+        load(lang)
         if infos[lang]!="":
             page.h3(infos[lang],lang=lang)
         page.table.open(lang=lang)
@@ -179,7 +179,7 @@ pyrealb specification.""")
 
 
 #### start of HTML generation
-
+now = datetime.datetime.now()
 page=markup.page()
 page.init(title="pyrealb - Documentation",
           css="style.css",
@@ -187,11 +187,11 @@ page.init(title="pyrealb - Documentation",
           charset="UTF-8",
           metainfo={"name":"viewport",
                     "content":"width=device-width, initial-scale=1.0",
-                    "date":str(datetime.datetime.now())},
+                    "date":str(now.strftime("%Y-%m-%d  %H:%M:%S"))},
           script=["https://code.jquery.com/jquery-latest.min.js","user.js"],
           footer=f"""Contact: <a href="mailto:lapalme@iro.umontreal.ca">Guy Lapalme</a> 
-<a href="http://rali.iro.umontreal.ca">RALI</a>, Université de Montréal, CANADA. 2025.<br/><hr/>
-{datetime.datetime.now().strftime("%Y-%m-%d  %H:%M:%S")}
+<a href="http://rali.iro.umontreal.ca">RALI</a>, Université de Montréal, CANADA. {now.strftime("%Y")}.<br/><hr/>
+{now.strftime("%Y-%m-%d  %H:%M:%S")}
 """
           )
 
@@ -224,13 +224,17 @@ that can be realized with <code>str()</code> , most often implicitely within a <
 instructions on the GitHub</a>, using it
 is only a matter of adding the following line to the program.""",lang="en")
 page.code("from pyrealb import *")
-page.p("""
+load("fr")
+page.p(f"""
 <span class="jsr">pyrealb</span> peut aussi être utilisé pour créer une page web comme celle-ci dans laquelle 
-les exemples ont été réalisés par <span class="jsr">pyrealb</span>  lors de la création de la page.""",
+les exemples ont été réalisés par <span class="jsr">pyrealb</span>  lors de la création de la page,  
+{evaluate('DT().dOpt({"day":False,"hour":False,"minute":False,"second":False})')}.""",
 lang="fr")
-page.p("""<span class="jsr">pyrealb</span> can be used to build web pages such as this one in which all examples 
+load("en")
+page.p(f"""<span class="jsr">pyrealb</span> can be used to build web pages such as this one in which all examples 
  were realized using
-<span class="jsr">pyrealb</span> when the page was created.""",
+<span class="jsr">pyrealb</span> when the page was created, 
+{evaluate('DT().dOpt({"day":False,"hour":False,"minute":False,"second":False})')}.""",
 lang="en")
 
 

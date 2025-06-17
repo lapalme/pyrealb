@@ -22,4 +22,4 @@ class Realizer:
                 NP(NO(len(persons)).nat(), self.individual()).ba("("),
                 self.attend(self.meeting(event)),
                 DT(date).dOpt(Realizer.dateOptions))
-                    .t(self.tense(date,Realizer.today)))
+                    .t(self.tense(date,Realizer.today)).realize())
