@@ -74,8 +74,8 @@ if __name__ == "__main__":
     francais = Francais()
     en = English_lang()
     fr = Francais_lang()
-    for (i,day) in zip(range(1,len(participants)+1),
-                       [today-timedelta(days=1),today,today+timedelta(days=1)]):
+    for (i,day) in enumerate([today-timedelta(days=1),today,today+timedelta(days=1)],
+                             start=1):
         report("assembly",participants[:i], day,"en")
         report("réunion",participants[:i], day,"fr")
         print("--")
