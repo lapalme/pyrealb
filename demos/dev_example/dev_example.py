@@ -349,6 +349,24 @@ def makeExamples():
               V("faire").t('b'),
               Pro("cela"))).typ({'int': 'wad'}),
          "Que puis-je faire? "],
+        [S(
+            S(P("voici"), NP(D("un"), N("titre"))).md("#"),
+            S(NP(D("un"), N("mot").md("*"),
+                 PP(P("en"), N("lien"), N("italique")).md("@http://example.com")),
+              PP(P("devant"), NP(D("un"), N("liste")))).a(".\n").cap(),
+            S([N(e).md("+") for e in ["chat", "chien", "poulet"]])
+        ).md("---"),
+          """# Voici un titre
+ Un *mot* [en lien italique](http://example.com) devant une liste.
+ 
++ chat
+ 
++ chien
+ 
++ poulet
+
+---
+. """],
     ]
 
     #  exemples en anglais

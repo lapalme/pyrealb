@@ -157,7 +157,31 @@ class Constituent:
         if "tag" not in self.props:self.props["tag"]=[]
         self.props["tag"].append([name,attrs])
         return self
-    
+
+    ## Markdown
+     # Regex for valid Markdown specifications with the following groups
+     #   #{1,6}  : 1 : header
+     #   *{1,}   : 2 : bold+italic
+     #   >+      : 3 : blockquote
+     #   \s+\+   : 4 : unordered list
+     #   \d+\.+  : 5 : ordered list
+     #   ---     : 6 : horizontal rule
+     #   @.*     : 7 : link
+     #   <       : 8 : autolink
+
+    mdRE = re.compile(r"(#{1,6})|(\*{1,3})|(>+)|(\s*\+)|(\d+\.+)|(---)|(@.*)|(<)")
+
+    def md(self,markup):
+        if not isinstance(markup,str):
+            return self.warn("bad application",".md","str",type(markup))
+        m = self.mdRE.fullmatch(markup)
+        if m is None:
+            return self.warn("ignored value for option",".md",markup);
+        if "md" not in self.props: self.props["md"]=[]
+        self.props["md"].append(markup)
+        self.optSource+=f".md({markup})"
+        return self
+
     def parseDateString(self,dateS):
         try:  ## parse the string as an iso-like time format 
             m=re.match(r"(\d{4}-\d{2}-\d{2})([T ](\d{2}:\d{2}:\d{2}))?",dateS)
@@ -342,6 +366,34 @@ class Constituent:
             for attName,attVal in self.props["tag"]:
                 wrapWith(startTag(attName,attVal),"</"+attName+">")
 
+        if "md" in self.props:
+            for markup in self.props["md"]:
+                gs = self.mdRE.fullmatch(markup).groups()
+                if gs[0] is not None: # header
+                    wrapWith(gs[0]+" ","\n")
+                    continue
+                if gs[1] is not None:  # bold, italic
+                    wrapWith(gs[1],gs[1])
+                    continue
+                if gs[2] is not None: # blockquote
+                    wrapWith("\n"+gs[2],"\n")
+                    continue
+                if gs[3] is not None: #unordered list
+                    wrapWith("\n"+gs[3]+" ","\n")
+                    continue
+                if gs[4] is not None: # ordered list
+                    wrapWith("\n"+gs[4]+" ","\n")
+                    continue
+                if gs[5] is not None: # horizontal rule after
+                    wrapWith("","\n---\n")
+                    continue
+                if gs[6] is not None: # link
+                    wrapWith("[",f"]({gs[6][1:]})")
+                    continue
+                if gs[7] is not None: # autolink
+                    wrapWith("<",">")
+                    continue
+
         if "a" in self.props:
             for a in self.props["a"]:
                 wrapWith("",getBeforeAfterString(a)["b"])
@@ -392,7 +444,8 @@ class Constituent:
 
         if doTitleCase : self.titleCase(terminals[-1])
         last = terminals[-1].realization
-        if last.startswith(" "): last = last[1:] # remove redundant initial space
+        # remove redundant initial space except at the start i.e. a single terminal
+        if last.startswith(" ") and len(terminals)>1: last = last[1:]
         s+=last
         # apply capitalization and final full stop unless .cap(False)
         if self.parentConst is None:

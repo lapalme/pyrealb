@@ -401,6 +401,16 @@ If the content added before and/or a constituent is defined in the language rule
 then the appropriate spacing is added before and after the punctuation sign, 
 otherwise the content is added without spacing.""",lang="en")
 addTable(formatSect)
+page.p("""Précisions pour le Markdown: le niveau de titre dépend du nombre de <code>#</code>; 
+les listes à puces sont obtenues avec <code>.md("+")</code>, les listes ordonnées, 
+avec <code>.md("1.")</code> ou tout autre nombre entier suivi d'un point; 
+un <i>autolink</i> est créé avec <code>.md("<")</code>; une ligne horizontale avec 
+<code>.md("---")</code> et un <i>blockquote</i> avec <code>.md(">")</code>""",lang="fr")
+page.p("""Remarks for Markdown: the header level is given by the number of <code>#</code>; 
+bulleted lists are created with <code>.md("+")</code>, ordered lists with <code>.md("1.")</code> 
+or any other integer followed by a period; an <i>autolink</i> is created with <code>.md("<")</code>; 
+an horizontal rule is obtained with <code>.md("---")</code> and a <i>blockquote</i> 
+with <code>.md(">")</code>""",lang="en")
 
 h2_fr("Position et pronominalization","modSN");h2_en("Position and pronominalization","npMod")
 addTable(nPmods)
@@ -683,19 +693,19 @@ page.p("""Créer une table dans laquelle chaque clé est une des formes déclin�
 de tous les mots du lexique de la langue spécifiée. La valeur associée à une liste d'instances de 
 <code>Terminal</code> qui sont réalisées par la clé.
 """,lang="fr")
-page.p("""Cette table peut être utilisée pour de la génération <i>inverse</i>. Voici quelques appels suivis des résultats après &rAarr;
+page.p("""Cette table peut être utilisée pour de la génération <i>inverse</i>. Voici quelques appels suivis des résultats après &rArr;
 <pre lang="fr"><code>    lemmataFr = buildLemmataMap("fr")
-    print(", ".join(e.toSource() for e in lemmataFr["finies"])) &rAarr; <i>A("fini").g('f').n('p'), V("finir").t('pp').g('f').n('p')</i>
-    print(", ".join(e.toSource() for e in lemmataFr["crus"] if e.isA("N"))) &rAarr; <i>N('cru').n("p")</i>
+    print(", ".join(e.toSource() for e in lemmataFr["finies"])) &rArr; <i>A("fini").g('f').n('p'), V("finir").t('pp').g('f').n('p')</i>
+    print(", ".join(e.toSource() for e in lemmataFr["crus"] if e.isA("N"))) &rArr; <i>N('cru').n("p")</i>
 </code></pre>
 """,lang="fr")
 page.p("""Build a dict in which each key is an inflected form of all the entries in the lexicon of the specified language. 
 The associated value is a list of <code>Terminal</code> instances that are realized by the key.
 """,lang="en")
-page.p("""This dict  can be used for <i>inverse</i> generation. Here are examples of calls with the result shown after &rAarr;
+page.p("""This dict  can be used for <i>inverse</i> generation. Here are examples of calls with the result shown after &rArr;
 <pre lang="en"><code>    lemmataEn = buildLemmataMap("en")
-    print(", ".join(e.toSource() for e in lemmataEn["love"])) &rAarr; <i>N('love'), V('love').t("b"), V('love').pe(1), V('love').pe(2), V('love').pe(1).n("p"), V('love').pe(2).n("p"), V('love').n("p")</i>
-    print(", ".join(e.toSource() for e in lemmataEn["love"] if e.isA("N"))) &rAarr; <i>N('love')</i>
+    print(", ".join(e.toSource() for e in lemmataEn["love"])) &rArr; <i>N('love'), V('love').t("b"), V('love').pe(1), V('love').pe(2), V('love').pe(1).n("p"), V('love').pe(2).n("p"), V('love').n("p")</i>
+    print(", ".join(e.toSource() for e in lemmataEn["love"] if e.isA("N"))) &rArr; <i>N('love')</i>
 </code></pre>
 """,lang="en")
 
@@ -780,7 +790,7 @@ Pour faciliter l'utilisation de <span class="jsr">pyrealb</span> en sortie d'un 
 Il est possible d'utiliser un format d'entrée JSON <a href="http://rali.iro.umontreal.ca/JSrealB/current/documentation/jsRealB-jsonInput.html">
 décrit dans ce document (en anglais)</a> où sont décrites deux API permettant 
 d'appeler un serveur <i>node.js</i> <code>jsRealB</code> <a href="http://rali.iro.umontreal.ca/JSrealB/current/documentation/jsRealBfromPython.html">depuis un autre programme Python</a> ou Prolog. 
-Il est également possible d"obtenir une expression JSON correspondant à une expression <span class="jsr">pyrealb</span>.
+Il est également possible d'obtenir une expression JSON correspondant à une expression <span class="jsr">pyrealb</span>.
 """,
 lang="fr")
 page.p("""
@@ -854,7 +864,7 @@ errors and awkwardnesses that were corrected in the original.
 h2_fr("Informations complémentaires","plusDinfo");h2_en("More information","moreInfo")
 page.ul("""
 <li><a href="https://arxiv.org/pdf/2311.14808" lang="fr">Utilisation de pyrealb pour la génération bilingue 
-(document en anglais)</a><a href="https://arxiv.org/pdf/2311.14808" lang="en">Use of pyrealb Data-to-Text Bilingual
+(document en anglais)</a><a href="https://arxiv.org/pdf/2311.14808" lang="en">Use of pyrealb for Data-to-Text Bilingual
  Generation</a></li>
 <li><a href="https://arxiv.org/pdf/2012.15425" lang="fr">Document décrivant l'organisation de <code>jsRealB</code>
 (section 6.7 spécifique à <span class='jsr'>pyrealb</span>)</a><a href="https://arxiv.org/pdf/2012.15425" lang="en"
@@ -877,8 +887,11 @@ pyrealb" lang="en">Jupyter Notebook</a></li>
 <a href="Lexicon-Format-en.html" lang="en">Format of the lexicon entries</a></li>
 <li>Publications:
     <ul>
+        <li>G. Lapalme, <em>Data-to-Text Bilingual Generation</em>, Nov 2023, 
+        <a href='https://arxiv.org/abs/2311.14808'>https://arxiv.org/pdf/2311.14808</a></li>
         <li><a href="https://aclanthology.org/W15-4719/">Demo paper at ENLG-2015</a></li>
-        <li>Daoust, N., and G. Lapalme, <em>JSreal: A Text Realizer for Web Programming</em>, Language Production, Cognition, and the Lexicon - a Festschrift in honor of Michael Zock, Text, Speech and Language Technology, Vol 48: Springer, pp. 363-378, 2014. [<a href="http://rali.iro.umontreal.ca/rali/sites/default/files/publis/JSreal.pdf">PDF</a>]</li>
+        <li>Daoust, N., and G. Lapalme, <em>JSreal: A Text Realizer for Web Programming</em>, Language Production, 
+        Cognition, and the Lexicon - a Festschrift in honor of Michael Zock, Text, Speech and Language Technology, Vol 48: Springer, pp. 363-378, 2014. [<a href="http://rali.iro.umontreal.ca/rali/sites/default/files/publis/JSreal.pdf">PDF</a>]</li>
     </ul>
 </li>
 """)
