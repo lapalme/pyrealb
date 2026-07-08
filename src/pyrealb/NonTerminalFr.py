@@ -108,9 +108,9 @@ class NonTerminalFr:
                 and re.match(r".*[,;!?] ?$",res[start].realization) is None:
             start -= 1
         start += 1
-        # find first consecutive adverbs (ignoring "not" or "ne")
+        # find first consecutive adverbs (ignoring "not" or "ne"|"non")
         advIdxes = [i for (i, e) in zip(range(start, len(res)), res[start:])
-                    if e.isA("Adv") and e.lemma != "ne"]
+                    if e.isA("Adv") and e.lemma not in ["ne","not","non"]]
         if len(advIdxes) == 0:
             return
         advIdx = advIdxes[0]
@@ -156,9 +156,12 @@ class NonTerminalFr:
             tempsAdv = ["hier", "demain", "longtemps", "aujourd'hui", "tôt", "tard", "auparavant", "autrefois"]
             lieuAdv = ["ici", "là", "là-bas", "là-haut", "ailleurs", "autour", "derrière", "dessus", "dessous",
                        "devant",
-                       "dedans", "dehors", "loin", "près", "alentour", "après", "avant", "partout",
+                       "dedans", "dehors", "loin", "près", "alentour", "après", "auprès", "avant", "partout",
                        "où", "partout", "au-dessus", "au-dessous", "au-devant", "nulle part", "quelque part"]
             if advLemma in tempsAdv or advLemma in lieuAdv: return
+            if advIdx < len(res)-1 and res[advIdx+1].isA("A","P") :
+                # do not move an adverb in front of an adjective or a préposition  ("auprès de", "tout de", "tout en")
+                return
             if len(advLemma) <= 6 or advLemma in ["toujours", "souvent"]:
                 # adverbe court ou commun: déjà, très, trop, toujours, souvent ...
                 moveAfterAux(["avoir", "être", "vouloir", "devoir", "savoir"])
@@ -227,6 +230,7 @@ class NonTerminalFr:
                     doNotMove = c.realization.endswith("'") or c.getProp("pos") is not None
                     if c.parentConst is not None and c.parentConst.isA("subj","comp","mod") \
                             and c.parentConst.getProp("pos") is not None: doNotMove = True
+                    if c.lemma in ["cela","ceci"]:doNotMove = True # these demonstrative pronouns should not be moved
                     if not doNotMove:
                         if c.getProp("c") in ["refl", "acc", "dat"] or c.lemma == "y" or c.lemma == "en":
                             pros.append(cList.pop(i))

@@ -117,18 +117,21 @@ class ConstituentFr:
                     elisionFound = True
             if elisionFound:
                 i += 1
-            elif (w1 + "+" + w2) in contractionFrTable and w3NoWords:
+            elif (w1 + "+" + w2) in contractionFrTable and w3NoWords and last>1:
                 # try contraction
                 contr = contractionFrTable[w1 + "+" + w2]
                 # check if the next word would be elidable, so instead elide it instead of contracting
                 # except when the next word is a date which has a "strange" realization
+                # do not elide when there are only two words, wait until at least another token is there
                 if i+2 <= last:
                     # remove possible markup from the realization
                     real_2 = self.sepWordRE().sub(r"\2",cList[i + 2].realization)
                 if (elidableWordFrRE.match(w2) and i + 2 <= last and not cList[i + 1].isA("DT") and
                         isElidableFr(real_2, cList[i + 2].lemma, cList[i + 2].constType)):
                     cList[i + 1].realization = m2[1] + w2[:-1] + "'" + m2[3]
-                else:  # do contraction of first word and remove second word (keeping start and end)
+                elif not(w2.startswith("le") and cList[i+1].isA("Pro")):
+                    # do contraction of first word and remove second word (keeping start and end)
+                    # HACK: except when le/les is a pronoun
                     cList[i].realization = m1[1] + contr + m1[3]
                     cList[i + 1].realization = m2[1] + m2[3].strip()
                 i += 1

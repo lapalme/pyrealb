@@ -178,7 +178,7 @@ root(V("permettre").t('ip').n('p').pe(2).lier(True),
                     comp(V("être").t('pc'),
                          subj(Pro("nous").c('nom')),
                          mod(A("sensible"),
-                             mod(Adv("très"))),
+                             mod(Adv("très")).pos("pre")),
                          comp(P("à"),
                               comp(N("évocation"),
                                    det(D("ce"))))))))).realize()   

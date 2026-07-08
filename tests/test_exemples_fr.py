@@ -642,7 +642,7 @@ S(Pro("je"),
         NP(D("le"),
            N("maison"))),
      Adv("sûrement"))).typ({'neg': True}).realize()   
-    ) == "Il n'est pas souvent allé à la maison sûrement. ",\
+    ) == "Il n'est pas allé souvent à la maison sûrement. ",\
     "Phrase complète:  Il n'est pas souvent allé à la maison sûrement. "
 
 
@@ -1357,7 +1357,7 @@ root(V("aller").t('pc'),
               det(D("le")))),
      comp(Adv("sûrement")),
      subj(Pro("je"))).typ({'neg': True}).realize()   
-    ) == "Il n'est pas souvent allé à la maison sûrement. ",\
+    ) == "Il n'est pas allé souvent à la maison sûrement. ",\
     "Phrase complète:  Il n'est pas souvent allé à la maison sûrement. "
 
 

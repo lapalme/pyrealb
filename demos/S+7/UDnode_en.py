@@ -1,14 +1,14 @@
-from UDNode import UDNode
-from UD2pyr import ud2pyr_deprel, applyOptions, findIndex, findLemma, checkLemma
+from UDnode import UDnode
+from ud2pyr import applyOptions, findIndex, findLemma, checkLemma
 from pyrealb import *
 
-class UDNode_en(UDNode):
+class UDnode_en(UDnode):
     lemmataMap = None
 
-    def __init__(self, word,sentence):
-        super().__init__(word,sentence)
-        if UDNode_en.lemmataMap is None: # only initialize
-            UDNode_en.lemmataMap = buildLemmataMap("en")
+    def __init__(self, word):
+        super().__init__(word)
+        if UDnode_en.lemmataMap is None: # only initialize once
+            UDnode_en.lemmataMap = buildLemmataMap("en")
 
     def toTerminal(self,copyGenderNumber):
         def tonicPronoun(udLemma):
@@ -57,7 +57,7 @@ class UDNode_en(UDNode):
                 "it": [3, "s", "n"],
                 "our": [1, "p", None],
                 "we": [1, "p", None],
-                "your": [2, "p", None],
+                # "your": [2, "p", None],
                 "you": [2, "p", None],
                 "their": [3, "p", None],
                 "they": [3, "p", None],
@@ -69,9 +69,8 @@ class UDNode_en(UDNode):
                 return det
             return None
 
-        text = self.text()
-        lemma = self.lemma()
-        upos = self.upos()
+        lemma = self.lemma
+        upos = self.upos
         feats = self.feats
         # open classes
         if upos == "ADJ":
@@ -82,21 +81,21 @@ class UDNode_en(UDNode):
                           "nineteen", "twenty"].index(lemma)
                     return NO(ix).dOpt({"ord":True})
                 except ValueError:
-                    return Q(text)
-            expr = findLemma(self.lemmataMap,lemma,text,"A",A)
+                    return Q(self.form)
+            expr = findLemma(self.lemmataMap,lemma,self.form,"A",A)
             if expr is None:
-                return Q(text)
+                return Q(self.form)
             else:
                 return self.feats2options(expr,["Number","Degree"])
         if upos == "ADV":
             if self.hasFeature("PronType","Rel"): return checkLemma(lemma,"C",C)
             if self.hasFeature("PronType","Int"): return checkLemma(lemma,"C",C) #  should update lexicon to add Adv et remove Pro
             return checkLemma(lemma,"Adv",Adv)
-        if upos == "INTJ": return Q(text)
+        if upos == "INTJ": return Q(self.form)
         if upos == "NOUN":
-            expr = findLemma(self.lemmataMap,lemma,text,"N",N)
+            expr = findLemma(self.lemmataMap,lemma,self.form,"N",N)
             if expr is None:
-                return Q(text)
+                return Q(self.form)
             else:
                 return self.feats2options(expr,["Number","Gender"])
         if upos == "PROPN":
@@ -104,11 +103,11 @@ class UDNode_en(UDNode):
             infos = getLemma(lemma)
             if infos is not None and "N" in infos:
                 return N(lemma)
-            return Q(text)
+            return Q(self.form)
         if upos == "VERB":
-            expr = findLemma(self.lemmataMap,lemma,text,"V",V)
+            expr = findLemma(self.lemmataMap,lemma,self.form,"V",V)
             if expr is None:
-                return Q(text)
+                return Q(self.form)
             else:
                 return self.feats2options(expr,["Mood","VerbForm","Tense","Person","Number"])
         if upos == "AUX":
@@ -133,16 +132,16 @@ class UDNode_en(UDNode):
                           "ten"].index(lemma)
                     return NO(ix).dOpt({"nat":True})
                 except ValueError:
-                    return Q(text)
+                    return Q(self.form)
             try:
                 float(lemma)
                 return NO(lemma).dOpt({"raw":True})
             except ValueError:
-                return Q(text)
+                return Q(self.form)
         if upos == "PART":
             if lemma == "not" and len(feats) == 0:
                 return Adv("not")
-            return Q(text)
+            return Q(self.form)
         if upos == "PRON":
             pro = None
             if self.hasFeature("Poss","Yes") and self.hasFeature("PronType","Prs"):
@@ -167,14 +166,14 @@ class UDNode_en(UDNode):
             if lemma == "that":return C("that")
             if lemma == "once": return Adv("once")
             return checkLemma(lemma,"C",C)
-        if upos in ["PUNCT","SYM","X"]: return Q(text)
+        if upos in ["PUNCT","SYM","X"]: return Q(self.form)
         print("unknown upos",upos)
-        return Q(text)
+        return Q(self.form)
 
     # modify the UD structure to better reflect the structure expected by pyrealb
     def toDependent(self,copyGenderNumber):
         # check coordination
-        if findIndex(self.right,lambda e:e.deprel()=="conj")>=0:
+        if findIndex(self.right,lambda e:e.deprel=="conj")>=0:
             return self.processCoordination([],copyGenderNumber)
 
         sentOptions = self.getSentOptions()
@@ -184,17 +183,17 @@ class UDNode_en(UDNode):
         headTerm = self.toTerminal(copyGenderNumber)
         if headTerm.isA("N","Q"):
             # check 's possessive
-            if len(self.right)==1 and self.right[0].lemma() == "'s":
+            if len(self.right)==1 and self.right[0].lemma == "'s":
                 self.right.pop()
                 headTerm.poss()
         elif headTerm.isA("V"):
             # check infinitive (remove the PART and change infinitive to "b-to")
-            if len(self.left)>0 and self.left[-1].lemma() == "to" and headTerm.getProp("t") == "b":
+            if len(self.left)>0 and self.left[-1].lemma == "to" and headTerm.getProp("t") == "b":
                 self.left.pop()
                 headTerm.t("b-to")
             # check future tense
             dep,idx = self.findDeprelUpos("aux","AUX")
-            if dep is not None and dep[idx].lemma()=="will":
+            if dep is not None and dep[idx].lemma=="will":
                 w = dep.pop(idx)
                 headTerm.t("c" if w.hasFeature("Tense","Past") else "f")
         # process the rest by the common traversal
@@ -205,7 +204,7 @@ class UDNode_en(UDNode):
         def checkNegation():
             dep, idx = self.findDeprelUpos("advmod", "PART")
             if dep is not None:
-                if dep[idx].lemma() == "not":
+                if dep[idx].lemma == "not":
                     dep.pop(idx)
                     return [("typ", {"neg": True})]
             return []
@@ -226,7 +225,7 @@ class UDNode_en(UDNode):
         # check for a modal
         dep,idx = self.findDeprelUpos("aux","AUX")
         if dep is not None:
-            lemma = dep[idx].lemma()
+            lemma = dep[idx].lemma
             if lemma in modals:
                 modal = modals[lemma]
                 self.feats = dep[idx].feats # set verb feature to those of aux
@@ -242,16 +241,16 @@ class UDNode_en(UDNode):
         if self.hasFeature("VerbForm","Prog") or \
                 (self.hasFeature("VerbForm","Part") and self.hasFeature("Tense","Pres")):
             dep,idx = self.findDeprelUpos("aux","AUX")
-            if dep is not None and dep[idx].lemma()=="be":
+            if dep is not None and dep[idx].lemma=="be":
                 self.feats = dep[idx].feats
                 dep.pop(idx)
                 options = [("typ",{"prog":True})]+checkNegation()
                 return self.getSentOptions()+options
 
         # check for perfect
-        if self.upos()=="VERB":
+        if self.upos=="VERB":
             dep,idx = self.findDeprelUpos("aux","AUX")
-            if dep is not None and dep[idx].lemma() == "have":
+            if dep is not None and dep[idx].lemma == "have":
                 self.feats = dep[idx].feats # copy aux features to verb
                 dep.pop(idx)  # remove auxiliary
                 options = [("typ",{"perf":True})]+checkNegation()
@@ -260,10 +259,10 @@ class UDNode_en(UDNode):
         # check for some interrogation types
         dep,idx = self.findDeprelUpos("advmod","ADV")
         if dep is not None:
-            adv = dep[idx].lemma()
+            adv = dep[idx].lemma
             if adv in ["why","how","when"]:
                 dep1,idx1 = self.findDeprelUpos("punct","PUNCT")
-                if dep1 is not None and dep1[idx1].lemma() == "?":
+                if dep1 is not None and dep1[idx1].lemma == "?":
                     dep1.pop(idx1)
                     dep.pop(idx)
                     options = [("typ",{"int":"whn" if adv=="when" else adv})]+checkNegation()
@@ -271,11 +270,11 @@ class UDNode_en(UDNode):
 
         # check for yon interrogative
         dep,idx = self.findDeprelUpos(["aux","cop"],"AUX")
-        if dep is not None and dep[idx].lemma() in ["do","have","be"]:
+        if dep is not None and dep[idx].lemma in ["do","have","be"]:
             dep1,idx1 = self.findDeprelUpos("punct","PUNCT")
-            if dep1 is not None and dep1[idx1].lemma()=="?":
+            if dep1 is not None and dep1[idx1].lemma=="?":
                 dep1.pop(idx1)
-                if dep[idx].lemma() == "do":
+                if dep[idx].lemma == "do":
                     self.feats = dep[idx].feats
                     dep.pop(idx)
                 options = [("typ",{"int":"yon"})]+checkNegation()
@@ -284,9 +283,9 @@ class UDNode_en(UDNode):
         # check for sole negation
         dep,idx = self.findDeprelUpos("advmod","PART")
         if dep is not None:
-            if dep[idx].lemma() == "not":
+            if dep[idx].lemma == "not":
                 dep1,idx1 = self.findDeprelUpos("aux","AUX")
-                if dep1 is not None and dep1[idx1].lemma() in ["do"]:
+                if dep1 is not None and dep1[idx1].lemma in ["do"]:
                     dep.pop(idx)
                     self.feats=dep1[idx1].feats  # copy to the verb the features from the removed auxiliary
                     dep1.pop(idx1) # remove auxiliary
