@@ -57,6 +57,12 @@ class TerminalFr(ConstituentFr,Terminal):
     def noun_always_plural(self):
         return ['n1','n15','n21','n22','n26']
 
+    def fix_gender_number(self):
+        if   self.tab=="n1" :self.setProp("g","m").setProp("n","p")
+        elif self.tab=="n15":self.setProp("g","f").setProp("n","p")
+        elif self.tab=="n35":self.setProp("g","m").setProp("n","s")
+        elif selt.tab=="n36":self.setProp("g","f").setProp("n","s")
+
     def check_gender_lexicon(self, g, n):
         if self.isA("N"):
             # check is French noun gender specified corresponds to the one given in the lexicon

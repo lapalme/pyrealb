@@ -9,6 +9,9 @@ class TerminalEn(ConstituentEn,Terminal):
     def noun_always_plural(self):
         return ['n6']
 
+    def fix_gender_number(self):
+        pass
+
     def grammaticalNumber(self):
         res = super().grammaticalNumber()
         if res is not None: return res

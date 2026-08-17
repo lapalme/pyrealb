@@ -140,8 +140,10 @@ class Terminal(Constituent):
                                                 if i==len(dd):self.setProp("pe",pe)
                                         else:
                                             pe=3
-                                    elif terminalType=="N" and self.tab in self.noun_always_plural():
-                                        self.setProp("n","p")
+                                    elif terminalType=="N":
+                                        if self.tab in self.noun_always_plural():
+                                            self.setProp("n","p")
+                                            self.fix_gender_number()
                             else:
                                 if self.tab in rules["conjugation"]:
                                     ending=rules["conjugation"][self.tab]["ending"]
