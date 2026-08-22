@@ -90,6 +90,9 @@ class ConstituentFr:
             if i > 0 and cList[i - 1].getProp("lier"):  # ignore if the preceding word is "lié" to this one
                 i += 1
                 continue
+            if cList[i].isA("Q"): # do not elide quoted string
+                i+=1
+                continue
             m1 = ConstituentFr.sepWordREC.match(cList[i].realization) if cList[i].realization is not None else None
             if m1 is None or m1.group(2) is None:
                 i += 1

@@ -70,6 +70,9 @@ class ConstituentEn:
         if last == 0: return  # do not try to elide a single word
         i = 0
         while i < last:
+            if cList[i].isA("Q"): # do not elide quoted string
+                i+=1
+                continue
             m1 = ConstituentEn.sepWordREC.match(cList[i].realization)
             if m1 is None or m1.group(2) is None:
                 i += 1
