@@ -93,32 +93,30 @@ class ConstituentFr:
             if cList[i].isA("Q"): # do not elide quoted string
                 i+=1
                 continue
-            m1 = ConstituentFr.sepWordREC.match(cList[i].realization) if cList[i].realization is not None else None
-            if m1 is None or m1.group(2) is None:
-                i += 1
-                continue
-            m2 = ConstituentFr.sepWordREC.match(cList[i + 1].realization) if cList[i].realization is not None else None
-            if m2 is None or m2.group(2) is None:
-                i += 1
-                continue
-            # HACK: m1 and m2 save the parts before and after the first word (w1 and w2) which is in m_i[2]
+            m1 = self.getTextInTags(cList[i].realization)
+            m2 = self.getTextInTags(cList[i+1].realization)
+            # HACK: DT can have a strange realization
+            if cList[i + 1].isA("DT") and cList[i + 1].realization.startswith("le "):
+                m2=("", "le", cList[i+1].realization[2:])
+            else:
+                m2 =("", cList[i + 1].realization, "")
             # for a single word
-            w1 = m1.group(2)
-            w2 = m2.group(2)
+            w1 = m1[1]
+            w2 = m2[1]
             w3NoWords = not re.match(r"^\s*\w",
-                                     m1.group(3))  # check that the rest of the first word does not start with a word
+                                     m1[2])  # check that the rest of the first word does not start with a word
             elisionFound = False
             if isElidableFr(w2, cList[i + 1].lemma, cList[i + 1].constType):
                 if elidableWordFrRE.match(w1) and w3NoWords:
-                    cList[i].realization = m1[1] + w1[:-1] + "'" + m1[3]
+                    cList[i].realization = m1[0] + w1[:-1] + "'" + m1[2]
                     elisionFound = True
                 elif euphonieFrRE.match(w1) and w3NoWords and cList[i].getProp("n") == "s":  # euphonie
                     if re.match(r"ce", w1, re.I) and re.match(r"(^est$)|(^étai)|(^a$)", w2, re.I):
                         # very special case but very frequent
-                        cList[i].realization = m1[1] + w1[:-1] + "'" + m1[3]
+                        cList[i].realization = m1[0] + w1[:-1] + "'" + m1[2]
                     elif w2 not in ["et", "ou", "où", "aujourd'hui"]:
                         # avoid euphonie before "et", "or" ....: e.g. "beau et fort" and not "bel et fort"
-                        cList[i].realization = m1[1] + euphonieFrTable[w1] + m1[3]
+                        cList[i].realization = m1[0] + euphonieFrTable[w1] + m1[2]
                     elisionFound = True
             if elisionFound:
                 i += 1
@@ -131,14 +129,14 @@ class ConstituentFr:
                 if i+2 <= last:
                     # remove possible markup from the realization
                     real_2 = self.sepWordRE().sub(r"\2",cList[i + 2].realization)
-                if (elidableWordFrRE.match(w2) and i + 2 <= last and not cList[i + 1].isA("DT") and
+                if (elidableWordFrRE.match(w2) and i + 2 <= last and
                         isElidableFr(real_2, cList[i + 2].lemma, cList[i + 2].constType)):
-                    cList[i + 1].realization = m2[1] + w2[:-1] + "'" + m2[3]
+                    cList[i + 1].realization = m2[0] + w2[:-1] + "'" + m2[2]
                 elif not(w2.startswith("le") and cList[i+1].isA("Pro")):
                     # do contraction of first word and remove second word (keeping start and end)
                     # HACK: except when le/les is a pronoun
-                    cList[i].realization = m1[1] + contr + m1[3]
-                    cList[i + 1].realization = m2[1] + m2[3].strip()
+                    cList[i].realization = m1[0] + contr + m1[2]
+                    cList[i + 1].realization = m2[0] + m2[2].strip()
                 i += 1
             i += 1
 

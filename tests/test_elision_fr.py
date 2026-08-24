@@ -359,10 +359,10 @@ S(NP(D("un"),
 
 def test_elision_fr_29():
     assert (
-S(PP(P("à"),
-     D("ce")).tag('b'),
+S(PP(P("à").tag('b'),
+     D("ce").tag('b')),
   N("homme")).realize()   
-    ) == '<b>À cet</b> homme. ',\
+    ) == '<b>À</b> <b>cet</b> homme. ',\
     'elision dans <b>À cet</b> homme. '
 
 

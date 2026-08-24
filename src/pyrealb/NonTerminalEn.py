@@ -98,7 +98,7 @@ class NonTerminalEn:
                 words.append(V(vAux, "en").t("b"))
             elif vAux in negMod:
                 if vAux == "can" and t == "p":
-                    words.append(Q("cannot"))
+                    words.append(V("cannot").t("b")) # HACK: "cannot" verb added to the English lexicon
                 else:
                     words.append(V(vAux, "en").t(t))
                     words.append(Adv("not", "en"))

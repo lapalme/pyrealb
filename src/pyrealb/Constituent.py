@@ -424,6 +424,57 @@ class Constituent:
             idx = len(m.group(1)) # get index of first letter
             t.realization = s[0:idx] + s[idx].upper() + s[idx + 1:]
 
+    # Extract text from possibly nested tagged string
+    # This is used for the elision process in both French and English
+    # returns [before, text, after], if no match before and after are empty strings
+    import re
+    def getTextInTags(self,str):
+        l = len(str)
+        if l < 3: return ("", str, "")  # need at least 3 chars to extract something
+        str0 = str[0]
+        str_1 = str[-1]
+        if str0 not in '<*["`({ ': return ("", str, "")
+        res = None
+        if str0 == "<":  # html or autolink
+            autolink_regex = re.compile(r"<[^<]+>")
+            if autolink_regex.fullmatch(str):
+                res = ("<", str[1:-1], ">")
+            else:
+                html_regex = re.compile(r"(<(\w+)(.*?)>)(.*)(</\2>)")
+                m = html_regex.fullmatch(str)
+                if m is not None:
+                    res = (m.group(1), m.group(4), m.group(5))
+        elif str0 == "*":  # markdown bold or italic
+            md_regex = re.compile(r"(\*+)(.*?)(\1)")
+            m = md_regex.fullmatch(str)
+            if m is not None:
+                res = (m.group(1), m.group(2), m.group(3))
+        elif str0 == "[":
+            md_link_regex = re.compile(r"\[(.*?)(\]\(.*\))")
+            m = md_link_regex.fullmatch(str)
+            if m is not None:
+                res = ("[", m.group(1), m.group(2))
+            elif str_1 == ']':  # wrapped in square brackets
+                res = ("[", str[1:-1], "]")
+        elif str0 == "(" and str_1 == ")":
+            res = (str0, str[1:-1], str_1)
+        elif str0 == "{" and str_1 == "}":
+            res = (str0, str[1:-1], str_1)
+        elif str0 == "\"" and str_1 == "\"":
+            res = (str0, str[1:-1], str_1)
+        elif str0 == "`" and str_1 == "`":
+            res = (str0, str[1:-1], str_1)
+        elif str0.startswith(" (") and str.endswith(") "):
+            res = (" (", str[2:-2], ") ")
+        elif str0.startswith(" [") and str.endswith("] "):
+            res = (" [", str[2:-2], "] ")
+        if res is not None:
+            nestedres = self.getTextInTags(res[1])
+            if nestedres is not None:
+                return (res[0] + nestedres[0], nestedres[1], nestedres[2] + res[2])
+            return res
+        return ("", str, "")
+
     def detokenize(self,terminals):
         if len(terminals)==0:return ""
         s=""

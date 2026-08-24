@@ -56,7 +56,7 @@ def test_elision_en_6():
     assert (
 NP(D("a").b('@@').cap(True),
    N("elevator").tag('p')).realize()   
-    ) == '@@An <p>elevator</p>',\
+    ) == '@@A <p>elevator</p>',\
     'elision in @@An <p>elevator</p>'
 
 

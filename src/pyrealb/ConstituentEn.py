@@ -73,18 +73,12 @@ class ConstituentEn:
             if cList[i].isA("Q"): # do not elide quoted string
                 i+=1
                 continue
-            m1 = ConstituentEn.sepWordREC.match(cList[i].realization)
-            if m1 is None or m1.group(2) is None:
-                i += 1
-                continue
-            m2 = ConstituentEn.sepWordREC.match(cList[i + 1].realization)
-            if m2 is None or m2.group(2) is None:
-                i += 1
-                continue
+            m1 = self.getTextInTags(cList[i].realization)
+            m2 = self.getTextInTags(cList[i+1].realization)
             # HACK: m1 and m2 save the parts before and after the first word (w1 and w2) which is in m_i.group(2)
             # for a single word
-            w1 = m1.group(2)
-            w2 = m2.group(2)
+            w1 = m1[1]
+            w2 = m2[1]
             if (w1 == "a" or w1 == "A") and cList[i].isA("D"):
                 if (re.match(r"^[ai]", w2, re.I) or  # starts with a or i
                         (re.match(r"^e", w2, re.I) and not re.match(r"^eu", w2, re.I) or  # starts with e but not eu
@@ -93,18 +87,18 @@ class ConstituentEn:
                          re.match(r"^u", w2, re.I) and not uLikeYouRE.match(w2) or  # u does not sound like you
                          hAnRE.match(w2) or  # silent h
                          acronymRE.match(w2))):  # is an acronym
-                    cList[i].realization = m1.group(1) + w1 + "n" + m1.group(3)
+                    cList[i].realization = m1[0] + w1 + "n" + m1[2]
                     i += 1  # skip next word
             elif hasattr(self, "contraction") and self.contraction == True:
                 if w1 == "cannot":  # special case...
-                    cList[i].realization = m1.group(1) + "can't" + m1.group(3)
+                    cList[i].realization = m1[0] + "can't" + m1[2]
                 else:
                     key = w1 + "+" + w2
                     if key in contractionEnTable:
                         contr = contractionEnTable[key]
                         # do contraction of first word and remove second word (keeping start and end)
-                        cList[i].realization = m1.group(1) + contr + m1.group(3)
-                        cList[i + 1].realization = m2.group(1) + m2.group(3).strip()
+                        cList[i].realization = m1[0] + contr + m1[2]
+                        cList[i + 1].realization = m2[0] + m2[2].strip()
                         i += 1
             i += 1
 
