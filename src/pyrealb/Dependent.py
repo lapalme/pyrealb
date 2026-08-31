@@ -14,7 +14,8 @@ class Dependent(Constituent):
         if isinstance(params[0],Terminal):
             self.terminal=params.pop(0)
         elif isinstance(params[0],str):
-            self.terminal=Q(params.pop(0))
+            self.warn("Dependent needs Terminal",params[0])
+            params.pop(0)
         else:
             self.warn("Dependent needs Terminal",type(params[0]).__name__)
             params.pop(0)

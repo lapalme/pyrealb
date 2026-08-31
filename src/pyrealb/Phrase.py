@@ -17,7 +17,7 @@ class Phrase(Constituent):
         # add all elements except the last to the list of elements
         for i in range(0, len(elements) - 1):
             e = elements[i]
-            if isinstance(e, str): e = Q(e)
+            # if isinstance(e, str): e = Q(e)
             if isinstance(e, Constituent):
                 e.parentConst = self
                 self.elements.append(e)
@@ -89,9 +89,9 @@ class Phrase(Constituent):
                     self.add(c,position)
                 return self
         if constituent is None: return self
-        if isinstance(constituent, str):
-            constituent = Q(constituent)
-        elif not isinstance(constituent, Constituent):
+        # if isinstance(constituent, str):
+        #     constituent = Q(constituent)
+        if not isinstance(constituent, Constituent):
             return self.warn("bad Constituent", self.word_last(),
                              type(constituent).__name__ + ":" + str(constituent))
         constituent.parentConst = self

@@ -5,11 +5,17 @@ description: Tricks for modifying pyrealb structures
 ---
 
 <center style="font-size:3em; font-family: 'Open Sans'; font-weight: bold"><code>pyrealb</code> Hacking</center>
-<center><a href="mailto:lapalme@iro.umontreal.ca">Guy Lapalme</a><br/>RALI-DIRO<br/>Université de Montréal<br/>June 2025</center>
+<center><a href="mailto:lapalme@iro.umontreal.ca">Guy Lapalme</a><br/>RALI-DIRO<br/>Université de Montréal<br/>August 2026</center>
+
+***
+
+The document outlines the use of *pyrealb*, a Python package for English and French sentence realization. It describes how users can build linguistic structures incrementally using specific classes and methods. The guide emphasizes that realization only occurs when called, allowing for dynamic modifications of syntactic trees. Additionally, it provides instructions on managing constituent properties and warns about the importance of cloning objects to avoid unintended side effects during the realization process.
+
+***
 
 [*pyrealb*](https://github.com/lapalme/pyrealb) is a *Python* package which allows English and French sentence realization by programming language instructions that create internal data structures corresponding to the elements of the sentence. This data structure can be built incrementally. When needed, the realization process traverses this structure to produce an output string in the appropriate language. 
 
-*Python* functions build sentence structures from terminals and properly order words within a sentence. They perform the most common agreements between constituents and carry out other useful sentence organization tasks, such as managing coordination or applying sentence transformations. Additionally, it spells out numbers and expresses temporal expressions.
+*Python* functions build sentence structures from terminals and properly order words within a sentence. They perform the most common agreements between constituents and carry out other useful sentence organization tasks, such as managing coordination or applying sentence transformations. Additionally, it spells out numbers and temporal expressions.
 
 The function names for building syntactic structures were chosen to resemble the symbols typically used in linguistics for constituent syntax trees and for dependency structures. The following code demonstrates two *pyrealb* expressions that are realized as `“He eats apples.”`  when called as `s.realize()` or `r.realize()`.
 
@@ -48,7 +54,7 @@ In order to modify `pyrealb` constituents, it is important to understand  how th
 | `Phrase`      | `NP,AP,VP,AdvP,PP,CP,S,SP`     |
 | `Dependent`   | `root,subj,det,comp,mod,coord` |
 
-This diagram depicts a simplified inheritance hierarchy, highlighting the pertinent attributes for structural modification. Each block consists of three components: the class name, the instance variables, and the methods. Additionally, the data types of fields, parameters, and method results are provided. When a value can be `None`, its type is indicated with a question mark. Internally each `Constituent` has a field `constType` whose value is a string corresponding to the name of the function that created it.
+This diagram depicts a simplified inheritance hierarchy, highlighting the pertinent attributes for structural modification. Each block consists of three components: the class name, the instance variables, and the methods. Additionally, the data types of fields, parameters, and method results are provided. When a value can be `None`, its type is indicated with a question mark. Internally, each `Constituent` has a field `constType` whose value is a string corresponding to the name of the function that created it.
 
 <!--<img src="./pyrealb-classes.jpg" alt="pyrealb-classes" style="zoom:80%;" />-->
 
@@ -123,6 +129,38 @@ Changing these values is possible, but it is not recommended due to the potentia
 Should changing the lemma and type of a `Terminal` be needed, the following method should be called instead of setting the attributes. 
 
 - `.setLemma(lemma,terminalType=None)` : where `lemma` is a string giving the new lemma; if `terminalType` is specified as a string corresponding to a Terminal (e.g. `"N"` or `'V'`) then its type is also changed.   
+
+## Beware of `Constituent` sharing 
+
+In software development, it is common to assign a constituent to a variable and use it to create more *pyrealb* expressions. However, the realization process can alter the constituent itself, potentially introducing subtle bugs.  
+
+Imagine a scenario where a coordinated noun phrase is employed. The designation of `d` guarantees that the same type of determiner (either indefinite or definite) will be chosen at random and consistently used on both sides of the conjunction. 
+
+```python
+d = D(oneOf("a","the"))
+S(CP(C("and"),NP(d,N("pear")),NP(d,N('apple')))).realize()
+```
+
+When `"a"` is chosen, its realization is `an` because it occurs before `apple` , As this realization is used everywhere, the realization of the second expression is thus the erroneous following:
+
+```swift
+An pear and an apple. 
+```
+
+In this case,  it would be sufficient to create the `D` within the coordinate to solve the problem as follows:
+
+```swift
+d = oneOf("a","the")
+S(CP(C("and"),NP(D(d),N("apple")),NP(D(d),N('pear')))).realize()
+```
+
+to realize the following:
+
+```text
+An apple and a pear. 
+```
+
+The next sections show how to avoid this type of problem, while taking advantage of structured expression building, either by cloning an expression before realization or by creating a function that creates a new expression at each call site.
 
 ## Cloning a `Constituent`
 
@@ -270,5 +308,5 @@ Now, he eats red apples.
 
 # Conclusion
 
-This document offered an in-depth guide on modifying `pyrealb` constructs prior to their realization. While the `pyrealb` manual briefly touches on this topic, I believed it could benefit from more comprehensive  explanations. I also presented some strategies that I have refined over time.
+This text offers a comprehensive tutorial on customizing \`pyrealb\` structures before they are realized\. Although the \`pyrealb\` user manual briefly addresses this subject, I thought it could benefit from more in\-depth explanations\. I have also included some strategies that I have developed over the years\.
 

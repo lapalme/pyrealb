@@ -322,11 +322,13 @@ class Terminal(Constituent):
                 if "typ" in pc.props:
                     typs=pc.props["typ"]
                     if "refl" in typs and typs["refl"]==True:
-                        if "réfl" not in pat:
-                            self.ignoreRefl=True
-                            if self.lemma not in ["avoir","être","pouvoir","devoir","vouloir"]:
-                                self.warn("ignored reflexive",pat)
-                            return False
+                        # This test creates too many spurious messages, we leave it to the user to check
+                        # if a verb should be allowed to be reflexive even if the lexicon does not specify it
+                        # if "réfl" not in pat:
+                        #     self.ignoreRefl=True
+                        #     if self.lemma not in ["avoir","être","pouvoir","devoir","vouloir"]:
+                        #         self.warn("ignored reflexive",pat)
+                        #     return False
                         return True
                 if not pc.isA("VP"):  # unless it is VP stop at the first sentence
                     return False

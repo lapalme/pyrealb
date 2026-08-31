@@ -48,7 +48,7 @@ def makeExamples():
            VP(V('dévorer').t('pc'),
               NP(D('le'),
                  N('souris'),
-                 A("gris"), "Wow!").tag("a", {"href": "http:#wikipedia.org/cat", "target": "_blank"}))
+                 A("gris"), Q("Wow!")).tag("a", {"href": "http:#wikipedia.org/cat", "target": "_blank"}))
            ).typ({"neg": True}),
          'Les <i><b>chattes</b></i> blanches n\'ont pas dévoré <a href="http:#wikipedia.org/cat" target="_blank">la souris grise Wow!</a>'],
         [S(NP(D('le'),
@@ -831,7 +831,7 @@ def makeExamples():
     constituentEnFr = \
         S(Pro("I").pe(1),
           VP(V("say"),
-             "hello",
+             Q("hello"),
              PP(P("to"), dest.tag("b"))))
 
     loadFr()
@@ -840,7 +840,7 @@ def makeExamples():
     dependentEnFr = \
         root(V("say"),
              subj(Pro("I").pe(1)),
-             comp("hello"),
+             comp(Q("hello")),
              comp(P("to"),
                   dest1.tag("b")))
 
