@@ -10,6 +10,10 @@ import sys
 
 from .Lexicon import getLanguage
 
+# version and date information
+pyrealb_version = "3.3.1"
+pyrealb_datecreated = datetime.datetime.today()
+
 pyrealb_oneOf_dict = {}  # internal Map for keeping track of calls to specific oneOf call
 
 # Select a random element in a list useful to have some variety in the generated text
@@ -128,9 +132,6 @@ def fromJSON(json, lang=None):
         print("fromJSON: object expected, but found " + type(json).__name__ + ":" + repr(json), file=sys.stderr)
 
 
-# version and date information
-pyrealb_version = "3.3"
-pyrealb_datecreated = datetime.datetime.today()
 
 ####################################################################################
 ###  Factory functions for Terminals
