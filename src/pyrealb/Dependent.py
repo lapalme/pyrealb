@@ -506,10 +506,8 @@ class Dependent(Constituent):
     def toJSON(self):
         res = {"dependent": self.constType,
                "terminal":self.terminal.toJSON()}
-        if hasattr(self,"dependents"):
+        if hasattr(self,"dependents") and len(self.dependents)>0:
             res["dependents"]=[e.toJSON() for e in self.dependents]
-        # if len(self.props) > 0:  # do not output empty props
-        #     res["props"] = self.props
         res = self.addJSONprops(res)
         if self.parentConst is None or self.lang() != self.parentConst.lang():  # only indicate when language changes
             res["lang"] = self.lang()

@@ -489,10 +489,8 @@ class Terminal(Constituent):
 
     def toJSON(self):
         res={"terminal":self.constType,"lemma":self.lemma}
-        if self.parentConst is None or self.lang()!=self.parentConst.lang(): # only indicate when language changes
+        if self.parentConst is None or self.lang()!=self.parentConst.lang(): # only set when language changes
             res["lang"]=self.lang()
-        # if len(self.props): # do not output empty props
-        #     res["props"]=self.props
         res=self.addJSONprops(res)
         return res
     

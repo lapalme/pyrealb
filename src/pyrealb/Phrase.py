@@ -574,9 +574,8 @@ class Phrase(Constituent):
         res = {"phrase": self.constType}
         if self.parentConst is None or self.lang() != self.parentConst.lang():  # only indicate when language changes
             res["lang"] = self.lang()
-        res["elements"] = [e.toJSON() for e in self.elements]
-        # if len(self.props) > 0:  # do not output empty props
-        #     res["props"] = self.props
+        if len(self.elements)>0:
+            res["elements"] = [e.toJSON() for e in self.elements]
         res = self.addJSONprops(res)
         return res
 

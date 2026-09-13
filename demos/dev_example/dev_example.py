@@ -1,3 +1,5 @@
+import json
+
 from pyrealb import *
 
 exemplesFr = []

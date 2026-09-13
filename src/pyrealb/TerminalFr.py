@@ -61,7 +61,7 @@ class TerminalFr(ConstituentFr,Terminal):
         if   self.tab=="n1" :self.setProp("g","m").setProp("n","p")
         elif self.tab=="n15":self.setProp("g","f").setProp("n","p")
         elif self.tab=="n35":self.setProp("g","m").setProp("n","s")
-        elif selt.tab=="n36":self.setProp("g","f").setProp("n","s")
+        elif self.tab=="n36":self.setProp("g","f").setProp("n","s")
 
     def check_gender_lexicon(self, g, n):
         if self.isA("N"):

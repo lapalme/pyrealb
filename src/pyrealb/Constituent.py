@@ -563,10 +563,14 @@ class Constituent:
     def toDebug(self,_indent=-1):
         return str(self.props) if len(self.props)>0 else ""
 
+    # Simplify JSON output by ignoring properties that are not needed for storage.
+    # They remain constant and will be restored when recreated from JSON
+    ignoredProps = {"tab","cnt","hAn","ldv", # English
+                    "h","niveau","pat"}      # French
     def addJSONprops(self,res):
-        props = self.props
-        if len(props) == 0 : return res
-        res["props"] = {("ow" if prop=="own" else prop):self.props[prop] for prop in props}
+        props = {("ow" if prop=="own" else prop):self.props[prop]
+                        for prop in self.props if prop not in Constituent.ignoredProps}
+        if len(props)>0: res["props"] = props
         return res
 
     def setJSONprops(self,json):
